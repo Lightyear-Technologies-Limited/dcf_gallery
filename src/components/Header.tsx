@@ -19,30 +19,42 @@ export default function Header() {
     <>
       {/* Desktop sidebar */}
       <aside className="hidden md:flex fixed left-0 top-0 bottom-0 w-32 z-50 flex-col border-r border-border bg-background">
-        {/* Masthead: logo + nav as one unit */}
+        {/* Masthead: logo at top */}
         <Link href="/" className="text-foreground pt-6 px-6" aria-label="Home">
           <img src="/brand/hivemind-black.png" alt="Hivemind" className="h-4 w-auto block dark:hidden" />
           <img src="/brand/hivemind-white.png" alt="Hivemind" className="h-4 w-auto hidden dark:block" />
         </Link>
 
-        <nav className="flex flex-col items-start gap-5 w-full px-6 mt-14">
-          {NAV.map((n) => {
-            const active = n.href === "/" ? path === "/" : path.startsWith(n.href);
-            return (
-              <Link
-                key={n.href}
-                href={n.href}
-                className={`text-[13px] tracking-[0.02em] transition-colors duration-200 ${
-                  active ? "text-foreground" : "text-muted hover:text-foreground"
-                }`}
-              >
-                {n.label}
-              </Link>
-            );
-          })}
+        {/* Nav — first item aligned with filter "All" row in main content (~72px from top) */}
+        <nav className="flex flex-col items-start w-full px-6" style={{ paddingTop: "16px" }}>
+          {/* About → All, Collection → Artist, Artists → Chapter, Search → next line */}
+          <Link
+            href="/about"
+            className={`text-[13px] tracking-[0.02em] transition-colors duration-200 leading-[30px] ${
+              path.startsWith("/about") ? "text-foreground" : "text-muted hover:text-foreground"
+            }`}
+          >
+            About
+          </Link>
+          <Link
+            href="/"
+            className={`text-[13px] tracking-[0.02em] transition-colors duration-200 leading-[30px] ${
+              path === "/" ? "text-foreground" : "text-muted hover:text-foreground"
+            }`}
+          >
+            Collection
+          </Link>
+          <Link
+            href="/artists"
+            className={`text-[13px] tracking-[0.02em] transition-colors duration-200 leading-[30px] ${
+              path.startsWith("/artists") ? "text-foreground" : "text-muted hover:text-foreground"
+            }`}
+          >
+            Artists
+          </Link>
           <Link
             href="/search"
-            className={`text-[13px] tracking-[0.02em] transition-colors duration-200 ${
+            className={`text-[13px] tracking-[0.02em] transition-colors duration-200 leading-[30px] ${
               path === "/search" ? "text-foreground" : "text-muted hover:text-foreground"
             }`}
           >

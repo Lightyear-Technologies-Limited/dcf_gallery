@@ -49,18 +49,33 @@ export function getArtworkImage(
   }
 
   // Auto-pulled: /art/{optimized|thumbs}/{contract}-{tokenId}.webp
-  // Falls back to /art/all/{contract}-{tokenId}.{png|svg} for unoptimized
   if (contractAddress && tokenId) {
-    const key = `${contractAddress.toLowerCase()}-${tokenId}`;
-    const isPunk = contractAddress.toLowerCase() === "0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb";
+    const contract = contractAddress.toLowerCase();
+    const isPunk = contract === "0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb";
     const dir = size === "detail" ? "optimized" : "thumbs";
 
-    if (isPunk) {
-      // CryptoPunks: serve SVG directly (tiny files, pixel art)
-      return `/art/all/${key}.svg`;
+    if (isPunk) return `/art/all/${contract}-${tokenId}.svg`;
+
+    // Art Blocks contract uses prefixed token IDs (project * 1000000 + serial).
+    // The spreadsheet sometimes stores raw serials (Fidenza: "145"), sometimes
+    // already-prefixed full IDs (Ringers: "13000374"). Only prefix when raw.
+    const ART_BLOCKS = "0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270";
+    if (contract === ART_BLOCKS) {
+      const n = parseInt(tokenId, 10);
+      if (n < 1000000) {
+        const project = (() => {
+          if (slug.startsWith("fidenza-")) return 78;
+          if (slug.startsWith("ringers-")) return 13;
+          return null;
+        })();
+        if (project !== null) {
+          const fullToken = project * 1000000 + n;
+          return `/art/${dir}/${contract}-${fullToken}.webp`;
+        }
+      }
     }
 
-    return `/art/${dir}/${key}.webp`;
+    return `/art/${dir}/${contract}-${tokenId}.webp`;
   }
 
   return null;

@@ -21,11 +21,9 @@ export default function CuratorNote({ text, attribution, variant = "inline" }: {
   }
 
   return (
-    <div className="border-l border-border pl-8">
-      <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-4">
-        Curator&rsquo;s Note
-      </p>
-      <p className="font-serif text-[20px] leading-relaxed text-foreground-secondary italic">
+    <div className="max-w-[52ch]">
+      <p className="text-[13px] text-muted mb-3">Curator&rsquo;s note</p>
+      <p className="font-serif text-[20px] leading-[1.5] text-foreground-secondary italic">
         {text}
       </p>
     </div>
