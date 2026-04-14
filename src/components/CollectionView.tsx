@@ -4,21 +4,11 @@ import { useState, useCallback, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { getArtworkImage } from "@/lib/images";
-import PlaceholderArt from "./PlaceholderArt";
 import JustifiedGallery from "./JustifiedGallery";
-
-// Chapter colors — for section headings only
-const CHAPTERS = [
-  { name: "AI Art", slug: "ai-art", color: "#9B6FD0", artists: ["refik-anadol"] },
-  { name: "CryptoArt", slug: "cryptoart", color: "#E05555", artists: ["xcopy", "beeple", "kim-asendorf"] },
-  { name: "Digital Canvas", slug: "digital-canvas", color: "#6AAF5C", artists: ["ack", "operator", "sam-spratt"] },
-  { name: "Digital Identity", slug: "digital-identity", color: "#4A9EC9", artists: ["larva-labs", "meebits"] },
-  { name: "Generative Art", slug: "genart", color: "#C4956A", artists: ["tyler-hobbs", "dmitri-cherniak"] },
-];
-
-const CHAPTER_COLORS: Record<string, string> = {};
-for (const ch of CHAPTERS) for (const a of ch.artists) CHAPTER_COLORS[a] = ch.color;
+import FixedRowGallery from "./FixedRowGallery";
+import SinglePieceDisplay from "./SinglePieceDisplay";
+import { getArtworkImage } from "@/lib/images";
+import { CHAPTERS, CHAPTER_COLORS } from "@/lib/chapters";
 
 interface PieceData {
   id: string;
@@ -36,77 +26,61 @@ interface Section {
   collections: {
     name: string;
     slug: string;
+    piecesPerRow?: number | null;
+    pieceRows?: Record<string, number> | null;
     pieces: PieceData[];
   }[];
+}
+
+interface FeaturedHero {
+  slug: string;
+  title: string;
+  image: string;
+  mintDate: string | null;
+  artistName: string;
+  artistSlug: string;
+  collectionName: string;
+  collectionSlug: string;
+  isPunk: boolean;
 }
 
 interface Props {
   sections: Section[];
   artists: { name: string; slug: string; tags: string[] }[];
-  totalPieces: number;
+  featured: FeaturedHero[];
 }
 
-function ArtworkThumb({ piece, natural = false }: { piece: PieceData; natural?: boolean }) {
-  const realImage = getArtworkImage(piece.slug, piece.contractAddress, piece.tokenId, "detail");
-  const isPunk = piece.collectionSlug === "cryptopunks";
-
-  if (natural && realImage && !isPunk) {
-    // Natural dimensions — let the artwork determine its own aspect ratio
-    return (
-      <Link href={`/piece/${piece.slug}`} className="block group">
-        <Image
-          src={realImage}
-          alt={piece.title}
-          width={800}
-          height={800}
-          className="block w-full h-auto"
-          sizes="(max-width: 640px) 100vw, 50vw"
-        />
-      </Link>
-    );
-  }
-
-  return (
-    <Link href={`/piece/${piece.slug}`} className="block group">
-      <div className={`relative aspect-square overflow-hidden ${isPunk ? "bg-[#638596]" : ""}`}>
-        {realImage ? (
-          <Image
-            src={realImage}
-            alt={piece.title}
-            fill
-            className={`${isPunk ? "[image-rendering:pixelated] object-contain" : "object-cover"}`}
-            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-          />
-        ) : (
-          <PlaceholderArt collectionSlug={piece.collectionSlug} pieceSlug={piece.slug} />
-        )}
-      </div>
-    </Link>
-  );
-}
-
-export default function CollectionView({ sections, artists, totalPieces }: Props) {
+export default function CollectionView({ sections, artists, featured }: Props) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [artistFilter, setArtistFilter] = useState<string | null>(searchParams.get("artist") || null);
   const [chapterFilter, setChapterFilter] = useState<string | null>(searchParams.get("chapter") || null);
-  const [mediumFilter, setMediumFilter] = useState<string | null>(searchParams.get("medium") || null);
+  const [heroIndex, setHeroIndex] = useState(0);
 
-  const syncUrl = useCallback((artist: string | null, chapter: string | null, medium: string | null) => {
-    const params = new URLSearchParams();
-    if (artist) params.set("artist", artist);
-    if (chapter) params.set("chapter", chapter);
-    if (medium) params.set("medium", medium);
-    const qs = params.toString();
-    router.replace(qs ? `/?${qs}` : "/", { scroll: false });
-  }, [router]);
+  // Rotate featured hero every 12s (only if we have >1 candidate).
+  useEffect(() => {
+    if (featured.length <= 1) return;
+    const id = setInterval(() => {
+      setHeroIndex((i) => (i + 1) % featured.length);
+    }, 12000);
+    return () => clearInterval(id);
+  }, [featured.length]);
 
-  // Track which artists are explicitly excluded when a chapter is active
+  const syncUrl = useCallback(
+    (artist: string | null, chapter: string | null) => {
+      const params = new URLSearchParams();
+      if (artist) params.set("artist", artist);
+      if (chapter) params.set("chapter", chapter);
+      const qs = params.toString();
+      router.replace(qs ? `/?${qs}` : "/", { scroll: false });
+    },
+    [router]
+  );
+
   const [excludedArtists, setExcludedArtists] = useState<string[]>([]);
 
   function selectArtist(slug: string) {
     if (chapterFilter) {
-      // Chapter is active — toggle this artist within the chapter
       if (excludedArtists.includes(slug)) {
         setExcludedArtists(excludedArtists.filter((a) => a !== slug));
       } else {
@@ -114,45 +88,37 @@ export default function CollectionView({ sections, artists, totalPieces }: Props
       }
       return;
     }
-    // No chapter — solo filter this artist
-    setArtistFilter(artistFilter === slug ? null : slug);
-    syncUrl(artistFilter === slug ? null : slug, null, mediumFilter);
+    const next = artistFilter === slug ? null : slug;
+    setArtistFilter(next);
+    syncUrl(next, null);
   }
 
   function selectChapter(slug: string | null) {
     if (chapterFilter === slug) {
-      // Deselect chapter
       setChapterFilter(null);
       setExcludedArtists([]);
-      syncUrl(artistFilter, null, mediumFilter);
+      syncUrl(artistFilter, null);
     } else {
       setChapterFilter(slug);
       setArtistFilter(null);
       setExcludedArtists([]);
-      syncUrl(null, slug, mediumFilter);
+      syncUrl(null, slug);
     }
-  }
-
-  function selectMedium(m: string | null) {
-    setMediumFilter(m);
-    syncUrl(artistFilter, chapterFilter, m);
   }
 
   function clearAll() {
     setArtistFilter(null);
     setChapterFilter(null);
-    setMediumFilter(null);
     setExcludedArtists([]);
-    syncUrl(null, null, null);
+    syncUrl(null, null);
   }
 
   useEffect(() => {
     const a = searchParams.get("artist");
     const c = searchParams.get("chapter");
-    const m = searchParams.get("medium");
     if (a !== artistFilter) setArtistFilter(a);
     if (c !== chapterFilter) setChapterFilter(c);
-    if (m !== mediumFilter) setMediumFilter(m);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
   // Apply filters
@@ -162,27 +128,65 @@ export default function CollectionView({ sections, artists, totalPieces }: Props
   }
   if (chapterFilter) {
     const ch = CHAPTERS.find((c) => c.slug === chapterFilter);
-    if (ch) visible = visible.filter((s) => ch.artists.includes(s.artist.slug) && !excludedArtists.includes(s.artist.slug));
-  }
-  if (mediumFilter) {
-    visible = visible.map((s) => ({
-      ...s,
-      collections: s.collections.map((col) => ({
-        ...col,
-        pieces: col.pieces.filter((p) => p.medium === mediumFilter),
-      })).filter((col) => col.pieces.length > 0),
-    })).filter((s) => s.collections.length > 0);
+    if (ch)
+      visible = visible.filter(
+        (s) => ch.artists.includes(s.artist.slug) && !excludedArtists.includes(s.artist.slug)
+      );
   }
 
-  const hasFilters = artistFilter || chapterFilter || mediumFilter;
+  const hasFilters = artistFilter || chapterFilter;
+  const activeChapter = chapterFilter ? CHAPTERS.find((c) => c.slug === chapterFilter) : null;
+  const hero = featured[heroIndex];
 
   return (
     <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
-      <div className="pt-12 sm:pt-16" />
+      {/* Featured hero — shown only when no filters are active */}
+      {hero && !hasFilters && (
+        <section className="pt-12 sm:pt-16">
+          <Link
+            href={`/piece/${hero.slug}`}
+            className={`block ${hero.isPunk ? "bg-[#638596]" : "bg-surface"} overflow-hidden`}
+          >
+            <div className="relative w-full" style={{ height: "min(75vh, 720px)" }}>
+              <Image
+                src={hero.image}
+                alt={hero.title}
+                fill
+                priority
+                sizes="(max-width: 1024px) 90vw, 1200px"
+                className={
+                  hero.isPunk
+                    ? "[image-rendering:pixelated] object-contain"
+                    : "object-contain"
+                }
+              />
+            </div>
+          </Link>
+          <div className="flex flex-wrap gap-y-2 justify-between items-baseline pt-5 text-[13px]">
+            <p className="text-muted">
+              <Link
+                href={`/artist/${hero.artistSlug}`}
+                className="hover:text-foreground transition-colors duration-200"
+                style={CHAPTER_COLORS[hero.artistSlug] ? { color: CHAPTER_COLORS[hero.artistSlug] } : undefined}
+              >
+                {hero.artistName}
+              </Link>
+              <span className="text-muted"> — </span>
+              <span className="font-serif italic text-foreground-secondary">{hero.title}</span>
+              {hero.mintDate && <span className="text-muted">, {hero.mintDate.slice(0, 4)}</span>}
+            </p>
+            <Link
+              href={`/collection/${hero.collectionSlug}`}
+              className="text-muted hover:text-foreground transition-colors duration-200"
+            >
+              {hero.collectionName}
+            </Link>
+          </div>
+        </section>
+      )}
 
-      {/* Filters */}
-      <div className="pb-6 sticky top-0 md:top-0 z-40 bg-background border-b border-border space-y-2 pt-2">
-        {/* All — above everything */}
+      {/* Filters — ALL above, then ARTIST row, then CHAPTER row */}
+      <section className={`${hero && !hasFilters ? "pt-12" : "pt-12 sm:pt-16"} pb-6 border-b border-border space-y-2`}>
         <button
           onClick={clearAll}
           className={`text-[13px] transition-colors duration-200 ${
@@ -196,12 +200,10 @@ export default function CollectionView({ sections, artists, totalPieces }: Props
         <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide">
           <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium shrink-0 w-20">Artist</span>
           {artists.map((a) => {
-            const activeChapter = chapterFilter ? CHAPTERS.find((c) => c.slug === chapterFilter) : null;
             const inChapter = activeChapter ? activeChapter.artists.includes(a.slug) : true;
             const excluded = excludedArtists.includes(a.slug);
             const isActive = artistFilter === a.slug || (inChapter && !excluded && !!chapterFilter);
-            const isDisabled = chapterFilter && !inChapter;
-
+            const isDisabled = !!chapterFilter && !inChapter;
             return (
               <button
                 key={a.slug}
@@ -226,7 +228,7 @@ export default function CollectionView({ sections, artists, totalPieces }: Props
           {CHAPTERS.map((ch) => (
             <button
               key={ch.slug}
-              onClick={() => selectChapter(chapterFilter === ch.slug ? null : ch.slug)}
+              onClick={() => selectChapter(ch.slug)}
               className={`text-[13px] whitespace-nowrap shrink-0 transition-colors duration-200 ${
                 chapterFilter === ch.slug ? "text-foreground" : "text-muted hover:text-foreground"
               }`}
@@ -237,48 +239,88 @@ export default function CollectionView({ sections, artists, totalPieces }: Props
           ))}
         </div>
 
+        {/* Chapter description — only when a chapter is active */}
+        {activeChapter && (
+          <p className="font-serif italic text-[16px] leading-[1.55] text-foreground-secondary pt-4 max-w-[680px]">
+            {activeChapter.description}
+          </p>
+        )}
+      </section>
 
-      </div>
-
-      {/* Works — Salon wall. Artist header once, collections as coherent blocks. */}
-      <div className="pt-6 pb-16 space-y-16">
-        {visible.map(({ artist, collections: cols }) => (
-          <div key={artist.slug} className="space-y-10">
-            {/* Artist header */}
-            <Link href={`/artist/${artist.slug}`} className="inline-block">
-              <h2
-                className="text-[32px] sm:text-[40px] tracking-tight leading-tight hover:opacity-60 transition-opacity duration-200"
-                style={CHAPTER_COLORS[artist.slug] ? { color: CHAPTER_COLORS[artist.slug] } : undefined}
-              >
-                {artist.name}
-              </h2>
-            </Link>
-
-            {cols.map((col) => {
-              const n = col.pieces.length;
-              // Target ideal per row — split pieces into rows at this size
-              let ideal: number;
-              if (n === 1) ideal = 1;
-              else if (n <= 3) ideal = n;
-              else if (n <= 6) ideal = 3;
-              else if (n <= 12) ideal = 4;
-              else ideal = 5;
-
-              return (
-                <div key={`${artist.slug}-${col.slug}`}>
-                  <Link
-                    href={`/collection/${col.slug}`}
-                    className="text-[11px] tracking-[0.05em] text-muted hover:text-foreground transition-colors duration-200 block mb-3"
-                  >
-                    {col.name}
-                  </Link>
-                  <JustifiedGallery pieces={col.pieces} piecesPerRow={ideal} />
-                </div>
-              );
-            })}
+      {/* Works — salon wall */}
+      <div className="pt-12 pb-20 space-y-16">
+        {visible.length === 0 ? (
+          <div className="py-24 text-center">
+            <p className="text-[13px] text-muted">No works match these filters.</p>
+            <button
+              onClick={clearAll}
+              className="text-[13px] text-foreground underline underline-offset-4 decoration-border hover:decoration-foreground transition-colors duration-200 mt-4"
+            >
+              Clear filters
+            </button>
           </div>
-        ))}
+        ) : (
+          visible.map(({ artist, collections: cols }) => (
+            <div key={artist.slug} className="space-y-10">
+              {/* Artist header */}
+              <Link href={`/artist/${artist.slug}`} className="inline-block">
+                <h2
+                  className="font-serif text-[32px] sm:text-[40px] tracking-[-0.01em] leading-tight hover:opacity-60 transition-opacity duration-200"
+                  style={CHAPTER_COLORS[artist.slug] ? { color: CHAPTER_COLORS[artist.slug] } : undefined}
+                >
+                  {artist.name}
+                </h2>
+              </Link>
+
+              {cols.map((col) => {
+                const n = col.pieces.length;
+                const piece = col.pieces[0];
+                let ideal: number;
+                if (col.piecesPerRow && col.piecesPerRow > 0) ideal = col.piecesPerRow;
+                else if (n <= 3) ideal = Math.max(n, 1);
+                else if (n <= 6) ideal = 3;
+                else if (n <= 12) ideal = 4;
+                else ideal = 5;
+
+                return (
+                  <div key={`${artist.slug}-${col.slug}`}>
+                    <Link
+                      href={`/collection/${col.slug}`}
+                      className="text-[11px] tracking-[0.05em] text-muted hover:text-foreground transition-colors duration-200 block mb-3"
+                    >
+                      {col.name}
+                    </Link>
+                    {n === 1 && piece ? (
+                      <SinglePieceDisplayLazy piece={piece} />
+                    ) : col.pieceRows && Object.keys(col.pieceRows).length > 0 ? (
+                      <FixedRowGallery
+                        pieces={col.pieces}
+                        rowMap={col.pieceRows}
+                        fallbackPerRow={ideal}
+                      />
+                    ) : (
+                      <JustifiedGallery pieces={col.pieces} piecesPerRow={ideal} />
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          ))
+        )}
       </div>
     </div>
+  );
+}
+
+function SinglePieceDisplayLazy({ piece }: { piece: PieceData }) {
+  const src = getArtworkImage(piece.slug, piece.contractAddress, piece.tokenId, "detail");
+  if (!src) return null;
+  return (
+    <SinglePieceDisplay
+      slug={piece.slug}
+      src={src}
+      title={piece.title}
+      isPunk={piece.collectionSlug === "cryptopunks"}
+    />
   );
 }

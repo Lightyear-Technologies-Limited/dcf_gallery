@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { artists, collections, pieces } from "@/lib/data";
+import { CHAPTERS } from "@/lib/chapters";
 
 export default function AboutPage() {
   return (
@@ -9,7 +10,7 @@ export default function AboutPage() {
         <h1 className="font-serif text-[48px] sm:text-[56px] tracking-[-0.02em] leading-[0.95]">
           Digital Culture Fund
         </h1>
-        <p className="text-[20px] text-foreground-secondary mt-8 leading-relaxed">
+        <p className="text-[20px] text-foreground-secondary mt-8 leading-[1.6]">
           A Hivemind initiative for collecting, contextualizing, and preserving
           culturally significant digital art.
         </p>
@@ -66,20 +67,50 @@ export default function AboutPage() {
       </div>
 
       <div className="max-w-[680px] pt-20">
-        <p className="text-[16px] text-foreground-secondary leading-relaxed">
-          The fund holds{" "}
-          <span className="font-serif text-[36px] text-foreground align-baseline">{pieces.length}</span>{" "}
-          works by{" "}
-          <span className="font-serif text-[36px] text-foreground align-baseline">{artists.length}</span>{" "}
-          artists across{" "}
-          <span className="font-serif text-[36px] text-foreground align-baseline">{collections.length}</span>{" "}
-          collections.
+        <p className="font-serif italic text-[20px] text-foreground-secondary leading-[1.6]">
+          The fund holds {pieces.length} works by {artists.length} artists across{" "}
+          {collections.length} collections.
         </p>
       </div>
 
-      <div className="max-w-[680px] pt-20">
+      {/* Chapters — the curatorial thesis made explicit */}
+      <div className="pt-24 pb-8">
+        <h2 className="text-[24px] tracking-[-0.01em] max-w-[680px]">Five chapters</h2>
+        <p className="text-[16px] text-foreground-secondary leading-[1.65] mt-4 max-w-[680px]">
+          The collection is organized around five chapters of digital art&rsquo;s first two decades.
+          Each chapter groups artists whose practices share a lineage — a way of making, a stance
+          toward the medium, or a cultural moment.
+        </p>
+        <div className="mt-12 space-y-10 max-w-[820px]">
+          {CHAPTERS.map((ch) => (
+            <div
+              key={ch.slug}
+              className="grid grid-cols-[minmax(0,3fr)_minmax(0,7fr)] gap-8 md:gap-12 items-baseline"
+            >
+              <div className="flex items-baseline gap-3">
+                <span
+                  aria-hidden
+                  className="inline-block w-2 h-2 rounded-full shrink-0 translate-y-[-2px]"
+                  style={{ backgroundColor: ch.color }}
+                />
+                <h3
+                  className="font-serif text-[22px] tracking-[-0.01em] leading-tight"
+                  style={{ color: ch.color }}
+                >
+                  {ch.name}
+                </h3>
+              </div>
+              <p className="text-[16px] text-foreground-secondary leading-[1.65]">
+                {ch.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="max-w-[680px] pt-24">
         <h2 className="text-[24px] tracking-[-0.01em]">Hivemind</h2>
-        <p className="text-[16px] text-foreground-secondary leading-relaxed mt-4">
+        <p className="text-[16px] text-foreground-secondary leading-[1.65] mt-4">
           Hivemind is a crypto-focused investment firm that backs the infrastructure,
           platforms, and culture shaping the decentralized future. The Digital Culture
           Fund is our commitment to preserving and promoting the art that defines this
@@ -89,7 +120,7 @@ export default function AboutPage() {
 
       <div className="pt-20 pb-8">
         <Link href="/" className="text-[13px] text-muted hover:text-foreground transition-colors duration-200">
-          View the Collection &rarr;
+          View the collection &rarr;
         </Link>
       </div>
     </div>

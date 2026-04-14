@@ -1,11 +1,11 @@
 import { notFound } from "next/navigation";
 import { pieces, getArtist, getCollection, getPiecesByCollection } from "@/lib/data";
 import { getArtworkImage } from "@/lib/images";
+import { sortPieces } from "@/lib/curation";
 import PlaceholderArt from "@/components/PlaceholderArt";
-import ArtworkCard from "@/components/ArtworkCard";
 import BackButton from "@/components/BackButton";
 import PieceLayout from "@/components/PieceLayout";
-import Link from "next/link";
+import JustifiedGallery from "@/components/JustifiedGallery";
 
 export function generateStaticParams() {
   return pieces.map((p) => ({ slug: p.slug }));
@@ -19,7 +19,18 @@ export default async function PiecePage({ params }: { params: Promise<{ slug: st
   const artist = getArtist(piece.artistSlug);
   const collection = getCollection(piece.collectionSlug);
   const colPieces = getPiecesByCollection(piece.collectionSlug);
-  const more = colPieces.filter((p) => p.id !== piece.id).slice(0, 4);
+  const orderedPieces = sortPieces(piece.collectionSlug, colPieces);
+  const moreRaw = orderedPieces.filter((p) => p.id !== piece.id).slice(0, 8);
+  const more = moreRaw.map((p) => ({
+    id: p.id,
+    slug: p.slug,
+    title: p.title,
+    collectionSlug: p.collectionSlug,
+    artistSlug: p.artistSlug,
+    medium: p.medium,
+    contractAddress: p.contractAddress,
+    tokenId: p.tokenId,
+  }));
   const realImage = getArtworkImage(piece.slug, piece.contractAddress, piece.tokenId, "detail");
   const isPunk = piece.collectionSlug === "cryptopunks";
 
@@ -57,7 +68,7 @@ export default async function PiecePage({ params }: { params: Promise<{ slug: st
   );
 
   return (
-    <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12">
+    <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
       <BackButton />
       <div className="pt-6">
         <PieceLayout
@@ -75,21 +86,10 @@ export default async function PiecePage({ params }: { params: Promise<{ slug: st
       </div>
 
       {/* More from collection */}
-      {more.length > 0 && (
-        <div className="pt-20 pb-8">
-          <div className="flex items-baseline justify-between mb-8">
-            <h2 className="text-[20px] tracking-[-0.01em]">More from {collection?.name}</h2>
-            {collection && (
-              <Link href={`/collection/${collection.slug}`} className="text-[13px] text-muted hover:text-foreground transition-colors duration-200">
-                View all &rarr;
-              </Link>
-            )}
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {more.map((p) => (
-              <ArtworkCard key={p.id} piece={p} showArtist={false} />
-            ))}
-          </div>
+      {more.length > 0 && collection && (
+        <div className="pt-24 pb-8">
+          <p className="text-[13px] text-muted mb-6">More from {collection.name}</p>
+          <JustifiedGallery pieces={more} piecesPerRow={Math.min(more.length, 4)} />
         </div>
       )}
     </div>

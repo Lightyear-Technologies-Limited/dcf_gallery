@@ -9,6 +9,8 @@ export interface Artist {
   bio: string;
   curationComment: string;
   artistQuote?: string;
+  essayUrl?: string;
+  essayTitle?: string;
   website?: string;
   twitter?: string;
   instagram?: string;
@@ -22,6 +24,8 @@ export interface Collection {
   artistSlug: string;
   description: string;
   curatorNote: string;
+  essayUrl?: string;
+  essayTitle?: string;
   medium: 'image' | 'video' | 'generative' | 'interactive';
   contractAddress?: string;
   totalSupply?: number;

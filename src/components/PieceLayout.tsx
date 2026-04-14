@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 
 interface Props {
   image: string | null;
@@ -18,14 +17,9 @@ interface Props {
 }
 
 /**
- * Adaptive piece layout:
- * - Wide artworks (aspect > 1.3): image on top full-width, info below
- * - Tall/square artworks: image left, info right
+ * Piece layout: image on the left, details on the right.
  */
 export default function PieceLayout({ image, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, metadata, rasterUrl, placeholder }: Props) {
-  const [aspect, setAspect] = useState<number | null>(null);
-  const isWide = aspect !== null && aspect > 1.3;
-
   const artworkBlock = image ? (
     <div className={isPunk ? "bg-[#638596] inline-block" : ""}>
       <Image
@@ -33,10 +27,9 @@ export default function PieceLayout({ image, title, isPunk, artistName, artistSl
         alt={title}
         width={1600}
         height={1200}
-        className={`block w-full h-auto max-h-[80vh] ${isPunk ? "[image-rendering:pixelated] max-w-[400px]" : ""}`}
+        className={`block w-full h-auto max-h-[80vh] object-contain ${isPunk ? "[image-rendering:pixelated] max-w-[400px]" : ""}`}
         priority
-        sizes={isWide ? "100vw" : "(max-width: 768px) 90vw, 60vw"}
-        onLoadingComplete={(img) => setAspect(img.naturalWidth / img.naturalHeight)}
+        sizes="(max-width: 768px) 90vw, 60vw"
       />
     </div>
   ) : (
@@ -70,21 +63,6 @@ export default function PieceLayout({ image, title, isPunk, artistName, artistSl
     </div>
   );
 
-  if (isWide) {
-    // Wide artwork: stacked layout, image spans full width
-    return (
-      <>
-        <div className="flex justify-center">
-          {artworkBlock}
-        </div>
-        <div className="pt-10 max-w-2xl">
-          {infoBlock}
-        </div>
-      </>
-    );
-  }
-
-  // Default/tall/square: side-by-side
   return (
     <div className="flex flex-col md:flex-row gap-8 md:gap-16 items-start">
       <div className="w-full md:w-[60%] lg:w-[65%] shrink-0">

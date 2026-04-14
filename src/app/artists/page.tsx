@@ -13,15 +13,14 @@ const FEATURED: Record<string, { image: string; title: string; collection: strin
   "sam-spratt":      { image: "/art/masks-442.png",              title: "Masks of Luci #442",     collection: "Masks of Luci" },
 };
 
-// Curated order
-const ARTIST_ORDER = [
-  "tyler-hobbs", "dmitri-cherniak", "xcopy", "refik-anadol", "larva-labs",
-  "sam-spratt", "operator", "kim-asendorf", "ack", "beeple", "meebits",
-];
+// Merge collab artists under their primary artist
+const MERGE_INTO: Record<string, string> = {
+  "tyler-hobbs-and-dandelion-wist": "tyler-hobbs",
+};
 
-const sorted = ARTIST_ORDER
-  .map((slug) => artists.find((a) => a.slug === slug))
-  .filter(Boolean) as typeof artists;
+const sorted = [...artists]
+  .filter((a) => !MERGE_INTO[a.slug])
+  .sort((a, b) => a.name.localeCompare(b.name));
 
 export default function ArtistsPage() {
   return (

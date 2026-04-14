@@ -1,14 +1,28 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
-import { artists, getCollectionsByArtist, getPiecesByArtist, getPiecesByCollection } from "@/lib/data";
+import { artists, collections, getPiecesByCollection } from "@/lib/data";
 import { getArtworkImage } from "@/lib/images";
-import PlaceholderArt from "@/components/PlaceholderArt";
-import ArtworkCard from "@/components/ArtworkCard";
-import CuratorNote from "@/components/CuratorNote";
+import {
+  getArtistDisplayName,
+  getCollectionDisplayName,
+  sortCollections,
+  sortPieces,
+  isCollectionHidden,
+  getPiecesPerRow,
+  getPieceRows,
+} from "@/lib/curation";
+import JustifiedGallery from "@/components/JustifiedGallery";
+import FixedRowGallery from "@/components/FixedRowGallery";
+import SinglePieceDisplay from "@/components/SinglePieceDisplay";
+
+const MERGE_INTO: Record<string, string> = {
+  "tyler-hobbs-and-dandelion-wist": "tyler-hobbs",
+};
 
 export function generateStaticParams() {
-  return artists.map((a) => ({ slug: a.slug }));
+  return artists
+    .filter((a) => !MERGE_INTO[a.slug])
+    .map((a) => ({ slug: a.slug }));
 }
 
 export default async function ArtistPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -16,93 +30,181 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
   const artist = artists.find((a) => a.slug === slug);
   if (!artist) notFound();
 
-  const cols = getCollectionsByArtist(slug);
-  const works = getPiecesByArtist(slug);
+  const artistName = getArtistDisplayName(artist.slug, artist.name);
+
+  // Include merged artists (e.g., Dandelion Wist under Tyler Hobbs).
+  const mergedSlugs = Object.entries(MERGE_INTO)
+    .filter(([, parent]) => parent === artist.slug)
+    .map(([child]) => child);
+  const allSlugs = [artist.slug, ...mergedSlugs];
+
+  const artistCollections = sortCollections(
+    artist.slug,
+    collections
+      .filter((c) => allSlugs.includes(c.artistSlug) && !isCollectionHidden(c.slug))
+      .map((col) => ({
+        name: getCollectionDisplayName(col.slug, col.name),
+        slug: col.slug,
+        description: col.description,
+        medium: col.medium,
+        mintDate: col.mintDate,
+        piecesPerRow: getPiecesPerRow(col.slug),
+        pieceRows: getPieceRows(col.slug),
+        pieces: sortPieces(
+          col.slug,
+          getPiecesByCollection(col.slug).map((p) => ({
+            id: p.id,
+            slug: p.slug,
+            title: p.title,
+            collectionSlug: p.collectionSlug,
+            artistSlug: p.artistSlug,
+            medium: p.medium,
+            contractAddress: p.contractAddress,
+            tokenId: p.tokenId,
+          }))
+        ),
+      }))
+  );
+
+  const totalWorks = artistCollections.reduce((s, c) => s + c.pieces.length, 0);
 
   return (
     <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
-
-      {/* Name */}
-      <div className="pt-[120px]">
-        <h1 className="font-serif text-[48px] sm:text-[64px] lg:text-[72px] tracking-[-0.02em] leading-[0.95]">
-          {artist.name}
-        </h1>
-        {artist.tags.length > 0 && (
-          <p className="text-[13px] text-muted mt-2">
-            {artist.tags.join(" · ")}
-          </p>
-        )}
-        {(artist.website || artist.twitter || artist.instagram) && (
-          <div className="flex gap-6 mt-4 text-[13px]">
-            {artist.website && <a href={artist.website} target="_blank" rel="noopener noreferrer" className="text-muted underline underline-offset-4 decoration-border hover:text-foreground transition-colors duration-200">Website</a>}
-            {artist.twitter && <a href={artist.twitter} target="_blank" rel="noopener noreferrer" className="text-muted underline underline-offset-4 decoration-border hover:text-foreground transition-colors duration-200">Twitter</a>}
-            {artist.instagram && <a href={artist.instagram} target="_blank" rel="noopener noreferrer" className="text-muted underline underline-offset-4 decoration-border hover:text-foreground transition-colors duration-200">Instagram</a>}
-          </div>
-        )}
-      </div>
-
-      {/* Bio + Curator's note — two column */}
-      <div className="grid grid-cols-1 md:grid-cols-[1fr_280px] gap-16 pt-20">
+      {/* Editorial header — name left, bio right */}
+      <div className="pt-20 grid grid-cols-1 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-10 md:gap-16">
         <div>
-          {artist.bio ? (
-            <p className="text-[16px] text-foreground-secondary leading-relaxed">{artist.bio}</p>
-          ) : (
-            <p className="text-[13px] text-muted italic">Artist biography forthcoming.</p>
+          <h1 className="font-serif text-[48px] sm:text-[64px] lg:text-[72px] tracking-[-0.02em] leading-[0.95]">
+            {artistName}
+          </h1>
+          <p className="mt-4 text-[13px] text-muted">
+            {artistCollections.length} collection
+            {artistCollections.length === 1 ? "" : "s"} · {totalWorks} works
+          </p>
+          {(artist.website || artist.twitter || artist.instagram) && (
+            <div className="flex flex-wrap gap-6 mt-4 text-[13px]">
+              {artist.website && (
+                <a href={artist.website} target="_blank" rel="noopener noreferrer" className="text-muted underline underline-offset-4 decoration-border hover:text-foreground transition-colors duration-200">
+                  Website
+                </a>
+              )}
+              {artist.twitter && (
+                <a href={artist.twitter} target="_blank" rel="noopener noreferrer" className="text-muted underline underline-offset-4 decoration-border hover:text-foreground transition-colors duration-200">
+                  Twitter
+                </a>
+              )}
+              {artist.instagram && (
+                <a href={artist.instagram} target="_blank" rel="noopener noreferrer" className="text-muted underline underline-offset-4 decoration-border hover:text-foreground transition-colors duration-200">
+                  Instagram
+                </a>
+              )}
+            </div>
           )}
         </div>
-        {artist.curationComment && (
-          <aside>
-            <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-4">Why DCF Holds This Work</p>
-            <p className="font-serif text-[16px] leading-relaxed text-foreground-secondary italic">{artist.curationComment}</p>
-          </aside>
-        )}
+
+        <div className="space-y-10 md:pt-4">
+          {artist.bio && (
+            <p className="text-[17px] text-foreground-secondary leading-[1.65]">{artist.bio}</p>
+          )}
+          {artist.curationComment && (
+            <div>
+              <p className="text-[13px] text-muted mb-3">Why DCF holds this work</p>
+              <p className="font-serif text-[17px] leading-[1.65] text-foreground-secondary italic">
+                {artist.curationComment}
+              </p>
+              {artist.essayUrl && (
+                <a
+                  href={artist.essayUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[13px] text-muted hover:text-foreground transition-colors duration-200 mt-4 inline-block"
+                >
+                  Read the essay
+                  {artist.essayTitle && (
+                    <>
+                      : <span className="underline underline-offset-4 decoration-border">{artist.essayTitle}</span>
+                    </>
+                  )}{" "}
+                  &rarr;
+                </a>
+              )}
+            </div>
+          )}
+        </div>
       </div>
 
-      {/* Artist Quote */}
+      {/* Artist quote — pull quote between header and collections */}
       {artist.artistQuote && (
-        <CuratorNote text={artist.artistQuote} attribution={artist.name} variant="pullquote" />
+        <div className="pt-16 max-w-[820px] mx-auto">
+          <p className="font-serif italic text-[24px] sm:text-[28px] leading-[1.4] text-foreground-secondary text-center">
+            “{artist.artistQuote}”
+          </p>
+          <p className="text-[13px] text-muted text-center mt-6">— {artistName}</p>
+        </div>
       )}
 
-      {/* Collections */}
-      <div className="pt-20">
-        <h2 className="text-[24px] tracking-[-0.01em]">Collections <span className="text-muted font-mono text-[13px] ml-2">{cols.length}</span></h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-12 mt-8">
-          {cols.map((col) => {
-            const colPieces = getPiecesByCollection(col.slug);
-            const first = colPieces[0];
-            return (
-              <Link key={col.slug} href={`/collection/${col.slug}`} className="block group">
-                <div className="aspect-[4/3] bg-surface overflow-hidden relative">
-                  {first && (() => {
-                    const img = getArtworkImage(first.slug);
-                    return img ? (
-                      <Image src={img} alt={col.name} fill className="object-cover" sizes="(max-width: 640px) 100vw, 50vw" />
-                    ) : (
-                      <PlaceholderArt collectionSlug={col.slug} pieceSlug={first.slug} />
-                    );
-                  })()}
-                </div>
-                <div className="mt-4">
-                  <p className="text-[13px] text-foreground-secondary group-hover:text-foreground transition-colors duration-200">{col.name}</p>
-                  <p className="text-[13px] text-muted">{colPieces.length} works &middot; {col.medium}</p>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
-      </div>
+      {/* Collections — each as an editorial block above its gallery */}
+      <div className="pt-16 pb-24 space-y-20">
+        {artistCollections.map((col) => {
+          const n = col.pieces.length;
+          const piece = col.pieces[0];
+          const heroImage =
+            n === 1 && piece
+              ? getArtworkImage(piece.slug, piece.contractAddress, piece.tokenId, "detail")
+              : null;
 
-      {/* All works */}
-      <div className="pt-12">
-        <h2 className="text-[24px] tracking-[-0.01em]">Works <span className="text-muted font-mono text-[13px] ml-2">{works.length}</span></h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mt-8">
-          {works.map((p) => (
-            <ArtworkCard key={p.id} piece={p} showArtist={false} />
-          ))}
-        </div>
-      </div>
+          let ideal: number;
+          if (col.piecesPerRow && col.piecesPerRow > 0) ideal = col.piecesPerRow;
+          else if (n <= 3) ideal = Math.max(n, 1);
+          else if (n <= 6) ideal = 3;
+          else if (n <= 12) ideal = 4;
+          else ideal = 5;
 
-      <div className="h-20" />
+          return (
+            <section key={col.slug}>
+              {/* Editorial block — title left, description right */}
+              <div className="grid grid-cols-1 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-8 md:gap-16 mb-10">
+                <div>
+                  <Link
+                    href={`/collection/${col.slug}`}
+                    className="font-serif text-[28px] sm:text-[32px] tracking-[-0.01em] leading-[1.05] hover:opacity-60 transition-opacity duration-200 inline-block"
+                  >
+                    {col.name}
+                  </Link>
+                  <p className="text-[13px] text-muted mt-3 capitalize">
+                    {n} work{n === 1 ? "" : "s"} · {col.medium}
+                    {col.mintDate && ` · ${col.mintDate.slice(0, 4)}`}
+                  </p>
+                </div>
+                <div className="md:pt-3">
+                  {col.description && (
+                    <p className="text-[16px] text-foreground-secondary leading-[1.65]">
+                      {col.description}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              {/* Gallery */}
+              {n === 1 && heroImage && piece ? (
+                <SinglePieceDisplay
+                  slug={piece.slug}
+                  src={heroImage}
+                  title={piece.title}
+                  isPunk={piece.collectionSlug === "cryptopunks"}
+                />
+              ) : col.pieceRows && Object.keys(col.pieceRows).length > 0 ? (
+                <FixedRowGallery
+                  pieces={col.pieces}
+                  rowMap={col.pieceRows}
+                  fallbackPerRow={ideal}
+                />
+              ) : (
+                <JustifiedGallery pieces={col.pieces} piecesPerRow={ideal} />
+              )}
+            </section>
+          );
+        })}
+      </div>
     </div>
   );
 }
