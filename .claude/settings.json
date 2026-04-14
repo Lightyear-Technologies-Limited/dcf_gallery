@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.fondationbeyeler.ch)",
+      "WebFetch(domain:www.thebroad.org)",
+      "WebFetch(domain:feralfile.com)",
+      "WebFetch(domain:www.bitforms.art)",
+      "WebFetch(domain:www.serpentinegalleries.org)",
+      "WebFetch(domain:www.rijksmuseum.nl)",
+      "WebFetch(domain:www.artechouse.com)",
+      "WebFetch(domain:www.masterworks.com)",
+      "WebFetch(domain:www.hivemind.capital)",
+      "WebFetch(domain:highlight.xyz)",
+      "WebFetch(domain:www.hauserwirth.com)",
+      "WebFetch(domain:www.nordiskamuseet.se)",
+      "WebFetch(domain:numiko.com)",
+      "WebFetch(domain:deca.art)",
+      "WebFetch(domain:verso.pacegallery.com)",
+      "WebFetch(domain:137.xyz)",
+      "WebFetch(domain:samspratt.com)",
+      "Bash(where chrome:*)",
+      "Bash(where \"C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe\")",
+      "Read(//c/Program Files/Google/Chrome/Application/**)",
+      "Read(//c/Program Files \\(x86\\)/Google/Chrome/Application/**)",
+      "Bash(npm install:*)",
+      "Bash(npx playwright:*)",
+      "Bash(node -e ':*)",
+      "Bash(node scripts/pull-all-images.mjs)",
+      "Bash(identify \"c:\\\\Users\\\\MichaelDavison\\\\Hourglass Digital Group\\\\Lightyear - Documents\\\\github\\\\dcf_gallery\\\\public\\\\art\\\\woy-103.png\")",
+      "Bash(python3 -c \"from PIL import Image; i=Image.open\\(r'c:\\\\Users\\\\MichaelDavison\\\\Hourglass Digital Group\\\\Lightyear - Documents\\\\github\\\\dcf_gallery\\\\public\\\\art\\\\woy-103.png'\\); print\\(i.size\\)\")",
+      "Bash(npx --yes sharp-cli --version)",
+      "Bash(python3 -c \"from PIL import Image; print\\('pillow available'\\)\")",
+      "Bash(pip install:*)",
+      "Bash(python3 scripts/optimize-images.py)",
+      "Bash(python3 -c ':*)",
+      "Bash(du -sh \"Brand Guidelines\" public/art)",
+      "Bash(find public:*)"
+    ]
+  }
+}

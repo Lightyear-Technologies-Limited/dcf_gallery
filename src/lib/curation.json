@@ -1,0 +1,76 @@
+{
+  "_instructions": "Edit this file to control how the collection is displayed. Save and refresh.",
+
+  "collectionNames": {
+    "piano-blossoms": "Piano Blossoms",
+    "her-favorite-flowers": "Her favorite flowers",
+    "ack-editions": "a.c.k. Editions",
+    "notablepepes": "NotablePepes",
+    "beeple": "Beeple",
+    "dmitricherniak": "Dmitri Cherniak 1/1s",
+    "lightyears": "Lightyears",
+    "ringers": "Ringers",
+    "pxldex": "PXLDEX",
+    "lights": "Lights",
+    "x0x": "X0X",
+    "cryptopunks": "CryptoPunks",
+    "meebit": "Meebit",
+    "human-unreadable": "Human Unreadable",
+    "repeat-as-necessary": "Repeat as Necessary",
+    "synthetic-dreams": "Synthetic Dreams",
+    "biomelumina": "BiomeLumina",
+    "woy": "Winds of Yawanawa",
+    "masksofluci": "Masks of Luci",
+    "skulls-of-luci": "Skulls of Luci",
+    "daygardens": "DayGardens",
+    "tylerhobbs": "Tyler Hobbs 1/1s",
+    "fidenza": "Fidenza",
+    "qql": "QQL",
+    "xcopy": "XCOPY 1/1s",
+    "grifters": "Grifters"
+  },
+
+  "artistNames": {
+    "a-c-k": "a.c.k.",
+    "ack": "a.c.k.",
+    "beeple": "Beeple",
+    "dmitri-cherniak": "Dmitri Cherniak",
+    "kim-asendorf": "Kim Asendorf",
+    "larva-labs": "Larva Labs",
+    "meebits": "Meebits",
+    "operator": "Operator",
+    "refik-anadol": "Refik Anadol",
+    "sam-spratt": "Sam Spratt",
+    "tyler-hobbs": "Tyler Hobbs",
+    "xcopy": "XCOPY"
+  },
+
+  "collectionOrder": {
+    "_comment": "Order collections within each artist. First = displayed first. Omitted collections appear at the end.",
+    "tyler-hobbs": ["tylerhobbs", "fidenza", "daygardens", "qql"],
+    "dmitri-cherniak": ["dmitricherniak", "lightyears", "ringers"],
+    "xcopy": ["xcopy", "grifters"],
+    "refik-anadol": ["synthetic-dreams", "biomelumina", "woy"],
+    "sam-spratt": ["skulls-of-luci", "masksofluci"],
+    "larva-labs": ["cryptopunks"],
+    "kim-asendorf": ["pxldex", "lights", "x0x"],
+    "a-c-k": ["piano-blossoms", "her-favorite-flowers"],
+    "ack": ["piano-blossoms", "her-favorite-flowers"],
+    "operator": ["human-unreadable", "repeat-as-necessary"]
+  },
+
+  "hideCollections": [
+    "ack-editions",
+    "notable-pepes"
+  ],
+
+  "pieceOrder": {
+    "piano-blossoms": [
+      "piano-blossoms-5-40f9",
+      "piano-blossoms-2-40f9",
+      "piano-blossoms-4-40f9",
+      "piano-blossoms-3-40f9",
+      "piano-blossoms-1-40f9"
+    ]
+  }
+}
