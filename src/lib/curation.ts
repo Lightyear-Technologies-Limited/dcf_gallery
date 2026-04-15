@@ -97,6 +97,32 @@ export function getFeaturedHeroes(): string[] {
 }
 
 /**
+ * Resolve the artist-website URL for a piece, using the collection's
+ * template from curation.json ({tokenId} placeholder). Returns null if no
+ * template is set or no tokenId is available.
+ */
+export function getArtistSiteUrl(collectionSlug: string, tokenId?: string): string | null {
+  if (!tokenId) return null;
+  const templates = (curation as { artistSiteTemplates?: Record<string, string> })
+    .artistSiteTemplates;
+  const tpl = templates?.[collectionSlug];
+  if (!tpl) return null;
+  return tpl.replace(/\{tokenId\}/g, tokenId);
+}
+
+/**
+ * Get the edition shorthand for a collection (e.g. "1/1", "1/1/999").
+ * Default is "1/1" — every piece is treated as unique unless the
+ * collection is explicitly marked as a series in curation.json.
+ *
+ * Curation entry: `editions: { "fidenza": "1/1/999", ... }`
+ */
+export function getEditionType(collectionSlug: string): string {
+  const editions = (curation as { editions?: Record<string, string> }).editions;
+  return editions?.[collectionSlug] || "1/1";
+}
+
+/**
  * Sort pieces within a collection based on curation.json order.
  */
 export function sortPieces<T extends { slug: string }>(collectionSlug: string, pieces: T[]): T[] {

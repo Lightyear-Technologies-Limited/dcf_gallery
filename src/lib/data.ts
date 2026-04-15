@@ -51,6 +51,10 @@ export interface Piece {
   floorPrice?: string;
   influences: string[];
   openseaUrl?: string;
+  // Optional deep-link to the work on the artist's own website
+  // (e.g. https://xcopy.art/..., https://ack.art/...). The "View on {host}"
+  // link on the piece page is derived from this URL's hostname.
+  artistSiteUrl?: string;
 }
 
 export interface Influence {
@@ -456,7 +460,19 @@ export const collections: Collection[] = [
     curatorNote: '',
     medium: 'image',
     contractAddress: '0x7fc4a267c44d9f4d31227edeee5df7ef93819345',
-    totalSupply: 4,
+    totalSupply: 3,
+    tags: ['generative', 'algorithmic', 'on-chain'],
+    influences: [],
+  },
+  {
+    slug: 'harbor-scene',
+    name: 'Harbor Scene',
+    artistSlug: 'tyler-hobbs',
+    description: '',
+    curatorNote: '',
+    medium: 'image',
+    contractAddress: '0x7fc4a267c44d9f4d31227edeee5df7ef93819345',
+    totalSupply: 1,
     tags: ['generative', 'algorithmic', 'on-chain'],
     influences: [],
   },
@@ -4316,7 +4332,7 @@ export const pieces: Piece[] = [
     id: 'tyler-hobbs-2-8e82',
     slug: 'tyler-hobbs-2-8e82',
     title: 'Harbor Scene #2 (after John Henry Twachtman)',
-    collectionSlug: 'tyler-hobbs',
+    collectionSlug: 'harbor-scene',
     artistSlug: 'tyler-hobbs',
     image: '/samples/tyler-hobbs-2.svg',
     medium: 'image',

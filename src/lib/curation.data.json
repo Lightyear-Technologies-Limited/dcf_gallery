@@ -5,26 +5,27 @@
   "collectionNames": {
     "piano-blossoms": "Piano Blossoms",
     "her-favorite-flowers": "Her favorite flowers",
-    "beeple": "Beeple",
-    "dmitricherniak": "Dmitri Cherniak 1/1s",
+    "superrare-beeple": "Beeple",
+    "dmitri-cherniak": "Dmitri Cherniak 1/1s",
     "lightyears": "Lightyears",
     "ringers": "Ringers",
     "lights": "Lights",
-    "pxldex": "PXLDEX",
-    "pxlpod": "PXLPOD",
+    "pxl-dex": "PXL DEX",
+    "pxl-pod": "PXL POD",
     "cryptopunks": "CryptoPunks",
     "human-unreadable": "Human Unreadable",
     "repeat-as-necessary": "Repeat as Necessary",
-    "woy": "Winds of Yawanawa",
-    "biomelumina": "BiomeLumina",
+    "winds-of-yawanawa": "Winds of Yawanawa",
+    "dataland-biome-lumina": "Dataland — Biome Lumina",
     "synthetic-dreams": "Synthetic Dreams",
     "skulls-of-luci": "Skulls of Luci",
-    "masksofluci": "Masks of Luci",
-    "tylerhobbs": "Tyler Hobbs 1/1s",
+    "masks-of-luci": "Masks of Luci",
+    "tyler-hobbs": "Tyler Hobbs 1/1s",
+    "harbor-scene": "Harbor Scene",
     "fidenza": "Fidenza",
     "qql": "QQL",
-    "daygardens": "DayGardens",
-    "xcopy": "XCOPY 1/1s",
+    "day-gardens": "Day Gardens",
+    "superrare-xcopy": "XCOPY 1/1s",
     "grifters": "Grifters"
   },
   "artistNames": {
@@ -43,23 +44,24 @@
   "collectionOrder": {
     "_comment": "Order collections within each artist. First = displayed first. Omitted collections appear at the end.",
     "tyler-hobbs": [
-      "tylerhobbs",
+      "tyler-hobbs",
+      "harbor-scene",
       "fidenza",
-      "daygardens",
+      "day-gardens",
       "qql"
     ],
     "dmitri-cherniak": [
-      "dmitricherniak",
+      "dmitri-cherniak",
       "ringers",
       "lightyears"
     ],
     "xcopy": [
-      "xcopy",
+      "superrare-xcopy",
       "grifters"
     ],
     "refik-anadol": [
-      "woy",
-      "biomelumina",
+      "winds-of-yawanawa",
+      "dataland-biome-lumina",
       "synthetic-dreams"
     ],
     "sam-spratt": [
@@ -85,8 +87,29 @@
   },
   "hideCollections": [
     "ack-editions",
-    "notable-pepes"
+    "notable-pepes",
+    "meebit",
+    "x0x",
+    "cope-salada"
   ],
+  "_artistSiteTemplates_note": "URL template per collection for the 'View on {host}' link on piece pages. Use {tokenId} as the placeholder. Individual pieces can still override with piece.artistSiteUrl.",
+  "artistSiteTemplates": {
+    "pxl-dex": "https://pxl.onl/dex/id/{tokenId}",
+    "pxl-pod": "https://pxl.onl/pod/id/{tokenId}"
+  },
+  "_editions_note": "Edition shorthand per collection. Default for all collections is '1/1' (each piece is unique). Override here only for generative series where each piece is unique within an edition of N (e.g. '1/1/999').",
+  "editions": {
+    "fidenza": "1/1/999",
+    "ringers": "1/1/1000",
+    "lights": "1/1/100",
+    "qql": "1/1/999",
+    "winds-of-yawanawa": "1/1/1000",
+    "human-unreadable": "1/1/400",
+    "synthetic-dreams": "1/1/1000",
+    "lightyears": "1/1/200",
+    "cryptopunks": "1/1/10000",
+    "grifters": "1/1/686"
+  },
   "piecesPerRow": {
     "_comment": "Force N pieces per row for a collection. Omitted = auto (1-3 pieces n across; 4-6 = 3; 7-12 = 4; 13+ = 5). Example: \"fidenza\": 5"
   },
@@ -186,9 +209,6 @@
       "pxl-pod-241-88b3",
       "pxl-pod-242-88b3"
     ],
-    "x0x": [
-      "x0x-576-3753"
-    ],
     "cryptopunks": [
       "cryptopunks-269-3BBB",
       "cryptopunks-1568-3BBB",
@@ -230,9 +250,6 @@
       "cryptopunks-9968-3BBB",
       "cryptopunks-9985-3BBB"
     ],
-    "meebit": [
-      "meebit-3611-6bc7"
-    ],
     "human-unreadable": [
       "human-unreadable-455000095-b069",
       "human-unreadable-455000124-b069",
@@ -257,40 +274,6 @@
       "repeat-as-necessary-12-b069",
       "repeat-as-necessary-21-b069",
       "repeat-as-necessary-40-b069"
-    ],
-    "synthetic-dreams": [
-      "synthetic-dreams-51-be3a",
-      "synthetic-dreams-362-be3a",
-      "synthetic-dreams-379-be3a",
-      "synthetic-dreams-625-be3a",
-      "synthetic-dreams-630-be3a",
-      "synthetic-dreams-648-be3a",
-      "synthetic-dreams-754-be3a",
-      "synthetic-dreams-774-be3a",
-      "synthetic-dreams-854-be3a",
-      "synthetic-dreams-858-be3a",
-      "synthetic-dreams-951-be3a",
-      "synthetic-dreams-957-be3a"
-    ],
-    "dataland-biome-lumina": [
-      "dataland-biome-lumina-115-1c9d",
-      "dataland-biome-lumina-127-1c9d",
-      "dataland-biome-lumina-161-1c9d",
-      "dataland-biome-lumina-179-1c9d",
-      "dataland-biome-lumina-207-1c9d",
-      "dataland-biome-lumina-242-1c9d",
-      "dataland-biome-lumina-458-1c9d",
-      "dataland-biome-lumina-461-1c9d",
-      "dataland-biome-lumina-464-1c9d",
-      "dataland-biome-lumina-524-1c9d",
-      "dataland-biome-lumina-549-1c9d",
-      "dataland-biome-lumina-632-1c9d",
-      "dataland-biome-lumina-665-1c9d",
-      "dataland-biome-lumina-670-1c9d",
-      "dataland-biome-lumina-691-1c9d",
-      "dataland-biome-lumina-789-1c9d",
-      "dataland-biome-lumina-791-1c9d",
-      "dataland-biome-lumina-999-1c9d"
     ],
     "winds-of-yawanawa": [
       "winds-of-yawanawa-20-100b",
@@ -344,6 +327,40 @@
       "winds-of-yawanawa-962-100b",
       "winds-of-yawanawa-989-100b"
     ],
+    "dataland-biome-lumina": [
+      "dataland-biome-lumina-115-1c9d",
+      "dataland-biome-lumina-127-1c9d",
+      "dataland-biome-lumina-161-1c9d",
+      "dataland-biome-lumina-179-1c9d",
+      "dataland-biome-lumina-207-1c9d",
+      "dataland-biome-lumina-242-1c9d",
+      "dataland-biome-lumina-458-1c9d",
+      "dataland-biome-lumina-461-1c9d",
+      "dataland-biome-lumina-464-1c9d",
+      "dataland-biome-lumina-524-1c9d",
+      "dataland-biome-lumina-549-1c9d",
+      "dataland-biome-lumina-632-1c9d",
+      "dataland-biome-lumina-665-1c9d",
+      "dataland-biome-lumina-670-1c9d",
+      "dataland-biome-lumina-691-1c9d",
+      "dataland-biome-lumina-789-1c9d",
+      "dataland-biome-lumina-791-1c9d",
+      "dataland-biome-lumina-999-1c9d"
+    ],
+    "synthetic-dreams": [
+      "synthetic-dreams-51-be3a",
+      "synthetic-dreams-362-be3a",
+      "synthetic-dreams-379-be3a",
+      "synthetic-dreams-625-be3a",
+      "synthetic-dreams-630-be3a",
+      "synthetic-dreams-648-be3a",
+      "synthetic-dreams-754-be3a",
+      "synthetic-dreams-774-be3a",
+      "synthetic-dreams-854-be3a",
+      "synthetic-dreams-858-be3a",
+      "synthetic-dreams-951-be3a",
+      "synthetic-dreams-957-be3a"
+    ],
     "skulls-of-luci": [
       "skulls-of-luci-12-d27c",
       "skulls-of-luci-20-d27c"
@@ -368,6 +385,14 @@
       "masks-of-luci-591-249a",
       "masks-of-luci-597-249a",
       "masks-of-luci-609-249a"
+    ],
+    "tyler-hobbs": [
+      "tyler-hobbs-1-9345",
+      "tyler-hobbs-2-9345",
+      "tyler-hobbs-3-9345"
+    ],
+    "harbor-scene": [
+      "tyler-hobbs-2-8e82"
     ],
     "fidenza": [
       "fidenza-5-d270",
@@ -401,6 +426,11 @@
       "fidenza-943-d270",
       "fidenza-984-d270"
     ],
+    "day-gardens": [
+      "day-gardens-27-c0fd",
+      "day-gardens-32-c0fd",
+      "day-gardens-40-c0fd"
+    ],
     "qql": [
       "qql-308-0c88",
       "qql-309-0c88",
@@ -415,16 +445,12 @@
       "qql-915-1088",
       "qql-978-1088"
     ],
-    "day-gardens": [
-      "day-gardens-27-c0fd",
-      "day-gardens-32-c0fd",
-      "day-gardens-40-c0fd"
-    ],
-    "tyler-hobbs": [
-      "tyler-hobbs-1-9345",
-      "tyler-hobbs-2-9345",
-      "tyler-hobbs-3-9345",
-      "tyler-hobbs-2-8e82"
+    "superrare-xcopy": [
+      "superrare-xcopy-9129-b9e0",
+      "superrare-xcopy-29757-b9e0",
+      "superrare-xcopy-30801-b9e0",
+      "superrare-xcopy-32171-b9e0",
+      "superrare-xcopy-2123-b9e0"
     ],
     "grifters": [
       "grifters-8-c1f3",
@@ -452,15 +478,14 @@
       "grifters-572-c1f3",
       "grifters-574-c1f3"
     ],
-    "superrare-xcopy": [
-      "superrare-xcopy-9129-b9e0",
-      "superrare-xcopy-29757-b9e0",
-      "superrare-xcopy-30801-b9e0",
-      "superrare-xcopy-32171-b9e0",
-      "superrare-xcopy-2123-b9e0"
-    ],
     "cope-salada": [
       "cope-salada-125-2e9e"
+    ],
+    "x0x": [
+      "x0x-576-3753"
+    ],
+    "meebit": [
+      "meebit-3611-6bc7"
     ]
   }
 }

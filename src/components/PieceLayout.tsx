@@ -13,13 +13,24 @@ interface Props {
   collectionSlug?: string;
   metadata: React.ReactNode;
   rasterUrl?: string;
+  artistSiteUrl?: string;
   placeholder: React.ReactNode;
+}
+
+/** Derive a label like "xcopy.art" from a URL, stripping "www." */
+function hostLabel(url: string): string | null {
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return null;
+  }
 }
 
 /**
  * Piece layout: image on the left, details on the right.
  */
-export default function PieceLayout({ image, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, metadata, rasterUrl, placeholder }: Props) {
+export default function PieceLayout({ image, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, metadata, rasterUrl, artistSiteUrl, placeholder }: Props) {
+  const artistHost = artistSiteUrl ? hostLabel(artistSiteUrl) : null;
   const artworkBlock = image ? (
     <div className={isPunk ? "bg-[#638596] inline-block" : ""}>
       <Image
@@ -54,11 +65,29 @@ export default function PieceLayout({ image, title, isPunk, artistName, artistSl
 
       <div className="mt-10">{metadata}</div>
 
-      {rasterUrl && (
-        <a href={rasterUrl} target="_blank" rel="noopener noreferrer"
-          className="text-[11px] text-muted/60 hover:text-muted transition-colors duration-200 inline-block mt-10">
-          View on Raster
-        </a>
+      {(artistSiteUrl || rasterUrl) && (
+        <div className="mt-10 flex flex-col gap-2 text-[11px] text-muted/60">
+          {artistSiteUrl && artistHost && (
+            <a
+              href={artistSiteUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-muted transition-colors duration-200"
+            >
+              View on {artistHost}
+            </a>
+          )}
+          {rasterUrl && (
+            <a
+              href={rasterUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-muted transition-colors duration-200"
+            >
+              View on Raster
+            </a>
+          )}
+        </div>
       )}
     </div>
   );
