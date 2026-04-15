@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Dark mode is class-based — toggled by ThemeToggle, persisted to localStorage. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #F8F8F7;
   --foreground: #1A1A1A;

@@ -1,11 +1,12 @@
 import { notFound } from "next/navigation";
 import { pieces, getArtist, getCollection, getPiecesByCollection } from "@/lib/data";
 import { getArtworkImage } from "@/lib/images";
-import { sortPieces } from "@/lib/curation";
+import { sortPieces, getEditionType, getArtistSiteUrl } from "@/lib/curation";
 import PlaceholderArt from "@/components/PlaceholderArt";
 import BackButton from "@/components/BackButton";
 import PieceLayout from "@/components/PieceLayout";
 import JustifiedGallery from "@/components/JustifiedGallery";
+import OnChainDetails from "@/components/OnChainDetails";
 
 export function generateStaticParams() {
   return pieces.map((p) => ({ slug: p.slug }));
@@ -38,33 +39,15 @@ export default async function PiecePage({ params }: { params: Promise<{ slug: st
     ? `https://www.raster.art/token/ethereum/${piece.contractAddress}/${piece.tokenId}`
     : undefined;
 
+  const artistSiteUrl =
+    piece.artistSiteUrl || getArtistSiteUrl(piece.collectionSlug, piece.tokenId) || undefined;
+
   const metadata = (
-    <div className="space-y-0 text-[13px]">
-      {piece.tokenId && (
-        <div className="flex justify-between py-2.5 border-b border-border">
-          <span className="text-muted">Token ID</span>
-          <span className="font-mono tabular-nums">{piece.tokenId}</span>
-        </div>
-      )}
-      {piece.contractAddress && (
-        <div className="flex justify-between py-2.5 border-b border-border">
-          <span className="text-muted">Contract</span>
-          <span className="font-mono">{piece.contractAddress.slice(0, 6)}...{piece.contractAddress.slice(-4)}</span>
-        </div>
-      )}
-      {piece.mintDate && (
-        <div className="flex justify-between py-2.5 border-b border-border">
-          <span className="text-muted">Minted</span>
-          <span>{piece.mintDate}</span>
-        </div>
-      )}
-      {Object.entries(piece.traits).map(([k, v]) => (
-        <div key={k} className="flex justify-between py-2.5 border-b border-border">
-          <span className="text-muted">{k}</span>
-          <span>{v}</span>
-        </div>
-      ))}
-    </div>
+    <OnChainDetails
+      contractAddress={piece.contractAddress}
+      tokenId={piece.tokenId}
+      editionType={getEditionType(piece.collectionSlug)}
+    />
   );
 
   return (
@@ -81,6 +64,7 @@ export default async function PiecePage({ params }: { params: Promise<{ slug: st
           collectionSlug={collection?.slug}
           metadata={metadata}
           rasterUrl={rasterUrl}
+          artistSiteUrl={artistSiteUrl}
           placeholder={<PlaceholderArt collectionSlug={piece.collectionSlug} pieceSlug={piece.slug} className="w-full h-full" />}
         />
       </div>

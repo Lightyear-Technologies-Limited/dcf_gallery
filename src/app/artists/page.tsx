@@ -1,17 +1,14 @@
 import Link from "next/link";
-import Image from "next/image";
 import { artists, getPiecesByArtist, getCollectionsByArtist } from "@/lib/data";
-import PlaceholderArt from "@/components/PlaceholderArt";
-
-// Best representative piece per artist — { image, title, collection }
-const FEATURED: Record<string, { image: string; title: string; collection: string }> = {
-  "tyler-hobbs":     { image: "/art/fidenza-145.png",            title: "Fidenza #145",           collection: "Fidenza" },
-  "dmitri-cherniak": { image: "/art/ringers-13000014.png",       title: "Ringers #14",            collection: "Ringers" },
-  "xcopy":           { image: "/art/grifters/008.png",           title: "Grifter #8",             collection: "Grifters" },
-  "refik-anadol":    { image: "/art/woy-103.png",                title: "Winds of Yawanawa #103", collection: "Winds of Yawanawa" },
-  "larva-labs":      { image: "/art/cryptopunk-1568.png",        title: "CryptoPunk #1568",       collection: "CryptoPunks" },
-  "sam-spratt":      { image: "/art/masks-442.png",              title: "Masks of Luci #442",     collection: "Masks of Luci" },
-};
+import { getArtworkImage } from "@/lib/images";
+import {
+  getArtistDisplayName,
+  getCollectionDisplayName,
+  isCollectionHidden,
+  sortCollections,
+  sortPieces,
+} from "@/lib/curation";
+import ArtistHero from "@/components/ArtistHero";
 
 // Merge collab artists under their primary artist
 const MERGE_INTO: Record<string, string> = {
@@ -26,73 +23,74 @@ export default function ArtistsPage() {
   return (
     <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 pt-12 sm:pt-16 pb-16">
       {sorted.map((artist) => {
-        const works = getPiecesByArtist(artist.slug);
-        const cols = getCollectionsByArtist(artist.slug);
-        const featured = FEATURED[artist.slug];
-        const firstPiece = works[0];
-        const isPunk = artist.slug === "larva-labs" || artist.slug === "meebits";
+        const artistName = getArtistDisplayName(artist.slug, artist.name);
+        const visibleCols = sortCollections(
+          artist.slug,
+          getCollectionsByArtist(artist.slug).filter((c) => !isCollectionHidden(c.slug))
+        );
+        const allWorks = getPiecesByArtist(artist.slug).filter(
+          (p) => !isCollectionHidden(p.collectionSlug)
+        );
+
+        // Build the candidate pool — every visible piece that resolves to a
+        // real image, in curation order. Client component picks one at random
+        // on each mount.
+        const candidates = visibleCols
+          .flatMap((col) =>
+            sortPieces(col.slug, allWorks.filter((w) => w.collectionSlug === col.slug))
+          )
+          .map((p) => {
+            const src = getArtworkImage(p.slug, p.contractAddress, p.tokenId, "detail");
+            if (!src) return null;
+            return { src, title: p.title, isPunk: p.collectionSlug === "cryptopunks" };
+          })
+          .filter((c): c is NonNullable<typeof c> => c !== null);
 
         return (
-          <Link
+          <div
             key={artist.slug}
-            href={`/artist/${artist.slug}`}
-            className="group block border-b border-border py-16 first:pt-8"
+            className="border-b border-border py-16 first:pt-8"
           >
-            <div className="flex flex-col md:flex-row gap-8 md:gap-16 items-start">
-              {/* Featured artwork — full dimensions, no cropping */}
-              <div className="w-full md:w-[55%] shrink-0">
-                {featured ? (
-                  <div className={isPunk ? "bg-[#638596] inline-block" : ""}>
-                    <Image
-                      src={featured.image}
-                      alt={featured.title}
-                      width={800}
-                      height={800}
-                      className={`block w-auto h-auto max-w-full max-h-[60vh] ${isPunk ? "[image-rendering:pixelated] w-[200px]" : ""}`}
-                      sizes="(max-width: 768px) 90vw, 55vw"
-                    />
-                  </div>
-                ) : firstPiece ? (
-                  <div className="aspect-[4/3] w-full">
-                    <PlaceholderArt collectionSlug={firstPiece.collectionSlug} pieceSlug={firstPiece.slug} />
-                  </div>
-                ) : null}
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-[55fr_45fr] gap-8 md:gap-16 items-start">
+              {/* Hero artwork — fills its column */}
+              <ArtistHero artistSlug={artist.slug} candidates={candidates} />
 
-              {/* Info — right side */}
-              <div className="flex-1 md:pt-4">
-                <h2 className="text-[32px] sm:text-[40px] tracking-tight leading-tight group-hover:opacity-60 transition-opacity duration-200">
-                  {artist.name}
-                </h2>
-                <p className="text-[13px] text-muted mt-2">
-                  {works.length} works &middot; {cols.length} collection{cols.length !== 1 ? "s" : ""}
+              {/* Info */}
+              <div className="md:pt-4">
+                <Link
+                  href={`/artist/${artist.slug}`}
+                  className="inline-block group"
+                >
+                  <h2 className="font-serif text-[32px] sm:text-[40px] tracking-tight leading-tight group-hover:opacity-60 transition-opacity duration-200">
+                    {artistName}
+                  </h2>
+                </Link>
+                <p className="text-[13px] text-muted mt-3">
+                  {visibleCols.length} collection{visibleCols.length !== 1 ? "s" : ""} &middot; {allWorks.length} works
                 </p>
-                {cols.length > 0 && (
-                  <p className="text-[13px] text-muted mt-1">
-                    {cols.map((c) => c.name).join(", ")}
+                {visibleCols.length > 0 && (
+                  <p className="text-[13px] text-muted mt-2">
+                    {visibleCols.map((c, i) => (
+                      <span key={c.slug}>
+                        {i > 0 && ", "}
+                        <Link
+                          href={`/collection/${c.slug}`}
+                          className="hover:text-foreground transition-colors duration-200"
+                        >
+                          {getCollectionDisplayName(c.slug, c.name)}
+                        </Link>
+                      </span>
+                    ))}
                   </p>
                 )}
                 {artist.bio && (
-                  <p className="text-[15px] text-foreground-secondary leading-relaxed mt-6 max-w-[400px]">
+                  <p className="text-[15px] text-foreground-secondary leading-[1.65] mt-6 max-w-[400px]">
                     {artist.bio}
                   </p>
                 )}
-                {!artist.bio && (
-                  <p className="text-[13px] text-muted italic mt-6">Biography forthcoming.</p>
-                )}
-                {featured && (
-                  <div className="mt-8">
-                    <p className="text-[10px] tracking-[0.1em] uppercase text-muted">Featured</p>
-                    <p className="text-[13px] text-foreground mt-1">{featured.title}</p>
-                    <p className="text-[13px] text-muted">{featured.collection}</p>
-                  </div>
-                )}
-                <p className="text-[13px] text-muted mt-8 group-hover:text-foreground transition-colors duration-200">
-                  View works &rarr;
-                </p>
               </div>
             </div>
-          </Link>
+          </div>
         );
       })}
     </div>
