@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import CopyableHash from "./CopyableHash";
 
 interface Props {
   contractAddress?: string;
@@ -8,6 +8,7 @@ interface Props {
   editionType?: string;
   tokenStandard?: string;
   chain?: string;
+  storage?: string;
 }
 
 /**
@@ -21,6 +22,7 @@ export default function OnChainDetails({
   editionType,
   tokenStandard = "ERC-721",
   chain = "Ethereum",
+  storage,
 }: Props) {
   if (!contractAddress && !tokenId) return null;
 
@@ -62,6 +64,11 @@ export default function OnChainDetails({
             <span className="text-foreground">{chain}</span>
           </Row>
         )}
+        {storage && (
+          <Row label="Storage">
+            <span className="text-foreground">{storage}</span>
+          </Row>
+        )}
       </div>
     </details>
   );
@@ -73,33 +80,5 @@ function Row({ label, children }: { label: string; children: React.ReactNode }) 
       <span className="text-muted shrink-0">{label}</span>
       {children}
     </div>
-  );
-}
-
-function CopyableHash({ value }: { value: string }) {
-  const [copied, setCopied] = useState(false);
-  const truncated =
-    value.length > 14 ? `${value.slice(0, 6)}…${value.slice(-4)}` : value;
-
-  function copy() {
-    navigator.clipboard?.writeText(value).then(
-      () => {
-        setCopied(true);
-        setTimeout(() => setCopied(false), 1200);
-      },
-      () => {}
-    );
-  }
-
-  return (
-    <button
-      type="button"
-      onClick={copy}
-      title={`Click to copy — ${value}`}
-      aria-label={`Copy contract address ${value}`}
-      className="font-mono text-foreground cursor-pointer hover:opacity-60 transition-opacity duration-200"
-    >
-      {copied ? "Copied" : truncated}
-    </button>
   );
 }

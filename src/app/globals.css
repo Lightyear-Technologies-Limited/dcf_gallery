@@ -3,13 +3,18 @@
 /* Dark mode is class-based — toggled by ThemeToggle, persisted to localStorage. */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/*
+ * Color tokens are in OKLCH for perceptual uniformity. All neutrals carry a
+ * tiny warm tint (hue 80, chroma 0.004–0.008) so the eggshell foundation
+ * cohere across surfaces. Pure black/white are deliberately avoided.
+ */
 :root {
-  --background: #F8F8F7;
-  --foreground: #1A1A1A;
-  --foreground-secondary: #4A4A4A;
-  --muted: #999999;
-  --border: #E8E8E6;
-  --surface: #F0F0EE;
+  --background:           oklch(0.975 0.006 80);   /* warm eggshell */
+  --foreground:           oklch(0.180 0.004 80);   /* warm near-black */
+  --foreground-secondary: oklch(0.330 0.005 80);
+  --muted:                oklch(0.620 0.005 80);
+  --border:               oklch(0.920 0.005 80);
+  --surface:              oklch(0.945 0.006 80);
 }
 
 @theme inline {
@@ -25,26 +30,53 @@
 }
 
 .dark {
-  --background: #111111;
-  --foreground: #ECECEC;
-  --foreground-secondary: #B0B0B0;
-  --muted: #777777;
-  --border: #2A2A28;
-  --surface: #1A1A18;
+  --background:           oklch(0.135 0.003 80);
+  --foreground:           oklch(0.925 0.004 80);
+  --foreground-secondary: oklch(0.745 0.004 80);
+  --muted:                oklch(0.500 0.004 80);
+  --border:               oklch(0.225 0.004 80);
+  --surface:              oklch(0.165 0.003 80);
 }
 
+/*
+ * Body type — Instrument Sans 16px / 1.65. OpenType features (kerning, common
+ * ligatures, contextual alternates) on for prose; tabular figures opt-in via
+ * Tailwind utility on numeric content.
+ */
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.65;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
+/*
+ * Fluid display sizes — used by H1 on editorial pages. Pick the one whose
+ * range matches the importance of the page (sm for utility/single-piece,
+ * default for standard editorial, lg for artist hero).
+ */
+.display-sm { font-size: clamp(2rem,    4vw, 3rem);   line-height: 0.98; letter-spacing: -0.02em; }
+.display    { font-size: clamp(2.5rem,  5vw, 4rem);   line-height: 0.95; letter-spacing: -0.02em; }
+.display-lg { font-size: clamp(2.5rem,  6vw, 4.5rem); line-height: 0.95; letter-spacing: -0.02em; }
+
+/* Selection — invert without going pure on either end. */
 ::selection {
   background: var(--foreground);
   color: var(--background);
 }
+
+/* Logo light/dark swap — stacked with absolute positioning, toggled via opacity */
+.logo-wrap { position: relative; }
+.logo-wrap img { position: absolute; left: 0; top: 0; }
+.logo-light { opacity: 1; }
+.logo-dark { opacity: 0; }
+.dark .logo-light { opacity: 0; }
+.dark .logo-dark { opacity: 1; }
 
 /* Hide scrollbar for filter bars */
 .scrollbar-hide {

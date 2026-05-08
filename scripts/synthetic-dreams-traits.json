@@ -1,0 +1,194 @@
+[
+  {
+    "slug": "synthetic-dreams-51-be3a",
+    "tokenId": "51",
+    "traits": {
+      "artist": "Refik Anadol",
+      "Collection": "Landscapes",
+      "Event": "Google Quantum Summer Symposium 2021",
+      "Bitstring": "11001001000111111110001010101101000100100101010011001",
+      "Cluster": "CLOSED WATER",
+      "X": "0.933917",
+      "Y": "0.864708",
+      "Z": "0.578635",
+      "Rarity": 2
+    },
+    "features": {}
+  },
+  {
+    "slug": "synthetic-dreams-362-be3a",
+    "tokenId": "362",
+    "traits": {
+      "artist": "Refik Anadol",
+      "Collection": "Landscapes",
+      "Event": "Google Quantum Summer Symposium 2021",
+      "Bitstring": "10110000100001101110000111100101101000110111000100110",
+      "Cluster": "ROCKY LANDSCAPES",
+      "X": "0.216258",
+      "Y": "0.112087",
+      "Z": "0.546797",
+      "Rarity": 1
+    },
+    "features": {}
+  },
+  {
+    "slug": "synthetic-dreams-379-be3a",
+    "tokenId": "379",
+    "traits": {
+      "artist": "Refik Anadol",
+      "Collection": "Landscapes",
+      "Event": "Google Quantum Summer Symposium 2021",
+      "Bitstring": "11010011101000111100110011110100100101111010000010101",
+      "Cluster": "CLOSED WATER",
+      "X": "0.752922",
+      "Y": "0.687913",
+      "Z": "0.227991",
+      "Rarity": 2
+    },
+    "features": {}
+  },
+  {
+    "slug": "synthetic-dreams-625-be3a",
+    "tokenId": "625",
+    "traits": {
+      "artist": "Refik Anadol",
+      "Collection": "Landscapes",
+      "Event": "Google Quantum Summer Symposium 2021",
+      "Bitstring": "10011101100010000010110100011001100111100000001000100",
+      "Cluster": "GREEN LANDSCAPES",
+      "X": "0.079977",
+      "Y": "0.135517",
+      "Z": "0.651713",
+      "Rarity": 1
+    },
+    "features": {}
+  },
+  {
+    "slug": "synthetic-dreams-630-be3a",
+    "tokenId": "630",
+    "traits": {
+      "artist": "Refik Anadol",
+      "Collection": "Landscapes",
+      "Event": "Google Quantum Summer Symposium 2021",
+      "Bitstring": "00000010101001000100111111111110011000001100110100011",
+      "Cluster": "DESERT LANDSCAPES",
+      "X": "0.596244",
+      "Y": "0.596465",
+      "Z": "0.188677",
+      "Rarity": 1
+    },
+    "features": {}
+  },
+  {
+    "slug": "synthetic-dreams-648-be3a",
+    "tokenId": "648",
+    "traits": {
+      "artist": "Refik Anadol",
+      "Collection": "Landscapes",
+      "Event": "Google Quantum Summer Symposium 2021",
+      "Bitstring": "10110101000100101000010111000101110010101101001101101",
+      "Cluster": "CLOSED WATER",
+      "X": "0.946196",
+      "Y": "0.935888",
+      "Z": "0.539476",
+      "Rarity": 2
+    },
+    "features": {}
+  },
+  {
+    "slug": "synthetic-dreams-754-be3a",
+    "tokenId": "754",
+    "traits": {
+      "artist": "Refik Anadol",
+      "Collection": "Landscapes",
+      "Event": "Google Quantum Summer Symposium 2021",
+      "Bitstring": "11110110111010010010110110000110101100010000000000010",
+      "Cluster": "GREEN LANDSCAPES",
+      "X": "0.081555",
+      "Y": "0.069321",
+      "Z": "0.612352",
+      "Rarity": 1
+    },
+    "features": {}
+  },
+  {
+    "slug": "synthetic-dreams-774-be3a",
+    "tokenId": "774",
+    "traits": {
+      "artist": "Refik Anadol",
+      "Collection": "Landscapes",
+      "Event": "Google Quantum Summer Symposium 2021",
+      "Bitstring": "11110011111011010110101111011010100001001001111010111",
+      "Cluster": "DESERT LANDSCAPES",
+      "X": "0.209601",
+      "Y": "0.382616",
+      "Z": "0.197306",
+      "Rarity": 1
+    },
+    "features": {}
+  },
+  {
+    "slug": "synthetic-dreams-854-be3a",
+    "tokenId": "854",
+    "traits": {
+      "artist": "Refik Anadol",
+      "Collection": "Landscapes",
+      "Event": "Google Quantum Summer Symposium 2021",
+      "Bitstring": "11100100000110101011010001100101000101110100110111000",
+      "Cluster": "CLOSED WATER",
+      "X": "0.493494",
+      "Y": "0.441065",
+      "Z": "0.255054",
+      "Rarity": 2
+    },
+    "features": {}
+  },
+  {
+    "slug": "synthetic-dreams-858-be3a",
+    "tokenId": "858",
+    "traits": {
+      "artist": "Refik Anadol",
+      "Collection": "Landscapes",
+      "Event": "Google Quantum Summer Symposium 2021",
+      "Bitstring": "10111001110001011101000100010100011011000000100011101",
+      "Cluster": "ROCKY LANDSCAPES",
+      "X": "0.215551",
+      "Y": "0.338422",
+      "Z": "0.784875",
+      "Rarity": 1
+    },
+    "features": {}
+  },
+  {
+    "slug": "synthetic-dreams-951-be3a",
+    "tokenId": "951",
+    "traits": {
+      "artist": "Refik Anadol",
+      "Collection": "Landscapes",
+      "Event": "Google Quantum Summer Symposium 2021",
+      "Bitstring": "00001011111011110101100000000001110001110000110010111",
+      "Cluster": "DESERT LANDSCAPES",
+      "X": "0.276214",
+      "Y": "0.382149",
+      "Z": "0.634583",
+      "Rarity": 1
+    },
+    "features": {}
+  },
+  {
+    "slug": "synthetic-dreams-957-be3a",
+    "tokenId": "957",
+    "traits": {
+      "artist": "Refik Anadol",
+      "Collection": "Landscapes",
+      "Event": "Google Quantum Summer Symposium 2021",
+      "Bitstring": "01101010001111011111010110011001111000101010010010000",
+      "Cluster": "GREEN LANDSCAPES",
+      "X": "0.129854",
+      "Y": "0.163856",
+      "Z": "0.607364",
+      "Rarity": 1
+    },
+    "features": {}
+  }
+]

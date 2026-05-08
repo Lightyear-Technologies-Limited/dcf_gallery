@@ -2,6 +2,7 @@
 // curation.json is the human-editable source (supports inline (N) row tags).
 // curation.data.json is the parsed, valid-JSON form the app reads.
 import curation from "./curation.data.json";
+import traitsData from "./traits.data.json";
 
 /**
  * Get display name for a collection. Falls back to data name.
@@ -97,6 +98,25 @@ export function getFeaturedHeroes(): string[] {
 }
 
 /**
+ * Composite hero+sidebar layout config for a collection.
+ * `heroPiece` slug is rendered as a (sidebarRows × sidebarRows) hero with
+ * `sidebarCols × sidebarRows` smaller pieces beside it. Anything past that
+ * spills into a regular justified gallery below.
+ */
+export interface HeroLayout {
+  heroPiece: string;
+  sidebarCols: number;
+  sidebarRows: number;
+  /** Optional explicit row-major ordering for the sidebar cells. */
+  sidebarPieces?: string[];
+}
+
+export function getHeroLayout(collectionSlug: string): HeroLayout | null {
+  const layouts = (curation as { heroLayouts?: Record<string, HeroLayout> }).heroLayouts;
+  return layouts?.[collectionSlug] || null;
+}
+
+/**
  * Resolve the artist-website URL for a piece, using the collection's
  * template from curation.json ({tokenId} placeholder). Returns null if no
  * template is set or no tokenId is available.
@@ -120,6 +140,18 @@ export function getArtistSiteUrl(collectionSlug: string, tokenId?: string): stri
 export function getEditionType(collectionSlug: string): string {
   const editions = (curation as { editions?: Record<string, string> }).editions;
   return editions?.[collectionSlug] || "1/1";
+}
+
+/**
+ * Get the filtered/ordered generative traits for a piece slug, or null if none.
+ * Populated from on-chain metadata in scripts/build-traits-data.mjs.
+ */
+export function getPieceTraits(slug: string): Array<[string, string | number]> | null {
+  const data = traitsData as Record<string, Record<string, string | number>>;
+  const row = data[slug];
+  if (!row) return null;
+  const entries = Object.entries(row);
+  return entries.length > 0 ? entries : null;
 }
 
 /**

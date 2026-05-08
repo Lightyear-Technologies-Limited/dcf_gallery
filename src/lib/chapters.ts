@@ -16,7 +16,7 @@ export const CHAPTERS: Chapter[] = [
     color: "#9B6FD0",
     artists: ["refik-anadol"],
     description:
-      "Work in which machine learning is not a tool but a medium — models trained, guided, and contested until something resolves into an image.",
+      "Art and artists that use machine learning, neural networks, and/or large data systems as their primary medium, rendering archives, atmosphere, and memory as continuous moving image.",
   },
   {
     name: "CryptoArt",
@@ -24,23 +24,23 @@ export const CHAPTERS: Chapter[] = [
     color: "#E05555",
     artists: ["xcopy", "beeple", "kim-asendorf"],
     description:
-      "The native art of a new medium — gestural, glitched, politically alert, and made for the chain it lives on.",
+      "Art and artists that are native to the blockchain, and/or deeply tied to crypto culture and the early digital art movement.",
   },
   {
     name: "Digital Canvas",
     slug: "digital-canvas",
     color: "#6AAF5C",
-    artists: ["a-c-k", "ack", "operator", "sam-spratt"],
+    artists: ["a-c-k", "operator", "sam-spratt"],
     description:
-      "Painters, illustrators, and narrative image-makers extending the canvas tradition into a screen-native practice.",
+      "Digital-native artists who use visual storytelling, traditional art skills, and/or immersive media to build narratives, characters, or concepts in digital form.",
   },
   {
     name: "Digital Identity",
     slug: "digital-identity",
     color: "#4A9EC9",
-    artists: ["larva-labs", "meebits"],
+    artists: ["larva-labs"],
     description:
-      "Avatars, profile pictures, and the grammar of self-representation on-chain — the earliest and most widely-held forms of digital ownership.",
+      "Generative collections and projects that establish on-chain identity, where algorithmic artwork doubles as profile picture, status object, and/or community membership.",
   },
   {
     name: "Generative Art",
@@ -48,7 +48,7 @@ export const CHAPTERS: Chapter[] = [
     color: "#C4956A",
     artists: ["tyler-hobbs", "dmitri-cherniak"],
     description:
-      "Algorithmic authorship — artists who write the rules and let the work complete itself, one output at a time.",
+      "Artists who design algorithmic systems rather than finished works, where each piece in a collection is a unique output of the same underlying logic.",
   },
 ];
 

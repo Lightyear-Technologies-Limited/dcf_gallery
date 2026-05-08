@@ -74,8 +74,9 @@ for (const line of lines) {
   }
 }
 
-// Strip all (N) and empty () placeholder tags to get valid JSON
-const stripped = raw.replace(/\s*\(\d*\)/g, "");
+// Strip // trait annotations (only those after a () or (N) tag on piece lines),
+// then strip the (N) tags and empty () placeholders to get valid JSON.
+const stripped = raw.replace(/\(\d*\)\s*\/\/[^\n]*/g, (m) => m.match(/\(\d*\)/)[0]).replace(/\s*\(\d*\)/g, "");
 
 // ---------------------------------------------------------------------------
 // 2. Parse JSON

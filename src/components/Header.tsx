@@ -18,11 +18,13 @@ export default function Header() {
   return (
     <>
       {/* Desktop sidebar */}
-      <aside className="hidden md:flex fixed left-0 top-0 bottom-0 w-32 z-50 flex-col border-r border-border bg-background">
+      <aside className="hidden md:flex fixed left-0 top-0 bottom-0 w-36 z-50 flex-col border-r border-border bg-background">
         {/* Masthead: logo at top */}
         <Link href="/" className="text-foreground pt-6 px-6" aria-label="Home">
-          <img src="/brand/hivemind-black.png" alt="Hivemind" className="h-4 w-auto block dark:hidden" />
-          <img src="/brand/hivemind-white.png" alt="Hivemind" className="h-4 w-auto hidden dark:block" />
+          <span className="logo-wrap block h-4 w-24">
+            <img src="/brand/hivemind-black.png" alt="Hivemind" className="h-4 w-auto logo-light" />
+            <img src="/brand/hivemind-white.png" alt="Hivemind" className="h-4 w-auto logo-dark" />
+          </span>
         </Link>
 
         {/* Nav — first item aligned with filter "All" row in main content (~72px from top) */}
@@ -52,7 +54,7 @@ export default function Header() {
           >
             Artists
           </Link>
-          <Link
+<Link
             href="/search"
             className={`text-[13px] tracking-[0.02em] transition-colors duration-200 leading-[30px] ${
               path === "/search" ? "text-foreground" : "text-muted hover:text-foreground"
@@ -71,8 +73,10 @@ export default function Header() {
       {/* Mobile header */}
       <header className="md:hidden fixed top-0 left-0 right-0 z-50 bg-background border-b border-border h-14 flex items-center justify-between px-6">
         <Link href="/" aria-label="Home">
-          <img src="/brand/hivemind-black.png" alt="Hivemind" className="h-[12px] w-auto block dark:hidden" />
-          <img src="/brand/hivemind-white.png" alt="Hivemind" className="h-[12px] w-auto hidden dark:block" />
+          <span className="logo-wrap block h-[12px] w-20">
+            <img src="/brand/hivemind-black.png" alt="Hivemind" className="h-[12px] w-auto logo-light" />
+            <img src="/brand/hivemind-white.png" alt="Hivemind" className="h-[12px] w-auto logo-dark" />
+          </span>
         </Link>
         <div className="flex items-center gap-4">
           <Link href="/search" className="text-muted" aria-label="Search">

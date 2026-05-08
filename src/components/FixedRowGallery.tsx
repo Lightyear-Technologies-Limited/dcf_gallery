@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { getArtworkImage } from "@/lib/images";
+import PlaceholderArt from "./PlaceholderArt";
 
 interface PieceData {
   id: string;
@@ -114,7 +115,13 @@ export default function FixedRowGallery({ pieces, rowMap, fallbackPerRow, gap = 
                       className={`w-full h-full ${isPunk ? "[image-rendering:pixelated] object-contain" : "object-cover"}`}
                       sizes="500px"
                     />
-                  ) : null}
+                  ) : (
+                    <PlaceholderArt
+                      collectionSlug={piece.collectionSlug}
+                      pieceSlug={piece.slug}
+                      className="w-full h-full"
+                    />
+                  )}
                 </Link>
               );
             })}

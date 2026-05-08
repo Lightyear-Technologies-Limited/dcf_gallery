@@ -10,9 +10,11 @@ import {
   isCollectionHidden,
   getPiecesPerRow,
   getPieceRows,
+  getHeroLayout,
 } from "@/lib/curation";
 import JustifiedGallery from "@/components/JustifiedGallery";
 import FixedRowGallery from "@/components/FixedRowGallery";
+import HeroSidebarGallery from "@/components/HeroSidebarGallery";
 import SinglePieceDisplay from "@/components/SinglePieceDisplay";
 
 const MERGE_INTO: Record<string, string> = {
@@ -48,6 +50,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
         description: col.description,
         medium: col.medium,
         mintDate: col.mintDate,
+        totalSupply: col.totalSupply,
         piecesPerRow: getPiecesPerRow(col.slug),
         pieceRows: getPieceRows(col.slug),
         pieces: sortPieces(
@@ -71,9 +74,9 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
   return (
     <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
       {/* Editorial header — name left, bio right */}
-      <div className="pt-20 grid grid-cols-1 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-10 md:gap-16">
+      <div className="pt-[120px] grid grid-cols-1 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-10 md:gap-16">
         <div>
-          <h1 className="font-serif text-[48px] sm:text-[64px] lg:text-[72px] tracking-[-0.02em] leading-[0.95]">
+          <h1 className="font-serif display-lg">
             {artistName}
           </h1>
           <p className="mt-4 text-[13px] text-muted">
@@ -101,33 +104,28 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
           )}
         </div>
 
-        <div className="space-y-10 md:pt-4">
-          {artist.bio && (
-            <p className="text-[17px] text-foreground-secondary leading-[1.65]">{artist.bio}</p>
-          )}
-          {artist.curationComment && (
-            <div>
-              <p className="text-[13px] text-muted mb-3">Why DCF holds this work</p>
-              <p className="font-serif text-[17px] leading-[1.65] text-foreground-secondary italic">
-                {artist.curationComment}
-              </p>
-              {artist.essayUrl && (
-                <a
-                  href={artist.essayUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[13px] text-muted hover:text-foreground transition-colors duration-200 mt-4 inline-block"
-                >
-                  Read the essay
-                  {artist.essayTitle && (
-                    <>
-                      : <span className="underline underline-offset-4 decoration-border">{artist.essayTitle}</span>
-                    </>
-                  )}{" "}
-                  &rarr;
-                </a>
-              )}
+        <div className="space-y-6 md:pt-4">
+          {(artist.bio || artist.curationComment) && (
+            <div className="text-[20px] text-foreground-secondary leading-[1.6] space-y-4">
+              {artist.bio && <p>{artist.bio}</p>}
+              {artist.curationComment && <p>{artist.curationComment}</p>}
             </div>
+          )}
+          {artist.essayUrl && (
+            <a
+              href={artist.essayUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[13px] text-muted hover:text-foreground transition-colors duration-200 inline-block"
+            >
+              Read the essay
+              {artist.essayTitle && (
+                <>
+                  : <span className="underline underline-offset-4 decoration-border">{artist.essayTitle}</span>
+                </>
+              )}{" "}
+              &rarr;
+            </a>
           )}
         </div>
       </div>
@@ -170,9 +168,11 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
                   >
                     {col.name}
                   </Link>
-                  <p className="text-[13px] text-muted mt-3 capitalize">
-                    {n} work{n === 1 ? "" : "s"} · {col.medium}
-                    {col.mintDate && ` · ${col.mintDate.slice(0, 4)}`}
+                  <p className="text-[13px] text-muted mt-3">
+                    {col.totalSupply
+                      ? <>{n} of {col.totalSupply.toLocaleString()}</>
+                      : <>{n} piece{n === 1 ? "" : "s"}</>
+                    }
                   </p>
                 </div>
                 <div className="md:pt-3">
@@ -185,22 +185,41 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
               </div>
 
               {/* Gallery */}
-              {n === 1 && heroImage && piece ? (
-                <SinglePieceDisplay
-                  slug={piece.slug}
-                  src={heroImage}
-                  title={piece.title}
-                  isPunk={piece.collectionSlug === "cryptopunks"}
-                />
-              ) : col.pieceRows && Object.keys(col.pieceRows).length > 0 ? (
-                <FixedRowGallery
-                  pieces={col.pieces}
-                  rowMap={col.pieceRows}
-                  fallbackPerRow={ideal}
-                />
-              ) : (
-                <JustifiedGallery pieces={col.pieces} piecesPerRow={ideal} />
-              )}
+              {(() => {
+                const heroLayout = getHeroLayout(col.slug);
+                if (n === 1 && heroImage && piece) {
+                  return (
+                    <SinglePieceDisplay
+                      slug={piece.slug}
+                      src={heroImage}
+                      title={piece.title}
+                      isPunk={piece.collectionSlug === "cryptopunks"}
+                    />
+                  );
+                }
+                if (heroLayout) {
+                  return (
+                    <HeroSidebarGallery
+                      pieces={col.pieces}
+                      heroSlug={heroLayout.heroPiece}
+                      sidebarCols={heroLayout.sidebarCols}
+                      sidebarRows={heroLayout.sidebarRows}
+                      sidebarSlugs={heroLayout.sidebarPieces}
+                      fallbackPerRow={ideal}
+                    />
+                  );
+                }
+                if (col.pieceRows && Object.keys(col.pieceRows).length > 0) {
+                  return (
+                    <FixedRowGallery
+                      pieces={col.pieces}
+                      rowMap={col.pieceRows}
+                      fallbackPerRow={ideal}
+                    />
+                  );
+                }
+                return <JustifiedGallery pieces={col.pieces} piecesPerRow={ideal} />;
+              })()}
             </section>
           );
         })}

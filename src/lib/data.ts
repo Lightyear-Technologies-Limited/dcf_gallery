@@ -18,6 +18,18 @@ export interface Artist {
   tags: string[];
 }
 
+export interface Exhibition {
+  /** Year or month-year, e.g. "2021" or "October 2024" */
+  date: string;
+  /** Exhibition or event title — italicized in render. */
+  title: string;
+  /** City or venue, rendered after the title. */
+  location?: string;
+  /** Optional link to event details (press, recap, catalogue). Renders the
+      title + location as an external link when present. */
+  url?: string;
+}
+
 export interface Collection {
   slug: string;
   name: string;
@@ -30,6 +42,8 @@ export interface Collection {
   contractAddress?: string;
   totalSupply?: number;
   mintDate?: string;
+  /** Public exhibitions / auctions / showings of works in this collection. */
+  exhibitions?: Exhibition[];
   tags: string[];
   influences: string[];
 }
@@ -55,6 +69,10 @@ export interface Piece {
   // (e.g. https://xcopy.art/..., https://ack.art/...). The "View on {host}"
   // link on the piece page is derived from this URL's hostname.
   artistSiteUrl?: string;
+  // Original source URI for the artwork — usually IPFS or Arweave.
+  // Rendered as a "View original on ipfs.io" link on the piece page.
+  // ipfs:// and ar:// URIs are resolved to public gateways at render time.
+  originalUri?: string;
 }
 
 export interface Influence {
@@ -73,88 +91,88 @@ export const artists: Artist[] = [
   {
     slug: 'a-c-k',
     name: 'a.c.k.',
-    bio: '',
-    curationComment: '',
+    bio: 'Alpha Centauri Kid is a visionary in the digital art world, weaving complex narratives through his unique, emotive style. His work, guided by the Muse, is constantly evolving to reflect his own journey and relationship with art, and the prevailing themes of the digital art space.',
+    curationComment: 'The Digital Culture Fund acquired all five 1/1 artworks presented by a.c.k. at his Piano Blossoms auction in Amsterdam in October 2024 \u2014 a complete suite that captures his evolution as a narrative painter working natively on-chain.',
     influences: [],
     tags: ['digital-painting', 'contemporary', 'new-media'],
   },
   {
     slug: 'beeple',
     name: 'Beeple',
-    bio: '',
-    curationComment: '',
+    bio: 'Beeple helped define the modern era of digital art \u2014 not just through medium, but message. His practice spans daily digital sketches, monumental compositions, and cultural commentary that bridges legacy institutions and the on-chain world.',
+    curationComment: 'TIME: The Future of Business captures a cultural moment \u2014 a digital-native artist collaborating with a legacy publication to reflect on a world accelerating into the digital age. The 1/1 was acquired by the Digital Culture Fund in April 2025.',
     influences: [],
     tags: ['crypto-native', 'digital-culture', 'glitch'],
   },
   {
     slug: 'refik-anadol',
     name: 'Refik Anadol',
-    bio: '',
-    curationComment: '',
+    bio: 'Refik Anadol\u2019s art is driven by AI and machine learning algorithms, which he uses to process, analyze, and visualize data in novel and aesthetic ways. His practice sits at the intersection of data science, new media, and spatial design.',
+    curationComment: 'Winds of Yawanawa is a groundbreaking project that showcases the potential of AI and blockchain technology for social good and cultural exchange. Biome Lumina extends this into fully dynamic living paintings for Dataland, Refik\u2019s ambitious Museum of AI Arts.',
     influences: [],
     tags: ['ai-generated', 'machine-learning', 'data-art'],
   },
   {
     slug: 'larva-labs',
     name: 'Larva Labs',
-    bio: '',
-    curationComment: '',
+    bio: 'In the landscape of digital collectibles, CryptoPunks stand as a foundational symbol \u2014 blending crypto, art, and identity. Created in 2017, this 10,000-piece algorithmic collection helped pioneer on-chain generative art and sparked the NFT movement.',
+    curationComment: 'CryptoPunks are the origin point. DCF holds a significant position including sealed physical lithographs printed by Larva Labs \u2014 artifacts that bridge the digital provenance layer with a tangible art object.',
     influences: [],
     tags: ['pfp', 'cultural-icon', 'provenance'],
   },
   {
     slug: 'tyler-hobbs',
     name: 'Tyler Hobbs',
-    bio: '',
-    curationComment: '',
+    bio: 'Tyler Hobbs is an eloquent champion of code as a creative medium and a central figure in the generative art movement. His work showcases a mastery of blending precise digital processes with the chaos that comes from human input and computational surprises.',
+    curationComment: 'DCF holds one of the deepest Tyler Hobbs positions in any institutional collection \u2014 multiple 1/1s including Elektroanima, One One Overflow, and Return Zero alongside a significant Fidenza holding. Harbor Scene #2 was acquired through a private sale via LACMA and Cactoid Labs.',
     influences: [],
     tags: ['generative', 'algorithmic', 'on-chain'],
   },
   {
     slug: 'dmitri-cherniak',
     name: 'Dmitri Cherniak',
-    bio: '',
-    curationComment: '',
+    bio: 'Dmitri Cherniak is known for his extensive use of long-form generative art, paying homage to 20th-century art movements through algorithmic reinterpretation. His collaboration with The Estate of L\u00e1szl\u00f3 Moholy-Nagy on Light Years bridges the Bauhaus tradition with on-chain computation.',
+    curationComment: 'Using simple pegs and strings, Cherniak\u2019s Ringers algorithm emphasizes control through randomness. \u2018The Goose\u2019 sold for $6.2M at Sotheby\u2019s in 2023, securing Ringers as a landmark in on-chain generative art. DCF holds 34 Ringers and 6 Light Years.',
     influences: [],
     tags: ['generative', 'algorithmic', 'on-chain'],
   },
   {
     slug: 'xcopy',
     name: 'XCOPY',
-    bio: '',
-    curationComment: '',
+    bio: 'XCOPY\u2019s instantly recognizable glitch aesthetic explores death, dystopia, and apathy \u2014 delivering a raw critique of capitalism and technology. His work confronts viewers with scenes of exploitation, decay, and digital-era disillusionment.',
+    curationComment: 'DCF holds key 1/1s alongside a significant Grifters position. The 666-piece Grifters collection, minted in December 2021, remains one of the space\u2019s most sought-after series \u2014 revered for its symbolism, holder network, and connection to the artist\u2019s broader universe.',
     influences: [],
     tags: ['crypto-native', 'digital-culture', 'glitch'],
   },
   {
     slug: 'operator',
     name: 'Operator',
-    bio: '',
-    curationComment: '',
+    bio: 'Operator is an award-winning art duo exploring the interplay of systems, structure, and control. Known for their large-scale conceptual works and generative practice, their acclaimed Human Unreadable series embodies the balance between human movement and machine logic.',
+    curationComment: 'The X-Ray Machine \u2014 a monumental physical sculpture \u2014 is currently in the Infinite Images exhibition at Toledo Museum of Art. DCF\u2019s holding spans both the generative NFT series and this landmark physical work.',
     influences: [],
     tags: ['digital-painting', 'contemporary', 'new-media'],
   },
   {
     slug: 'sam-spratt',
     name: 'Sam Spratt',
-    bio: '',
-    curationComment: '',
+    bio: 'Sam Spratt is a generational talent who has spent over a decade mastering digital tools with old-world craftsmanship. Through Luci, he has built one of digital art\u2019s most expansive narrative ecosystems, reframing blockchain as a medium for myth-making and community participation.',
+    curationComment: 'Spratt\u2019s Luci universe represents the most ambitious narrative project in on-chain art \u2014 a multi-chapter mythology with deep community participation. DCF holds works across Skulls of Luci and Masks of Luci.',
     influences: [],
     tags: ['digital-painting', 'contemporary', 'new-media'],
   },
   {
     slug: 'kim-asendorf',
     name: 'Kim Asendorf',
-    bio: '',
-    curationComment: '',
+    bio: 'Kim Asendorf is a Berlin-based artist working at the intersection of code, pixels, and visual systems. His practice spans generative and interactive works that foreground the raw materiality of the digital image \u2014 pixel sorting, compression artifacts, and algorithmic pattern-making.',
+    curationComment: 'Asendorf\u2019s PXL DEX and PXL POD collections represent a distinct voice in on-chain art: systematic, visually precise, and rooted in the formal language of computation rather than illustration.',
     influences: [],
     tags: ['crypto-native', 'digital-culture', 'glitch'],
   },
   {
     slug: 'tyler-hobbs-and-dandelion-wist',
     name: 'Tyler Hobbs and Dandelion Wist',
-    bio: '',
-    curationComment: '',
+    bio: 'A collaboration between Tyler Hobbs and Dandelion Wist, QQL is a generative art algorithm that invites collectors to compose their own outputs \u2014 blending the artist\u2019s system with the collector\u2019s creative input.',
+    curationComment: 'QQL extends the generative art conversation from pure algorithmic output to collaborative creation. DCF holds pieces minted directly by Tyler Hobbs.',
     influences: [],
     tags: ['generative', 'algorithmic', 'on-chain'],
   },
@@ -168,11 +186,10 @@ export const collections: Collection[] = [
     slug: 'ack-editions',
     name: 'ACK Editions',
     artistSlug: 'a-c-k',
-    description: '',
+    description: 'A collection of Tyler Hobbs\' 1/1 artworks showcasing his mastery of blending precise digital processes with the chaos that comes from human input and computational surprises. Includes Elektroanima, One One Overflow, and Return Zero.',
     curatorNote: '',
     medium: 'image',
     contractAddress: '0x232a68a51d6e07357ae025d2a459c16077327102',
-    totalSupply: 1,
     tags: ['digital-painting', 'contemporary', 'new-media'],
     influences: [],
   },
@@ -180,11 +197,24 @@ export const collections: Collection[] = [
     slug: 'piano-blossoms',
     name: 'Piano Blossoms',
     artistSlug: 'a-c-k',
-    description: '',
-    curatorNote: '',
+    description: 'Five 1/1 artworks presented at a.c.k.\'s Piano Blossoms auction in Amsterdam, October 2024. Each piece is a unique narrative painting exploring the artist\'s evolving relationship with the Muse.',
+    curatorNote: 'a.c.k.\'s narrative practice processes the digital condition through painterly figuration. The Piano Blossoms auction marked a pivotal moment in his maturation — five works that read as a coherent emotional arc.',
     medium: 'image',
     contractAddress: '0x728d7a5133068e3c7e5afe72de8999076bc940f9',
-    totalSupply: 5,
+    exhibitions: [
+      {
+        date: 'October 2024',
+        title: 'Piano Blossoms',
+        location: 'Amsterdam',
+        url: 'https://avantarte.com/releases/alpha-centauri-kid-2024',
+      },
+      {
+        date: 'September 2025',
+        title: 'Grand Skull Piano',
+        location: 'Carnegie Hall, New York',
+        url: 'https://nftnow.com/features/alpha-centauri-kid-market-rise-grand-exhibition-xcopy/',
+      },
+    ],
     tags: ['digital-painting', 'contemporary', 'new-media'],
     influences: [],
   },
@@ -192,11 +222,10 @@ export const collections: Collection[] = [
     slug: 'her-favorite-flowers',
     name: 'Her favorite flowers',
     artistSlug: 'a-c-k',
-    description: '',
-    curatorNote: '',
+    description: 'A singular work from a.c.k.\'s exploration of botanical and emotive imagery, extending his narrative practice into the language of flowers.',
+    curatorNote: 'A singular reference point in a.c.k.\'s practice, bridging his crypto-native sensibility with traditional botanical painting. A reminder that digital art holds quiet, intimate registers.',
     medium: 'image',
     contractAddress: '0xa3cdefc4aea0407937ac3ea127b7491f24e5fe63',
-    totalSupply: 1,
     tags: ['digital-painting', 'contemporary', 'new-media'],
     influences: [],
   },
@@ -204,11 +233,10 @@ export const collections: Collection[] = [
     slug: 'superrare-beeple',
     name: 'SuperRare',
     artistSlug: 'beeple',
-    description: '',
-    curatorNote: '',
+    description: 'TIME: The Future of Business was created for a 2021 TIME magazine cover \u2014 a collaboration between a digital-native artist and a legacy publication reflecting on a world accelerating into the digital age.',
+    curatorNote: 'Beeple\'s TIME cover collaboration is a watershed in the cultural legitimization of digital art — the moment a major legacy publication recognized crypto-native artists as their visual peers.',
     medium: 'image',
     contractAddress: '0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0',
-    totalSupply: 1,
     tags: ['crypto-native', 'digital-culture', 'glitch'],
     influences: [],
   },
@@ -216,11 +244,11 @@ export const collections: Collection[] = [
     slug: 'dataland-biome-lumina',
     name: 'Dataland - Biome Lumina',
     artistSlug: 'refik-anadol',
-    description: '',
-    curatorNote: '',
+    description: 'Biome Lumina is the first series of unique living paintings for Dataland, Refik Anadol\'s ambitious Museum of AI Arts. Each artwork is fully dynamic, shaped by incoming environmental data.',
+    curatorNote: 'Biome Lumina opens a new chapter for AI-driven art: works that breathe and respond rather than resolve as static outputs. As a founding piece in Anadol\'s Dataland, it anchors a new institutional framework for the medium.',
     medium: 'image',
     contractAddress: '0xb097fba49a679a61b18b7079b99a953ca2691c9d',
-    totalSupply: 18,
+    totalSupply: 1000,
     tags: ['ai-generated', 'machine-learning', 'data-art'],
     influences: [],
   },
@@ -228,11 +256,11 @@ export const collections: Collection[] = [
     slug: 'cryptopunks',
     name: 'CryptoPunks',
     artistSlug: 'larva-labs',
-    description: '',
-    curatorNote: '',
+    description: 'Created in 2017, CryptoPunks is a 10,000-piece algorithmic collection that helped pioneer on-chain generative art and sparked the NFT movement. A foundational symbol blending crypto, art, and identity.',
+    curatorNote: 'CryptoPunks established the cultural foundation for everything that followed in NFTs. DCF\'s 40-piece holding reflects the project\'s status as both art-historical artifact and ongoing identity primitive.',
     medium: 'image',
     contractAddress: '0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB',
-    totalSupply: 39,
+    totalSupply: 10000,
     tags: ['pfp', 'cultural-icon', 'provenance'],
     influences: [],
   },
@@ -240,11 +268,11 @@ export const collections: Collection[] = [
     slug: 'day-gardens',
     name: 'Day Gardens',
     artistSlug: 'tyler-hobbs',
-    description: '',
-    curatorNote: '',
+    description: 'Day Gardens extends Tyler Hobbs\' generative practice into quieter, more contemplative territory \u2014 algorithmic compositions that evoke natural light and seasonal rhythm.',
+    curatorNote: 'Day Gardens shows Hobbs returning to the painterly with the discipline of his algorithmic practice intact — gestural, observational works that document the artist\'s continued evolution.',
     medium: 'image',
     contractAddress: '0xa7644d0a70dacce6a8468287e1aa888a0766c0fd',
-    totalSupply: 3,
+    totalSupply: 50,
     tags: ['generative', 'algorithmic', 'on-chain'],
     influences: [],
   },
@@ -252,11 +280,10 @@ export const collections: Collection[] = [
     slug: 'superrare-dmitri-cherniak',
     name: 'SuperRare',
     artistSlug: 'dmitri-cherniak',
-    description: '',
-    curatorNote: '',
+    description: 'Dmitri Cherniak\'s singular works explore the tension between systematic process and aesthetic surprise, extending his generative practice beyond the long-form series format.',
+    curatorNote: 'Cherniak\'s two-part SuperRare diptych explores the formal interest in symmetry and asymmetry that runs through his Art Blocks practice, bringing his generative thinking into the 1/1 register.',
     medium: 'image',
     contractAddress: '0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0',
-    totalSupply: 2,
     tags: ['generative', 'algorithmic', 'on-chain'],
     influences: [],
   },
@@ -264,11 +291,11 @@ export const collections: Collection[] = [
     slug: 'fidenza',
     name: 'Fidenza',
     artistSlug: 'tyler-hobbs',
-    description: '',
-    curatorNote: '',
+    description: 'Fidenza has helped define the generative art era, blending visual clarity with algorithmic depth. Visually elegant, endlessly variable, and instantly recognizable \u2014 a landmark work in on-chain art. DCF holds 27 of 999.',
+    curatorNote: 'Fidenza is the canonical Art Blocks work and a cornerstone of the generative art canon. DCF\'s 30-piece holding is built around extreme palettes and rare scales — intended to read as a cohesive sub-collection rather than a representative sample.',
     medium: 'generative',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
-    totalSupply: 30,
+    totalSupply: 999,
     tags: ['generative', 'algorithmic', 'on-chain'],
     influences: [],
   },
@@ -276,11 +303,11 @@ export const collections: Collection[] = [
     slug: 'grifters',
     name: 'Grifters',
     artistSlug: 'xcopy',
-    description: '',
-    curatorNote: '',
+    description: 'XCOPY\'s 666-piece Grifters collection, minted in December 2021, is rich with cultural commentary and remains one of the space\'s most sought-after series \u2014 revered for its symbolism, holder network, and connection to the artist\'s broader universe.',
+    curatorNote: 'Grifters is XCOPY\'s most ambitious systematic project — a generative cast of characters in his crypto-cynical visual language. The Legendary Edition centerpiece anchors DCF\'s set of the rarest and most expressive variants.',
     medium: 'video',
     contractAddress: '0xc143bbfcdbdbed6d454803804752a064a622c1f3',
-    totalSupply: 24,
+    totalSupply: 666,
     tags: ['crypto-native', 'digital-culture', 'glitch'],
     influences: [],
   },
@@ -288,11 +315,11 @@ export const collections: Collection[] = [
     slug: 'human-unreadable',
     name: 'Human Unreadable',
     artistSlug: 'operator',
-    description: '',
-    curatorNote: '',
+    description: 'The acclaimed Human Unreadable series embodies the balance between human movement and machine logic. Operator\'s practice transforms choreographic data into generative visual output, questioning where the human ends and the system begins.',
+    curatorNote: 'Human Unreadable maps choreography onto generative algorithms, producing what Operator calls \'unreadable\' bodies — figures shaped by code. The series is a milestone in performance-informed digital art.',
     medium: 'generative',
     contractAddress: '0x99a9b7c1116f9ceeb1652de04d5969cce509b069',
-    totalSupply: 17,
+    totalSupply: 400,
     tags: ['digital-painting', 'contemporary', 'new-media'],
     influences: [],
   },
@@ -300,11 +327,11 @@ export const collections: Collection[] = [
     slug: 'lightyears',
     name: 'Lightyears',
     artistSlug: 'dmitri-cherniak',
-    description: '',
-    curatorNote: '',
+    description: 'A collaboration with The Estate of L\u00e1szl\u00f3 Moholy-Nagy, Light Years bridges the Bauhaus tradition with on-chain computation \u2014 generative art paying homage to 20th-century visual experimentation.',
+    curatorNote: 'Light Years is one of Cherniak\'s quieter projects: a Bauhaus-informed exploration of color and form done in collaboration with the Estate of László Moholy-Nagy. It connects his algorithmic practice with 20th-century modernism.',
     medium: 'generative',
     contractAddress: '0x082dcab372505ae56eafde58204ba5b12ff3f3f5',
-    totalSupply: 6,
+    totalSupply: 200,
     tags: ['generative', 'algorithmic', 'on-chain'],
     influences: [],
   },
@@ -312,11 +339,11 @@ export const collections: Collection[] = [
     slug: 'masks-of-luci',
     name: 'Masks of Luci',
     artistSlug: 'sam-spratt',
-    description: '',
-    curatorNote: '',
+    description: 'Masks of Luci is a chapter in Sam Spratt\'s expansive Luci mythology \u2014 an on-chain narrative ecosystem that reframes blockchain as a medium for myth-making and community participation.',
+    curatorNote: 'Sam Spratt\'s most ambitious narrative work — a digital masquerade where each mask carries authored language and ritualized meaning. DCF holds both Council Mask 1/1s alongside a curated set of generative entries.',
     medium: 'image',
     contractAddress: '0x4440732b0d85e2a77dcb2caedfd940154241249a',
-    totalSupply: 19,
+    totalSupply: 613,
     tags: ['digital-painting', 'contemporary', 'new-media'],
     influences: [],
   },
@@ -328,7 +355,6 @@ export const collections: Collection[] = [
     curatorNote: '',
     medium: 'image',
     contractAddress: '0x7bd29408f11d2bfc23c34f18275bbf23bb716bc7',
-    totalSupply: 1,
     tags: ['pfp', 'cultural-icon', 'provenance'],
     influences: [],
   },
@@ -340,7 +366,6 @@ export const collections: Collection[] = [
     curatorNote: '',
     medium: 'image',
     contractAddress: '0xe70659b717112ac4e14284d0db2f5d5703df8e43',
-    totalSupply: 1,
     tags: ['digital-painting', 'contemporary', 'new-media'],
     influences: [],
   },
@@ -348,11 +373,11 @@ export const collections: Collection[] = [
     slug: 'lights',
     name: 'Lights',
     artistSlug: 'kim-asendorf',
-    description: '',
-    curatorNote: '',
+    description: 'Kim Asendorf\'s Lights explores the fundamental properties of digital illumination \u2014 algorithmic compositions built from the raw behavior of light rendered through code.',
+    curatorNote: 'Lights is Asendorf\'s earliest exploration of light-as-medium on-chain — a foundational entry point into pixel-native art and the throughline of his practice.',
     medium: 'image',
     contractAddress: '0x6d38705ad8af087d86ef505618b77b066ead2006',
-    totalSupply: 1,
+    totalSupply: 100,
     tags: ['crypto-native', 'digital-culture', 'glitch'],
     influences: [],
   },
@@ -360,11 +385,11 @@ export const collections: Collection[] = [
     slug: 'pxl-dex',
     name: 'PXL DEX',
     artistSlug: 'kim-asendorf',
-    description: '',
-    curatorNote: '',
+    description: 'PXL DEX is part of Kim Asendorf\'s systematic investigation of the pixel as a primary unit of digital expression \u2014 precise, formally rigorous, and rooted in the language of computation.',
+    curatorNote: 'PXL DEX is Kim Asendorf\'s most rigorous statement on pixel-as-currency. Each piece\'s pixel allowance is a finite, depletable resource — work that thinks of itself as both image and economic primitive.',
     medium: 'image',
     contractAddress: '0x81345761670fc8b90665466a94c196e26b92ecfb',
-    totalSupply: 5,
+    totalSupply: 256,
     tags: ['crypto-native', 'digital-culture', 'glitch'],
     influences: [],
   },
@@ -372,11 +397,11 @@ export const collections: Collection[] = [
     slug: 'pxl-pod',
     name: 'PXL POD',
     artistSlug: 'kim-asendorf',
-    description: '',
-    curatorNote: '',
+    description: 'PXL POD extends Asendorf\'s pixel-centric practice into a distinct formal territory, emphasizing modular composition and the tension between grid structure and visual emergence.',
+    curatorNote: 'PXL POD continues Asendorf\'s pixel-native practice into modular composition, where each piece reads as both discrete artwork and node in a larger formal grammar.',
     medium: 'image',
     contractAddress: '0xaee022552b539db18297d7481b6d547c622488b3',
-    totalSupply: 10,
+    totalSupply: 256,
     tags: ['crypto-native', 'digital-culture', 'glitch'],
     influences: [],
   },
@@ -388,7 +413,6 @@ export const collections: Collection[] = [
     curatorNote: '',
     medium: 'generative',
     contractAddress: '0x03699f24c1a96d91c261f3f6574e8aeba6bc3753',
-    totalSupply: 1,
     tags: ['crypto-native', 'digital-culture', 'glitch'],
     influences: [],
   },
@@ -396,11 +420,11 @@ export const collections: Collection[] = [
     slug: 'qql',
     name: 'QQL',
     artistSlug: 'tyler-hobbs-and-dandelion-wist',
-    description: '',
-    curatorNote: '',
+    description: 'QQL is a generative art algorithm by Tyler Hobbs and Dandelion Wist that invites collectors to compose their own outputs \u2014 blending the artist\'s system with the collector\'s creative input. DCF holds pieces minted directly by Tyler Hobbs.',
+    curatorNote: 'QQL turned generative art into a participatory medium: collectors compose their own outputs from Hobbs and Wist\'s algorithm. DCF holds two minted compositions alongside ten unspent Mint Passes — a position on both authorship and reserve.',
     medium: 'generative',
     contractAddress: '0x845dd2a7ee2a92a0518ab2135365ed63fdba0c88',
-    totalSupply: 12,
+    totalSupply: 999,
     tags: ['generative', 'algorithmic', 'on-chain'],
     influences: [],
   },
@@ -408,11 +432,19 @@ export const collections: Collection[] = [
     slug: 'repeat-as-necessary',
     name: 'Repeat as necessary',
     artistSlug: 'operator',
-    description: '',
-    curatorNote: '',
+    description: 'Repeat as Necessary extends Operator\'s investigation of algorithmic repetition and variation \u2014 systematic compositions that reveal emergent complexity through constrained rule sets.',
+    curatorNote: 'Operator\'s continued investigation of the body as algorithmic input. The four-piece sequence forms a meditative arc around breath, presence, and dissolution.',
     medium: 'generative',
     contractAddress: '0x99a9b7c1116f9ceeb1652de04d5969cce509b069',
-    totalSupply: 4,
+    totalSupply: 40,
+    exhibitions: [
+      {
+        date: 'August 2025',
+        title: 'Repeat as Necessary',
+        location: 'Scorpios Bodrum, Turkey',
+        url: 'https://www.operator.la/repeat-as-necessary',
+      },
+    ],
     tags: ['digital-painting', 'contemporary', 'new-media'],
     influences: [],
   },
@@ -420,11 +452,11 @@ export const collections: Collection[] = [
     slug: 'ringers',
     name: 'Ringers',
     artistSlug: 'dmitri-cherniak',
-    description: '',
-    curatorNote: '',
+    description: 'Using simple pegs and strings, Cherniak\'s Ringers algorithm emphasizes control through randomness. \u2018The Goose\u2019 sold for $6.2M at Sotheby\'s in 2023, securing Ringers as a landmark in on-chain generative art. DCF holds 34 of 1,000.',
+    curatorNote: 'Ringers is the algorithmic counterpart to Fidenza — proof that constraint produces inexhaustible variety. DCF\'s 36-piece holding is among the largest single-collector positions in the project, organized to read as a coherent visual taxonomy.',
     medium: 'generative',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
-    totalSupply: 36,
+    totalSupply: 1000,
     tags: ['generative', 'algorithmic', 'on-chain'],
     influences: [],
   },
@@ -432,11 +464,18 @@ export const collections: Collection[] = [
     slug: 'synthetic-dreams',
     name: 'Synthetic Dreams',
     artistSlug: 'refik-anadol',
-    description: '',
-    curatorNote: '',
+    description: 'Synthetic Dreams extends Refik Anadol\'s AI-driven practice into the territory of machine imagination \u2014 neural networks trained on vast datasets producing outputs that hover between the photographic and the hallucinatory.',
+    curatorNote: 'Created for the Google Quantum Summer Symposium 2021, each piece is generated from quantum random states. The work documents an early collaboration between a major artist and bleeding-edge computational research.',
     medium: 'generative',
     contractAddress: '0x183368d767b299681fdf660233e39f9f8cf8be3a',
-    totalSupply: 12,
+    totalSupply: 1000,
+    exhibitions: [
+      {
+        date: '2021',
+        title: 'Synthetic Dreams — Google Quantum Summer Symposium',
+        url: 'https://sd.refikanadol.com/',
+      },
+    ],
     tags: ['ai-generated', 'machine-learning', 'data-art'],
     influences: [],
   },
@@ -444,11 +483,11 @@ export const collections: Collection[] = [
     slug: 'skulls-of-luci',
     name: 'Skulls of Luci',
     artistSlug: 'sam-spratt',
-    description: '',
-    curatorNote: '',
+    description: 'Skulls of Luci marks an earlier chapter in Spratt\'s Luci universe, establishing the visual and narrative foundations for the mythology that would grow into one of digital art\'s most ambitious storytelling projects.',
+    curatorNote: 'The precursor to Masks of Luci — Sam Spratt\'s earlier exploration of the same formal language with rawer, more elemental material. Historical anchors for the larger Masks practice.',
     medium: 'image',
     contractAddress: '0xc9041f80dce73721a5f6a779672ec57ef255d27c',
-    totalSupply: 2,
+    totalSupply: 50,
     tags: ['digital-painting', 'contemporary', 'new-media'],
     influences: [],
   },
@@ -457,10 +496,9 @@ export const collections: Collection[] = [
     name: 'Tyler Hobbs',
     artistSlug: 'tyler-hobbs',
     description: '',
-    curatorNote: '',
+    curatorNote: 'Hobbs\' personal 1/1 practice — Return Zero, Elektroanima, One One Overflow — represents his most intentional standalone statements outside the generative editions. Each piece refines a different dimension of his algorithmic vocabulary.',
     medium: 'image',
     contractAddress: '0x7fc4a267c44d9f4d31227edeee5df7ef93819345',
-    totalSupply: 3,
     tags: ['generative', 'algorithmic', 'on-chain'],
     influences: [],
   },
@@ -468,11 +506,18 @@ export const collections: Collection[] = [
     slug: 'harbor-scene',
     name: 'Harbor Scene',
     artistSlug: 'tyler-hobbs',
-    description: '',
-    curatorNote: '',
+    description: 'Harbor Scene #2 (after John Henry Twachtman) was acquired through a private sale via LACMA and Cactoid Labs \u2014 a generative reinterpretation of Twachtman\'s Impressionist harbor painting through Hobbs\' algorithmic lens.',
+    curatorNote: 'Acquired through a private LACMA exhibition — a contemporary generative response to American Impressionism. Belongs to a small body of works where Hobbs explicitly converses with art history.',
     medium: 'image',
     contractAddress: '0x7fc4a267c44d9f4d31227edeee5df7ef93819345',
-    totalSupply: 1,
+    exhibitions: [
+      {
+        date: '2024',
+        title: 'Remembrance of Things Future',
+        location: 'LACMA × Cactoid Labs, Los Angeles',
+        url: 'https://unframed.lacma.org/2024/06/05/remembrance-things-future-conversation-tyler-hobbs-artist-experimenting-blockchain',
+      },
+    ],
     tags: ['generative', 'algorithmic', 'on-chain'],
     influences: [],
   },
@@ -480,11 +525,11 @@ export const collections: Collection[] = [
     slug: 'winds-of-yawanawa',
     name: 'Winds of Yawanawa',
     artistSlug: 'refik-anadol',
-    description: '',
-    curatorNote: '',
+    description: 'Winds of Yawanawa is a groundbreaking project that showcases the potential of AI and blockchain technology for social good and cultural exchange. DCF holds 45 of 1,000.',
+    curatorNote: 'Anadol\'s data-painting practice paired with the Yawanawa community of the Brazilian Amazon. The project channels collector capital toward indigenous cultural preservation; DCF\'s 50-piece holding is among the largest single positions.',
     medium: 'image',
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
-    totalSupply: 50,
+    totalSupply: 1000,
     tags: ['ai-generated', 'machine-learning', 'data-art'],
     influences: [],
   },
@@ -492,11 +537,10 @@ export const collections: Collection[] = [
     slug: 'superrare-xcopy',
     name: 'SuperRare',
     artistSlug: 'xcopy',
-    description: '',
-    curatorNote: '',
+    description: 'XCOPY\'s 1/1 works on SuperRare represent some of the artist\'s most direct statements \u2014 raw, glitched, and uncompromising explorations of death, dystopia, and digital-era disillusionment.',
+    curatorNote: 'DCF\'s XCOPY 1/1s span the artist\'s most-cited cultural moments — works that helped define crypto art\'s visual register: glitch, dread, and political commentary at compressed scale.',
     medium: 'image',
     contractAddress: '0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0',
-    totalSupply: 5,
     tags: ['crypto-native', 'digital-culture', 'glitch'],
     influences: [],
   },
@@ -508,7 +552,6 @@ export const collections: Collection[] = [
     curatorNote: '',
     medium: 'image',
     contractAddress: '0xab3a867a6b14cc2f3286b9f03698656f8a892e9e',
-    totalSupply: 1,
     tags: ['crypto-native', 'digital-culture', 'glitch'],
     influences: [],
   },
@@ -532,6 +575,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x232a68a51d6e07357ae025d2a459c16077327102',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x232a68a51d6e07357ae025d2a459c16077327102/8',
+    originalUri: 'https://arweave.net/yGmovdTJKNtu91z9bK9xHPFCSIaeiu8mseac7rkyaRM',
   },
   {
     id: 'piano-blossoms-5-40f9',
@@ -547,6 +591,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x728d7a5133068e3c7e5afe72de8999076bc940f9',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x728d7a5133068e3c7e5afe72de8999076bc940f9/5',
+    originalUri: 'https://arweave.net/eNtJ-LGNPakT5WovYLGlDBWmZd8-S3VvYKYnoxJNoSA',
   },
   {
     id: 'piano-blossoms-3-40f9',
@@ -562,6 +607,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x728d7a5133068e3c7e5afe72de8999076bc940f9',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x728d7a5133068e3c7e5afe72de8999076bc940f9/3',
+    originalUri: 'https://arweave.net/OtB20VVBT3ll4M9iF12NRVLkWqUainEdehDsOb0YH_Q',
   },
   {
     id: 'piano-blossoms-2-40f9',
@@ -577,6 +623,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x728d7a5133068e3c7e5afe72de8999076bc940f9',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x728d7a5133068e3c7e5afe72de8999076bc940f9/2',
+    originalUri: 'https://arweave.net/AL7ZgwTPrjZr17w8RQZ1oT88hj42P6_jYfpOpNV12nE',
   },
   {
     id: 'piano-blossoms-4-40f9',
@@ -592,6 +639,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x728d7a5133068e3c7e5afe72de8999076bc940f9',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x728d7a5133068e3c7e5afe72de8999076bc940f9/4',
+    originalUri: 'https://arweave.net/YJ_Hg8tWhzqwnXPt0w1P61FRkIW-yy_Afml7-oqfIpw',
   },
   {
     id: 'piano-blossoms-1-40f9',
@@ -607,6 +655,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x728d7a5133068e3c7e5afe72de8999076bc940f9',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x728d7a5133068e3c7e5afe72de8999076bc940f9/1',
+    originalUri: 'https://arweave.net/EB4HlnS8qsw8h3LHmFHyR4nIr0kBG5GQoAycJHPUTro',
   },
   {
     id: 'her-favorite-flowers-2-fe63',
@@ -622,6 +671,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa3cdefc4aea0407937ac3ea127b7491f24e5fe63',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa3cdefc4aea0407937ac3ea127b7491f24e5fe63/2',
+    originalUri: 'https://arweave.net/ZE-OOQatUDn7SnZuRYQNr47Rioj3l_-4JdfoJJyvyBE',
   },
   {
     id: 'superrare-beeple-24644-b9e0',
@@ -637,6 +687,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0/24644',
+    originalUri: 'https://ipfs.pixura.io/ipfs/QmaRtEEVDS1168HNfDvCxtxkUDkf6dSrpNwr9AHjRCgsBS/Final.Beeple.Cover2.jpg',
   },
   {
     id: 'dataland-biome-lumina-115-1c9d',
@@ -652,6 +703,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xb097fba49a679a61b18b7079b99a953ca2691c9d',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xb097fba49a679a61b18b7079b99a953ca2691c9d/115',
+    originalUri: 'https://arweave.net/JbXowae1oA7dqLjaann4VzkHYis1zot9xP8I9dqB14M',
   },
   {
     id: 'dataland-biome-lumina-127-1c9d',
@@ -667,6 +719,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xb097fba49a679a61b18b7079b99a953ca2691c9d',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xb097fba49a679a61b18b7079b99a953ca2691c9d/127',
+    originalUri: 'https://arweave.net/t5sjZDtnaRY8GuSG5G3xZ7K4zvg3Hvu78mTR25NFjK0',
   },
   {
     id: 'dataland-biome-lumina-161-1c9d',
@@ -682,6 +735,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xb097fba49a679a61b18b7079b99a953ca2691c9d',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xb097fba49a679a61b18b7079b99a953ca2691c9d/161',
+    originalUri: 'https://arweave.net/QcWr0zNLhurORixvq_1QuIXGIkMl77atHpLRWQN0EdY',
   },
   {
     id: 'dataland-biome-lumina-179-1c9d',
@@ -697,6 +751,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xb097fba49a679a61b18b7079b99a953ca2691c9d',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xb097fba49a679a61b18b7079b99a953ca2691c9d/179',
+    originalUri: 'https://arweave.net/9Do2Y9A9vv4awRMFauhNUtNBmkSGzlS2dA26_-ZzENk',
   },
   {
     id: 'dataland-biome-lumina-207-1c9d',
@@ -712,6 +767,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xb097fba49a679a61b18b7079b99a953ca2691c9d',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xb097fba49a679a61b18b7079b99a953ca2691c9d/207',
+    originalUri: 'https://arweave.net/UAuhq0oMOZvaaKgbTwGTNNY2DsetTYds7e-1749y_rE',
   },
   {
     id: 'dataland-biome-lumina-242-1c9d',
@@ -727,6 +783,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xb097fba49a679a61b18b7079b99a953ca2691c9d',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xb097fba49a679a61b18b7079b99a953ca2691c9d/242',
+    originalUri: 'https://arweave.net/AT_wHnoEeJ8SPKn5LtsHRhLGv8isZepB9MqWQosjPO0',
   },
   {
     id: 'dataland-biome-lumina-458-1c9d',
@@ -742,6 +799,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xb097fba49a679a61b18b7079b99a953ca2691c9d',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xb097fba49a679a61b18b7079b99a953ca2691c9d/458',
+    originalUri: 'https://arweave.net/2_BVs8hH5SDKn3TcTwNMwlGojofxaRpglp2JmYkc_zw',
   },
   {
     id: 'dataland-biome-lumina-461-1c9d',
@@ -757,6 +815,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xb097fba49a679a61b18b7079b99a953ca2691c9d',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xb097fba49a679a61b18b7079b99a953ca2691c9d/461',
+    originalUri: 'https://arweave.net/vbtpRBzj6x-WVSt3suTOhngh5IWHLXsHrLkwHDiOO-k',
   },
   {
     id: 'dataland-biome-lumina-464-1c9d',
@@ -772,6 +831,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xb097fba49a679a61b18b7079b99a953ca2691c9d',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xb097fba49a679a61b18b7079b99a953ca2691c9d/464',
+    originalUri: 'https://arweave.net/FxNHVLKgImmWrjX3XQUrBqiExw3zzB7tFf9r2yUaF2Y',
   },
   {
     id: 'dataland-biome-lumina-524-1c9d',
@@ -787,6 +847,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xb097fba49a679a61b18b7079b99a953ca2691c9d',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xb097fba49a679a61b18b7079b99a953ca2691c9d/524',
+    originalUri: 'https://arweave.net/EItVy8rHZtfaCvFLymxiwPtdfPDqC8EWCQBDASvRfz4',
   },
   {
     id: 'dataland-biome-lumina-549-1c9d',
@@ -802,6 +863,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xb097fba49a679a61b18b7079b99a953ca2691c9d',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xb097fba49a679a61b18b7079b99a953ca2691c9d/549',
+    originalUri: 'https://arweave.net/IeFv663D4H2HnIENbwyeWdrPUgw5pkKRbvZgqNB8g0Q',
   },
   {
     id: 'dataland-biome-lumina-632-1c9d',
@@ -817,6 +879,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xb097fba49a679a61b18b7079b99a953ca2691c9d',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xb097fba49a679a61b18b7079b99a953ca2691c9d/632',
+    originalUri: 'https://arweave.net/HnD_NSlTGKAQb--Rti2E0y0hzdoKMQ12PXW_ut4l7Mw',
   },
   {
     id: 'dataland-biome-lumina-665-1c9d',
@@ -832,6 +895,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xb097fba49a679a61b18b7079b99a953ca2691c9d',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xb097fba49a679a61b18b7079b99a953ca2691c9d/665',
+    originalUri: 'https://arweave.net/I75XiHCguUAxFz2zfFbnW2ktlMXvJ0E9u5Lj845hG5M',
   },
   {
     id: 'dataland-biome-lumina-670-1c9d',
@@ -847,6 +911,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xb097fba49a679a61b18b7079b99a953ca2691c9d',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xb097fba49a679a61b18b7079b99a953ca2691c9d/670',
+    originalUri: 'https://arweave.net/RAIW9D_EvhBwM93UcQks56J8HshhKH7k555ukW1Exxc',
   },
   {
     id: 'dataland-biome-lumina-691-1c9d',
@@ -862,6 +927,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xb097fba49a679a61b18b7079b99a953ca2691c9d',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xb097fba49a679a61b18b7079b99a953ca2691c9d/691',
+    originalUri: 'https://arweave.net/2mIPDph15hQAQOHOIstEvidl8V5-714vLqkxsWVl2mg',
   },
   {
     id: 'dataland-biome-lumina-789-1c9d',
@@ -877,6 +943,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xb097fba49a679a61b18b7079b99a953ca2691c9d',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xb097fba49a679a61b18b7079b99a953ca2691c9d/789',
+    originalUri: 'https://arweave.net/b-V-wRU2qnHsK0Un_ta6lSk4O55283avNKT1dGIVPYs',
   },
   {
     id: 'dataland-biome-lumina-791-1c9d',
@@ -892,6 +959,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xb097fba49a679a61b18b7079b99a953ca2691c9d',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xb097fba49a679a61b18b7079b99a953ca2691c9d/791',
+    originalUri: 'https://arweave.net/rodhz2X645sUyMt1qLXPDRecsqQLTP5_Vo9hrietDgM',
   },
   {
     id: 'dataland-biome-lumina-999-1c9d',
@@ -907,6 +975,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xb097fba49a679a61b18b7079b99a953ca2691c9d',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xb097fba49a679a61b18b7079b99a953ca2691c9d/999',
+    originalUri: 'https://arweave.net/hL2bQiPqdGVt0dHnOEyFKoEdGZQSffHifaXo4HCkW8Q',
   },
   {
     id: 'cryptopunks-269-3BBB',
@@ -967,6 +1036,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xb7f7f6c52f2e2fdb1963eab30438024864c313f6',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xb7f7f6c52f2e2fdb1963eab30438024864c313f6/1887',
+    originalUri: 'https://wrappedpunks.com:3000/images/punks/1887.png',
   },
   {
     id: 'cryptopunks-2412-3BBB',
@@ -1147,6 +1217,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xb7f7f6c52f2e2fdb1963eab30438024864c313f6',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xb7f7f6c52f2e2fdb1963eab30438024864c313f6/4853',
+    originalUri: 'https://wrappedpunks.com:3000/images/punks/4853.png',
   },
   {
     id: 'cryptopunks-4926-3BBB',
@@ -1494,6 +1565,21 @@ export const pieces: Piece[] = [
     openseaUrl: 'https://opensea.io/item/ethereum/0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB/9985',
   },
   {
+    id: 'cryptopunks-9133-3BBB',
+    slug: 'cryptopunks-9133-3BBB',
+    title: 'CryptoPunk 9133',
+    collectionSlug: 'cryptopunks',
+    artistSlug: 'larva-labs',
+    image: '/samples/cryptopunks-9133.svg',
+    medium: 'image',
+    description: '',
+    traits: {},
+    tokenId: '9133',
+    contractAddress: '0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB',
+    influences: [],
+    openseaUrl: 'https://opensea.io/item/ethereum/0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB/9133',
+  },
+  {
     id: 'day-gardens-27-c0fd',
     slug: 'day-gardens-27-c0fd',
     title: 'Day Garden #27',
@@ -1507,6 +1593,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7644d0a70dacce6a8468287e1aa888a0766c0fd',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7644d0a70dacce6a8468287e1aa888a0766c0fd/27',
+    originalUri: 'https://arweave.net/OhucHjatkT06iLhtbV3ru2nLsbsKqG87vL3tFDAWpsE',
   },
   {
     id: 'day-gardens-32-c0fd',
@@ -1522,6 +1609,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7644d0a70dacce6a8468287e1aa888a0766c0fd',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7644d0a70dacce6a8468287e1aa888a0766c0fd/32',
+    originalUri: 'https://arweave.net/RngkhQiYhc3Uayb6rDmkoaPVy3DHkWEpT7gDq9vNsmE',
   },
   {
     id: 'day-gardens-40-c0fd',
@@ -1537,6 +1625,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7644d0a70dacce6a8468287e1aa888a0766c0fd',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7644d0a70dacce6a8468287e1aa888a0766c0fd/40',
+    originalUri: 'https://arweave.net/eMOwsjOc7WqzlF9EHoD3Ln5-8TiNYfhL7bqoouvp-10',
   },
   {
     id: 'superrare-dmitri-cherniak-26901-b9e0',
@@ -1552,6 +1641,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0/26901',
+    originalUri: 'https://ipfs.pixura.io/ipfs/QmWSRYvVTZkSwPSgaRuQR5b6zqU8nn9BFvESvxsV4RQzQf/sparseringer-2020-03-04T232021.667.png',
   },
   {
     id: 'superrare-dmitri-cherniak-26902-b9e0',
@@ -1567,6 +1657,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0/26902',
+    originalUri: 'https://ipfs.pixura.io/ipfs/QmUhAKjBP8CSdNGaxPaUs6Ug3srZBzPfeC8DPzrb5Y417f/sparseringer-2020-03-04T231942.875.png',
   },
   {
     id: 'fidenza-5-d270',
@@ -1581,7 +1672,8 @@ export const pieces: Piece[] = [
     tokenId: '5',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
-    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/5',
+    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000005',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000005.png',
   },
   {
     id: 'fidenza-19-d270',
@@ -1596,7 +1688,8 @@ export const pieces: Piece[] = [
     tokenId: '19',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
-    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/19',
+    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000019',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000019.png',
   },
   {
     id: 'fidenza-28-d270',
@@ -1611,7 +1704,8 @@ export const pieces: Piece[] = [
     tokenId: '28',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
-    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/28',
+    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000028',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000028.png',
   },
   {
     id: 'fidenza-60-d270',
@@ -1626,7 +1720,8 @@ export const pieces: Piece[] = [
     tokenId: '60',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
-    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/60',
+    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000060',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000060.png',
   },
   {
     id: 'fidenza-90-d270',
@@ -1641,7 +1736,8 @@ export const pieces: Piece[] = [
     tokenId: '90',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
-    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/90',
+    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000090',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000090.png',
   },
   {
     id: 'fidenza-98-d270',
@@ -1656,7 +1752,8 @@ export const pieces: Piece[] = [
     tokenId: '98',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
-    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/98',
+    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000098',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000098.png',
   },
   {
     id: 'fidenza-145-d270',
@@ -1671,7 +1768,8 @@ export const pieces: Piece[] = [
     tokenId: '145',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
-    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/145',
+    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000145',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000145.png',
   },
   {
     id: 'fidenza-169-d270',
@@ -1686,7 +1784,8 @@ export const pieces: Piece[] = [
     tokenId: '169',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
-    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/169',
+    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000169',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000169.png',
   },
   {
     id: 'fidenza-180-d270',
@@ -1701,7 +1800,8 @@ export const pieces: Piece[] = [
     tokenId: '180',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
-    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/180',
+    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000180',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000180.png',
   },
   {
     id: 'fidenza-200-d270',
@@ -1716,7 +1816,8 @@ export const pieces: Piece[] = [
     tokenId: '200',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
-    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/200',
+    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000200',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000200.png',
   },
   {
     id: 'fidenza-231-d270',
@@ -1731,7 +1832,8 @@ export const pieces: Piece[] = [
     tokenId: '231',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
-    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/231',
+    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000231',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000231.png',
   },
   {
     id: 'fidenza-253-d270',
@@ -1746,7 +1848,8 @@ export const pieces: Piece[] = [
     tokenId: '253',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
-    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/253',
+    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000253',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000253.png',
   },
   {
     id: 'fidenza-256-d270',
@@ -1761,7 +1864,8 @@ export const pieces: Piece[] = [
     tokenId: '256',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
-    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/256',
+    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000256',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000256.png',
   },
   {
     id: 'fidenza-262-d270',
@@ -1776,7 +1880,8 @@ export const pieces: Piece[] = [
     tokenId: '262',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
-    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/262',
+    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000262',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000262.png',
   },
   {
     id: 'fidenza-342-d270',
@@ -1791,7 +1896,8 @@ export const pieces: Piece[] = [
     tokenId: '342',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
-    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/342',
+    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000342',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000342.png',
   },
   {
     id: 'fidenza-378-d270',
@@ -1806,7 +1912,8 @@ export const pieces: Piece[] = [
     tokenId: '378',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
-    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/378',
+    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000378',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000378.png',
   },
   {
     id: 'fidenza-437-d270',
@@ -1821,7 +1928,8 @@ export const pieces: Piece[] = [
     tokenId: '437',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
-    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/437',
+    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000437',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000437.png',
   },
   {
     id: 'fidenza-456-d270',
@@ -1836,7 +1944,8 @@ export const pieces: Piece[] = [
     tokenId: '456',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
-    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/456',
+    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000456',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000456.png',
   },
   {
     id: 'fidenza-573-d270',
@@ -1851,7 +1960,8 @@ export const pieces: Piece[] = [
     tokenId: '573',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
-    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/573',
+    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000573',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000573.png',
   },
   {
     id: 'fidenza-587-d270',
@@ -1866,7 +1976,8 @@ export const pieces: Piece[] = [
     tokenId: '587',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
-    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/587',
+    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000587',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000587.png',
   },
   {
     id: 'fidenza-593-d270',
@@ -1881,7 +1992,8 @@ export const pieces: Piece[] = [
     tokenId: '593',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
-    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/593',
+    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000593',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000593.png',
   },
   {
     id: 'fidenza-609-d270',
@@ -1896,7 +2008,8 @@ export const pieces: Piece[] = [
     tokenId: '609',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
-    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/609',
+    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000609',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000609.png',
   },
   {
     id: 'fidenza-647-d270',
@@ -1911,7 +2024,8 @@ export const pieces: Piece[] = [
     tokenId: '647',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
-    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/647',
+    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000647',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000647.png',
   },
   {
     id: 'fidenza-650-d270',
@@ -1926,7 +2040,8 @@ export const pieces: Piece[] = [
     tokenId: '650',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
-    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/650',
+    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000650',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000650.png',
   },
   {
     id: 'fidenza-713-d270',
@@ -1941,7 +2056,8 @@ export const pieces: Piece[] = [
     tokenId: '713',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
-    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/713',
+    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000713',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000713.png',
   },
   {
     id: 'fidenza-718-d270',
@@ -1956,7 +2072,8 @@ export const pieces: Piece[] = [
     tokenId: '718',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
-    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/718',
+    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000718',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000718.png',
   },
   {
     id: 'fidenza-819-d270',
@@ -1971,7 +2088,8 @@ export const pieces: Piece[] = [
     tokenId: '819',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
-    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/819',
+    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000819',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000819.png',
   },
   {
     id: 'fidenza-929-d270',
@@ -1986,7 +2104,8 @@ export const pieces: Piece[] = [
     tokenId: '929',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
-    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/929',
+    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000929',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000929.png',
   },
   {
     id: 'fidenza-943-d270',
@@ -2001,7 +2120,8 @@ export const pieces: Piece[] = [
     tokenId: '943',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
-    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/943',
+    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000943',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000943.png',
   },
   {
     id: 'fidenza-984-d270',
@@ -2016,7 +2136,8 @@ export const pieces: Piece[] = [
     tokenId: '984',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
-    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/984',
+    openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000984',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000984.png',
   },
   {
     id: 'grifters-8-c1f3',
@@ -2032,6 +2153,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc143bbfcdbdbed6d454803804752a064a622c1f3',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc143bbfcdbdbed6d454803804752a064a622c1f3/8',
+    originalUri: 'https://admin.xcopy.art/media/original_images/0xc143bbfcdbdbed6d454803804752a064a622c1f3-8.png',
   },
   {
     id: 'grifters-37-c1f3',
@@ -2047,6 +2169,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc143bbfcdbdbed6d454803804752a064a622c1f3',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc143bbfcdbdbed6d454803804752a064a622c1f3/37',
+    originalUri: 'https://admin.xcopy.art/media/original_images/0xc143bbfcdbdbed6d454803804752a064a622c1f3-37.png',
   },
   {
     id: 'grifters-66-c1f3',
@@ -2062,6 +2185,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc143bbfcdbdbed6d454803804752a064a622c1f3',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc143bbfcdbdbed6d454803804752a064a622c1f3/66',
+    originalUri: 'https://admin.xcopy.art/media/original_images/0xc143bbfcdbdbed6d454803804752a064a622c1f3-66.png',
   },
   {
     id: 'grifters-88-c1f3',
@@ -2077,6 +2201,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc143bbfcdbdbed6d454803804752a064a622c1f3',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc143bbfcdbdbed6d454803804752a064a622c1f3/88',
+    originalUri: 'https://admin.xcopy.art/media/original_images/0xc143bbfcdbdbed6d454803804752a064a622c1f3-88.png',
   },
   {
     id: 'grifters-132-c1f3',
@@ -2092,6 +2217,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc143bbfcdbdbed6d454803804752a064a622c1f3',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc143bbfcdbdbed6d454803804752a064a622c1f3/132',
+    originalUri: 'https://admin.xcopy.art/media/original_images/0xc143bbfcdbdbed6d454803804752a064a622c1f3-132.png',
   },
   {
     id: 'grifters-51-c1f3',
@@ -2107,6 +2233,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc143bbfcdbdbed6d454803804752a064a622c1f3',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc143bbfcdbdbed6d454803804752a064a622c1f3/51',
+    originalUri: 'https://admin.xcopy.art/media/original_images/0xc143bbfcdbdbed6d454803804752a064a622c1f3-51.png',
   },
   {
     id: 'grifters-165-c1f3',
@@ -2122,6 +2249,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc143bbfcdbdbed6d454803804752a064a622c1f3',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc143bbfcdbdbed6d454803804752a064a622c1f3/165',
+    originalUri: 'https://admin.xcopy.art/media/original_images/0xc143bbfcdbdbed6d454803804752a064a622c1f3-165.png',
   },
   {
     id: 'grifters-166-c1f3',
@@ -2137,6 +2265,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc143bbfcdbdbed6d454803804752a064a622c1f3',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc143bbfcdbdbed6d454803804752a064a622c1f3/166',
+    originalUri: 'https://admin.xcopy.art/media/original_images/0xc143bbfcdbdbed6d454803804752a064a622c1f3-166.png',
   },
   {
     id: 'grifters-170-c1f3',
@@ -2152,6 +2281,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc143bbfcdbdbed6d454803804752a064a622c1f3',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc143bbfcdbdbed6d454803804752a064a622c1f3/170',
+    originalUri: 'QmXeN6W3KEiyxZL3ywxeT83KJ1wn7KMzL4kunmLxWNH5yh',
   },
   {
     id: 'grifters-197-c1f3',
@@ -2167,6 +2297,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc143bbfcdbdbed6d454803804752a064a622c1f3',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc143bbfcdbdbed6d454803804752a064a622c1f3/197',
+    originalUri: 'https://admin.xcopy.art/media/original_images/0xc143bbfcdbdbed6d454803804752a064a622c1f3-197.png',
   },
   {
     id: 'grifters-222-c1f3',
@@ -2182,6 +2313,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc143bbfcdbdbed6d454803804752a064a622c1f3',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc143bbfcdbdbed6d454803804752a064a622c1f3/222',
+    originalUri: 'https://admin.xcopy.art/media/original_images/0xc143bbfcdbdbed6d454803804752a064a622c1f3-222.png',
   },
   {
     id: 'grifters-254-c1f3',
@@ -2197,6 +2329,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc143bbfcdbdbed6d454803804752a064a622c1f3',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc143bbfcdbdbed6d454803804752a064a622c1f3/254',
+    originalUri: 'QmRoxC6LfrYjuiCzQufYWNqZ1EMXEBp91rDJUGgjtoTysd',
   },
   {
     id: 'grifters-308-c1f3',
@@ -2212,6 +2345,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc143bbfcdbdbed6d454803804752a064a622c1f3',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc143bbfcdbdbed6d454803804752a064a622c1f3/308',
+    originalUri: 'QmSmqhF7esCEagB9QaLpDZ3qEJfnmQcmMoRJNNa6P46un4',
   },
   {
     id: 'grifters-363-c1f3',
@@ -2227,6 +2361,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc143bbfcdbdbed6d454803804752a064a622c1f3',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc143bbfcdbdbed6d454803804752a064a622c1f3/363',
+    originalUri: 'QmULQUfxxB1RUoJGfmksKzcdsC9ZfyeXuTdvvBAZFRmbUL',
   },
   {
     id: 'grifters-368-c1f3',
@@ -2242,6 +2377,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc143bbfcdbdbed6d454803804752a064a622c1f3',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc143bbfcdbdbed6d454803804752a064a622c1f3/368',
+    originalUri: 'QmPB7Mwsvbcr6ERsu2hTzWn4HPY1xFUmj8Z7MDTD8SX9aW',
   },
   {
     id: 'grifters-439-c1f3',
@@ -2257,6 +2393,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc143bbfcdbdbed6d454803804752a064a622c1f3',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc143bbfcdbdbed6d454803804752a064a622c1f3/439',
+    originalUri: 'QmWfKdZ7MFCVhvtXaqfFsid5h3MeZb9UiQhg8gmMvQ4jjm',
   },
   {
     id: 'grifters-442-c1f3',
@@ -2272,6 +2409,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc143bbfcdbdbed6d454803804752a064a622c1f3',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc143bbfcdbdbed6d454803804752a064a622c1f3/442',
+    originalUri: 'QmUd8jNn74NygrSnDmDnE14VFsuYqztFzBdo2mZTvyLVDA',
   },
   {
     id: 'grifters-472-c1f3',
@@ -2287,6 +2425,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc143bbfcdbdbed6d454803804752a064a622c1f3',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc143bbfcdbdbed6d454803804752a064a622c1f3/472',
+    originalUri: 'https://admin.xcopy.art/media/original_images/0xc143bbfcdbdbed6d454803804752a064a622c1f3-472.png',
   },
   {
     id: 'grifters-522-c1f3',
@@ -2302,6 +2441,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc143bbfcdbdbed6d454803804752a064a622c1f3',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc143bbfcdbdbed6d454803804752a064a622c1f3/522',
+    originalUri: 'https://admin.xcopy.art/media/original_images/0xc143bbfcdbdbed6d454803804752a064a622c1f3-522.png',
   },
   {
     id: 'grifters-532-c1f3',
@@ -2317,6 +2457,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc143bbfcdbdbed6d454803804752a064a622c1f3',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc143bbfcdbdbed6d454803804752a064a622c1f3/532',
+    originalUri: 'https://admin.xcopy.art/media/original_images/0xc143bbfcdbdbed6d454803804752a064a622c1f3-532.png',
   },
   {
     id: 'grifters-542-c1f3',
@@ -2332,6 +2473,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc143bbfcdbdbed6d454803804752a064a622c1f3',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc143bbfcdbdbed6d454803804752a064a622c1f3/542',
+    originalUri: 'https://admin.xcopy.art/media/original_images/0xc143bbfcdbdbed6d454803804752a064a622c1f3-542.png',
   },
   {
     id: 'grifters-547-c1f3',
@@ -2347,6 +2489,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc143bbfcdbdbed6d454803804752a064a622c1f3',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc143bbfcdbdbed6d454803804752a064a622c1f3/547',
+    originalUri: 'https://admin.xcopy.art/media/original_images/0xc143bbfcdbdbed6d454803804752a064a622c1f3-547.png',
   },
   {
     id: 'grifters-572-c1f3',
@@ -2362,6 +2505,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc143bbfcdbdbed6d454803804752a064a622c1f3',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc143bbfcdbdbed6d454803804752a064a622c1f3/572',
+    originalUri: 'https://admin.xcopy.art/media/original_images/0xc143bbfcdbdbed6d454803804752a064a622c1f3-572.png',
   },
   {
     id: 'grifters-574-c1f3',
@@ -2377,6 +2521,19 @@ export const pieces: Piece[] = [
     contractAddress: '0xc143bbfcdbdbed6d454803804752a064a622c1f3',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc143bbfcdbdbed6d454803804752a064a622c1f3/574',
+    originalUri: 'https://admin.xcopy.art/media/original_images/0xc143bbfcdbdbed6d454803804752a064a622c1f3-574.png',
+  },
+  {
+    id: 'x-ray-machine-1',
+    slug: 'x-ray-machine-1',
+    title: 'X-Ray Machine',
+    collectionSlug: 'human-unreadable',
+    artistSlug: 'operator',
+    image: '/art/optimized/operator-x-ray-machine.webp',
+    medium: 'interactive',
+    description: '',
+    traits: {},
+    influences: [],
   },
   {
     id: 'human-unreadable-455000095-b069',
@@ -2392,6 +2549,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x99a9b7c1116f9ceeb1652de04d5969cce509b069',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/455000095',
+    originalUri: 'https://media-proxy.artblocks.io/1/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/455000095.png',
   },
   {
     id: 'human-unreadable-455000124-b069',
@@ -2407,6 +2565,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x99a9b7c1116f9ceeb1652de04d5969cce509b069',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/455000124',
+    originalUri: 'https://media-proxy.artblocks.io/1/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/455000124.png',
   },
   {
     id: 'human-unreadable-455000140-b069',
@@ -2422,6 +2581,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x99a9b7c1116f9ceeb1652de04d5969cce509b069',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/455000140',
+    originalUri: 'https://media-proxy.artblocks.io/1/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/455000140.png',
   },
   {
     id: 'human-unreadable-455000141-b069',
@@ -2437,6 +2597,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x99a9b7c1116f9ceeb1652de04d5969cce509b069',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/455000141',
+    originalUri: 'https://media-proxy.artblocks.io/1/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/455000141.png',
   },
   {
     id: 'human-unreadable-455000150-b069',
@@ -2452,6 +2613,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x99a9b7c1116f9ceeb1652de04d5969cce509b069',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/455000150',
+    originalUri: 'https://media-proxy.artblocks.io/1/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/455000150.png',
   },
   {
     id: 'human-unreadable-455000155-b069',
@@ -2467,6 +2629,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x99a9b7c1116f9ceeb1652de04d5969cce509b069',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/455000155',
+    originalUri: 'https://media-proxy.artblocks.io/1/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/455000155.png',
   },
   {
     id: 'human-unreadable-455000156-b069',
@@ -2482,6 +2645,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x99a9b7c1116f9ceeb1652de04d5969cce509b069',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/455000156',
+    originalUri: 'https://media-proxy.artblocks.io/1/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/455000156.png',
   },
   {
     id: 'human-unreadable-455000169-b069',
@@ -2497,6 +2661,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x99a9b7c1116f9ceeb1652de04d5969cce509b069',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/455000169',
+    originalUri: 'https://media-proxy.artblocks.io/1/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/455000169.png',
   },
   {
     id: 'human-unreadable-455000180-b069',
@@ -2512,6 +2677,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x99a9b7c1116f9ceeb1652de04d5969cce509b069',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/455000180',
+    originalUri: 'https://media-proxy.artblocks.io/1/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/455000180.png',
   },
   {
     id: 'human-unreadable-455000201-b069',
@@ -2527,6 +2693,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x99a9b7c1116f9ceeb1652de04d5969cce509b069',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/455000201',
+    originalUri: 'https://media-proxy.artblocks.io/1/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/455000201.png',
   },
   {
     id: 'human-unreadable-455000216-b069',
@@ -2542,6 +2709,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x99a9b7c1116f9ceeb1652de04d5969cce509b069',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/455000216',
+    originalUri: 'https://media-proxy.artblocks.io/1/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/455000216.png',
   },
   {
     id: 'human-unreadable-455000237-b069',
@@ -2557,6 +2725,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x99a9b7c1116f9ceeb1652de04d5969cce509b069',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/455000237',
+    originalUri: 'https://media-proxy.artblocks.io/1/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/455000237.png',
   },
   {
     id: 'human-unreadable-455000245-b069',
@@ -2572,6 +2741,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x99a9b7c1116f9ceeb1652de04d5969cce509b069',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/455000245',
+    originalUri: 'https://media-proxy.artblocks.io/1/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/455000245.png',
   },
   {
     id: 'human-unreadable-455000278-b069',
@@ -2587,6 +2757,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x99a9b7c1116f9ceeb1652de04d5969cce509b069',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/455000278',
+    originalUri: 'https://media-proxy.artblocks.io/1/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/455000278.png',
   },
   {
     id: 'human-unreadable-455000328-b069',
@@ -2602,6 +2773,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x99a9b7c1116f9ceeb1652de04d5969cce509b069',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/455000328',
+    originalUri: 'https://media-proxy.artblocks.io/1/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/455000328.png',
   },
   {
     id: 'human-unreadable-455000336-b069',
@@ -2617,6 +2789,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x99a9b7c1116f9ceeb1652de04d5969cce509b069',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/455000336',
+    originalUri: 'https://media-proxy.artblocks.io/1/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/455000336.png',
   },
   {
     id: 'human-unreadable-455000339-b069',
@@ -2632,6 +2805,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x99a9b7c1116f9ceeb1652de04d5969cce509b069',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/455000339',
+    originalUri: 'https://media-proxy.artblocks.io/1/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/455000339.png',
   },
   {
     id: 'lightyears-1-f3f5',
@@ -2647,6 +2821,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x082dcab372505ae56eafde58204ba5b12ff3f3f5',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x082dcab372505ae56eafde58204ba5b12ff3f3f5/1',
+    originalUri: 'https://ipfs.io/ipfs/QmS4WRvmEXtDKmd7ovMyG7o134fYTBRUFV6UddL9qhn4ag',
   },
   {
     id: 'lightyears-13-f3f5',
@@ -2662,6 +2837,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x082dcab372505ae56eafde58204ba5b12ff3f3f5',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x082dcab372505ae56eafde58204ba5b12ff3f3f5/13',
+    originalUri: 'https://ipfs.io/ipfs/QmQKZ3Dige323E2MeFsP9Bkaz9dWPfveikrh88pSh7N1XP',
   },
   {
     id: 'lightyears-30-f3f5',
@@ -2677,6 +2853,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x082dcab372505ae56eafde58204ba5b12ff3f3f5',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x082dcab372505ae56eafde58204ba5b12ff3f3f5/30',
+    originalUri: 'https://ipfs.io/ipfs/QmRDAFn6CRvssBAP1CHueoQCPhder6ofRThy6ZBTtpK3ES',
   },
   {
     id: 'lightyears-42-f3f5',
@@ -2692,6 +2869,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x082dcab372505ae56eafde58204ba5b12ff3f3f5',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x082dcab372505ae56eafde58204ba5b12ff3f3f5/42',
+    originalUri: 'https://ipfs.io/ipfs/QmQoWyjaQvNw4wNRJp8zWmtLutW1YWasmkdWE5SQioFhse',
   },
   {
     id: 'lightyears-67-f3f5',
@@ -2707,6 +2885,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x082dcab372505ae56eafde58204ba5b12ff3f3f5',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x082dcab372505ae56eafde58204ba5b12ff3f3f5/67',
+    originalUri: 'https://ipfs.io/ipfs/Qmag8Wfy31nk5dero94nZUJr6x1WFfiF7MVnBCEEBTJeTE',
   },
   {
     id: 'lightyears-72-f3f5',
@@ -2722,6 +2901,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x082dcab372505ae56eafde58204ba5b12ff3f3f5',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x082dcab372505ae56eafde58204ba5b12ff3f3f5/72',
+    originalUri: 'https://ipfs.io/ipfs/QmVs4dL5HsznU1ZdgSz5gWBtv3TA37WkYhUyMV3deRusGh',
   },
   {
     id: 'masks-of-luci-86-249a',
@@ -2737,6 +2917,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x4440732b0d85e2a77dcb2caedfd940154241249a',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/86',
+    originalUri: 'https://media.niftygateway.com/image/upload/v1741829548/0MASQUERADEFINALMASKS/86.jpg',
   },
   {
     id: 'masks-of-luci-94-249a',
@@ -2752,6 +2933,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x4440732b0d85e2a77dcb2caedfd940154241249a',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/94',
+    originalUri: 'https://media.niftygateway.com/image/upload/v1741829554/0MASQUERADEFINALMASKS/94.jpg',
   },
   {
     id: 'masks-of-luci-142-249a',
@@ -2767,6 +2949,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x4440732b0d85e2a77dcb2caedfd940154241249a',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/142',
+    originalUri: 'https://media.niftygateway.com/image/upload/v1741829592/0MASQUERADEFINALMASKS/142.jpg',
   },
   {
     id: 'masks-of-luci-191-249a',
@@ -2782,6 +2965,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x4440732b0d85e2a77dcb2caedfd940154241249a',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/191',
+    originalUri: 'https://media.niftygateway.com/image/upload/v1741829635/0MASQUERADEFINALMASKS/191.jpg',
   },
   {
     id: 'masks-of-luci-240-249a',
@@ -2797,6 +2981,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x4440732b0d85e2a77dcb2caedfd940154241249a',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/240',
+    originalUri: 'https://media.niftygateway.com/image/upload/v1741829683/0MASQUERADEFINALMASKS/240.jpg',
   },
   {
     id: 'masks-of-luci-241-249a',
@@ -2812,6 +2997,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x4440732b0d85e2a77dcb2caedfd940154241249a',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/241',
+    originalUri: 'https://media.niftygateway.com/image/upload/v1741829684/0MASQUERADEFINALMASKS/241.jpg',
   },
   {
     id: 'masks-of-luci-303-249a',
@@ -2827,6 +3013,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x4440732b0d85e2a77dcb2caedfd940154241249a',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/303',
+    originalUri: 'https://media.niftygateway.com/image/upload/v1741829770/0MASQUERADEFINALMASKS/303.jpg',
   },
   {
     id: 'masks-of-luci-349-249a',
@@ -2842,6 +3029,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x4440732b0d85e2a77dcb2caedfd940154241249a',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/349',
+    originalUri: 'https://media.niftygateway.com/image/upload/v1741829854/0MASQUERADEFINALMASKS/349.jpg',
   },
   {
     id: 'masks-of-luci-394-249a',
@@ -2857,6 +3045,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x4440732b0d85e2a77dcb2caedfd940154241249a',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/394',
+    originalUri: 'https://media.niftygateway.com/image/upload/v1741829932/0MASQUERADEFINALMASKS/394.jpg',
   },
   {
     id: 'masks-of-luci-435-249a',
@@ -2872,6 +3061,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x4440732b0d85e2a77dcb2caedfd940154241249a',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/435',
+    originalUri: 'https://media.niftygateway.com/image/upload/v1741830032/0MASQUERADEFINALMASKS/435.jpg',
   },
   {
     id: 'masks-of-luci-442-249a',
@@ -2887,6 +3077,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x4440732b0d85e2a77dcb2caedfd940154241249a',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/442',
+    originalUri: 'https://media.niftygateway.com/image/upload/v1741830053/0MASQUERADEFINALMASKS/442.jpg',
   },
   {
     id: 'masks-of-luci-476-249a',
@@ -2902,6 +3093,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x4440732b0d85e2a77dcb2caedfd940154241249a',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/476',
+    originalUri: 'https://media.niftygateway.com/image/upload/v1741830138/0MASQUERADEFINALMASKS/476.jpg',
   },
   {
     id: 'masks-of-luci-504-249a',
@@ -2917,6 +3109,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x4440732b0d85e2a77dcb2caedfd940154241249a',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/504',
+    originalUri: 'https://media.niftygateway.com/image/upload/v1741830217/0MASQUERADEFINALMASKS/504.jpg',
   },
   {
     id: 'masks-of-luci-518-249a',
@@ -2932,6 +3125,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x4440732b0d85e2a77dcb2caedfd940154241249a',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/518',
+    originalUri: 'https://media.niftygateway.com/image/upload/v1741830271/0MASQUERADEFINALMASKS/518.jpg',
   },
   {
     id: 'masks-of-luci-540-249a',
@@ -2947,6 +3141,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x4440732b0d85e2a77dcb2caedfd940154241249a',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/540',
+    originalUri: 'https://media.niftygateway.com/image/upload/v1741830343/0MASQUERADEFINALMASKS/540.jpg',
   },
   {
     id: 'masks-of-luci-569-249a',
@@ -2962,6 +3157,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x4440732b0d85e2a77dcb2caedfd940154241249a',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/569',
+    originalUri: 'https://media.niftygateway.com/image/upload/v1741830438/0MASQUERADEFINALMASKS/569.jpg',
   },
   {
     id: 'masks-of-luci-591-249a',
@@ -2977,6 +3173,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x4440732b0d85e2a77dcb2caedfd940154241249a',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/591',
+    originalUri: 'https://media.niftygateway.com/image/upload/v1741830513/0MASQUERADEFINALMASKS/591.jpg',
   },
   {
     id: 'masks-of-luci-597-249a',
@@ -2992,6 +3189,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x4440732b0d85e2a77dcb2caedfd940154241249a',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/597',
+    originalUri: 'https://media.niftygateway.com/image/upload/v1741830535/0MASQUERADEFINALMASKS/597.jpg',
   },
   {
     id: 'masks-of-luci-609-249a',
@@ -3007,6 +3205,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x4440732b0d85e2a77dcb2caedfd940154241249a',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/609',
+    originalUri: 'https://media.niftygateway.com/image/upload/v1741830592/0MASQUERADEFINALMASKS/609.jpg',
   },
   {
     id: 'meebit-3611-6bc7',
@@ -3022,6 +3221,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7bd29408f11d2bfc23c34f18275bbf23bb716bc7',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7bd29408f11d2bfc23c34f18275bbf23bb716bc7/3611',
+    originalUri: 'https://api.meebits.app/v2/images/yugalabs_full/03611',
   },
   {
     id: 'notable-pepes-354-8e43',
@@ -3037,6 +3237,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xe70659b717112ac4e14284d0db2f5d5703df8e43',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xe70659b717112ac4e14284d0db2f5d5703df8e43/354',
+    originalUri: 'https://arweave.net/UHiOuCpFtKtqFQ3oK_j52IbisiidaVgW4uGlG2Eew1Q',
   },
   {
     id: 'lights-3-2006',
@@ -3292,6 +3493,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x03699f24c1a96d91c261f3f6574e8aeba6bc3753',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x03699f24c1a96d91c261f3f6574e8aeba6bc3753/576',
+    originalUri: 'https://nclmsxyrvlgoibpohsr35uow46ueookeqf5zgq6563ayxmd75gfq.arweave.net/aJbJXxGqzOQF7jyjvtHW56hHOUSBe5ND3fbBi7B_6Ys/576.png',
   },
   {
     id: 'qql-308-0c88',
@@ -3307,6 +3509,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x845dd2a7ee2a92a0518ab2135365ed63fdba0c88',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x845dd2a7ee2a92a0518ab2135365ed63fdba0c88/308',
+    originalUri: 'https://img.qql.art/canon/308.png',
   },
   {
     id: 'qql-309-0c88',
@@ -3322,6 +3525,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x845dd2a7ee2a92a0518ab2135365ed63fdba0c88',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x845dd2a7ee2a92a0518ab2135365ed63fdba0c88/309',
+    originalUri: 'https://img.qql.art/canon/309.png',
   },
   {
     id: 'qql-160-1088',
@@ -3337,6 +3541,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc73b17179bf0c59cd5860bb25247d1d1092c1088',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc73b17179bf0c59cd5860bb25247d1d1092c1088/160',
+    originalUri: 'https://img.qql.art/assets/mintpass.png',
   },
   {
     id: 'qql-220-1088',
@@ -3352,6 +3557,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc73b17179bf0c59cd5860bb25247d1d1092c1088',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc73b17179bf0c59cd5860bb25247d1d1092c1088/220',
+    originalUri: 'https://img.qql.art/assets/mintpass.png',
   },
   {
     id: 'qql-458-1088',
@@ -3367,6 +3573,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc73b17179bf0c59cd5860bb25247d1d1092c1088',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc73b17179bf0c59cd5860bb25247d1d1092c1088/458',
+    originalUri: 'https://img.qql.art/assets/mintpass.png',
   },
   {
     id: 'qql-469-1088',
@@ -3382,6 +3589,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc73b17179bf0c59cd5860bb25247d1d1092c1088',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc73b17179bf0c59cd5860bb25247d1d1092c1088/469',
+    originalUri: 'https://img.qql.art/assets/mintpass.png',
   },
   {
     id: 'qql-534-1088',
@@ -3397,6 +3605,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc73b17179bf0c59cd5860bb25247d1d1092c1088',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc73b17179bf0c59cd5860bb25247d1d1092c1088/534',
+    originalUri: 'https://img.qql.art/assets/mintpass.png',
   },
   {
     id: 'qql-617-1088',
@@ -3412,6 +3621,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc73b17179bf0c59cd5860bb25247d1d1092c1088',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc73b17179bf0c59cd5860bb25247d1d1092c1088/617',
+    originalUri: 'https://img.qql.art/assets/mintpass.png',
   },
   {
     id: 'qql-714-1088',
@@ -3427,6 +3637,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc73b17179bf0c59cd5860bb25247d1d1092c1088',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc73b17179bf0c59cd5860bb25247d1d1092c1088/714',
+    originalUri: 'https://img.qql.art/assets/mintpass.png',
   },
   {
     id: 'qql-722-1088',
@@ -3442,6 +3653,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc73b17179bf0c59cd5860bb25247d1d1092c1088',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc73b17179bf0c59cd5860bb25247d1d1092c1088/722',
+    originalUri: 'https://img.qql.art/assets/mintpass.png',
   },
   {
     id: 'qql-915-1088',
@@ -3457,6 +3669,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc73b17179bf0c59cd5860bb25247d1d1092c1088',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc73b17179bf0c59cd5860bb25247d1d1092c1088/915',
+    originalUri: 'https://img.qql.art/assets/mintpass.png',
   },
   {
     id: 'qql-978-1088',
@@ -3472,6 +3685,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc73b17179bf0c59cd5860bb25247d1d1092c1088',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc73b17179bf0c59cd5860bb25247d1d1092c1088/978',
+    originalUri: 'https://img.qql.art/assets/mintpass.png',
   },
   {
     id: 'repeat-as-necessary-1-b069',
@@ -3547,6 +3761,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000014',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000014.png',
   },
   {
     id: 'ringers-13000025-d270',
@@ -3562,6 +3777,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000025',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000025.png',
   },
   {
     id: 'ringers-13000058-d270',
@@ -3577,6 +3793,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000058',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000058.png',
   },
   {
     id: 'ringers-13000064-d270',
@@ -3592,6 +3809,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000064',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000064.png',
   },
   {
     id: 'ringers-13000075-d270',
@@ -3607,6 +3825,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000075',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000075.png',
   },
   {
     id: 'ringers-13000086-d270',
@@ -3622,6 +3841,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000086',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000086.png',
   },
   {
     id: 'ringers-13000089-d270',
@@ -3637,6 +3857,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000089',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000089.png',
   },
   {
     id: 'ringers-13000108-d270',
@@ -3652,6 +3873,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000108',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000108.png',
   },
   {
     id: 'ringers-13000117-d270',
@@ -3667,6 +3889,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000117',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000117.png',
   },
   {
     id: 'ringers-13000174-d270',
@@ -3682,6 +3905,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000174',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000174.png',
   },
   {
     id: 'ringers-13000209-d270',
@@ -3697,6 +3921,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000209',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000209.png',
   },
   {
     id: 'ringers-13000214-d270',
@@ -3712,6 +3937,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000214',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000214.png',
   },
   {
     id: 'ringers-13000241-d270',
@@ -3727,6 +3953,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000241',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000241.png',
   },
   {
     id: 'ringers-13000268-d270',
@@ -3742,6 +3969,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000268',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000268.png',
   },
   {
     id: 'ringers-13000273-d270',
@@ -3757,6 +3985,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000273',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000273.png',
   },
   {
     id: 'ringers-13000287-d270',
@@ -3772,6 +4001,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000287',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000287.png',
   },
   {
     id: 'ringers-13000303-d270',
@@ -3787,6 +4017,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000303',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000303.png',
   },
   {
     id: 'ringers-13000338-d270',
@@ -3802,6 +4033,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000338',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000338.png',
   },
   {
     id: 'ringers-13000342-d270',
@@ -3817,6 +4049,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000342',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000342.png',
   },
   {
     id: 'ringers-13000374-d270',
@@ -3832,6 +4065,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000374',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000374.png',
   },
   {
     id: 'ringers-13000391-d270',
@@ -3847,6 +4081,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000391',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000391.png',
   },
   {
     id: 'ringers-13000392-d270',
@@ -3862,6 +4097,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000392',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000392.png',
   },
   {
     id: 'ringers-13000492-d270',
@@ -3877,6 +4113,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000492',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000492.png',
   },
   {
     id: 'ringers-13000505-d270',
@@ -3892,6 +4129,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000505',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000505.png',
   },
   {
     id: 'ringers-13000520-d270',
@@ -3907,6 +4145,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000520',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000520.png',
   },
   {
     id: 'ringers-13000523-d270',
@@ -3922,6 +4161,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000523',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000523.png',
   },
   {
     id: 'ringers-13000549-d270',
@@ -3937,6 +4177,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000549',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000549.png',
   },
   {
     id: 'ringers-13000654-d270',
@@ -3952,6 +4193,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000654',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000654.png',
   },
   {
     id: 'ringers-13000680-d270',
@@ -3967,6 +4209,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000680',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000680.png',
   },
   {
     id: 'ringers-13000696-d270',
@@ -3982,6 +4225,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000696',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000696.png',
   },
   {
     id: 'ringers-13000698-d270',
@@ -3997,6 +4241,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000698',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000698.png',
   },
   {
     id: 'ringers-13000708-d270',
@@ -4012,6 +4257,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000708',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000708.png',
   },
   {
     id: 'ringers-13000715-d270',
@@ -4027,6 +4273,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000715',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000715.png',
   },
   {
     id: 'ringers-13000792-d270',
@@ -4042,6 +4289,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000792',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000792.png',
   },
   {
     id: 'ringers-13000952-d270',
@@ -4057,6 +4305,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000952',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000952.png',
   },
   {
     id: 'ringers-13000972-d270',
@@ -4072,6 +4321,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000972',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/13000972.png',
   },
   {
     id: 'synthetic-dreams-51-be3a',
@@ -4087,6 +4337,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x183368d767b299681fdf660233e39f9f8cf8be3a',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x183368d767b299681fdf660233e39f9f8cf8be3a/51',
+    originalUri: 'https://arweave.net/eV5EbhevRl2Aq5YD8Y0mhYrHh-n8R_oBAkfPOPhhiNE',
   },
   {
     id: 'synthetic-dreams-362-be3a',
@@ -4102,6 +4353,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x183368d767b299681fdf660233e39f9f8cf8be3a',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x183368d767b299681fdf660233e39f9f8cf8be3a/362',
+    originalUri: 'https://arweave.net/3SXuyiiPJNq6aBv8zejZUG9k6hLQb-hnm3meW4hZDRU',
   },
   {
     id: 'synthetic-dreams-379-be3a',
@@ -4117,6 +4369,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x183368d767b299681fdf660233e39f9f8cf8be3a',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x183368d767b299681fdf660233e39f9f8cf8be3a/379',
+    originalUri: 'https://arweave.net/bbmK3YX42bv4nTapssRO3dDKymct-7J3mynrXXDo_8E',
   },
   {
     id: 'synthetic-dreams-625-be3a',
@@ -4132,6 +4385,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x183368d767b299681fdf660233e39f9f8cf8be3a',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x183368d767b299681fdf660233e39f9f8cf8be3a/625',
+    originalUri: 'https://arweave.net/m9IyjM6UVBtdBCIBhR1jmDAAEpkosvzfp18gOGGSNKY',
   },
   {
     id: 'synthetic-dreams-630-be3a',
@@ -4147,6 +4401,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x183368d767b299681fdf660233e39f9f8cf8be3a',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x183368d767b299681fdf660233e39f9f8cf8be3a/630',
+    originalUri: 'https://arweave.net/Ukueng9KoFuzNbH5VsbqRS0Uqeu_mYK18pq257gUpJo',
   },
   {
     id: 'synthetic-dreams-648-be3a',
@@ -4162,6 +4417,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x183368d767b299681fdf660233e39f9f8cf8be3a',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x183368d767b299681fdf660233e39f9f8cf8be3a/648',
+    originalUri: 'https://arweave.net/V2kNMbU3XQ0LHWg-DxOj7By2iadKmbU8_f3BscJBsZ4',
   },
   {
     id: 'synthetic-dreams-754-be3a',
@@ -4177,6 +4433,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x183368d767b299681fdf660233e39f9f8cf8be3a',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x183368d767b299681fdf660233e39f9f8cf8be3a/754',
+    originalUri: 'https://arweave.net/hFBYwyuYHQClugM5gIYsK9wMbq9Q8CF6iYyQP-QlOOU',
   },
   {
     id: 'synthetic-dreams-774-be3a',
@@ -4192,6 +4449,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x183368d767b299681fdf660233e39f9f8cf8be3a',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x183368d767b299681fdf660233e39f9f8cf8be3a/774',
+    originalUri: 'https://arweave.net/mVXD7HkMm_gpeoyWIPuMRKQJnmgHup6mjY3_gzsMSTE',
   },
   {
     id: 'synthetic-dreams-854-be3a',
@@ -4207,6 +4465,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x183368d767b299681fdf660233e39f9f8cf8be3a',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x183368d767b299681fdf660233e39f9f8cf8be3a/854',
+    originalUri: 'https://arweave.net/dfHBy0aYKJqJsoaEqc7v-R0RqBquaDLERYgN8egRdNo',
   },
   {
     id: 'synthetic-dreams-858-be3a',
@@ -4222,6 +4481,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x183368d767b299681fdf660233e39f9f8cf8be3a',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x183368d767b299681fdf660233e39f9f8cf8be3a/858',
+    originalUri: 'https://arweave.net/vVR4It35cZZrzMbo2W61HWWVC8LOyG2cHIwerFxumEg',
   },
   {
     id: 'synthetic-dreams-951-be3a',
@@ -4237,6 +4497,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x183368d767b299681fdf660233e39f9f8cf8be3a',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x183368d767b299681fdf660233e39f9f8cf8be3a/951',
+    originalUri: 'https://arweave.net/4S0jpgJZh47GABhRadm6BKlayI8s9l9ZhTF82KfhTS0',
   },
   {
     id: 'synthetic-dreams-957-be3a',
@@ -4252,6 +4513,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x183368d767b299681fdf660233e39f9f8cf8be3a',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x183368d767b299681fdf660233e39f9f8cf8be3a/957',
+    originalUri: 'https://arweave.net/vzerw5oAOT4WVs5a4b_Pc7HctSPTdtuEOKmwBOhf8jU',
   },
   {
     id: 'skulls-of-luci-12-d27c',
@@ -4267,6 +4529,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc9041f80dce73721a5f6a779672ec57ef255d27c',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc9041f80dce73721a5f6a779672ec57ef255d27c/12',
+    originalUri: 'https://i2c.seadn.io/ethereum/0xc9041f80dce73721a5f6a779672ec57ef255d27c/c2cf734c0d383dd7cd9dccbb99036f/59c2cf734c0d383dd7cd9dccbb99036f.jpeg',
   },
   {
     id: 'skulls-of-luci-20-d27c',
@@ -4282,6 +4545,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc9041f80dce73721a5f6a779672ec57ef255d27c',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc9041f80dce73721a5f6a779672ec57ef255d27c/20',
+    originalUri: 'https://i2c.seadn.io/ethereum/0xc9041f80dce73721a5f6a779672ec57ef255d27c/b07fc6b252579cddddd475200af4cb/49b07fc6b252579cddddd475200af4cb.jpeg',
   },
   {
     id: 'tyler-hobbs-1-9345',
@@ -4297,6 +4561,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7fc4a267c44d9f4d31227edeee5df7ef93819345',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7fc4a267c44d9f4d31227edeee5df7ef93819345/1',
+    originalUri: 'https://arweave.net/C-8asW3l0jth8-kxftNCvf0tIWv9neZqG0syvj7wwew',
   },
   {
     id: 'tyler-hobbs-2-9345',
@@ -4312,6 +4577,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7fc4a267c44d9f4d31227edeee5df7ef93819345',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7fc4a267c44d9f4d31227edeee5df7ef93819345/2',
+    originalUri: 'https://arweave.net/8G6bwO50FyRg6OP1zXMPjlhr8KJa9Ohjv_7bhurDDWQ',
   },
   {
     id: 'tyler-hobbs-3-9345',
@@ -4327,6 +4593,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7fc4a267c44d9f4d31227edeee5df7ef93819345',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7fc4a267c44d9f4d31227edeee5df7ef93819345/3',
+    originalUri: 'https://arweave.net/Q0olFJuEQIvIr9JxpVaY2Uku95C2c0SiCuC9R-qYOjU',
   },
   {
     id: 'tyler-hobbs-2-8e82',
@@ -4342,6 +4609,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xf135ef341d7209a66abe0536ee867eca87bb8e82',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xf135ef341d7209a66abe0536ee867eca87bb8e82/2',
+    originalUri: 'https://arweave.net/IErmtwIHaSLQhNGL1ndNAWv9FPtqcocYLqJly2htG08',
   },
   {
     id: 'winds-of-yawanawa-20-100b',
@@ -4357,6 +4625,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/20',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0020.png',
   },
   {
     id: 'winds-of-yawanawa-62-100b',
@@ -4372,6 +4641,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/62',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0062.png',
   },
   {
     id: 'winds-of-yawanawa-103-100b',
@@ -4387,6 +4657,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/103',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0103.png',
   },
   {
     id: 'winds-of-yawanawa-118-100b',
@@ -4402,6 +4673,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/118',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0118.png',
   },
   {
     id: 'winds-of-yawanawa-154-100b',
@@ -4417,6 +4689,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/154',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0154.png',
   },
   {
     id: 'winds-of-yawanawa-178-100b',
@@ -4432,6 +4705,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/178',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0178.png',
   },
   {
     id: 'winds-of-yawanawa-227-100b',
@@ -4447,6 +4721,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/227',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0227.png',
   },
   {
     id: 'winds-of-yawanawa-265-100b',
@@ -4462,6 +4737,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/265',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0265.png',
   },
   {
     id: 'winds-of-yawanawa-281-100b',
@@ -4477,6 +4753,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/281',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0281.png',
   },
   {
     id: 'winds-of-yawanawa-369-100b',
@@ -4492,6 +4769,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/369',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0369.png',
   },
   {
     id: 'winds-of-yawanawa-371-100b',
@@ -4507,6 +4785,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/371',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0371.png',
   },
   {
     id: 'winds-of-yawanawa-373-100b',
@@ -4522,6 +4801,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/373',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0373.png',
   },
   {
     id: 'winds-of-yawanawa-442-100b',
@@ -4537,6 +4817,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/442',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0442.png',
   },
   {
     id: 'winds-of-yawanawa-451-100b',
@@ -4552,6 +4833,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/451',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0451.png',
   },
   {
     id: 'winds-of-yawanawa-487-100b',
@@ -4567,6 +4849,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/487',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0487.png',
   },
   {
     id: 'winds-of-yawanawa-495-100b',
@@ -4582,6 +4865,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/495',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0495.png',
   },
   {
     id: 'winds-of-yawanawa-524-100b',
@@ -4597,6 +4881,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/524',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0524.png',
   },
   {
     id: 'winds-of-yawanawa-554-100b',
@@ -4612,6 +4897,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/554',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0554.png',
   },
   {
     id: 'winds-of-yawanawa-572-100b',
@@ -4627,6 +4913,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/572',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0572.png',
   },
   {
     id: 'winds-of-yawanawa-600-100b',
@@ -4642,6 +4929,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/600',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0600.png',
   },
   {
     id: 'winds-of-yawanawa-629-100b',
@@ -4657,6 +4945,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/629',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0629.png',
   },
   {
     id: 'winds-of-yawanawa-637-100b',
@@ -4672,6 +4961,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/637',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0637.png',
   },
   {
     id: 'winds-of-yawanawa-638-100b',
@@ -4687,6 +4977,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/638',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0638.png',
   },
   {
     id: 'winds-of-yawanawa-681-100b',
@@ -4702,6 +4993,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/681',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0681.png',
   },
   {
     id: 'winds-of-yawanawa-688-100b',
@@ -4717,6 +5009,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/688',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0688.png',
   },
   {
     id: 'winds-of-yawanawa-692-100b',
@@ -4732,6 +5025,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/692',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0692.png',
   },
   {
     id: 'winds-of-yawanawa-695-100b',
@@ -4747,6 +5041,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/695',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0695.png',
   },
   {
     id: 'winds-of-yawanawa-697-100b',
@@ -4762,6 +5057,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/697',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0697.png',
   },
   {
     id: 'winds-of-yawanawa-700-100b',
@@ -4777,6 +5073,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/700',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0700.png',
   },
   {
     id: 'winds-of-yawanawa-701-100b',
@@ -4792,6 +5089,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/701',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0701.png',
   },
   {
     id: 'winds-of-yawanawa-704-100b',
@@ -4807,6 +5105,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/704',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0704.png',
   },
   {
     id: 'winds-of-yawanawa-712-100b',
@@ -4822,6 +5121,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/712',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0712.png',
   },
   {
     id: 'winds-of-yawanawa-717-100b',
@@ -4837,6 +5137,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/717',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0717.png',
   },
   {
     id: 'winds-of-yawanawa-738-100b',
@@ -4852,6 +5153,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/738',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0738.png',
   },
   {
     id: 'winds-of-yawanawa-741-100b',
@@ -4867,6 +5169,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/741',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0741.png',
   },
   {
     id: 'winds-of-yawanawa-745-100b',
@@ -4882,6 +5185,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/745',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0745.png',
   },
   {
     id: 'winds-of-yawanawa-746-100b',
@@ -4897,6 +5201,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/746',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0746.png',
   },
   {
     id: 'winds-of-yawanawa-754-100b',
@@ -4912,6 +5217,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/754',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0754.png',
   },
   {
     id: 'winds-of-yawanawa-755-100b',
@@ -4927,6 +5233,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/755',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0755.png',
   },
   {
     id: 'winds-of-yawanawa-764-100b',
@@ -4942,6 +5249,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/764',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0764.png',
   },
   {
     id: 'winds-of-yawanawa-856-100b',
@@ -4957,6 +5265,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/856',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0856.png',
   },
   {
     id: 'winds-of-yawanawa-863-100b',
@@ -4972,6 +5281,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/863',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0863.png',
   },
   {
     id: 'winds-of-yawanawa-870-100b',
@@ -4987,6 +5297,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/870',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0870.png',
   },
   {
     id: 'winds-of-yawanawa-878-100b',
@@ -5002,6 +5313,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/878',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0878.png',
   },
   {
     id: 'winds-of-yawanawa-888-100b',
@@ -5017,6 +5329,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/888',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0888.png',
   },
   {
     id: 'winds-of-yawanawa-912-100b',
@@ -5032,6 +5345,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/912',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0912.png',
   },
   {
     id: 'winds-of-yawanawa-917-100b',
@@ -5047,6 +5361,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/917',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0917.png',
   },
   {
     id: 'winds-of-yawanawa-921-100b',
@@ -5062,6 +5377,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/921',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0921.png',
   },
   {
     id: 'winds-of-yawanawa-962-100b',
@@ -5077,6 +5393,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/962',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0962.png',
   },
   {
     id: 'winds-of-yawanawa-989-100b',
@@ -5092,6 +5409,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b/989',
+    originalUri: 'https://cdn.kaizen.finance/nft/YAWANAWA/images/0989.png',
   },
   {
     id: 'superrare-xcopy-9129-b9e0',
@@ -5107,6 +5425,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0/9129',
+    originalUri: 'https://ipfs.pixura.io/ipfs/QmR91LtJjcEDHohKiH27aAuoynhkTQTvJKKQp2G9BE9WgB/citizen-slipper10.gif',
   },
   {
     id: 'superrare-xcopy-29757-b9e0',
@@ -5122,6 +5441,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0/29757',
+    originalUri: 'https://ipfs.pixura.io/ipfs/QmaDeC811oLBD1ScWkGFLdUD2nWerDfFaRh9jubgX4M1tq/2021_XCOPY_DANKRUPT.gif',
   },
   {
     id: 'superrare-xcopy-30801-b9e0',
@@ -5137,6 +5457,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0/30801',
+    originalUri: 'https://ipfs.pixura.io/ipfs/Qmf7R1Mm5v7BGXsibibXAWDJyFXumFPJK6KNcP2EQVCkxD/2021_XCOPY_SR_DECAY.gif',
   },
   {
     id: 'superrare-xcopy-32171-b9e0',
@@ -5152,6 +5473,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0/32171',
+    originalUri: 'https://ipfs.pixura.io/ipfs/QmNTVBcKRj3VwijmCzXyjWDf3q9q6kScHuaRkbgBmKJjtJ/2022_XCOPY_SR_THE_FUD.gif',
   },
   {
     id: 'superrare-xcopy-2123-b9e0',

@@ -1,12 +1,35 @@
 import { notFound } from "next/navigation";
 import { pieces, getArtist, getCollection, getPiecesByCollection } from "@/lib/data";
-import { getArtworkImage } from "@/lib/images";
-import { sortPieces, getEditionType, getArtistSiteUrl } from "@/lib/curation";
+import { getArtworkImage, resolveTokenId } from "@/lib/images";
+import { sortPieces, getEditionType, getArtistSiteUrl, getPieceTraits } from "@/lib/curation";
 import PlaceholderArt from "@/components/PlaceholderArt";
 import BackButton from "@/components/BackButton";
 import PieceLayout from "@/components/PieceLayout";
 import JustifiedGallery from "@/components/JustifiedGallery";
 import OnChainDetails from "@/components/OnChainDetails";
+import Features from "@/components/Features";
+
+const PUNK_CANONICAL = "0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb";
+const PUNK_V1 = "0xb7f7f6c52f2e2fdb1963eab30438024864c313f6";
+
+/**
+ * Derive a human-readable storage label from where the artwork actually lives.
+ * Used as the "Storage" row in OnChainDetails — high-signal for fund collectors
+ * who care about long-term permanence.
+ */
+function deriveStorage(originalUri?: string, contractAddress?: string): string | undefined {
+  const contract = contractAddress?.toLowerCase();
+  // Punks render from on-chain pixel data; the SVG is composed client-side.
+  if (contract === PUNK_CANONICAL || contract === PUNK_V1) return "On-chain";
+  if (!originalUri) return undefined;
+  if (originalUri.startsWith("data:")) return "On-chain";
+  if (originalUri.startsWith("ipfs://")) return "IPFS";
+  if (/^(Qm[1-9A-HJ-NP-Za-km-z]{44}|bafy[a-z0-9]+|bafk[a-z0-9]+)$/.test(originalUri)) return "IPFS";
+  if (originalUri.startsWith("ar://") || originalUri.includes("arweave.net")) return "Arweave";
+  if (originalUri.includes("media-proxy.artblocks.io")) return "IPFS (Art Blocks proxy)";
+  if (originalUri.startsWith("https://") || originalUri.startsWith("http://")) return "Centralized";
+  return undefined;
+}
 
 export function generateStaticParams() {
   return pieces.map((p) => ({ slug: p.slug }));
@@ -35,19 +58,27 @@ export default async function PiecePage({ params }: { params: Promise<{ slug: st
   const realImage = getArtworkImage(piece.slug, piece.contractAddress, piece.tokenId, "detail");
   const isPunk = piece.collectionSlug === "cryptopunks";
 
-  const rasterUrl = piece.contractAddress && piece.tokenId
-    ? `https://www.raster.art/token/ethereum/${piece.contractAddress}/${piece.tokenId}`
+  // Marketplace link: CryptoPunks Marketplace for Punks (canonical), Raster for everything else.
+  const marketplaceUrl = piece.contractAddress && piece.tokenId
+    ? (isPunk
+        ? `https://cryptopunks.app/cryptopunks/details/${piece.tokenId}`
+        : `https://www.raster.art/token/ethereum/${piece.contractAddress}/${resolveTokenId(piece.slug, piece.contractAddress, piece.tokenId)}`)
     : undefined;
 
   const artistSiteUrl =
     piece.artistSiteUrl || getArtistSiteUrl(piece.collectionSlug, piece.tokenId) || undefined;
 
+  const traits = getPieceTraits(piece.slug);
   const metadata = (
-    <OnChainDetails
-      contractAddress={piece.contractAddress}
-      tokenId={piece.tokenId}
-      editionType={getEditionType(piece.collectionSlug)}
-    />
+    <div className="space-y-6">
+      <Features traits={traits} />
+      <OnChainDetails
+        contractAddress={piece.contractAddress}
+        tokenId={piece.tokenId}
+        editionType={getEditionType(piece.collectionSlug)}
+        storage={deriveStorage(piece.originalUri, piece.contractAddress)}
+      />
+    </div>
   );
 
   return (
@@ -63,8 +94,9 @@ export default async function PiecePage({ params }: { params: Promise<{ slug: st
           collectionName={collection?.name}
           collectionSlug={collection?.slug}
           metadata={metadata}
-          rasterUrl={rasterUrl}
+          rasterUrl={marketplaceUrl}
           artistSiteUrl={artistSiteUrl}
+          originalUri={piece.originalUri}
           placeholder={<PlaceholderArt collectionSlug={piece.collectionSlug} pieceSlug={piece.slug} className="w-full h-full" />}
         />
       </div>

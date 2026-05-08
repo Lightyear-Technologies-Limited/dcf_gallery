@@ -1,18 +1,26 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { collections, getArtist, getPiecesByCollection } from "@/lib/data";
+import { collections, getArtist, getCollectionsByArtist, getPiecesByCollection } from "@/lib/data";
 import { getArtworkImage } from "@/lib/images";
 import {
   getArtistDisplayName,
   getCollectionDisplayName,
   sortPieces,
+  sortCollections,
+  isCollectionHidden,
   getPiecesPerRow,
   getPieceRows,
+  getHeroLayout,
+  getEditionType,
 } from "@/lib/curation";
 import JustifiedGallery from "@/components/JustifiedGallery";
 import FixedRowGallery from "@/components/FixedRowGallery";
+import HeroSidebarGallery from "@/components/HeroSidebarGallery";
 import SinglePieceDisplay from "@/components/SinglePieceDisplay";
 import CuratorNote from "@/components/CuratorNote";
+import ExpandableProse from "@/components/ExpandableProse";
+import MetadataTable from "@/components/MetadataTable";
+import CopyableHash from "@/components/CopyableHash";
 
 export function generateStaticParams() {
   return collections.map((c) => ({ slug: c.slug }));
@@ -55,93 +63,201 @@ export default async function CollectionPage({ params }: { params: Promise<{ slu
   else if (n <= 12) ideal = 4;
   else ideal = 5;
 
+  // Find the next visible collection by the same artist for the closing link.
+  const siblings = artist
+    ? sortCollections(artist.slug, getCollectionsByArtist(artist.slug)).filter(
+        (c) => !isCollectionHidden(c.slug)
+      )
+    : [];
+  const idx = siblings.findIndex((c) => c.slug === slug);
+  const nextSibling = idx >= 0 && idx < siblings.length - 1 ? siblings[idx + 1] : null;
+
+  const editionType = getEditionType(slug);
+  const isSingle = n === 1 && heroImage && first;
+
   return (
     <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
-      {/* Breadcrumb */}
-      <div className="pt-[120px]">
+      {/* Breadcrumb — collection only; artist link lives below the title */}
+      <div className="pt-20">
         <p className="text-[13px] text-muted">
           <Link href="/" className="hover:text-foreground transition-colors duration-200">
             Collection
           </Link>
-          {artist && (
-            <>
-              {" / "}
-              <Link
-                href={`/artist/${artist.slug}`}
-                className="hover:text-foreground transition-colors duration-200"
-              >
-                {artistName}
-              </Link>
-            </>
-          )}
           {" / "}
           {collectionName}
         </p>
       </div>
 
-      {/* Editorial header — title left, description right */}
-      <div className="pt-10 grid grid-cols-1 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-12 md:gap-16">
-        <div>
-          <h1 className="font-serif text-[48px] sm:text-[56px] lg:text-[64px] tracking-[-0.02em] leading-[0.95]">
+      {/* Editorial header — title left, description right. Stripped to bare on
+          single-piece collections (Lights, Harbor Scene) so the SinglePieceDisplay
+          can dominate. */}
+      {isSingle ? (
+        <div className="pt-10">
+          <h1 className="font-serif display-sm">
             {collectionName}
           </h1>
           {artist && (
             <Link
               href={`/artist/${artist.slug}`}
-              className="text-[16px] text-muted hover:text-foreground transition-colors duration-200 mt-3 inline-block"
+              className="text-[20px] text-foreground-secondary hover:text-foreground transition-colors duration-200 mt-3 inline-block"
             >
               {artistName}
             </Link>
           )}
-          <div className="mt-6 space-y-1 text-[13px] text-muted">
-            <p className="capitalize">
-              {n} work{n === 1 ? "" : "s"} · {col.medium}
-            </p>
-            {col.mintDate && <p>Minted {col.mintDate}</p>}
+        </div>
+      ) : (
+        <div className="pt-10 grid grid-cols-1 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-12 md:gap-16">
+          <div>
+            <h1 className="font-serif display">
+              {collectionName}
+            </h1>
+            {artist && (
+              <Link
+                href={`/artist/${artist.slug}`}
+                className="text-[20px] text-foreground-secondary hover:text-foreground transition-colors duration-200 mt-3 inline-block"
+              >
+                {artistName}
+              </Link>
+            )}
+            <div className="mt-6 space-y-1 text-[13px] text-muted tabular-nums">
+              <p>
+                {col.totalSupply
+                  ? `DCF holds ${n} of ${col.totalSupply.toLocaleString()}`
+                  : `${n} piece${n === 1 ? "" : "s"}`
+                }
+              </p>
+              {col.mintDate && <p>Minted {col.mintDate}</p>}
+            </div>
+
+            {/* Institutional metadata — chain, contract, edition. Reinforces fund-grade
+                posture without adding visual weight. Contract is click-to-copy. */}
+            {(col.contractAddress || editionType !== "1/1") && (
+              <div className="mt-8 max-w-[280px]">
+                <MetadataTable
+                  items={[
+                    { label: "Chain", value: col.contractAddress ? "Ethereum" : null },
+                    {
+                      label: "Contract",
+                      value: col.contractAddress ? <CopyableHash value={col.contractAddress} /> : null,
+                    },
+                    { label: "Type", value: editionType },
+                  ]}
+                />
+              </div>
+            )}
+          </div>
+
+          <div className="space-y-10 md:pt-4">
+            {col.description && <ExpandableProse text={col.description} />}
+            {col.curatorNote && <CuratorNote text={col.curatorNote} variant="inline" />}
+            {col.exhibitions && col.exhibitions.length > 0 && (
+              <div>
+                <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
+                  Exhibitions
+                </p>
+                <ul className="space-y-2 text-[13px]">
+                  {col.exhibitions.map((ex, i) => (
+                    <li key={i}>
+                      <span className="text-muted tabular-nums">{ex.date}</span>
+                      <span className="text-muted"> — </span>
+                      {ex.url ? (
+                        <a
+                          href={ex.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-foreground-secondary hover:text-foreground transition-colors duration-200 underline decoration-transparent hover:decoration-border underline-offset-4"
+                        >
+                          <span className="font-serif italic">{ex.title}</span>
+                          {ex.location && `, ${ex.location}`}
+                        </a>
+                      ) : (
+                        <>
+                          <span className="font-serif italic text-foreground-secondary">{ex.title}</span>
+                          {ex.location && (
+                            <span className="text-foreground-secondary">, {ex.location}</span>
+                          )}
+                        </>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {col.essayUrl && (
+              <a
+                href={col.essayUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[13px] text-muted hover:text-foreground transition-colors duration-200 inline-block"
+              >
+                Read the essay
+                {col.essayTitle && (
+                  <>
+                    : <span className="underline underline-offset-4 decoration-border">{col.essayTitle}</span>
+                  </>
+                )}{" "}
+                →
+              </a>
+            )}
           </div>
         </div>
-
-        <div className="space-y-10 md:pt-4">
-          {col.description && (
-            <p className="text-[17px] text-foreground-secondary leading-[1.65]">
-              {col.description}
-            </p>
-          )}
-          {col.curatorNote && <CuratorNote text={col.curatorNote} variant="inline" />}
-          {col.essayUrl && (
-            <a
-              href={col.essayUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[13px] text-muted hover:text-foreground transition-colors duration-200 inline-block"
-            >
-              Read the essay
-              {col.essayTitle && (
-                <>
-                  : <span className="underline underline-offset-4 decoration-border">{col.essayTitle}</span>
-                </>
-              )}{" "}
-              &rarr;
-            </a>
-          )}
-        </div>
-      </div>
+      )}
 
       {/* Gallery */}
       <div className="pt-20 pb-24">
-        {n === 1 && heroImage && first ? (
-          <SinglePieceDisplay
-            slug={first.slug}
-            src={heroImage}
-            title={first.title}
-            isPunk={first.collectionSlug === "cryptopunks"}
-          />
-        ) : pieceRows && Object.keys(pieceRows).length > 0 ? (
-          <FixedRowGallery pieces={pieces} rowMap={pieceRows} fallbackPerRow={ideal} />
-        ) : (
-          <JustifiedGallery pieces={pieces} piecesPerRow={ideal} />
-        )}
+        {(() => {
+          const heroLayout = getHeroLayout(slug);
+          if (n === 1 && heroImage && first) {
+            return (
+              <SinglePieceDisplay
+                slug={first.slug}
+                src={heroImage}
+                title={first.title}
+                isPunk={first.collectionSlug === "cryptopunks"}
+              />
+            );
+          }
+          if (heroLayout) {
+            return (
+              <HeroSidebarGallery
+                pieces={pieces}
+                heroSlug={heroLayout.heroPiece}
+                sidebarCols={heroLayout.sidebarCols}
+                sidebarRows={heroLayout.sidebarRows}
+                sidebarSlugs={heroLayout.sidebarPieces}
+                fallbackPerRow={ideal}
+              />
+            );
+          }
+          if (pieceRows && Object.keys(pieceRows).length > 0) {
+            return <FixedRowGallery pieces={pieces} rowMap={pieceRows} fallbackPerRow={ideal} />;
+          }
+          return <JustifiedGallery pieces={pieces} piecesPerRow={ideal} />;
+        })()}
       </div>
+
+      {/* Closing gesture — a single hand-off to the next collection by the
+          same artist, or back up the catalogue. One link, generous space. */}
+      {!isSingle && artist && (
+        <div className="pt-12 pb-24 border-t border-border">
+          <div className="pt-8 flex flex-col sm:flex-row sm:justify-between gap-4 text-[13px] text-muted">
+            <Link
+              href={`/artist/${artist.slug}`}
+              className="hover:text-foreground transition-colors duration-200"
+            >
+              ← All works by {artistName}
+            </Link>
+            {nextSibling && (
+              <Link
+                href={`/collection/${nextSibling.slug}`}
+                className="hover:text-foreground transition-colors duration-200 text-right"
+              >
+                Next: {getCollectionDisplayName(nextSibling.slug, nextSibling.name)} →
+              </Link>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -40,9 +40,15 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <script dangerouslySetInnerHTML={{ __html: `(function(){var t=localStorage.getItem('dcf-theme');if(t==='dark'){document.documentElement.classList.add('dark');document.querySelector('meta[name=theme-color]').content='#111111'}})()` }} />
       </head>
       <body className="bg-background text-foreground min-h-screen flex flex-col">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-background focus:text-foreground focus:px-4 focus:py-2 focus:border focus:border-border focus:text-[13px]"
+        >
+          Skip to content
+        </a>
         <Header />
-        <main className="flex-1 pt-14 md:pt-0 md:pl-32">{children}</main>
-        <footer className="mt-20 border-t border-border py-16 md:pl-32">
+        <main id="main" className="flex-1 pt-14 md:pt-0 md:pl-36">{children}</main>
+        <footer className="mt-20 border-t border-border py-16 md:pl-36">
           <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
             <div>
               <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium">Digital Culture Fund</p>
@@ -52,7 +58,14 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               <Link href="/" className="hover:text-foreground transition-colors duration-200">Collection</Link>
               <Link href="/artists" className="hover:text-foreground transition-colors duration-200">Artists</Link>
               <Link href="/about" className="hover:text-foreground transition-colors duration-200">About</Link>
-              <a href="mailto:dcf@hivemind.capital" className="hover:text-foreground transition-colors duration-200">Inquire</a>
+              <a
+                href="mailto:dcf@hivemind.capital?subject=DCF%20Inquiry"
+                className="hover:text-foreground transition-colors duration-200"
+                title="For acquisitions, partnerships, or press"
+                aria-label="Inquire about acquisitions, partnerships, or press"
+              >
+                Inquire
+              </a>
             </div>
           </div>
         </footer>

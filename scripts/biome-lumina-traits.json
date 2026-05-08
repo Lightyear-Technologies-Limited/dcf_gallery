@@ -1,0 +1,380 @@
+[
+  {
+    "slug": "dataland-biome-lumina-115-1c9d",
+    "tokenId": "115",
+    "traits": {
+      "MUSEUM": "DATALAND",
+      "YEAR": "2025",
+      "COLLECTION": "DATALAND FOUNDING COLLECTION",
+      "SPECIES NAME": "LUMINFLORA AUREOLEA",
+      "CLUSTER": "ABYSSAL PETALON",
+      "TYPE": "BIOLUMINESCENT FLORA",
+      "LOCATION": "TROPICAL RAINFOREST UNDERSTORY",
+      "STATUS": "VULNERABLE",
+      "HEIGHT": "15-30cm",
+      "WEIGHT": "15-50g",
+      "TEMPERATURE RANGE": "15-25°C",
+      "BIOLUMINESCENCE SPECTRUM": "420-490nm",
+      "MOVEMENT": "LIGHT-RESPONSIVE SWAYING",
+      "SPECIES COUNT": "10 KNOWN SPECIES"
+    },
+    "features": {}
+  },
+  {
+    "slug": "dataland-biome-lumina-127-1c9d",
+    "tokenId": "127",
+    "traits": {
+      "MUSEUM": "DATALAND",
+      "YEAR": "2025",
+      "COLLECTION": "DATALAND FOUNDING COLLECTION",
+      "SPECIES NAME": "LUMINARA AURELIUS",
+      "CLUSTER": "AETHERIUM ARBORESCENS",
+      "TYPE": "RARE MYSTICAL VARIANTS",
+      "LOCATION": "TROPICAL RAINFOREST UNDERSTORY",
+      "STATUS": "VULNERABLE HABITAT LOSS",
+      "HEIGHT": "0-15cm",
+      "WEIGHT": "15-50g",
+      "TEMPERATURE RANGE": "10-25°C",
+      "BIOLUMINESCENCE SPECTRUM": "470-530nm",
+      "MOVEMENT": "PHOTOTROPIC GROWTH",
+      "SPECIES COUNT": "10 KNOWN SPECIES"
+    },
+    "features": {}
+  },
+  {
+    "slug": "dataland-biome-lumina-161-1c9d",
+    "tokenId": "161",
+    "traits": {
+      "MUSEUM": "DATALAND",
+      "YEAR": "2025",
+      "COLLECTION": "DATALAND FOUNDING COLLECTION",
+      "SPECIES NAME": "LUMINOSA FLORAE SCINTILLANS",
+      "CLUSTER": "LUMINOUS GLACIES",
+      "TYPE": "BIOLUMINESCENT FLORA",
+      "LOCATION": "ABYSSAL OCEAN GARDENS",
+      "STATUS": "VULNERABLE",
+      "HEIGHT": "10-25cm",
+      "WEIGHT": "15-50g",
+      "TEMPERATURE RANGE": "0-10°C",
+      "BIOLUMINESCENCE SPECTRUM": "420-490nm",
+      "MOVEMENT": "AQUATIC UNDULATION",
+      "SPECIES COUNT": "10 KNOWN SPECIES"
+    },
+    "features": {}
+  },
+  {
+    "slug": "dataland-biome-lumina-179-1c9d",
+    "tokenId": "179",
+    "traits": {
+      "MUSEUM": "DATALAND",
+      "YEAR": "2025",
+      "COLLECTION": "DATALAND FOUNDING COLLECTION",
+      "SPECIES NAME": "PHOSPHORBLOSSOM LUCENS",
+      "CLUSTER": "PHANTASMAE NOTANI",
+      "TYPE": "SPECIALIZED BIOLUMINESCENT FLORA",
+      "LOCATION": "TROPICAL RAINFOREST UNDERSTORY",
+      "STATUS": "RARE PROTECTED",
+      "HEIGHT": "20-50cm",
+      "WEIGHT": "15-50g",
+      "TEMPERATURE RANGE": "15-30°C",
+      "BIOLUMINESCENCE SPECTRUM": "420-490nm",
+      "MOVEMENT": "GENTLE AIR SWAYING",
+      "SPECIES COUNT": "10 KNOWN SPECIES"
+    },
+    "features": {}
+  },
+  {
+    "slug": "dataland-biome-lumina-207-1c9d",
+    "tokenId": "207",
+    "traits": {
+      "MUSEUM": "DATALAND",
+      "YEAR": "2025",
+      "COLLECTION": "DATALAND FOUNDING COLLECTION",
+      "SPECIES NAME": "PHOSPHORIFLORA CREPUSCULARIS",
+      "CLUSTER": "HELIOS PETALATE",
+      "TYPE": "BIOLUMINESCENT FLORA",
+      "LOCATION": "TROPICAL RAINFOREST UNDERSTORY",
+      "STATUS": "RARE STABLE",
+      "HEIGHT": "30-50cm",
+      "WEIGHT": "15-50g",
+      "TEMPERATURE RANGE": "15-25°C",
+      "BIOLUMINESCENCE SPECTRUM": "470-530nm",
+      "MOVEMENT": "BIOLUMINESCENT SWAYING",
+      "SPECIES COUNT": "10 KNOWN SPECIES"
+    },
+    "features": {}
+  },
+  {
+    "slug": "dataland-biome-lumina-242-1c9d",
+    "tokenId": "242",
+    "traits": {
+      "MUSEUM": "DATALAND",
+      "YEAR": "2025",
+      "COLLECTION": "DATALAND FOUNDING COLLECTION",
+      "SPECIES NAME": "LUMINOSA FLORINUS",
+      "CLUSTER": "PETALUM GLIMMERA",
+      "TYPE": "SPECIALIZED BIOLUMINESCENT FLORA",
+      "LOCATION": "TROPICAL RAINFOREST CANOPY",
+      "STATUS": "RARE PROTECTED",
+      "HEIGHT": "0-15cm",
+      "WEIGHT": "15-50g",
+      "TEMPERATURE RANGE": "15-25°C",
+      "BIOLUMINESCENCE SPECTRUM": "420-490nm",
+      "MOVEMENT": "GENTLE AIR SWAYING",
+      "SPECIES COUNT": "20 KNOWN SPECIES"
+    },
+    "features": {}
+  },
+  {
+    "slug": "dataland-biome-lumina-458-1c9d",
+    "tokenId": "458",
+    "traits": {
+      "MUSEUM": "DATALAND",
+      "YEAR": "2025",
+      "COLLECTION": "DATALAND FOUNDING COLLECTION",
+      "SPECIES NAME": "LUMINIFLORA AURELIENSIS",
+      "CLUSTER": "ILLUMINAETHEREA PETALENS",
+      "TYPE": "SPECIALIZED BIOLUMINESCENT FLORA",
+      "LOCATION": "HYDROTHERMAL VENTS",
+      "STATUS": "VULNERABLE",
+      "HEIGHT": "10-30cm",
+      "WEIGHT": "15-50g",
+      "TEMPERATURE RANGE": "0-10°C",
+      "BIOLUMINESCENCE SPECTRUM": "470-530nm",
+      "MOVEMENT": "AQUATIC UNDULATION",
+      "SPECIES COUNT": "20 KNOWN SPECIES"
+    },
+    "features": {}
+  },
+  {
+    "slug": "dataland-biome-lumina-461-1c9d",
+    "tokenId": "461",
+    "traits": {
+      "MUSEUM": "DATALAND",
+      "YEAR": "2025",
+      "COLLECTION": "DATALAND FOUNDING COLLECTION",
+      "SPECIES NAME": "FLORAGLOW LUMINAFLORA",
+      "CLUSTER": "GALACTICAE PETALIA",
+      "TYPE": "BIOLUMINESCENT FLORA",
+      "LOCATION": "TROPICAL RAINFOREST UNDERSTORY",
+      "STATUS": "RARE PROTECTED",
+      "HEIGHT": "30-50cm",
+      "WEIGHT": "50-150g",
+      "TEMPERATURE RANGE": "15-25°C",
+      "BIOLUMINESCENCE SPECTRUM": "450-495nm",
+      "MOVEMENT": "GENTLE AIR SWAYING",
+      "SPECIES COUNT": "10 KNOWN SPECIES"
+    },
+    "features": {}
+  },
+  {
+    "slug": "dataland-biome-lumina-464-1c9d",
+    "tokenId": "464",
+    "traits": {
+      "MUSEUM": "DATALAND",
+      "YEAR": "2025",
+      "COLLECTION": "DATALAND FOUNDING COLLECTION",
+      "SPECIES NAME": "PHOSPHORA PETALUMIS",
+      "CLUSTER": "LUMINOUS GLACIES",
+      "TYPE": "BIOLUMINESCENT FLORA",
+      "LOCATION": "TROPICAL RAINFOREST UNDERSTORY",
+      "STATUS": "VULNERABLE",
+      "HEIGHT": "10-25cm",
+      "WEIGHT": "15-50g",
+      "TEMPERATURE RANGE": "5-20°C",
+      "BIOLUMINESCENCE SPECTRUM": "450-495nm",
+      "MOVEMENT": "AQUATIC UNDULATION",
+      "SPECIES COUNT": "10 KNOWN SPECIES"
+    },
+    "features": {}
+  },
+  {
+    "slug": "dataland-biome-lumina-524-1c9d",
+    "tokenId": "524",
+    "traits": {
+      "MUSEUM": "DATALAND",
+      "YEAR": "2025",
+      "COLLECTION": "DATALAND FOUNDING COLLECTION",
+      "SPECIES NAME": "LUMINORA AUREA",
+      "CLUSTER": "AURELIA PETALINA",
+      "TYPE": "BIOLUMINESCENT FLORA",
+      "LOCATION": "TROPICAL RAINFOREST UNDERSTORY",
+      "STATUS": "NEAR THREATENED",
+      "HEIGHT": "5-30cm",
+      "WEIGHT": "15-50g",
+      "TEMPERATURE RANGE": "20-30°C",
+      "BIOLUMINESCENCE SPECTRUM": "470-530nm",
+      "MOVEMENT": "GENTLE AIR SWAYING",
+      "SPECIES COUNT": "10 KNOWN SPECIES"
+    },
+    "features": {}
+  },
+  {
+    "slug": "dataland-biome-lumina-549-1c9d",
+    "tokenId": "549",
+    "traits": {
+      "MUSEUM": "DATALAND",
+      "YEAR": "2025",
+      "COLLECTION": "DATALAND FOUNDING COLLECTION",
+      "SPECIES NAME": "LUMINIFLORA SPECTRAGLOW",
+      "CLUSTER": "NOCTURNALIS FLORA",
+      "TYPE": "SPECIALIZED BIOLUMINESCENT FLORA",
+      "LOCATION": "TROPICAL RAINFOREST CANOPY",
+      "STATUS": "VULNERABLE",
+      "HEIGHT": "5-30cm",
+      "WEIGHT": "10-25g",
+      "TEMPERATURE RANGE": "10-25°C",
+      "BIOLUMINESCENCE SPECTRUM": "420-490nm",
+      "MOVEMENT": "LIGHT-RESPONSIVE SWAYING",
+      "SPECIES COUNT": "100 KNOWN SPECIES"
+    },
+    "features": {}
+  },
+  {
+    "slug": "dataland-biome-lumina-632-1c9d",
+    "tokenId": "632",
+    "traits": {
+      "MUSEUM": "DATALAND",
+      "YEAR": "2025",
+      "COLLECTION": "DATALAND FOUNDING COLLECTION",
+      "SPECIES NAME": "LUMINOSA FLORAGLORIA",
+      "CLUSTER": "GALACTICAE PETALIA",
+      "TYPE": "SPECIALIZED BIOLUMINESCENT FLORA",
+      "LOCATION": "TROPICAL RAINFOREST CANOPY",
+      "STATUS": "RARE PROTECTED",
+      "HEIGHT": "15-30cm",
+      "WEIGHT": "0-15g",
+      "TEMPERATURE RANGE": "15-25°C",
+      "BIOLUMINESCENCE SPECTRUM": "450-495nm",
+      "MOVEMENT": "GENTLE AIR SWAYING",
+      "SPECIES COUNT": "10 KNOWN SPECIES"
+    },
+    "features": {}
+  },
+  {
+    "slug": "dataland-biome-lumina-665-1c9d",
+    "tokenId": "665",
+    "traits": {
+      "MUSEUM": "DATALAND",
+      "YEAR": "2025",
+      "COLLECTION": "DATALAND FOUNDING COLLECTION",
+      "SPECIES NAME": "PHOSPHORIFLORA SCINTILLANS",
+      "CLUSTER": "AURELIA PETALINA",
+      "TYPE": "BIOLUMINESCENT FLORA",
+      "LOCATION": "TROPICAL RAINFOREST CANOPY",
+      "STATUS": "RARE PROTECTED",
+      "HEIGHT": "5-30cm",
+      "WEIGHT": "15-50g",
+      "TEMPERATURE RANGE": "20-30°C",
+      "BIOLUMINESCENCE SPECTRUM": "470-530nm",
+      "MOVEMENT": "GENTLE AIR SWAYING",
+      "SPECIES COUNT": "10 KNOWN SPECIES"
+    },
+    "features": {}
+  },
+  {
+    "slug": "dataland-biome-lumina-670-1c9d",
+    "tokenId": "670",
+    "traits": {
+      "MUSEUM": "DATALAND",
+      "YEAR": "2025",
+      "COLLECTION": "DATALAND FOUNDING COLLECTION",
+      "SPECIES NAME": "LUMINA FRONDOSA",
+      "CLUSTER": "AETHERIUM ARBORESCENS",
+      "TYPE": "BIOLUMINESCENT FUNGI",
+      "LOCATION": "TROPICAL FOREST FLOOR",
+      "STATUS": "RARE STABLE",
+      "HEIGHT": "10-25cm",
+      "WEIGHT": "15-50g",
+      "TEMPERATURE RANGE": "10-25°C",
+      "BIOLUMINESCENCE SPECTRUM": "450-495nm",
+      "MOVEMENT": "IMMOBILE",
+      "SPECIES COUNT": "20 KNOWN SPECIES"
+    },
+    "features": {}
+  },
+  {
+    "slug": "dataland-biome-lumina-691-1c9d",
+    "tokenId": "691",
+    "traits": {
+      "MUSEUM": "DATALAND",
+      "YEAR": "2025",
+      "COLLECTION": "DATALAND FOUNDING COLLECTION",
+      "SPECIES NAME": "PHOSPHORALIS ETHEREALIS",
+      "CLUSTER": "ILLUMINAETHEREA PETALENS",
+      "TYPE": "SPECIALIZED BIOLUMINESCENT FLORA",
+      "LOCATION": "TROPICAL CAVE SYSTEMS",
+      "STATUS": "RARE STABLE",
+      "HEIGHT": "15-30cm",
+      "WEIGHT": "10-50g",
+      "TEMPERATURE RANGE": "0-10°C",
+      "BIOLUMINESCENCE SPECTRUM": "450-495nm",
+      "MOVEMENT": "AQUATIC UNDULATION",
+      "SPECIES COUNT": "10 KNOWN SPECIES"
+    },
+    "features": {}
+  },
+  {
+    "slug": "dataland-biome-lumina-789-1c9d",
+    "tokenId": "789",
+    "traits": {
+      "MUSEUM": "DATALAND",
+      "YEAR": "2025",
+      "COLLECTION": "DATALAND FOUNDING COLLECTION",
+      "SPECIES NAME": "FLORALIS LUMINARA",
+      "CLUSTER": "AQUA LUMINACEAE",
+      "TYPE": "BIOLUMINESCENT FLORA",
+      "LOCATION": "TROPICAL RAINFOREST UNDERSTORY",
+      "STATUS": "RARE STABLE",
+      "HEIGHT": "10-25cm",
+      "WEIGHT": "15-50g",
+      "TEMPERATURE RANGE": "15-25°C",
+      "BIOLUMINESCENCE SPECTRUM": "450-495nm",
+      "MOVEMENT": "RHYTHMIC PULSATION",
+      "SPECIES COUNT": "10 KNOWN SPECIES"
+    },
+    "features": {}
+  },
+  {
+    "slug": "dataland-biome-lumina-791-1c9d",
+    "tokenId": "791",
+    "traits": {
+      "MUSEUM": "DATALAND",
+      "YEAR": "2025",
+      "COLLECTION": "DATALAND FOUNDING COLLECTION",
+      "SPECIES NAME": "LUMINIFLORA SCINTILLANS",
+      "CLUSTER": "HELIOS PETALATE",
+      "TYPE": "SPECIALIZED BIOLUMINESCENT FLORA",
+      "LOCATION": "TEMPERATE FOREST UNDERSTORY",
+      "STATUS": "RARE STABLE",
+      "HEIGHT": "15-30cm",
+      "WEIGHT": "0-15g",
+      "TEMPERATURE RANGE": "10-20°C",
+      "BIOLUMINESCENCE SPECTRUM": "420-490nm",
+      "MOVEMENT": "GENTLE AIR SWAYING",
+      "SPECIES COUNT": "10 KNOWN SPECIES"
+    },
+    "features": {}
+  },
+  {
+    "slug": "dataland-biome-lumina-999-1c9d",
+    "tokenId": "999",
+    "traits": {
+      "MUSEUM": "DATALAND",
+      "YEAR": "2025",
+      "COLLECTION": "DATALAND FOUNDING COLLECTION",
+      "SPECIES NAME": "LUMINELLUS AURORAGLOW",
+      "CLUSTER": "LUMINORIALIS AURORAE",
+      "TYPE": "BIOLUMINESCENT FUNGI",
+      "LOCATION": "TROPICAL RAINFOREST CANOPY",
+      "STATUS": "RARE LOCALLY ABUNDANT",
+      "HEIGHT": "10-25cm",
+      "WEIGHT": "0-15g",
+      "TEMPERATURE RANGE": "10-20°C",
+      "BIOLUMINESCENCE SPECTRUM": "470-530nm",
+      "MOVEMENT": "SPORE DISPERSAL",
+      "SPECIES COUNT": "50 KNOWN SPECIES"
+    },
+    "features": {}
+  }
+]

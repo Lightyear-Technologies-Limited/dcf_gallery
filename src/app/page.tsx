@@ -1,7 +1,6 @@
 import CollectionView from "@/components/CollectionView";
-import { artists, collections, pieces, getPiecesByCollection } from "@/lib/data";
-import { getArtworkImage } from "@/lib/images";
-import { getCollectionDisplayName, getArtistDisplayName, sortCollections, sortPieces, isCollectionHidden, getArtistOrder, getPiecesPerRow, getPieceRows, getFeaturedHeroes } from "@/lib/curation";
+import { artists, collections, getPiecesByCollection } from "@/lib/data";
+import { getCollectionDisplayName, getArtistDisplayName, sortCollections, sortPieces, isCollectionHidden, getArtistOrder, getPiecesPerRow, getPieceRows } from "@/lib/curation";
 
 const MERGE_INTO: Record<string, string> = {
   "tyler-hobbs-and-dandelion-wist": "tyler-hobbs",
@@ -42,6 +41,7 @@ export default function HomePage() {
         .map((col) => ({
           name: getCollectionDisplayName(col.slug, col.name),
           slug: col.slug,
+          totalSupply: col.totalSupply,
           piecesPerRow: getPiecesPerRow(col.slug),
           pieceRows: getPieceRows(col.slug),
           pieces: sortPieces(
@@ -66,35 +66,10 @@ export default function HomePage() {
     };
   });
 
-  // Build featured-hero pool from curation.json, resolving to piece + image + labels.
-  const heroSlugs = getFeaturedHeroes();
-  const featured = heroSlugs
-    .map((slug) => {
-      const p = pieces.find((pp) => pp.slug === slug);
-      if (!p) return null;
-      const image = getArtworkImage(p.slug, p.contractAddress, p.tokenId, "detail");
-      if (!image) return null;
-      const artist = artists.find((a) => a.slug === p.artistSlug);
-      const collection = collections.find((c) => c.slug === p.collectionSlug);
-      return {
-        slug: p.slug,
-        title: p.title,
-        image,
-        mintDate: p.mintDate || null,
-        artistName: artist ? getArtistDisplayName(artist.slug, artist.name) : "",
-        artistSlug: p.artistSlug,
-        collectionName: collection ? getCollectionDisplayName(collection.slug, collection.name) : "",
-        collectionSlug: p.collectionSlug,
-        isPunk: p.collectionSlug === "cryptopunks",
-      };
-    })
-    .filter((f): f is NonNullable<typeof f> => f !== null);
-
   return (
     <CollectionView
       sections={sections}
       artists={sorted.map((a) => ({ name: getArtistDisplayName(a.slug, a.name), slug: a.slug, tags: a.tags }))}
-      featured={featured}
     />
   );
 }

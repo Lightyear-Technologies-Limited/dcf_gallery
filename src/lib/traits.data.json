@@ -1,0 +1,1582 @@
+{
+  "fidenza-5-d270": {
+    "Palette": "Politique",
+    "Scale": "Jumbo",
+    "Spiral": "No",
+    "Turbulence": "Med",
+    "Super Blocks": "No",
+    "Density": "High"
+  },
+  "fidenza-19-d270": {
+    "Palette": "Cool",
+    "Scale": "Jumbo",
+    "Spiral": "No",
+    "Turbulence": "None",
+    "Super Blocks": "No",
+    "Density": "High"
+  },
+  "fidenza-28-d270": {
+    "Palette": "Politique",
+    "Scale": "Jumbo",
+    "Spiral": "No",
+    "Turbulence": "Med",
+    "Super Blocks": "No",
+    "Density": "High"
+  },
+  "fidenza-60-d270": {
+    "Palette": "AM",
+    "Scale": "Uniform",
+    "Spiral": "No",
+    "Turbulence": "Med",
+    "Super Blocks": "Yes",
+    "Density": "Medium"
+  },
+  "fidenza-90-d270": {
+    "Palette": "Luxe",
+    "Scale": "Large",
+    "Spiral": "No",
+    "Turbulence": "None",
+    "Super Blocks": "No",
+    "Density": "Medium"
+  },
+  "fidenza-98-d270": {
+    "Palette": "White Mono",
+    "Scale": "Medium",
+    "Spiral": "No",
+    "Turbulence": "None",
+    "Super Blocks": "No",
+    "Density": "Medium"
+  },
+  "fidenza-145-d270": {
+    "Palette": "Baked",
+    "Scale": "Uniform",
+    "Spiral": "No",
+    "Turbulence": "Low",
+    "Super Blocks": "Yes",
+    "Density": "Medium"
+  },
+  "fidenza-169-d270": {
+    "Palette": "White Mono",
+    "Scale": "Jumbo",
+    "Spiral": "No",
+    "Turbulence": "None",
+    "Super Blocks": "Yes",
+    "Density": "High"
+  },
+  "fidenza-180-d270": {
+    "Palette": "Golf Socks",
+    "Scale": "Jumbo",
+    "Spiral": "No",
+    "Turbulence": "High",
+    "Super Blocks": "No",
+    "Density": "High"
+  },
+  "fidenza-200-d270": {
+    "Palette": "White Mono",
+    "Scale": "Jumbo",
+    "Spiral": "No",
+    "Turbulence": "Low",
+    "Super Blocks": "No",
+    "Density": "High"
+  },
+  "fidenza-231-d270": {
+    "Palette": "AM",
+    "Scale": "Jumbo",
+    "Spiral": "No",
+    "Turbulence": "Low",
+    "Super Blocks": "No",
+    "Density": "High"
+  },
+  "fidenza-253-d270": {
+    "Palette": "Politique",
+    "Scale": "Jumbo",
+    "Spiral": "No",
+    "Turbulence": "None",
+    "Super Blocks": "No",
+    "Density": "High"
+  },
+  "fidenza-256-d270": {
+    "Palette": "Rad",
+    "Scale": "Jumbo",
+    "Spiral": "No",
+    "Turbulence": "High",
+    "Super Blocks": "Yes",
+    "Density": "High"
+  },
+  "fidenza-262-d270": {
+    "Palette": "Baked",
+    "Scale": "Jumbo",
+    "Spiral": "No",
+    "Turbulence": "Med",
+    "Super Blocks": "No",
+    "Density": "High"
+  },
+  "fidenza-342-d270": {
+    "Palette": "Golf Socks",
+    "Scale": "Large",
+    "Spiral": "No",
+    "Turbulence": "Med",
+    "Super Blocks": "No",
+    "Density": "Medium"
+  },
+  "fidenza-378-d270": {
+    "Palette": "Golf Socks",
+    "Scale": "Jumbo",
+    "Spiral": "No",
+    "Turbulence": "Low",
+    "Super Blocks": "Yes",
+    "Density": "High"
+  },
+  "fidenza-437-d270": {
+    "Palette": "Luxe",
+    "Scale": "Jumbo",
+    "Spiral": "No",
+    "Turbulence": "Med",
+    "Super Blocks": "No",
+    "Density": "High"
+  },
+  "fidenza-456-d270": {
+    "Palette": "Black",
+    "Scale": "Jumbo XL",
+    "Spiral": "No",
+    "Turbulence": "Med",
+    "Super Blocks": "Yes",
+    "Density": "High AF"
+  },
+  "fidenza-573-d270": {
+    "Palette": "Golf Socks",
+    "Scale": "Large",
+    "Spiral": "No",
+    "Turbulence": "Low",
+    "Super Blocks": "No",
+    "Density": "Medium"
+  },
+  "fidenza-587-d270": {
+    "Palette": "Luxe",
+    "Scale": "Jumbo",
+    "Spiral": "No",
+    "Turbulence": "High",
+    "Super Blocks": "No",
+    "Density": "High"
+  },
+  "fidenza-593-d270": {
+    "Palette": "Politique",
+    "Scale": "Jumbo",
+    "Spiral": "Yes",
+    "Turbulence": "Low",
+    "Super Blocks": "Yes",
+    "Density": "High"
+  },
+  "fidenza-609-d270": {
+    "Palette": "Rad",
+    "Scale": "Jumbo",
+    "Spiral": "No",
+    "Turbulence": "High",
+    "Super Blocks": "No",
+    "Density": "High"
+  },
+  "fidenza-647-d270": {
+    "Palette": "Rad",
+    "Scale": "Large",
+    "Spiral": "No",
+    "Turbulence": "Med",
+    "Super Blocks": "Yes",
+    "Density": "Medium"
+  },
+  "fidenza-650-d270": {
+    "Palette": "Rose",
+    "Scale": "Jumbo",
+    "Spiral": "No",
+    "Turbulence": "Med",
+    "Super Blocks": "No",
+    "Density": "High"
+  },
+  "fidenza-713-d270": {
+    "Palette": "Black",
+    "Scale": "Uniform",
+    "Spiral": "No",
+    "Turbulence": "Low",
+    "Super Blocks": "No",
+    "Density": "High"
+  },
+  "fidenza-718-d270": {
+    "Palette": "Rad",
+    "Scale": "Micro-Uniform",
+    "Spiral": "No",
+    "Turbulence": "Med",
+    "Super Blocks": "No",
+    "Density": "High AF"
+  },
+  "fidenza-819-d270": {
+    "Palette": "Golf Socks",
+    "Scale": "Jumbo",
+    "Spiral": "No",
+    "Turbulence": "Med",
+    "Super Blocks": "No",
+    "Density": "High"
+  },
+  "fidenza-929-d270": {
+    "Palette": "Luxe",
+    "Scale": "Jumbo",
+    "Spiral": "No",
+    "Turbulence": "None",
+    "Super Blocks": "Yes",
+    "Density": "High"
+  },
+  "fidenza-943-d270": {
+    "Palette": "White Mono",
+    "Scale": "Jumbo",
+    "Spiral": "No",
+    "Turbulence": "Med",
+    "Super Blocks": "Yes",
+    "Density": "High"
+  },
+  "fidenza-984-d270": {
+    "Palette": "White Mono",
+    "Scale": "Jumbo",
+    "Spiral": "Yes",
+    "Turbulence": "Low",
+    "Super Blocks": "No",
+    "Density": "High"
+  },
+  "ringers-13000014-d270": {
+    "Body": "Black",
+    "Background": "White",
+    "Pegs": 29,
+    "Size": "Normal",
+    "Layout": "Recursive grid",
+    "Wrap style": "Weave",
+    "Wrap orientation": "Off-center"
+  },
+  "ringers-13000025-d270": {
+    "Body": "Black",
+    "Background": "White",
+    "Pegs": 10,
+    "Size": "Normal",
+    "Layout": "4x4 grid",
+    "Wrap style": "Loop",
+    "Wrap orientation": "Balanced"
+  },
+  "ringers-13000058-d270": {
+    "Body": "Black",
+    "Background": "White",
+    "Pegs": 11,
+    "Size": "Normal",
+    "Layout": "4x4 grid",
+    "Wrap style": "Loop",
+    "Wrap orientation": "Balanced"
+  },
+  "ringers-13000064-d270": {
+    "Body": "Black",
+    "Background": "White",
+    "Pegs": 7,
+    "Size": "Normal",
+    "Layout": "Tiled 4,3",
+    "Wrap style": "Loop",
+    "Wrap orientation": "Balanced"
+  },
+  "ringers-13000075-d270": {
+    "Body": "Black",
+    "Background": "White",
+    "Pegs": 5,
+    "Size": "Normal",
+    "Layout": "3x3 grid",
+    "Wrap style": "Weave",
+    "Wrap orientation": "Balanced"
+  },
+  "ringers-13000086-d270": {
+    "Body": "White",
+    "Background": "White",
+    "Pegs": 18,
+    "Size": "Normal",
+    "Layout": "Recursive grid",
+    "Wrap style": "Loop",
+    "Wrap orientation": "Balanced"
+  },
+  "ringers-13000089-d270": {
+    "Body": "White",
+    "Background": "White",
+    "Pegs": 16,
+    "Size": "Normal",
+    "Layout": "5x5 grid",
+    "Wrap style": "Loop",
+    "Wrap orientation": "Balanced"
+  },
+  "ringers-13000108-d270": {
+    "Body": "White",
+    "Background": "White",
+    "Pegs": 10,
+    "Size": "Normal",
+    "Layout": "Tiled 3,4",
+    "Wrap style": "Weave",
+    "Wrap orientation": "Balanced"
+  },
+  "ringers-13000117-d270": {
+    "Body": "Black",
+    "Background": "White",
+    "Pegs": 14,
+    "Size": "Normal",
+    "Layout": "Tiled 3,4",
+    "Wrap style": "Weave",
+    "Wrap orientation": "Balanced"
+  },
+  "ringers-13000174-d270": {
+    "Body": "Black",
+    "Background": "White",
+    "Pegs": 9,
+    "Size": "Normal",
+    "Layout": "3x3 grid",
+    "Wrap style": "Loop",
+    "Wrap orientation": "Balanced"
+  },
+  "ringers-13000209-d270": {
+    "Body": "Black",
+    "Background": "White",
+    "Pegs": 4,
+    "Size": "Normal",
+    "Layout": "3x3 grid",
+    "Wrap style": "Weave",
+    "Wrap orientation": "Balanced"
+  },
+  "ringers-13000214-d270": {
+    "Body": "Black",
+    "Background": "White",
+    "Pegs": 8,
+    "Size": "Normal",
+    "Layout": "Tiled 3,4",
+    "Wrap style": "Loop",
+    "Wrap orientation": "Balanced"
+  },
+  "ringers-13000241-d270": {
+    "Body": "White",
+    "Background": "White",
+    "Pegs": 8,
+    "Size": "Normal",
+    "Layout": "Tiled 3,2",
+    "Wrap style": "Weave",
+    "Wrap orientation": "Balanced"
+  },
+  "ringers-13000268-d270": {
+    "Body": "White",
+    "Background": "White",
+    "Pegs": 8,
+    "Size": "smol boi",
+    "Layout": "Tiled 3,2",
+    "Wrap style": "Weave",
+    "Wrap orientation": "Balanced"
+  },
+  "ringers-13000273-d270": {
+    "Body": "White",
+    "Background": "Red",
+    "Pegs": 5,
+    "Size": "Normal",
+    "Layout": "3x3 grid",
+    "Wrap style": "Weave",
+    "Wrap orientation": "Balanced"
+  },
+  "ringers-13000287-d270": {
+    "Body": "White",
+    "Background": "White",
+    "Pegs": 12,
+    "Size": "smol boi",
+    "Layout": "Tiled 5,4",
+    "Wrap style": "Weave",
+    "Wrap orientation": "Balanced"
+  },
+  "ringers-13000303-d270": {
+    "Body": "Black",
+    "Background": "Yellow",
+    "Pegs": 6,
+    "Size": "Normal",
+    "Layout": "Tiled 3,2",
+    "Wrap style": "Weave",
+    "Wrap orientation": "Balanced"
+  },
+  "ringers-13000338-d270": {
+    "Body": "White",
+    "Background": "Yellow",
+    "Pegs": 25,
+    "Size": "Normal",
+    "Layout": "5x5 grid",
+    "Wrap style": "Weave",
+    "Wrap orientation": "Balanced"
+  },
+  "ringers-13000342-d270": {
+    "Body": "Yellow",
+    "Background": "White",
+    "Pegs": 10,
+    "Size": "Normal",
+    "Layout": "4x4 grid",
+    "Wrap style": "Loop",
+    "Wrap orientation": "Balanced"
+  },
+  "ringers-13000374-d270": {
+    "Body": "White",
+    "Background": "White",
+    "Pegs": 4,
+    "Size": "Normal",
+    "Layout": "Tiled 2,3",
+    "Wrap style": "Weave",
+    "Wrap orientation": "Off-center"
+  },
+  "ringers-13000391-d270": {
+    "Body": "Black",
+    "Background": "White",
+    "Pegs": 12,
+    "Size": "Normal",
+    "Layout": "5x5 grid",
+    "Wrap style": "Loop",
+    "Wrap orientation": "Balanced"
+  },
+  "ringers-13000392-d270": {
+    "Body": "Black",
+    "Background": "White",
+    "Pegs": 10,
+    "Size": "Normal",
+    "Layout": "4x4 grid",
+    "Wrap style": "Loop",
+    "Wrap orientation": "Balanced"
+  },
+  "ringers-13000492-d270": {
+    "Body": "Black",
+    "Background": "White",
+    "Pegs": 12,
+    "Size": "smol boi",
+    "Layout": "4x4 grid",
+    "Wrap style": "Loop",
+    "Wrap orientation": "Balanced"
+  },
+  "ringers-13000505-d270": {
+    "Body": "White",
+    "Background": "White",
+    "Pegs": 9,
+    "Size": "Normal",
+    "Layout": "4x4 grid",
+    "Wrap style": "Loop",
+    "Wrap orientation": "Balanced"
+  },
+  "ringers-13000520-d270": {
+    "Body": "White",
+    "Background": "White",
+    "Pegs": 5,
+    "Size": "Normal",
+    "Layout": "3x3 grid",
+    "Wrap style": "Weave",
+    "Wrap orientation": "Off-center"
+  },
+  "ringers-13000523-d270": {
+    "Body": "Black",
+    "Background": "White",
+    "Pegs": 9,
+    "Size": "Normal",
+    "Layout": "3x3 grid",
+    "Wrap style": "Weave",
+    "Wrap orientation": "Off-center"
+  },
+  "ringers-13000549-d270": {
+    "Body": "Black",
+    "Background": "Yellow",
+    "Pegs": 10,
+    "Size": "smol boi",
+    "Layout": "4x4 grid",
+    "Wrap style": "Loop",
+    "Wrap orientation": "Balanced"
+  },
+  "ringers-13000654-d270": {
+    "Body": "Black",
+    "Background": "White",
+    "Pegs": 17,
+    "Size": "Normal",
+    "Layout": "Tiled 5,4",
+    "Wrap style": "Weave",
+    "Wrap orientation": "Balanced"
+  },
+  "ringers-13000680-d270": {
+    "Body": "Black",
+    "Background": "White",
+    "Pegs": 6,
+    "Size": "Normal",
+    "Layout": "3x3 grid",
+    "Wrap style": "Loop",
+    "Wrap orientation": "Balanced"
+  },
+  "ringers-13000696-d270": {
+    "Body": "Black",
+    "Background": "White",
+    "Pegs": 13,
+    "Size": "Normal",
+    "Layout": "Tiled 5,4",
+    "Wrap style": "Loop",
+    "Wrap orientation": "Balanced"
+  },
+  "ringers-13000698-d270": {
+    "Body": "White",
+    "Background": "White",
+    "Pegs": 22,
+    "Size": "Normal",
+    "Layout": "Tiled 4,5",
+    "Wrap style": "Weave",
+    "Wrap orientation": "Balanced"
+  },
+  "ringers-13000708-d270": {
+    "Body": "Black",
+    "Background": "Red",
+    "Pegs": 5,
+    "Size": "Normal",
+    "Layout": "Tiled 3,2",
+    "Wrap style": "Weave",
+    "Wrap orientation": "Off-center"
+  },
+  "ringers-13000715-d270": {
+    "Body": "Yellow",
+    "Background": "White",
+    "Pegs": 14,
+    "Size": "Normal",
+    "Layout": "Tiled 4,5",
+    "Wrap style": "Loop",
+    "Wrap orientation": "Balanced"
+  },
+  "ringers-13000792-d270": {
+    "Body": "Black",
+    "Background": "White",
+    "Pegs": 6,
+    "Size": "Normal",
+    "Layout": "3x3 grid",
+    "Wrap style": "Loop",
+    "Wrap orientation": "Balanced"
+  },
+  "ringers-13000952-d270": {
+    "Body": "Yellow",
+    "Background": "Beige",
+    "Pegs": 13,
+    "Size": "Normal",
+    "Layout": "5x5 grid",
+    "Wrap style": "Weave",
+    "Wrap orientation": "Balanced"
+  },
+  "ringers-13000972-d270": {
+    "Body": "Black",
+    "Background": "White",
+    "Pegs": 6,
+    "Size": "Normal",
+    "Layout": "3x3 grid",
+    "Wrap style": "Weave",
+    "Wrap orientation": "Balanced"
+  },
+  "winds-of-yawanawa-20-100b": {
+    "Origin": "Mai — Earth",
+    "Color Temperature": "Hot",
+    "Wind Intensity": "Tranquil",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 03"
+  },
+  "winds-of-yawanawa-62-100b": {
+    "Origin": "Niwe — Wind",
+    "Color Temperature": "Freezing",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 01"
+  },
+  "winds-of-yawanawa-103-100b": {
+    "Origin": "Uwa — Flower",
+    "Color Temperature": "Mild",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 01"
+  },
+  "winds-of-yawanawa-118-100b": {
+    "Origin": "Nay — Sky",
+    "Color Temperature": "Mild",
+    "Wind Intensity": "Intense",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 02"
+  },
+  "winds-of-yawanawa-154-100b": {
+    "Origin": "Nii — Forest",
+    "Color Temperature": "Mild",
+    "Wind Intensity": "Still",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 02"
+  },
+  "winds-of-yawanawa-178-100b": {
+    "Origin": "Waka — Water",
+    "Color Temperature": "Cold",
+    "Wind Intensity": "Tranquil",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 04"
+  },
+  "winds-of-yawanawa-227-100b": {
+    "Origin": "Txii — Fire",
+    "Color Temperature": "Scorching",
+    "Wind Intensity": "Intense",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 04"
+  },
+  "winds-of-yawanawa-265-100b": {
+    "Origin": "Nay — Sky",
+    "Color Temperature": "Mild",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 01"
+  },
+  "winds-of-yawanawa-281-100b": {
+    "Origin": "Nay — Sky",
+    "Color Temperature": "Scorching",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 02"
+  },
+  "winds-of-yawanawa-369-100b": {
+    "Origin": "Ushe — Moon",
+    "Color Temperature": "Cold",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 01"
+  },
+  "winds-of-yawanawa-371-100b": {
+    "Origin": "Ushe — Moon",
+    "Color Temperature": "Freezing",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 03"
+  },
+  "winds-of-yawanawa-373-100b": {
+    "Origin": "Nii — Forest",
+    "Color Temperature": "Freezing",
+    "Wind Intensity": "Intense",
+    "Particle Type": "Spherical",
+    "Soundtrack": "Track 01"
+  },
+  "winds-of-yawanawa-442-100b": {
+    "Origin": "Ushe — Moon",
+    "Color Temperature": "Freezing",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 02"
+  },
+  "winds-of-yawanawa-451-100b": {
+    "Origin": "Nii — Forest",
+    "Color Temperature": "Hot",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 02"
+  },
+  "winds-of-yawanawa-487-100b": {
+    "Origin": "Uwa — Flower",
+    "Color Temperature": "Hot",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 02"
+  },
+  "winds-of-yawanawa-495-100b": {
+    "Origin": "Nay — Sky",
+    "Color Temperature": "Cold",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 03"
+  },
+  "winds-of-yawanawa-524-100b": {
+    "Origin": "Txii — Fire",
+    "Color Temperature": "Mild",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 02"
+  },
+  "winds-of-yawanawa-554-100b": {
+    "Origin": "Waka — Water",
+    "Color Temperature": "Cold",
+    "Wind Intensity": "Intense",
+    "Particle Type": "Spherical",
+    "Soundtrack": "Track 03"
+  },
+  "winds-of-yawanawa-572-100b": {
+    "Origin": "Nay — Sky",
+    "Color Temperature": "Mild",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 03"
+  },
+  "winds-of-yawanawa-600-100b": {
+    "Origin": "Vari — Sun",
+    "Color Temperature": "Mild",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 04"
+  },
+  "winds-of-yawanawa-629-100b": {
+    "Origin": "Nay — Sky",
+    "Color Temperature": "Mild",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 04"
+  },
+  "winds-of-yawanawa-637-100b": {
+    "Origin": "Nay — Sky",
+    "Color Temperature": "Mild",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 02"
+  },
+  "winds-of-yawanawa-638-100b": {
+    "Origin": "Uwa — Flower",
+    "Color Temperature": "Mild",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 01"
+  },
+  "winds-of-yawanawa-681-100b": {
+    "Origin": "Ushe — Moon",
+    "Color Temperature": "Freezing",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 04"
+  },
+  "winds-of-yawanawa-688-100b": {
+    "Origin": "Niwe — Wind",
+    "Color Temperature": "Mild",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 04"
+  },
+  "winds-of-yawanawa-692-100b": {
+    "Origin": "Nay — Sky",
+    "Color Temperature": "Cold",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 01"
+  },
+  "winds-of-yawanawa-695-100b": {
+    "Origin": "Mai — Earth",
+    "Color Temperature": "Freezing",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 02"
+  },
+  "winds-of-yawanawa-697-100b": {
+    "Origin": "Txii — Fire",
+    "Color Temperature": "Hot",
+    "Wind Intensity": "Intense",
+    "Particle Type": "Spherical",
+    "Soundtrack": "Track 04"
+  },
+  "winds-of-yawanawa-700-100b": {
+    "Origin": "Vari — Sun",
+    "Color Temperature": "Hot",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 04"
+  },
+  "winds-of-yawanawa-701-100b": {
+    "Origin": "Uwa — Flower",
+    "Color Temperature": "Hot",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 02"
+  },
+  "winds-of-yawanawa-704-100b": {
+    "Origin": "Ishtī — Star",
+    "Color Temperature": "Cold",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 03"
+  },
+  "winds-of-yawanawa-712-100b": {
+    "Origin": "Vari — Sun",
+    "Color Temperature": "Scorching",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Spherical",
+    "Soundtrack": "Track 03"
+  },
+  "winds-of-yawanawa-717-100b": {
+    "Origin": "Niwe — Wind",
+    "Color Temperature": "Cold",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 02"
+  },
+  "winds-of-yawanawa-738-100b": {
+    "Origin": "Nii — Forest",
+    "Color Temperature": "Cold",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Spherical",
+    "Soundtrack": "Track 02"
+  },
+  "winds-of-yawanawa-741-100b": {
+    "Origin": "Ushe — Moon",
+    "Color Temperature": "Cold",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 01"
+  },
+  "winds-of-yawanawa-745-100b": {
+    "Origin": "Mai — Earth",
+    "Color Temperature": "Mild",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 04"
+  },
+  "winds-of-yawanawa-746-100b": {
+    "Origin": "Txii — Fire",
+    "Color Temperature": "Hot",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 01"
+  },
+  "winds-of-yawanawa-754-100b": {
+    "Origin": "Nay — Sky",
+    "Color Temperature": "Cold",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 04"
+  },
+  "winds-of-yawanawa-755-100b": {
+    "Origin": "Vari — Sun",
+    "Color Temperature": "Scorching",
+    "Wind Intensity": "Tranquil",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 04"
+  },
+  "winds-of-yawanawa-764-100b": {
+    "Origin": "Uwa — Flower",
+    "Color Temperature": "Mild",
+    "Wind Intensity": "Intense",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 02"
+  },
+  "winds-of-yawanawa-856-100b": {
+    "Origin": "Txii — Fire",
+    "Color Temperature": "Scorching",
+    "Wind Intensity": "Tranquil",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 02"
+  },
+  "winds-of-yawanawa-863-100b": {
+    "Origin": "Niwe — Wind",
+    "Color Temperature": "Hot",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 01"
+  },
+  "winds-of-yawanawa-870-100b": {
+    "Origin": "Nay — Sky",
+    "Color Temperature": "Mild",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 01"
+  },
+  "winds-of-yawanawa-878-100b": {
+    "Origin": "Ushe — Moon",
+    "Color Temperature": "Cold",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 03"
+  },
+  "winds-of-yawanawa-888-100b": {
+    "Origin": "Vari — Sun",
+    "Color Temperature": "Scorching",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 04"
+  },
+  "winds-of-yawanawa-912-100b": {
+    "Origin": "Vari — Sun",
+    "Color Temperature": "Scorching",
+    "Wind Intensity": "Intense",
+    "Particle Type": "Spherical",
+    "Soundtrack": "Track 04"
+  },
+  "winds-of-yawanawa-917-100b": {
+    "Origin": "Uwa — Flower",
+    "Color Temperature": "Mild",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 03"
+  },
+  "winds-of-yawanawa-921-100b": {
+    "Origin": "Ushe — Moon",
+    "Color Temperature": "Freezing",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Spherical",
+    "Soundtrack": "Track 04"
+  },
+  "winds-of-yawanawa-962-100b": {
+    "Origin": "Niwe — Wind",
+    "Color Temperature": "Hot",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Spherical",
+    "Soundtrack": "Track 01"
+  },
+  "winds-of-yawanawa-989-100b": {
+    "Origin": "Uwa — Flower",
+    "Color Temperature": "Cold",
+    "Wind Intensity": "Moderate",
+    "Particle Type": "Cubical",
+    "Soundtrack": "Track 04"
+  },
+  "human-unreadable-455000095-b069": {
+    "Emotional Climate": "Your crush responded",
+    "Vulnerability": "Door cracked open",
+    "Signature Bone": "R_Ankle",
+    "Unique Moves": 10,
+    "Sequence Length": 14
+  },
+  "human-unreadable-455000124-b069": {
+    "Emotional Climate": "Current",
+    "Vulnerability": "Vulnerable",
+    "Signature Bone": "R_Wrist",
+    "Unique Moves": 2,
+    "Sequence Length": 2
+  },
+  "human-unreadable-455000140-b069": {
+    "Emotional Climate": "Just heard bad news",
+    "Vulnerability": "Guarded",
+    "Signature Bone": "Head",
+    "Unique Moves": 4,
+    "Sequence Length": 5
+  },
+  "human-unreadable-455000141-b069": {
+    "Emotional Climate": "Relaxed",
+    "Vulnerability": "Guarded",
+    "Signature Bone": "L_Elbow",
+    "Unique Moves": 11,
+    "Sequence Length": 15
+  },
+  "human-unreadable-455000150-b069": {
+    "Emotional Climate": "Relaxed",
+    "Vulnerability": "Door cracked open",
+    "Signature Bone": "L_Knee",
+    "Improv": "Present",
+    "Unique Moves": 6,
+    "Sequence Length": 7
+  },
+  "human-unreadable-455000155-b069": {
+    "Emotional Climate": "Your crush responded",
+    "Vulnerability": "Door cracked open",
+    "Signature Bone": "R_Shoulder",
+    "Slowness": "Less slow",
+    "Unique Moves": 2,
+    "Sequence Length": 2
+  },
+  "human-unreadable-455000156-b069": {
+    "Emotional Climate": "Current",
+    "Vulnerability": "Door cracked open",
+    "Signature Bone": "L_Wrist",
+    "Unique Moves": 11,
+    "Sequence Length": 13
+  },
+  "human-unreadable-455000169-b069": {
+    "Emotional Climate": "Your crush responded",
+    "Vulnerability": "Door cracked open",
+    "Signature Bone": "R_Wrist",
+    "Unique Moves": 7,
+    "Sequence Length": 7
+  },
+  "human-unreadable-455000180-b069": {
+    "Emotional Climate": "Current",
+    "Vulnerability": "Door cracked open",
+    "Signature Bone": "L_Elbow",
+    "Unique Moves": 2,
+    "Sequence Length": 3
+  },
+  "human-unreadable-455000201-b069": {
+    "Emotional Climate": "On edge",
+    "Vulnerability": "Door cracked open",
+    "Signature Bone": "L_Wrist",
+    "Unique Moves": 7,
+    "Sequence Length": 8
+  },
+  "human-unreadable-455000216-b069": {
+    "Emotional Climate": "Just heard bad news",
+    "Vulnerability": "Door cracked open",
+    "Signature Bone": "L_Knee",
+    "Pause": "Yes",
+    "Unique Moves": 6,
+    "Sequence Length": 6
+  },
+  "human-unreadable-455000237-b069": {
+    "Emotional Climate": "Just heard bad news",
+    "Vulnerability": "Door cracked open",
+    "Signature Bone": "R_Ankle",
+    "Unique Moves": 7,
+    "Sequence Length": 7
+  },
+  "human-unreadable-455000245-b069": {
+    "Emotional Climate": "Some clouds",
+    "Vulnerability": "Door cracked open",
+    "Signature Bone": "R_Shoulder",
+    "Improv": "Present",
+    "Unique Moves": 9,
+    "Sequence Length": 12
+  },
+  "human-unreadable-455000278-b069": {
+    "Emotional Climate": "Some clouds",
+    "Vulnerability": "Door cracked open",
+    "Signature Bone": "L_Wrist",
+    "Unique Moves": 3,
+    "Sequence Length": 3
+  },
+  "human-unreadable-455000328-b069": {
+    "Emotional Climate": "Relaxed",
+    "Vulnerability": "Door cracked open",
+    "Signature Bone": "L_Wrist",
+    "Unique Moves": 8,
+    "Sequence Length": 9
+  },
+  "human-unreadable-455000336-b069": {
+    "Emotional Climate": "Some clouds",
+    "Vulnerability": "Door cracked open",
+    "Signature Bone": "R_Wrist",
+    "Unique Moves": 9,
+    "Sequence Length": 11
+  },
+  "human-unreadable-455000339-b069": {
+    "Emotional Climate": "Current",
+    "Vulnerability": "Door cracked open",
+    "Signature Bone": "L_Elbow",
+    "Unique Moves": 5,
+    "Sequence Length": 8
+  },
+  "dataland-biome-lumina-115-1c9d": {
+    "Type": "Bioluminescent Flora",
+    "Cluster": "Abyssal Petalon",
+    "Location": "Tropical Rainforest Understory",
+    "Status": "Vulnerable",
+    "Movement": "Light-Responsive Swaying"
+  },
+  "dataland-biome-lumina-127-1c9d": {
+    "Type": "Rare Mystical Variants",
+    "Cluster": "Aetherium Arborescens",
+    "Location": "Tropical Rainforest Understory",
+    "Status": "Vulnerable Habitat Loss",
+    "Movement": "Phototropic Growth"
+  },
+  "dataland-biome-lumina-161-1c9d": {
+    "Type": "Bioluminescent Flora",
+    "Cluster": "Luminous Glacies",
+    "Location": "Abyssal Ocean Gardens",
+    "Status": "Vulnerable",
+    "Movement": "Aquatic Undulation"
+  },
+  "dataland-biome-lumina-179-1c9d": {
+    "Type": "Specialized Bioluminescent Flora",
+    "Cluster": "Phantasmae Notani",
+    "Location": "Tropical Rainforest Understory",
+    "Status": "Rare Protected",
+    "Movement": "Gentle Air Swaying"
+  },
+  "dataland-biome-lumina-207-1c9d": {
+    "Type": "Bioluminescent Flora",
+    "Cluster": "Helios Petalate",
+    "Location": "Tropical Rainforest Understory",
+    "Status": "Rare Stable",
+    "Movement": "Bioluminescent Swaying"
+  },
+  "dataland-biome-lumina-242-1c9d": {
+    "Type": "Specialized Bioluminescent Flora",
+    "Cluster": "Petalum Glimmera",
+    "Location": "Tropical Rainforest Canopy",
+    "Status": "Rare Protected",
+    "Movement": "Gentle Air Swaying"
+  },
+  "dataland-biome-lumina-458-1c9d": {
+    "Type": "Specialized Bioluminescent Flora",
+    "Cluster": "Illuminaetherea Petalens",
+    "Location": "Hydrothermal Vents",
+    "Status": "Vulnerable",
+    "Movement": "Aquatic Undulation"
+  },
+  "dataland-biome-lumina-461-1c9d": {
+    "Type": "Bioluminescent Flora",
+    "Cluster": "Galacticae Petalia",
+    "Location": "Tropical Rainforest Understory",
+    "Status": "Rare Protected",
+    "Movement": "Gentle Air Swaying"
+  },
+  "dataland-biome-lumina-464-1c9d": {
+    "Type": "Bioluminescent Flora",
+    "Cluster": "Luminous Glacies",
+    "Location": "Tropical Rainforest Understory",
+    "Status": "Vulnerable",
+    "Movement": "Aquatic Undulation"
+  },
+  "dataland-biome-lumina-524-1c9d": {
+    "Type": "Bioluminescent Flora",
+    "Cluster": "Aurelia Petalina",
+    "Location": "Tropical Rainforest Understory",
+    "Status": "Near Threatened",
+    "Movement": "Gentle Air Swaying"
+  },
+  "dataland-biome-lumina-549-1c9d": {
+    "Type": "Specialized Bioluminescent Flora",
+    "Cluster": "Nocturnalis Flora",
+    "Location": "Tropical Rainforest Canopy",
+    "Status": "Vulnerable",
+    "Movement": "Light-Responsive Swaying"
+  },
+  "dataland-biome-lumina-632-1c9d": {
+    "Type": "Specialized Bioluminescent Flora",
+    "Cluster": "Galacticae Petalia",
+    "Location": "Tropical Rainforest Canopy",
+    "Status": "Rare Protected",
+    "Movement": "Gentle Air Swaying"
+  },
+  "dataland-biome-lumina-665-1c9d": {
+    "Type": "Bioluminescent Flora",
+    "Cluster": "Aurelia Petalina",
+    "Location": "Tropical Rainforest Canopy",
+    "Status": "Rare Protected",
+    "Movement": "Gentle Air Swaying"
+  },
+  "dataland-biome-lumina-670-1c9d": {
+    "Type": "Bioluminescent Fungi",
+    "Cluster": "Aetherium Arborescens",
+    "Location": "Tropical Forest Floor",
+    "Status": "Rare Stable",
+    "Movement": "Immobile"
+  },
+  "dataland-biome-lumina-691-1c9d": {
+    "Type": "Specialized Bioluminescent Flora",
+    "Cluster": "Illuminaetherea Petalens",
+    "Location": "Tropical Cave Systems",
+    "Status": "Rare Stable",
+    "Movement": "Aquatic Undulation"
+  },
+  "dataland-biome-lumina-789-1c9d": {
+    "Type": "Bioluminescent Flora",
+    "Cluster": "Aqua Luminaceae",
+    "Location": "Tropical Rainforest Understory",
+    "Status": "Rare Stable",
+    "Movement": "Rhythmic Pulsation"
+  },
+  "dataland-biome-lumina-791-1c9d": {
+    "Type": "Specialized Bioluminescent Flora",
+    "Cluster": "Helios Petalate",
+    "Location": "Temperate Forest Understory",
+    "Status": "Rare Stable",
+    "Movement": "Gentle Air Swaying"
+  },
+  "dataland-biome-lumina-999-1c9d": {
+    "Type": "Bioluminescent Fungi",
+    "Cluster": "Luminorialis Aurorae",
+    "Location": "Tropical Rainforest Canopy",
+    "Status": "Rare Locally Abundant",
+    "Movement": "Spore Dispersal"
+  },
+  "synthetic-dreams-51-be3a": {
+    "Cluster": "Closed Water",
+    "Rarity": 2
+  },
+  "synthetic-dreams-362-be3a": {
+    "Cluster": "Rocky Landscapes",
+    "Rarity": 1
+  },
+  "synthetic-dreams-379-be3a": {
+    "Cluster": "Closed Water",
+    "Rarity": 2
+  },
+  "synthetic-dreams-625-be3a": {
+    "Cluster": "Green Landscapes",
+    "Rarity": 1
+  },
+  "synthetic-dreams-630-be3a": {
+    "Cluster": "Desert Landscapes",
+    "Rarity": 1
+  },
+  "synthetic-dreams-648-be3a": {
+    "Cluster": "Closed Water",
+    "Rarity": 2
+  },
+  "synthetic-dreams-754-be3a": {
+    "Cluster": "Green Landscapes",
+    "Rarity": 1
+  },
+  "synthetic-dreams-774-be3a": {
+    "Cluster": "Desert Landscapes",
+    "Rarity": 1
+  },
+  "synthetic-dreams-854-be3a": {
+    "Cluster": "Closed Water",
+    "Rarity": 2
+  },
+  "synthetic-dreams-858-be3a": {
+    "Cluster": "Rocky Landscapes",
+    "Rarity": 1
+  },
+  "synthetic-dreams-951-be3a": {
+    "Cluster": "Desert Landscapes",
+    "Rarity": 1
+  },
+  "synthetic-dreams-957-be3a": {
+    "Cluster": "Green Landscapes",
+    "Rarity": 1
+  },
+  "grifters-8-c1f3": {
+    "Asset Type": "Edition",
+    "Type": "Shady",
+    "Color": "Green",
+    "Vision": "Suss",
+    "Noise": "Guzz",
+    "Surface": "No.2",
+    "Atmosphere": "Probably"
+  },
+  "grifters-37-c1f3": {
+    "Asset Type": "Edition",
+    "Type": "Shady",
+    "Color": "Green",
+    "Vision": "Turbulence",
+    "Noise": "Deviant",
+    "Surface": "Sideways Pink",
+    "Atmosphere": "Save As"
+  },
+  "grifters-66-c1f3": {
+    "Asset Type": "Edition",
+    "Type": "Wretch",
+    "Color": "Yellow",
+    "Vision": "ProtoVisor",
+    "Noise": "Rager",
+    "Surface": "No.2",
+    "Atmosphere": "Probably"
+  },
+  "grifters-88-c1f3": {
+    "Asset Type": "Edition",
+    "Type": "Wretch",
+    "Color": "Blue",
+    "Vision": "Bandit Obvious",
+    "Noise": "Blue Pill",
+    "Surface": "Sideways Pink",
+    "Atmosphere": "Probably"
+  },
+  "grifters-132-c1f3": {
+    "Asset Type": "Edition",
+    "Type": "Flimflam",
+    "Color": "Green",
+    "Vision": "Art Innit",
+    "Noise": "LOUD",
+    "Surface": "No.2",
+    "Atmosphere": "Bubbles"
+  },
+  "grifters-51-c1f3": {
+    "Asset Type": "Edition",
+    "Type": "Wretch",
+    "Color": "Blue",
+    "Vision": "Art Innit",
+    "Noise": "Blue Pill",
+    "Surface": "No.2",
+    "Atmosphere": "Probably"
+  },
+  "grifters-165-c1f3": {
+    "Asset Type": "Edition",
+    "Type": "Flimflam",
+    "Color": "Yellow",
+    "Vision": "Bandit Drowsy",
+    "Noise": "Sweaty",
+    "Surface": "No.2",
+    "Atmosphere": "Bubbles"
+  },
+  "grifters-166-c1f3": {
+    "Asset Type": "Edition",
+    "Type": "Flimflam",
+    "Color": "Blue",
+    "Vision": "Turbulence",
+    "Noise": "G to the M",
+    "Surface": "No.2",
+    "Atmosphere": "Probably"
+  },
+  "grifters-170-c1f3": {
+    "Asset Type": "Legendary Edition"
+  },
+  "grifters-197-c1f3": {
+    "Asset Type": "Edition",
+    "Type": "Gouge",
+    "Color": "Blue",
+    "Vision": "Eth Hed",
+    "Noise": "Deviant",
+    "Surface": "Mo Yel",
+    "Atmosphere": "AirDrop"
+  },
+  "grifters-222-c1f3": {
+    "Asset Type": "Edition",
+    "Type": "Flimflam",
+    "Color": "Blue",
+    "Vision": "Bandit Obvious",
+    "Noise": "Guzz",
+    "Surface": "Mo Multi",
+    "Atmosphere": "Probably"
+  },
+  "grifters-254-c1f3": {
+    "Asset Type": "Edition",
+    "Type": "Wretch",
+    "Color": "Blue",
+    "Vision": "Hyper",
+    "Noise": "Gappy",
+    "Surface": "Sideways Pink",
+    "Atmosphere": "DMs"
+  },
+  "grifters-308-c1f3": {
+    "Asset Type": "Edition",
+    "Type": "Wretch",
+    "Color": "Green",
+    "Vision": "Faceport",
+    "Noise": "Sweaty",
+    "Surface": "Flies",
+    "Atmosphere": "FlySpy"
+  },
+  "grifters-363-c1f3": {
+    "Asset Type": "Edition",
+    "Type": "Flimflam",
+    "Color": "Green",
+    "Vision": "FacePort",
+    "Noise": "Sweaty",
+    "Surface": "Sideways Pink",
+    "Atmosphere": "Probably"
+  },
+  "grifters-368-c1f3": {
+    "Asset Type": "Edition",
+    "Type": "Gouge",
+    "Color": "Yellow",
+    "Vision": "Bandit Classic",
+    "Noise": "G to the M",
+    "Surface": "No.2",
+    "Atmosphere": "Universe"
+  },
+  "grifters-439-c1f3": {
+    "Asset Type": "Edition",
+    "Type": "Gouge",
+    "Color": "Yellow",
+    "Vision": "Turbulence",
+    "Noise": "Rager",
+    "Surface": "White Worms",
+    "Atmosphere": "Bubbles"
+  },
+  "grifters-442-c1f3": {
+    "Asset Type": "Edition",
+    "Type": "Gouge",
+    "Color": "Blue",
+    "Vision": "Burnout",
+    "Noise": "Deviant",
+    "Surface": "No.1",
+    "Atmosphere": "Universe"
+  },
+  "grifters-472-c1f3": {
+    "Asset Type": "Edition",
+    "Type": "Gouge",
+    "Color": "Blue",
+    "Vision": "Ded",
+    "Noise": "Sweaty",
+    "Surface": "White Worms",
+    "Atmosphere": "Universe"
+  },
+  "grifters-522-c1f3": {
+    "Asset Type": "Edition",
+    "Type": "Flimflam",
+    "Color": "Green",
+    "Vision": "Art Innit",
+    "Noise": "G to the M",
+    "Surface": "No.2",
+    "Atmosphere": "JPEGs"
+  },
+  "grifters-532-c1f3": {
+    "Asset Type": "Edition",
+    "Type": "Gouge",
+    "Color": "Green",
+    "Vision": "Art Innit",
+    "Noise": "Candy Cig",
+    "Surface": "Mo Multi",
+    "Atmosphere": "Bubbles"
+  },
+  "grifters-542-c1f3": {
+    "Asset Type": "Edition",
+    "Type": "Gouge",
+    "Color": "Blue",
+    "Vision": "Hyper",
+    "Noise": "Sweaty",
+    "Surface": "Flies",
+    "Atmosphere": "DMs"
+  },
+  "grifters-547-c1f3": {
+    "Asset Type": "Edition",
+    "Type": "Gouge",
+    "Color": "Blue",
+    "Vision": "Suss",
+    "Noise": "Deviant",
+    "Surface": "No.1",
+    "Atmosphere": "Save As"
+  },
+  "grifters-572-c1f3": {
+    "Asset Type": "Edition",
+    "Type": "Gouge",
+    "Color": "Yellow",
+    "Vision": "Hyper",
+    "Noise": "Deviant",
+    "Surface": "White Worms",
+    "Atmosphere": "Universe"
+  },
+  "grifters-574-c1f3": {
+    "Asset Type": "Edition",
+    "Type": "Shady",
+    "Color": "Blue",
+    "Vision": "ProtoVisor",
+    "Noise": "Deviant",
+    "Surface": "No.2",
+    "Atmosphere": "Bubbles"
+  },
+  "masks-of-luci-86-249a": {
+    "Attendee Type": "Masked Player",
+    "Category": "Luminate",
+    "Material": "Crystal",
+    "Region": "Endless Cycle",
+    "Adornments": "Sacred Lines"
+  },
+  "masks-of-luci-94-249a": {
+    "Attendee Type": "Masked Player",
+    "Category": "Understory",
+    "Material": "Wood",
+    "Region": "First Cycle"
+  },
+  "masks-of-luci-142-249a": {
+    "Attendee Type": "Masked Player",
+    "Category": "Network",
+    "Material": "Moss",
+    "Region": "Kingdom"
+  },
+  "masks-of-luci-191-249a": {
+    "Attendee Type": "Masked Guest",
+    "Category": "Canopic",
+    "Material": "Stone",
+    "Region": "Nectar Springs"
+  },
+  "masks-of-luci-240-249a": {
+    "Attendee Type": "Council Mask",
+    "Material": "Bone",
+    "Region": "Bankless Canopy",
+    "Adornments": "Teeth"
+  },
+  "masks-of-luci-241-249a": {
+    "Attendee Type": "Masked Player",
+    "Category": "Foundation",
+    "Material": "Wood"
+  },
+  "masks-of-luci-303-249a": {
+    "Attendee Type": "Masked Player",
+    "Category": "Network",
+    "Material": "Fungi",
+    "Region": "Auctioneers Valley"
+  },
+  "masks-of-luci-349-249a": {
+    "Attendee Type": "Masked Player",
+    "Category": "Foundation",
+    "Material": "Quartz",
+    "Region": "Bankless Canopy"
+  },
+  "masks-of-luci-394-249a": {
+    "Attendee Type": "Masked Guest",
+    "Category": "Luminate",
+    "Material": "Visions",
+    "Region": "Monument Garden",
+    "Adornments": "Protrusions"
+  },
+  "masks-of-luci-435-249a": {
+    "Attendee Type": "Masked Guest",
+    "Category": "Herd",
+    "Material": "Stone",
+    "Region": "Endless Cycle"
+  },
+  "masks-of-luci-442-249a": {
+    "Attendee Type": "Masked Guest",
+    "Category": "Root",
+    "Material": "Flesh",
+    "Region": "Frogland",
+    "Adornments": "Ears",
+    "Bond": "Wolfpack"
+  },
+  "masks-of-luci-476-249a": {
+    "Attendee Type": "Masked Guest",
+    "Category": "Understory",
+    "Material": "Wood",
+    "Region": "Endless Cycle",
+    "Adornments": "Protrusions"
+  },
+  "masks-of-luci-504-249a": {
+    "Attendee Type": "Masked Guest",
+    "Category": "Foundation",
+    "Material": "Vine",
+    "Region": "Kingdom",
+    "Adornments": "Protrusions"
+  },
+  "masks-of-luci-518-249a": {
+    "Attendee Type": "Masked Guest",
+    "Category": "Canopic",
+    "Material": "Stone",
+    "Region": "Endless Cycle"
+  },
+  "masks-of-luci-540-249a": {
+    "Attendee Type": "Masked Guest",
+    "Category": "Root",
+    "Material": "Stone",
+    "Region": "Sprawl"
+  },
+  "masks-of-luci-569-249a": {
+    "Attendee Type": "Masked Guest",
+    "Category": "Order",
+    "Material": "Feather",
+    "Region": "Sprawl",
+    "Adornments": "Horns"
+  },
+  "masks-of-luci-591-249a": {
+    "Attendee Type": "Council Mask",
+    "Material": "Bone",
+    "Region": "Endless Cycle",
+    "Adornments": "Teeth"
+  },
+  "masks-of-luci-597-249a": {
+    "Attendee Type": "Masked Guest",
+    "Category": "Order",
+    "Material": "Metal",
+    "Region": "Kingdom",
+    "Adornments": "Teeth"
+  },
+  "masks-of-luci-609-249a": {
+    "Attendee Type": "Masked Guest",
+    "Category": "Herd",
+    "Material": "Scales",
+    "Region": "Nectar Springs"
+  },
+  "qql-308-0c88": {
+    "Palette": "Fidenza",
+    "Color Mode": "Simple",
+    "Structure": "Formation",
+    "Flow Field": "Random Radial",
+    "Turbulence": "Low",
+    "Spacing": "Dense",
+    "Background": "Fidenza Newsprint"
+  },
+  "qql-309-0c88": {
+    "Palette": "Fidenza",
+    "Color Mode": "Simple",
+    "Structure": "Formation",
+    "Flow Field": "Random Radial",
+    "Turbulence": "Low",
+    "Spacing": "Dense",
+    "Background": "Fidenza Newsprint"
+  },
+  "pxl-dex-105-ecfb": {
+    "Pixels": 500000,
+    "Allowance": 500000
+  },
+  "pxl-dex-107-ecfb": {
+    "Pixels": 450000,
+    "Allowance": 0
+  },
+  "pxl-dex-130-ecfb": {
+    "Pixels": 500000,
+    "Allowance": 500000
+  },
+  "pxl-dex-139-ecfb": {
+    "Pixels": 500000,
+    "Allowance": 500000
+  },
+  "pxl-dex-141-ecfb": {
+    "Pixels": 0,
+    "Allowance": 0
+  }
+}

@@ -1,0 +1,357 @@
+[
+  {
+    "slug": "grifters-8-c1f3",
+    "tokenId": "8",
+    "traits": {
+      "Asset Type": "Edition",
+      "Artist": "XCOPY",
+      "Type": "Shady",
+      "Shady": "Green",
+      "Vision": "Suss",
+      "Noise": "Guzz",
+      "Surface": "No.2",
+      "Atmosphere": "Probably"
+    },
+    "features": {}
+  },
+  {
+    "slug": "grifters-37-c1f3",
+    "tokenId": "37",
+    "traits": {
+      "Asset Type": "Edition",
+      "Artist": "XCOPY",
+      "Type": "Shady",
+      "Shady": "Green",
+      "Vision": "Turbulence",
+      "Noise": "Deviant",
+      "Surface": "Sideways Pink",
+      "Atmosphere": "Save As"
+    },
+    "features": {}
+  },
+  {
+    "slug": "grifters-66-c1f3",
+    "tokenId": "66",
+    "traits": {
+      "Asset Type": "Edition",
+      "Artist": "XCOPY",
+      "Type": "Wretch",
+      "Wretch": "Yellow",
+      "Vision": "ProtoVisor",
+      "Noise": "Rager",
+      "Surface": "No.2",
+      "Atmosphere": "Probably"
+    },
+    "features": {}
+  },
+  {
+    "slug": "grifters-88-c1f3",
+    "tokenId": "88",
+    "traits": {
+      "Asset Type": "Edition",
+      "Artist": "XCOPY",
+      "Type": "Wretch",
+      "Wretch": "Blue",
+      "Vision": "Bandit Obvious",
+      "Noise": "Blue Pill",
+      "Surface": "Sideways Pink",
+      "Atmosphere": "Probably"
+    },
+    "features": {}
+  },
+  {
+    "slug": "grifters-132-c1f3",
+    "tokenId": "132",
+    "traits": {
+      "Asset Type": "Edition",
+      "Artist": "XCOPY",
+      "Type": "Flimflam",
+      "Flimflam": "Green",
+      "Vision": "Art Innit",
+      "Noise": "LOUD",
+      "Surface": "No.2",
+      "Atmosphere": "Bubbles"
+    },
+    "features": {}
+  },
+  {
+    "slug": "grifters-51-c1f3",
+    "tokenId": "51",
+    "traits": {
+      "Type": "Wretch",
+      "Noise": "Blue Pill",
+      "Artist": "XCOPY",
+      "Vision": "Art Innit",
+      "Wretch": "Blue",
+      "Surface": "No.2",
+      "Asset Type": "Edition",
+      "Atmosphere": "Probably",
+      "Collection": "Grifters"
+    },
+    "features": {}
+  },
+  {
+    "slug": "grifters-165-c1f3",
+    "tokenId": "165",
+    "traits": {
+      "Asset Type": "Edition",
+      "Artist": "XCOPY",
+      "Type": "Flimflam",
+      "Flimflam": "Yellow",
+      "Vision": "Bandit Drowsy",
+      "Noise": "Sweaty",
+      "Surface": "No.2",
+      "Atmosphere": "Bubbles"
+    },
+    "features": {}
+  },
+  {
+    "slug": "grifters-166-c1f3",
+    "tokenId": "166",
+    "traits": {
+      "Asset Type": "Edition",
+      "Artist": "XCOPY",
+      "Type": "Flimflam",
+      "Flimflam": "Blue",
+      "Vision": "Turbulence",
+      "Noise": "G to the M",
+      "Surface": "No.2",
+      "Atmosphere": "Probably"
+    },
+    "features": {}
+  },
+  {
+    "slug": "grifters-170-c1f3",
+    "tokenId": "170",
+    "traits": {
+      "Asset Type": "Legendary Edition",
+      "Artist": "XCOPY"
+    },
+    "features": {}
+  },
+  {
+    "slug": "grifters-197-c1f3",
+    "tokenId": "197",
+    "traits": {
+      "Asset Type": "Edition",
+      "Artist": "XCOPY",
+      "Type": "Gouge",
+      "Gouge": "Blue",
+      "Vision": "Eth Hed",
+      "Noise": "Deviant",
+      "Surface": "Mo Yel",
+      "Atmosphere": "AirDrop"
+    },
+    "features": {}
+  },
+  {
+    "slug": "grifters-222-c1f3",
+    "tokenId": "222",
+    "traits": {
+      "Asset Type": "Edition",
+      "Artist": "XCOPY",
+      "Type": "Flimflam",
+      "Flimflam": "Blue",
+      "Vision": "Bandit Obvious",
+      "Noise": "Guzz",
+      "Surface": "Mo Multi",
+      "Atmosphere": "Probably"
+    },
+    "features": {}
+  },
+  {
+    "slug": "grifters-254-c1f3",
+    "tokenId": "254",
+    "traits": {
+      "Asset Type": "Edition",
+      "Artist": "XCOPY",
+      "Type": "Wretch",
+      "Wretch": "Blue",
+      "Vision": "Hyper",
+      "Noise": "Gappy",
+      "Surface": "Sideways Pink",
+      "Atmosphere": "DMs"
+    },
+    "features": {}
+  },
+  {
+    "slug": "grifters-308-c1f3",
+    "tokenId": "308",
+    "traits": {
+      "Asset Type": "Edition",
+      "Artist": "XCOPY",
+      "Type": "Wretch",
+      "Wretch": "Green",
+      "Vision": "Faceport",
+      "Noise": "Sweaty",
+      "Surface": "Flies",
+      "Atmosphere": "FlySpy"
+    },
+    "features": {}
+  },
+  {
+    "slug": "grifters-363-c1f3",
+    "tokenId": "363",
+    "traits": {
+      "Asset Type": "Edition",
+      "Artist": "XCOPY",
+      "Type": "Flimflam",
+      "Flimflam": "Green",
+      "Vision": "FacePort",
+      "Noise": "Sweaty",
+      "Surface": "Sideways Pink",
+      "Atmosphere": "Probably"
+    },
+    "features": {}
+  },
+  {
+    "slug": "grifters-368-c1f3",
+    "tokenId": "368",
+    "traits": {
+      "Asset Type": "Edition",
+      "Artist": "XCOPY",
+      "Type": "Gouge",
+      "Gouge": "Yellow",
+      "Vision": "Bandit Classic",
+      "Noise": "G to the M",
+      "Surface": "No.2",
+      "Atmosphere": "Universe"
+    },
+    "features": {}
+  },
+  {
+    "slug": "grifters-439-c1f3",
+    "tokenId": "439",
+    "traits": {
+      "Asset Type": "Edition",
+      "Artist": "XCOPY",
+      "Type": "Gouge",
+      "Gouge": "Yellow",
+      "Vision": "Turbulence",
+      "Noise": "Rager",
+      "Surface": "White Worms",
+      "Atmosphere": "Bubbles"
+    },
+    "features": {}
+  },
+  {
+    "slug": "grifters-442-c1f3",
+    "tokenId": "442",
+    "traits": {
+      "Asset Type": "Edition",
+      "Artist": "XCOPY",
+      "Type": "Gouge",
+      "Gouge": "Blue",
+      "Vision": "Burnout",
+      "Noise": "Deviant",
+      "Surface": "No.1",
+      "Atmosphere": "Universe"
+    },
+    "features": {}
+  },
+  {
+    "slug": "grifters-472-c1f3",
+    "tokenId": "472",
+    "traits": {
+      "Asset Type": "Edition",
+      "Artist": "XCOPY",
+      "Type": "Gouge",
+      "Gouge": "Blue",
+      "Vision": "Ded",
+      "Noise": "Sweaty",
+      "Surface": "White Worms",
+      "Atmosphere": "Universe"
+    },
+    "features": {}
+  },
+  {
+    "slug": "grifters-522-c1f3",
+    "tokenId": "522",
+    "traits": {
+      "Asset Type": "Edition",
+      "Artist": "XCOPY",
+      "Type": "Flimflam",
+      "Flimflam": "Green",
+      "Vision": "Art Innit",
+      "Noise": "G to the M",
+      "Surface": "No.2",
+      "Atmosphere": "JPEGs"
+    },
+    "features": {}
+  },
+  {
+    "slug": "grifters-532-c1f3",
+    "tokenId": "532",
+    "traits": {
+      "Asset Type": "Edition",
+      "Artist": "XCOPY",
+      "Type": "Gouge",
+      "Gouge": "Green",
+      "Vision": "Art Innit",
+      "Noise": "Candy Cig",
+      "Surface": "Mo Multi",
+      "Atmosphere": "Bubbles"
+    },
+    "features": {}
+  },
+  {
+    "slug": "grifters-542-c1f3",
+    "tokenId": "542",
+    "traits": {
+      "Asset Type": "Edition",
+      "Artist": "XCOPY",
+      "Type": "Gouge",
+      "Gouge": "Blue",
+      "Vision": "Hyper",
+      "Noise": "Sweaty",
+      "Surface": "Flies",
+      "Atmosphere": "DMs"
+    },
+    "features": {}
+  },
+  {
+    "slug": "grifters-547-c1f3",
+    "tokenId": "547",
+    "traits": {
+      "Asset Type": "Edition",
+      "Artist": "XCOPY",
+      "Type": "Gouge",
+      "Gouge": "Blue",
+      "Vision": "Suss",
+      "Noise": "Deviant",
+      "Surface": "No.1",
+      "Atmosphere": "Save As"
+    },
+    "features": {}
+  },
+  {
+    "slug": "grifters-572-c1f3",
+    "tokenId": "572",
+    "traits": {
+      "Asset Type": "Edition",
+      "Artist": "XCOPY",
+      "Type": "Gouge",
+      "Gouge": "Yellow",
+      "Vision": "Hyper",
+      "Noise": "Deviant",
+      "Surface": "White Worms",
+      "Atmosphere": "Universe"
+    },
+    "features": {}
+  },
+  {
+    "slug": "grifters-574-c1f3",
+    "tokenId": "574",
+    "traits": {
+      "Asset Type": "Edition",
+      "Artist": "XCOPY",
+      "Type": "Shady",
+      "Shady": "Blue",
+      "Vision": "ProtoVisor",
+      "Noise": "Deviant",
+      "Surface": "No.2",
+      "Atmosphere": "Bubbles"
+    },
+    "features": {}
+  }
+]

@@ -1,0 +1,852 @@
+[
+  {
+    "slug": "winds-of-yawanawa-20-100b",
+    "tokenId": "20",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 3384382,
+      "Wind Intensity — Categorical": "Tranquil",
+      "Generative Soundtrack": "Track 03",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 1678296,
+      "Color Temperature — Categorical": "Hot",
+      "Origin": "Mai — Earth"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-62-100b",
+    "tokenId": "62",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 4692581,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 01",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 493778,
+      "Color Temperature — Categorical": "Freezing",
+      "Origin": "Niwe — Wind"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-103-100b",
+    "tokenId": "103",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 4301357,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 01",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 1209663,
+      "Color Temperature — Categorical": "Mild",
+      "Origin": "Uwa — Flower"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-118-100b",
+    "tokenId": "118",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 9036237,
+      "Wind Intensity — Categorical": "Intense",
+      "Generative Soundtrack": "Track 02",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 1194033,
+      "Color Temperature — Categorical": "Mild",
+      "Origin": "Nay — Sky"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-154-100b",
+    "tokenId": "154",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 2860098,
+      "Wind Intensity — Categorical": "Still",
+      "Generative Soundtrack": "Track 02",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 1106949,
+      "Color Temperature — Categorical": "Mild",
+      "Origin": "Nii — Forest"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-178-100b",
+    "tokenId": "178",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 3186366,
+      "Wind Intensity — Categorical": "Tranquil",
+      "Generative Soundtrack": "Track 04",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 771828,
+      "Color Temperature — Categorical": "Cold",
+      "Origin": "Waka — Water"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-227-100b",
+    "tokenId": "227",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 8000790,
+      "Wind Intensity — Categorical": "Intense",
+      "Generative Soundtrack": "Track 04",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 2155048,
+      "Color Temperature — Categorical": "Scorching",
+      "Origin": "Txii — Fire"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-265-100b",
+    "tokenId": "265",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 4612418,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 01",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 1123986,
+      "Color Temperature — Categorical": "Mild",
+      "Origin": "Nay — Sky"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-281-100b",
+    "tokenId": "281",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 4842707,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 02",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 2180607,
+      "Color Temperature — Categorical": "Scorching",
+      "Origin": "Nay — Sky"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-369-100b",
+    "tokenId": "369",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 4494474,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 01",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 879821,
+      "Color Temperature — Categorical": "Cold",
+      "Origin": "Ushe — Moon"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-371-100b",
+    "tokenId": "371",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 4874422,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 03",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 377600,
+      "Color Temperature — Categorical": "Freezing",
+      "Origin": "Ushe — Moon"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-373-100b",
+    "tokenId": "373",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 8083927,
+      "Wind Intensity — Categorical": "Intense",
+      "Generative Soundtrack": "Track 01",
+      "Particle Type": "Spherical",
+      "Color Temperature — Numeric": 408889,
+      "Color Temperature — Categorical": "Freezing",
+      "Origin": "Nii — Forest"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-442-100b",
+    "tokenId": "442",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 4809624,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 02",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 379716,
+      "Color Temperature — Categorical": "Freezing",
+      "Origin": "Ushe — Moon"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-451-100b",
+    "tokenId": "451",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 5334870,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 02",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 1618027,
+      "Color Temperature — Categorical": "Hot",
+      "Origin": "Nii — Forest"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-487-100b",
+    "tokenId": "487",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 4473510,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 02",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 1638215,
+      "Color Temperature — Categorical": "Hot",
+      "Origin": "Uwa — Flower"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-495-100b",
+    "tokenId": "495",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 4351351,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 03",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 835149,
+      "Color Temperature — Categorical": "Cold",
+      "Origin": "Nay — Sky"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-524-100b",
+    "tokenId": "524",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 4767728,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 02",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 1370944,
+      "Color Temperature — Categorical": "Mild",
+      "Origin": "Txii — Fire"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-554-100b",
+    "tokenId": "554",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 7519606,
+      "Wind Intensity — Categorical": "Intense",
+      "Generative Soundtrack": "Track 03",
+      "Particle Type": "Spherical",
+      "Color Temperature — Numeric": 907332,
+      "Color Temperature — Categorical": "Cold",
+      "Origin": "Waka — Water"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-572-100b",
+    "tokenId": "572",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 5443129,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 03",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 1249875,
+      "Color Temperature — Categorical": "Mild",
+      "Origin": "Nay — Sky"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-600-100b",
+    "tokenId": "600",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 4931998,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 04",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 1244418,
+      "Color Temperature — Categorical": "Mild",
+      "Origin": "Vari — Sun"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-629-100b",
+    "tokenId": "629",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 4224835,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 04",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 1101340,
+      "Color Temperature — Categorical": "Mild",
+      "Origin": "Nay — Sky"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-637-100b",
+    "tokenId": "637",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 4698874,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 02",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 1119912,
+      "Color Temperature — Categorical": "Mild",
+      "Origin": "Nay — Sky"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-638-100b",
+    "tokenId": "638",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 6462156,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 01",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 1431919,
+      "Color Temperature — Categorical": "Mild",
+      "Origin": "Uwa — Flower"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-681-100b",
+    "tokenId": "681",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 4847803,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 04",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 401280,
+      "Color Temperature — Categorical": "Freezing",
+      "Origin": "Ushe — Moon"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-688-100b",
+    "tokenId": "688",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 5685128,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 04",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 1195335,
+      "Color Temperature — Categorical": "Mild",
+      "Origin": "Niwe — Wind"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-692-100b",
+    "tokenId": "692",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 4810699,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 01",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 840401,
+      "Color Temperature — Categorical": "Cold",
+      "Origin": "Nay — Sky"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-695-100b",
+    "tokenId": "695",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 5786768,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 02",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 360762,
+      "Color Temperature — Categorical": "Freezing",
+      "Origin": "Mai — Earth"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-697-100b",
+    "tokenId": "697",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 9731258,
+      "Wind Intensity — Categorical": "Intense",
+      "Generative Soundtrack": "Track 04",
+      "Particle Type": "Spherical",
+      "Color Temperature — Numeric": 1774996,
+      "Color Temperature — Categorical": "Hot",
+      "Origin": "Txii — Fire"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-700-100b",
+    "tokenId": "700",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 6015212,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 04",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 1774565,
+      "Color Temperature — Categorical": "Hot",
+      "Origin": "Vari — Sun"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-701-100b",
+    "tokenId": "701",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 4788295,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 02",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 1705687,
+      "Color Temperature — Categorical": "Hot",
+      "Origin": "Uwa — Flower"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-704-100b",
+    "tokenId": "704",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 5047708,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 03",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 967981,
+      "Color Temperature — Categorical": "Cold",
+      "Origin": "Ishtī — Star"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-712-100b",
+    "tokenId": "712",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 5821600,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 03",
+      "Particle Type": "Spherical",
+      "Color Temperature — Numeric": 2078569,
+      "Color Temperature — Categorical": "Scorching",
+      "Origin": "Vari — Sun"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-717-100b",
+    "tokenId": "717",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 5639016,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 02",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 931346,
+      "Color Temperature — Categorical": "Cold",
+      "Origin": "Niwe — Wind"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-738-100b",
+    "tokenId": "738",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 6581134,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 02",
+      "Particle Type": "Spherical",
+      "Color Temperature — Numeric": 828704,
+      "Color Temperature — Categorical": "Cold",
+      "Origin": "Nii — Forest"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-741-100b",
+    "tokenId": "741",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 4171028,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 01",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 553948,
+      "Color Temperature — Categorical": "Cold",
+      "Origin": "Ushe — Moon"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-745-100b",
+    "tokenId": "745",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 6866043,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 04",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 1011495,
+      "Color Temperature — Categorical": "Mild",
+      "Origin": "Mai — Earth"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-746-100b",
+    "tokenId": "746",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 5761163,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 01",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 1820549,
+      "Color Temperature — Categorical": "Hot",
+      "Origin": "Txii — Fire"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-754-100b",
+    "tokenId": "754",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 5291686,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 04",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 768972,
+      "Color Temperature — Categorical": "Cold",
+      "Origin": "Nay — Sky"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-755-100b",
+    "tokenId": "755",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 3270145,
+      "Wind Intensity — Categorical": "Tranquil",
+      "Generative Soundtrack": "Track 04",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 2226307,
+      "Color Temperature — Categorical": "Scorching",
+      "Origin": "Vari — Sun"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-764-100b",
+    "tokenId": "764",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 8388628,
+      "Wind Intensity — Categorical": "Intense",
+      "Generative Soundtrack": "Track 02",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 1183126,
+      "Color Temperature — Categorical": "Mild",
+      "Origin": "Uwa — Flower"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-856-100b",
+    "tokenId": "856",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 3701525,
+      "Wind Intensity — Categorical": "Tranquil",
+      "Generative Soundtrack": "Track 02",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 2015782,
+      "Color Temperature — Categorical": "Scorching",
+      "Origin": "Txii — Fire"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-863-100b",
+    "tokenId": "863",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 5390527,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 01",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 1547680,
+      "Color Temperature — Categorical": "Hot",
+      "Origin": "Niwe — Wind"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-870-100b",
+    "tokenId": "870",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 4475170,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 01",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 1351890,
+      "Color Temperature — Categorical": "Mild",
+      "Origin": "Nay — Sky"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-878-100b",
+    "tokenId": "878",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 4787130,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 03",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 940110,
+      "Color Temperature — Categorical": "Cold",
+      "Origin": "Ushe — Moon"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-888-100b",
+    "tokenId": "888",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 6042517,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 04",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 2023928,
+      "Color Temperature — Categorical": "Scorching",
+      "Origin": "Vari — Sun"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-912-100b",
+    "tokenId": "912",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 9670392,
+      "Wind Intensity — Categorical": "Intense",
+      "Generative Soundtrack": "Track 04",
+      "Particle Type": "Spherical",
+      "Color Temperature — Numeric": 2194687,
+      "Color Temperature — Categorical": "Scorching",
+      "Origin": "Vari — Sun"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-917-100b",
+    "tokenId": "917",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 4854599,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 03",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 1184988,
+      "Color Temperature — Categorical": "Mild",
+      "Origin": "Uwa — Flower"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-921-100b",
+    "tokenId": "921",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 5764333,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 04",
+      "Particle Type": "Spherical",
+      "Color Temperature — Numeric": 328595,
+      "Color Temperature — Categorical": "Freezing",
+      "Origin": "Ushe — Moon"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-962-100b",
+    "tokenId": "962",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 6735711,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 01",
+      "Particle Type": "Spherical",
+      "Color Temperature — Numeric": 1878654,
+      "Color Temperature — Categorical": "Hot",
+      "Origin": "Niwe — Wind"
+    }
+  },
+  {
+    "slug": "winds-of-yawanawa-989-100b",
+    "tokenId": "989",
+    "traits": {
+      "Artists": "Yawanawa and Refik Anadol",
+      "Communities": "Aldeia Sagrada and Nova Esperança",
+      "Medium": "AI Data Painting",
+      "Year": "2023",
+      "Wind Intensity — Numeric": 4802738,
+      "Wind Intensity — Categorical": "Moderate",
+      "Generative Soundtrack": "Track 04",
+      "Particle Type": "Cubical",
+      "Color Temperature — Numeric": 896434,
+      "Color Temperature — Categorical": "Cold",
+      "Origin": "Uwa — Flower"
+    }
+  }
+]

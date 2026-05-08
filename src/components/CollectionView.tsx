@@ -3,11 +3,12 @@
 import { useState, useCallback, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
 import JustifiedGallery from "./JustifiedGallery";
 import FixedRowGallery from "./FixedRowGallery";
+import HeroSidebarGallery from "./HeroSidebarGallery";
 import SinglePieceDisplay from "./SinglePieceDisplay";
 import { getArtworkImage } from "@/lib/images";
+import { getHeroLayout } from "@/lib/curation";
 import { CHAPTERS, CHAPTER_COLORS } from "@/lib/chapters";
 
 interface PieceData {
@@ -26,45 +27,23 @@ interface Section {
   collections: {
     name: string;
     slug: string;
+    totalSupply?: number;
     piecesPerRow?: number | null;
     pieceRows?: Record<string, number> | null;
     pieces: PieceData[];
   }[];
 }
 
-interface FeaturedHero {
-  slug: string;
-  title: string;
-  image: string;
-  mintDate: string | null;
-  artistName: string;
-  artistSlug: string;
-  collectionName: string;
-  collectionSlug: string;
-  isPunk: boolean;
-}
-
 interface Props {
   sections: Section[];
   artists: { name: string; slug: string; tags: string[] }[];
-  featured: FeaturedHero[];
 }
 
-export default function CollectionView({ sections, artists, featured }: Props) {
+export default function CollectionView({ sections, artists }: Props) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [artistFilter, setArtistFilter] = useState<string | null>(searchParams.get("artist") || null);
   const [chapterFilter, setChapterFilter] = useState<string | null>(searchParams.get("chapter") || null);
-  const [heroIndex, setHeroIndex] = useState(0);
-
-  // Rotate featured hero every 12s (only if we have >1 candidate).
-  useEffect(() => {
-    if (featured.length <= 1) return;
-    const id = setInterval(() => {
-      setHeroIndex((i) => (i + 1) % featured.length);
-    }, 12000);
-    return () => clearInterval(id);
-  }, [featured.length]);
 
   const syncUrl = useCallback(
     (artist: string | null, chapter: string | null) => {
@@ -79,6 +58,14 @@ export default function CollectionView({ sections, artists, featured }: Props) {
 
   const [excludedArtists, setExcludedArtists] = useState<string[]>([]);
 
+  // Reset scroll on filter change so the filter bar is visible. Without this,
+  // the hero collapses and the user finds themselves stranded mid-gallery.
+  function scrollToTop() {
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }
+
   function selectArtist(slug: string) {
     if (chapterFilter) {
       if (excludedArtists.includes(slug)) {
@@ -86,11 +73,13 @@ export default function CollectionView({ sections, artists, featured }: Props) {
       } else {
         setExcludedArtists([...excludedArtists, slug]);
       }
+      scrollToTop();
       return;
     }
     const next = artistFilter === slug ? null : slug;
     setArtistFilter(next);
     syncUrl(next, null);
+    scrollToTop();
   }
 
   function selectChapter(slug: string | null) {
@@ -104,6 +93,7 @@ export default function CollectionView({ sections, artists, featured }: Props) {
       setExcludedArtists([]);
       syncUrl(null, slug);
     }
+    scrollToTop();
   }
 
   function clearAll() {
@@ -111,6 +101,7 @@ export default function CollectionView({ sections, artists, featured }: Props) {
     setChapterFilter(null);
     setExcludedArtists([]);
     syncUrl(null, null);
+    scrollToTop();
   }
 
   useEffect(() => {
@@ -136,57 +127,21 @@ export default function CollectionView({ sections, artists, featured }: Props) {
 
   const hasFilters = artistFilter || chapterFilter;
   const activeChapter = chapterFilter ? CHAPTERS.find((c) => c.slug === chapterFilter) : null;
-  const hero = featured[heroIndex];
+
+  // Counts for the result-count line under filters.
+  const totalPieces = sections.reduce(
+    (sum, s) => sum + s.collections.reduce((cs, c) => cs + c.pieces.length, 0),
+    0
+  );
+  const visiblePieces = visible.reduce(
+    (sum, s) => sum + s.collections.reduce((cs, c) => cs + c.pieces.length, 0),
+    0
+  );
 
   return (
     <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
-      {/* Featured hero — shown only when no filters are active */}
-      {hero && !hasFilters && (
-        <section className="pt-12 sm:pt-16">
-          <Link
-            href={`/piece/${hero.slug}`}
-            className={`block ${hero.isPunk ? "bg-[#638596]" : "bg-surface"} overflow-hidden`}
-          >
-            <div className="relative w-full" style={{ height: "min(75vh, 720px)" }}>
-              <Image
-                src={hero.image}
-                alt={hero.title}
-                fill
-                priority
-                sizes="(max-width: 1024px) 90vw, 1200px"
-                className={
-                  hero.isPunk
-                    ? "[image-rendering:pixelated] object-contain"
-                    : "object-contain"
-                }
-              />
-            </div>
-          </Link>
-          <div className="flex flex-wrap gap-y-2 justify-between items-baseline pt-5 text-[13px]">
-            <p className="text-muted">
-              <Link
-                href={`/artist/${hero.artistSlug}`}
-                className="hover:text-foreground transition-colors duration-200"
-                style={CHAPTER_COLORS[hero.artistSlug] ? { color: CHAPTER_COLORS[hero.artistSlug] } : undefined}
-              >
-                {hero.artistName}
-              </Link>
-              <span className="text-muted"> — </span>
-              <span className="font-serif italic text-foreground-secondary">{hero.title}</span>
-              {hero.mintDate && <span className="text-muted">, {hero.mintDate.slice(0, 4)}</span>}
-            </p>
-            <Link
-              href={`/collection/${hero.collectionSlug}`}
-              className="text-muted hover:text-foreground transition-colors duration-200"
-            >
-              {hero.collectionName}
-            </Link>
-          </div>
-        </section>
-      )}
-
       {/* Filters — ALL above, then ARTIST row, then CHAPTER row */}
-      <section className={`${hero && !hasFilters ? "pt-12" : "pt-12 sm:pt-16"} pb-6 border-b border-border space-y-2`}>
+      <section className="pt-12 sm:pt-16 pb-6 border-b border-border space-y-2">
         <button
           onClick={clearAll}
           className={`text-[13px] transition-colors duration-200 ${
@@ -196,9 +151,11 @@ export default function CollectionView({ sections, artists, featured }: Props) {
           All
         </button>
 
-        {/* Row 1: Artists */}
-        <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide">
-          <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium shrink-0 w-20">Artist</span>
+        {/* Row 1: Artists. Mask gives a fade on the trailing edge when overflowing. */}
+        <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide [mask-image:linear-gradient(to_right,black_calc(100%-24px),transparent)]">
+          <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium shrink-0 w-20">
+            {activeChapter ? "Exclude" : "Artist"}
+          </span>
           {artists.map((a) => {
             const inChapter = activeChapter ? activeChapter.artists.includes(a.slug) : true;
             const excluded = excludedArtists.includes(a.slug);
@@ -213,8 +170,17 @@ export default function CollectionView({ sections, artists, featured }: Props) {
                     ? "text-muted/30 cursor-default"
                     : isActive
                     ? "text-foreground"
+                    : excluded
+                    ? "text-muted/40 line-through"
                     : "text-muted hover:text-foreground"
                 }`}
+                aria-label={
+                  activeChapter
+                    ? excluded
+                      ? `Include ${a.name} in chapter`
+                      : `Exclude ${a.name} from chapter`
+                    : `Filter by ${a.name}`
+                }
               >
                 {a.name}
               </button>
@@ -223,7 +189,7 @@ export default function CollectionView({ sections, artists, featured }: Props) {
         </div>
 
         {/* Row 2: Chapters */}
-        <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide">
+        <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide [mask-image:linear-gradient(to_right,black_calc(100%-24px),transparent)]">
           <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium shrink-0 w-20">Chapter</span>
           {CHAPTERS.map((ch) => (
             <button
@@ -245,10 +211,17 @@ export default function CollectionView({ sections, artists, featured }: Props) {
             {activeChapter.description}
           </p>
         )}
+
+        {/* Result count — only when filters are active */}
+        {hasFilters && (
+          <p className="text-[11px] text-muted tabular-nums pt-2">
+            {visiblePieces} of {totalPieces} works
+          </p>
+        )}
       </section>
 
       {/* Works — salon wall */}
-      <div className="pt-12 pb-20 space-y-16">
+      <div className="pt-10 pb-20 space-y-12">
         {visible.length === 0 ? (
           <div className="py-24 text-center">
             <p className="text-[13px] text-muted">No works match these filters.</p>
@@ -261,11 +234,11 @@ export default function CollectionView({ sections, artists, featured }: Props) {
           </div>
         ) : (
           visible.map(({ artist, collections: cols }) => (
-            <div key={artist.slug} className="space-y-10">
+            <div key={artist.slug} className="space-y-6">
               {/* Artist header */}
               <Link href={`/artist/${artist.slug}`} className="inline-block">
                 <h2
-                  className="font-serif text-[32px] sm:text-[40px] tracking-[-0.01em] leading-tight hover:opacity-60 transition-opacity duration-200"
+                  className="font-serif text-[28px] sm:text-[32px] tracking-[-0.01em] leading-tight hover:opacity-60 transition-opacity duration-200"
                   style={CHAPTER_COLORS[artist.slug] ? { color: CHAPTER_COLORS[artist.slug] } : undefined}
                 >
                   {artist.name}
@@ -286,21 +259,36 @@ export default function CollectionView({ sections, artists, featured }: Props) {
                   <div key={`${artist.slug}-${col.slug}`}>
                     <Link
                       href={`/collection/${col.slug}`}
-                      className="text-[11px] tracking-[0.05em] text-muted hover:text-foreground transition-colors duration-200 block mb-3"
+                      className="text-[11px] tracking-[0.05em] text-muted hover:text-foreground transition-colors duration-200 block mb-2"
                     >
                       {col.name}
                     </Link>
-                    {n === 1 && piece ? (
-                      <SinglePieceDisplayLazy piece={piece} />
-                    ) : col.pieceRows && Object.keys(col.pieceRows).length > 0 ? (
-                      <FixedRowGallery
-                        pieces={col.pieces}
-                        rowMap={col.pieceRows}
-                        fallbackPerRow={ideal}
-                      />
-                    ) : (
-                      <JustifiedGallery pieces={col.pieces} piecesPerRow={ideal} />
-                    )}
+                    {(() => {
+                      const heroLayout = getHeroLayout(col.slug);
+                      if (n === 1 && piece) return <SinglePieceDisplayLazy piece={piece} />;
+                      if (heroLayout) {
+                        return (
+                          <HeroSidebarGallery
+                            pieces={col.pieces}
+                            heroSlug={heroLayout.heroPiece}
+                            sidebarCols={heroLayout.sidebarCols}
+                            sidebarRows={heroLayout.sidebarRows}
+                            sidebarSlugs={heroLayout.sidebarPieces}
+                            fallbackPerRow={ideal}
+                          />
+                        );
+                      }
+                      if (col.pieceRows && Object.keys(col.pieceRows).length > 0) {
+                        return (
+                          <FixedRowGallery
+                            pieces={col.pieces}
+                            rowMap={col.pieceRows}
+                            fallbackPerRow={ideal}
+                          />
+                        );
+                      }
+                      return <JustifiedGallery pieces={col.pieces} piecesPerRow={ideal} />;
+                    })()}
                   </div>
                 );
               })}

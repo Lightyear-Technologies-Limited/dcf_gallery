@@ -16,6 +16,25 @@ const CURATED_DETAIL: Record<string, string> = {
   "synthetic-dreams-51": "/art/optimized/curated-synthetic-dreams-51.webp",
   "lightyears-1": "/art/optimized/curated-lightyears-001.webp",
   "masksofluci-442": "/art/optimized/curated-masks-442.webp",
+  "x-ray-machine-1": "/art/optimized/operator-x-ray-machine.webp",
+  // Kim Asendorf — static PNG screengrabs (Alchemy/Cloudinary 1000px renders)
+  "lights-3-2006": "/art/lights-3-2006.png",
+  "pxl-dex-105-ecfb": "/art/pxl-dex-105-ecfb.png",
+  "pxl-dex-107-ecfb": "/art/pxl-dex-107-ecfb.png",
+  "pxl-dex-130-ecfb": "/art/pxl-dex-130-ecfb.png",
+  "pxl-dex-139-ecfb": "/art/pxl-dex-139-ecfb.png",
+  "pxl-dex-141-ecfb": "/art/pxl-dex-141-ecfb.png",
+  "pxl-pod-42-88b3": "/art/pxl-pod-42-88b3.png",
+  "pxl-pod-55-88b3": "/art/pxl-pod-55-88b3.png",
+  "pxl-pod-61-88b3": "/art/pxl-pod-61-88b3.png",
+  "pxl-pod-108-88b3": "/art/pxl-pod-108-88b3.png",
+  "pxl-pod-122-88b3": "/art/pxl-pod-122-88b3.png",
+  "pxl-pod-175-88b3": "/art/pxl-pod-175-88b3.png",
+  "pxl-pod-209-88b3": "/art/pxl-pod-209-88b3.png",
+  "pxl-pod-215-88b3": "/art/pxl-pod-215-88b3.png",
+  "pxl-pod-241-88b3": "/art/pxl-pod-241-88b3.png",
+  "pxl-pod-242-88b3": "/art/pxl-pod-242-88b3.png",
+  "x0x-576-3753": "/art/x0x-576-3753.png",
 };
 
 const CURATED_THUMB: Record<string, string> = {
@@ -25,7 +44,56 @@ const CURATED_THUMB: Record<string, string> = {
   "synthetic-dreams-51": "/art/thumbs/curated-synthetic-dreams-51.webp",
   "lightyears-1": "/art/thumbs/curated-lightyears-001.webp",
   "masksofluci-442": "/art/thumbs/curated-masks-442.webp",
+  "x-ray-machine-1": "/art/thumbs/operator-x-ray-machine.webp",
+  // Kim Asendorf — same PNGs serve both sizes (1000px is sufficient for thumbs)
+  "lights-3-2006": "/art/lights-3-2006.png",
+  "pxl-dex-105-ecfb": "/art/pxl-dex-105-ecfb.png",
+  "pxl-dex-107-ecfb": "/art/pxl-dex-107-ecfb.png",
+  "pxl-dex-130-ecfb": "/art/pxl-dex-130-ecfb.png",
+  "pxl-dex-139-ecfb": "/art/pxl-dex-139-ecfb.png",
+  "pxl-dex-141-ecfb": "/art/pxl-dex-141-ecfb.png",
+  "pxl-pod-42-88b3": "/art/pxl-pod-42-88b3.png",
+  "pxl-pod-55-88b3": "/art/pxl-pod-55-88b3.png",
+  "pxl-pod-61-88b3": "/art/pxl-pod-61-88b3.png",
+  "pxl-pod-108-88b3": "/art/pxl-pod-108-88b3.png",
+  "pxl-pod-122-88b3": "/art/pxl-pod-122-88b3.png",
+  "pxl-pod-175-88b3": "/art/pxl-pod-175-88b3.png",
+  "pxl-pod-209-88b3": "/art/pxl-pod-209-88b3.png",
+  "pxl-pod-215-88b3": "/art/pxl-pod-215-88b3.png",
+  "pxl-pod-241-88b3": "/art/pxl-pod-241-88b3.png",
+  "pxl-pod-242-88b3": "/art/pxl-pod-242-88b3.png",
+  "x0x-576-3753": "/art/x0x-576-3753.png",
 };
+
+/**
+ * Resolve the full on-chain token ID for a piece.
+ *
+ * Most contracts store the tokenId as-is. The Art Blocks contract uses a
+ * prefixed ID (project * 1_000_000 + serial). The spreadsheet stores some
+ * projects as raw serials (Fidenza: "145") and others as already-prefixed
+ * full IDs (Ringers: "13000374"). This helper normalizes both to the full
+ * on-chain tokenId so URLs built from it — Raster, OpenSea, image paths —
+ * resolve correctly.
+ */
+export function resolveTokenId(
+  slug: string,
+  contractAddress: string | undefined,
+  tokenId: string | undefined
+): string | undefined {
+  if (!contractAddress || !tokenId) return tokenId;
+  const contract = contractAddress.toLowerCase();
+  const ART_BLOCKS = "0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270";
+  if (contract === ART_BLOCKS) {
+    const n = parseInt(tokenId, 10);
+    if (n < 1000000) {
+      let project: number | null = null;
+      if (slug.startsWith("fidenza-")) project = 78;
+      else if (slug.startsWith("ringers-")) project = 13;
+      if (project !== null) return String(project * 1000000 + n);
+    }
+  }
+  return tokenId;
+}
 
 /**
  * Get artwork image path.
@@ -51,31 +119,16 @@ export function getArtworkImage(
   // Auto-pulled: /art/{optimized|thumbs}/{contract}-{tokenId}.webp
   if (contractAddress && tokenId) {
     const contract = contractAddress.toLowerCase();
-    const isPunk = contract === "0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb";
+    const PUNK_CANONICAL = "0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb";
+    const PUNK_V1_WRAPPED = "0xb7f7f6c52f2e2fdb1963eab30438024864c313f6";
+    const isPunk = contract === PUNK_CANONICAL || contract === PUNK_V1_WRAPPED;
     const dir = size === "detail" ? "optimized" : "thumbs";
 
-    if (isPunk) return `/art/all/${contract}-${tokenId}.svg`;
+    // V1 wrapped punks share the same pixel art as the canonical contract
+    if (isPunk) return `/art/all/${PUNK_CANONICAL}-${tokenId}.svg`;
 
-    // Art Blocks contract uses prefixed token IDs (project * 1000000 + serial).
-    // The spreadsheet sometimes stores raw serials (Fidenza: "145"), sometimes
-    // already-prefixed full IDs (Ringers: "13000374"). Only prefix when raw.
-    const ART_BLOCKS = "0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270";
-    if (contract === ART_BLOCKS) {
-      const n = parseInt(tokenId, 10);
-      if (n < 1000000) {
-        const project = (() => {
-          if (slug.startsWith("fidenza-")) return 78;
-          if (slug.startsWith("ringers-")) return 13;
-          return null;
-        })();
-        if (project !== null) {
-          const fullToken = project * 1000000 + n;
-          return `/art/${dir}/${contract}-${fullToken}.webp`;
-        }
-      }
-    }
-
-    return `/art/${dir}/${contract}-${tokenId}.webp`;
+    const fullToken = resolveTokenId(slug, contractAddress, tokenId);
+    return `/art/${dir}/${contract}-${fullToken}.webp`;
   }
 
   return null;

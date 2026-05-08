@@ -14,6 +14,7 @@ interface Props {
   metadata: React.ReactNode;
   rasterUrl?: string;
   artistSiteUrl?: string;
+  originalUri?: string;
   placeholder: React.ReactNode;
 }
 
@@ -27,10 +28,33 @@ function hostLabel(url: string): string | null {
 }
 
 /**
+ * Resolve ipfs:// and ar:// URIs to public gateway HTTPS URLs,
+ * and derive a short human label for the link text.
+ */
+function resolveOriginal(uri: string): { href: string; label: string } | null {
+  if (!uri) return null;
+  if (uri.startsWith("ipfs://")) {
+    const path = uri.slice(7).replace(/^ipfs\//, "");
+    return { href: `https://ipfs.io/ipfs/${path}`, label: "ipfs.io" };
+  }
+  if (uri.startsWith("ar://")) {
+    return { href: `https://arweave.net/${uri.slice(5)}`, label: "arweave.net" };
+  }
+  if (uri.startsWith("data:")) return null; // on-chain SVG; no external link
+  // Bare IPFS CID (CIDv0 starts with "Qm", CIDv1 with "bafy"/"bafk").
+  if (/^(Qm[1-9A-HJ-NP-Za-km-z]{44}|bafy[a-z0-9]+|bafk[a-z0-9]+)$/.test(uri)) {
+    return { href: `https://ipfs.io/ipfs/${uri}`, label: "ipfs.io" };
+  }
+  const host = hostLabel(uri);
+  return host ? { href: uri, label: host } : null;
+}
+
+/**
  * Piece layout: image on the left, details on the right.
  */
-export default function PieceLayout({ image, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, metadata, rasterUrl, artistSiteUrl, placeholder }: Props) {
+export default function PieceLayout({ image, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, metadata, rasterUrl, artistSiteUrl, originalUri, placeholder }: Props) {
   const artistHost = artistSiteUrl ? hostLabel(artistSiteUrl) : null;
+  const original = originalUri ? resolveOriginal(originalUri) : null;
   const artworkBlock = image ? (
     <div className={isPunk ? "bg-[#638596] inline-block" : ""}>
       <Image
@@ -65,16 +89,26 @@ export default function PieceLayout({ image, title, isPunk, artistName, artistSl
 
       <div className="mt-10">{metadata}</div>
 
-      {(artistSiteUrl || rasterUrl) && (
+      {(artistSiteUrl || rasterUrl || original) && (
         <div className="mt-10 flex flex-col gap-2 text-[11px] text-muted/60">
           {artistSiteUrl && artistHost && (
             <a
               href={artistSiteUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-muted transition-colors duration-200"
+              className="hover:text-foreground transition-colors duration-200"
             >
               View on {artistHost}
+            </a>
+          )}
+          {original && (
+            <a
+              href={original.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-foreground transition-colors duration-200"
+            >
+              View original
             </a>
           )}
           {rasterUrl && (
@@ -82,9 +116,9 @@ export default function PieceLayout({ image, title, isPunk, artistName, artistSl
               href={rasterUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-muted transition-colors duration-200"
+              className="hover:text-foreground transition-colors duration-200"
             >
-              View on Raster
+              {isPunk ? "View on CryptoPunks Marketplace" : "View on Raster"}
             </a>
           )}
         </div>
