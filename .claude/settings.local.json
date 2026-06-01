@@ -40,7 +40,8 @@
       "Bash(python)",
       "Bash(cp \"/c/Users/MichaelDavison/Downloads/202603_Portfolio Report.XLSX\" /tmp/portfolio.xlsx)",
       "Bash(cp \"/c/Users/MichaelDavison/Downloads/202603_Portfolio Report.XLSX\" \"/c/Users/MichaelDavison/AppData/Local/Temp/portfolio.xlsx\")",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "Bash(node -e *)"
     ]
   }
 }

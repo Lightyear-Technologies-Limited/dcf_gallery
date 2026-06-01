@@ -34,14 +34,20 @@ export default function ArtistHero({ artistSlug, candidates }: Props) {
   return (
     <Link
       href={`/artist/${artistSlug}`}
-      className={`block w-full ${hero.isPunk ? "bg-[#638596]" : ""}`}
+      // Uniform aspect-[6/5] frame per artist so every row on /artists has the
+      // same hero footprint regardless of the artwork's natural ratio. Image
+      // inside is object-contain (never cropped) - tall pieces render narrower
+      // than the frame; wide pieces render shorter. Punks get their classic
+      // teal background to frame the pixel art; everything else uses bg-surface
+      // so the artwork sits on a subtle tile rather than the raw page colour.
+      className={`block w-full aspect-[9/8] flex items-center justify-center overflow-hidden ${hero.isPunk ? "bg-[#638596]" : "bg-surface"}`}
     >
       <Image
         src={hero.src}
         alt={hero.title}
         width={1200}
         height={1200}
-        className={`block w-full h-auto ${hero.isPunk ? "[image-rendering:pixelated]" : ""}`}
+        className={`max-w-full max-h-full w-auto h-auto ${hero.isPunk ? "[image-rendering:pixelated]" : ""}`}
         sizes="(max-width: 768px) 90vw, 55vw"
       />
     </Link>

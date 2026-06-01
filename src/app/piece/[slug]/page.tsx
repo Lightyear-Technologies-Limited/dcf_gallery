@@ -58,11 +58,35 @@ export default async function PiecePage({ params }: { params: Promise<{ slug: st
   const realImage = getArtworkImage(piece.slug, piece.contractAddress, piece.tokenId, "detail");
   const isPunk = piece.collectionSlug === "cryptopunks";
 
-  // Marketplace link: CryptoPunks Marketplace for Punks (canonical), Raster for everything else.
+  // Marketplace link: CryptoPunks Marketplace for Punks (canonical), Raster
+  // for everything else. Most pieces use Raster's token-based URL; some
+  // contracts/tokens aren't in that index but exist on Raster's slug-based
+  // /artwork/ pages, so we override those explicitly.
+  const RASTER_CONTRACT_OVERRIDES: Record<string, string> = {
+    // Operator, Repeat as Necessary - all 4 pieces share the series artwork page.
+    "0x99a9b7c1116f9ceeb1652de04d5969cce509b069":
+      "https://www.raster.art/artwork/repeat-as-necessary-by-operator",
+    // XCOPY, Cope Salada (single-piece contract).
+    "0xab3a867a6b14cc2f3286b9f03698656f8a892e9e":
+      "https://www.raster.art/artwork/cope-salada-by-xcopy",
+  };
+  const RASTER_PIECE_OVERRIDES: Record<string, string> = {
+    // XCOPY, "Some Other Asshole" - early SuperRare token, not in Raster's token index.
+    "0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0:2123":
+      "https://www.raster.art/artwork/some-other-asshole-by-xcopy",
+  };
+  function rasterUrlFor(contract: string, slug: string, tokenId: string): string {
+    const c = contract.toLowerCase();
+    return (
+      RASTER_PIECE_OVERRIDES[`${c}:${tokenId}`] ||
+      RASTER_CONTRACT_OVERRIDES[c] ||
+      `https://www.raster.art/token/ethereum/${contract}/${resolveTokenId(slug, contract, tokenId)}`
+    );
+  }
   const marketplaceUrl = piece.contractAddress && piece.tokenId
     ? (isPunk
         ? `https://cryptopunks.app/cryptopunks/details/${piece.tokenId}`
-        : `https://www.raster.art/token/ethereum/${piece.contractAddress}/${resolveTokenId(piece.slug, piece.contractAddress, piece.tokenId)}`)
+        : rasterUrlFor(piece.contractAddress, piece.slug, piece.tokenId))
     : undefined;
 
   const artistSiteUrl =

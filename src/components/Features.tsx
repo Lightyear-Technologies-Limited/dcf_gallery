@@ -20,7 +20,7 @@ export default function Features({ traits, defaultOpen = false }: Props) {
       open={defaultOpen}
     >
       <summary className="cursor-pointer list-none text-muted hover:text-foreground transition-colors duration-200 inline-flex items-center gap-2 select-none">
-        <span>Features</span>
+        <span>Traits</span>
         <span
           aria-hidden
           className="inline-block transition-transform duration-200 group-open:rotate-90"

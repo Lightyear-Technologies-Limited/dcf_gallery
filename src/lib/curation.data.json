@@ -135,7 +135,8 @@
     "harbor-scene": "1/1/3"
   },
   "piecesPerRow": {
-    "_comment": "Force N pieces per row for a collection. Omitted = auto (1-3 pieces n across; 4-6 = 3; 7-12 = 4; 13+ = 5). Example: \"fidenza\": 5"
+    "_comment": "Force N pieces per row for a collection. Omitted = auto (1-3 pieces n across; 4-6 = 3; 7-12 = 4; 13+ = 5). Example: \"fidenza\": 5",
+    "winds-of-yawanawa": 8
   },
   "pieceRows": {
     "piano-blossoms": {

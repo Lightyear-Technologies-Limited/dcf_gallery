@@ -69,7 +69,11 @@ export default function PieceLayout({ image, title, isPunk, artistName, artistSl
         alt={title}
         width={1600}
         height={1200}
-        className={`block w-full h-auto max-h-[80vh] object-contain ${isPunk ? "[image-rendering:pixelated] max-w-[400px]" : ""}`}
+        // w-auto + max-w-full + max-h-[80vh] lets the image size by its natural
+        // aspect ratio, capped by both the column width and 80% of viewport
+        // height. w-full would stretch the box for tall pieces and produce
+        // letterbox whitespace on the sides.
+        className={`block w-auto h-auto max-w-full max-h-[80vh] object-contain ${isPunk ? "[image-rendering:pixelated] max-w-[400px]" : ""}`}
         priority
         sizes="(max-width: 768px) 90vw, 60vw"
       />

@@ -163,7 +163,7 @@ export const artists: Artist[] = [
   {
     slug: 'kim-asendorf',
     name: 'Kim Asendorf',
-    bio: 'Kim Asendorf is a Berlin-based artist working at the intersection of code, pixels, and visual systems. His practice spans generative and interactive works that foreground the raw materiality of the digital image \u2014 pixel sorting, compression artifacts, and algorithmic pattern-making.',
+    bio: 'Kim Asendorf is a code-based artist working at the intersection of code, pixels, and visual systems. His practice spans generative and interactive works that foreground the raw materiality of the digital image \u2014 pixel sorting, compression artifacts, and algorithmic pattern-making.',
     curationComment: 'Asendorf\u2019s PXL DEX and PXL POD collections represent a distinct voice in on-chain art: systematic, visually precise, and rooted in the formal language of computation rather than illustration.',
     influences: [],
     tags: ['crypto-native', 'digital-culture', 'glitch'],

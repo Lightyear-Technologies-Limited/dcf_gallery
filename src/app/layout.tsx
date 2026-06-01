@@ -51,8 +51,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <footer className="mt-20 border-t border-border py-16 md:pl-32 xl:pl-36">
           <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
             <div>
-              <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium">Digital Culture Fund</p>
-              <p className="text-[13px] text-muted mt-1">A Hivemind Collection</p>
+              <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium">Hivemind Digital Culture Fund</p>
             </div>
             <div className="flex flex-wrap gap-8 text-[13px] text-muted">
               <Link href="/" className="hover:text-foreground transition-colors duration-200">Collection</Link>

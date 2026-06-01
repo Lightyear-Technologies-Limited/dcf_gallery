@@ -17,69 +17,66 @@ export default function AboutPage() {
           Digital Culture Fund
         </h1>
         <p className="text-[20px] text-foreground-secondary mt-8 leading-[1.6]">
-          The Hivemind Digital Culture Fund is a curated collection of digital art
-          that is emblematic of today&rsquo;s digital cultural revolution &mdash;
-          a thesis-driven acquisition program holding {visiblePieces.length} works
-          by {primaryArtists.length} artists across {visibleCollections.length} collections.
+          A curated portfolio of digital art&rsquo;s emergent canon, acquired
+          after the first market cycle - when the artists, collections, and
+          individual works that define the medium can be identified with the
+          benefit of a full cycle of data.
+        </p>
+        <p className="text-[13px] text-muted mt-6 tabular-nums">
+          {visiblePieces.length} works &middot; {primaryArtists.length} artists &middot; {visibleCollections.length} collections
         </p>
       </div>
 
       <div className="max-w-[680px] pt-20 space-y-10 text-[16px] text-foreground-secondary leading-[1.65]">
         <p>
-          Most collections are assembled after the fact &mdash; once the canon is
-          established, once the prices are set, once history has decided what matters.
-          The Digital Culture Fund was built differently. We started acquiring in the
-          middle of the story, when the artists in this collection were still defining
-          the medium, when the line between experiment and masterwork was drawn in
-          real time.
+          Every technological cycle mints a new class of wealth, and that wealth
+          buys the art of its moment. Blockchain has redefined how digital art is
+          owned, traded, and seen; online communities now influence the markets
+          that price it.
         </p>
-        <p className="text-foreground">
-          This is not a retrospective. It is a position: that the most significant
-          artistic movement of the twenty-first century is happening on-chain, and
-          that the works in this collection will be studied long after the platforms
-          that hosted them have been forgotten.
+        <p>
+          Hivemind launched the Fund deliberately late in the first cycle. A
+          handful of artists and collections have broken out and now stand as
+          the established canon - names that have survived the cycle and trade
+          well below their peaks.
         </p>
       </div>
 
       <blockquote className="max-w-[680px] mx-auto text-center py-24">
-        <p className="font-serif text-[28px] italic leading-relaxed tracking-tight text-foreground">
-          &ldquo;The best digital art doesn&rsquo;t replace tradition.
-          It makes visible the computational structures that were always
-          latent in the work of its predecessors.&rdquo;
+        <p className="font-serif text-[28px] leading-relaxed tracking-tight text-foreground">
+          Technology drives wealth. Wealth drives culture.
         </p>
       </blockquote>
 
-      {/* Curation thesis */}
+      {/* Collecting Framework - reduced to the three pillars that actually
+          differentiate. Accessibility cut (retail-flavoured pitch wrong for
+          institutional reader); Power-Law moved to lead position as the only
+          claim doing real positioning work. */}
       <div className="max-w-[680px] space-y-8">
         <h2 className="font-serif display-sm">Collecting Framework</h2>
-        <p className="text-[16px] text-foreground-secondary leading-[1.65]">
-          Strategic curation informed by a deep understanding of the origins,
-          development, and evolution of digital art.
-        </p>
         <div>
-          <p className="text-[16px] font-medium text-foreground">Mirroring the Movement</p>
+          <p className="text-[16px] font-medium text-foreground">Power-Law Concentration</p>
           <p className="text-[16px] text-foreground-secondary leading-[1.65] mt-1">
-            Curated collections with historical precedents, sampled from across
-            digital art and culture. We collect artists and artworks that embody
-            and elevate the digital art movement as it evolves.
+            As the medium matures, value concentrates in the collections,
+            artists, and individual works that define each chapter. The
+            portfolio is built deep rather than wide.
           </p>
         </div>
         <div>
-          <p className="text-[16px] font-medium text-foreground">Value Accrues to the Top</p>
+          <p className="text-[16px] font-medium text-foreground">End-State Curation</p>
           <p className="text-[16px] text-foreground-secondary leading-[1.65] mt-1">
-            Focus on quality to capture value. Digital art exhibits similar concentration
-            dynamics to global contemporary art: the top 10 artists account for 27%
-            of market turnover, the top 50 for 51%.
+            The portfolio is designed end-first. Collections and 1/1 pieces are
+            chosen to fill specific chapters of digital culture, so the holdings
+            compound into a single argument.
           </p>
-          {/* TODO: replace with the actual citation source used in the deck */}
-          <p className="text-[13px] text-muted mt-2">Source: ArtTactic Digital Art Market Report, 2024.</p>
         </div>
         <div>
-          <p className="text-[16px] font-medium text-foreground">Cornerstone Collections &amp; Unique 1/1s</p>
+          <p className="text-[16px] font-medium text-foreground">Institutional Structure</p>
           <p className="text-[16px] text-foreground-secondary leading-[1.65] mt-1">
-            Scale through core collections with support from singular 1/1 pieces
-            and adjacent works, with the goal of elevating the significance of the
-            portfolio and enhancing long-term value.
+            Custody, security, and operational standards meet the requirements
+            LPs apply to any other asset on their book. The fund is structured
+            for a long-horizon, depth-over-volume approach to a less liquid
+            asset class.
           </p>
         </div>
       </div>
@@ -88,10 +85,8 @@ export default function AboutPage() {
       <div className="pt-24 pb-8">
         <h2 className="font-serif display-sm max-w-[680px]">Five chapters</h2>
         <p className="text-[16px] text-foreground-secondary leading-[1.65] mt-4 max-w-[680px]">
-          The collection is organized around five chapters of digital art&rsquo;s
-          first two decades. Each chapter groups artists whose practices share a
-          lineage &mdash; a way of making, a stance toward the medium, or a
-          cultural moment.
+          The ten artists in the fund are grouped into five chapters of digital
+          art&rsquo;s first decades.
         </p>
         <div className="mt-12 space-y-10 max-w-[820px]">
           {CHAPTERS.map((ch) => (
@@ -120,42 +115,57 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* Practice - reframed from "Edge in Execution" (LP-deck language) into
-          institutional prose. Three flowing paragraphs instead of bold-label
-          stacks so the visual rhythm differs from "Collecting Framework". */}
+      {/* Practice - methodology drawn directly from the Hivemind making-of
+          essay. Examples cited are all verified DCF holdings (White Mono
+          Fidenzas, Return Zero, Slight Lack of Symmetry 1/4 + 2/4). */}
       <div className="max-w-[680px] pt-24 space-y-6">
         <h2 className="font-serif display-sm">Practice</h2>
         <p className="text-[16px] text-foreground-secondary leading-[1.65]">
-          DCF benefits from an expansive network and access to premier venues,
-          which enables exclusive acquisitions and strategic partnerships &mdash;
-          including coveted pieces from 3AC&rsquo;s iconic NFT collection,
-          secured on favorable terms.
+          Within a collection, the fund concentrates on the traits that define
+          it. Tyler Hobbs&rsquo;s Fidenza series is held with a focus on the
+          White Mono trait - pure white forms on a colored ground, the inverse
+          of the standard Fidenza palette, and the variant that most clearly
+          exposes the algorithm&rsquo;s drawing logic.
         </p>
         <p className="text-[16px] text-foreground-secondary leading-[1.65]">
-          The fund launched at a pivotal moment, capitalizing on a period when
-          mainstream opinion was at its lowest. Early conviction in &lsquo;grail&rsquo;
-          works positioned Hivemind at the forefront of the digital art space
-          from the outset.
-        </p>
-        <p className="text-[16px] text-foreground-secondary leading-[1.65]">
-          Commitment extends beyond acquisition. Hivemind invests in experiences
-          that strengthen the visibility and long-term value of the fund, its
-          artists, and the field as a whole &mdash; including sponsorship of the
-          inaugural Digital Art Awards in May 2025.
+          1/1s are acquired as keystones rather than standalone trophies. Tyler
+          Hobbs&rsquo;s <em>Return Zero</em>, the precursor algorithm to Fidenza,
+          sits alongside the Fidenza set. Dmitri Cherniak&rsquo;s <em>A Slight
+          Lack of Symmetry Can Cause So Much Pain</em> sits alongside the deep
+          Ringers position.
         </p>
       </div>
 
-      {/* Hivemind closer - heading + thesis paragraph, then a labeled
-          INVESTOR RELATIONS block so the IR email reads as its own surface
-          rather than parenthetical prose. */}
+      {/* Hivemind closer - tightened firm bio, then a CTA row for the two
+          natural next destinations (View Collection / Read Thesis), then a
+          separately-labeled IR block. */}
       <div className="max-w-[680px] pt-24">
         <h2 className="font-serif display-sm">Hivemind Capital Partners</h2>
         <p className="text-[16px] text-foreground-secondary leading-[1.65] mt-6">
-          Hivemind is a crypto-focused investment firm backing the infrastructure,
-          platforms, and culture that shape the decentralized future. The Digital
-          Culture Fund is Hivemind&rsquo;s commitment to preserving and promoting
-          the art that defines this moment in cultural history.
+          Hivemind is a crypto-focused investment firm with positions across
+          infrastructure, applications, and culture. The Digital Culture Fund is
+          Hivemind&rsquo;s vehicle for collecting the art of this period at
+          institutional scale.
         </p>
+
+        {/* Primary CTAs - View Collection routes to the gallery, Read Thesis
+            links to the source essay on hivemind.capital. */}
+        <div className="mt-10 flex flex-col sm:flex-row gap-6 sm:gap-10 text-[13px]">
+          <Link
+            href="/"
+            className="text-foreground hover:opacity-60 transition-opacity duration-200 underline underline-offset-4 decoration-border hover:decoration-foreground"
+          >
+            View the Collection →
+          </Link>
+          <a
+            href="https://www.hivemind.capital/content/the-making-of-the-digital-culture-fund"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-foreground hover:opacity-60 transition-opacity duration-200 underline underline-offset-4 decoration-border hover:decoration-foreground"
+          >
+            Read the Thesis →
+          </a>
+        </div>
 
         <div className="mt-10 border-t border-border pt-8">
           <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium">
@@ -168,15 +178,7 @@ export default function AboutPage() {
             investor.relations@hivemind.capital
           </a>
         </div>
-      </div>
 
-      <div className="pt-20 pb-8">
-        <Link
-          href="/"
-          className="text-[13px] text-muted hover:text-foreground transition-colors duration-200"
-        >
-          View the collection →
-        </Link>
       </div>
     </div>
   );
