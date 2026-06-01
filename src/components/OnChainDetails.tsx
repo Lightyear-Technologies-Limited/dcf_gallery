@@ -66,12 +66,28 @@ export default function OnChainDetails({
         )}
         {storage && (
           <Row label="Storage">
-            <span className="text-foreground">{storage}</span>
+            <span
+              className="text-foreground"
+              title={storageTooltip(storage)}
+            >
+              {storage}
+            </span>
           </Row>
         )}
       </div>
     </details>
   );
+}
+
+/** Hover tooltip for the Storage label - explains what the label means for
+    permanence (the actual fund-relevant property). */
+function storageTooltip(storage: string): string {
+  if (storage === "On-chain") return "Rendered from contract bytecode - survives as long as Ethereum.";
+  if (storage === "IPFS") return "Image pinned to IPFS - distributed storage, persistence depends on continued pinning.";
+  if (storage === "IPFS (Art Blocks proxy)") return "Image on IPFS, served via Art Blocks' media proxy.";
+  if (storage === "Arweave") return "Image on Arweave - paid-once permanent storage.";
+  if (storage === "Centralized") return "Image hosted on a centralized server - depends on that host remaining online.";
+  return storage;
 }
 
 function Row({ label, children }: { label: string; children: React.ReactNode }) {

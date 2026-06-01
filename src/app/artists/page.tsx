@@ -32,7 +32,7 @@ export default function ArtistsPage() {
           (p) => !isCollectionHidden(p.collectionSlug)
         );
 
-        // Build the candidate pool — every visible piece that resolves to a
+        // Build the candidate pool - every visible piece that resolves to a
         // real image, in curation order. Client component picks one at random
         // on each mount.
         const candidates = visibleCols
@@ -52,7 +52,7 @@ export default function ArtistsPage() {
             className="border-b border-border py-16 first:pt-8"
           >
             <div className="grid grid-cols-1 md:grid-cols-[55fr_45fr] gap-8 md:gap-16 items-start">
-              {/* Hero artwork — fills its column */}
+              {/* Hero artwork - fills its column */}
               <ArtistHero artistSlug={artist.slug} candidates={candidates} />
 
               {/* Info */}

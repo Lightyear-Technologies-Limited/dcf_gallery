@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
-/* Dark mode is class-based — toggled by ThemeToggle, persisted to localStorage. */
+/* Dark mode is class-based - toggled by ThemeToggle, persisted to localStorage. */
 @custom-variant dark (&:where(.dark, .dark *));
 
 /*
  * Color tokens are in OKLCH for perceptual uniformity. All neutrals carry a
- * tiny warm tint (hue 80, chroma 0.004–0.008) so the eggshell foundation
+ * tiny warm tint (hue 80, chroma 0.004-0.008) so the eggshell foundation
  * cohere across surfaces. Pure black/white are deliberately avoided.
  */
 :root {
@@ -39,7 +39,7 @@
 }
 
 /*
- * Body type — Instrument Sans 16px / 1.65. OpenType features (kerning, common
+ * Body type - Instrument Sans 16px / 1.65. OpenType features (kerning, common
  * ligatures, contextual alternates) on for prose; tabular figures opt-in via
  * Tailwind utility on numeric content.
  */
@@ -56,7 +56,7 @@ body {
 }
 
 /*
- * Fluid display sizes — used by H1 on editorial pages. Pick the one whose
+ * Fluid display sizes - used by H1 on editorial pages. Pick the one whose
  * range matches the importance of the page (sm for utility/single-piece,
  * default for standard editorial, lg for artist hero).
  */
@@ -64,13 +64,13 @@ body {
 .display    { font-size: clamp(2.5rem,  5vw, 4rem);   line-height: 0.95; letter-spacing: -0.02em; }
 .display-lg { font-size: clamp(2.5rem,  6vw, 4.5rem); line-height: 0.95; letter-spacing: -0.02em; }
 
-/* Selection — invert without going pure on either end. */
+/* Selection - invert without going pure on either end. */
 ::selection {
   background: var(--foreground);
   color: var(--background);
 }
 
-/* Logo light/dark swap — stacked with absolute positioning, toggled via opacity */
+/* Logo light/dark swap - stacked with absolute positioning, toggled via opacity */
 .logo-wrap { position: relative; }
 .logo-wrap img { position: absolute; left: 0; top: 0; }
 .logo-light { opacity: 1; }

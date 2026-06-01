@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Fix openseaUrl for Art Blocks Fidenza pieces — short serials → full on-chain token IDs
+// Fix openseaUrl for Art Blocks Fidenza pieces - short serials → full on-chain token IDs
 import { readFileSync, writeFileSync } from "fs";
 import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
@@ -28,7 +28,7 @@ const fixed = src.replace(re, (match, prefix, tokenId, suffix) => {
 });
 
 if (count === 0) {
-  console.log("No short Fidenza openseaUrls found — nothing to do.");
+  console.log("No short Fidenza openseaUrls found - nothing to do.");
 } else {
   writeFileSync(filePath, fixed);
   console.log(`\nFixed ${count} openseaUrl(s).`);

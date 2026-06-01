@@ -12,10 +12,12 @@ import {
   getPieceRows,
   getHeroLayout,
 } from "@/lib/curation";
+import { getChapterForArtist } from "@/lib/chapters";
 import JustifiedGallery from "@/components/JustifiedGallery";
 import FixedRowGallery from "@/components/FixedRowGallery";
 import HeroSidebarGallery from "@/components/HeroSidebarGallery";
 import SinglePieceDisplay from "@/components/SinglePieceDisplay";
+import CuratorNote from "@/components/CuratorNote";
 
 const MERGE_INTO: Record<string, string> = {
   "tyler-hobbs-and-dandelion-wist": "tyler-hobbs",
@@ -33,6 +35,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
   if (!artist) notFound();
 
   const artistName = getArtistDisplayName(artist.slug, artist.name);
+  const chapter = getChapterForArtist(artist.slug);
 
   // Include merged artists (e.g., Dandelion Wist under Tyler Hobbs).
   const mergedSlugs = Object.entries(MERGE_INTO)
@@ -70,77 +73,120 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
   );
 
   const totalWorks = artistCollections.reduce((s, c) => s + c.pieces.length, 0);
+  const isSingleCollection = artistCollections.length === 1;
 
   return (
     <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
-      {/* Editorial header — name left, bio right */}
+      {/* Editorial header - name left, bio right */}
       <div className="pt-[120px] grid grid-cols-1 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-10 md:gap-16">
         <div>
-          <h1 className="font-serif display-lg">
+          {/* Chapter eyebrow - the page's one chromatic accent. Doubles as
+              navigational lineage back to the chapter filter on the homepage. */}
+          {chapter && (
+            <Link
+              href={`/?chapter=${chapter.slug}`}
+              className="text-[10px] tracking-[0.1em] uppercase font-medium hover:opacity-60 transition-opacity duration-200 inline-block mb-5"
+              style={{ color: chapter.color }}
+            >
+              {chapter.name}
+            </Link>
+          )}
+          <h1 className="font-serif display-lg text-balance">
             {artistName}
           </h1>
-          <p className="mt-4 text-[13px] text-muted">
-            {artistCollections.length} collection
-            {artistCollections.length === 1 ? "" : "s"} · {totalWorks} works
+          <p className="mt-4 text-[13px] text-muted tabular-nums">
+            {artistCollections.length} collection{artistCollections.length === 1 ? "" : "s"} · {totalWorks} works
           </p>
-          {(artist.website || artist.twitter || artist.instagram) && (
-            <div className="flex flex-wrap gap-6 mt-4 text-[13px]">
-              {artist.website && (
-                <a href={artist.website} target="_blank" rel="noopener noreferrer" className="text-muted underline underline-offset-4 decoration-border hover:text-foreground transition-colors duration-200">
-                  Website
-                </a>
-              )}
-              {artist.twitter && (
-                <a href={artist.twitter} target="_blank" rel="noopener noreferrer" className="text-muted underline underline-offset-4 decoration-border hover:text-foreground transition-colors duration-200">
-                  Twitter
-                </a>
-              )}
-              {artist.instagram && (
-                <a href={artist.instagram} target="_blank" rel="noopener noreferrer" className="text-muted underline underline-offset-4 decoration-border hover:text-foreground transition-colors duration-200">
-                  Instagram
-                </a>
-              )}
-            </div>
+
+          {/* Collection jump-nav - multi-collection artists only. Cheap
+              orientation aid for Tyler Hobbs (6 sections, scroll-only otherwise). */}
+          {artistCollections.length > 1 && (
+            <ol className="mt-6 space-y-1.5 text-[13px]">
+              {artistCollections.map((col) => (
+                <li key={col.slug} className="flex items-baseline justify-between gap-3 max-w-[260px]">
+                  <a
+                    href={`#${col.slug}`}
+                    className="text-foreground-secondary hover:text-foreground transition-colors duration-200"
+                  >
+                    {col.name}
+                  </a>
+                  <span className="text-muted tabular-nums">{col.pieces.length}</span>
+                </li>
+              ))}
+            </ol>
           )}
         </div>
 
         <div className="space-y-6 md:pt-4">
-          {(artist.bio || artist.curationComment) && (
-            <div className="text-[20px] text-foreground-secondary leading-[1.6] space-y-4">
-              {artist.bio && <p>{artist.bio}</p>}
-              {artist.curationComment && <p>{artist.curationComment}</p>}
-            </div>
+          {artist.bio && (
+            <p className="text-[20px] text-foreground-secondary leading-[1.6]">
+              {artist.bio}
+            </p>
+          )}
+          {/* curationComment is the curator's voice - given its own attributed
+              block (HIVEMIND COMMENTARY) instead of running on as a second bio
+              paragraph, so a reader can clearly tell what is DCF's view. */}
+          {artist.curationComment && (
+            <CuratorNote text={artist.curationComment} variant="inline" />
           )}
           {artist.essayUrl && (
-            <a
-              href={artist.essayUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[13px] text-muted hover:text-foreground transition-colors duration-200 inline-block"
-            >
-              Read the essay
-              {artist.essayTitle && (
-                <>
-                  : <span className="underline underline-offset-4 decoration-border">{artist.essayTitle}</span>
-                </>
-              )}{" "}
-              &rarr;
-            </a>
+            <div>
+              <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-2">
+                Essay
+              </p>
+              <a
+                href={artist.essayUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[15px] text-foreground-secondary hover:text-foreground transition-colors duration-200 inline-block underline underline-offset-4 decoration-border hover:decoration-foreground"
+              >
+                {artist.essayTitle || "Read the essay"} →
+              </a>
+            </div>
           )}
         </div>
       </div>
 
-      {/* Artist quote — pull quote between header and collections */}
-      {artist.artistQuote && (
-        <div className="pt-16 max-w-[820px] mx-auto">
-          <p className="font-serif italic text-[24px] sm:text-[28px] leading-[1.4] text-foreground-secondary text-center">
-            “{artist.artistQuote}”
-          </p>
-          <p className="text-[13px] text-muted text-center mt-6">— {artistName}</p>
+      {/* Socials moved below the editorial block - institutional convention
+          (catalog raisonné footer) and naturally lands after the bio on mobile
+          rather than interrupting it. */}
+      {(artist.website || artist.twitter || artist.instagram) && (
+        <div className="mt-10 flex flex-wrap gap-6 text-[13px]">
+          {artist.website && (
+            <a href={artist.website} target="_blank" rel="noopener noreferrer" className="text-muted underline underline-offset-4 decoration-border hover:text-foreground transition-colors duration-200">
+              Website
+            </a>
+          )}
+          {artist.twitter && (
+            <a href={artist.twitter} target="_blank" rel="noopener noreferrer" className="text-muted underline underline-offset-4 decoration-border hover:text-foreground transition-colors duration-200">
+              Twitter
+            </a>
+          )}
+          {artist.instagram && (
+            <a href={artist.instagram} target="_blank" rel="noopener noreferrer" className="text-muted underline underline-offset-4 decoration-border hover:text-foreground transition-colors duration-200">
+              Instagram
+            </a>
+          )}
         </div>
       )}
 
-      {/* Collections — each as an editorial block above its gallery */}
+      {/* Artist quote - left-aligned in the 7fr-style column, smaller (22px
+          instead of 28), italic Argent (genuine pullquote earns italic). No
+          longer centered with curly-quotes - that read as decoration competing
+          with the H1 for hero status. */}
+      {artist.artistQuote && (
+        <div className="pt-16 max-w-[680px]">
+          <p className="font-serif italic text-[22px] leading-[1.5] text-foreground-secondary">
+            {artist.artistQuote}
+          </p>
+          <p className="text-[13px] text-muted mt-4">- {artistName}</p>
+        </div>
+      )}
+
+      {/* Collections. Single-collection artists merge: the artist header IS
+          the collection header, so we suppress the per-collection editorial
+          block and render the gallery directly. As soon as a second collection
+          is added the structure naturally expands. */}
       <div className="pt-16 pb-24 space-y-20">
         {artistCollections.map((col) => {
           const n = col.pieces.length;
@@ -158,31 +204,32 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
           else ideal = 5;
 
           return (
-            <section key={col.slug}>
-              {/* Editorial block — title left, description right */}
-              <div className="grid grid-cols-1 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-8 md:gap-16 mb-10">
-                <div>
-                  <Link
-                    href={`/collection/${col.slug}`}
-                    className="font-serif text-[28px] sm:text-[32px] tracking-[-0.01em] leading-[1.05] hover:opacity-60 transition-opacity duration-200 inline-block"
-                  >
-                    {col.name}
-                  </Link>
-                  <p className="text-[13px] text-muted mt-3">
-                    {col.totalSupply
-                      ? <>{n} of {col.totalSupply.toLocaleString()}</>
-                      : <>{n} piece{n === 1 ? "" : "s"}</>
-                    }
-                  </p>
-                </div>
-                <div className="md:pt-3">
-                  {col.description && (
-                    <p className="text-[16px] text-foreground-secondary leading-[1.65]">
-                      {col.description}
+            <section key={col.slug} id={col.slug}>
+              {!isSingleCollection && (
+                <div className="grid grid-cols-1 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-8 md:gap-16 mb-10">
+                  <div>
+                    <Link
+                      href={`/collection/${col.slug}`}
+                      className="font-serif display-sm hover:opacity-60 transition-opacity duration-200 inline-block"
+                    >
+                      {col.name}
+                    </Link>
+                    <p className="text-[13px] text-muted mt-3 tabular-nums">
+                      {col.totalSupply
+                        ? <>{n} of {col.totalSupply.toLocaleString()}</>
+                        : <>{n} piece{n === 1 ? "" : "s"}</>
+                      }
                     </p>
-                  )}
+                  </div>
+                  <div className="md:pt-3">
+                    {col.description && (
+                      <p className="text-[16px] text-foreground-secondary leading-[1.65]">
+                        {col.description}
+                      </p>
+                    )}
+                  </div>
                 </div>
-              </div>
+              )}
 
               {/* Gallery */}
               {(() => {

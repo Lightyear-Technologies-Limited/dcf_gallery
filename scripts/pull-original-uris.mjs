@@ -4,9 +4,9 @@
  * and inject it into data.ts as `originalUri`.
  *
  * Priority order for the URI we capture (most useful to least):
- *   1. raw.metadata.image  — the artist-declared image source (usually ipfs://)
- *   2. raw.metadata.animation_url — for video/interactive pieces
- *   3. image.originalUrl — Alchemy's resolved source
+ *   1. raw.metadata.image  - the artist-declared image source (usually ipfs://)
+ *   2. raw.metadata.animation_url - for video/interactive pieces
+ *   3. image.originalUrl - Alchemy's resolved source
  *
  * Skips pieces that already have originalUri.
  */
@@ -143,7 +143,7 @@ for (const piece of sorted) {
   if (closingBraceRel < 0) continue;
   const indent = "    ";
   const escapedUri = uri.replace(/'/g, "\\'");
-  // Insert before the closing brace — preserves existing structure
+  // Insert before the closing brace - preserves existing structure
   const insertAt = piece._absStart + closingBraceRel;
   src =
     src.slice(0, insertAt).trimEnd() +

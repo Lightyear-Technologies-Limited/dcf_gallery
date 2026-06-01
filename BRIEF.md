@@ -1,8 +1,8 @@
-# DCF Gallery — Project Brief
+# DCF Gallery - Project Brief
 
 ## Overview
 
-A bespoke, fast gallery website to showcase the Hivemind Digital Culture Fund (DCF) collection. Pure showcase — no transactions, no marketplace, no pricing. The purpose is to display what DCF holds, contextualize the artwork, and communicate the curation thesis to investors and the art community.
+A bespoke, fast gallery website to showcase the Hivemind Digital Culture Fund (DCF) collection. Pure showcase - no transactions, no marketplace, no pricing. The purpose is to display what DCF holds, contextualize the artwork, and communicate the curation thesis to investors and the art community.
 
 **Replacing:** Deca Art (too slow, doesn't reflect collection quality)
 
@@ -19,17 +19,17 @@ A bespoke, fast gallery website to showcase the Hivemind Digital Culture Fund (D
 ### Aesthetic
 - **Minimal, crypto-native, high-end gallery**
 - Dark-first, but both dark and light modes important (auto-detect + manual toggle)
-- Art-focused — the work is the hero, UI gets out of the way
+- Art-focused - the work is the hero, UI gets out of the way
 - Clean display, no clutter
 
-### Reference Sites — What to Take From Each
+### Reference Sites - What to Take From Each
 
 | Site | Take | Leave |
 |------|------|-------|
 | [Raster.art](https://www.raster.art) | **Primary reference.** Clean tab navigation (Oeuvre / Activity / About), simple grid, collection cards with mini-carousels, minimal typography. Simplicity is the goal. | Light-mode only aesthetic |
 | [Curated.xyz](https://explore.curated.xyz) | Left sidebar with collection dropdown. Dual commentary model: artist quote + curator note side-by-side with artwork carousel. Editorial depth without clutter. | Horizontal-only layout can feel limiting |
-| [gallery.so](https://gallery.so) | Single-piece hero view: one artwork centered, massive whitespace, just artist name + piece title + counter ("5 of 15"). Perfect for a "focus mode" on key works. Dark mode toggle. | Too minimal for a fund site — not enough editorial context |
-| [137.xyz/art](https://137.xyz/art) | Art-forward, single-focus. Nothing competes with the work. | Not deep enough — no artist context, no curation narrative |
+| [gallery.so](https://gallery.so) | Single-piece hero view: one artwork centered, massive whitespace, just artist name + piece title + counter ("5 of 15"). Perfect for a "focus mode" on key works. Dark mode toggle. | Too minimal for a fund site - not enough editorial context |
+| [137.xyz/art](https://137.xyz/art) | Art-forward, single-focus. Nothing competes with the work. | Not deep enough - no artist context, no curation narrative |
 | [ArtBlocks](https://www.artblocks.io/discover) | Category carousel at top ("Browse collection categories"), then filter + search bar, then grid. Good drill-down: Artist → Collection → Trait. | Too marketplace-oriented |
 | [Artsy](https://www.artsy.net/collect) | Movement/category pages with editorial intro text, "Browse by Category" subcards, then grid. Strong model for DCF's movement pages. | Pricing, marketplace, commerce UX |
 | [Tappan Collective](https://www.tappancollective.com) | Editorial piece pages: large artist quote as a design element, "About the Artist" section with photo + full bio, related artwork row at bottom. | E-commerce framing (Add to Bag, framing options) |
@@ -44,16 +44,16 @@ Raster's simplicity ←→ Curated's editorial depth ←→ gallery.so's present
 ```
 
 - **Grid/browse:** Raster-style clean grid with tabs, minimal chrome
-- **Artist/collection pages:** Curated-style — curator note + artist commentary alongside the work
+- **Artist/collection pages:** Curated-style - curator note + artist commentary alongside the work
 - **Individual piece view:** gallery.so-style hero for key works, Tappan-style editorial depth (artist quote, about section, related works)
-- **Movement/category pages:** Artsy-style — editorial intro + subcategory cards + grid
+- **Movement/category pages:** Artsy-style - editorial intro + subcategory cards + grid
 
 ### Anti-patterns
 - No pricing/marketplace features
 - No comments/social features (sharing to socials is OK)
-- No lag — speed is critical
+- No lag - speed is critical
 - Nothing that looks like a generic NFT platform
-- No busy UI — when in doubt, remove elements, don't add them
+- No busy UI - when in doubt, remove elements, don't add them
 
 ### Pending
 - Brand guidelines (need access from team)
@@ -67,15 +67,15 @@ Raster's simplicity ←→ Curated's editorial depth ←→ gallery.so's present
 
 Each level gets its own curator's note explaining DCF's thesis:
 
-1. **Artist level** — Why this artist matters to DCF's thesis
-2. **Collection level** — Why this collection specifically
-3. **Piece level** — Why this individual work (optional, for key pieces)
+1. **Artist level** - Why this artist matters to DCF's thesis
+2. **Collection level** - Why this collection specifically
+3. **Piece level** - Why this individual work (optional, for key pieces)
 
 ### Content sources
 - Existing X threads and thesis documents
-- [HDCF collecting thesis - art styles & movements.docx](internal) — chapter structure for narrative
+- [HDCF collecting thesis - art styles & movements.docx](internal) - chapter structure for narrative
 - Most commentary needs to be **written** (AI-assisted, reviewed by Michael/marketing)
-- Artist bios — mix of sourced and contributed by artists directly
+- Artist bios - mix of sourced and contributed by artists directly
 
 ---
 
@@ -94,14 +94,14 @@ Use the most recent `DCF_Portfolio` file from:
 - **5 movement tags**: GenArt, CryptoArt, Digital Canvas, AI Art, Digital Identity
 
 ### Thesis chapter structure (from collecting thesis doc)
-1. From Computer Art to NFT — 60 years of digital art evolution
-2. The Early Pioneers (2014–2017) — Rare Pepes, NFT archaeology
-3. Rise of Larva Labs — CryptoPunks, Autoglyphs, Meebits
-4. Generative Art & Collecting the Algorithm — Fidenza, Ringers, Art Blocks
-5. Glitch Art and Crypto Movement — XCOPY, Grifters
-6. Data, AI and Refik Anadol — Wind of Yawanawa, GAN art
-7. PFP & Web3 Community — CryptoPunks (cultural lens), Meebits
-8. New Media Art & NFT for Interactive Culture — Beeple
+1. From Computer Art to NFT - 60 years of digital art evolution
+2. The Early Pioneers (2014-2017) - Rare Pepes, NFT archaeology
+3. Rise of Larva Labs - CryptoPunks, Autoglyphs, Meebits
+4. Generative Art & Collecting the Algorithm - Fidenza, Ringers, Art Blocks
+5. Glitch Art and Crypto Movement - XCOPY, Grifters
+6. Data, AI and Refik Anadol - Wind of Yawanawa, GAN art
+7. PFP & Web3 Community - CryptoPunks (cultural lens), Meebits
+8. New Media Art & NFT for Interactive Culture - Beeple
 
 This chapter structure could inform how the gallery organizes and narrates the collection.
 
@@ -118,7 +118,7 @@ This chapter structure could inform how the gallery organizes and narrates the c
 
 ### Artist Page
 - Artist bio/blurb
-- DCF curator's note — why we hold their work
+- DCF curator's note - why we hold their work
 - Artist quote (if available)
 - Links to socials/website
 - Collections by this artist
@@ -128,7 +128,7 @@ This chapter structure could inform how the gallery organizes and narrates the c
 ### Collection Page
 - Collection description
 - Stats: piece count, medium, mint date, contract
-- DCF curator's note — why we hold this collection
+- DCF curator's note - why we hold this collection
 - Movement/tag badges
 - Works grid
 - Breadcrumb drill-down: Artist → Collection → Piece
@@ -143,7 +143,7 @@ This chapter structure could inform how the gallery organizes and narrates the c
 - Share to socials
 
 ### About Page
-- About DCF — mission, thesis, approach
+- About DCF - mission, thesis, approach
 - About Hivemind
 - Collection stats overview
 
@@ -170,7 +170,7 @@ This chapter structure could inform how the gallery organizes and narrates the c
 
 ### Open questions
 - Do we self-host optimized files or use a CDN (Cloudflare Images, Vercel Image Optimization)?
-- For on-chain generative pieces — embed live rendering or screenshot + link?
+- For on-chain generative pieces - embed live rendering or screenshot + link?
 - Storage budget / hosting approach
 
 ---
@@ -206,10 +206,10 @@ The thesis doc structures the collection as a narrative across art movements. Th
 |------|-------|--------|
 | Brand guidelines access | Michael | Pending |
 | Domain decision | Team | TBC |
-| Asset pipeline — scrape OpenSea URLs to source files | Dev | Not started |
-| Curation commentary — write per-artist and per-collection notes | Michael + marketing | Not started |
-| Artist bios — source or request from artists | Michael | Not started |
-| Thesis chapter integration — decide if gallery follows chapter structure | Michael | Discussion needed |
+| Asset pipeline - scrape OpenSea URLs to source files | Dev | Not started |
+| Curation commentary - write per-artist and per-collection notes | Michael + marketing | Not started |
+| Artist bios - source or request from artists | Michael | Not started |
+| Thesis chapter integration - decide if gallery follows chapter structure | Michael | Discussion needed |
 | Generative/interactive display approach | Dev | Decision needed |
 | CMS decision (v2) | Team | Future |
 

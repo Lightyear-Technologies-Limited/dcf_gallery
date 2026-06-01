@@ -44,7 +44,7 @@ try {
   }
 } catch (e) { console.warn("Skipping ringers:", e.message); }
 
-// Winds: nested in .traits with long — Categorical keys
+// Winds: nested in .traits with long - Categorical keys
 try {
   const w = JSON.parse(readFileSync(resolve(__dirname, "winds-traits.json"), "utf-8"));
   for (const p of w) {
@@ -52,8 +52,8 @@ try {
     const s = p.traits;
     const t = {};
     if (s["Origin"]) t["Origin"] = s["Origin"];
-    if (s["Color Temperature — Categorical"]) t["Color Temperature"] = s["Color Temperature — Categorical"];
-    if (s["Wind Intensity — Categorical"]) t["Wind Intensity"] = s["Wind Intensity — Categorical"];
+    if (s["Color Temperature - Categorical"]) t["Color Temperature"] = s["Color Temperature - Categorical"];
+    if (s["Wind Intensity - Categorical"]) t["Wind Intensity"] = s["Wind Intensity - Categorical"];
     if (s["Particle Type"]) t["Particle Type"] = s["Particle Type"];
     if (s["Generative Soundtrack"]) t["Soundtrack"] = s["Generative Soundtrack"];
     if (Object.keys(t).length) out[p.slug] = t;

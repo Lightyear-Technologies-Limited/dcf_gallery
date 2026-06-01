@@ -12,7 +12,7 @@
  *     "ringers-13000025-d270"
  *   ]
  *
- * Idempotent — running repeatedly gives the same result.
+ * Idempotent - running repeatedly gives the same result.
  */
 
 import { readFileSync, writeFileSync } from "fs";
@@ -64,7 +64,7 @@ for (const line of lines) {
     continue;
   }
 
-  // Piece line — may have (N) tag
+  // Piece line - may have (N) tag
   if (currentCollection) {
     const pieceMatch = line.match(/"([^"]+)"\s*,?\s*\((\d+)\)/);
     if (pieceMatch) {

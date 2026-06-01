@@ -1,5 +1,5 @@
 // =============================================================================
-// DCF Gallery — Portfolio Data
+// DCF Gallery - Portfolio Data
 // Generated from 20260408_DCF_Portfolio.xlsx on 2026-04-14
 // =============================================================================
 
@@ -21,7 +21,7 @@ export interface Artist {
 export interface Exhibition {
   /** Year or month-year, e.g. "2021" or "October 2024" */
   date: string;
-  /** Exhibition or event title — italicized in render. */
+  /** Exhibition or event title - italicized in render. */
   title: string;
   /** City or venue, rendered after the title. */
   location?: string;
@@ -69,7 +69,7 @@ export interface Piece {
   // (e.g. https://xcopy.art/..., https://ack.art/...). The "View on {host}"
   // link on the piece page is derived from this URL's hostname.
   artistSiteUrl?: string;
-  // Original source URI for the artwork — usually IPFS or Arweave.
+  // Original source URI for the artwork - usually IPFS or Arweave.
   // Rendered as a "View original on ipfs.io" link on the piece page.
   // ipfs:// and ar:// URIs are resolved to public gateways at render time.
   originalUri?: string;
@@ -198,7 +198,7 @@ export const collections: Collection[] = [
     name: 'Piano Blossoms',
     artistSlug: 'a-c-k',
     description: 'Five 1/1 artworks presented at a.c.k.\'s Piano Blossoms auction in Amsterdam, October 2024. Each piece is a unique narrative painting exploring the artist\'s evolving relationship with the Muse.',
-    curatorNote: 'a.c.k.\'s narrative practice processes the digital condition through painterly figuration. The Piano Blossoms auction marked a pivotal moment in his maturation — five works that read as a coherent emotional arc.',
+    curatorNote: 'a.c.k.\'s narrative practice processes the digital condition through painterly figuration. The Piano Blossoms auction marked a pivotal moment in his maturation - five works that read as a coherent emotional arc.',
     medium: 'image',
     contractAddress: '0x728d7a5133068e3c7e5afe72de8999076bc940f9',
     exhibitions: [
@@ -234,7 +234,7 @@ export const collections: Collection[] = [
     name: 'SuperRare',
     artistSlug: 'beeple',
     description: 'TIME: The Future of Business was created for a 2021 TIME magazine cover \u2014 a collaboration between a digital-native artist and a legacy publication reflecting on a world accelerating into the digital age.',
-    curatorNote: 'Beeple\'s TIME cover collaboration is a watershed in the cultural legitimization of digital art — the moment a major legacy publication recognized crypto-native artists as their visual peers.',
+    curatorNote: 'Beeple\'s TIME cover collaboration is a watershed in the cultural legitimization of digital art - the moment a major legacy publication recognized crypto-native artists as their visual peers.',
     medium: 'image',
     contractAddress: '0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0',
     tags: ['crypto-native', 'digital-culture', 'glitch'],
@@ -269,7 +269,7 @@ export const collections: Collection[] = [
     name: 'Day Gardens',
     artistSlug: 'tyler-hobbs',
     description: 'Day Gardens extends Tyler Hobbs\' generative practice into quieter, more contemplative territory \u2014 algorithmic compositions that evoke natural light and seasonal rhythm.',
-    curatorNote: 'Day Gardens shows Hobbs returning to the painterly with the discipline of his algorithmic practice intact — gestural, observational works that document the artist\'s continued evolution.',
+    curatorNote: 'Day Gardens shows Hobbs returning to the painterly with the discipline of his algorithmic practice intact - gestural, observational works that document the artist\'s continued evolution.',
     medium: 'image',
     contractAddress: '0xa7644d0a70dacce6a8468287e1aa888a0766c0fd',
     totalSupply: 50,
@@ -292,7 +292,7 @@ export const collections: Collection[] = [
     name: 'Fidenza',
     artistSlug: 'tyler-hobbs',
     description: 'Fidenza has helped define the generative art era, blending visual clarity with algorithmic depth. Visually elegant, endlessly variable, and instantly recognizable \u2014 a landmark work in on-chain art. DCF holds 27 of 999.',
-    curatorNote: 'Fidenza is the canonical Art Blocks work and a cornerstone of the generative art canon. DCF\'s 30-piece holding is built around extreme palettes and rare scales — intended to read as a cohesive sub-collection rather than a representative sample.',
+    curatorNote: 'Fidenza is the canonical Art Blocks work and a cornerstone of the generative art canon. DCF\'s 30-piece holding is built around extreme palettes and rare scales - intended to read as a cohesive sub-collection rather than a representative sample.',
     medium: 'generative',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     totalSupply: 999,
@@ -304,7 +304,7 @@ export const collections: Collection[] = [
     name: 'Grifters',
     artistSlug: 'xcopy',
     description: 'XCOPY\'s 666-piece Grifters collection, minted in December 2021, is rich with cultural commentary and remains one of the space\'s most sought-after series \u2014 revered for its symbolism, holder network, and connection to the artist\'s broader universe.',
-    curatorNote: 'Grifters is XCOPY\'s most ambitious systematic project — a generative cast of characters in his crypto-cynical visual language. The Legendary Edition centerpiece anchors DCF\'s set of the rarest and most expressive variants.',
+    curatorNote: 'Grifters is XCOPY\'s most ambitious systematic project - a generative cast of characters in his crypto-cynical visual language. The Legendary Edition centerpiece anchors DCF\'s set of the rarest and most expressive variants.',
     medium: 'video',
     contractAddress: '0xc143bbfcdbdbed6d454803804752a064a622c1f3',
     totalSupply: 666,
@@ -316,7 +316,7 @@ export const collections: Collection[] = [
     name: 'Human Unreadable',
     artistSlug: 'operator',
     description: 'The acclaimed Human Unreadable series embodies the balance between human movement and machine logic. Operator\'s practice transforms choreographic data into generative visual output, questioning where the human ends and the system begins.',
-    curatorNote: 'Human Unreadable maps choreography onto generative algorithms, producing what Operator calls \'unreadable\' bodies — figures shaped by code. The series is a milestone in performance-informed digital art.',
+    curatorNote: 'Human Unreadable maps choreography onto generative algorithms, producing what Operator calls \'unreadable\' bodies - figures shaped by code. The series is a milestone in performance-informed digital art.',
     medium: 'generative',
     contractAddress: '0x99a9b7c1116f9ceeb1652de04d5969cce509b069',
     totalSupply: 400,
@@ -340,7 +340,7 @@ export const collections: Collection[] = [
     name: 'Masks of Luci',
     artistSlug: 'sam-spratt',
     description: 'Masks of Luci is a chapter in Sam Spratt\'s expansive Luci mythology \u2014 an on-chain narrative ecosystem that reframes blockchain as a medium for myth-making and community participation.',
-    curatorNote: 'Sam Spratt\'s most ambitious narrative work — a digital masquerade where each mask carries authored language and ritualized meaning. DCF holds both Council Mask 1/1s alongside a curated set of generative entries.',
+    curatorNote: 'Sam Spratt\'s most ambitious narrative work - a digital masquerade where each mask carries authored language and ritualized meaning. DCF holds both Council Mask 1/1s alongside a curated set of generative entries.',
     medium: 'image',
     contractAddress: '0x4440732b0d85e2a77dcb2caedfd940154241249a',
     totalSupply: 613,
@@ -374,7 +374,7 @@ export const collections: Collection[] = [
     name: 'Lights',
     artistSlug: 'kim-asendorf',
     description: 'Kim Asendorf\'s Lights explores the fundamental properties of digital illumination \u2014 algorithmic compositions built from the raw behavior of light rendered through code.',
-    curatorNote: 'Lights is Asendorf\'s earliest exploration of light-as-medium on-chain — a foundational entry point into pixel-native art and the throughline of his practice.',
+    curatorNote: 'Lights is Asendorf\'s earliest exploration of light-as-medium on-chain - a foundational entry point into pixel-native art and the throughline of his practice.',
     medium: 'image',
     contractAddress: '0x6d38705ad8af087d86ef505618b77b066ead2006',
     totalSupply: 100,
@@ -386,7 +386,7 @@ export const collections: Collection[] = [
     name: 'PXL DEX',
     artistSlug: 'kim-asendorf',
     description: 'PXL DEX is part of Kim Asendorf\'s systematic investigation of the pixel as a primary unit of digital expression \u2014 precise, formally rigorous, and rooted in the language of computation.',
-    curatorNote: 'PXL DEX is Kim Asendorf\'s most rigorous statement on pixel-as-currency. Each piece\'s pixel allowance is a finite, depletable resource — work that thinks of itself as both image and economic primitive.',
+    curatorNote: 'PXL DEX is Kim Asendorf\'s most rigorous statement on pixel-as-currency. Each piece\'s pixel allowance is a finite, depletable resource - work that thinks of itself as both image and economic primitive.',
     medium: 'image',
     contractAddress: '0x81345761670fc8b90665466a94c196e26b92ecfb',
     totalSupply: 256,
@@ -421,7 +421,7 @@ export const collections: Collection[] = [
     name: 'QQL',
     artistSlug: 'tyler-hobbs-and-dandelion-wist',
     description: 'QQL is a generative art algorithm by Tyler Hobbs and Dandelion Wist that invites collectors to compose their own outputs \u2014 blending the artist\'s system with the collector\'s creative input. DCF holds pieces minted directly by Tyler Hobbs.',
-    curatorNote: 'QQL turned generative art into a participatory medium: collectors compose their own outputs from Hobbs and Wist\'s algorithm. DCF holds two minted compositions alongside ten unspent Mint Passes — a position on both authorship and reserve.',
+    curatorNote: 'QQL turned generative art into a participatory medium: collectors compose their own outputs from Hobbs and Wist\'s algorithm. DCF holds two minted compositions alongside ten unspent Mint Passes - a position on both authorship and reserve.',
     medium: 'generative',
     contractAddress: '0x845dd2a7ee2a92a0518ab2135365ed63fdba0c88',
     totalSupply: 999,
@@ -453,7 +453,7 @@ export const collections: Collection[] = [
     name: 'Ringers',
     artistSlug: 'dmitri-cherniak',
     description: 'Using simple pegs and strings, Cherniak\'s Ringers algorithm emphasizes control through randomness. \u2018The Goose\u2019 sold for $6.2M at Sotheby\'s in 2023, securing Ringers as a landmark in on-chain generative art. DCF holds 34 of 1,000.',
-    curatorNote: 'Ringers is the algorithmic counterpart to Fidenza — proof that constraint produces inexhaustible variety. DCF\'s 36-piece holding is among the largest single-collector positions in the project, organized to read as a coherent visual taxonomy.',
+    curatorNote: 'Ringers is the algorithmic counterpart to Fidenza - proof that constraint produces inexhaustible variety. DCF\'s 36-piece holding is among the largest single-collector positions in the project, organized to read as a coherent visual taxonomy.',
     medium: 'generative',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     totalSupply: 1000,
@@ -472,7 +472,7 @@ export const collections: Collection[] = [
     exhibitions: [
       {
         date: '2021',
-        title: 'Synthetic Dreams — Google Quantum Summer Symposium',
+        title: 'Synthetic Dreams - Google Quantum Summer Symposium',
         url: 'https://sd.refikanadol.com/',
       },
     ],
@@ -484,7 +484,7 @@ export const collections: Collection[] = [
     name: 'Skulls of Luci',
     artistSlug: 'sam-spratt',
     description: 'Skulls of Luci marks an earlier chapter in Spratt\'s Luci universe, establishing the visual and narrative foundations for the mythology that would grow into one of digital art\'s most ambitious storytelling projects.',
-    curatorNote: 'The precursor to Masks of Luci — Sam Spratt\'s earlier exploration of the same formal language with rawer, more elemental material. Historical anchors for the larger Masks practice.',
+    curatorNote: 'The precursor to Masks of Luci - Sam Spratt\'s earlier exploration of the same formal language with rawer, more elemental material. Historical anchors for the larger Masks practice.',
     medium: 'image',
     contractAddress: '0xc9041f80dce73721a5f6a779672ec57ef255d27c',
     totalSupply: 50,
@@ -496,7 +496,7 @@ export const collections: Collection[] = [
     name: 'Tyler Hobbs',
     artistSlug: 'tyler-hobbs',
     description: '',
-    curatorNote: 'Hobbs\' personal 1/1 practice — Return Zero, Elektroanima, One One Overflow — represents his most intentional standalone statements outside the generative editions. Each piece refines a different dimension of his algorithmic vocabulary.',
+    curatorNote: 'Hobbs\' personal 1/1 practice - Return Zero, Elektroanima, One One Overflow - represents his most intentional standalone statements outside the generative editions. Each piece refines a different dimension of his algorithmic vocabulary.',
     medium: 'image',
     contractAddress: '0x7fc4a267c44d9f4d31227edeee5df7ef93819345',
     tags: ['generative', 'algorithmic', 'on-chain'],
@@ -507,7 +507,7 @@ export const collections: Collection[] = [
     name: 'Harbor Scene',
     artistSlug: 'tyler-hobbs',
     description: 'Harbor Scene #2 (after John Henry Twachtman) was acquired through a private sale via LACMA and Cactoid Labs \u2014 a generative reinterpretation of Twachtman\'s Impressionist harbor painting through Hobbs\' algorithmic lens.',
-    curatorNote: 'Acquired through a private LACMA exhibition — a contemporary generative response to American Impressionism. Belongs to a small body of works where Hobbs explicitly converses with art history.',
+    curatorNote: 'Acquired through a private LACMA exhibition - a contemporary generative response to American Impressionism. Belongs to a small body of works where Hobbs explicitly converses with art history.',
     medium: 'image',
     contractAddress: '0x7fc4a267c44d9f4d31227edeee5df7ef93819345',
     exhibitions: [
@@ -538,7 +538,7 @@ export const collections: Collection[] = [
     name: 'SuperRare',
     artistSlug: 'xcopy',
     description: 'XCOPY\'s 1/1 works on SuperRare represent some of the artist\'s most direct statements \u2014 raw, glitched, and uncompromising explorations of death, dystopia, and digital-era disillusionment.',
-    curatorNote: 'DCF\'s XCOPY 1/1s span the artist\'s most-cited cultural moments — works that helped define crypto art\'s visual register: glitch, dread, and political commentary at compressed scale.',
+    curatorNote: 'DCF\'s XCOPY 1/1s span the artist\'s most-cited cultural moments - works that helped define crypto art\'s visual register: glitch, dread, and political commentary at compressed scale.',
     medium: 'image',
     contractAddress: '0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0',
     tags: ['crypto-native', 'digital-culture', 'glitch'],
@@ -3576,19 +3576,19 @@ export const pieces: Piece[] = [
     originalUri: 'https://img.qql.art/assets/mintpass.png',
   },
   {
-    id: 'qql-469-1088',
-    slug: 'qql-469-1088',
-    title: 'Mint Pass #469',
+    id: 'qql-496-1088',
+    slug: 'qql-496-1088',
+    title: 'Mint Pass #496',
     collectionSlug: 'qql',
     artistSlug: 'tyler-hobbs-and-dandelion-wist',
-    image: '/samples/qql-469.svg',
+    image: '/samples/qql-496.svg',
     medium: 'generative',
     description: '',
     traits: {},
-    tokenId: '469',
+    tokenId: '496',
     contractAddress: '0xc73b17179bf0c59cd5860bb25247d1d1092c1088',
     influences: [],
-    openseaUrl: 'https://opensea.io/item/ethereum/0xc73b17179bf0c59cd5860bb25247d1d1092c1088/469',
+    openseaUrl: 'https://opensea.io/item/ethereum/0xc73b17179bf0c59cd5860bb25247d1d1092c1088/496',
     originalUri: 'https://img.qql.art/assets/mintpass.png',
   },
   {
@@ -5508,8 +5508,8 @@ export const pieces: Piece[] = [
 ];
 
 // ---------------------------------------------------------------------------
-// Influence map — connecting traditional art to digital works
-// (placeholder — to be populated with art historical connections)
+// Influence map - connecting traditional art to digital works
+// (placeholder - to be populated with art historical connections)
 // ---------------------------------------------------------------------------
 export const influences: Influence[] = [];
 

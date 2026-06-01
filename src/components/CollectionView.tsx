@@ -140,7 +140,7 @@ export default function CollectionView({ sections, artists }: Props) {
 
   return (
     <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
-      {/* Filters — ALL above, then ARTIST row, then CHAPTER row */}
+      {/* Filters - ALL above, then ARTIST row, then CHAPTER row */}
       <section className="pt-12 sm:pt-16 pb-6 border-b border-border space-y-2">
         <button
           onClick={clearAll}
@@ -205,22 +205,24 @@ export default function CollectionView({ sections, artists }: Props) {
           ))}
         </div>
 
-        {/* Chapter description — only when a chapter is active */}
+        {/* Chapter description - only when a chapter is active */}
         {activeChapter && (
-          <p className="font-serif italic text-[16px] leading-[1.55] text-foreground-secondary pt-4 max-w-[680px]">
+          <p className="font-serif text-[16px] leading-[1.55] text-foreground-secondary pt-4 max-w-[680px]">
             {activeChapter.description}
           </p>
         )}
 
-        {/* Result count — only when filters are active */}
+        {/* Result count - only when filters are active. Phrased as institutional
+            context (X of Y in DCF) rather than a raw ratio, so the chapter
+            explainer reads as "this chapter contains N of the fund's whole." */}
         {hasFilters && (
           <p className="text-[11px] text-muted tabular-nums pt-2">
-            {visiblePieces} of {totalPieces} works
+            {visiblePieces} of {totalPieces} works in Hivemind Digital Culture Fund
           </p>
         )}
       </section>
 
-      {/* Works — salon wall */}
+      {/* Works - salon wall */}
       <div className="pt-10 pb-20 space-y-12">
         {visible.length === 0 ? (
           <div className="py-24 text-center">

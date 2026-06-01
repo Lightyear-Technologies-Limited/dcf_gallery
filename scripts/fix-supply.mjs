@@ -29,7 +29,7 @@ const SUPPLY = {
   "day-gardens": 50,
 };
 
-// Collections that are 1/1 or complete sets — remove totalSupply so they show "N works"
+// Collections that are 1/1 or complete sets - remove totalSupply so they show "N works"
 const REMOVE_SUPPLY = [
   "ack-editions",
   "piano-blossoms",

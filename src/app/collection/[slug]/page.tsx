@@ -77,7 +77,7 @@ export default async function CollectionPage({ params }: { params: Promise<{ slu
 
   return (
     <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
-      {/* Breadcrumb — collection only; artist link lives below the title */}
+      {/* Breadcrumb - collection only; artist link lives below the title */}
       <div className="pt-20">
         <p className="text-[13px] text-muted">
           <Link href="/" className="hover:text-foreground transition-colors duration-200">
@@ -88,7 +88,7 @@ export default async function CollectionPage({ params }: { params: Promise<{ slu
         </p>
       </div>
 
-      {/* Editorial header — title left, description right. Stripped to bare on
+      {/* Editorial header - title left, description right. Stripped to bare on
           single-piece collections (Lights, Harbor Scene) so the SinglePieceDisplay
           can dominate. */}
       {isSingle ? (
@@ -129,7 +129,7 @@ export default async function CollectionPage({ params }: { params: Promise<{ slu
               {col.mintDate && <p>Minted {col.mintDate}</p>}
             </div>
 
-            {/* Institutional metadata — chain, contract, edition. Reinforces fund-grade
+            {/* Institutional metadata - chain, contract, edition. Reinforces fund-grade
                 posture without adding visual weight. Contract is click-to-copy. */}
             {(col.contractAddress || editionType !== "1/1") && (
               <div className="mt-8 max-w-[280px]">
@@ -159,7 +159,7 @@ export default async function CollectionPage({ params }: { params: Promise<{ slu
                   {col.exhibitions.map((ex, i) => (
                     <li key={i}>
                       <span className="text-muted tabular-nums">{ex.date}</span>
-                      <span className="text-muted"> — </span>
+                      <span className="text-muted"> - </span>
                       {ex.url ? (
                         <a
                           href={ex.url}
@@ -236,7 +236,7 @@ export default async function CollectionPage({ params }: { params: Promise<{ slu
         })()}
       </div>
 
-      {/* Closing gesture — a single hand-off to the next collection by the
+      {/* Closing gesture - a single hand-off to the next collection by the
           same artist, or back up the catalogue. One link, generous space. */}
       {!isSingle && artist && (
         <div className="pt-12 pb-24 border-t border-border">

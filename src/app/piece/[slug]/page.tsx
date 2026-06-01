@@ -14,7 +14,7 @@ const PUNK_V1 = "0xb7f7f6c52f2e2fdb1963eab30438024864c313f6";
 
 /**
  * Derive a human-readable storage label from where the artwork actually lives.
- * Used as the "Storage" row in OnChainDetails — high-signal for fund collectors
+ * Used as the "Storage" row in OnChainDetails - high-signal for fund collectors
  * who care about long-term permanence.
  */
 function deriveStorage(originalUri?: string, contractAddress?: string): string | undefined {
@@ -69,9 +69,23 @@ export default async function PiecePage({ params }: { params: Promise<{ slug: st
     piece.artistSiteUrl || getArtistSiteUrl(piece.collectionSlug, piece.tokenId) || undefined;
 
   const traits = getPieceTraits(piece.slug);
+  // Collections where traits carry curatorial weight (palette, scale, mood,
+  // origin) - open the Features panel by default. Others stay collapsed.
+  const HIGH_SIGNAL_TRAITS = new Set([
+    "fidenza",
+    "ringers",
+    "human-unreadable",
+    "winds-of-yawanawa",
+    "dataland-biome-lumina",
+    "synthetic-dreams",
+    "masks-of-luci",
+    "grifters",
+    "qql",
+  ]);
+  const featuresDefaultOpen = HIGH_SIGNAL_TRAITS.has(piece.collectionSlug);
   const metadata = (
     <div className="space-y-6">
-      <Features traits={traits} />
+      <Features traits={traits} defaultOpen={featuresDefaultOpen} />
       <OnChainDetails
         contractAddress={piece.contractAddress}
         tokenId={piece.tokenId}
@@ -101,10 +115,12 @@ export default async function PiecePage({ params }: { params: Promise<{ slug: st
         />
       </div>
 
-      {/* More from collection */}
+      {/* Other works from this series */}
       {more.length > 0 && collection && (
         <div className="pt-24 pb-8">
-          <p className="text-[13px] text-muted mb-6">More from {collection.name}</p>
+          <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-6">
+            Other works from {collection.name}
+          </p>
           <JustifiedGallery pieces={more} piecesPerRow={Math.min(more.length, 4)} />
         </div>
       )}

@@ -14,9 +14,9 @@ const map = JSON.parse(readFileSync(mapPath, "utf-8"));
 for (const w of winds) {
   if (!w.traits) continue;
   const t = w.traits;
-  const origin = (t["Origin"] || "").split(" — ")[1] || "?";
-  const temp = t["Color Temperature — Categorical"] || "?";
-  const wind = t["Wind Intensity — Categorical"] || "?";
+  const origin = (t["Origin"] || "").split(" - ")[1] || "?";
+  const temp = t["Color Temperature - Categorical"] || "?";
+  const wind = t["Wind Intensity - Categorical"] || "?";
   const particle = t["Particle Type"] || "";
   const parts = [temp, origin];
   if (wind && wind !== "Moderate") parts.push(wind);

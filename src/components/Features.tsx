@@ -1,17 +1,24 @@
 interface Props {
   traits: Array<[string, string | number]> | null;
+  /** Default-open for collections where traits are curatorial (palette, scale,
+      emotional climate). Closed by default for collections where traits are
+      mechanical (just token IDs etc). */
+  defaultOpen?: boolean;
 }
 
 /**
  * Generative features for a piece (palette, scale, etc). Shown beneath
- * OnChainDetails. Collapsible to preserve the page's quiet hierarchy —
+ * OnChainDetails. Collapsible to preserve the page's quiet hierarchy -
  * traits are supporting context, not the headline.
  */
-export default function Features({ traits }: Props) {
+export default function Features({ traits, defaultOpen = false }: Props) {
   if (!traits || traits.length === 0) return null;
 
   return (
-    <details className="group text-[13px] [&_summary::-webkit-details-marker]:hidden">
+    <details
+      className="group text-[13px] [&_summary::-webkit-details-marker]:hidden"
+      open={defaultOpen}
+    >
       <summary className="cursor-pointer list-none text-muted hover:text-foreground transition-colors duration-200 inline-flex items-center gap-2 select-none">
         <span>Features</span>
         <span

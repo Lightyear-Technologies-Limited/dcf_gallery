@@ -20,7 +20,7 @@ interface PieceData {
 interface Props {
   pieces: PieceData[];
   heroSlug: string;
-  /** Grid is `(sidebarCols + N) × N` squares — hero spans N × N. */
+  /** Grid is `(sidebarCols + N) × N` squares - hero spans N × N. */
   sidebarCols: number;
   /** Number of rows in the composite block (also the hero side length). */
   sidebarRows: number;
@@ -53,7 +53,7 @@ export default function HeroSidebarGallery({
 }: Props) {
   const hero = pieces.find((p) => p.slug === heroSlug);
   if (!hero) {
-    // Hero not in this collection — fall back to plain justified gallery.
+    // Hero not in this collection - fall back to plain justified gallery.
     return <JustifiedGallery pieces={pieces} piecesPerRow={fallbackPerRow} gap={gap} />;
   }
 
@@ -96,7 +96,7 @@ export default function HeroSidebarGallery({
           aspectRatio: `${totalCols} / ${sidebarRows}`,
         }}
       >
-        {/* Hero — spans the first sidebarRows × sidebarRows cells */}
+        {/* Hero - spans the first sidebarRows × sidebarRows cells */}
         <Link
           href={`/piece/${hero.slug}`}
           className={`block overflow-hidden ${isPunkHero ? "bg-[#638596]" : "bg-surface"}`}
@@ -123,7 +123,7 @@ export default function HeroSidebarGallery({
           )}
         </Link>
 
-        {/* Sidebar — fills the remaining cells row-major */}
+        {/* Sidebar - fills the remaining cells row-major */}
         {sidebarPieces.map((p) => {
           const src = getArtworkImage(p.slug, p.contractAddress, p.tokenId, "detail");
           const isPunk = p.collectionSlug === "cryptopunks";

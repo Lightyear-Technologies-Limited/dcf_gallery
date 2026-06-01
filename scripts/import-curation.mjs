@@ -53,7 +53,7 @@ if (slugIdx < 0) {
   process.exit(1);
 }
 
-// Need to look up artist + collection per piece — read from data.ts
+// Need to look up artist + collection per piece - read from data.ts
 const dataText = readFileSync(resolve(ROOT, "src/lib/data.ts"), "utf-8");
 const piecesMatch = dataText.match(/export const pieces[\s\S]*?\];\n/);
 const pieceBlocks = piecesMatch[0].match(/\{[^}]+\}/g) || [];

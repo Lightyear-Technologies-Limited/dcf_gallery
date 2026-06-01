@@ -9,7 +9,7 @@ Analyze a feature and strategically add animations and micro-interactions that e
 
 ## MANDATORY PREPARATION
 
-Invoke /impeccable — it contains design principles, anti-patterns, and the **Context Gathering Protocol**. Follow the protocol before proceeding — if no design context exists yet, you MUST run /impeccable teach first. Additionally gather: performance constraints.
+Invoke /impeccable - it contains design principles, anti-patterns, and the **Context Gathering Protocol**. Follow the protocol before proceeding - if no design context exists yet, you MUST run /impeccable teach first. Additionally gather: performance constraints.
 
 ---
 
@@ -152,12 +152,12 @@ Use appropriate techniques for each animation:
 ```
 
 **NEVER**:
-- Use bounce or elastic easing curves—they feel dated and draw attention to the animation itself
-- Animate layout properties (width, height, top, left)—use transform instead
-- Use durations over 500ms for feedback—it feels laggy
-- Animate without purpose—every animation needs a reason
-- Ignore `prefers-reduced-motion`—this is an accessibility violation
-- Animate everything—animation fatigue makes interfaces feel exhausting
+- Use bounce or elastic easing curves-they feel dated and draw attention to the animation itself
+- Animate layout properties (width, height, top, left)-use transform instead
+- Use durations over 500ms for feedback-it feels laggy
+- Animate without purpose-every animation needs a reason
+- Ignore `prefers-reduced-motion`-this is an accessibility violation
+- Animate everything-animation fatigue makes interfaces feel exhausting
 - Block interaction during animations unless intentional
 
 ## Verify Quality

@@ -8,7 +8,7 @@
  *   Artist
  *   Collection
  *   Piece Title
- *   Piece Slug   (the unique ID — don't edit this)
+ *   Piece Slug   (the unique ID - don't edit this)
  *   Token ID
  *
  * To reorder pieces: drag rows in Excel.

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Backfill originalUri for Grifters that resolve at xcopy's admin path.
 // Pattern: https://admin.xcopy.art/media/original_images/{contract}-{tokenId}.png
-// Some tokens 404 — only inject when HEAD returns 200.
+// Some tokens 404 - only inject when HEAD returns 200.
 import { readFileSync, writeFileSync } from "fs";
 import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
@@ -30,7 +30,7 @@ while ((m = blockRe.exec(src)) !== null) {
     updates.push({ slug: m[1], tokenId, url, blockStart: m.index, blockEnd: m.index + block.length });
     console.log(`  ✓ ${m[1]} → ${url}`);
   } else {
-    console.log(`  ✗ ${m[1]} (${tokenId}) — ${r.status}, leaving existing originalUri`);
+    console.log(`  ✗ ${m[1]} (${tokenId}) - ${r.status}, leaving existing originalUri`);
   }
   await sleep(120);
 }

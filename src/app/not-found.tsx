@@ -2,8 +2,10 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 pt-[160px] pb-24">
-      <p className="text-[13px] text-muted mb-6">404</p>
+    <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 min-h-[calc(100vh-14rem)] flex flex-col justify-center py-24">
+      <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-6">
+        404
+      </p>
       <h1 className="font-serif display">
         Not in the collection.
       </h1>
@@ -13,7 +15,7 @@ export default function NotFound() {
       </p>
       <Link
         href="/"
-        className="text-[13px] text-muted hover:text-foreground transition-colors duration-200 mt-10 inline-block underline underline-offset-4 decoration-border"
+        className="text-[13px] text-muted hover:text-foreground transition-colors duration-200 mt-10 inline-block underline underline-offset-4 decoration-border hover:decoration-foreground self-start"
       >
         Return to the collection
       </Link>

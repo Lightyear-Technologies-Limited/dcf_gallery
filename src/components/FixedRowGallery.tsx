@@ -25,7 +25,7 @@ interface Props {
 }
 
 /**
- * Fixed-row gallery — pieces are grouped into rows based on explicit rowMap
+ * Fixed-row gallery - pieces are grouped into rows based on explicit rowMap
  * from curation.json (e.g., "ringers-x": 1, "ringers-y": 1, "ringers-z": 2).
  * Pieces without explicit rows are appended at the end using fallbackPerRow.
  * Each row fills container width; row heights vary by aspect.

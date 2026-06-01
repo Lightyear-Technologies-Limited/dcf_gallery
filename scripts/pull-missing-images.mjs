@@ -6,10 +6,10 @@
  * so images are immediately resolvable by getArtworkImage().
  *
  * Sources (in order):
- *  1. Art Blocks media proxy  — for contract 0xa7d8...d270 (Fidenza, Ringers, etc.)
- *  2. Alchemy demo NFT API    — for everything else
+ *  1. Art Blocks media proxy  - for contract 0xa7d8...d270 (Fidenza, Ringers, etc.)
+ *  2. Alchemy demo NFT API    - for everything else
  *
- * Files are saved with .webp extension regardless of source format — Next.js
+ * Files are saved with .webp extension regardless of source format - Next.js
  * image optimization handles the actual transcoding at request time. Run the
  * proper Python optimizer later if you want true WebP on disk.
  *
@@ -132,7 +132,7 @@ async function fetchBinary(url, timeoutMs = 20000) {
 }
 
 async function tryArtBlocks({ contract, tokenId }) {
-  // Several hosts serve Art Blocks renders — try in order.
+  // Several hosts serve Art Blocks renders - try in order.
   const urls = [
     `https://media-proxy.artblocks.io/1/${contract}/${tokenId}.png`,
     `https://media.artblocks.io/${tokenId}.png`,
@@ -179,7 +179,7 @@ async function tryAlchemy({ contract, tokenId }) {
 // ---------------------------------------------------------------------------
 // Download loop, limited parallelism
 // ---------------------------------------------------------------------------
-const LIMIT = 2;           // Alchemy demo tier is strict — keep low
+const LIMIT = 2;           // Alchemy demo tier is strict - keep low
 const SLEEP_MS = 400;       // Between requests per worker
 const MAX_RETRY = 2;
 

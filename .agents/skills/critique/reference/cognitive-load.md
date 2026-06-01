@@ -6,17 +6,17 @@ Cognitive load is the total mental effort required to use an interface. Overload
 
 ## Three Types of Cognitive Load
 
-### Intrinsic Load — The Task Itself
+### Intrinsic Load - The Task Itself
 Complexity inherent to what the user is trying to do. You can't eliminate this, but you can structure it.
 
 **Manage it by**:
 - Breaking complex tasks into discrete steps
 - Providing scaffolding (templates, defaults, examples)
-- Progressive disclosure — show what's needed now, hide the rest
+- Progressive disclosure - show what's needed now, hide the rest
 - Grouping related decisions together
 
-### Extraneous Load — Bad Design
-Mental effort caused by poor design choices. **Eliminate this ruthlessly** — it's pure waste.
+### Extraneous Load - Bad Design
+Mental effort caused by poor design choices. **Eliminate this ruthlessly** - it's pure waste.
 
 **Common sources**:
 - Confusing navigation that requires mental mapping
@@ -25,8 +25,8 @@ Mental effort caused by poor design choices. **Eliminate this ruthlessly** — i
 - Inconsistent patterns that prevent learning
 - Unnecessary steps between user intent and result
 
-### Germane Load — Learning Effort
-Mental effort spent building understanding. This is *good* cognitive load — it leads to mastery.
+### Germane Load - Learning Effort
+Mental effort spent building understanding. This is *good* cognitive load - it leads to mastery.
 
 **Support it by**:
 - Progressive disclosure that reveals complexity gradually
@@ -49,7 +49,7 @@ Evaluate the interface against these 8 items:
 - [ ] **Working memory**: Does the user need to remember information from a previous screen to act on the current one?
 - [ ] **Progressive disclosure**: Is complexity revealed only when the user needs it?
 
-**Scoring**: Count the failed items. 0–1 failures = low cognitive load (good). 2–3 = moderate (address soon). 4+ = high cognitive load (critical fix needed).
+**Scoring**: Count the failed items. 0-1 failures = low cognitive load (good). 2-3 = moderate (address soon). 4+ = high cognitive load (critical fix needed).
 
 ---
 
@@ -58,14 +58,14 @@ Evaluate the interface against these 8 items:
 **Humans can hold ≤4 items in working memory at once** (Miller's Law revised by Cowan, 2001).
 
 At any decision point, count the number of distinct options, actions, or pieces of information a user must simultaneously consider:
-- **≤4 items**: Within working memory limits — manageable
-- **5–7 items**: Pushing the boundary — consider grouping or progressive disclosure
-- **8+ items**: Overloaded — users will skip, misclick, or abandon
+- **≤4 items**: Within working memory limits - manageable
+- **5-7 items**: Pushing the boundary - consider grouping or progressive disclosure
+- **8+ items**: Overloaded - users will skip, misclick, or abandon
 
 **Practical applications**:
 - Navigation menus: ≤5 top-level items (group the rest under clear categories)
 - Form sections: ≤4 fields visible per group before a visual break
-- Action buttons: 1 primary, 1–2 secondary, group the rest in a menu
+- Action buttons: 1 primary, 1-2 secondary, group the rest in a menu
 - Dashboard widgets: ≤4 key metrics visible without scrolling
 - Pricing tiers: ≤3 options (more causes analysis paralysis)
 
@@ -90,8 +90,8 @@ At any decision point, count the number of distinct options, actions, or pieces 
 **Fix**: Use plain language. If domain terms are unavoidable, define them inline.
 
 ### 5. The Visual Noise Floor
-**Problem**: Every element has the same visual weight — nothing stands out.
-**Fix**: Establish clear hierarchy: one primary element, 2–3 secondary, everything else muted.
+**Problem**: Every element has the same visual weight - nothing stands out.
+**Fix**: Establish clear hierarchy: one primary element, 2-3 secondary, everything else muted.
 
 ### 6. The Inconsistent Pattern
 **Problem**: Similar actions work differently in different places.

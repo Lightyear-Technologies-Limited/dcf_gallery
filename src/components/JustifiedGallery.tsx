@@ -24,7 +24,7 @@ interface Props {
 }
 
 /**
- * Justified gallery — each row fills the full container width exactly.
+ * Justified gallery - each row fills the full container width exactly.
  * Pieces within a row share the same height; widths come from aspect ratios.
  * Row heights naturally differ: rows with wider pieces are shorter, rows with
  * narrower pieces are taller. Result: no cropping, no empty space.

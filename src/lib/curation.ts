@@ -132,7 +132,7 @@ export function getArtistSiteUrl(collectionSlug: string, tokenId?: string): stri
 
 /**
  * Get the edition shorthand for a collection (e.g. "1/1", "1/1/999").
- * Default is "1/1" — every piece is treated as unique unless the
+ * Default is "1/1" - every piece is treated as unique unless the
  * collection is explicitly marked as a series in curation.json.
  *
  * Curation entry: `editions: { "fidenza": "1/1/999", ... }`

@@ -23,7 +23,7 @@ const instrumentSans = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "DCF Gallery — Digital Culture Fund",
+  title: "DCF Gallery - Digital Culture Fund",
   description: "A curated showcase of the Hivemind Digital Culture Fund collection.",
 };
 
@@ -47,8 +47,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           Skip to content
         </a>
         <Header />
-        <main id="main" className="flex-1 pt-14 md:pt-0 md:pl-36">{children}</main>
-        <footer className="mt-20 border-t border-border py-16 md:pl-36">
+        <main id="main" className="flex-1 pt-14 md:pt-0 md:pl-32 xl:pl-36">{children}</main>
+        <footer className="mt-20 border-t border-border py-16 md:pl-32 xl:pl-36">
           <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
             <div>
               <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium">Digital Culture Fund</p>

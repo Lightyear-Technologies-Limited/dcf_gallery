@@ -163,7 +163,7 @@ function preferTitle(piece, meta) {
   // Prefer chain name if different AND it isn't just "Collection #N/M"
   if (name && name.trim()) {
     // Avoid verbose placeholder names like "BIOME LUMINA #115/1000"
-    if (!/^\s*[A-Z][A-Z\s\-—]+#\d+/i.test(name) && !/#\d+\/\d+$/.test(name)) {
+    if (!/^\s*[A-Z][A-Z\s\--]+#\d+/i.test(name) && !/#\d+\/\d+$/.test(name)) {
       return name;
     }
   }
@@ -178,7 +178,7 @@ function summarize(piece, meta) {
 
   switch (piece.collectionSlug) {
     case "piano-blossoms": {
-      // ACK piano blossoms — 1/1 title. Prefer chain's spaced version (e.g. "Flower Demons").
+      // ACK piano blossoms - 1/1 title. Prefer chain's spaced version (e.g. "Flower Demons").
       return truncate(preferTitle(piece, meta));
     }
     case "her-favorite-flowers": {
@@ -194,7 +194,7 @@ function summarize(piece, meta) {
       return truncate(preferTitle(piece, meta));
     }
     case "lights": {
-      // Kim Asendorf — chain name is "Raster und Spektrum" which is perfect.
+      // Kim Asendorf - chain name is "Raster und Spektrum" which is perfect.
       return truncate(preferTitle(piece, meta));
     }
     case "dataland-biome-lumina": {
@@ -236,7 +236,7 @@ function summarize(piece, meta) {
       return truncate(`#${piece.tokenId}`);
     }
     case "skulls-of-luci": {
-      // Same pattern as masks — chain name is the skull name.
+      // Same pattern as masks - chain name is the skull name.
       return truncate(name || title || `#${piece.tokenId}`);
     }
     case "tyler-hobbs": {
@@ -331,7 +331,7 @@ for (let i = 0; i < pieces.length; i++) {
   process.stdout.write(`[${i + 1}/${pieces.length}] ${p.slug} ... `);
   const meta = await fetchMeta(p.contractAddress, p.tokenId);
   if (meta?.error) {
-    console.log(`FAIL (${meta.error}) — using fallback`);
+    console.log(`FAIL (${meta.error}) - using fallback`);
     failures.push({ slug: p.slug, reason: meta.error, title: p.title });
     // Fallback based on title or #tokenId
     merged[p.slug] = p.title ? p.title.slice(0, 60) : `#${p.tokenId}`;

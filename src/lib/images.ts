@@ -1,5 +1,5 @@
 /**
- * Artwork image lookup — serves optimized WebP.
+ * Artwork image lookup - serves optimized WebP.
  *
  * Two sizes:
  * - /art/optimized/{key}.webp  (max 1200px, for detail pages)
@@ -17,7 +17,7 @@ const CURATED_DETAIL: Record<string, string> = {
   "lightyears-1": "/art/optimized/curated-lightyears-001.webp",
   "masksofluci-442": "/art/optimized/curated-masks-442.webp",
   "x-ray-machine-1": "/art/optimized/operator-x-ray-machine.webp",
-  // Kim Asendorf — static PNG screengrabs (Alchemy/Cloudinary 1000px renders)
+  // Kim Asendorf - static PNG screengrabs (Alchemy/Cloudinary 1000px renders)
   "lights-3-2006": "/art/lights-3-2006.png",
   "pxl-dex-105-ecfb": "/art/pxl-dex-105-ecfb.png",
   "pxl-dex-107-ecfb": "/art/pxl-dex-107-ecfb.png",
@@ -45,7 +45,7 @@ const CURATED_THUMB: Record<string, string> = {
   "lightyears-1": "/art/thumbs/curated-lightyears-001.webp",
   "masksofluci-442": "/art/thumbs/curated-masks-442.webp",
   "x-ray-machine-1": "/art/thumbs/operator-x-ray-machine.webp",
-  // Kim Asendorf — same PNGs serve both sizes (1000px is sufficient for thumbs)
+  // Kim Asendorf - same PNGs serve both sizes (1000px is sufficient for thumbs)
   "lights-3-2006": "/art/lights-3-2006.png",
   "pxl-dex-105-ecfb": "/art/pxl-dex-105-ecfb.png",
   "pxl-dex-107-ecfb": "/art/pxl-dex-107-ecfb.png",
@@ -72,7 +72,7 @@ const CURATED_THUMB: Record<string, string> = {
  * prefixed ID (project * 1_000_000 + serial). The spreadsheet stores some
  * projects as raw serials (Fidenza: "145") and others as already-prefixed
  * full IDs (Ringers: "13000374"). This helper normalizes both to the full
- * on-chain tokenId so URLs built from it — Raster, OpenSea, image paths —
+ * on-chain tokenId so URLs built from it - Raster, OpenSea, image paths -
  * resolve correctly.
  */
 export function resolveTokenId(

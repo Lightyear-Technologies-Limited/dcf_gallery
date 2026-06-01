@@ -148,7 +148,7 @@ const ORDERS = {
     // Minted Outputs (Tyler Hobbs compositions) - more valuable
     "qql-308-0c88", "qql-309-0c88",
     // Mint Passes
-    "qql-160-1088", "qql-220-1088", "qql-458-1088", "qql-469-1088",
+    "qql-160-1088", "qql-220-1088", "qql-458-1088", "qql-496-1088",
     "qql-534-1088", "qql-617-1088", "qql-714-1088", "qql-722-1088",
     "qql-915-1088", "qql-978-1088",
   ],

@@ -7,13 +7,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 3384382,
-      "Wind Intensity — Categorical": "Tranquil",
+      "Wind Intensity - Numeric": 3384382,
+      "Wind Intensity - Categorical": "Tranquil",
       "Generative Soundtrack": "Track 03",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 1678296,
-      "Color Temperature — Categorical": "Hot",
-      "Origin": "Mai — Earth"
+      "Color Temperature - Numeric": 1678296,
+      "Color Temperature - Categorical": "Hot",
+      "Origin": "Mai - Earth"
     }
   },
   {
@@ -24,13 +24,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 4692581,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 4692581,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 01",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 493778,
-      "Color Temperature — Categorical": "Freezing",
-      "Origin": "Niwe — Wind"
+      "Color Temperature - Numeric": 493778,
+      "Color Temperature - Categorical": "Freezing",
+      "Origin": "Niwe - Wind"
     }
   },
   {
@@ -41,13 +41,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 4301357,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 4301357,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 01",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 1209663,
-      "Color Temperature — Categorical": "Mild",
-      "Origin": "Uwa — Flower"
+      "Color Temperature - Numeric": 1209663,
+      "Color Temperature - Categorical": "Mild",
+      "Origin": "Uwa - Flower"
     }
   },
   {
@@ -58,13 +58,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 9036237,
-      "Wind Intensity — Categorical": "Intense",
+      "Wind Intensity - Numeric": 9036237,
+      "Wind Intensity - Categorical": "Intense",
       "Generative Soundtrack": "Track 02",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 1194033,
-      "Color Temperature — Categorical": "Mild",
-      "Origin": "Nay — Sky"
+      "Color Temperature - Numeric": 1194033,
+      "Color Temperature - Categorical": "Mild",
+      "Origin": "Nay - Sky"
     }
   },
   {
@@ -75,13 +75,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 2860098,
-      "Wind Intensity — Categorical": "Still",
+      "Wind Intensity - Numeric": 2860098,
+      "Wind Intensity - Categorical": "Still",
       "Generative Soundtrack": "Track 02",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 1106949,
-      "Color Temperature — Categorical": "Mild",
-      "Origin": "Nii — Forest"
+      "Color Temperature - Numeric": 1106949,
+      "Color Temperature - Categorical": "Mild",
+      "Origin": "Nii - Forest"
     }
   },
   {
@@ -92,13 +92,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 3186366,
-      "Wind Intensity — Categorical": "Tranquil",
+      "Wind Intensity - Numeric": 3186366,
+      "Wind Intensity - Categorical": "Tranquil",
       "Generative Soundtrack": "Track 04",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 771828,
-      "Color Temperature — Categorical": "Cold",
-      "Origin": "Waka — Water"
+      "Color Temperature - Numeric": 771828,
+      "Color Temperature - Categorical": "Cold",
+      "Origin": "Waka - Water"
     }
   },
   {
@@ -109,13 +109,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 8000790,
-      "Wind Intensity — Categorical": "Intense",
+      "Wind Intensity - Numeric": 8000790,
+      "Wind Intensity - Categorical": "Intense",
       "Generative Soundtrack": "Track 04",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 2155048,
-      "Color Temperature — Categorical": "Scorching",
-      "Origin": "Txii — Fire"
+      "Color Temperature - Numeric": 2155048,
+      "Color Temperature - Categorical": "Scorching",
+      "Origin": "Txii - Fire"
     }
   },
   {
@@ -126,13 +126,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 4612418,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 4612418,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 01",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 1123986,
-      "Color Temperature — Categorical": "Mild",
-      "Origin": "Nay — Sky"
+      "Color Temperature - Numeric": 1123986,
+      "Color Temperature - Categorical": "Mild",
+      "Origin": "Nay - Sky"
     }
   },
   {
@@ -143,13 +143,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 4842707,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 4842707,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 02",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 2180607,
-      "Color Temperature — Categorical": "Scorching",
-      "Origin": "Nay — Sky"
+      "Color Temperature - Numeric": 2180607,
+      "Color Temperature - Categorical": "Scorching",
+      "Origin": "Nay - Sky"
     }
   },
   {
@@ -160,13 +160,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 4494474,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 4494474,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 01",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 879821,
-      "Color Temperature — Categorical": "Cold",
-      "Origin": "Ushe — Moon"
+      "Color Temperature - Numeric": 879821,
+      "Color Temperature - Categorical": "Cold",
+      "Origin": "Ushe - Moon"
     }
   },
   {
@@ -177,13 +177,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 4874422,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 4874422,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 03",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 377600,
-      "Color Temperature — Categorical": "Freezing",
-      "Origin": "Ushe — Moon"
+      "Color Temperature - Numeric": 377600,
+      "Color Temperature - Categorical": "Freezing",
+      "Origin": "Ushe - Moon"
     }
   },
   {
@@ -194,13 +194,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 8083927,
-      "Wind Intensity — Categorical": "Intense",
+      "Wind Intensity - Numeric": 8083927,
+      "Wind Intensity - Categorical": "Intense",
       "Generative Soundtrack": "Track 01",
       "Particle Type": "Spherical",
-      "Color Temperature — Numeric": 408889,
-      "Color Temperature — Categorical": "Freezing",
-      "Origin": "Nii — Forest"
+      "Color Temperature - Numeric": 408889,
+      "Color Temperature - Categorical": "Freezing",
+      "Origin": "Nii - Forest"
     }
   },
   {
@@ -211,13 +211,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 4809624,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 4809624,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 02",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 379716,
-      "Color Temperature — Categorical": "Freezing",
-      "Origin": "Ushe — Moon"
+      "Color Temperature - Numeric": 379716,
+      "Color Temperature - Categorical": "Freezing",
+      "Origin": "Ushe - Moon"
     }
   },
   {
@@ -228,13 +228,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 5334870,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 5334870,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 02",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 1618027,
-      "Color Temperature — Categorical": "Hot",
-      "Origin": "Nii — Forest"
+      "Color Temperature - Numeric": 1618027,
+      "Color Temperature - Categorical": "Hot",
+      "Origin": "Nii - Forest"
     }
   },
   {
@@ -245,13 +245,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 4473510,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 4473510,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 02",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 1638215,
-      "Color Temperature — Categorical": "Hot",
-      "Origin": "Uwa — Flower"
+      "Color Temperature - Numeric": 1638215,
+      "Color Temperature - Categorical": "Hot",
+      "Origin": "Uwa - Flower"
     }
   },
   {
@@ -262,13 +262,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 4351351,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 4351351,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 03",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 835149,
-      "Color Temperature — Categorical": "Cold",
-      "Origin": "Nay — Sky"
+      "Color Temperature - Numeric": 835149,
+      "Color Temperature - Categorical": "Cold",
+      "Origin": "Nay - Sky"
     }
   },
   {
@@ -279,13 +279,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 4767728,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 4767728,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 02",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 1370944,
-      "Color Temperature — Categorical": "Mild",
-      "Origin": "Txii — Fire"
+      "Color Temperature - Numeric": 1370944,
+      "Color Temperature - Categorical": "Mild",
+      "Origin": "Txii - Fire"
     }
   },
   {
@@ -296,13 +296,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 7519606,
-      "Wind Intensity — Categorical": "Intense",
+      "Wind Intensity - Numeric": 7519606,
+      "Wind Intensity - Categorical": "Intense",
       "Generative Soundtrack": "Track 03",
       "Particle Type": "Spherical",
-      "Color Temperature — Numeric": 907332,
-      "Color Temperature — Categorical": "Cold",
-      "Origin": "Waka — Water"
+      "Color Temperature - Numeric": 907332,
+      "Color Temperature - Categorical": "Cold",
+      "Origin": "Waka - Water"
     }
   },
   {
@@ -313,13 +313,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 5443129,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 5443129,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 03",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 1249875,
-      "Color Temperature — Categorical": "Mild",
-      "Origin": "Nay — Sky"
+      "Color Temperature - Numeric": 1249875,
+      "Color Temperature - Categorical": "Mild",
+      "Origin": "Nay - Sky"
     }
   },
   {
@@ -330,13 +330,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 4931998,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 4931998,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 04",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 1244418,
-      "Color Temperature — Categorical": "Mild",
-      "Origin": "Vari — Sun"
+      "Color Temperature - Numeric": 1244418,
+      "Color Temperature - Categorical": "Mild",
+      "Origin": "Vari - Sun"
     }
   },
   {
@@ -347,13 +347,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 4224835,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 4224835,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 04",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 1101340,
-      "Color Temperature — Categorical": "Mild",
-      "Origin": "Nay — Sky"
+      "Color Temperature - Numeric": 1101340,
+      "Color Temperature - Categorical": "Mild",
+      "Origin": "Nay - Sky"
     }
   },
   {
@@ -364,13 +364,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 4698874,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 4698874,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 02",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 1119912,
-      "Color Temperature — Categorical": "Mild",
-      "Origin": "Nay — Sky"
+      "Color Temperature - Numeric": 1119912,
+      "Color Temperature - Categorical": "Mild",
+      "Origin": "Nay - Sky"
     }
   },
   {
@@ -381,13 +381,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 6462156,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 6462156,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 01",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 1431919,
-      "Color Temperature — Categorical": "Mild",
-      "Origin": "Uwa — Flower"
+      "Color Temperature - Numeric": 1431919,
+      "Color Temperature - Categorical": "Mild",
+      "Origin": "Uwa - Flower"
     }
   },
   {
@@ -398,13 +398,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 4847803,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 4847803,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 04",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 401280,
-      "Color Temperature — Categorical": "Freezing",
-      "Origin": "Ushe — Moon"
+      "Color Temperature - Numeric": 401280,
+      "Color Temperature - Categorical": "Freezing",
+      "Origin": "Ushe - Moon"
     }
   },
   {
@@ -415,13 +415,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 5685128,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 5685128,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 04",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 1195335,
-      "Color Temperature — Categorical": "Mild",
-      "Origin": "Niwe — Wind"
+      "Color Temperature - Numeric": 1195335,
+      "Color Temperature - Categorical": "Mild",
+      "Origin": "Niwe - Wind"
     }
   },
   {
@@ -432,13 +432,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 4810699,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 4810699,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 01",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 840401,
-      "Color Temperature — Categorical": "Cold",
-      "Origin": "Nay — Sky"
+      "Color Temperature - Numeric": 840401,
+      "Color Temperature - Categorical": "Cold",
+      "Origin": "Nay - Sky"
     }
   },
   {
@@ -449,13 +449,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 5786768,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 5786768,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 02",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 360762,
-      "Color Temperature — Categorical": "Freezing",
-      "Origin": "Mai — Earth"
+      "Color Temperature - Numeric": 360762,
+      "Color Temperature - Categorical": "Freezing",
+      "Origin": "Mai - Earth"
     }
   },
   {
@@ -466,13 +466,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 9731258,
-      "Wind Intensity — Categorical": "Intense",
+      "Wind Intensity - Numeric": 9731258,
+      "Wind Intensity - Categorical": "Intense",
       "Generative Soundtrack": "Track 04",
       "Particle Type": "Spherical",
-      "Color Temperature — Numeric": 1774996,
-      "Color Temperature — Categorical": "Hot",
-      "Origin": "Txii — Fire"
+      "Color Temperature - Numeric": 1774996,
+      "Color Temperature - Categorical": "Hot",
+      "Origin": "Txii - Fire"
     }
   },
   {
@@ -483,13 +483,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 6015212,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 6015212,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 04",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 1774565,
-      "Color Temperature — Categorical": "Hot",
-      "Origin": "Vari — Sun"
+      "Color Temperature - Numeric": 1774565,
+      "Color Temperature - Categorical": "Hot",
+      "Origin": "Vari - Sun"
     }
   },
   {
@@ -500,13 +500,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 4788295,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 4788295,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 02",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 1705687,
-      "Color Temperature — Categorical": "Hot",
-      "Origin": "Uwa — Flower"
+      "Color Temperature - Numeric": 1705687,
+      "Color Temperature - Categorical": "Hot",
+      "Origin": "Uwa - Flower"
     }
   },
   {
@@ -517,13 +517,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 5047708,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 5047708,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 03",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 967981,
-      "Color Temperature — Categorical": "Cold",
-      "Origin": "Ishtī — Star"
+      "Color Temperature - Numeric": 967981,
+      "Color Temperature - Categorical": "Cold",
+      "Origin": "Ishtī - Star"
     }
   },
   {
@@ -534,13 +534,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 5821600,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 5821600,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 03",
       "Particle Type": "Spherical",
-      "Color Temperature — Numeric": 2078569,
-      "Color Temperature — Categorical": "Scorching",
-      "Origin": "Vari — Sun"
+      "Color Temperature - Numeric": 2078569,
+      "Color Temperature - Categorical": "Scorching",
+      "Origin": "Vari - Sun"
     }
   },
   {
@@ -551,13 +551,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 5639016,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 5639016,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 02",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 931346,
-      "Color Temperature — Categorical": "Cold",
-      "Origin": "Niwe — Wind"
+      "Color Temperature - Numeric": 931346,
+      "Color Temperature - Categorical": "Cold",
+      "Origin": "Niwe - Wind"
     }
   },
   {
@@ -568,13 +568,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 6581134,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 6581134,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 02",
       "Particle Type": "Spherical",
-      "Color Temperature — Numeric": 828704,
-      "Color Temperature — Categorical": "Cold",
-      "Origin": "Nii — Forest"
+      "Color Temperature - Numeric": 828704,
+      "Color Temperature - Categorical": "Cold",
+      "Origin": "Nii - Forest"
     }
   },
   {
@@ -585,13 +585,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 4171028,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 4171028,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 01",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 553948,
-      "Color Temperature — Categorical": "Cold",
-      "Origin": "Ushe — Moon"
+      "Color Temperature - Numeric": 553948,
+      "Color Temperature - Categorical": "Cold",
+      "Origin": "Ushe - Moon"
     }
   },
   {
@@ -602,13 +602,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 6866043,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 6866043,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 04",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 1011495,
-      "Color Temperature — Categorical": "Mild",
-      "Origin": "Mai — Earth"
+      "Color Temperature - Numeric": 1011495,
+      "Color Temperature - Categorical": "Mild",
+      "Origin": "Mai - Earth"
     }
   },
   {
@@ -619,13 +619,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 5761163,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 5761163,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 01",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 1820549,
-      "Color Temperature — Categorical": "Hot",
-      "Origin": "Txii — Fire"
+      "Color Temperature - Numeric": 1820549,
+      "Color Temperature - Categorical": "Hot",
+      "Origin": "Txii - Fire"
     }
   },
   {
@@ -636,13 +636,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 5291686,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 5291686,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 04",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 768972,
-      "Color Temperature — Categorical": "Cold",
-      "Origin": "Nay — Sky"
+      "Color Temperature - Numeric": 768972,
+      "Color Temperature - Categorical": "Cold",
+      "Origin": "Nay - Sky"
     }
   },
   {
@@ -653,13 +653,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 3270145,
-      "Wind Intensity — Categorical": "Tranquil",
+      "Wind Intensity - Numeric": 3270145,
+      "Wind Intensity - Categorical": "Tranquil",
       "Generative Soundtrack": "Track 04",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 2226307,
-      "Color Temperature — Categorical": "Scorching",
-      "Origin": "Vari — Sun"
+      "Color Temperature - Numeric": 2226307,
+      "Color Temperature - Categorical": "Scorching",
+      "Origin": "Vari - Sun"
     }
   },
   {
@@ -670,13 +670,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 8388628,
-      "Wind Intensity — Categorical": "Intense",
+      "Wind Intensity - Numeric": 8388628,
+      "Wind Intensity - Categorical": "Intense",
       "Generative Soundtrack": "Track 02",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 1183126,
-      "Color Temperature — Categorical": "Mild",
-      "Origin": "Uwa — Flower"
+      "Color Temperature - Numeric": 1183126,
+      "Color Temperature - Categorical": "Mild",
+      "Origin": "Uwa - Flower"
     }
   },
   {
@@ -687,13 +687,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 3701525,
-      "Wind Intensity — Categorical": "Tranquil",
+      "Wind Intensity - Numeric": 3701525,
+      "Wind Intensity - Categorical": "Tranquil",
       "Generative Soundtrack": "Track 02",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 2015782,
-      "Color Temperature — Categorical": "Scorching",
-      "Origin": "Txii — Fire"
+      "Color Temperature - Numeric": 2015782,
+      "Color Temperature - Categorical": "Scorching",
+      "Origin": "Txii - Fire"
     }
   },
   {
@@ -704,13 +704,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 5390527,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 5390527,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 01",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 1547680,
-      "Color Temperature — Categorical": "Hot",
-      "Origin": "Niwe — Wind"
+      "Color Temperature - Numeric": 1547680,
+      "Color Temperature - Categorical": "Hot",
+      "Origin": "Niwe - Wind"
     }
   },
   {
@@ -721,13 +721,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 4475170,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 4475170,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 01",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 1351890,
-      "Color Temperature — Categorical": "Mild",
-      "Origin": "Nay — Sky"
+      "Color Temperature - Numeric": 1351890,
+      "Color Temperature - Categorical": "Mild",
+      "Origin": "Nay - Sky"
     }
   },
   {
@@ -738,13 +738,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 4787130,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 4787130,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 03",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 940110,
-      "Color Temperature — Categorical": "Cold",
-      "Origin": "Ushe — Moon"
+      "Color Temperature - Numeric": 940110,
+      "Color Temperature - Categorical": "Cold",
+      "Origin": "Ushe - Moon"
     }
   },
   {
@@ -755,13 +755,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 6042517,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 6042517,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 04",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 2023928,
-      "Color Temperature — Categorical": "Scorching",
-      "Origin": "Vari — Sun"
+      "Color Temperature - Numeric": 2023928,
+      "Color Temperature - Categorical": "Scorching",
+      "Origin": "Vari - Sun"
     }
   },
   {
@@ -772,13 +772,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 9670392,
-      "Wind Intensity — Categorical": "Intense",
+      "Wind Intensity - Numeric": 9670392,
+      "Wind Intensity - Categorical": "Intense",
       "Generative Soundtrack": "Track 04",
       "Particle Type": "Spherical",
-      "Color Temperature — Numeric": 2194687,
-      "Color Temperature — Categorical": "Scorching",
-      "Origin": "Vari — Sun"
+      "Color Temperature - Numeric": 2194687,
+      "Color Temperature - Categorical": "Scorching",
+      "Origin": "Vari - Sun"
     }
   },
   {
@@ -789,13 +789,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 4854599,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 4854599,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 03",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 1184988,
-      "Color Temperature — Categorical": "Mild",
-      "Origin": "Uwa — Flower"
+      "Color Temperature - Numeric": 1184988,
+      "Color Temperature - Categorical": "Mild",
+      "Origin": "Uwa - Flower"
     }
   },
   {
@@ -806,13 +806,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 5764333,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 5764333,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 04",
       "Particle Type": "Spherical",
-      "Color Temperature — Numeric": 328595,
-      "Color Temperature — Categorical": "Freezing",
-      "Origin": "Ushe — Moon"
+      "Color Temperature - Numeric": 328595,
+      "Color Temperature - Categorical": "Freezing",
+      "Origin": "Ushe - Moon"
     }
   },
   {
@@ -823,13 +823,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 6735711,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 6735711,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 01",
       "Particle Type": "Spherical",
-      "Color Temperature — Numeric": 1878654,
-      "Color Temperature — Categorical": "Hot",
-      "Origin": "Niwe — Wind"
+      "Color Temperature - Numeric": 1878654,
+      "Color Temperature - Categorical": "Hot",
+      "Origin": "Niwe - Wind"
     }
   },
   {
@@ -840,13 +840,13 @@
       "Communities": "Aldeia Sagrada and Nova Esperança",
       "Medium": "AI Data Painting",
       "Year": "2023",
-      "Wind Intensity — Numeric": 4802738,
-      "Wind Intensity — Categorical": "Moderate",
+      "Wind Intensity - Numeric": 4802738,
+      "Wind Intensity - Categorical": "Moderate",
       "Generative Soundtrack": "Track 04",
       "Particle Type": "Cubical",
-      "Color Temperature — Numeric": 896434,
-      "Color Temperature — Categorical": "Cold",
-      "Origin": "Uwa — Flower"
+      "Color Temperature - Numeric": 896434,
+      "Color Temperature - Categorical": "Cold",
+      "Origin": "Uwa - Flower"
     }
   }
 ]

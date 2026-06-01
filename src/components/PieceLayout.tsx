@@ -38,12 +38,19 @@ function resolveOriginal(uri: string): { href: string; label: string } | null {
     return { href: `https://ipfs.io/ipfs/${path}`, label: "ipfs.io" };
   }
   if (uri.startsWith("ar://")) {
-    return { href: `https://arweave.net/${uri.slice(5)}`, label: "arweave.net" };
+    return { href: `https://ar-io.dev/${uri.slice(5)}`, label: "ar-io.dev" };
   }
   if (uri.startsWith("data:")) return null; // on-chain SVG; no external link
   // Bare IPFS CID (CIDv0 starts with "Qm", CIDv1 with "bafy"/"bafk").
   if (/^(Qm[1-9A-HJ-NP-Za-km-z]{44}|bafy[a-z0-9]+|bafk[a-z0-9]+)$/.test(uri)) {
     return { href: `https://ipfs.io/ipfs/${uri}`, label: "ipfs.io" };
+  }
+  // Rewrite literal arweave.net URLs to ar-io.dev - arweave.net's edge is
+  // flaky enough that 4% of our originalUri probes timed out on it; ar-io.dev
+  // resolves the same transactions reliably.
+  const arweaveMatch = uri.match(/^https?:\/\/arweave\.net\/(.+)$/);
+  if (arweaveMatch) {
+    return { href: `https://ar-io.dev/${arweaveMatch[1]}`, label: "ar-io.dev" };
   }
   const host = hostLabel(uri);
   return host ? { href: uri, label: host } : null;
@@ -73,24 +80,32 @@ export default function PieceLayout({ image, title, isPunk, artistName, artistSl
 
   const infoBlock = (
     <div className="flex-1 md:pt-4">
+      <h1 className="font-serif text-[32px] sm:text-[40px] tracking-tight leading-tight">
+        {title}
+      </h1>
       {artistSlug && artistName && (
-        <Link href={`/artist/${artistSlug}`} className="text-[16px] text-foreground hover:text-muted transition-colors duration-200">
+        <Link
+          href={`/artist/${artistSlug}`}
+          className="text-[16px] text-foreground-secondary hover:text-foreground transition-colors duration-200 mt-3 inline-block"
+        >
           {artistName}
         </Link>
       )}
-      <h1 className="font-serif text-[24px] sm:text-[32px] tracking-tight leading-tight mt-2 italic">
-        {title}
-      </h1>
       {collectionSlug && collectionName && (
-        <Link href={`/collection/${collectionSlug}`} className="text-[13px] text-muted hover:text-foreground transition-colors duration-200 mt-2 inline-block">
-          {collectionName}
-        </Link>
+        <div className="mt-1">
+          <Link
+            href={`/collection/${collectionSlug}`}
+            className="text-[13px] text-muted hover:text-foreground transition-colors duration-200"
+          >
+            {collectionName}
+          </Link>
+        </div>
       )}
 
       <div className="mt-10">{metadata}</div>
 
       {(artistSiteUrl || rasterUrl || original) && (
-        <div className="mt-10 flex flex-col gap-2 text-[11px] text-muted/60">
+        <div className="mt-10 flex flex-col gap-2 text-[12px] text-muted">
           {artistSiteUrl && artistHost && (
             <a
               href={artistSiteUrl}

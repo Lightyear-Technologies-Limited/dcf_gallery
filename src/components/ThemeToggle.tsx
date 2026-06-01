@@ -16,12 +16,17 @@ export default function ThemeToggle() {
     setDark(next);
     document.documentElement.classList.toggle("dark", next);
     localStorage.setItem("dcf-theme", next ? "dark" : "light");
+    // Keep the mobile browser chrome color in sync - otherwise iOS Safari /
+    // Android Chrome retain the previous status-bar tint after a toggle.
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute("content", next ? "#111111" : "#F8F8F7");
   }
 
   return (
     <button
       onClick={toggle}
-      aria-label="Toggle theme"
+      aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
+      title={dark ? "Switch to light mode" : "Switch to dark mode"}
       className="p-2 hover:text-foreground transition-colors text-muted"
     >
       {dark ? (

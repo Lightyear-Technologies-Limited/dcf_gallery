@@ -57,6 +57,15 @@ export function generateStaticParams() {
   return Object.keys(VIEWING_ROOMS).map((slug) => ({ slug }));
 }
 
+/**
+ * Viewing rooms are not surfaced in public navigation right now - they exist
+ * as a parked format for future curated exhibitions. Block search indexing so
+ * a direct URL doesn't end up in Google before we commit to the program.
+ */
+export const metadata = {
+  robots: { index: false, follow: false },
+};
+
 export default async function ViewingRoomPage({
   params,
 }: {
@@ -96,6 +105,9 @@ export default async function ViewingRoomPage({
             Collection
           </Link>
           {" / "}
+          {room.title}
+        </p>
+        <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-5">
           Viewing Room
         </p>
         <h1 className="font-serif display">
@@ -106,7 +118,7 @@ export default async function ViewingRoomPage({
         </p>
       </div>
 
-      {/* Pieces — one per screen, curatorial text between */}
+      {/* Pieces - one per screen, curatorial text between */}
       <div className="pt-24 pb-24 space-y-32">
         {resolved.map(({ piece, image, artist, collection, note }, i) => {
           const artistName = artist
@@ -119,7 +131,7 @@ export default async function ViewingRoomPage({
 
           return (
             <section key={piece.slug}>
-              {/* Artwork — near-full-width */}
+              {/* Artwork - near-full-width */}
               <Link
                 href={`/piece/${piece.slug}`}
                 className={`block ${isPunk ? "bg-[#638596]" : ""}`}
@@ -151,7 +163,7 @@ export default async function ViewingRoomPage({
                   >
                     {artistName}
                   </Link>
-                  <p className="font-serif italic text-[24px] sm:text-[28px] tracking-tight leading-tight mt-2 text-foreground">
+                  <p className="font-serif text-[24px] sm:text-[28px] tracking-tight leading-tight mt-2 text-foreground">
                     {piece.title}
                   </p>
                   <Link
@@ -162,7 +174,7 @@ export default async function ViewingRoomPage({
                   </Link>
                 </div>
                 {note && (
-                  <p className="font-serif italic text-[20px] leading-[1.55] text-foreground-secondary md:pt-2">
+                  <p className="font-serif text-[20px] leading-[1.55] text-foreground-secondary md:pt-2">
                     {note}
                   </p>
                 )}
@@ -172,13 +184,23 @@ export default async function ViewingRoomPage({
         })}
       </div>
 
-      {/* Footer link */}
-      <div className="pb-16">
+      {/* Curator attribution - institutional convention for an online
+          exhibition. DCF curates as an institution, not a named individual. */}
+      <div className="border-t border-border pt-10 pb-16 max-w-[680px]">
+        <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium">
+          Curated by
+        </p>
+        <p className="text-[16px] text-foreground-secondary mt-2">
+          Hivemind Digital Culture Fund
+        </p>
+        <p className="text-[13px] text-muted tabular-nums mt-1">
+          {resolved.length} work{resolved.length === 1 ? "" : "s"}
+        </p>
         <Link
           href="/"
-          className="text-[13px] text-muted hover:text-foreground transition-colors duration-200"
+          className="text-[13px] text-muted hover:text-foreground transition-colors duration-200 mt-8 inline-block"
         >
-          &larr; Back to the collection
+          ← Back to the collection
         </Link>
       </div>
     </div>

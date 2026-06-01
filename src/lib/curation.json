@@ -1,6 +1,6 @@
 {
   "_instructions": "Edit this file to control how the collection is displayed. Save and refresh.",
-  "_featuredHeroes_note": "Currently disabled — homepage opens straight into the artists. Slugs left here for potential reuse (e.g. on About). Empty [] = no hero anywhere.",
+  "_featuredHeroes_note": "Currently disabled - homepage opens straight into the artists. Slugs left here for potential reuse (e.g. on About). Empty [] = no hero anywhere.",
   "featuredHeroes": [],
   "collectionNames": {
     "piano-blossoms": "Piano Blossoms",
@@ -16,7 +16,7 @@
     "human-unreadable": "Human Unreadable",
     "repeat-as-necessary": "Repeat as Necessary",
     "winds-of-yawanawa": "Winds of Yawanawa",
-    "dataland-biome-lumina": "Dataland — Biome Lumina",
+    "dataland-biome-lumina": "Dataland - Biome Lumina",
     "synthetic-dreams": "Synthetic Dreams",
     "skulls-of-luci": "Skulls of Luci",
     "masks-of-luci": "Masks of Luci",
@@ -425,7 +425,7 @@
       "qql-160-1088": 2,
       "qql-220-1088": 2,
       "qql-458-1088": 2,
-      "qql-469-1088": 2,
+      "qql-496-1088": 2,
       "qql-534-1088": 2,
       "qql-617-1088": 3,
       "qql-714-1088": 3,
@@ -769,7 +769,7 @@
       "qql-160-1088", (2)
       "qql-220-1088", (2)
       "qql-458-1088", (2)
-      "qql-469-1088", (2)
+      "qql-496-1088", (2)
       "qql-534-1088", (2)
       "qql-617-1088", (3)
       "qql-714-1088", (3)

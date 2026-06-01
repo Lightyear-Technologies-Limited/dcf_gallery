@@ -65,7 +65,7 @@ for (const p of PIECES) {
   try {
     const r = await fetch(metaUrl);
     const j = await r.json();
-    // pngUrl is Alchemy's Cloudinary PNG render — use it so we get static PNGs
+    // pngUrl is Alchemy's Cloudinary PNG render - use it so we get static PNGs
     // instead of animated SVGs for on-chain SVG works like PXL DEX / PXL POD.
     let pngUrl = j?.image?.pngUrl || j?.image?.cachedUrl || j?.raw?.metadata?.image || null;
     // Upscale small on-chain SVG renders via Cloudinary transform (w_1000,c_pad,b_black)
@@ -94,7 +94,7 @@ for (const p of PIECES) {
     const imgRes = await fetch(resolvedUrl);
     const contentType = imgRes.headers.get("content-type") || "";
     const ext = guessExt(resolvedUrl, contentType);
-    // Always save as .png — pngUrl renders and the X0X piece are both PNG
+    // Always save as .png - pngUrl renders and the X0X piece are both PNG
     const filename = `${p.slug}.png`;
     const outPath = resolve(OUT_DIR, filename);
     const buf = Buffer.from(await imgRes.arrayBuffer());

@@ -1,7 +1,46 @@
 {
   "permissions": {
     "allow": [
-      "Bash(echo \"EXIT_CODE: $?\")"
+      "Bash(echo \"EXIT_CODE: $?\")",
+      "Bash(node -e ' *)",
+      "Bash(node scripts/fetch-human-unreadable.mjs)",
+      "Bash(node scripts/fetch-winds.mjs)",
+      "Bash(node scripts/update-winds-trait-map.mjs)",
+      "Bash(node scripts/build-traits-data.mjs)",
+      "Bash(node scripts/fetch-three.mjs)",
+      "Bash(node scripts/fetch-masks.mjs)",
+      "Bash(node scripts/fetch-qql.mjs)",
+      "Bash(node scripts/fetch-lightyears.mjs)",
+      "Bash(node scripts/inject-curator-notes.mjs)",
+      "Bash(node scripts/pull-original-uris.mjs)",
+      "Bash(node --input-type=module -e ' *)",
+      "Bash(curl -sI \"https://admin.xcopy.art/media/original_images/0xc143bbfcdbdbed6d454803804752a064a622c1f3-170.png\")",
+      "Bash(node scripts/backfill-grifters-uri.mjs)",
+      "WebFetch(domain:www.operator.la)",
+      "WebFetch(domain:opensea.io)",
+      "WebFetch(domain:etherscan.io)",
+      "Bash(curl -s \"https://www.operator.la/repeat-as-necessary\")",
+      "Bash(grep -oE \"https://images.squarespace-cdn.com/content/[^\\\\\"\\\\\\\\?]+\\\\.\\(png|jpg|gif\\)\")",
+      "Bash(curl -s https://artblocks-mainnet.hasura.app/v1/graphql -H 'Content-Type: application/json' -d '{\"query\": \"query { projects_metadata\\(where: {name: {_ilike: \\\\\"%repeat%necessary%\\\\\"}}\\) { project_id name contract_address } }\"}')",
+      "Bash(curl -s https://artblocks-mainnet.hasura.app/v1/graphql -H 'Content-Type: application/json' -d '{\"query\": \"query { projects_metadata\\(where: {artist_name: {_ilike: \\\\\"%operator%\\\\\"}}\\) { project_id name contract_address artist_name } }\"}')",
+      "Bash(curl -s \"https://api.reservoir.tools/collections/v7?slug=repeat-as-necessary-by-operator&limit=1\" -H \"x-api-key: demo-api-key\")",
+      "Bash(curl -sw \"\\\\nstatus=%{http_code}\\\\n\" \"https://api.reservoir.tools/search/collections/v2?name=repeat%20as%20necessary&limit=5\")",
+      "Bash(curl -sw \"\\\\nstatus=%{http_code}\\\\n\" \"https://eth-mainnet.g.alchemy.com/nft/v3/demo/searchContractMetadata?query=repeat%20as%20necessary\")",
+      "Bash(curl -sw \"\\\\nstatus=%{http_code}\\\\n\" \"https://eth-mainnet.g.alchemy.com/nft/v3/demo/getContractsForOwner?owner=Operator&pageSize=5\")",
+      "Bash(curl -sw \"\\\\nstatus=%{http_code}\\\\n\" \"https://api.opensea.io/api/v1/collection/repeat-as-necessary-by-operator\" -H \"accept: application/json\")",
+      "Bash(git add *)",
+      "Bash(git push *)",
+      "Bash(git fetch *)",
+      "Skill(critique)",
+      "Skill(critique:*)",
+      "Bash(unzip -l \"C:/Users/MichaelDavison/Downloads/hivemind-brand 1 \\(3\\).skill\")",
+      "Bash(unzip -o \"C:/Users/MichaelDavison/Downloads/hivemind-brand 1 \\(3\\).skill\" -d .claude/skills/)",
+      "Bash(python -c \"import openpyxl; print\\('openpyxl available'\\)\")",
+      "Bash(python -c ' *)",
+      "Bash(python)",
+      "Bash(cp \"/c/Users/MichaelDavison/Downloads/202603_Portfolio Report.XLSX\" /tmp/portfolio.xlsx)",
+      "Bash(cp \"/c/Users/MichaelDavison/Downloads/202603_Portfolio Report.XLSX\" \"/c/Users/MichaelDavison/AppData/Local/Temp/portfolio.xlsx\")",
+      "Bash(git commit -m ' *)"
     ]
   }
 }

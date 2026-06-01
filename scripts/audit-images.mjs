@@ -18,13 +18,13 @@ const ROOT = resolve(__dirname, "..");
 const FIX = process.argv.includes("--fix");
 
 // ---------------------------------------------------------------------------
-// Parse data.ts — robust, bracket-aware block extractor
+// Parse data.ts - robust, bracket-aware block extractor
 // ---------------------------------------------------------------------------
 function parsePieces() {
   const text = readFileSync(resolve(ROOT, "src/lib/data.ts"), "utf-8");
   const start = text.indexOf("export const pieces");
   if (start === -1) throw new Error("pieces array not found");
-  // Skip past the `Piece[]` type annotation — find `= [`
+  // Skip past the `Piece[]` type annotation - find `= [`
   const eq = text.indexOf("=", start);
   const arrStart = text.indexOf("[", eq);
   // Walk bracket depth to find matching closing ]
@@ -59,7 +59,7 @@ function parsePieces() {
 
 function parseObject(block) {
   const obj = {};
-  // Match simple `key: 'value'` (strings) — ignore nested objects/arrays.
+  // Match simple `key: 'value'` (strings) - ignore nested objects/arrays.
   const re = /(\w+)\s*:\s*'((?:[^'\\]|\\.)*)'/g;
   let m;
   while ((m = re.exec(block)) !== null) {

@@ -24,7 +24,7 @@
 .DS_Store
 *.pem
 
-# Raw downloaded artwork — too large for git. Only optimized WebP is committed.
+# Raw downloaded artwork - too large for git. Only optimized WebP is committed.
 /public/art/all/
 /public/art/grifters/
 

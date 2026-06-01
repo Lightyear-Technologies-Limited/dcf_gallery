@@ -126,7 +126,7 @@ const MEDIUM_MAP = {
   grifters: "video",
   xcopy: "video",
   beeple: "image",
-  // Winds of Yawanawa — multimedia/video
+  // Winds of Yawanawa - multimedia/video
   woy: "video",
 };
 
@@ -246,7 +246,7 @@ function indent(n) {
 }
 
 let out = `// =============================================================================
-// DCF Gallery — Portfolio Data
+// DCF Gallery - Portfolio Data
 // Generated from 20260408_DCF_Portfolio.xlsx on ${new Date().toISOString().slice(0, 10)}
 // =============================================================================
 
@@ -379,8 +379,8 @@ for (const p of pieceData) {
 out += `];
 
 // ---------------------------------------------------------------------------
-// Influence map — connecting traditional art to digital works
-// (placeholder — to be populated with art historical connections)
+// Influence map - connecting traditional art to digital works
+// (placeholder - to be populated with art historical connections)
 // ---------------------------------------------------------------------------
 export const influences: Influence[] = [];
 
