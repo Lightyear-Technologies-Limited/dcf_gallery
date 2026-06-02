@@ -65,24 +65,13 @@ export default function ArtistsPage() {
                     {artistName}
                   </h2>
                 </Link>
-                <p className="text-[13px] text-muted mt-3">
+                {/* Single eyebrow line - count only. The collection list used
+                    to be inlined here as a comma-separated link row, but it
+                    duplicated what the artist page itself does better and read
+                    as filler. Cut. */}
+                <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mt-4 tabular-nums">
                   {visibleCols.length} collection{visibleCols.length !== 1 ? "s" : ""} &middot; {allWorks.length} works
                 </p>
-                {visibleCols.length > 0 && (
-                  <p className="text-[13px] text-muted mt-2">
-                    {visibleCols.map((c, i) => (
-                      <span key={c.slug}>
-                        {i > 0 && ", "}
-                        <Link
-                          href={`/collection/${c.slug}`}
-                          className="hover:text-foreground transition-colors duration-200"
-                        >
-                          {getCollectionDisplayName(c.slug, c.name)}
-                        </Link>
-                      </span>
-                    ))}
-                  </p>
-                )}
                 {artist.bio && (
                   <p className="text-[15px] text-foreground-secondary leading-[1.65] mt-6 max-w-[400px]">
                     {artist.bio}

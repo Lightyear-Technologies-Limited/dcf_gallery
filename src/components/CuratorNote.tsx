@@ -25,7 +25,7 @@ export default function CuratorNote({ text, attribution, variant = "inline" }: {
       <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
         Hivemind Commentary
       </p>
-      <p className="font-serif text-[20px] leading-[1.5] text-foreground-secondary">
+      <p className="font-serif text-[18px] leading-[1.55] text-foreground-secondary">
         {text}
       </p>
     </div>
