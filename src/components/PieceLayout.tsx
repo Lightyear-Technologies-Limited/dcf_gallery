@@ -215,7 +215,7 @@ function PieceDescription({ text, label }: { text: string; label: string }) {
         </button>
       )}
       <p className="mt-4 text-[12px] text-muted italic">
-        From the artist&rsquo;s on-chain metadata
+        From the artist&rsquo;s metadata description
       </p>
     </div>
   );
