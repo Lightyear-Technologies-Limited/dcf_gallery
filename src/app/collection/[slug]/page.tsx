@@ -77,7 +77,10 @@ export default async function CollectionPage({ params }: { params: Promise<{ slu
 
   return (
     <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
-      {/* Breadcrumb - collection only; artist link lives below the title */}
+      {/* Breadcrumb + sibling nav. Prev (artist's other works) and next
+          collection sit at the top alongside the trail so a returning
+          reader can jump laterally without first scrolling to the bottom
+          of the gallery. */}
       <div className="pt-20">
         <p className="text-[13px] text-muted">
           <Link href="/" className="hover:text-foreground transition-colors duration-200">
@@ -86,6 +89,24 @@ export default async function CollectionPage({ params }: { params: Promise<{ slu
           {" / "}
           {collectionName}
         </p>
+        {artist && (
+          <div className="mt-6 flex flex-col sm:flex-row sm:justify-between gap-4 text-[13px] text-muted">
+            <Link
+              href={`/artist/${artist.slug}`}
+              className="hover:text-foreground transition-colors duration-200"
+            >
+              ← All works by {artistName}
+            </Link>
+            {nextSibling && (
+              <Link
+                href={`/collection/${nextSibling.slug}`}
+                className="hover:text-foreground transition-colors duration-200 text-right"
+              >
+                Next: {getCollectionDisplayName(nextSibling.slug, nextSibling.name)} →
+              </Link>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Editorial header - title left, description right. Stripped to bare on
@@ -309,28 +330,6 @@ export default async function CollectionPage({ params }: { params: Promise<{ slu
         })()}
       </div>
 
-      {/* Closing gesture - a single hand-off to the next collection by the
-          same artist, or back up the catalogue. One link, generous space. */}
-      {!isSingle && artist && (
-        <div className="pt-12 pb-24 border-t border-border">
-          <div className="pt-8 flex flex-col sm:flex-row sm:justify-between gap-4 text-[13px] text-muted">
-            <Link
-              href={`/artist/${artist.slug}`}
-              className="hover:text-foreground transition-colors duration-200"
-            >
-              ← All works by {artistName}
-            </Link>
-            {nextSibling && (
-              <Link
-                href={`/collection/${nextSibling.slug}`}
-                className="hover:text-foreground transition-colors duration-200 text-right"
-              >
-                Next: {getCollectionDisplayName(nextSibling.slug, nextSibling.name)} →
-              </Link>
-            )}
-          </div>
-        </div>
-      )}
     </div>
   );
 }

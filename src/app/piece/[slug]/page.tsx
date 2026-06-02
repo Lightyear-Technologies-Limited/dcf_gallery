@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
-import { pieces, getArtist, getCollection } from "@/lib/data";
+import Link from "next/link";
+import { pieces, getArtist, getCollection, getPiecesByCollection } from "@/lib/data";
 import { getArtworkImage, getArtworkAspect, resolveTokenId } from "@/lib/images";
-import { getEditionType, getArtistSiteUrl, getPieceTraits, getPieceDescription } from "@/lib/curation";
+import { getEditionType, getArtistSiteUrl, getPieceTraits, getPieceDescription, sortPieces } from "@/lib/curation";
 import PlaceholderArt from "@/components/PlaceholderArt";
 import BackButton from "@/components/BackButton";
 import PieceLayout from "@/components/PieceLayout";
@@ -42,6 +43,14 @@ export default async function PiecePage({ params }: { params: Promise<{ slug: st
   const artist = getArtist(piece.artistSlug);
   const collection = getCollection(piece.collectionSlug);
   const realImage = getArtworkImage(piece.slug, piece.contractAddress, piece.tokenId, "detail");
+
+  // Sibling navigation - previous + next piece in the collection (curation
+  // order). Sits at the top alongside the back link so a reader can move
+  // laterally through the catalogue without scrolling.
+  const siblingPieces = sortPieces(piece.collectionSlug, getPiecesByCollection(piece.collectionSlug));
+  const sibIdx = siblingPieces.findIndex((p) => p.slug === piece.slug);
+  const prevPiece = sibIdx > 0 ? siblingPieces[sibIdx - 1] : null;
+  const nextPiece = sibIdx >= 0 && sibIdx < siblingPieces.length - 1 ? siblingPieces[sibIdx + 1] : null;
   const isPunk = piece.collectionSlug === "cryptopunks";
 
   // Marketplace link: CryptoPunks Marketplace for Punks (canonical), Raster
@@ -108,6 +117,28 @@ export default async function PiecePage({ params }: { params: Promise<{ slug: st
   return (
     <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
       <BackButton />
+      {(prevPiece || nextPiece) && (
+        <div className="mt-4 flex flex-col sm:flex-row sm:justify-between gap-2 text-[13px] text-muted">
+          {prevPiece ? (
+            <Link
+              href={`/piece/${prevPiece.slug}`}
+              className="hover:text-foreground transition-colors duration-200 truncate max-w-full sm:max-w-[45%]"
+            >
+              ← {prevPiece.title}
+            </Link>
+          ) : (
+            <span />
+          )}
+          {nextPiece && (
+            <Link
+              href={`/piece/${nextPiece.slug}`}
+              className="hover:text-foreground transition-colors duration-200 text-right truncate max-w-full sm:max-w-[45%]"
+            >
+              {nextPiece.title} →
+            </Link>
+          )}
+        </div>
+      )}
       <div className="pt-6">
         <PieceLayout
           image={realImage}
