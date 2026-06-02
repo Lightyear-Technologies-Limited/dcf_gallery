@@ -298,7 +298,7 @@ export default async function CollectionPage({ params }: { params: Promise<{ slu
       )}
 
       {/* Gallery */}
-      <div className="pt-20 pb-24">
+      <div className="pt-12 pb-24">
         {(() => {
           const heroLayout = getHeroLayout(slug);
           if (n === 1 && heroImage && first) {
