@@ -198,7 +198,7 @@ function PieceDescription({ text }: { text: string }) {
   return (
     <div className="mt-8 border-l border-border pl-5">
       <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
-        Inscribed On-Chain
+        Metadata Description
       </p>
       <p
         className={`font-serif text-[17px] leading-[1.55] text-foreground-secondary whitespace-pre-line ${
