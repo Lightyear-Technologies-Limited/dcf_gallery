@@ -2555,8 +2555,7 @@ export const pieces: Piece[] = [
       // naturally falls when the column is narrow.
       dimensions: '200.07 × 137.28 × 66.3 cm (78.8 × 54 × 26.1 in)',
       weight: 'Approximately 525 kg (1,157 lb)',
-      materials: 'Tempered glass, stainless steel, copper, LED system,
-micro-computer control',
+      materials: 'Tempered glass, stainless steel, copper, LED system,\nmicro-computer control',
       edition: '1/1 + AP',
     },
     companionSlug: 'human-unreadable-455000124-b069',
