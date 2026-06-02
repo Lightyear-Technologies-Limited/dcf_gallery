@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 interface Props {
   image: string | null;
@@ -116,14 +117,7 @@ export default function PieceLayout({ image, aspect, title, isPunk, artistName, 
         </div>
       )}
 
-      {description && (
-        // Per-piece prose from on-chain metadata. Serif body so it reads as
-        // editorial context rather than UI text - this is the artist's
-        // voice on most 1/1s.
-        <p className="mt-8 font-serif text-[17px] leading-[1.55] text-foreground-secondary whitespace-pre-line">
-          {description}
-        </p>
-      )}
+      {description && <PieceDescription text={description} />}
 
       <div className="mt-10">{metadata}</div>
 
@@ -181,6 +175,37 @@ export default function PieceLayout({ image, aspect, title, isPunk, artistName, 
         {artworkBlock}
       </div>
       {infoBlock}
+    </div>
+  );
+}
+
+/**
+ * Description block. Short prose renders static; long prose collapses to
+ * three lines with a Read more / Show less toggle so multi-paragraph artist
+ * statements (Piano Blossoms, Return Zero, the Beeple TIME essay) don't
+ * push the rest of the page off-screen.
+ */
+function PieceDescription({ text }: { text: string }) {
+  const COLLAPSE_THRESHOLD = 280;
+  const isLong = text.length > COLLAPSE_THRESHOLD || text.includes("\n");
+  const [expanded, setExpanded] = useState(false);
+  return (
+    <div className="mt-8">
+      <p
+        className={`font-serif text-[17px] leading-[1.55] text-foreground-secondary whitespace-pre-line ${
+          isLong && !expanded ? "line-clamp-3" : ""
+        }`}
+      >
+        {text}
+      </p>
+      {isLong && (
+        <button
+          onClick={() => setExpanded((v) => !v)}
+          className="mt-3 text-[11px] tracking-[0.1em] uppercase text-muted hover:text-foreground transition-colors duration-200 font-medium"
+        >
+          {expanded ? "Show less" : "Read more"}
+        </button>
+      )}
     </div>
   );
 }
