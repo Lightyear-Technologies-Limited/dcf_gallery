@@ -111,7 +111,9 @@
   "_artistSiteTemplates_note": "URL template per collection for the 'View on {host}' link on piece pages. Use {tokenId} as the placeholder. Individual pieces can still override with piece.artistSiteUrl.",
   "artistSiteTemplates": {
     "pxl-dex": "https://pxl.onl/dex/id/{tokenId}",
-    "pxl-pod": "https://pxl.onl/pod/id/{tokenId}"
+    "pxl-pod": "https://pxl.onl/pod/id/{tokenId}",
+    "superrare-xcopy": "https://xcopy.art",
+    "grifters": "https://xcopy.art"
   },
   "_editions_note": "Edition shorthand per collection. Default for all collections is '1/1' (each piece is unique). Override here only for generative series where each piece is unique within an edition of N (e.g. '1/1/999').",
   "editions": {

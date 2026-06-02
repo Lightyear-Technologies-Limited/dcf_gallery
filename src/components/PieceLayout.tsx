@@ -22,6 +22,9 @@ interface Props {
   description?: string | null;
   metadata: React.ReactNode;
   rasterUrl?: string;
+  /** Optional CryptoPunks Marketplace URL. Only set for Punks; rendered as
+      "View on CryptoPunks.app" above the Raster link. */
+  cryptopunksUrl?: string;
   artistSiteUrl?: string;
   originalUri?: string;
   placeholder: React.ReactNode;
@@ -68,7 +71,7 @@ function resolveOriginal(uri: string): { href: string; label: string } | null {
 /**
  * Piece layout: image on the left, details on the right.
  */
-export default function PieceLayout({ image, aspect, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, description, metadata, rasterUrl, artistSiteUrl, originalUri, placeholder }: Props) {
+export default function PieceLayout({ image, aspect, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, description, metadata, rasterUrl, cryptopunksUrl, artistSiteUrl, originalUri, placeholder }: Props) {
   const artistHost = artistSiteUrl ? hostLabel(artistSiteUrl) : null;
   const original = originalUri ? resolveOriginal(originalUri) : null;
   // When natural aspect is known, pass it as width/height props so next/image
@@ -121,10 +124,11 @@ export default function PieceLayout({ image, aspect, title, isPunk, artistName, 
 
       <div className="mt-10">{metadata}</div>
 
-      {(artistSiteUrl || rasterUrl || original) && (
-        // Link order: original/on-chain source first (verify it's real), then
-        // marketplace (check market), then artist site (learn more). Matches
-        // the reader's intent flow on a fund catalogue.
+      {(artistSiteUrl || rasterUrl || cryptopunksUrl || original) && (
+        // Link order: original (verify on-chain provenance), then artist site
+        // (canonical artist-curated view), then marketplace(s) (trading view).
+        // Punks get both CryptoPunks.app and Raster under marketplace, with
+        // CryptoPunks.app first as canonical.
         <div className="mt-10 flex flex-col gap-2 text-[12px] text-muted">
           {original && (
             <a
@@ -136,16 +140,6 @@ export default function PieceLayout({ image, aspect, title, isPunk, artistName, 
               View original
             </a>
           )}
-          {rasterUrl && (
-            <a
-              href={rasterUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-foreground transition-colors duration-200"
-            >
-              {isPunk ? "View on CryptoPunks Marketplace" : "View on Raster"}
-            </a>
-          )}
           {artistSiteUrl && artistHost && (
             <a
               href={artistSiteUrl}
@@ -154,6 +148,26 @@ export default function PieceLayout({ image, aspect, title, isPunk, artistName, 
               className="hover:text-foreground transition-colors duration-200"
             >
               View on {artistHost}
+            </a>
+          )}
+          {cryptopunksUrl && (
+            <a
+              href={cryptopunksUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-foreground transition-colors duration-200"
+            >
+              View on CryptoPunks.app
+            </a>
+          )}
+          {rasterUrl && (
+            <a
+              href={rasterUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-foreground transition-colors duration-200"
+            >
+              View on Raster
             </a>
           )}
         </div>

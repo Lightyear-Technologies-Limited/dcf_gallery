@@ -53,9 +53,10 @@ export default async function PiecePage({ params }: { params: Promise<{ slug: st
   const nextPiece = sibIdx >= 0 && sibIdx < siblingPieces.length - 1 ? siblingPieces[sibIdx + 1] : null;
   const isPunk = piece.collectionSlug === "cryptopunks";
 
-  // Marketplace link: CryptoPunks Marketplace for Punks (canonical), Raster
-  // for everything else. Most pieces use Raster's token-based URL; some
-  // contracts/tokens aren't in that index but exist on Raster's slug-based
+  // Marketplace links. Punks get both CryptoPunks.app (canonical) and
+  // Raster - the canonical V2 contract is indexed there regardless of
+  // wrap state. Everything else gets Raster only. Some contracts/tokens
+  // aren't in Raster's token index but exist on Raster's slug-based
   // /artwork/ pages, so we override those explicitly.
   const RASTER_CONTRACT_OVERRIDES: Record<string, string> = {
     // Operator, Repeat as Necessary - all 4 pieces share the series artwork page.
@@ -78,9 +79,16 @@ export default async function PiecePage({ params }: { params: Promise<{ slug: st
       `https://www.raster.art/token/ethereum/${contract}/${resolveTokenId(slug, contract, tokenId)}`
     );
   }
-  const marketplaceUrl = piece.contractAddress && piece.tokenId
+  // Punks: Raster indexes the canonical V2 contract regardless of which
+  // contract our copy lives on (V2 canonical or V1 wrapped). Always use
+  // V2 for the Raster URL.
+  const PUNK_V2 = "0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb";
+  const cryptopunksUrl = isPunk && piece.tokenId
+    ? `https://cryptopunks.app/cryptopunks/details/${piece.tokenId}`
+    : undefined;
+  const rasterUrl = piece.contractAddress && piece.tokenId
     ? (isPunk
-        ? `https://cryptopunks.app/cryptopunks/details/${piece.tokenId}`
+        ? `https://www.raster.art/token/ethereum/${PUNK_V2}/${piece.tokenId}`
         : rasterUrlFor(piece.contractAddress, piece.slug, piece.tokenId))
     : undefined;
 
@@ -151,7 +159,8 @@ export default async function PiecePage({ params }: { params: Promise<{ slug: st
           collectionSlug={collection?.slug}
           description={getPieceDescription(piece.slug)}
           metadata={metadata}
-          rasterUrl={marketplaceUrl}
+          rasterUrl={rasterUrl}
+          cryptopunksUrl={cryptopunksUrl}
           artistSiteUrl={artistSiteUrl}
           originalUri={piece.originalUri}
           placeholder={<PlaceholderArt collectionSlug={piece.collectionSlug} pieceSlug={piece.slug} className="w-full h-full" />}
