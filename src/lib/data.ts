@@ -91,7 +91,7 @@ export const artists: Artist[] = [
   {
     slug: 'a-c-k',
     name: 'a.c.k.',
-    bio: 'Alpha Centauri Kid is a visionary in the digital art world, weaving complex narratives through his unique, emotive style. His work, guided by the Muse, is constantly evolving to reflect his own journey and relationship with art, and the prevailing themes of the digital art space.',
+    bio: 'Alpha Centauri Kid - a.c.k. - is a painter working natively on-chain. His work pairs painted compositions with extended narrative arcs that often span multiple pieces or move into physical installations.',
     curationComment: 'The Digital Culture Fund acquired all five 1/1 artworks presented by a.c.k. at his Piano Blossoms auction in Amsterdam in October 2024 - a complete suite that captures his evolution as a narrative painter working natively on-chain.',
     influences: [],
     tags: ['digital-painting', 'contemporary', 'new-media'],
@@ -107,7 +107,7 @@ export const artists: Artist[] = [
   {
     slug: 'refik-anadol',
     name: 'Refik Anadol',
-    bio: 'Refik Anadol\u2019s art is driven by AI and machine learning algorithms, which he uses to process, analyze, and visualize data in novel and aesthetic ways. His practice sits at the intersection of data science, new media, and spatial design.',
+    bio: 'Refik Anadol uses machine learning to render datasets as moving image. His data paintings have shown at MoMA - Unsupervised was the first tokenized work acquired into its permanent collection - and live now at Dataland, his Museum of AI Arts in Los Angeles.',
     curationComment: 'Winds of Yawanawa is a groundbreaking project that showcases the potential of AI and blockchain technology for social good and cultural exchange. Biome Lumina extends this into fully dynamic living paintings for Dataland, Refik\u2019s ambitious Museum of AI Arts.',
     influences: [],
     tags: ['ai-generated', 'machine-learning', 'data-art'],

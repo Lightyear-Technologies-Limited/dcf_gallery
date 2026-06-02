@@ -109,17 +109,10 @@ export default function PieceLayout({ image, title, isPunk, artistName, artistSl
       <div className="mt-10">{metadata}</div>
 
       {(artistSiteUrl || rasterUrl || original) && (
+        // Link order: original/on-chain source first (verify it's real), then
+        // marketplace (check market), then artist site (learn more). Matches
+        // the reader's intent flow on a fund catalogue.
         <div className="mt-10 flex flex-col gap-2 text-[12px] text-muted">
-          {artistSiteUrl && artistHost && (
-            <a
-              href={artistSiteUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-foreground transition-colors duration-200"
-            >
-              View on {artistHost}
-            </a>
-          )}
           {original && (
             <a
               href={original.href}
@@ -138,6 +131,16 @@ export default function PieceLayout({ image, title, isPunk, artistName, artistSl
               className="hover:text-foreground transition-colors duration-200"
             >
               {isPunk ? "View on CryptoPunks Marketplace" : "View on Raster"}
+            </a>
+          )}
+          {artistSiteUrl && artistHost && (
+            <a
+              href={artistSiteUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-foreground transition-colors duration-200"
+            >
+              View on {artistHost}
             </a>
           )}
         </div>

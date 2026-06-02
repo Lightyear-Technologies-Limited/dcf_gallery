@@ -140,20 +140,17 @@ export default function CollectionView({ sections, artists }: Props) {
 
   return (
     <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
-      {/* Filters - ALL above, then ARTIST row, then CHAPTER row */}
+      {/* Filters - ARTIST row, then CHAPTER row. Removing a filter is done
+          by clicking its active label; no "All" / "Clear" button needed
+          above the rows. The empty state below still offers a "Clear filters"
+          recovery action when a combination returns zero. */}
       <section className="pt-12 sm:pt-16 pb-6 border-b border-border space-y-2">
-        <button
-          onClick={clearAll}
-          className={`text-[13px] transition-colors duration-200 ${
-            !hasFilters ? "text-foreground" : "text-muted hover:text-foreground"
-          }`}
-        >
-          All
-        </button>
-
         {/* Row 1: Artists. Mask gives a fade on the trailing edge when overflowing. */}
         <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide [mask-image:linear-gradient(to_right,black_calc(100%-24px),transparent)]">
-          <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium shrink-0 w-20">
+          <span
+            className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium shrink-0 w-20"
+            title={activeChapter ? "With a chapter active, tap an artist to remove them from the chapter" : "Tap an artist to filter"}
+          >
             {activeChapter ? "Exclude" : "Artist"}
           </span>
           {artists.map((a) => {
