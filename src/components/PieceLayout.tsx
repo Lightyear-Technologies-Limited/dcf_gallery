@@ -304,7 +304,11 @@ function SpecRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex justify-between items-start gap-4 py-2.5 border-b border-border">
       <span className="text-muted shrink-0">{label}</span>
-      <span className="text-foreground text-right">{value}</span>
+      {/* text-pretty + the NBSPs embedded in the value strings let the
+          browser break at natural phrase boundaries (between metric and
+          imperial, between comma-separated materials) rather than
+          mid-phrase. */}
+      <span className="text-foreground text-right text-pretty">{value}</span>
     </div>
   );
 }

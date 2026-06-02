@@ -51,7 +51,8 @@
       "mcp__nft-data-hub__get_collection",
       "Bash(node scripts/fetch-piece-metadata.mjs)",
       "Bash(node scripts/build-descriptions.mjs)",
-      "Bash(node scripts/fill-traits.mjs)"
+      "Bash(node scripts/fill-traits.mjs)",
+      "Bash(grep -E \"London|only large-scale|1/1.\\\\\\\\+ AP\" src/lib/data.ts)"
     ]
   }
 }

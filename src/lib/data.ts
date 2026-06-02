@@ -2545,14 +2545,18 @@ export const pieces: Piece[] = [
     artistSlug: 'operator',
     image: '/art/optimized/operator-x-ray-machine.webp',
     medium: 'interactive',
-    description: 'The X-ray Machine is a 1/1 steel-and-tempered-glass sculpture by Operator (Ania Catherine and Dejha Ti) that unifies the first two acts of their Human Unreadable collection - the on-chain choreographic token and the physical interpretation of its score - in a single object that operates without screens. Fifteen engraved, UV-printed, smoked and mirrored glass sheets sit within a stainless-steel frame; custom electronics translate the choreography into shifting light patterns, producing an ambient glow rather than a screen-based image.\n\nThe sculpture is the physical companion to Human Unreadable #124, the on-chain token Operator minted and held until this acquisition. It is one of the sole large-scale X-ray Machines the artists will produce alongside their retained artist proof; the only other large-scale example enters a major London museum’s permanent collection. Operator describes the work as “a dynamic, breathing, ghostly, yet elegant object” viewable from all angles, and the partnership with Hivemind as one that “gives this work, which started as a dream in our minds, a platform to reach new scales and audiences.”',
+    description: 'The X-ray Machine is a 1/1 steel-and-tempered-glass sculpture by Operator (Ania Catherine and Dejha Ti) that unifies the first two acts of their Human Unreadable collection - the on-chain choreographic token and the physical interpretation of its score - in a single object that operates without screens. Fifteen engraved, UV-printed, smoked and mirrored glass sheets sit within a stainless-steel frame; custom electronics translate the choreography into shifting light patterns, producing an ambient glow rather than a screen-based image.\n\nThe sculpture is the physical companion to Human Unreadable #124, the on-chain token Operator minted and held until this acquisition. It is the only large-scale X-ray Machine the artists will produce, alongside their retained artist proof. Operator describes the work as “a dynamic, breathing, ghostly, yet elegant object” viewable from all angles, and the partnership with Hivemind as one that “gives this work, which started as a dream in our minds, a platform to reach new scales and audiences.”',
     traits: {},
     influences: [],
     physical: {
-      dimensions: '200.07 × 137.28 × 66.3 cm (78.8 × 54 × 26.1 in)',
-      weight: 'approximately 525 kg (1,157 lb)',
-      materials: 'Tempered glass, stainless steel, copper, LED system, micro-computer control',
-      edition: 'Sole large-scale, alongside artist proof',
+      // NBSPs ( ) inside each metric / imperial conversion keep the
+      // numbers + unit + symbols from splitting mid-phrase; the single
+      // regular space between metric and imperial is where wrapping
+      // naturally falls when the column is narrow.
+      dimensions: '200.07 × 137.28 × 66.3 cm (78.8 × 54 × 26.1 in)',
+      weight: 'Approximately 525 kg (1,157 lb)',
+      materials: 'Tempered glass, stainless steel, copper, LED system, micro-computer control',
+      edition: '1/1 + AP',
     },
     companionSlug: 'human-unreadable-455000124-b069',
   },
