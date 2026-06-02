@@ -148,7 +148,14 @@ export default async function CollectionPage({ params }: { params: Promise<{ slu
           </div>
 
           <div className="space-y-10 md:pt-4">
-            {col.description && <ExpandableProse text={col.description} />}
+            {col.description && (
+              <div className="border-l border-border pl-5">
+                <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
+                  About {collectionName}
+                </p>
+                <ExpandableProse text={col.description} />
+              </div>
+            )}
             {col.curatorNote && <CuratorNote text={col.curatorNote} variant="inline" />}
             {col.exhibitions && col.exhibitions.length > 0 && (
               <div>

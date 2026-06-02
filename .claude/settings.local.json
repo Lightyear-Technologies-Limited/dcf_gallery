@@ -46,7 +46,12 @@
       "Bash(npm view *)",
       "Bash(node check_dash.cjs src/lib/data.ts)",
       "Bash(node check_dash.cjs scripts/fill-descriptions.mjs)",
-      "Bash(node sweep_dashes.cjs)"
+      "Bash(node sweep_dashes.cjs)",
+      "Bash(node scripts/extract-aspects.mjs)",
+      "mcp__nft-data-hub__get_collection",
+      "Bash(node scripts/fetch-piece-metadata.mjs)",
+      "Bash(node scripts/build-descriptions.mjs)",
+      "Bash(node scripts/fill-traits.mjs)"
     ]
   }
 }

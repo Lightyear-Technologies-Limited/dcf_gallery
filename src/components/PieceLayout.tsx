@@ -117,7 +117,7 @@ export default function PieceLayout({ image, aspect, title, isPunk, artistName, 
         </div>
       )}
 
-      {description && <PieceDescription text={description} label={collectionName ? `About ${collectionName}` : "About this work"} />}
+      {description && <PieceDescription text={description} label={`About ${title}`} />}
 
       <div className="mt-10">{metadata}</div>
 
@@ -181,11 +181,14 @@ export default function PieceLayout({ image, aspect, title, isPunk, artistName, 
 
 /**
  * Description block - the prose stored as the token's on-chain metadata
- * description field. Eyebrow names the subject ("About {Collection}") so
- * the reader knows what the prose is about; the left rule signals the
- * block is set off from the main info column as quoted material.
+ * description field. Catalogue convention:
+ * - Eyebrow names the subject ("About {Artwork}")
+ * - Body holds the prose
+ * - Closing attribution names the source ("From the artist's metadata")
  *
- * Long prose collapses to three lines with a Read more / Show less toggle.
+ * The left rule sets the block off as quoted material rather than UI text,
+ * the way a museum catalogue indents a sourced quote. Long prose collapses
+ * to three lines with a Read more / Show less toggle.
  */
 function PieceDescription({ text, label }: { text: string; label: string }) {
   const COLLAPSE_THRESHOLD = 280;
@@ -211,6 +214,9 @@ function PieceDescription({ text, label }: { text: string; label: string }) {
           {expanded ? "Show less" : "Read more"}
         </button>
       )}
+      <p className="mt-4 text-[12px] text-muted italic">
+        From the artist&rsquo;s on-chain metadata
+      </p>
     </div>
   );
 }
