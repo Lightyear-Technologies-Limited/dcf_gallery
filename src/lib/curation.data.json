@@ -112,8 +112,8 @@
   "artistSiteTemplates": {
     "pxl-dex": "https://pxl.onl/dex/id/{tokenId}",
     "pxl-pod": "https://pxl.onl/pod/id/{tokenId}",
-    "superrare-xcopy": "https://xcopy.art",
-    "grifters": "https://xcopy.art"
+    "grifters": "https://xcopy.art/works/grifters",
+    "cope-salada": "https://xcopy.art/works/cope-salada"
   },
   "_editions_note": "Edition shorthand per collection. Default for all collections is '1/1' (each piece is unique). Override here only for generative series where each piece is unique within an edition of N (e.g. '1/1/999').",
   "editions": {

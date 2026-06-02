@@ -30,10 +30,16 @@ interface Props {
   placeholder: React.ReactNode;
 }
 
-/** Derive a label like "xcopy.art" from a URL, stripping "www." */
+/** Derive a label like "pxl.onl" from a URL, stripping "www.". A few brand
+    names are stylized (XCOPY.art is upper-cased per the artist's wordmark);
+    those get explicit display overrides. */
+const HOST_DISPLAY: Record<string, string> = {
+  "xcopy.art": "XCOPY.art",
+};
 function hostLabel(url: string): string | null {
   try {
-    return new URL(url).hostname.replace(/^www\./, "");
+    const host = new URL(url).hostname.replace(/^www\./, "");
+    return HOST_DISPLAY[host] || host;
   } catch {
     return null;
   }

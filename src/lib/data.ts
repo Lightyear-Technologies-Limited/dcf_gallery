@@ -5426,6 +5426,7 @@ export const pieces: Piece[] = [
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0/9129',
     originalUri: 'https://ipfs.pixura.io/ipfs/QmR91LtJjcEDHohKiH27aAuoynhkTQTvJKKQp2G9BE9WgB/citizen-slipper10.gif',
+    artistSiteUrl: 'https://xcopy.art/works/citizens',
   },
   {
     id: 'superrare-xcopy-29757-b9e0',
@@ -5442,6 +5443,7 @@ export const pieces: Piece[] = [
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0/29757',
     originalUri: 'https://ipfs.pixura.io/ipfs/QmaDeC811oLBD1ScWkGFLdUD2nWerDfFaRh9jubgX4M1tq/2021_XCOPY_DANKRUPT.gif',
+    artistSiteUrl: 'https://xcopy.art/works/dankrupt',
   },
   {
     id: 'superrare-xcopy-30801-b9e0',
@@ -5458,6 +5460,7 @@ export const pieces: Piece[] = [
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0/30801',
     originalUri: 'https://ipfs.pixura.io/ipfs/Qmf7R1Mm5v7BGXsibibXAWDJyFXumFPJK6KNcP2EQVCkxD/2021_XCOPY_SR_DECAY.gif',
+    artistSiteUrl: 'https://xcopy.art/works/decay',
   },
   {
     id: 'superrare-xcopy-32171-b9e0',
@@ -5474,6 +5477,7 @@ export const pieces: Piece[] = [
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0/32171',
     originalUri: 'https://ipfs.pixura.io/ipfs/QmNTVBcKRj3VwijmCzXyjWDf3q9q6kScHuaRkbgBmKJjtJ/2022_XCOPY_SR_THE_FUD.gif',
+    artistSiteUrl: 'https://xcopy.art/works/the-fud',
   },
   {
     id: 'superrare-xcopy-2123-b9e0',
@@ -5489,6 +5493,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0/2123',
+    artistSiteUrl: 'https://xcopy.art/works/some-other-asshole',
   },
   {
     id: 'cope-salada-125-2e9e',
