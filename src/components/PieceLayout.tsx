@@ -180,20 +180,25 @@ export default function PieceLayout({ image, aspect, title, isPunk, artistName, 
 }
 
 /**
- * Description block. Small-caps eyebrow signals authorship (matches the
- * "HIVEMIND COMMENTARY" pattern on CuratorNote). Short prose renders static;
- * long prose collapses to three lines with a Read more / Show less toggle
- * so multi-paragraph artist statements (Piano Blossoms, Return Zero, the
- * Beeple TIME essay) don't push the rest of the page off-screen.
+ * Description block - the prose stored as the token's on-chain metadata
+ * description field. Gagosian / Sotheby's convention for sourced or
+ * inscribed text: lead with a small-caps provenance label that names the
+ * source/medium rather than claiming authorship, then a thin left rule to
+ * mark the text as quoted from elsewhere. The label "Inscribed on-chain"
+ * is true regardless of who wrote the prose (artist, marketplace, or
+ * gallery) and signals provenance the way "Signed and dated 'Beeple 2021'
+ * upper right" would in a print catalogue.
+ *
+ * Long prose collapses to three lines with a Read more / Show less toggle.
  */
 function PieceDescription({ text }: { text: string }) {
   const COLLAPSE_THRESHOLD = 280;
   const isLong = text.length > COLLAPSE_THRESHOLD || text.includes("\n");
   const [expanded, setExpanded] = useState(false);
   return (
-    <div className="mt-8">
+    <div className="mt-8 border-l border-border pl-5">
       <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
-        From the Artist
+        Inscribed On-Chain
       </p>
       <p
         className={`font-serif text-[17px] leading-[1.55] text-foreground-secondary whitespace-pre-line ${
