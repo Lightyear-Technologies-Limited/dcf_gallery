@@ -180,10 +180,11 @@ export default function PieceLayout({ image, aspect, title, isPunk, artistName, 
 }
 
 /**
- * Description block. Short prose renders static; long prose collapses to
- * three lines with a Read more / Show less toggle so multi-paragraph artist
- * statements (Piano Blossoms, Return Zero, the Beeple TIME essay) don't
- * push the rest of the page off-screen.
+ * Description block. Small-caps eyebrow signals authorship (matches the
+ * "HIVEMIND COMMENTARY" pattern on CuratorNote). Short prose renders static;
+ * long prose collapses to three lines with a Read more / Show less toggle
+ * so multi-paragraph artist statements (Piano Blossoms, Return Zero, the
+ * Beeple TIME essay) don't push the rest of the page off-screen.
  */
 function PieceDescription({ text }: { text: string }) {
   const COLLAPSE_THRESHOLD = 280;
@@ -191,6 +192,9 @@ function PieceDescription({ text }: { text: string }) {
   const [expanded, setExpanded] = useState(false);
   return (
     <div className="mt-8">
+      <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
+        From the Artist
+      </p>
       <p
         className={`font-serif text-[17px] leading-[1.55] text-foreground-secondary whitespace-pre-line ${
           isLong && !expanded ? "line-clamp-3" : ""
