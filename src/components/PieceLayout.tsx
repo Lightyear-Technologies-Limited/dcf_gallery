@@ -117,7 +117,7 @@ export default function PieceLayout({ image, aspect, title, isPunk, artistName, 
         </div>
       )}
 
-      {description && <PieceDescription text={description} />}
+      {description && <PieceDescription text={description} label={collectionName ? `About ${collectionName}` : "About this work"} />}
 
       <div className="mt-10">{metadata}</div>
 
@@ -181,24 +181,20 @@ export default function PieceLayout({ image, aspect, title, isPunk, artistName, 
 
 /**
  * Description block - the prose stored as the token's on-chain metadata
- * description field. Gagosian / Sotheby's convention for sourced or
- * inscribed text: lead with a small-caps provenance label that names the
- * source/medium rather than claiming authorship, then a thin left rule to
- * mark the text as quoted from elsewhere. The label "Inscribed on-chain"
- * is true regardless of who wrote the prose (artist, marketplace, or
- * gallery) and signals provenance the way "Signed and dated 'Beeple 2021'
- * upper right" would in a print catalogue.
+ * description field. Eyebrow names the subject ("About {Collection}") so
+ * the reader knows what the prose is about; the left rule signals the
+ * block is set off from the main info column as quoted material.
  *
  * Long prose collapses to three lines with a Read more / Show less toggle.
  */
-function PieceDescription({ text }: { text: string }) {
+function PieceDescription({ text, label }: { text: string; label: string }) {
   const COLLAPSE_THRESHOLD = 280;
   const isLong = text.length > COLLAPSE_THRESHOLD || text.includes("\n");
   const [expanded, setExpanded] = useState(false);
   return (
     <div className="mt-8 border-l border-border pl-5">
       <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
-        Metadata Description
+        {label}
       </p>
       <p
         className={`font-serif text-[17px] leading-[1.55] text-foreground-secondary whitespace-pre-line ${
