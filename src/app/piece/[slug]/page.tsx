@@ -1,11 +1,10 @@
 import { notFound } from "next/navigation";
-import { pieces, getArtist, getCollection, getPiecesByCollection } from "@/lib/data";
-import { getArtworkImage, resolveTokenId } from "@/lib/images";
-import { sortPieces, getEditionType, getArtistSiteUrl, getPieceTraits } from "@/lib/curation";
+import { pieces, getArtist, getCollection } from "@/lib/data";
+import { getArtworkImage, getArtworkAspect, resolveTokenId } from "@/lib/images";
+import { getEditionType, getArtistSiteUrl, getPieceTraits } from "@/lib/curation";
 import PlaceholderArt from "@/components/PlaceholderArt";
 import BackButton from "@/components/BackButton";
 import PieceLayout from "@/components/PieceLayout";
-import JustifiedGallery from "@/components/JustifiedGallery";
 import OnChainDetails from "@/components/OnChainDetails";
 import Features from "@/components/Features";
 
@@ -42,19 +41,6 @@ export default async function PiecePage({ params }: { params: Promise<{ slug: st
 
   const artist = getArtist(piece.artistSlug);
   const collection = getCollection(piece.collectionSlug);
-  const colPieces = getPiecesByCollection(piece.collectionSlug);
-  const orderedPieces = sortPieces(piece.collectionSlug, colPieces);
-  const moreRaw = orderedPieces.filter((p) => p.id !== piece.id).slice(0, 8);
-  const more = moreRaw.map((p) => ({
-    id: p.id,
-    slug: p.slug,
-    title: p.title,
-    collectionSlug: p.collectionSlug,
-    artistSlug: p.artistSlug,
-    medium: p.medium,
-    contractAddress: p.contractAddress,
-    tokenId: p.tokenId,
-  }));
   const realImage = getArtworkImage(piece.slug, piece.contractAddress, piece.tokenId, "detail");
   const isPunk = piece.collectionSlug === "cryptopunks";
 
@@ -125,6 +111,7 @@ export default async function PiecePage({ params }: { params: Promise<{ slug: st
       <div className="pt-6">
         <PieceLayout
           image={realImage}
+          aspect={getArtworkAspect(piece.slug, piece.contractAddress, piece.tokenId)}
           title={piece.title}
           isPunk={isPunk}
           artistName={artist?.name}
@@ -139,15 +126,6 @@ export default async function PiecePage({ params }: { params: Promise<{ slug: st
         />
       </div>
 
-      {/* Other works from this series */}
-      {more.length > 0 && collection && (
-        <div className="pt-24 pb-8">
-          <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-6">
-            Other works from {collection.name}
-          </p>
-          <JustifiedGallery pieces={more} piecesPerRow={Math.min(more.length, 4)} />
-        </div>
-      )}
     </div>
   );
 }

@@ -22,7 +22,7 @@ const sorted = [...artists]
 export default function ArtistsPage() {
   return (
     <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 pt-12 sm:pt-16 pb-16">
-      {sorted.map((artist) => {
+      {sorted.map((artist, idx) => {
         const artistName = getArtistDisplayName(artist.slug, artist.name);
         const visibleCols = sortCollections(
           artist.slug,
@@ -33,8 +33,8 @@ export default function ArtistsPage() {
         );
 
         // Build the candidate pool - every visible piece that resolves to a
-        // real image, in curation order. Client component picks one at random
-        // on each mount.
+        // real image, in curation order. ArtistHero picks one and freezes
+        // it for the session.
         const candidates = visibleCols
           .flatMap((col) =>
             sortPieces(col.slug, allWorks.filter((w) => w.collectionSlug === col.slug))
@@ -46,17 +46,27 @@ export default function ArtistsPage() {
           })
           .filter((c): c is NonNullable<typeof c> => c !== null);
 
+        // Alternate image-left and image-right across rows so the eye has
+        // something to track. Eleven identical 55/45 rows read as wallpaper;
+        // the cadence break gives each artist a distinct beat without losing
+        // the catalogue rhythm.
+        const heroOnRight = idx % 2 === 1;
+
         return (
           <div
             key={artist.slug}
             className="border-b border-border py-16 first:pt-8"
           >
-            <div className="grid grid-cols-1 md:grid-cols-[55fr_45fr] gap-8 md:gap-16 items-start">
-              {/* Hero artwork - fills its column */}
-              <ArtistHero artistSlug={artist.slug} candidates={candidates} />
+            <div className={`grid grid-cols-1 ${heroOnRight ? "md:grid-cols-[45fr_55fr]" : "md:grid-cols-[55fr_45fr]"} gap-8 md:gap-16 items-start`}>
+              {/* On odd rows the hero is on the right; markup-order stays
+                  hero-first so reading order matches visual order on mobile
+                  (single column), and the desktop swap is column-order only. */}
+              <div className={heroOnRight ? "md:order-2" : ""}>
+                <ArtistHero artistSlug={artist.slug} candidates={candidates} />
+              </div>
 
               {/* Info */}
-              <div className="md:pt-4">
+              <div className={`md:pt-4 ${heroOnRight ? "md:order-1" : ""}`}>
                 <Link
                   href={`/artist/${artist.slug}`}
                   className="inline-block group"

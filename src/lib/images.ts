@@ -95,6 +95,31 @@ export function resolveTokenId(
   return tokenId;
 }
 
+// Natural aspect ratios extracted from the optimized webp/png/svg files at
+// build time. See scripts/extract-aspects.mjs. Used by piece pages so the
+// Image box renders at the real intrinsic aspect rather than a 4:3 default.
+import aspectsRaw from "./aspects.data.json";
+const ASPECTS = aspectsRaw as Record<string, { w: number; h: number }>;
+
+/**
+ * Get natural (width, height) of the optimized artwork file, if known.
+ * Returns null for Punks, curated samples, and any piece without a stored
+ * dimension entry - PieceLayout falls back to its 4:3 default in that case.
+ */
+export function getArtworkAspect(
+  slug: string,
+  contractAddress?: string,
+  tokenId?: string
+): { w: number; h: number } | null {
+  if (contractAddress && tokenId) {
+    const contract = contractAddress.toLowerCase();
+    const fullToken = resolveTokenId(slug, contractAddress, tokenId);
+    const key = `${contract}-${fullToken}`.toLowerCase();
+    if (ASPECTS[key]) return ASPECTS[key];
+  }
+  return null;
+}
+
 /**
  * Get artwork image path.
  * @param size - "detail" (1200px) or "thumb" (400px)

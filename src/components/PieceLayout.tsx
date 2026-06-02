@@ -5,6 +5,10 @@ import Link from "next/link";
 
 interface Props {
   image: string | null;
+  /** Natural pixel dimensions of the artwork file, when known. Used to size
+      the Image box at the true intrinsic aspect (else next/image defaults to
+      the 4:3 of the placeholder width/height props and tall pieces letterbox). */
+  aspect?: { w: number; h: number } | null;
   title: string;
   isPunk: boolean;
   artistName?: string;
@@ -59,20 +63,22 @@ function resolveOriginal(uri: string): { href: string; label: string } | null {
 /**
  * Piece layout: image on the left, details on the right.
  */
-export default function PieceLayout({ image, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, metadata, rasterUrl, artistSiteUrl, originalUri, placeholder }: Props) {
+export default function PieceLayout({ image, aspect, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, metadata, rasterUrl, artistSiteUrl, originalUri, placeholder }: Props) {
   const artistHost = artistSiteUrl ? hostLabel(artistSiteUrl) : null;
   const original = originalUri ? resolveOriginal(originalUri) : null;
+  // When natural aspect is known, pass it as width/height props so next/image
+  // sizes the box to the artwork's true shape. Falls back to 1600x1200 (4:3)
+  // for pieces without a stored aspect - tall fallback pieces will still
+  // letterbox slightly but the gallery 320-of-321 has real dimensions.
+  const imgW = aspect?.w ?? 1600;
+  const imgH = aspect?.h ?? 1200;
   const artworkBlock = image ? (
     <div className={isPunk ? "bg-[#638596] inline-block" : ""}>
       <Image
         src={image}
         alt={title}
-        width={1600}
-        height={1200}
-        // w-auto + max-w-full + max-h-[80vh] lets the image size by its natural
-        // aspect ratio, capped by both the column width and 80% of viewport
-        // height. w-full would stretch the box for tall pieces and produce
-        // letterbox whitespace on the sides.
+        width={imgW}
+        height={imgH}
         className={`block w-auto h-auto max-w-full max-h-[80vh] object-contain ${isPunk ? "[image-rendering:pixelated] max-w-[400px]" : ""}`}
         priority
         sizes="(max-width: 768px) 90vw, 60vw"
@@ -148,9 +154,17 @@ export default function PieceLayout({ image, title, isPunk, artistName, artistSl
     </div>
   );
 
+  // Tall pieces (aspect ratio < 1, i.e. taller than wide) collapse the column
+  // to a tighter cap so the dead gutter between artwork and metadata vanishes;
+  // wide/square pieces keep the standard 60-65% column so they have room to
+  // breathe.
+  const isTall = aspect ? aspect.w / aspect.h < 1 : false;
+  const columnClass = isTall
+    ? "w-full md:w-auto md:max-w-[45%] lg:max-w-[40%] shrink-0"
+    : "w-full md:w-[60%] lg:w-[65%] shrink-0";
   return (
     <div className="flex flex-col md:flex-row gap-8 md:gap-16 items-start">
-      <div className="w-full md:w-[60%] lg:w-[65%] shrink-0">
+      <div className={columnClass}>
         {artworkBlock}
       </div>
       {infoBlock}
