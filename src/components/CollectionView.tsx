@@ -202,6 +202,16 @@ export default function CollectionView({ sections, artists }: Props) {
           ))}
         </div>
 
+        {/* Standing dek when no filter is active - quiet "you are here"
+            identifier so the page has a voice before any interaction. Hidden
+            once a chapter is selected (the chapter description takes its
+            slot instead). */}
+        {!hasFilters && (
+          <p className="font-serif text-[16px] leading-[1.55] text-foreground-secondary pt-4 max-w-[680px]">
+            Hivemind Digital Culture Fund
+          </p>
+        )}
+
         {/* Chapter description - only when a chapter is active */}
         {activeChapter && (
           <p className="font-serif text-[16px] leading-[1.55] text-foreground-secondary pt-4 max-w-[680px]">

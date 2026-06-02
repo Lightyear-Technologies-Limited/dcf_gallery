@@ -3,6 +3,7 @@
 // curation.data.json is the parsed, valid-JSON form the app reads.
 import curation from "./curation.data.json";
 import traitsData from "./traits.data.json";
+import descriptionsData from "./descriptions.data.json";
 
 /**
  * Get display name for a collection. Falls back to data name.
@@ -152,6 +153,17 @@ export function getPieceTraits(slug: string): Array<[string, string | number]> |
   if (!row) return null;
   const entries = Object.entries(row);
   return entries.length > 0 ? entries : null;
+}
+
+/**
+ * Get the per-piece description prose pulled from on-chain metadata, or null
+ * if absent. Collection-level boilerplate (descriptions repeating across most
+ * pieces in a collection) is filtered out at build time - only distinctive
+ * per-piece prose survives.
+ */
+export function getPieceDescription(slug: string): string | null {
+  const data = descriptionsData as Record<string, string>;
+  return data[slug] || null;
 }
 
 /**

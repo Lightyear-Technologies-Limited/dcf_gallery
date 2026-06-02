@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { pieces, getArtist, getCollection } from "@/lib/data";
 import { getArtworkImage, getArtworkAspect, resolveTokenId } from "@/lib/images";
-import { getEditionType, getArtistSiteUrl, getPieceTraits } from "@/lib/curation";
+import { getEditionType, getArtistSiteUrl, getPieceTraits, getPieceDescription } from "@/lib/curation";
 import PlaceholderArt from "@/components/PlaceholderArt";
 import BackButton from "@/components/BackButton";
 import PieceLayout from "@/components/PieceLayout";
@@ -118,6 +118,7 @@ export default async function PiecePage({ params }: { params: Promise<{ slug: st
           artistSlug={artist?.slug}
           collectionName={collection?.name}
           collectionSlug={collection?.slug}
+          description={getPieceDescription(piece.slug)}
           metadata={metadata}
           rasterUrl={marketplaceUrl}
           artistSiteUrl={artistSiteUrl}

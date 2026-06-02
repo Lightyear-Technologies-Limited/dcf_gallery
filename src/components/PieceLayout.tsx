@@ -15,6 +15,10 @@ interface Props {
   artistSlug?: string;
   collectionName?: string;
   collectionSlug?: string;
+  /** Per-piece prose from on-chain metadata (artist statement, TIME essay
+      excerpt, etc.). Rendered below the title block and above the metadata
+      panel. Collection-level boilerplate is filtered out at build time. */
+  description?: string | null;
   metadata: React.ReactNode;
   rasterUrl?: string;
   artistSiteUrl?: string;
@@ -63,7 +67,7 @@ function resolveOriginal(uri: string): { href: string; label: string } | null {
 /**
  * Piece layout: image on the left, details on the right.
  */
-export default function PieceLayout({ image, aspect, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, metadata, rasterUrl, artistSiteUrl, originalUri, placeholder }: Props) {
+export default function PieceLayout({ image, aspect, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, description, metadata, rasterUrl, artistSiteUrl, originalUri, placeholder }: Props) {
   const artistHost = artistSiteUrl ? hostLabel(artistSiteUrl) : null;
   const original = originalUri ? resolveOriginal(originalUri) : null;
   // When natural aspect is known, pass it as width/height props so next/image
@@ -110,6 +114,15 @@ export default function PieceLayout({ image, aspect, title, isPunk, artistName, 
             {collectionName}
           </Link>
         </div>
+      )}
+
+      {description && (
+        // Per-piece prose from on-chain metadata. Serif body so it reads as
+        // editorial context rather than UI text - this is the artist's
+        // voice on most 1/1s.
+        <p className="mt-8 font-serif text-[17px] leading-[1.55] text-foreground-secondary whitespace-pre-line">
+          {description}
+        </p>
       )}
 
       <div className="mt-10">{metadata}</div>
