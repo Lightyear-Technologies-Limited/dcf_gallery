@@ -104,6 +104,72 @@ export default async function CollectionPage({ params }: { params: Promise<{ slu
               {artistName}
             </Link>
           )}
+
+          {/* Editorial content (description, curator note, exhibitions,
+              essay) was previously dropped on single-piece collections so
+              the SinglePieceDisplay could dominate, but that hid substantial
+              content on richly-documented collections like superrare-beeple.
+              Render it in a constrained column below the title block. */}
+          <div className="mt-10 space-y-10 max-w-[680px]">
+            {col.description && (
+              <div className="border-l border-border pl-5">
+                <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
+                  About {collectionName}
+                </p>
+                <ExpandableProse text={col.description} />
+              </div>
+            )}
+            {col.curatorNote && <CuratorNote text={col.curatorNote} variant="inline" />}
+            {col.exhibitions && col.exhibitions.length > 0 && (
+              <div>
+                <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
+                  Exhibitions
+                </p>
+                <ul className="space-y-2 text-[13px]">
+                  {col.exhibitions.map((ex, i) => (
+                    <li key={i}>
+                      <span className="text-muted tabular-nums">{ex.date}</span>
+                      <span className="text-muted"> - </span>
+                      {ex.url ? (
+                        <a
+                          href={ex.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-foreground-secondary hover:text-foreground transition-colors duration-200 underline decoration-transparent hover:decoration-border underline-offset-4"
+                        >
+                          <span className="font-serif italic">{ex.title}</span>
+                          {ex.location && `, ${ex.location}`}
+                        </a>
+                      ) : (
+                        <>
+                          <span className="font-serif italic text-foreground-secondary">{ex.title}</span>
+                          {ex.location && (
+                            <span className="text-foreground-secondary">, {ex.location}</span>
+                          )}
+                        </>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {col.essayUrl && (
+              <a
+                href={col.essayUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[13px] text-muted hover:text-foreground transition-colors duration-200 inline-block"
+              >
+                Read the essay
+                {col.essayTitle && (
+                  <>
+                    : <span className="underline underline-offset-4 decoration-border">{col.essayTitle}</span>
+                  </>
+                )}{" "}
+                →
+              </a>
+            )}
+          </div>
         </div>
       ) : (
         <div className="pt-10 grid grid-cols-1 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-12 md:gap-16">
