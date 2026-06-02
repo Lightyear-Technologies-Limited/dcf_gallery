@@ -20,6 +20,23 @@ interface Props {
       excerpt, etc.). Rendered below the title block and above the metadata
       panel. Collection-level boilerplate is filtered out at build time. */
   description?: string | null;
+  /** True if the piece has a contract address + token ID. Drives whether the
+      description block carries the "From the artist's metadata description"
+      attribution; physical works (no on-chain token) get no attribution
+      because their description is editorial, not quoted from metadata. */
+  isOnChain?: boolean;
+  /** Physical specifications for sculptural / installation works. Rendered
+      as a Specifications panel; the blockchain details panel is omitted by
+      the caller for these pieces. */
+  physical?: {
+    dimensions: string;
+    weight?: string;
+    materials: string;
+    edition?: string;
+  };
+  /** Related piece in the catalogue (e.g. the on-chain NFT this sculpture
+      extends). Rendered as a small "Companion: {Title}" link. */
+  companion?: { slug: string; title: string };
   metadata: React.ReactNode;
   rasterUrl?: string;
   /** Optional CryptoPunks Marketplace URL. Only set for Punks; rendered as
@@ -77,7 +94,7 @@ function resolveOriginal(uri: string): { href: string; label: string } | null {
 /**
  * Piece layout: image on the left, details on the right.
  */
-export default function PieceLayout({ image, aspect, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, description, metadata, rasterUrl, cryptopunksUrl, artistSiteUrl, originalUri, placeholder }: Props) {
+export default function PieceLayout({ image, aspect, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, description, isOnChain = true, physical, companion, metadata, rasterUrl, cryptopunksUrl, artistSiteUrl, originalUri, placeholder }: Props) {
   const artistHost = artistSiteUrl ? hostLabel(artistSiteUrl) : null;
   const original = originalUri ? resolveOriginal(originalUri) : null;
   // When natural aspect is known, pass it as width/height props so next/image
@@ -126,7 +143,39 @@ export default function PieceLayout({ image, aspect, title, isPunk, artistName, 
         </div>
       )}
 
-      {description && <PieceDescription text={description} label={`About ${title}`} />}
+      {description && (
+        <PieceDescription
+          text={description}
+          label={`About ${title}`}
+          showMetadataAttribution={isOnChain}
+        />
+      )}
+
+      {physical && (
+        <div className="mt-10 border-l border-border pl-5">
+          <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
+            Specifications
+          </p>
+          <div className="text-[13px] space-y-0">
+            <SpecRow label="Dimensions" value={physical.dimensions} />
+            {physical.weight && <SpecRow label="Weight" value={physical.weight} />}
+            <SpecRow label="Materials" value={physical.materials} />
+            {physical.edition && <SpecRow label="Edition" value={physical.edition} />}
+          </div>
+        </div>
+      )}
+
+      {companion && (
+        <div className="mt-8 text-[12px] text-muted">
+          Companion:{" "}
+          <Link
+            href={`/piece/${companion.slug}`}
+            className="text-foreground-secondary hover:text-foreground transition-colors duration-200 underline underline-offset-4 decoration-border hover:decoration-foreground italic font-serif"
+          >
+            {companion.title}
+          </Link>
+        </div>
+      )}
 
       <div className="mt-10">{metadata}</div>
 
@@ -210,7 +259,15 @@ export default function PieceLayout({ image, aspect, title, isPunk, artistName, 
  * the way a museum catalogue indents a sourced quote. Long prose collapses
  * to three lines with a Read more / Show less toggle.
  */
-function PieceDescription({ text, label }: { text: string; label: string }) {
+function PieceDescription({
+  text,
+  label,
+  showMetadataAttribution = true,
+}: {
+  text: string;
+  label: string;
+  showMetadataAttribution?: boolean;
+}) {
   const COLLAPSE_THRESHOLD = 280;
   const isLong = text.length > COLLAPSE_THRESHOLD || text.includes("\n");
   const [expanded, setExpanded] = useState(false);
@@ -234,9 +291,20 @@ function PieceDescription({ text, label }: { text: string; label: string }) {
           {expanded ? "Show less" : "Read more"}
         </button>
       )}
-      <p className="mt-4 text-[12px] text-muted italic">
-        From the artist&rsquo;s metadata description
-      </p>
+      {showMetadataAttribution && (
+        <p className="mt-4 text-[12px] text-muted italic">
+          From the artist&rsquo;s metadata description
+        </p>
+      )}
+    </div>
+  );
+}
+
+function SpecRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex justify-between items-start gap-4 py-2.5 border-b border-border">
+      <span className="text-muted shrink-0">{label}</span>
+      <span className="text-foreground text-right">{value}</span>
     </div>
   );
 }

@@ -157,7 +157,15 @@ export default async function PiecePage({ params }: { params: Promise<{ slug: st
           artistSlug={artist?.slug}
           collectionName={collection?.name}
           collectionSlug={collection?.slug}
-          description={getPieceDescription(piece.slug)}
+          description={getPieceDescription(piece.slug) || piece.description || null}
+          isOnChain={Boolean(piece.contractAddress && piece.tokenId)}
+          physical={piece.physical}
+          companion={(() => {
+            if (!piece.companionSlug) return undefined;
+            const c = pieces.find((p) => p.slug === piece.companionSlug);
+            if (!c) return undefined;
+            return { slug: c.slug, title: c.title };
+          })()}
           metadata={metadata}
           rasterUrl={rasterUrl}
           cryptopunksUrl={cryptopunksUrl}

@@ -73,6 +73,20 @@ export interface Piece {
   // Rendered as a "View original on ipfs.io" link on the piece page.
   // ipfs:// and ar:// URIs are resolved to public gateways at render time.
   originalUri?: string;
+  // Physical specifications for sculptural / installation works that have
+  // no on-chain token. Rendered as a Specifications panel on the piece
+  // page (in lieu of the blockchain details panel which is omitted for
+  // pieces without a contract/token).
+  physical?: {
+    dimensions: string;
+    weight?: string;
+    materials: string;
+    edition?: string;
+  };
+  // Slug of a related piece in the catalogue (e.g. the on-chain NFT that
+  // a physical sculpture extends). Rendered as a "Companion: {Title}" link
+  // on the piece page so the catalogue can express the pairing.
+  companionSlug?: string;
 }
 
 export interface Influence {
@@ -2526,14 +2540,21 @@ export const pieces: Piece[] = [
   {
     id: 'x-ray-machine-1',
     slug: 'x-ray-machine-1',
-    title: 'X-Ray Machine',
+    title: 'X-ray Machine',
     collectionSlug: 'human-unreadable',
     artistSlug: 'operator',
     image: '/art/optimized/operator-x-ray-machine.webp',
     medium: 'interactive',
-    description: '',
+    description: 'The X-ray Machine is a 1/1 steel-and-tempered-glass sculpture by Operator (Ania Catherine and Dejha Ti) that unifies the first two acts of their Human Unreadable collection - the on-chain choreographic token and the physical interpretation of its score - in a single object that operates without screens. Fifteen engraved, UV-printed, smoked and mirrored glass sheets sit within a stainless-steel frame; custom electronics translate the choreography into shifting light patterns, producing an ambient glow rather than a screen-based image.\n\nThe sculpture is the physical companion to Human Unreadable #124, the on-chain token Operator minted and held until this acquisition. It is one of the sole large-scale X-ray Machines the artists will produce alongside their retained artist proof; the only other large-scale example enters a major London museum’s permanent collection. Operator describes the work as “a dynamic, breathing, ghostly, yet elegant object” viewable from all angles, and the partnership with Hivemind as one that “gives this work, which started as a dream in our minds, a platform to reach new scales and audiences.”',
     traits: {},
     influences: [],
+    physical: {
+      dimensions: '200.07 × 137.28 × 66.3 cm (78.8 × 54 × 26.1 in)',
+      weight: 'approximately 525 kg (1,157 lb)',
+      materials: 'Tempered glass, stainless steel, copper, LED system, micro-computer control',
+      edition: 'Sole large-scale, alongside artist proof',
+    },
+    companionSlug: 'human-unreadable-455000124-b069',
   },
   {
     id: 'human-unreadable-455000095-b069',
