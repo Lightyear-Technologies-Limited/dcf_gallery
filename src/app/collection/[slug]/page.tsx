@@ -164,16 +164,11 @@ export default async function CollectionPage({
     });
     const rule = clickableSpec?.[key];
     if (rule === undefined) {
-      // Key not in the clickability whitelist: hide unless the active filter
-      // happens to target this key (then promote the active value into view
-      // so the reader sees their current pivot, even if it's editorial-off).
-      if (
-        traitFilter?.key === key &&
-        traitFilter?.value &&
-        values.has(traitFilter.value)
-      ) {
-        return [[traitFilter.value, values.get(traitFilter.value)!]];
-      }
+      // Key not in the clickability whitelist: hide entirely. If the active
+      // filter targets a key that's covered by a synthetic group (Grifters
+      // Vision / Noise -> Sets), the active state surfaces in the synthetic
+      // row, not as an auto-promoted standalone row. The chip above always
+      // names the current filter, so the reader isn't lost.
       return [];
     }
     if (rule === "all") return sortedValues;
@@ -238,13 +233,24 @@ export default async function CollectionPage({
   // the eye's anchor; everything else is muted.
   const chipBlock = traitFilter ? (() => {
     const globalCount = getTraitGlobalCount(slug, traitFilter.key, traitFilter.value);
+    // If the active filter targets a (key, value) that's covered by a
+    // synthetic group (Grifters Vision/Noise -> "Sets"), the chip names
+    // the synthetic group instead of the underlying real trait. Reader
+    // sees "Sets: G to the M" rather than the unhelpful "Noise: G to the
+    // M" - matches the affordance they clicked from.
+    const syntheticGroup = SYNTHETIC_TRAIT_GROUPS[slug]?.find((g) =>
+      g.values.some(
+        (v) => v.key === traitFilter.key && v.value === traitFilter.value,
+      ),
+    );
+    const chipKey = syntheticGroup?.label ?? traitFilter.key;
     return (
       <div className="mt-6 max-w-[520px] flex flex-wrap items-baseline gap-x-3 gap-y-1 border-b border-border pb-3 text-[13px]">
         <span className="text-[10px] uppercase text-muted">
           Filter
         </span>
         <span className="text-foreground">
-          {traitFilter.key}: <span className="font-medium">{traitFilter.value}</span>
+          {chipKey}: <span className="font-medium">{traitFilter.value}</span>
         </span>
         <span className="text-muted">·</span>
         <span className="text-foreground tabular-nums font-medium">{pieces.length}</span>
@@ -291,8 +297,15 @@ export default async function CollectionPage({
     );
   }
   for (const group of SYNTHETIC_TRAIT_GROUPS[slug] ?? []) {
+    // Set counts cap at 3 - one per color (Yellow / Blue / Green). When
+    // Hivemind holds 4+ of a set in the same color, the surplus drops
+    // from the displayed count so the figure reads "1 of each colour"
+    // rather than total holdings.
     const entries = group.values
-      .map((v) => ({ ...v, count: facets.get(v.key)?.get(v.value) ?? 0 }))
+      .map((v) => ({
+        ...v,
+        count: Math.min(facets.get(v.key)?.get(v.value) ?? 0, 3),
+      }))
       .filter((v) => v.count > 0);
     if (!entries.length) continue;
     traitIndexRows.push(
@@ -353,11 +366,26 @@ export default async function CollectionPage({
   const hasVisibleFacets = [...facets.entries()].some(([key, values]) =>
     buildVisibleValues(key, values).length > 0,
   );
-  // Same inline component renders on filtered AND unfiltered views so the
-  // page structure doesn't change when a reader applies a filter. The
-  // disclosure + stacked-row layout was inconsistent with the inline
-  // filtered placement; consolidated into a single tight layout.
-  const traitDisclosure = traitIndexRows.length > 0 ? traitIndexInline : null;
+  // Unfiltered placement wraps the same inline layout in a <details>
+  // disclosure so the trait index stays collapsed by default (the
+  // unfiltered page subject is the artwork, not the pivot affordance).
+  // When opened, it renders the exact same tight inline rows the
+  // filtered view shows always-visible - no structural mismatch
+  // between filter states.
+  const traitDisclosure = traitIndexRows.length > 0 ? (
+    <details className="group max-w-[520px] [&_summary::-webkit-details-marker]:hidden">
+      <summary className="cursor-pointer list-none text-muted hover:text-foreground transition-colors duration-200 inline-flex items-center gap-2 select-none">
+        <span className="text-[10px] uppercase">Browse by trait</span>
+        <span
+          aria-hidden
+          className="inline-block transition-transform duration-200 group-open:rotate-90"
+        >
+          &rsaquo;
+        </span>
+      </summary>
+      {traitIndexInline}
+    </details>
+  ) : null;
 
   return (
     <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
