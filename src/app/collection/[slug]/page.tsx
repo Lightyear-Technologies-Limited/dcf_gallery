@@ -447,13 +447,51 @@ export default async function CollectionPage({
             {chipBlock}
             {traitIndexInline}
 
-            {/* Browse-by-trait disclosure lives in the LEFT column under
-                the holdings data stack on unfiltered views, so it sits
-                naturally below the fund's position figure. Editorial
-                prose (About + Hivemind Commentary + Artist Statement)
-                lives in the RIGHT column - this lets the left column be
-                purely position/identity data and keeps the right column
-                purely the institutional + artist voice. */}
+            {/* Exhibitions - tombstone provenance under the holdings stack.
+                Catalogue convention: EXHIBITED sits in the lot tombstone
+                next to PROVENANCE, not in a page-end appendix. Previously
+                rendered as a footer band below the gallery; relocated so
+                a reader gets the show history before scrolling past the
+                artwork. Persists on filtered views - the show history is
+                collection-level truth, not subset-relative. */}
+            {col.exhibitions && col.exhibitions.length > 0 && (
+              <div className="mt-8 max-w-[420px]">
+                <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
+                  Exhibitions
+                </p>
+                <ul className="space-y-1 text-[13px] leading-snug">
+                  {col.exhibitions.map((ex, i) => (
+                    <li key={i}>
+                      <span className="text-muted tabular-nums">{ex.date}</span>
+                      <span className="text-muted"> - </span>
+                      {ex.url ? (
+                        <a
+                          href={ex.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-foreground-secondary hover:text-foreground transition-colors duration-200 underline decoration-transparent hover:decoration-border underline-offset-4"
+                        >
+                          <span className="font-serif italic">{ex.title}</span>
+                          {ex.location && `, ${ex.location}`}
+                        </a>
+                      ) : (
+                        <>
+                          <span className="font-serif italic text-foreground-secondary">{ex.title}</span>
+                          {ex.location && (
+                            <span className="text-foreground-secondary">, {ex.location}</span>
+                          )}
+                        </>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Browse-by-trait disclosure - sits below the exhibitions
+                block when present, otherwise directly under the holdings
+                stack. Editorial prose (About + Hivemind Commentary +
+                Artist Statement) lives in the RIGHT column. */}
             {!traitFilter && traitDisclosure && (
               <div className="mt-8">{traitDisclosure}</div>
             )}
@@ -546,10 +584,8 @@ export default async function CollectionPage({
           )}
         </div>
 
-      {/* Gallery. Bottom padding drops to pb-8 when an Exhibitions footer
-          follows (the footer's own top spacing + border carries the rule);
-          otherwise pb-24 provides end-of-page breathing room. */}
-      <div className={`${traitFilter ? "pt-8" : "pt-6"} ${col.exhibitions && col.exhibitions.length > 0 ? "pb-8" : "pb-12"}`}>
+      {/* Gallery. */}
+      <div className={`${traitFilter ? "pt-8" : "pt-6"} pb-12`}>
         {(() => {
           const heroLayout = getHeroLayout(slug);
           // Filtered view: bypass hero / fixed-row / single-piece layouts
@@ -620,45 +656,6 @@ export default async function CollectionPage({
           return <JustifiedGallery pieces={pieces} piecesPerRow={ideal} />;
         })()}
       </div>
-
-      {/* Exhibitions footer - public showings of works in this collection.
-          Sits below the gallery as catalogue provenance ("EXHIBITED" in a
-          Sotheby's lot) rather than mixed in with the editorial header.
-          Persists on filtered views - the show history is collection-level
-          truth, not subset-relative. */}
-      {col.exhibitions && col.exhibitions.length > 0 && (
-        <div className="border-t border-border pt-6 pb-12 max-w-[680px]">
-          <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
-            Exhibitions
-          </p>
-          <ul className="space-y-1 text-[13px] leading-snug">
-            {col.exhibitions.map((ex, i) => (
-              <li key={i}>
-                <span className="text-muted tabular-nums">{ex.date}</span>
-                <span className="text-muted"> - </span>
-                {ex.url ? (
-                  <a
-                    href={ex.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-foreground-secondary hover:text-foreground transition-colors duration-200 underline decoration-transparent hover:decoration-border underline-offset-4"
-                  >
-                    <span className="font-serif italic">{ex.title}</span>
-                    {ex.location && `, ${ex.location}`}
-                  </a>
-                ) : (
-                  <>
-                    <span className="font-serif italic text-foreground-secondary">{ex.title}</span>
-                    {ex.location && (
-                      <span className="text-foreground-secondary">, {ex.location}</span>
-                    )}
-                  </>
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
 
     </div>
   );
