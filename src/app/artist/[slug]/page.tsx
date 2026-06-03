@@ -264,7 +264,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
               <div className="mb-8">
                 <Link
                   href={sectionHref}
-                  className="font-serif display-sm hover:opacity-60 transition-opacity duration-200 inline-block"
+                  className="font-serif display-sm underline decoration-border underline-offset-[10px] hover:decoration-foreground transition-colors duration-200 inline-block"
                 >
                   {col.name}
                 </Link>

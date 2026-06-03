@@ -101,7 +101,7 @@ export default function Header() {
               </Link>
             ))}
             <a
-              href="mailto:dcf@hivemind.capital?subject=DCF%20Inquiry"
+              href="mailto:dcf@hivemind.capital?subject=Hivemind%20Inquiry"
               onClick={() => setOpen(false)}
               className="font-serif text-3xl tracking-[-0.01em] text-foreground-secondary hover:text-foreground transition-colors duration-200"
             >

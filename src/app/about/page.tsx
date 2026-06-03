@@ -15,7 +15,7 @@ export default function AboutPage() {
       {/* Hero */}
       <div className="max-w-[680px] pt-[120px]">
         <h1 className="font-serif display">
-          Digital Culture Fund
+          Hivemind Digital Culture Fund
         </h1>
         <p className="text-[20px] text-foreground-secondary mt-8 leading-[1.6]">
           A curated portfolio of digital art&rsquo;s emergent canon, acquired

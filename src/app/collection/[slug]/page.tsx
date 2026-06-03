@@ -377,8 +377,13 @@ export default async function CollectionPage({
       </div>
     );
   }
+  // Tight rhythm: mt-3 below the summary chip / chipBlock above. The wider
+  // mt-6 read as a void between "Browse by trait >" and the first trait row
+  // when the disclosure was opened, and broke the editorial column's
+  // space-y-6 rhythm. mt-3 inside the disclosure pairs with space-y-2
+  // between rows so opening Browse by trait reads as one tight block.
   const traitIndexInline = traitIndexRows.length > 0 ? (
-    <div className="mt-6 max-w-[520px] space-y-2 text-[12px]">
+    <div className="mt-3 max-w-[520px] space-y-2 text-[12px]">
       {traitIndexRows}
     </div>
   ) : null;
@@ -400,8 +405,13 @@ export default async function CollectionPage({
   // When opened, it renders the exact same tight inline rows the
   // filtered view shows always-visible - no structural mismatch
   // between filter states.
+  // Open trait rows render as an absolute-positioned panel so opening
+  // Browse-by-trait NEVER grows the left column or pushes the gallery
+  // down. The disclosure occupies only its summary height in layout;
+  // the expanded rows visually overlay the space below (which is empty
+  // gutter to the left of the editorial right column).
   const traitDisclosure = traitIndexRows.length > 0 ? (
-    <details className="group max-w-[520px] [&_summary::-webkit-details-marker]:hidden">
+    <details className="group relative max-w-[520px] [&_summary::-webkit-details-marker]:hidden">
       <summary className="cursor-pointer list-none text-muted hover:text-foreground transition-colors duration-200 inline-flex items-center gap-2 select-none">
         <span className="text-[10px] uppercase">Browse by trait</span>
         <span
@@ -411,7 +421,9 @@ export default async function CollectionPage({
           &rsaquo;
         </span>
       </summary>
-      {traitIndexInline}
+      <div className="absolute left-0 right-0 top-full z-10">
+        {traitIndexInline}
+      </div>
     </details>
   ) : null;
 
@@ -481,7 +493,7 @@ export default async function CollectionPage({
           the header structure stays constant. */}
       <div className="pt-6 grid grid-cols-1 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-12 md:gap-16">
           <div>
-            <h1 className="font-serif display">
+            <h1 className="font-serif display-sm">
               {collectionName}
             </h1>
             {artist && (
@@ -545,13 +557,15 @@ export default async function CollectionPage({
               )}
             </div>
 
-            {/* Filter chip + compact trait index. On filtered views these
-                sit directly under the holdings line so the filter context
-                pairs visually with the fund's position figure (holdings ->
-                chip -> available pivots), and the right column is freed
-                for the institutional voice. */}
+            {/* Filter chip + compact trait index. On FILTERED views the
+                inline trait rows sit directly under the holdings line so
+                the filter context pairs visually with the fund's position
+                figure (holdings -> chip -> available pivots). On unfiltered
+                views the inline is suppressed: the Browse-by-trait
+                disclosure below handles the same rows, and rendering both
+                would double the pivots above the gallery. */}
             {chipBlock}
-            {traitIndexInline}
+            {traitFilter && traitIndexInline}
 
             {/* Exhibitions - tombstone provenance under the holdings stack.
                 Catalogue convention: EXHIBITED sits in the lot tombstone
@@ -561,7 +575,7 @@ export default async function CollectionPage({
                 artwork. Persists on filtered views - the show history is
                 collection-level truth, not subset-relative. */}
             {col.exhibitions && col.exhibitions.length > 0 && (
-              <div className="mt-8 max-w-[420px]">
+              <div className="mt-6 max-w-[420px]">
                 <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
                   Exhibitions
                 </p>
@@ -599,7 +613,7 @@ export default async function CollectionPage({
                 stack. Editorial prose (About + Hivemind Commentary +
                 Artist Statement) lives in the RIGHT column. */}
             {!traitFilter && traitDisclosure && (
-              <div className="mt-8">{traitDisclosure}</div>
+              <div className="mt-6">{traitDisclosure}</div>
             )}
           </div>
 
@@ -678,15 +692,15 @@ export default async function CollectionPage({
                   <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
                     Artist Statement
                   </p>
-                  {/* Threshold raised to 600 chars so single-paragraph
-                      statements (Ringers ~500) render in full while
-                      genuinely long ones (Human Unreadable, several
-                      thousand chars across paragraphs) collapse to a
-                      3-line preview behind Read more. whitespace-pre-line
-                      preserves paragraph breaks when expanded. */}
+                  {/* Threshold at 300 chars - medium-length statements
+                      (Ringers ~500, Lightyears ~430) collapse to a 3-line
+                      preview behind Read more so the right column stays
+                      tight. Short statements (under 300, no line breaks)
+                      render in full. Multi-line content always collapses
+                      regardless of length. */}
                   <ExpandableProse
                     text={col.artistStatement}
-                    threshold={600}
+                    threshold={300}
                     className="font-serif text-[16px] leading-[1.65] text-foreground-secondary whitespace-pre-line"
                   />
                 </div>

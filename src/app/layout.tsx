@@ -58,7 +58,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               <Link href="/artists" className="hover:text-foreground transition-colors duration-200">Artists</Link>
               <Link href="/about" className="hover:text-foreground transition-colors duration-200">About</Link>
               <a
-                href="mailto:dcf@hivemind.capital?subject=DCF%20Inquiry"
+                href="mailto:dcf@hivemind.capital?subject=Hivemind%20Inquiry"
                 className="hover:text-foreground transition-colors duration-200"
                 title="For acquisitions, partnerships, or press"
                 aria-label="Inquire about acquisitions, partnerships, or press"

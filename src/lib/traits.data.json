@@ -246,7 +246,10 @@
     "Size": "Normal",
     "Layout": "Recursive grid",
     "Wrap style": "Weave",
-    "Wrap orientation": "Off-center"
+    "Wrap orientation": "Off-center",
+    "Peg style": "Solid",
+    "Extra color": "N/A",
+    "Peg scaling": "Uniform"
   },
   "ringers-13000025-d270": {
     "Body": "Black",
@@ -255,7 +258,10 @@
     "Size": "Normal",
     "Layout": "4x4 grid",
     "Wrap style": "Loop",
-    "Wrap orientation": "Balanced"
+    "Wrap orientation": "Balanced",
+    "Peg style": "Solid",
+    "Extra color": "N/A",
+    "Peg scaling": "Uniform"
   },
   "ringers-13000058-d270": {
     "Body": "Black",
@@ -264,7 +270,10 @@
     "Size": "Normal",
     "Layout": "4x4 grid",
     "Wrap style": "Loop",
-    "Wrap orientation": "Balanced"
+    "Wrap orientation": "Balanced",
+    "Peg style": "Solid",
+    "Extra color": "N/A",
+    "Peg scaling": "Uniform"
   },
   "ringers-13000064-d270": {
     "Body": "Black",
@@ -273,7 +282,10 @@
     "Size": "Normal",
     "Layout": "Tiled 4,3",
     "Wrap style": "Loop",
-    "Wrap orientation": "Balanced"
+    "Wrap orientation": "Balanced",
+    "Peg style": "Bullseye",
+    "Extra color": "N/A",
+    "Peg scaling": "Uniform"
   },
   "ringers-13000075-d270": {
     "Body": "Black",
@@ -282,7 +294,10 @@
     "Size": "Normal",
     "Layout": "3x3 grid",
     "Wrap style": "Weave",
-    "Wrap orientation": "Balanced"
+    "Wrap orientation": "Balanced",
+    "Peg style": "Solid",
+    "Extra color": "N/A",
+    "Peg scaling": "Uniform"
   },
   "ringers-13000086-d270": {
     "Body": "White",
@@ -291,7 +306,10 @@
     "Size": "Normal",
     "Layout": "Recursive grid",
     "Wrap style": "Loop",
-    "Wrap orientation": "Balanced"
+    "Wrap orientation": "Balanced",
+    "Peg style": "Solid",
+    "Extra color": "N/A",
+    "Peg scaling": "Bigger near center"
   },
   "ringers-13000089-d270": {
     "Body": "White",
@@ -300,7 +318,10 @@
     "Size": "Normal",
     "Layout": "5x5 grid",
     "Wrap style": "Loop",
-    "Wrap orientation": "Balanced"
+    "Wrap orientation": "Balanced",
+    "Peg style": "Solid",
+    "Extra color": "N/A",
+    "Peg scaling": "Smaller near center"
   },
   "ringers-13000108-d270": {
     "Body": "White",
@@ -309,7 +330,10 @@
     "Size": "Normal",
     "Layout": "Tiled 3,4",
     "Wrap style": "Weave",
-    "Wrap orientation": "Balanced"
+    "Wrap orientation": "Balanced",
+    "Peg style": "Solid",
+    "Extra color": "N/A",
+    "Peg scaling": "Uniform"
   },
   "ringers-13000117-d270": {
     "Body": "Black",
@@ -318,7 +342,10 @@
     "Size": "Normal",
     "Layout": "Tiled 3,4",
     "Wrap style": "Weave",
-    "Wrap orientation": "Balanced"
+    "Wrap orientation": "Balanced",
+    "Peg style": "Bullseye",
+    "Extra color": "N/A",
+    "Peg scaling": "Uniform"
   },
   "ringers-13000174-d270": {
     "Body": "Black",
@@ -327,7 +354,10 @@
     "Size": "Normal",
     "Layout": "3x3 grid",
     "Wrap style": "Loop",
-    "Wrap orientation": "Balanced"
+    "Wrap orientation": "Balanced",
+    "Peg style": "Solid",
+    "Extra color": "N/A",
+    "Peg scaling": "Uniform"
   },
   "ringers-13000209-d270": {
     "Body": "Black",
@@ -336,7 +366,10 @@
     "Size": "Normal",
     "Layout": "3x3 grid",
     "Wrap style": "Weave",
-    "Wrap orientation": "Balanced"
+    "Wrap orientation": "Balanced",
+    "Peg style": "Solid",
+    "Extra color": "N/A",
+    "Peg scaling": "Uniform"
   },
   "ringers-13000214-d270": {
     "Body": "Black",
@@ -345,7 +378,10 @@
     "Size": "Normal",
     "Layout": "Tiled 3,4",
     "Wrap style": "Loop",
-    "Wrap orientation": "Balanced"
+    "Wrap orientation": "Balanced",
+    "Peg style": "Solid",
+    "Extra color": "N/A",
+    "Peg scaling": "Uniform"
   },
   "ringers-13000241-d270": {
     "Body": "White",
@@ -354,7 +390,10 @@
     "Size": "Normal",
     "Layout": "Tiled 3,2",
     "Wrap style": "Weave",
-    "Wrap orientation": "Balanced"
+    "Wrap orientation": "Balanced",
+    "Peg style": "Solid",
+    "Extra color": "N/A",
+    "Peg scaling": "Smaller near center"
   },
   "ringers-13000268-d270": {
     "Body": "White",
@@ -363,7 +402,10 @@
     "Size": "smol boi",
     "Layout": "Tiled 3,2",
     "Wrap style": "Weave",
-    "Wrap orientation": "Balanced"
+    "Wrap orientation": "Balanced",
+    "Peg style": "Solid",
+    "Extra color": "N/A",
+    "Peg scaling": "Uniform"
   },
   "ringers-13000273-d270": {
     "Body": "White",
@@ -372,7 +414,10 @@
     "Size": "Normal",
     "Layout": "3x3 grid",
     "Wrap style": "Weave",
-    "Wrap orientation": "Balanced"
+    "Wrap orientation": "Balanced",
+    "Peg style": "Solid",
+    "Extra color": "N/A",
+    "Peg scaling": "Smaller near center"
   },
   "ringers-13000287-d270": {
     "Body": "White",
@@ -381,7 +426,10 @@
     "Size": "smol boi",
     "Layout": "Tiled 5,4",
     "Wrap style": "Weave",
-    "Wrap orientation": "Balanced"
+    "Wrap orientation": "Balanced",
+    "Peg style": "Solid",
+    "Extra color": "N/A",
+    "Peg scaling": "Uniform"
   },
   "ringers-13000303-d270": {
     "Body": "Black",
@@ -390,7 +438,10 @@
     "Size": "Normal",
     "Layout": "Tiled 3,2",
     "Wrap style": "Weave",
-    "Wrap orientation": "Balanced"
+    "Wrap orientation": "Balanced",
+    "Peg style": "Solid",
+    "Extra color": "N/A",
+    "Peg scaling": "Smaller near center"
   },
   "ringers-13000338-d270": {
     "Body": "White",
@@ -399,7 +450,10 @@
     "Size": "Normal",
     "Layout": "5x5 grid",
     "Wrap style": "Weave",
-    "Wrap orientation": "Balanced"
+    "Wrap orientation": "Balanced",
+    "Peg style": "Solid",
+    "Extra color": "Red",
+    "Peg scaling": "Uniform"
   },
   "ringers-13000342-d270": {
     "Body": "Yellow",
@@ -408,7 +462,10 @@
     "Size": "Normal",
     "Layout": "4x4 grid",
     "Wrap style": "Loop",
-    "Wrap orientation": "Balanced"
+    "Wrap orientation": "Balanced",
+    "Peg style": "Solid",
+    "Extra color": "N/A",
+    "Peg scaling": "Uniform"
   },
   "ringers-13000374-d270": {
     "Body": "White",
@@ -417,7 +474,10 @@
     "Size": "Normal",
     "Layout": "Tiled 2,3",
     "Wrap style": "Weave",
-    "Wrap orientation": "Off-center"
+    "Wrap orientation": "Off-center",
+    "Peg style": "Solid",
+    "Extra color": "N/A",
+    "Peg scaling": "Uniform"
   },
   "ringers-13000391-d270": {
     "Body": "Black",
@@ -426,7 +486,10 @@
     "Size": "Normal",
     "Layout": "5x5 grid",
     "Wrap style": "Loop",
-    "Wrap orientation": "Balanced"
+    "Wrap orientation": "Balanced",
+    "Peg style": "Solid",
+    "Extra color": "N/A",
+    "Peg scaling": "Smaller near center"
   },
   "ringers-13000392-d270": {
     "Body": "Black",
@@ -435,7 +498,10 @@
     "Size": "Normal",
     "Layout": "4x4 grid",
     "Wrap style": "Loop",
-    "Wrap orientation": "Balanced"
+    "Wrap orientation": "Balanced",
+    "Peg style": "Solid",
+    "Extra color": "N/A",
+    "Peg scaling": "Uniform"
   },
   "ringers-13000492-d270": {
     "Body": "Black",
@@ -444,7 +510,10 @@
     "Size": "smol boi",
     "Layout": "4x4 grid",
     "Wrap style": "Loop",
-    "Wrap orientation": "Balanced"
+    "Wrap orientation": "Balanced",
+    "Peg style": "Solid",
+    "Extra color": "N/A",
+    "Peg scaling": "Uniform"
   },
   "ringers-13000505-d270": {
     "Body": "White",
@@ -453,7 +522,10 @@
     "Size": "Normal",
     "Layout": "4x4 grid",
     "Wrap style": "Loop",
-    "Wrap orientation": "Balanced"
+    "Wrap orientation": "Balanced",
+    "Peg style": "Solid",
+    "Extra color": "N/A",
+    "Peg scaling": "Bigger near center"
   },
   "ringers-13000520-d270": {
     "Body": "White",
@@ -462,7 +534,10 @@
     "Size": "Normal",
     "Layout": "3x3 grid",
     "Wrap style": "Weave",
-    "Wrap orientation": "Off-center"
+    "Wrap orientation": "Off-center",
+    "Peg style": "Solid",
+    "Extra color": "N/A",
+    "Peg scaling": "Bigger near center"
   },
   "ringers-13000523-d270": {
     "Body": "Black",
@@ -471,7 +546,10 @@
     "Size": "Normal",
     "Layout": "3x3 grid",
     "Wrap style": "Weave",
-    "Wrap orientation": "Off-center"
+    "Wrap orientation": "Off-center",
+    "Peg style": "Solid",
+    "Extra color": "N/A",
+    "Peg scaling": "Uniform"
   },
   "ringers-13000549-d270": {
     "Body": "Black",
@@ -480,7 +558,10 @@
     "Size": "smol boi",
     "Layout": "4x4 grid",
     "Wrap style": "Loop",
-    "Wrap orientation": "Balanced"
+    "Wrap orientation": "Balanced",
+    "Peg style": "Solid",
+    "Extra color": "N/A",
+    "Peg scaling": "Uniform"
   },
   "ringers-13000654-d270": {
     "Body": "Black",
@@ -489,7 +570,10 @@
     "Size": "Normal",
     "Layout": "Tiled 5,4",
     "Wrap style": "Weave",
-    "Wrap orientation": "Balanced"
+    "Wrap orientation": "Balanced",
+    "Peg style": "Bullseye",
+    "Extra color": "N/A",
+    "Peg scaling": "Uniform"
   },
   "ringers-13000680-d270": {
     "Body": "Black",
@@ -498,7 +582,10 @@
     "Size": "Normal",
     "Layout": "3x3 grid",
     "Wrap style": "Loop",
-    "Wrap orientation": "Balanced"
+    "Wrap orientation": "Balanced",
+    "Peg style": "Solid",
+    "Extra color": "N/A",
+    "Peg scaling": "Uniform"
   },
   "ringers-13000696-d270": {
     "Body": "Black",
@@ -507,7 +594,10 @@
     "Size": "Normal",
     "Layout": "Tiled 5,4",
     "Wrap style": "Loop",
-    "Wrap orientation": "Balanced"
+    "Wrap orientation": "Balanced",
+    "Peg style": "Solid",
+    "Extra color": "N/A",
+    "Peg scaling": "Bigger near center"
   },
   "ringers-13000698-d270": {
     "Body": "White",
@@ -516,7 +606,10 @@
     "Size": "Normal",
     "Layout": "Tiled 4,5",
     "Wrap style": "Weave",
-    "Wrap orientation": "Balanced"
+    "Wrap orientation": "Balanced",
+    "Peg style": "Bullseye",
+    "Extra color": "N/A",
+    "Peg scaling": "Smaller near center"
   },
   "ringers-13000708-d270": {
     "Body": "Black",
@@ -525,7 +618,10 @@
     "Size": "Normal",
     "Layout": "Tiled 3,2",
     "Wrap style": "Weave",
-    "Wrap orientation": "Off-center"
+    "Wrap orientation": "Off-center",
+    "Peg style": "Solid",
+    "Extra color": "N/A",
+    "Peg scaling": "Uniform"
   },
   "ringers-13000715-d270": {
     "Body": "Yellow",
@@ -534,7 +630,10 @@
     "Size": "Normal",
     "Layout": "Tiled 4,5",
     "Wrap style": "Loop",
-    "Wrap orientation": "Balanced"
+    "Wrap orientation": "Balanced",
+    "Peg style": "Solid",
+    "Extra color": "N/A",
+    "Peg scaling": "Uniform"
   },
   "ringers-13000792-d270": {
     "Body": "Black",
@@ -543,7 +642,10 @@
     "Size": "Normal",
     "Layout": "3x3 grid",
     "Wrap style": "Loop",
-    "Wrap orientation": "Balanced"
+    "Wrap orientation": "Balanced",
+    "Peg style": "Solid",
+    "Extra color": "N/A",
+    "Peg scaling": "Uniform"
   },
   "ringers-13000952-d270": {
     "Body": "Yellow",
@@ -552,7 +654,10 @@
     "Size": "Normal",
     "Layout": "5x5 grid",
     "Wrap style": "Weave",
-    "Wrap orientation": "Balanced"
+    "Wrap orientation": "Balanced",
+    "Peg style": "Solid",
+    "Extra color": "N/A",
+    "Peg scaling": "Uniform"
   },
   "ringers-13000972-d270": {
     "Body": "Black",
@@ -561,7 +666,10 @@
     "Size": "Normal",
     "Layout": "3x3 grid",
     "Wrap style": "Weave",
-    "Wrap orientation": "Balanced"
+    "Wrap orientation": "Balanced",
+    "Peg style": "Bullseye",
+    "Extra color": "N/A",
+    "Peg scaling": "Uniform"
   },
   "winds-of-yawanawa-20-100b": {
     "Origin": "Mai - Earth",

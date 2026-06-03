@@ -229,6 +229,9 @@ export const CLICKABLE_TRAITS: Record<string, Record<string, ClickableRule>> = {
   ringers: {
     Body: "all",
     Background: "all",
+    "Peg style": ["Bullseye"],
+    "Extra color": ["Red", "Green", "Blue"],
+    Size: ["smol boi"],
   },
   fidenza: {
     Palette: "all",
