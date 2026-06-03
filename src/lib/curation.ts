@@ -260,9 +260,12 @@ export const CLICKABLE_TRAITS: Record<string, Record<string, ClickableRule>> = {
   },
   grifters: {
     Type: "all",
-    Color: "all",
-    Vision: ["Turbulence"],
-    Noise: ["G to the M"],
+    // Array order is preserved as display order (Yellow / Blue / Green per
+    // editorial spec, not the default count-desc sort).
+    Color: ["Yellow", "Blue", "Green"],
+    // Vision + Noise no longer render as standalone rows; their named-set
+    // values surface under the synthetic "Sets" row defined in
+    // SYNTHETIC_TRAIT_GROUPS below, alongside Wretch (also in Type).
   },
   // Explicit empty: traits display on the piece page but none are clickable,
   // and the collection page disclosure stays empty. Distinct from "absent"
@@ -331,6 +334,36 @@ export function isTraitKeyDisplayed(
  */
 export const SYNTHETIC_TRAITS: Record<string, Record<string, string>> = {
   qql: { "Minted by": "Tyler Hobbs" },
+};
+
+/**
+ * Synthetic trait groups that render as their own row in the Browse-by-
+ * trait disclosure but cut across multiple underlying trait keys. Used
+ * for editorial groupings that don't map 1:1 to an on-chain trait
+ * dimension - e.g., Grifters "Sets" surfaces named groups (Turbulence,
+ * G to the M, Wretch) that span Vision / Noise / Type respectively.
+ *
+ * Each value carries its own label (what shows in the disclosure) plus
+ * the (key, value) of the underlying real trait it filters by, so the
+ * click destination is the same /collection/{slug}?trait=X&value=Y URL
+ * a click on the real-trait row would produce. Counts come from the
+ * facets map at render time.
+ */
+export type SyntheticTraitGroup = {
+  label: string;
+  values: { label: string; key: string; value: string }[];
+};
+export const SYNTHETIC_TRAIT_GROUPS: Record<string, SyntheticTraitGroup[]> = {
+  grifters: [
+    {
+      label: "Sets",
+      values: [
+        { label: "Turbulence", key: "Vision", value: "Turbulence" },
+        { label: "G to the M", key: "Noise", value: "G to the M" },
+        { label: "Wretch", key: "Type", value: "Wretch" },
+      ],
+    },
+  ],
 };
 
 // Back-compat alias used by older call sites; new code should use the

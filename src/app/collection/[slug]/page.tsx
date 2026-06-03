@@ -15,6 +15,7 @@ import {
   getPieceTraits,
   getTraitGlobalCount,
   CLICKABLE_TRAITS,
+  SYNTHETIC_TRAIT_GROUPS,
 } from "@/lib/curation";
 import JustifiedGallery from "@/components/JustifiedGallery";
 import FixedRowGallery from "@/components/FixedRowGallery";
@@ -182,9 +183,13 @@ export default async function CollectionPage({
     if (traitFilter?.key === key && traitFilter?.value && values.has(traitFilter.value)) {
       visibleSet.add(traitFilter.value);
     }
+    // String[] rules preserve the spec's array order (editorial intent like
+    // Grifters Color = Yellow / Blue / Green rather than the default
+    // alphabetical or count-desc sort).
+    const orderIndex = new Map(rule.map((v, i) => [v, i]));
     return sortedValues
       .filter(([v]) => visibleSet.has(v))
-      .sort((a, b) => a[0].localeCompare(b[0]));
+      .sort((a, b) => (orderIndex.get(a[0])! - orderIndex.get(b[0])!));
   };
   const renderTraitLink = (key: string, val: string, count: number) => {
     const isActive = traitFilter?.key === key && traitFilter?.value === val;
@@ -327,6 +332,61 @@ export default async function CollectionPage({
               </p>
               <div className="flex flex-wrap gap-x-5 gap-y-2">
                 {visible.map(([val, count]) => renderTraitLink(key, val, count))}
+              </div>
+            </div>
+          );
+        })}
+        {/* Synthetic groups - editorial cross-trait rows (Grifters "Sets":
+            Turbulence / G to the M / Wretch span Vision / Noise / Type
+            respectively). Each entry resolves its count from the underlying
+            facets and links to the real-trait filter URL, so it behaves
+            identically to a value from one of the regular rows. */}
+        {(SYNTHETIC_TRAIT_GROUPS[slug] ?? []).map((group) => {
+          const entries = group.values
+            .map((v) => {
+              const count = facets.get(v.key)?.get(v.value) ?? 0;
+              return { ...v, count };
+            })
+            .filter((v) => v.count > 0);
+          if (!entries.length) return null;
+          return (
+            <div key={group.label}>
+              <p className="text-[10px] uppercase text-muted mb-2">
+                {group.label}
+              </p>
+              <div className="flex flex-wrap gap-x-5 gap-y-2">
+                {entries.map((entry) => {
+                  const isActive =
+                    traitFilter?.key === entry.key &&
+                    traitFilter?.value === entry.value;
+                  return (
+                    <Link
+                      key={`${entry.key}:${entry.value}`}
+                      href={`/collection/${slug}?trait=${encodeURIComponent(entry.key)}&value=${encodeURIComponent(entry.value)}`}
+                      className={`inline-flex items-baseline gap-1.5 transition-colors duration-200 underline underline-offset-4 ${
+                        isActive
+                          ? "text-foreground font-medium decoration-foreground"
+                          : "text-foreground-secondary hover:text-foreground decoration-border hover:decoration-foreground"
+                      }`}
+                      aria-current={isActive ? "page" : undefined}
+                    >
+                      <span>{entry.label}</span>
+                      <span className="text-[11px] tabular-nums no-underline">
+                        <span
+                          className={
+                            isActive
+                              ? "text-foreground"
+                              : entry.count > 1
+                              ? "text-muted"
+                              : "text-muted/40"
+                          }
+                        >
+                          {entry.count}
+                        </span>
+                      </span>
+                    </Link>
+                  );
+                })}
               </div>
             </div>
           );
