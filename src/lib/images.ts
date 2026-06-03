@@ -35,6 +35,13 @@ const CURATED_DETAIL: Record<string, string> = {
   "pxl-pod-241-88b3": "/art/pxl-pod-241-88b3.png",
   "pxl-pod-242-88b3": "/art/pxl-pod-242-88b3.png",
   "x0x-576-3753": "/art/x0x-576-3753.png",
+  // Operator - Repeat as Necessary (Art Blocks Engine via Verse, contract
+  // ...2ee0). Stored as raw SVG decoded from the contract's tokenURI
+  // data: URL; same file serves detail + thumb (SVG scales).
+  "repeat-as-necessary-1": "/art/repeat-as-necessary-1.svg",
+  "repeat-as-necessary-12": "/art/repeat-as-necessary-12.svg",
+  "repeat-as-necessary-21": "/art/repeat-as-necessary-21.svg",
+  "repeat-as-necessary-40": "/art/repeat-as-necessary-40.svg",
 };
 
 const CURATED_THUMB: Record<string, string> = {
@@ -63,6 +70,11 @@ const CURATED_THUMB: Record<string, string> = {
   "pxl-pod-241-88b3": "/art/pxl-pod-241-88b3.png",
   "pxl-pod-242-88b3": "/art/pxl-pod-242-88b3.png",
   "x0x-576-3753": "/art/x0x-576-3753.png",
+  // Operator - Repeat as Necessary (same SVGs as detail; vector scales).
+  "repeat-as-necessary-1": "/art/repeat-as-necessary-1.svg",
+  "repeat-as-necessary-12": "/art/repeat-as-necessary-12.svg",
+  "repeat-as-necessary-21": "/art/repeat-as-necessary-21.svg",
+  "repeat-as-necessary-40": "/art/repeat-as-necessary-40.svg",
 };
 
 /**

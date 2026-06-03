@@ -261,10 +261,10 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
           const sectionHref = n === 1 && piece ? `/piece/${piece.slug}` : `/collection/${col.slug}`;
           return (
             <section key={col.slug} id={col.slug}>
-              <div className="mb-8">
+              <div className="mb-2">
                 <Link
                   href={sectionHref}
-                  className="font-serif display-sm hover:opacity-60 transition-opacity duration-200 inline-block"
+                  className="font-serif text-[22px] sm:text-[28px] text-foreground-secondary hover:opacity-60 transition-opacity duration-200 inline-block"
                 >
                   {col.name}
                 </Link>

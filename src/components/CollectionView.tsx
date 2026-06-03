@@ -231,7 +231,7 @@ export default function CollectionView({ sections, artists }: Props) {
       </section>
 
       {/* Works - salon wall */}
-      <div className="pt-6 pb-20 space-y-12">
+      <div className="pt-6 pb-20 space-y-10">
         {visible.length === 0 ? (
           <div className="py-24 text-center">
             <p className="text-[13px] text-muted">No works match these filters.</p>
@@ -244,7 +244,7 @@ export default function CollectionView({ sections, artists }: Props) {
           </div>
         ) : (
           visible.map(({ artist, collections: cols }) => (
-            <div key={artist.slug} className="space-y-6">
+            <div key={artist.slug} className="space-y-3">
               {/* Artist header */}
               <Link href={`/artist/${artist.slug}`} className="inline-block">
                 <h2
@@ -272,7 +272,7 @@ export default function CollectionView({ sections, artists }: Props) {
                         chrome for what is effectively one artwork. */}
                     <Link
                       href={n === 1 && piece ? `/piece/${piece.slug}` : `/collection/${col.slug}`}
-                      className="text-[11px] tracking-[0.05em] text-muted hover:text-foreground transition-colors duration-200 block mb-2"
+                      className="font-serif text-[22px] sm:text-[28px] text-foreground-secondary hover:opacity-60 transition-opacity duration-200 block mb-2"
                     >
                       {col.name}
                     </Link>
