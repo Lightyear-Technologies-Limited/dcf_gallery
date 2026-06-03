@@ -140,17 +140,25 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
               the catalogue index. */}
           {artistCollections.length > 0 && (
             <ol className="mt-6 space-y-1.5 text-[13px]">
-              {artistCollections.map((col) => (
-                <li key={col.slug} className="flex items-baseline justify-between gap-3 max-w-[260px]">
-                  <Link
-                    href={`/collection/${col.slug}`}
-                    className="text-foreground-secondary hover:text-foreground transition-colors duration-200"
-                  >
-                    {col.name}
-                  </Link>
-                  <span className="text-muted tabular-nums">{col.pieces.length}</span>
-                </li>
-              ))}
+              {artistCollections.map((col) => {
+                /* Single-piece collections link straight to the piece -
+                   the collection page would be redundant chrome. */
+                const onlyPiece = col.pieces.length === 1 ? col.pieces[0] : null;
+                const href = onlyPiece
+                  ? `/piece/${onlyPiece.slug}`
+                  : `/collection/${col.slug}`;
+                return (
+                  <li key={col.slug} className="flex items-baseline justify-between gap-3 max-w-[260px]">
+                    <Link
+                      href={href}
+                      className="text-foreground-secondary hover:text-foreground transition-colors duration-200"
+                    >
+                      {col.name}
+                    </Link>
+                    <span className="text-muted tabular-nums">{col.pieces.length}</span>
+                  </li>
+                );
+              })}
             </ol>
           )}
 
@@ -248,11 +256,14 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
           else if (n <= 12) ideal = 4;
           else ideal = 5;
 
+          /* Single-piece collections skip the collection layer entirely;
+             the title links straight to the piece. */
+          const sectionHref = n === 1 && piece ? `/piece/${piece.slug}` : `/collection/${col.slug}`;
           return (
             <section key={col.slug} id={col.slug}>
               <div className="mb-8">
                 <Link
-                  href={`/collection/${col.slug}`}
+                  href={sectionHref}
                   className="font-serif display-sm hover:opacity-60 transition-opacity duration-200 inline-block"
                 >
                   {col.name}

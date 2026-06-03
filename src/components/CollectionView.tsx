@@ -267,8 +267,11 @@ export default function CollectionView({ sections, artists }: Props) {
 
                 return (
                   <div key={`${artist.slug}-${col.slug}`}>
+                    {/* Single-piece collections link the title directly to
+                        the piece - the collection page would be redundant
+                        chrome for what is effectively one artwork. */}
                     <Link
-                      href={`/collection/${col.slug}`}
+                      href={n === 1 && piece ? `/piece/${piece.slug}` : `/collection/${col.slug}`}
                       className="text-[11px] tracking-[0.05em] text-muted hover:text-foreground transition-colors duration-200 block mb-2"
                     >
                       {col.name}
