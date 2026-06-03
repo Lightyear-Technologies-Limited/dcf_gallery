@@ -79,7 +79,7 @@ export default async function CollectionPage({
       for (const val of values) valMap.set(val, (valMap.get(val) || 0) + 1);
     }
   }
-  const pieces = traitFilter
+  let pieces = traitFilter
     ? sorted
         .filter((p) => {
           const t = getPieceTraits(p.slug);
@@ -104,6 +104,34 @@ export default async function CollectionPage({
           return a.slug.localeCompare(b.slug);
         })
     : sorted;
+
+  // If the active filter is a synthetic Sets value (Grifters Turbulence,
+  // G to the M, Wretch), reduce the filtered pieces to one representative
+  // per color in Yellow / Blue / Green order. With 5 Wretches across mixed
+  // colors, the gallery surfaces the first Yellow Wretch, first Blue
+  // Wretch, and first Green Wretch (by tokenId) - "1 of each colour".
+  const isSyntheticSetFilter = traitFilter
+    ? !!SYNTHETIC_TRAIT_GROUPS[slug]?.some((g) =>
+        g.values.some(
+          (v) => v.key === traitFilter.key && v.value === traitFilter.value,
+        ),
+      )
+    : false;
+  if (isSyntheticSetFilter) {
+    const colorOrder = ["Yellow", "Blue", "Green"];
+    const byColor = new Map<string, (typeof pieces)[number]>();
+    for (const p of pieces) {
+      const traits = getPieceTraits(p.slug);
+      const colorEntry = traits?.find(([k]) => k === "Color");
+      const color = colorEntry?.[1];
+      if (typeof color === "string" && !byColor.has(color)) {
+        byColor.set(color, p);
+      }
+    }
+    pieces = colorOrder
+      .map((c) => byColor.get(c))
+      .filter((p): p is (typeof pieces)[number] => p !== undefined);
+  }
 
   const piecesPerRow = getPiecesPerRow(slug);
   const pieceRows = getPieceRows(slug);
