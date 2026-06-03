@@ -162,7 +162,7 @@ export default function CollectionView({ sections, artists }: Props) {
             className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium shrink-0 w-20"
             title={activeChapter ? "With a chapter active, tap an artist to remove them from the chapter" : "Tap an artist to filter"}
           >
-            {activeChapter ? "Exclude" : "Artist"}
+            Artist
           </span>
           {artists.map((a) => {
             const inChapter = activeChapter ? activeChapter.artists.includes(a.slug) : true;
