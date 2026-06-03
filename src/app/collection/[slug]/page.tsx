@@ -423,7 +423,20 @@ export default async function CollectionPage({
               {col.codeSizeKb !== undefined && (
                 <p>Code size {col.codeSizeKb} Kb</p>
               )}
-              {!traitFilter && editionType !== "1/1" && <p>{editionType}</p>}
+              {/* Edition row shows the canonical web3 shorthand:
+                  - "1/1/N" for curated programmatic series (Fidenza 999,
+                    Punks 10000): each piece is 1 of 1 in a series of N.
+                  - "1/1" alone for collections of independent 1/1s on a
+                    shared artist contract (Her favorite flowers, Piano
+                    Blossoms): each piece is unique, not a series output.
+                    Surfaces when totalSupply > 1 so the reader knows
+                    each piece is 1/1 (not an edition of N), paired with
+                    the holdings line below.
+                  - Suppressed entirely for true singletons (no totalSupply)
+                    where the 1/1 is implicit. */}
+              {!traitFilter &&
+                col.totalSupply !== undefined &&
+                col.totalSupply > 1 && <p>{editionType}</p>}
               {!traitFilter && col.platform && <p>{col.platform}</p>}
               {!traitFilter && col.contractAddress && (
                 <p className="inline-flex items-baseline gap-x-2">
