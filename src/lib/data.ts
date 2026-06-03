@@ -641,6 +641,7 @@ export const collections: Collection[] = [
     curatorNote: 'Hivemind\'s XCOPY 1/1s span the artist\'s most-cited cultural moments - works that helped define crypto art\'s visual register: glitch, dread, and political commentary at compressed scale.',
     medium: 'image',
     contractAddress: '0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0',
+    totalSupply: 149,
     tags: ['crypto-native', 'digital-culture', 'glitch'],
     influences: [],
   },
