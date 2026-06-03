@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { artists, getPiecesByArtist, getCollectionsByArtist } from "@/lib/data";
 import { getArtworkImage } from "@/lib/images";
 import {
@@ -67,10 +68,25 @@ export default function ArtistsPage() {
 
               {/* Info */}
               <div className={`md:pt-4 ${heroOnRight ? "md:order-1" : ""}`}>
+                {/* Portrait + wordmark. Portrait sits inline with the h2
+                    as the artist's identity badge - small enough not to
+                    compete with the artwork hero across the gutter,
+                    consistent across rows so the index reads as a roster.
+                    Absent portrait gracefully degrades to a plain
+                    wordmark row. */}
                 <Link
                   href={`/artist/${artist.slug}`}
-                  className="inline-block group"
+                  className="inline-flex items-center gap-3 group"
                 >
+                  {artist.portrait && (
+                    <Image
+                      src={artist.portrait}
+                      alt=""
+                      width={48}
+                      height={48}
+                      className="w-10 h-10 rounded-full object-cover shrink-0"
+                    />
+                  )}
                   <h2 className="font-serif text-[32px] sm:text-[40px] tracking-tight leading-tight group-hover:opacity-60 transition-opacity duration-200">
                     {artistName}
                   </h2>

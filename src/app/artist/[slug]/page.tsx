@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { artists, collections, getPiecesByCollection } from "@/lib/data";
 import { getArtworkImage } from "@/lib/images";
 import {
@@ -77,39 +78,77 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
 
   return (
     <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
-      {/* Editorial header - name left, bio right */}
-      <div className="pt-[120px] grid grid-cols-1 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-10 md:gap-16">
-        <div>
-          {/* Chapter eyebrow - the page's one chromatic accent. Doubles as
-              navigational lineage back to the chapter filter on the homepage. */}
-          {chapter && (
+      {/* Top row mirrors the collection page's breadcrumb + sibling-nav
+          structure so the h1 below sits at the same vertical position
+          on both routes (no jump when navigating Artist <-> Collection).
+          Chapter eyebrow doubles as navigational lineage back to the
+          chapter filter on the homepage. */}
+      <div className="pt-8">
+        <p className="text-[13px] text-muted">
+          <Link href="/" className="hover:text-foreground transition-colors duration-200">
+            Holdings
+          </Link>
+          {" / "}
+          <Link href="/artists" className="hover:text-foreground transition-colors duration-200">
+            Artists
+          </Link>
+          {" / "}
+          {artistName}
+        </p>
+        {chapter && (
+          <div className="mt-6 text-[13px]">
             <Link
               href={`/?chapter=${chapter.slug}`}
-              className="text-[10px] tracking-[0.1em] uppercase font-medium hover:opacity-60 transition-opacity duration-200 inline-block mb-5"
+              className="text-muted hover:text-foreground transition-colors duration-200"
               style={{ color: chapter.color }}
             >
               {chapter.name}
             </Link>
-          )}
+          </div>
+        )}
+      </div>
+      {/* Editorial header - name left, bio right */}
+      <div className="pt-6 grid grid-cols-1 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-10 md:gap-16">
+        <div>
           <h1 className="font-serif display-lg text-balance">
             {artistName}
           </h1>
-          <p className="mt-4 text-[13px] text-muted tabular-nums">
-            {artistCollections.length} collection{artistCollections.length === 1 ? "" : "s"} · {totalWorks} works
-          </p>
+          {/* Portrait + count line. Portrait acts as the artist's identity
+              badge (XCOPY's signature avatar, Tyler Hobbs's photograph,
+              etc.). Sits inline with the holdings count so it earns the
+              real-estate the count alone used to occupy, and gives the
+              page an anchor below the wordmark h1. Absent portrait
+              gracefully degrades to just the count line. */}
+          <div className="mt-4 flex items-center gap-3">
+            {artist.portrait && (
+              <Image
+                src={artist.portrait}
+                alt=""
+                width={56}
+                height={56}
+                className="w-12 h-12 rounded-full object-cover shrink-0"
+              />
+            )}
+            <p className="text-[13px] text-muted tabular-nums">
+              {artistCollections.length} collection{artistCollections.length === 1 ? "" : "s"} · {totalWorks} works
+            </p>
+          </div>
 
-          {/* Collection jump-nav - multi-collection artists only. Cheap
-              orientation aid for Tyler Hobbs (6 sections, scroll-only otherwise). */}
+          {/* Collection list for multi-collection artists - links straight
+              to the dedicated collection page rather than scrolling within
+              this page. The in-page sections below (which also link to the
+              same collection pages) act as inline previews; the top list is
+              the catalogue index. */}
           {artistCollections.length > 1 && (
             <ol className="mt-6 space-y-1.5 text-[13px]">
               {artistCollections.map((col) => (
                 <li key={col.slug} className="flex items-baseline justify-between gap-3 max-w-[260px]">
-                  <a
-                    href={`#${col.slug}`}
+                  <Link
+                    href={`/collection/${col.slug}`}
                     className="text-foreground-secondary hover:text-foreground transition-colors duration-200"
                   >
                     {col.name}
-                  </a>
+                  </Link>
                   <span className="text-muted tabular-nums">{col.pieces.length}</span>
                 </li>
               ))}
@@ -187,7 +226,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
           the collection header, so we suppress the per-collection editorial
           block and render the gallery directly. As soon as a second collection
           is added the structure naturally expands. */}
-      <div className="pt-16 pb-24 space-y-20">
+      <div className="pt-16 pb-12 space-y-20">
         {artistCollections.map((col) => {
           const n = col.pieces.length;
           const piece = col.pieces[0];
