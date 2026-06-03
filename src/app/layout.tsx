@@ -23,7 +23,7 @@ const instrumentSans = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "DCF Gallery - Digital Culture Fund",
+  title: "Hivemind - Digital Culture Fund Gallery",
   description: "A curated showcase of the Hivemind Digital Culture Fund collection.",
 };
 

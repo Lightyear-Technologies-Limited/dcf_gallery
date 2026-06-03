@@ -239,7 +239,8 @@ export const CLICKABLE_TRAITS: Record<string, Record<string, ClickableRule>> = {
     // traits.data.json. Add once the build pipeline captures it.
   },
   "winds-of-yawanawa": {
-    Origin: "all",
+    Origin: ["Uwa - Flower"],
+    "Color Temperature": ["Scorching", "Freezing"],
   },
   "human-unreadable": {
     "Emotional Climate": "all",

@@ -20,7 +20,6 @@ import JustifiedGallery from "@/components/JustifiedGallery";
 import FixedRowGallery from "@/components/FixedRowGallery";
 import HeroSidebarGallery from "@/components/HeroSidebarGallery";
 import SinglePieceDisplay from "@/components/SinglePieceDisplay";
-import CuratorNote from "@/components/CuratorNote";
 import ExpandableProse from "@/components/ExpandableProse";
 import CopyableHash from "@/components/CopyableHash";
 
@@ -406,45 +405,38 @@ export default async function CollectionPage({
                 {artistName}
               </Link>
             )}
-            {/* Catalogue-style data stack - DCF position, mint date, code
-                size, chain + contract + edition all in a single rhythm of
-                muted 13px tabular-nums lines under the artist link. Reads
-                like a Sotheby's lot caption: figures stacked, no boxes,
-                no padding. Replaces the earlier separate MetadataTable
-                component. Each row carries one piece of information;
-                rows with nothing to say are simply omitted.
-                Holdings line ("DCF holds N of M") omitted when:
+            {/* Catalogue-style data stack - reads top-down from work-
+                level facts (mint date, code size, edition) to provenance
+                (contract) to the fund's position last. Each row is one
+                muted 13px tabular-nums line; rows with nothing to say
+                are omitted. Replaces the earlier 3-row MetadataTable.
+                Hivemind holdings line ("Hivemind holds N of M") omitted
+                when:
                   - n === 1: singleton; the count is inventory tally on
                     what is fundamentally a single artwork.
                   - n === totalSupply <= 2: tiny series we hold entire.
                   - !totalSupply: no series context.
-                Chain + contract + edition row suppressed on filtered
-                views (collection-level context, not subset-relevant). */}
+                Contract + edition rows suppressed on filtered views
+                (collection-level context, not subset-relevant). */}
             <div className="mt-6 space-y-1 text-[13px] text-muted tabular-nums">
-              {col.totalSupply &&
-                sorted.length > 1 &&
-                !(sorted.length === col.totalSupply && col.totalSupply <= 2) && (
-                  <p>
-                    DCF holds {sorted.length} of {col.totalSupply.toLocaleString()}
-                  </p>
-                )}
               {col.mintDate && <p>Minted {col.mintDate}</p>}
               {col.codeSizeKb !== undefined && (
                 <p>Code size {col.codeSizeKb} Kb</p>
               )}
-              {!traitFilter && (col.contractAddress || editionType !== "1/1") && (
-                <p className="inline-flex flex-wrap items-baseline gap-x-2">
-                  {col.contractAddress && (
-                    <>
-                      <span>Ethereum</span>
-                      <span className="text-muted/50">·</span>
-                      <CopyableHash value={col.contractAddress} />
-                      <span className="text-muted/50">·</span>
-                    </>
-                  )}
-                  <span>{editionType}</span>
+              {!traitFilter && editionType !== "1/1" && <p>{editionType}</p>}
+              {!traitFilter && col.contractAddress && (
+                <p className="inline-flex items-baseline gap-x-2">
+                  <span>Contract:</span>
+                  <CopyableHash value={col.contractAddress} />
                 </p>
               )}
+              {col.totalSupply &&
+                sorted.length > 1 &&
+                !(sorted.length === col.totalSupply && col.totalSupply <= 2) && (
+                  <p>
+                    Hivemind holds {sorted.length} of {col.totalSupply.toLocaleString()}
+                  </p>
+                )}
             </div>
 
             {/* Filter chip + compact trait index. On filtered views these
@@ -455,55 +447,25 @@ export default async function CollectionPage({
             {chipBlock}
             {traitIndexInline}
 
-            {/* Hivemind Commentary + essay link placement is DYNAMIC -
-                whichever column shortens the path to the art. When the
-                collection has an Artist Statement, the right column is
-                already full (About + Statement) so Commentary stays on
-                the LEFT next to the institutional data. When there's no
-                Artist Statement, Commentary moves to the RIGHT (next to
-                About) so the LEFT column stays lean (header + metadata)
-                and the gallery climbs up the page.
-                Suppressed entirely on filtered views. */}
-            {!traitFilter && col.artistStatement && col.curatorNote && (
-              <div className="mt-10 max-w-[420px]">
-                <CuratorNote text={col.curatorNote} variant="inline" />
-              </div>
-            )}
-            {!traitFilter && col.artistStatement && col.essayUrl && (
-              <a
-                href={col.essayUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 text-[13px] text-muted hover:text-foreground transition-colors duration-200 inline-block"
-              >
-                Read the essay
-                {col.essayTitle && (
-                  <>
-                    : <span className="underline underline-offset-4 decoration-border">{col.essayTitle}</span>
-                  </>
-                )}{" "}
-                →
-              </a>
-            )}
-
-            {/* Browse-by-trait disclosure lives in the LEFT column on
-                unfiltered views so it sits directly under the last left
-                column block (essay link, Commentary, or MetadataTable
-                depending on the collection's editorial fields). Previously
-                it sat below the grid where it visually detached from the
-                editorial content above. */}
+            {/* Browse-by-trait disclosure lives in the LEFT column under
+                the holdings data stack on unfiltered views, so it sits
+                naturally below the fund's position figure. Editorial
+                prose (About + Hivemind Commentary + Artist Statement)
+                lives in the RIGHT column - this lets the left column be
+                purely position/identity data and keeps the right column
+                purely the institutional + artist voice. */}
             {!traitFilter && traitDisclosure && (
               <div className="mt-8">{traitDisclosure}</div>
             )}
           </div>
 
-          {/* Right column.
-              - WITH Artist Statement: About + Artist Statement (artist
-                voice grouped). Commentary + essay are on the LEFT (above).
-              - WITHOUT Artist Statement: About + Commentary + essay so
-                the right column has something to balance, and the LEFT
-                column stays lean (header + holdings + metadata) so the
-                gallery climbs up.
+          {/* Right column - editorial voice stack:
+              - About description (always)
+              - Hivemind Commentary (always, rendered with the same
+                serif 16px register as Artist Statement so the two
+                voices have visual parity)
+              - Artist Statement (when present)
+              - Essay link (always when present)
               On filtered views only About survives. */}
           {!traitFilter ? (
             <div className="space-y-8 md:pt-4">
@@ -515,26 +477,17 @@ export default async function CollectionPage({
                   <ExpandableProse text={col.description} />
                 </div>
               )}
-              {!col.artistStatement && col.curatorNote && (
-                <div className="max-w-[420px]">
-                  <CuratorNote text={col.curatorNote} variant="inline" />
+              {col.curatorNote && (
+                <div className="border-l border-border pl-5">
+                  <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
+                    Hivemind Commentary
+                  </p>
+                  <ExpandableProse
+                    text={col.curatorNote}
+                    threshold={400}
+                    className="font-serif text-[16px] leading-[1.65] text-foreground-secondary whitespace-pre-line"
+                  />
                 </div>
-              )}
-              {!col.artistStatement && col.essayUrl && (
-                <a
-                  href={col.essayUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[13px] text-muted hover:text-foreground transition-colors duration-200 inline-block"
-                >
-                  Read the essay
-                  {col.essayTitle && (
-                    <>
-                      : <span className="underline underline-offset-4 decoration-border">{col.essayTitle}</span>
-                    </>
-                  )}{" "}
-                  →
-                </a>
               )}
               {col.artistStatement && (
                 <div className="border-l border-border pl-5">
@@ -553,6 +506,22 @@ export default async function CollectionPage({
                     className="font-serif text-[16px] leading-[1.65] text-foreground-secondary whitespace-pre-line"
                   />
                 </div>
+              )}
+              {col.essayUrl && (
+                <a
+                  href={col.essayUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[13px] text-muted hover:text-foreground transition-colors duration-200 inline-block"
+                >
+                  Read the essay
+                  {col.essayTitle && (
+                    <>
+                      : <span className="underline underline-offset-4 decoration-border">{col.essayTitle}</span>
+                    </>
+                  )}{" "}
+                  →
+                </a>
               )}
             </div>
           ) : (
