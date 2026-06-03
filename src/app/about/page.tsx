@@ -11,9 +11,9 @@ export default function AboutPage() {
   );
 
   return (
-    <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
+    <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 pb-24">
       {/* Hero */}
-      <div className="max-w-[680px] pt-[120px]">
+      <div className="max-w-[680px] pt-16">
         <h1 className="font-serif display">
           Hivemind Digital Culture Fund
         </h1>
@@ -30,7 +30,7 @@ export default function AboutPage() {
 
       {/* Cycle-timing context - paraphrases the "Technology Drives Wealth" and
           "A Fund is Born" sections of the source thesis. */}
-      <div className="max-w-[680px] pt-20 space-y-10 text-[16px] text-foreground-secondary leading-[1.65]">
+      <div className="max-w-[680px] pt-16 space-y-6 text-[16px] text-foreground-secondary leading-[1.65]">
         <p>
           Technological advancement has consistently created new wealth, and
           with it a new class of investors and collectors looking for art that
@@ -47,7 +47,7 @@ export default function AboutPage() {
         </p>
       </div>
 
-      <blockquote className="max-w-[680px] mx-auto text-center py-24">
+      <blockquote className="max-w-[680px] mx-auto text-center py-12">
         <p className="font-serif text-[28px] leading-relaxed tracking-tight text-foreground">
           Technology drives wealth. Wealth drives culture.
         </p>
@@ -80,7 +80,7 @@ export default function AboutPage() {
           Keystones) compress the thesis's six subheadings into the ones that
           matter for a public reader; examples are verified DCF holdings
           (White Mono Fidenza, Return Zero, A Slight Lack of Symmetry). */}
-      <div className="max-w-[680px] pt-24 space-y-10">
+      <div className="max-w-[680px] pt-16 space-y-6">
         <h2 className="font-serif display-sm">The Curation</h2>
         <div>
           <p className="text-[16px] font-medium text-foreground">Artist and Collection</p>
@@ -117,28 +117,24 @@ export default function AboutPage() {
       </div>
 
       {/* Five Chapters */}
-      <div className="pt-24 pb-8">
+      <div className="pt-16 pb-8">
         <h2 className="font-serif display-sm max-w-[680px]">Five Chapters</h2>
         <p className="text-[16px] text-foreground-secondary leading-[1.65] mt-4 max-w-[680px]">
           The ten artists in the Fund are grouped into five chapters of digital
           art&rsquo;s first decades.
         </p>
-        <div className="mt-12 space-y-10 max-w-[820px]">
+        <div className="mt-8 space-y-6 max-w-[820px]">
           {CHAPTERS.map((ch) => (
             <div
               key={ch.slug}
-              className="grid grid-cols-1 md:grid-cols-[minmax(0,3fr)_minmax(0,7fr)] gap-3 md:gap-12 md:items-baseline"
+              className="grid grid-cols-1 md:grid-cols-[minmax(0,3fr)_minmax(0,7fr)] gap-6 md:gap-12 md:items-baseline"
             >
               <div className="flex items-center gap-3">
                 <span
                   aria-hidden
-                  className="inline-block w-2 h-2 rounded-full shrink-0"
-                  style={{ backgroundColor: ch.color }}
+                  className="inline-block w-2 h-2 rounded-full shrink-0 bg-foreground"
                 />
-                <h3
-                  className="font-serif text-[22px] tracking-[-0.01em] leading-tight"
-                  style={{ color: ch.color }}
-                >
+                <h3 className="font-serif text-[22px] tracking-[-0.01em] leading-tight">
                   {ch.name}
                 </h3>
               </div>
@@ -153,7 +149,7 @@ export default function AboutPage() {
       {/* Hivemind closer - firm bio with the institutional-structure language
           folded in (custody / standards), then CTAs to gallery + source essay,
           then a separately-labelled IR block. */}
-      <div className="max-w-[680px] pt-24">
+      <div className="max-w-[680px] pt-16">
         <h2 className="font-serif display-sm">Hivemind Capital Partners</h2>
         <p className="text-[16px] text-foreground-secondary leading-[1.65] mt-6">
           Hivemind is a crypto-focused investment firm with positions across
@@ -163,7 +159,7 @@ export default function AboutPage() {
           any other asset on their book.
         </p>
 
-        <div className="mt-10 flex flex-col sm:flex-row gap-6 sm:gap-10 text-[13px]">
+        <div className="mt-8 flex flex-col sm:flex-row gap-6 sm:gap-10 text-[13px]">
           <Link
             href="/"
             className="text-foreground hover:opacity-60 transition-opacity duration-200 underline underline-offset-4 decoration-border hover:decoration-foreground"
@@ -180,7 +176,7 @@ export default function AboutPage() {
           </a>
         </div>
 
-        <div className="mt-10 border-t border-border pt-8">
+        <div className="mt-8 border-t border-border pt-6">
           <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium">
             Investor Relations
           </p>

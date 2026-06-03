@@ -25,7 +25,7 @@ import ExpandableProse from "@/components/ExpandableProse";
 import CopyableHash from "@/components/CopyableHash";
 
 export function generateStaticParams() {
-  return collections.map((c) => ({ slug: c.slug }));
+  return collections.filter((c) => !isCollectionHidden(c.slug)).map((c) => ({ slug: c.slug }));
 }
 
 
@@ -40,6 +40,7 @@ export default async function CollectionPage({
   const sp = await searchParams;
   const col = collections.find((c) => c.slug === slug);
   if (!col) notFound();
+  if (isCollectionHidden(slug)) notFound();
 
   const artist = getArtist(col.artistSlug);
   const collectionName = getCollectionDisplayName(col.slug, col.name);
@@ -392,13 +393,6 @@ export default async function CollectionPage({
   // UNFILTERED pages only. On filtered views the inline traitIndexInline
   // above takes over instead, sitting directly under the chip in the left
   // column.
-  // Only render when at least one (key, value) pair survives the
-  // CLICKABLE_TRAITS whitelist - otherwise the disclosure summary opens
-  // to an empty panel (the "dead" state seen on Skulls of Luci, where
-  // pieces have raw traits but no editorial pivots are configured).
-  const hasVisibleFacets = [...facets.entries()].some(([key, values]) =>
-    buildVisibleValues(key, values).length > 0,
-  );
   // Unfiltered placement wraps the same inline layout in a <details>
   // disclosure so the trait index stays collapsed by default (the
   // unfiltered page subject is the artwork, not the pivot affordance).
@@ -593,7 +587,7 @@ export default async function CollectionPage({
                           href={ex.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-foreground-secondary hover:text-foreground transition-colors duration-200 underline decoration-transparent hover:decoration-border underline-offset-4"
+                          className="text-foreground-secondary hover:text-foreground transition-colors duration-200 underline decoration-border hover:decoration-foreground underline-offset-4"
                         >
                           <span className="font-serif italic">{ex.title}</span>
                           {ex.location && `, ${ex.location}`}
@@ -631,8 +625,7 @@ export default async function CollectionPage({
               - Artist Statement (when present)
               - Essay link nested under Commentary, or standalone if no
                 Commentary */}
-          {true && (
-            <div className="space-y-6 md:pt-4">
+          <div className="space-y-6 md:pt-4">
               {col.description && (
                 <div className="border-l border-border pl-5">
                   <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
@@ -710,7 +703,6 @@ export default async function CollectionPage({
                 </div>
               )}
             </div>
-          )}
         </div>
 
       {/* Gallery. */}

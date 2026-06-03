@@ -147,7 +147,7 @@ export default function CollectionView({ sections, artists }: Props) {
           across the gutter; eye reads "Hivemind" on the rail and
           "Hivemind Digital Culture Fund" on the page at the same line. */}
       <div className="pt-6">
-        <h1 className="font-serif text-[28px] sm:text-[32px] tracking-tight leading-tight">
+        <h1 className="font-serif display-sm">
           Hivemind Digital Culture Fund
         </h1>
       </div>

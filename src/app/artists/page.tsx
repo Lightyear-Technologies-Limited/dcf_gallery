@@ -22,7 +22,15 @@ const sorted = [...artists]
 
 export default function ArtistsPage() {
   return (
-    <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 pt-12 sm:pt-16 pb-16">
+    <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 pt-16 pb-24">
+      {/* Page-level H1 so the index has a document title and parity with
+          About + collection/piece detail pages. */}
+      <div className="max-w-[680px] mb-8">
+        <h1 className="font-serif display">Artists</h1>
+        <p className="text-[13px] text-muted mt-6 tabular-nums">
+          {sorted.length} artists
+        </p>
+      </div>
       {sorted.map((artist, idx) => {
         const artistName = getArtistDisplayName(artist.slug, artist.name);
         const visibleCols = sortCollections(

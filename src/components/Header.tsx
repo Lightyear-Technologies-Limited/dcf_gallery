@@ -16,7 +16,15 @@ export default function Header() {
   const path = usePathname();
 
   function isActive(href: string) {
-    if (href === "/") return path === "/";
+    if (href === "/") {
+      // Collection nav is active on home, collection pages, and piece pages.
+      return path === "/" || path.startsWith("/collection/") || path.startsWith("/piece/");
+    }
+    if (href === "/artists") {
+      // Artists nav is active on the index AND on each artist detail page
+      // (path is /artist/[slug], not /artists/[slug] — startsWith would miss it).
+      return path === "/artists" || path.startsWith("/artist/");
+    }
     return path.startsWith(href);
   }
 

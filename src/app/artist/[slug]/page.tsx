@@ -129,7 +129,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
               />
             )}
             <p className="text-[13px] text-muted tabular-nums">
-              {artistCollections.length} collection{artistCollections.length === 1 ? "" : "s"} · {totalWorks} works
+              {artistCollections.length} collection{artistCollections.length === 1 ? "" : "s"} · {totalWorks} work{totalWorks === 1 ? "" : "s"}
             </p>
           </div>
 
@@ -137,8 +137,10 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
               to the dedicated collection page rather than scrolling within
               this page. The in-page sections below (which also link to the
               same collection pages) act as inline previews; the top list is
-              the catalogue index. */}
-          {artistCollections.length > 0 && (
+              the catalogue index. Gated to artists with 3+ collections; for
+              1-2 collections the inline sections are reachable without an
+              index and the list reads as duplication. */}
+          {artistCollections.length >= 3 && (
             <ol className="mt-6 space-y-1.5 text-[13px]">
               {artistCollections.map((col) => {
                 /* Single-piece collections link straight to the piece -
@@ -240,7 +242,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
           collection prose beside each gallery would compete with the
           actual art for attention. Holdings count omitted when n === 1
           (a single piece IS the gallery; the count carries no info). */}
-      <div className="pt-16 pb-12 space-y-20">
+      <div className="pt-16 pb-24 space-y-20">
         {artistCollections.map((col) => {
           const n = col.pieces.length;
           const piece = col.pieces[0];

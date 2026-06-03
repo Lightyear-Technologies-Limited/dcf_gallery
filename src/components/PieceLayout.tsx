@@ -149,7 +149,7 @@ export default function PieceLayout({ image, aspect, title, isPunk, artistName, 
 
   const infoBlock = (
     <div className="flex-1 md:pt-4">
-      <h1 className="font-serif text-[32px] sm:text-[40px] tracking-tight leading-tight">
+      <h1 className="font-serif display-sm">
         {title}
       </h1>
       {artistSlug && artistName && (
