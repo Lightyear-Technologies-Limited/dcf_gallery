@@ -522,7 +522,7 @@ export const collections: Collection[] = [
     description: 'Repeat as Necessary extends Operator\'s investigation of algorithmic repetition and variation - systematic compositions that reveal emergent complexity through constrained rule sets.',
     curatorNote: 'Operator\'s continued investigation of the body as algorithmic input. The four-piece sequence forms a meditative arc around breath, presence, and dissolution.',
     medium: 'generative',
-    contractAddress: '0x99a9b7c1116f9ceeb1652de04d5969cce509b069',
+    contractAddress: '0xf89660fb0214b770b66d6132b5ebf282bf7e2ee0',
     totalSupply: 40,
     exhibitions: [
       {
@@ -3812,9 +3812,9 @@ export const pieces: Piece[] = [
     description: '',
     traits: {},
     tokenId: '1',
-    contractAddress: '0x99a9b7c1116f9ceeb1652de04d5969cce509b069',
+    contractAddress: '0xf89660fb0214b770b66d6132b5ebf282bf7e2ee0',
     influences: [],
-    openseaUrl: 'https://opensea.io/item/ethereum/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/1',
+    openseaUrl: 'https://opensea.io/item/ethereum/0xf89660fb0214b770b66d6132b5ebf282bf7e2ee0/1',
   },
   {
     id: 'repeat-as-necessary-12-b069',
@@ -3827,9 +3827,9 @@ export const pieces: Piece[] = [
     description: '',
     traits: {},
     tokenId: '12',
-    contractAddress: '0x99a9b7c1116f9ceeb1652de04d5969cce509b069',
+    contractAddress: '0xf89660fb0214b770b66d6132b5ebf282bf7e2ee0',
     influences: [],
-    openseaUrl: 'https://opensea.io/item/ethereum/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/12',
+    openseaUrl: 'https://opensea.io/item/ethereum/0xf89660fb0214b770b66d6132b5ebf282bf7e2ee0/12',
   },
   {
     id: 'repeat-as-necessary-21-b069',
@@ -3842,9 +3842,9 @@ export const pieces: Piece[] = [
     description: '',
     traits: {},
     tokenId: '21',
-    contractAddress: '0x99a9b7c1116f9ceeb1652de04d5969cce509b069',
+    contractAddress: '0xf89660fb0214b770b66d6132b5ebf282bf7e2ee0',
     influences: [],
-    openseaUrl: 'https://opensea.io/item/ethereum/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/21',
+    openseaUrl: 'https://opensea.io/item/ethereum/0xf89660fb0214b770b66d6132b5ebf282bf7e2ee0/21',
   },
   {
     id: 'repeat-as-necessary-40-b069',
@@ -3857,9 +3857,9 @@ export const pieces: Piece[] = [
     description: '',
     traits: {},
     tokenId: '40',
-    contractAddress: '0x99a9b7c1116f9ceeb1652de04d5969cce509b069',
+    contractAddress: '0xf89660fb0214b770b66d6132b5ebf282bf7e2ee0',
     influences: [],
-    openseaUrl: 'https://opensea.io/item/ethereum/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/40',
+    openseaUrl: 'https://opensea.io/item/ethereum/0xf89660fb0214b770b66d6132b5ebf282bf7e2ee0/40',
   },
   {
     id: 'ringers-13000014-d270',

@@ -405,31 +405,30 @@ export default async function CollectionPage({
   // When opened, it renders the exact same tight inline rows the
   // filtered view shows always-visible - no structural mismatch
   // between filter states.
-  // Open trait rows render as an absolute-positioned panel so opening
-  // Browse-by-trait NEVER grows the left column or pushes the gallery
-  // down. The disclosure occupies only its summary height in layout;
-  // the expanded rows visually overlay the space below (which is empty
-  // gutter to the left of the editorial right column).
+  // Pure-CSS checkbox+peer disclosure. The rows are always rendered so
+  // the column reserves their height, and visibility toggles with the
+  // checkbox state. Net: opening never grows the column or pushes the
+  // gallery down — the closed state just shows the summary above the
+  // reserved (empty) space the rows would occupy. We don't use a native
+  // `<details>` element because its browser-default `display: none` on
+  // closed children would collapse the height we want to reserve.
+  const traitToggleId = `trait-toggle-${slug}`;
   const traitDisclosure = traitIndexRows.length > 0 ? (
-    <details className="group relative max-w-[520px] [&_summary::-webkit-details-marker]:hidden">
-      <summary className="cursor-pointer list-none text-muted hover:text-foreground transition-colors duration-200 inline-flex items-center gap-2 select-none">
+    <div className="max-w-[520px]">
+      <input id={traitToggleId} type="checkbox" className="peer sr-only" />
+      <label
+        htmlFor={traitToggleId}
+        className="cursor-pointer text-muted hover:text-foreground transition-colors duration-200 inline-flex items-center gap-2 select-none peer-checked:[&_.tt-chev]:rotate-90"
+      >
         <span className="text-[10px] uppercase">Browse by trait</span>
-        <span
-          aria-hidden
-          className="inline-block transition-transform duration-200 group-open:rotate-90"
-        >
+        <span aria-hidden className="tt-chev inline-block transition-transform duration-200">
           &rsaquo;
         </span>
-      </summary>
-      {/* Solid eggshell background occludes anything underneath (the
-          gallery below the grid extends full-width, so without bg the
-          trait rows render on top of Punk image tiles etc.). pr-4
-          keeps right-edge text off the editorial column rule when
-          the panel widens past its natural max. */}
-      <div className="absolute left-0 right-0 top-full z-10 bg-background pr-4">
+      </label>
+      <div className="invisible peer-checked:visible">
         {traitIndexInline}
       </div>
-    </details>
+    </div>
   ) : null;
 
   return (
