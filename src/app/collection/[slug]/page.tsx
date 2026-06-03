@@ -523,15 +523,17 @@ export default async function CollectionPage({
             )}
           </div>
 
-          {/* Right column - editorial voice stack:
-              - About description (always)
-              - Hivemind Commentary (always, rendered with the same
-                serif 16px register as Artist Statement so the two
-                voices have visual parity)
+          {/* Right column - editorial voice stack. Same content on
+              unfiltered AND filtered views so the page structure stays
+              consistent when a reader applies a filter (only chrome
+              should be added by the filter, never editorial subtracted).
+              - About description
+              - Hivemind Commentary (same serif 16px register as Artist
+                Statement so the two voices have visual parity)
               - Artist Statement (when present)
-              - Essay link (always when present)
-              On filtered views only About survives. */}
-          {!traitFilter ? (
+              - Essay link nested under Commentary, or standalone if no
+                Commentary */}
+          {true && (
             <div className="space-y-6 md:pt-4">
               {col.description && (
                 <div className="border-l border-border pl-5">
@@ -610,17 +612,6 @@ export default async function CollectionPage({
                 </div>
               )}
             </div>
-          ) : (
-            col.description && (
-              <div className="md:pt-4">
-                <div className="border-l border-border pl-5">
-                  <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
-                    About {collectionName}
-                  </p>
-                  <ExpandableProse text={col.description} />
-                </div>
-              </div>
-            )
           )}
         </div>
 
