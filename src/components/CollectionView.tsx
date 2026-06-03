@@ -142,10 +142,11 @@ export default function CollectionView({ sections, artists }: Props) {
     <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
       {/* Masthead - "Hivemind Digital Culture Fund" rendered prominently
           above the filter rows so the catalogue identifies itself before
-          any interaction (mirrors the wordmark + count pattern from the
-          artist page). Quiet serif, restrained sizing - reads as a title
-          card, not a hero. */}
-      <div className="pt-12 sm:pt-16">
+          any interaction. Top padding matches the sidebar logo's pt-6 so
+          the h1 anchors at the same vertical as the masthead wordmark
+          across the gutter; eye reads "Hivemind" on the rail and
+          "Hivemind Digital Culture Fund" on the page at the same line. */}
+      <div className="pt-6">
         <h1 className="font-serif text-[28px] sm:text-[32px] tracking-tight leading-tight">
           Hivemind Digital Culture Fund
         </h1>

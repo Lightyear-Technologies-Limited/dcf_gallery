@@ -30,7 +30,12 @@ export default function ExpandableProse({
   const [open, setOpen] = useState(false);
   const proseId = useId();
 
-  if (text.length <= threshold) {
+  // Multi-line content always engages the collapse mechanism even when
+  // under the character threshold - a 300-char poem with 4 paragraph
+  // breaks adds significant vertical space and should fold behind Read
+  // more so the gallery climbs faster.
+  const isMultiline = text.includes("\n");
+  if (text.length <= threshold && !isMultiline) {
     return <p className={className}>{text}</p>;
   }
 
