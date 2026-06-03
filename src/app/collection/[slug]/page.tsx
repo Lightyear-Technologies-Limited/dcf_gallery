@@ -421,7 +421,12 @@ export default async function CollectionPage({
           &rsaquo;
         </span>
       </summary>
-      <div className="absolute left-0 right-0 top-full z-10">
+      {/* Solid eggshell background occludes anything underneath (the
+          gallery below the grid extends full-width, so without bg the
+          trait rows render on top of Punk image tiles etc.). pr-4
+          keeps right-edge text off the editorial column rule when
+          the panel widens past its natural max. */}
+      <div className="absolute left-0 right-0 top-full z-10 bg-background pr-4">
         {traitIndexInline}
       </div>
     </details>
