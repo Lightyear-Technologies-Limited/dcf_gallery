@@ -86,7 +86,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
       <div className="pt-8">
         <p className="text-[13px] text-muted">
           <Link href="/" className="hover:text-foreground transition-colors duration-200">
-            Holdings
+            Collection
           </Link>
           {" / "}
           <Link href="/artists" className="hover:text-foreground transition-colors duration-200">

@@ -339,7 +339,7 @@ export default async function CollectionPage({
       <div className="pt-8">
         <p className="text-[13px] text-muted">
           <Link href="/" className="hover:text-foreground transition-colors duration-200">
-            Holdings
+            Collection
           </Link>
           {" / "}
           {traitFilter ? (
