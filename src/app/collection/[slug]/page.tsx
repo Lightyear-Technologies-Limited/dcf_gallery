@@ -293,7 +293,14 @@ export default async function CollectionPage({
   // UNFILTERED pages only. On filtered views the inline traitIndexInline
   // above takes over instead, sitting directly under the chip in the left
   // column.
-  const traitDisclosure = facets.size > 0 ? (
+  // Only render when at least one (key, value) pair survives the
+  // CLICKABLE_TRAITS whitelist - otherwise the disclosure summary opens
+  // to an empty panel (the "dead" state seen on Skulls of Luci, where
+  // pieces have raw traits but no editorial pivots are configured).
+  const hasVisibleFacets = [...facets.entries()].some(([key, values]) =>
+    buildVisibleValues(key, values).length > 0,
+  );
+  const traitDisclosure = facets.size > 0 && hasVisibleFacets ? (
     <details
       open={!!traitFilter}
       className="group max-w-[820px] text-[13px] [&_summary::-webkit-details-marker]:hidden"

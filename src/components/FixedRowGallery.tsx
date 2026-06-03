@@ -104,7 +104,7 @@ export default function FixedRowGallery({ pieces, rowMap, fallbackPerRow, gap = 
                   key={piece.id}
                   href={`/piece/${piece.slug}`}
                   style={{ width: w > 0 ? `${w}px` : undefined, height: "100%" }}
-                  className={`block shrink-0 overflow-hidden ${isPunk ? "bg-[#638596]" : "bg-surface"}`}
+                  className={`block shrink-0 overflow-hidden ${isPunk ? "bg-[#638596]" : ""}`}
                 >
                   {src ? (
                     <Image

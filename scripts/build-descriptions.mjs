@@ -76,7 +76,10 @@ let suppressed = 0;
 for (const slug of Object.keys(meta)) {
   const d = clean(meta[slug]?.description);
   if (!d) { dropped++; continue; }
-  if (d.length < 10) { dropped++; continue; }
+  // Keep any non-empty description, even single words. Artists like XCOPY
+  // use 4-char metadata fields ("SALT" on THE FUD) as intentional editorial
+  // commentary - the earlier <10 char filter dropped these as noise. Now
+  // the only floor is empty / whitespace-only.
   if (suppressedCollections.has(pieceCol[slug])) { suppressed++; continue; }
   out[slug] = d;
   kept++;

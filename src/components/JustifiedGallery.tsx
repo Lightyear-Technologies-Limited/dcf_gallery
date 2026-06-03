@@ -105,7 +105,7 @@ export default function JustifiedGallery({ pieces, piecesPerRow, gap = 4, maxRow
                   <Link
                     href={tileHref}
                     style={{ height: rowHeight > 0 ? `${rowHeight}px` : undefined }}
-                    className={`block overflow-hidden ${isPunk ? "bg-[#638596]" : "bg-surface"}`}
+                    className={`block overflow-hidden ${isPunk ? "bg-[#638596]" : ""}`}
                   >
                     {src ? (
                       <Image

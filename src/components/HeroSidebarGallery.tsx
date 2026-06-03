@@ -99,7 +99,7 @@ export default function HeroSidebarGallery({
         {/* Hero - spans the first sidebarRows × sidebarRows cells */}
         <Link
           href={`/piece/${hero.slug}`}
-          className={`block overflow-hidden ${isPunkHero ? "bg-[#638596]" : "bg-surface"}`}
+          className={`block overflow-hidden ${isPunkHero ? "bg-[#638596]" : ""}`}
           style={{
             gridColumn: `1 / span ${sidebarRows}`,
             gridRow: `1 / span ${sidebarRows}`,
@@ -131,7 +131,7 @@ export default function HeroSidebarGallery({
             <Link
               key={p.id}
               href={`/piece/${p.slug}`}
-              className={`block overflow-hidden ${isPunk ? "bg-[#638596]" : "bg-surface"}`}
+              className={`block overflow-hidden ${isPunk ? "bg-[#638596]" : ""}`}
             >
               {src ? (
                 <Image
