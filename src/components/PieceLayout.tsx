@@ -24,10 +24,16 @@ interface Props {
       excerpt, etc.). Rendered below the title block and above the metadata
       panel. Collection-level boilerplate is filtered out at build time. */
   description?: string | null;
-  /** True if the piece has a contract address + token ID. Drives whether the
-      description block carries the "From the artist's metadata description"
-      attribution; physical works (no on-chain token) get no attribution
-      because their description is editorial, not quoted from metadata. */
+  /** Collection-level description used as a fallback About when the piece
+      itself has no per-piece prose (collections where descriptions repeat
+      across every token, e.g. Ringers, Winds, Skulls of Luci). Eyebrow
+      reads "About {Collection}" instead of "About {Piece Title}". The
+      block starts collapsed so the editorial context is reachable but
+      doesn't compete with the artwork. */
+  collectionDescription?: string | null;
+  /** True if the piece has a contract address + token ID. Reserved for
+      future use; currently unused since the metadata-attribution line
+      under the description was dropped. */
   isOnChain?: boolean;
   /** Physical specifications for sculptural / installation works. Rendered
       as a Specifications panel; the blockchain details panel is omitted by
@@ -98,7 +104,7 @@ function resolveOriginal(uri: string): { href: string; label: string } | null {
 /**
  * Piece layout: image on the left, details on the right.
  */
-export default function PieceLayout({ image, aspect, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, holdingNote, description, isOnChain = true, physical, companion, metadata, rasterUrl, cryptopunksUrl, artistSiteUrl, originalUri, placeholder }: Props) {
+export default function PieceLayout({ image, aspect, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, holdingNote, description, collectionDescription, physical, companion, metadata, rasterUrl, cryptopunksUrl, artistSiteUrl, originalUri, placeholder }: Props) {
   const artistHost = artistSiteUrl ? hostLabel(artistSiteUrl) : null;
   const original = originalUri ? resolveOriginal(originalUri) : null;
   // When natural aspect is known, pass it as width/height props so next/image
@@ -165,13 +171,24 @@ export default function PieceLayout({ image, aspect, title, isPunk, artistName, 
         </div>
       )}
 
-      {description && (
+      {description ? (
         <PieceDescription
           text={description}
           label={`About ${title}`}
-          showMetadataAttribution={isOnChain}
         />
-      )}
+      ) : collectionDescription && collectionName ? (
+        /* Fallback: the piece has no per-piece prose (descriptions repeat
+           across every token in the collection - Ringers, Winds, Skulls,
+           etc.) so borrow the collection's editorial description. A reader
+           who clicks straight from the Collection page to a Piece page
+           still gets editorial grounding instead of nothing. Starts
+           collapsed - the artwork is the subject. */
+        <PieceDescription
+          text={collectionDescription}
+          label={`About ${collectionName}`}
+          defaultCollapsed
+        />
+      ) : null}
 
       {physical && (
         <div className="mt-10 border-l border-border pl-5">
@@ -271,27 +288,32 @@ export default function PieceLayout({ image, aspect, title, isPunk, artistName, 
 }
 
 /**
- * Description block - the prose stored as the token's on-chain metadata
- * description field. Catalogue convention:
- * - Eyebrow names the subject ("About {Artwork}")
- * - Body holds the prose
- * - Closing attribution names the source ("From the artist's metadata")
+ * Description block - prose for the piece. The eyebrow names the subject
+ * ("About {Artwork}" when piece-level, "About {Collection}" when the piece
+ * page is borrowing the collection's editorial description because per-
+ * piece prose is suppressed or repeats). The metadata-attribution line
+ * ("From the artist's metadata description") that used to follow has been
+ * dropped - it was chrome more than information.
  *
  * The left rule sets the block off as quoted material rather than UI text,
  * the way a museum catalogue indents a sourced quote. Long prose collapses
- * to three lines with a Read more / Show less toggle.
+ * to three lines behind a Read more toggle.
  */
 function PieceDescription({
   text,
   label,
-  showMetadataAttribution = true,
+  defaultCollapsed = false,
 }: {
   text: string;
   label: string;
-  showMetadataAttribution?: boolean;
+  /** When true, start collapsed regardless of length. Used for the
+      collection-level About fallback - the reader on the piece page is
+      here for the art; the editorial context is in reach but not in the
+      way. */
+  defaultCollapsed?: boolean;
 }) {
   const COLLAPSE_THRESHOLD = 280;
-  const isLong = text.length > COLLAPSE_THRESHOLD || text.includes("\n");
+  const isLong = text.length > COLLAPSE_THRESHOLD || text.includes("\n") || defaultCollapsed;
   const [expanded, setExpanded] = useState(false);
   return (
     <div className="mt-8 border-l border-border pl-5">
@@ -312,11 +334,6 @@ function PieceDescription({
         >
           {expanded ? "Show less" : "Read more"}
         </button>
-      )}
-      {showMetadataAttribution && (
-        <p className="mt-4 text-[12px] text-muted italic">
-          From the artist&rsquo;s metadata description
-        </p>
       )}
     </div>
   );

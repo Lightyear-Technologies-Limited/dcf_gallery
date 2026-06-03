@@ -231,6 +231,7 @@ export default async function PiecePage({
           collectionSlug={collection?.slug}
           holdingNote={collection?.holdingNote}
           description={getPieceDescription(piece.slug) || piece.description || null}
+          collectionDescription={collection?.description || null}
           isOnChain={Boolean(piece.contractAddress && piece.tokenId)}
           physical={piece.physical}
           companion={(() => {

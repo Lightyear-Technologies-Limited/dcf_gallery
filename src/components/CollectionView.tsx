@@ -140,11 +140,21 @@ export default function CollectionView({ sections, artists }: Props) {
 
   return (
     <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
+      {/* Masthead - "Hivemind Digital Culture Fund" rendered prominently
+          above the filter rows so the catalogue identifies itself before
+          any interaction (mirrors the wordmark + count pattern from the
+          artist page). Quiet serif, restrained sizing - reads as a title
+          card, not a hero. */}
+      <div className="pt-12 sm:pt-16">
+        <h1 className="font-serif text-[28px] sm:text-[32px] tracking-tight leading-tight">
+          Hivemind Digital Culture Fund
+        </h1>
+      </div>
       {/* Filters - ARTIST row, then CHAPTER row. Removing a filter is done
           by clicking its active label; no "All" / "Clear" button needed
           above the rows. The empty state below still offers a "Clear filters"
           recovery action when a combination returns zero. */}
-      <section className="pt-12 sm:pt-16 pb-6 border-b border-border space-y-2">
+      <section className="pt-6 pb-4 border-b border-border space-y-2">
         {/* Row 1: Artists. Mask gives a fade on the trailing edge when overflowing. */}
         <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide [mask-image:linear-gradient(to_right,black_calc(100%-24px),transparent)]">
           <span
@@ -202,16 +212,6 @@ export default function CollectionView({ sections, artists }: Props) {
           ))}
         </div>
 
-        {/* Standing dek when no filter is active - quiet "you are here"
-            identifier so the page has a voice before any interaction. Hidden
-            once a chapter is selected (the chapter description takes its
-            slot instead). */}
-        {!hasFilters && (
-          <p className="font-serif text-[16px] leading-[1.55] text-foreground-secondary pt-4 max-w-[680px]">
-            Hivemind Digital Culture Fund
-          </p>
-        )}
-
         {/* Chapter description - only when a chapter is active */}
         {activeChapter && (
           <p className="font-serif text-[16px] leading-[1.55] text-foreground-secondary pt-4 max-w-[680px]">
@@ -230,7 +230,7 @@ export default function CollectionView({ sections, artists }: Props) {
       </section>
 
       {/* Works - salon wall */}
-      <div className="pt-10 pb-20 space-y-12">
+      <div className="pt-6 pb-20 space-y-12">
         {visible.length === 0 ? (
           <div className="py-24 text-center">
             <p className="text-[13px] text-muted">No works match these filters.</p>

@@ -489,6 +489,22 @@ export default async function CollectionPage({
                   />
                 </div>
               )}
+              {col.essayUrl && (
+                <a
+                  href={col.essayUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[13px] text-muted hover:text-foreground transition-colors duration-200 inline-block"
+                >
+                  Read the essay
+                  {col.essayTitle && (
+                    <>
+                      : <span className="underline underline-offset-4 decoration-border">{col.essayTitle}</span>
+                    </>
+                  )}{" "}
+                  →
+                </a>
+              )}
               {col.artistStatement && (
                 <div className="border-l border-border pl-5">
                   <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
@@ -506,22 +522,6 @@ export default async function CollectionPage({
                     className="font-serif text-[16px] leading-[1.65] text-foreground-secondary whitespace-pre-line"
                   />
                 </div>
-              )}
-              {col.essayUrl && (
-                <a
-                  href={col.essayUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[13px] text-muted hover:text-foreground transition-colors duration-200 inline-block"
-                >
-                  Read the essay
-                  {col.essayTitle && (
-                    <>
-                      : <span className="underline underline-offset-4 decoration-border">{col.essayTitle}</span>
-                    </>
-                  )}{" "}
-                  →
-                </a>
               )}
             </div>
           ) : (
