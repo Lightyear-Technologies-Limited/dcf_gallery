@@ -223,7 +223,7 @@ export default function PieceLayout({ image, aspect, title, isPunk, artistName, 
         // (canonical artist-curated view), then marketplace(s) (trading view).
         // Punks get both CryptoPunks.app and Raster under marketplace, with
         // CryptoPunks.app first as canonical.
-        <div className="mt-10 flex flex-col gap-2 text-[12px] text-muted">
+        <div className="mt-6 flex flex-col gap-2 text-[12px] text-muted">
           {original && (
             <a
               href={original.href}
