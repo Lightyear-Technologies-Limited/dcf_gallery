@@ -219,7 +219,7 @@ export default async function PiecePage({
           )}
         </div>
       )}
-      <div className="pt-6">
+      <div className="pt-6 pb-24">
         <PieceLayout
           image={realImage}
           aspect={getArtworkAspect(piece.slug, piece.contractAddress, piece.tokenId)}

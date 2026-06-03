@@ -714,7 +714,7 @@ export default async function CollectionPage({
         </div>
 
       {/* Gallery. */}
-      <div className={`${traitFilter ? "pt-8" : "pt-6"} pb-12`}>
+      <div className={`${traitFilter ? "pt-8" : "pt-6"} pb-24`}>
         {(() => {
           const heroLayout = getHeroLayout(slug);
           // Filtered view: bypass hero / fixed-row / single-piece layouts
