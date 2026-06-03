@@ -24,8 +24,13 @@
 .DS_Store
 *.pem
 
-# Raw downloaded artwork - too large for git. Only optimized WebP is committed.
-/public/art/all/
+# Raw downloaded artwork - too large for git (~4GB locally). Only optimized
+# WebP is committed for non-Punk pieces. Punk SVGs are an explicit exception:
+# images.ts routes Punks directly to /art/all/{contract}-{tokenId}.svg, so the
+# 40 CryptoPunk SVGs (~850KB total) ship to make the Punks chapter render
+# on a fresh clone.
+/public/art/all/*
+!/public/art/all/0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb-*.svg
 /public/art/grifters/
 
 # Claude tooling
