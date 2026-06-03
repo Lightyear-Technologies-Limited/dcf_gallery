@@ -266,31 +266,79 @@ export default async function CollectionPage({
     );
   })() : null;
 
-  // Compact inline trait index - rendered directly under the chip in the
-  // LEFT column on filtered views. Two-column row layout: small-caps key
-  // eyebrow on the left in a fixed-width gutter, values flowing inline to
-  // the right with the held/global count after each value. Reads as a
-  // web3-native stats panel (Bloomberg / DeFi dashboard register) rather
-  // than as a marketplace facet list. No "Browse by trait" wrapper, no
-  // <details> mechanic - the eyebrows carry the navigation. Curated
-  // whitelist (Punks Attribute) suppresses sub-core values; full list
-  // elsewhere.
-  const traitIndexInline = traitFilter && facets.size > 0 ? (
+  // Compact inline trait index - single layout used on BOTH filtered and
+  // unfiltered views so the disclosure mechanic doesn't change the page
+  // structure when a reader applies a filter. Two-column row layout:
+  // small-caps key eyebrow on the left in a fixed-width gutter, values
+  // flowing inline to the right with held/global counts after each.
+  // Reads as a Bloomberg / DeFi stats panel rather than a marketplace
+  // facet list. Curated whitelist (Punks Attribute) suppresses sub-core
+  // values; full list elsewhere. Synthetic groups (Grifters "Sets")
+  // render after the regular keys with the same row treatment.
+  const traitIndexRows: React.ReactNode[] = [];
+  for (const [key, values] of facets.entries()) {
+    const visible = buildVisibleValues(key, values);
+    if (!visible.length) continue;
+    traitIndexRows.push(
+      <div key={`r-${key}`} className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+        <span className="text-[10px] uppercase text-muted shrink-0 min-w-[80px]">
+          {key}
+        </span>
+        <div className="flex flex-wrap gap-x-4 gap-y-1">
+          {visible.map(([val, count]) => renderTraitLink(key, val, count))}
+        </div>
+      </div>
+    );
+  }
+  for (const group of SYNTHETIC_TRAIT_GROUPS[slug] ?? []) {
+    const entries = group.values
+      .map((v) => ({ ...v, count: facets.get(v.key)?.get(v.value) ?? 0 }))
+      .filter((v) => v.count > 0);
+    if (!entries.length) continue;
+    traitIndexRows.push(
+      <div key={`s-${group.label}`} className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+        <span className="text-[10px] uppercase text-muted shrink-0 min-w-[80px]">
+          {group.label}
+        </span>
+        <div className="flex flex-wrap gap-x-4 gap-y-1">
+          {entries.map((entry) => {
+            const isActive =
+              traitFilter?.key === entry.key && traitFilter?.value === entry.value;
+            return (
+              <Link
+                key={`${entry.key}:${entry.value}`}
+                href={`/collection/${slug}?trait=${encodeURIComponent(entry.key)}&value=${encodeURIComponent(entry.value)}`}
+                className={`inline-flex items-baseline gap-1.5 transition-colors duration-200 underline underline-offset-4 ${
+                  isActive
+                    ? "text-foreground font-medium decoration-foreground"
+                    : "text-foreground-secondary hover:text-foreground decoration-border hover:decoration-foreground"
+                }`}
+                aria-current={isActive ? "page" : undefined}
+              >
+                <span>{entry.label}</span>
+                <span className="text-[11px] tabular-nums no-underline">
+                  <span
+                    className={
+                      isActive
+                        ? "text-foreground"
+                        : entry.count > 1
+                        ? "text-muted"
+                        : "text-muted/40"
+                    }
+                  >
+                    {entry.count}
+                  </span>
+                </span>
+              </Link>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
+  const traitIndexInline = traitIndexRows.length > 0 ? (
     <div className="mt-6 max-w-[520px] space-y-2 text-[12px]">
-      {[...facets.entries()].map(([key, values]) => {
-        const visible = buildVisibleValues(key, values);
-        if (!visible.length) return null;
-        return (
-          <div key={key} className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-            <span className="text-[10px] uppercase text-muted shrink-0 min-w-[80px]">
-              {key}
-            </span>
-            <div className="flex flex-wrap gap-x-4 gap-y-1">
-              {visible.map(([val, count]) => renderTraitLink(key, val, count))}
-            </div>
-          </div>
-        );
-      })}
+      {traitIndexRows}
     </div>
   ) : null;
 
@@ -305,95 +353,11 @@ export default async function CollectionPage({
   const hasVisibleFacets = [...facets.entries()].some(([key, values]) =>
     buildVisibleValues(key, values).length > 0,
   );
-  const traitDisclosure = facets.size > 0 && hasVisibleFacets ? (
-    <details
-      open={!!traitFilter}
-      className="group max-w-[820px] text-[13px] [&_summary::-webkit-details-marker]:hidden"
-    >
-      <summary className="cursor-pointer list-none text-muted hover:text-foreground transition-colors duration-200 inline-flex items-center gap-2 select-none">
-        <span className="text-[10px] uppercase">
-          Browse by trait
-        </span>
-        <span
-          aria-hidden
-          className="inline-block transition-transform duration-200 group-open:rotate-90"
-        >
-          &rsaquo;
-        </span>
-      </summary>
-      <div className="mt-4 space-y-4">
-        {[...facets.entries()].map(([key, values]) => {
-          const visible = buildVisibleValues(key, values);
-          if (!visible.length) return null;
-          return (
-            <div key={key}>
-              <p className="text-[10px] uppercase text-muted mb-2">
-                {key}
-              </p>
-              <div className="flex flex-wrap gap-x-5 gap-y-2">
-                {visible.map(([val, count]) => renderTraitLink(key, val, count))}
-              </div>
-            </div>
-          );
-        })}
-        {/* Synthetic groups - editorial cross-trait rows (Grifters "Sets":
-            Turbulence / G to the M / Wretch span Vision / Noise / Type
-            respectively). Each entry resolves its count from the underlying
-            facets and links to the real-trait filter URL, so it behaves
-            identically to a value from one of the regular rows. */}
-        {(SYNTHETIC_TRAIT_GROUPS[slug] ?? []).map((group) => {
-          const entries = group.values
-            .map((v) => {
-              const count = facets.get(v.key)?.get(v.value) ?? 0;
-              return { ...v, count };
-            })
-            .filter((v) => v.count > 0);
-          if (!entries.length) return null;
-          return (
-            <div key={group.label}>
-              <p className="text-[10px] uppercase text-muted mb-2">
-                {group.label}
-              </p>
-              <div className="flex flex-wrap gap-x-5 gap-y-2">
-                {entries.map((entry) => {
-                  const isActive =
-                    traitFilter?.key === entry.key &&
-                    traitFilter?.value === entry.value;
-                  return (
-                    <Link
-                      key={`${entry.key}:${entry.value}`}
-                      href={`/collection/${slug}?trait=${encodeURIComponent(entry.key)}&value=${encodeURIComponent(entry.value)}`}
-                      className={`inline-flex items-baseline gap-1.5 transition-colors duration-200 underline underline-offset-4 ${
-                        isActive
-                          ? "text-foreground font-medium decoration-foreground"
-                          : "text-foreground-secondary hover:text-foreground decoration-border hover:decoration-foreground"
-                      }`}
-                      aria-current={isActive ? "page" : undefined}
-                    >
-                      <span>{entry.label}</span>
-                      <span className="text-[11px] tabular-nums no-underline">
-                        <span
-                          className={
-                            isActive
-                              ? "text-foreground"
-                              : entry.count > 1
-                              ? "text-muted"
-                              : "text-muted/40"
-                          }
-                        >
-                          {entry.count}
-                        </span>
-                      </span>
-                    </Link>
-                  );
-                })}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </details>
-  ) : null;
+  // Same inline component renders on filtered AND unfiltered views so the
+  // page structure doesn't change when a reader applies a filter. The
+  // disclosure + stacked-row layout was inconsistent with the inline
+  // filtered placement; consolidated into a single tight layout.
+  const traitDisclosure = traitIndexRows.length > 0 ? traitIndexInline : null;
 
   return (
     <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
