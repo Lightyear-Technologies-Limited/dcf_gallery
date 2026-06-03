@@ -71,6 +71,11 @@ export interface Collection {
       Surfaced as a quiet metadata line next to mintDate; absent for
       collections where code size isn't a meaningful signal. */
   codeSizeKb?: number;
+  /** Platform / marketplace where the collection was minted - surfaced as
+      a quiet data row alongside Contract / Type. Useful for institutional
+      readers where the platform name carries provenance weight (SuperRare
+      curated 1/1s, Async Art for the Grifters, etc.). */
+  platform?: string;
   /** Public exhibitions / auctions / showings of works in this collection. */
   exhibitions?: Exhibition[];
   /** Single-line institutional note about the Fund's position in this
@@ -300,6 +305,7 @@ export const collections: Collection[] = [
     curatorNote: 'Beeple\'s TIME cover collaboration is a watershed in the cultural legitimization of digital art - the moment a major legacy publication recognized crypto-native artists as their visual peers.',
     medium: 'image',
     contractAddress: '0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0',
+    platform: 'SuperRare',
     tags: ['crypto-native', 'digital-culture', 'glitch'],
     influences: [],
   },
@@ -351,6 +357,7 @@ export const collections: Collection[] = [
     essayTitle: 'Into the Collection: A Slight Lack of Symmetry',
     medium: 'image',
     contractAddress: '0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0',
+    platform: 'SuperRare',
     tags: ['generative', 'algorithmic', 'on-chain'],
     influences: [],
   },
@@ -635,6 +642,7 @@ export const collections: Collection[] = [
     curatorNote: 'Hivemind\'s XCOPY 1/1s span the artist\'s most-cited cultural moments - works that helped define crypto art\'s visual register: glitch, dread, and political commentary at compressed scale.',
     medium: 'image',
     contractAddress: '0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0',
+    platform: 'SuperRare',
     tags: ['crypto-native', 'digital-culture', 'glitch'],
     influences: [],
   },

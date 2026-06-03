@@ -138,7 +138,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
               this page. The in-page sections below (which also link to the
               same collection pages) act as inline previews; the top list is
               the catalogue index. */}
-          {artistCollections.length > 1 && (
+          {artistCollections.length > 0 && (
             <ol className="mt-6 space-y-1.5 text-[13px]">
               {artistCollections.map((col) => (
                 <li key={col.slug} className="flex items-baseline justify-between gap-3 max-w-[260px]">
@@ -248,8 +248,6 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
           else if (n <= 12) ideal = 4;
           else ideal = 5;
 
-          const showHoldingsLine = n > 1 && col.totalSupply;
-
           return (
             <section key={col.slug} id={col.slug}>
               <div className="mb-8">
@@ -259,11 +257,6 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
                 >
                   {col.name}
                 </Link>
-                {showHoldingsLine && (
-                  <p className="text-[13px] text-muted mt-3 tabular-nums">
-                    {n} of {col.totalSupply!.toLocaleString()}
-                  </p>
-                )}
               </div>
 
               {/* Gallery */}

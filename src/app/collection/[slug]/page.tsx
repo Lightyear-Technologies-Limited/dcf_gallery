@@ -424,19 +424,18 @@ export default async function CollectionPage({
                 <p>Code size {col.codeSizeKb} Kb</p>
               )}
               {!traitFilter && editionType !== "1/1" && <p>{editionType}</p>}
+              {!traitFilter && col.platform && <p>{col.platform}</p>}
               {!traitFilter && col.contractAddress && (
                 <p className="inline-flex items-baseline gap-x-2">
                   <span>Contract:</span>
                   <CopyableHash value={col.contractAddress} />
                 </p>
               )}
-              {col.totalSupply &&
-                sorted.length > 1 &&
-                !(sorted.length === col.totalSupply && col.totalSupply <= 2) && (
-                  <p>
-                    Hivemind holds {sorted.length} of {col.totalSupply.toLocaleString()}
-                  </p>
-                )}
+              {col.totalSupply && (
+                <p>
+                  Hivemind holds {sorted.length} of {col.totalSupply.toLocaleString()}
+                </p>
+              )}
             </div>
 
             {/* Filter chip + compact trait index. On filtered views these
