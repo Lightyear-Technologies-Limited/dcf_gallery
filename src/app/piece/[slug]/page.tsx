@@ -2,7 +2,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { pieces, getArtist, getCollection, getPiecesByCollection } from "@/lib/data";
 import { getArtworkImage, getArtworkAspect, resolveTokenId } from "@/lib/images";
-import { getEditionType, getArtistSiteUrl, getPieceTraits, getPieceDescription, sortPieces } from "@/lib/curation";
+import { getEditionType, getArtistSiteUrl, getPieceTraits, getPieceDescription, getCollectionDisplayName, SYNTHETIC_TRAITS } from "@/lib/curation";
+import type { TraitValue } from "@/lib/curation";
 import PlaceholderArt from "@/components/PlaceholderArt";
 import BackButton from "@/components/BackButton";
 import PieceLayout from "@/components/PieceLayout";
@@ -35,8 +36,15 @@ export function generateStaticParams() {
   return pieces.map((p) => ({ slug: p.slug }));
 }
 
-export default async function PiecePage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function PiecePage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
   const { slug } = await params;
+  const sp = await searchParams;
   const piece = pieces.find((p) => p.slug === slug);
   if (!piece) notFound();
 
@@ -44,10 +52,46 @@ export default async function PiecePage({ params }: { params: Promise<{ slug: st
   const collection = getCollection(piece.collectionSlug);
   const realImage = getArtworkImage(piece.slug, piece.contractAddress, piece.tokenId, "detail");
 
-  // Sibling navigation - previous + next piece in the collection (curation
-  // order). Sits at the top alongside the back link so a reader can move
-  // laterally through the catalogue without scrolling.
-  const siblingPieces = sortPieces(piece.collectionSlug, getPiecesByCollection(piece.collectionSlug));
+  // If the reader arrived via a filtered collection view, the URL carries
+  // the filter as ?trait=Key&value=Value (mirroring the filter route).
+  // Preserve it on Back + Prev/Next so the filtered browsing mode survives
+  // navigation.
+  const incomingFilter: { key: string; value: string } | null =
+    typeof sp.trait === "string" && typeof sp.value === "string" && sp.trait && sp.value
+      ? { key: sp.trait, value: sp.value }
+      : null;
+  const filterQs = incomingFilter
+    ? `trait=${encodeURIComponent(incomingFilter.key)}&value=${encodeURIComponent(incomingFilter.value)}`
+    : "";
+  const pieceHref = (s: string) => `/piece/${s}${filterQs ? `?${filterQs}` : ""}`;
+  const collectionHref = collection
+    ? `/collection/${collection.slug}${filterQs ? `?${filterQs}` : ""}`
+    : "/";
+
+  // Sibling navigation - previous + next piece in the collection sorted by
+  // numeric tokenId. Predictable forward/backward through the series, even
+  // when the collection page itself uses a curated display order. Falls back
+  // to lexical slug compare when tokenId is missing (physical works, etc.).
+  // When a filter is active, walk only the filtered subset so prev/next
+  // doesn't drop the reader out of their browsing mode.
+  let siblingPieces = [...getPiecesByCollection(piece.collectionSlug)];
+  if (incomingFilter) {
+    siblingPieces = siblingPieces.filter((p) => {
+      const t = getPieceTraits(p.slug);
+      if (!t) return false;
+      return t.some(([k, v]) => {
+        if (k !== incomingFilter.key) return false;
+        if (Array.isArray(v)) return v.some((item) => String(item) === incomingFilter.value);
+        return String(v) === incomingFilter.value;
+      });
+    });
+  }
+  siblingPieces.sort((a, b) => {
+    const an = parseInt(a.tokenId || "", 10);
+    const bn = parseInt(b.tokenId || "", 10);
+    if (Number.isFinite(an) && Number.isFinite(bn)) return an - bn;
+    return a.slug.localeCompare(b.slug);
+  });
   const sibIdx = siblingPieces.findIndex((p) => p.slug === piece.slug);
   const prevPiece = sibIdx > 0 ? siblingPieces[sibIdx - 1] : null;
   const nextPiece = sibIdx >= 0 && sibIdx < siblingPieces.length - 1 ? siblingPieces[sibIdx + 1] : null;
@@ -93,30 +137,44 @@ export default async function PiecePage({ params }: { params: Promise<{ slug: st
     : undefined;
 
   const artistSiteUrl =
-    piece.artistSiteUrl || getArtistSiteUrl(piece.collectionSlug, piece.tokenId) || undefined;
+    piece.artistSiteUrl ||
+    getArtistSiteUrl(piece.collectionSlug, piece.tokenId, piece.title) ||
+    undefined;
 
-  const traits = getPieceTraits(piece.slug);
+  const rawTraits = getPieceTraits(piece.slug);
+  // Editorial / curator-added "synthetic" traits prepended to the on-chain
+  // attributes - used for facts not in metadata (QQL "Minted by: Tyler
+  // Hobbs"). When the collection has none, the piece's traits pass through.
+  const syntheticEntries = SYNTHETIC_TRAITS[piece.collectionSlug];
+  const traits: Array<[string, TraitValue]> | null = syntheticEntries
+    ? [...Object.entries(syntheticEntries), ...(rawTraits || [])]
+    : rawTraits;
   // Collections where traits carry curatorial weight (palette, scale, mood,
   // origin) - open the Features panel by default. Others stay collapsed.
-  const HIGH_SIGNAL_TRAITS = new Set([
-    "fidenza",
-    "ringers",
-    "human-unreadable",
-    "winds-of-yawanawa",
-    "dataland-biome-lumina",
-    "synthetic-dreams",
-    "masks-of-luci",
-    "grifters",
-    "qql",
-  ]);
-  const featuresDefaultOpen = HIGH_SIGNAL_TRAITS.has(piece.collectionSlug);
+  // Traits / Attributes panel opens by default - the on-chain attributes
+  // are the readable signature of the work; collapsing them hides the
+  // information the reader came for.
+  const featuresDefaultOpen = true;
+  // Edition format "1/1/N" means a multi-piece series (CryptoPunks 1/1/10000,
+  // Fidenza 1/1/999, etc.) - those are the only collections where trait
+  // values are filterable, because there ARE other pieces sharing the trait
+  // to pivot to. Single-edition 1/1 pieces (Cope Salada, Some Other Asshole,
+  // her-favorite-flowers) have nothing to filter against, so traits render
+  // as plain catalogue metadata without link affordance.
+  const collectionEditionType = getEditionType(piece.collectionSlug);
+  const isMultiPieceSeries = /^1\/1\/\d/.test(collectionEditionType);
   const metadata = (
     <div className="space-y-6">
-      <Features traits={traits} defaultOpen={featuresDefaultOpen} />
+      <Features
+        traits={traits}
+        collectionSlug={isMultiPieceSeries ? piece.collectionSlug : undefined}
+        defaultOpen={featuresDefaultOpen}
+        label={isPunk ? "Attributes" : "Traits"}
+      />
       <OnChainDetails
         contractAddress={piece.contractAddress}
         tokenId={piece.tokenId}
-        editionType={getEditionType(piece.collectionSlug)}
+        editionType={collectionEditionType}
         storage={deriveStorage(piece.originalUri, piece.contractAddress)}
       />
     </div>
@@ -124,12 +182,26 @@ export default async function PiecePage({ params }: { params: Promise<{ slug: st
 
   return (
     <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
-      <BackButton />
+      {/* Back link goes up one level to the parent collection, preserving
+          any active trait filter so the reader returns to the filtered view
+          they came from. Label uses the curated display name and is
+          extended with "· {trait: value}" when filtered so the destination
+          is unambiguous. */}
+      <BackButton
+        href={collectionHref}
+        label={
+          collection
+            ? `${getCollectionDisplayName(collection.slug, collection.name)}${
+                incomingFilter ? ` · ${incomingFilter.key}: ${incomingFilter.value}` : ""
+              }`
+            : "Back"
+        }
+      />
       {(prevPiece || nextPiece) && (
         <div className="mt-4 flex flex-col sm:flex-row sm:justify-between gap-2 text-[13px] text-muted">
           {prevPiece ? (
             <Link
-              href={`/piece/${prevPiece.slug}`}
+              href={pieceHref(prevPiece.slug)}
               className="hover:text-foreground transition-colors duration-200 truncate max-w-full sm:max-w-[45%]"
             >
               ← {prevPiece.title}
@@ -139,7 +211,7 @@ export default async function PiecePage({ params }: { params: Promise<{ slug: st
           )}
           {nextPiece && (
             <Link
-              href={`/piece/${nextPiece.slug}`}
+              href={pieceHref(nextPiece.slug)}
               className="hover:text-foreground transition-colors duration-200 text-right truncate max-w-full sm:max-w-[45%]"
             >
               {nextPiece.title} →
@@ -155,8 +227,9 @@ export default async function PiecePage({ params }: { params: Promise<{ slug: st
           isPunk={isPunk}
           artistName={artist?.name}
           artistSlug={artist?.slug}
-          collectionName={collection?.name}
+          collectionName={collection ? getCollectionDisplayName(collection.slug, collection.name) : undefined}
           collectionSlug={collection?.slug}
+          holdingNote={collection?.holdingNote}
           description={getPieceDescription(piece.slug) || piece.description || null}
           isOnChain={Boolean(piece.contractAddress && piece.tokenId)}
           physical={piece.physical}

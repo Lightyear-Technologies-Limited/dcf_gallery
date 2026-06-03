@@ -16,6 +16,10 @@ interface Props {
   artistSlug?: string;
   collectionName?: string;
   collectionSlug?: string;
+  /** Optional single-line institutional note about the fund's position in
+      the collection (e.g. "DCF is the largest single holder of Winds of
+      Yawanawa."). Rendered as a quiet eyebrow under the collection link. */
+  holdingNote?: string;
   /** Per-piece prose from on-chain metadata (artist statement, TIME essay
       excerpt, etc.). Rendered below the title block and above the metadata
       panel. Collection-level boilerplate is filtered out at build time. */
@@ -94,7 +98,7 @@ function resolveOriginal(uri: string): { href: string; label: string } | null {
 /**
  * Piece layout: image on the left, details on the right.
  */
-export default function PieceLayout({ image, aspect, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, description, isOnChain = true, physical, companion, metadata, rasterUrl, cryptopunksUrl, artistSiteUrl, originalUri, placeholder }: Props) {
+export default function PieceLayout({ image, aspect, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, holdingNote, description, isOnChain = true, physical, companion, metadata, rasterUrl, cryptopunksUrl, artistSiteUrl, originalUri, placeholder }: Props) {
   const artistHost = artistSiteUrl ? hostLabel(artistSiteUrl) : null;
   const original = originalUri ? resolveOriginal(originalUri) : null;
   // When natural aspect is known, pass it as width/height props so next/image
@@ -104,17 +108,35 @@ export default function PieceLayout({ image, aspect, title, isPunk, artistName, 
   const imgW = aspect?.w ?? 1600;
   const imgH = aspect?.h ?? 1200;
   const artworkBlock = image ? (
-    <div className={isPunk ? "bg-[#638596] inline-block" : ""}>
+    isPunk ? (
+      // Punks render the on-chain SVG at full container dimensions on the
+      // colorway background. The container is aspect-square AND capped by
+      // max-w-[80vh] so it stays within the viewport without needing the
+      // image's own max-height to truncate it - which was clipping the
+      // image element shorter than the container and leaving a teal gap
+      // under the punk on wider desktops.
+      <div className="bg-[#638596] w-full aspect-square max-w-[80vh] mx-auto">
+        <Image
+          src={image}
+          alt={title}
+          width={imgW}
+          height={imgH}
+          className="block w-full h-full object-contain [image-rendering:pixelated]"
+          priority
+          sizes="(max-width: 768px) 90vw, 60vw"
+        />
+      </div>
+    ) : (
       <Image
         src={image}
         alt={title}
         width={imgW}
         height={imgH}
-        className={`block w-auto h-auto max-w-full max-h-[80vh] object-contain ${isPunk ? "[image-rendering:pixelated] max-w-[400px]" : ""}`}
+        className="block w-auto h-auto max-w-full max-h-[80vh] object-contain"
         priority
         sizes="(max-width: 768px) 90vw, 60vw"
       />
-    </div>
+    )
   ) : (
     <div className="aspect-[4/3] w-full">{placeholder}</div>
   );

@@ -21,6 +21,20 @@ interface Props {
   pieces: PieceData[];
   piecesPerRow: number;
   gap?: number;
+  /** Cap row height (px). When the natural justified row-height would exceed
+      this, pieces are sized to this height instead and the row centers within
+      the container rather than stretching to fill. Used on filtered views
+      where 1-2 matches would otherwise render as massive heroes. */
+  maxRowHeight?: number;
+  /** Optional query string (no leading `?`) appended to every tile href so a
+      reader's filter state survives clicking into a piece. The piece page
+      reads these params and rebuilds the BackButton + sibling nav to keep
+      the filter active. */
+  hrefSearch?: string;
+  /** When true, show the piece title under each tile as a small caption.
+      Used on filtered views (single-match especially) where the catalog
+      provenance otherwise vanishes. */
+  showCaptions?: boolean;
 }
 
 /**
@@ -28,8 +42,10 @@ interface Props {
  * Pieces within a row share the same height; widths come from aspect ratios.
  * Row heights naturally differ: rows with wider pieces are shorter, rows with
  * narrower pieces are taller. Result: no cropping, no empty space.
+ *
+ * When maxRowHeight is set, that's the ceiling; underfilled rows center.
  */
-export default function JustifiedGallery({ pieces, piecesPerRow, gap = 4 }: Props) {
+export default function JustifiedGallery({ pieces, piecesPerRow, gap = 4, maxRowHeight, hrefSearch, showCaptions }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0);
   const [aspects, setAspects] = useState<Record<string, number>>({});
@@ -65,16 +81,17 @@ export default function JustifiedGallery({ pieces, piecesPerRow, gap = 4 }: Prop
         const aspectSum = row.reduce((s, p) => s + (aspects[p.id] || 1), 0);
         const totalGap = gap * (row.length - 1);
         // Height this row needs so its pieces sum to full container width
-        const rowHeight = width > 0 && aspectSum > 0 ? (width - totalGap) / aspectSum : 0;
+        const naturalRowHeight = width > 0 && aspectSum > 0 ? (width - totalGap) / aspectSum : 0;
+        const rowHeight = maxRowHeight && naturalRowHeight > maxRowHeight ? maxRowHeight : naturalRowHeight;
+        const isCapped = maxRowHeight !== undefined && rowHeight < naturalRowHeight;
 
         return (
           <div
             key={rowIdx}
-            className="flex"
+            className={`flex items-start ${isCapped ? "justify-center" : ""}`}
             style={{
               gap: `${gap}px`,
-              marginBottom: `${gap}px`,
-              height: rowHeight > 0 ? `${rowHeight}px` : undefined,
+              marginBottom: showCaptions ? `${gap + 24}px` : `${gap}px`,
             }}
           >
             {row.map((piece) => {
@@ -82,30 +99,41 @@ export default function JustifiedGallery({ pieces, piecesPerRow, gap = 4 }: Prop
               const w = aspect * rowHeight;
               const src = getArtworkImage(piece.slug, piece.contractAddress, piece.tokenId, "detail");
               const isPunk = piece.collectionSlug === "cryptopunks";
+              const tileHref = `/piece/${piece.slug}${hrefSearch ? `?${hrefSearch}` : ""}`;
               return (
-                <Link
-                  key={piece.id}
-                  href={`/piece/${piece.slug}`}
-                  style={{ width: w > 0 ? `${w}px` : undefined, height: "100%" }}
-                  className={`block shrink-0 overflow-hidden ${isPunk ? "bg-[#638596]" : "bg-surface"}`}
-                >
-                  {src ? (
-                    <Image
-                      src={src}
-                      alt={piece.title}
-                      width={800}
-                      height={800}
-                      className={`w-full h-full ${isPunk ? "[image-rendering:pixelated] object-contain" : "object-cover"}`}
-                      sizes="500px"
-                    />
-                  ) : (
-                    <PlaceholderArt
-                      collectionSlug={piece.collectionSlug}
-                      pieceSlug={piece.slug}
-                      className="w-full h-full"
-                    />
+                <div key={piece.id} className="shrink-0" style={{ width: w > 0 ? `${w}px` : undefined }}>
+                  <Link
+                    href={tileHref}
+                    style={{ height: rowHeight > 0 ? `${rowHeight}px` : undefined }}
+                    className={`block overflow-hidden ${isPunk ? "bg-[#638596]" : "bg-surface"}`}
+                  >
+                    {src ? (
+                      <Image
+                        src={src}
+                        alt={piece.title}
+                        width={800}
+                        height={800}
+                        className={`w-full h-full ${isPunk ? "[image-rendering:pixelated] object-contain" : "object-cover"}`}
+                        sizes="500px"
+                      />
+                    ) : (
+                      <PlaceholderArt
+                        collectionSlug={piece.collectionSlug}
+                        pieceSlug={piece.slug}
+                        className="w-full h-full"
+                      />
+                    )}
+                  </Link>
+                  {showCaptions && (
+                    <Link
+                      href={tileHref}
+                      className="mt-2 block text-[11px] text-muted hover:text-foreground transition-colors duration-200 truncate"
+                      title={piece.title}
+                    >
+                      {piece.title}
+                    </Link>
                   )}
-                </Link>
+                </div>
               );
             })}
           </div>
