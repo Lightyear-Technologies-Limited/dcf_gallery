@@ -457,20 +457,21 @@ export default async function CollectionPage({
               </div>
             )}
 
-            {/* Hivemind Commentary + essay link always live on the LEFT,
-                regardless of whether an Artist Statement exists. Editorial
-                rule: About + Artist Statement belong together on the right
-                (they're both the artist's voice). Commentary is the fund's
-                voice and pairs with the institutional data (holdings,
-                contract). Two-block stack on the right keeps the column
-                lean and the gallery climbs up. Suppressed entirely on
-                filtered views. */}
-            {!traitFilter && col.curatorNote && (
+            {/* Hivemind Commentary + essay link placement is DYNAMIC -
+                whichever column shortens the path to the art. When the
+                collection has an Artist Statement, the right column is
+                already full (About + Statement) so Commentary stays on
+                the LEFT next to the institutional data. When there's no
+                Artist Statement, Commentary moves to the RIGHT (next to
+                About) so the LEFT column stays lean (header + metadata)
+                and the gallery climbs up the page.
+                Suppressed entirely on filtered views. */}
+            {!traitFilter && col.artistStatement && col.curatorNote && (
               <div className="mt-10 max-w-[420px]">
                 <CuratorNote text={col.curatorNote} variant="inline" />
               </div>
             )}
-            {!traitFilter && col.essayUrl && (
+            {!traitFilter && col.artistStatement && col.essayUrl && (
               <a
                 href={col.essayUrl}
                 target="_blank"
@@ -498,11 +499,14 @@ export default async function CollectionPage({
             )}
           </div>
 
-          {/* Right column - artist voice only: About description +
-              Artist Statement (when present). Commentary + essay live on
-              the left so this stack stays at most two blocks, keeping
-              the right column from towering past the left and pushing
-              the gallery down. On filtered views only About survives. */}
+          {/* Right column.
+              - WITH Artist Statement: About + Artist Statement (artist
+                voice grouped). Commentary + essay are on the LEFT (above).
+              - WITHOUT Artist Statement: About + Commentary + essay so
+                the right column has something to balance, and the LEFT
+                column stays lean (header + holdings + metadata) so the
+                gallery climbs up.
+              On filtered views only About survives. */}
           {!traitFilter ? (
             <div className="space-y-8 md:pt-4">
               {col.description && (
@@ -512,6 +516,27 @@ export default async function CollectionPage({
                   </p>
                   <ExpandableProse text={col.description} />
                 </div>
+              )}
+              {!col.artistStatement && col.curatorNote && (
+                <div className="max-w-[420px]">
+                  <CuratorNote text={col.curatorNote} variant="inline" />
+                </div>
+              )}
+              {!col.artistStatement && col.essayUrl && (
+                <a
+                  href={col.essayUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[13px] text-muted hover:text-foreground transition-colors duration-200 inline-block"
+                >
+                  Read the essay
+                  {col.essayTitle && (
+                    <>
+                      : <span className="underline underline-offset-4 decoration-border">{col.essayTitle}</span>
+                    </>
+                  )}{" "}
+                  →
+                </a>
               )}
               {col.artistStatement && (
                 <div className="border-l border-border pl-5">

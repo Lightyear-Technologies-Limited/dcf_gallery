@@ -74,7 +74,6 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
   );
 
   const totalWorks = artistCollections.reduce((s, c) => s + c.pieces.length, 0);
-  const isSingleCollection = artistCollections.length === 1;
 
   return (
     <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
@@ -222,10 +221,14 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
         </div>
       )}
 
-      {/* Collections. Single-collection artists merge: the artist header IS
-          the collection header, so we suppress the per-collection editorial
-          block and render the gallery directly. As soon as a second collection
-          is added the structure naturally expands. */}
+      {/* Collections. Always render a per-collection title + count above
+          each gallery (multi-collection OR single-collection artists alike)
+          so the structure is consistent across the spread. No description
+          gutter beside the artwork - the artist-level About + Hivemind
+          Commentary at the top of the page already does that work; per-
+          collection prose beside each gallery would compete with the
+          actual art for attention. Holdings count omitted when n === 1
+          (a single piece IS the gallery; the count carries no info). */}
       <div className="pt-16 pb-12 space-y-20">
         {artistCollections.map((col) => {
           const n = col.pieces.length;
@@ -242,33 +245,23 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
           else if (n <= 12) ideal = 4;
           else ideal = 5;
 
+          const showHoldingsLine = n > 1 && col.totalSupply;
+
           return (
             <section key={col.slug} id={col.slug}>
-              {!isSingleCollection && (
-                <div className="grid grid-cols-1 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-8 md:gap-16 mb-10">
-                  <div>
-                    <Link
-                      href={`/collection/${col.slug}`}
-                      className="font-serif display-sm hover:opacity-60 transition-opacity duration-200 inline-block"
-                    >
-                      {col.name}
-                    </Link>
-                    <p className="text-[13px] text-muted mt-3 tabular-nums">
-                      {col.totalSupply
-                        ? <>{n} of {col.totalSupply.toLocaleString()}</>
-                        : <>{n} piece{n === 1 ? "" : "s"}</>
-                      }
-                    </p>
-                  </div>
-                  <div className="md:pt-3">
-                    {col.description && (
-                      <p className="text-[16px] text-foreground-secondary leading-[1.65]">
-                        {col.description}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              )}
+              <div className="mb-8">
+                <Link
+                  href={`/collection/${col.slug}`}
+                  className="font-serif display-sm hover:opacity-60 transition-opacity duration-200 inline-block"
+                >
+                  {col.name}
+                </Link>
+                {showHoldingsLine && (
+                  <p className="text-[13px] text-muted mt-3 tabular-nums">
+                    {n} of {col.totalSupply!.toLocaleString()}
+                  </p>
+                )}
+              </div>
 
               {/* Gallery */}
               {(() => {
