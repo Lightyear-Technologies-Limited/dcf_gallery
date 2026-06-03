@@ -400,7 +400,7 @@ export default async function CollectionPage({
             {artist && (
               <Link
                 href={`/artist/${artist.slug}`}
-                className={`${(artistName?.length ?? 0) > 20 ? "text-[17px]" : "text-[20px]"} text-foreground-secondary hover:text-foreground transition-colors duration-200 mt-3 inline-block`}
+                className="text-[15px] text-foreground-secondary hover:text-foreground transition-colors duration-200 mt-3 inline-block"
               >
                 {artistName}
               </Link>
@@ -515,30 +515,28 @@ export default async function CollectionPage({
                   <ExpandableProse text={col.description} />
                 </div>
               )}
-              {/* Commentary + essay link grouped as one block - the essay
-                  is the natural continuation of the Commentary voice, so
-                  it sits tight (mt-3) underneath rather than catching the
-                  full inter-block gap. */}
-              {(col.curatorNote || col.essayUrl) && (
-                <div>
-                  {col.curatorNote && (
-                    <div className="border-l border-border pl-5">
-                      <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
-                        Hivemind Commentary
-                      </p>
-                      <ExpandableProse
-                        text={col.curatorNote}
-                        threshold={400}
-                        className="font-serif text-[16px] leading-[1.65] text-foreground-secondary whitespace-pre-line"
-                      />
-                    </div>
-                  )}
+              {/* Commentary + essay link grouped under the same border-l
+                  rule. Essay link sits inside the Commentary container so
+                  it indents to match the prose (pl-5 from the rule),
+                  reading as a continuation of the Commentary voice rather
+                  than a flush-left peer. When there's no Commentary, the
+                  essay link renders on its own without the rule. */}
+              {col.curatorNote && (
+                <div className="border-l border-border pl-5">
+                  <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
+                    Hivemind Commentary
+                  </p>
+                  <ExpandableProse
+                    text={col.curatorNote}
+                    threshold={400}
+                    className="font-serif text-[16px] leading-[1.65] text-foreground-secondary whitespace-pre-line"
+                  />
                   {col.essayUrl && (
                     <a
                       href={col.essayUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`${col.curatorNote ? "mt-3" : ""} text-[13px] text-muted hover:text-foreground transition-colors duration-200 inline-block`}
+                      className="mt-3 text-[13px] text-muted hover:text-foreground transition-colors duration-200 inline-block"
                     >
                       Read the essay
                       {col.essayTitle && (
@@ -550,6 +548,22 @@ export default async function CollectionPage({
                     </a>
                   )}
                 </div>
+              )}
+              {!col.curatorNote && col.essayUrl && (
+                <a
+                  href={col.essayUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[13px] text-muted hover:text-foreground transition-colors duration-200 inline-block"
+                >
+                  Read the essay
+                  {col.essayTitle && (
+                    <>
+                      : <span className="underline underline-offset-4 decoration-border">{col.essayTitle}</span>
+                    </>
+                  )}{" "}
+                  →
+                </a>
               )}
               {col.artistStatement && (
                 <div className="border-l border-border pl-5">
