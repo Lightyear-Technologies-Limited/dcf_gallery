@@ -3815,6 +3815,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xf89660fb0214b770b66d6132b5ebf282bf7e2ee0',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xf89660fb0214b770b66d6132b5ebf282bf7e2ee0/1',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xf89660fb0214b770b66d6132b5ebf282bf7e2ee0/1.png',
   },
   {
     id: 'repeat-as-necessary-12-b069',
@@ -3830,6 +3831,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xf89660fb0214b770b66d6132b5ebf282bf7e2ee0',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xf89660fb0214b770b66d6132b5ebf282bf7e2ee0/12',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xf89660fb0214b770b66d6132b5ebf282bf7e2ee0/12.png',
   },
   {
     id: 'repeat-as-necessary-21-b069',
@@ -3845,6 +3847,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xf89660fb0214b770b66d6132b5ebf282bf7e2ee0',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xf89660fb0214b770b66d6132b5ebf282bf7e2ee0/21',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xf89660fb0214b770b66d6132b5ebf282bf7e2ee0/21.png',
   },
   {
     id: 'repeat-as-necessary-40-b069',
@@ -3860,6 +3863,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xf89660fb0214b770b66d6132b5ebf282bf7e2ee0',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xf89660fb0214b770b66d6132b5ebf282bf7e2ee0/40',
+    originalUri: 'https://media-proxy.artblocks.io/1/0xf89660fb0214b770b66d6132b5ebf282bf7e2ee0/40.png',
   },
   {
     id: 'ringers-13000014-d270',
