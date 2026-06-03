@@ -468,7 +468,7 @@ export default async function CollectionPage({
               - Essay link (always when present)
               On filtered views only About survives. */}
           {!traitFilter ? (
-            <div className="space-y-8 md:pt-4">
+            <div className="space-y-6 md:pt-4">
               {col.description && (
                 <div className="border-l border-border pl-5">
                   <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
@@ -477,33 +477,41 @@ export default async function CollectionPage({
                   <ExpandableProse text={col.description} />
                 </div>
               )}
-              {col.curatorNote && (
-                <div className="border-l border-border pl-5">
-                  <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
-                    Hivemind Commentary
-                  </p>
-                  <ExpandableProse
-                    text={col.curatorNote}
-                    threshold={400}
-                    className="font-serif text-[16px] leading-[1.65] text-foreground-secondary whitespace-pre-line"
-                  />
+              {/* Commentary + essay link grouped as one block - the essay
+                  is the natural continuation of the Commentary voice, so
+                  it sits tight (mt-3) underneath rather than catching the
+                  full inter-block gap. */}
+              {(col.curatorNote || col.essayUrl) && (
+                <div>
+                  {col.curatorNote && (
+                    <div className="border-l border-border pl-5">
+                      <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
+                        Hivemind Commentary
+                      </p>
+                      <ExpandableProse
+                        text={col.curatorNote}
+                        threshold={400}
+                        className="font-serif text-[16px] leading-[1.65] text-foreground-secondary whitespace-pre-line"
+                      />
+                    </div>
+                  )}
+                  {col.essayUrl && (
+                    <a
+                      href={col.essayUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`${col.curatorNote ? "mt-3" : ""} text-[13px] text-muted hover:text-foreground transition-colors duration-200 inline-block`}
+                    >
+                      Read the essay
+                      {col.essayTitle && (
+                        <>
+                          : <span className="underline underline-offset-4 decoration-border">{col.essayTitle}</span>
+                        </>
+                      )}{" "}
+                      →
+                    </a>
+                  )}
                 </div>
-              )}
-              {col.essayUrl && (
-                <a
-                  href={col.essayUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[13px] text-muted hover:text-foreground transition-colors duration-200 inline-block"
-                >
-                  Read the essay
-                  {col.essayTitle && (
-                    <>
-                      : <span className="underline underline-offset-4 decoration-border">{col.essayTitle}</span>
-                    </>
-                  )}{" "}
-                  →
-                </a>
               )}
               {col.artistStatement && (
                 <div className="border-l border-border pl-5">
