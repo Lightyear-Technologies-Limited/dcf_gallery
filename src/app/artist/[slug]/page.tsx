@@ -153,6 +153,32 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
               ))}
             </ol>
           )}
+
+          {/* Socials live in the LEFT column under the count line so they
+              fill the natural air pocket that opens up when the right
+              column carries more content than the left (especially for
+              single-collection artists - Beeple, Refik, Sam Spratt et al.
+              where the count line is short). Pulled up from the previous
+              below-grid placement; lets the gallery climb the page. */}
+          {(artist.website || artist.twitter || artist.instagram) && (
+            <div className="mt-6 flex flex-wrap gap-x-5 gap-y-1 text-[13px]">
+              {artist.website && (
+                <a href={artist.website} target="_blank" rel="noopener noreferrer" className="text-muted underline underline-offset-4 decoration-border hover:text-foreground transition-colors duration-200">
+                  Website
+                </a>
+              )}
+              {artist.twitter && (
+                <a href={artist.twitter} target="_blank" rel="noopener noreferrer" className="text-muted underline underline-offset-4 decoration-border hover:text-foreground transition-colors duration-200">
+                  Twitter
+                </a>
+              )}
+              {artist.instagram && (
+                <a href={artist.instagram} target="_blank" rel="noopener noreferrer" className="text-muted underline underline-offset-4 decoration-border hover:text-foreground transition-colors duration-200">
+                  Instagram
+                </a>
+              )}
+            </div>
+          )}
         </div>
 
         <div className="space-y-6 md:pt-4">
@@ -184,29 +210,6 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
           )}
         </div>
       </div>
-
-      {/* Socials moved below the editorial block - institutional convention
-          (catalog raisonné footer) and naturally lands after the bio on mobile
-          rather than interrupting it. */}
-      {(artist.website || artist.twitter || artist.instagram) && (
-        <div className="mt-10 flex flex-wrap gap-6 text-[13px]">
-          {artist.website && (
-            <a href={artist.website} target="_blank" rel="noopener noreferrer" className="text-muted underline underline-offset-4 decoration-border hover:text-foreground transition-colors duration-200">
-              Website
-            </a>
-          )}
-          {artist.twitter && (
-            <a href={artist.twitter} target="_blank" rel="noopener noreferrer" className="text-muted underline underline-offset-4 decoration-border hover:text-foreground transition-colors duration-200">
-              Twitter
-            </a>
-          )}
-          {artist.instagram && (
-            <a href={artist.instagram} target="_blank" rel="noopener noreferrer" className="text-muted underline underline-offset-4 decoration-border hover:text-foreground transition-colors duration-200">
-              Instagram
-            </a>
-          )}
-        </div>
-      )}
 
       {/* Artist quote - left-aligned in the 7fr-style column, smaller (22px
           instead of 28), italic Argent (genuine pullquote earns italic). No

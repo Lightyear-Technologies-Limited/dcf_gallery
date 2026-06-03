@@ -22,7 +22,6 @@ import HeroSidebarGallery from "@/components/HeroSidebarGallery";
 import SinglePieceDisplay from "@/components/SinglePieceDisplay";
 import CuratorNote from "@/components/CuratorNote";
 import ExpandableProse from "@/components/ExpandableProse";
-import MetadataTable from "@/components/MetadataTable";
 import CopyableHash from "@/components/CopyableHash";
 
 export function generateStaticParams() {
@@ -407,16 +406,21 @@ export default async function CollectionPage({
                 {artistName}
               </Link>
             )}
+            {/* Catalogue-style data stack - DCF position, mint date, code
+                size, chain + contract + edition all in a single rhythm of
+                muted 13px tabular-nums lines under the artist link. Reads
+                like a Sotheby's lot caption: figures stacked, no boxes,
+                no padding. Replaces the earlier separate MetadataTable
+                component. Each row carries one piece of information;
+                rows with nothing to say are simply omitted.
+                Holdings line ("DCF holds N of M") omitted when:
+                  - n === 1: singleton; the count is inventory tally on
+                    what is fundamentally a single artwork.
+                  - n === totalSupply <= 2: tiny series we hold entire.
+                  - !totalSupply: no series context.
+                Chain + contract + edition row suppressed on filtered
+                views (collection-level context, not subset-relevant). */}
             <div className="mt-6 space-y-1 text-[13px] text-muted tabular-nums">
-              {/* Holdings line shows the Fund's position as N of M only
-                  when the fraction carries information. Omitted when:
-                  - n === 1: a single piece IS the page; "DCF holds 1 of M"
-                    reads as inventory tally on a singleton artwork (this
-                    covers Her Favorite Flowers and similar 1-piece-of-N
-                    holdings).
-                  - n === totalSupply <= 2: we hold the entire tiny series
-                    so the count is trivial (the reader can count).
-                  - !totalSupply: no series context to compare against. */}
               {col.totalSupply &&
                 sorted.length > 1 &&
                 !(sorted.length === col.totalSupply && col.totalSupply <= 2) && (
@@ -428,6 +432,19 @@ export default async function CollectionPage({
               {col.codeSizeKb !== undefined && (
                 <p>Code size {col.codeSizeKb} Kb</p>
               )}
+              {!traitFilter && (col.contractAddress || editionType !== "1/1") && (
+                <p className="inline-flex flex-wrap items-baseline gap-x-2">
+                  {col.contractAddress && (
+                    <>
+                      <span>Ethereum</span>
+                      <span className="text-muted/50">·</span>
+                      <CopyableHash value={col.contractAddress} />
+                      <span className="text-muted/50">·</span>
+                    </>
+                  )}
+                  <span>{editionType}</span>
+                </p>
+              )}
             </div>
 
             {/* Filter chip + compact trait index. On filtered views these
@@ -437,25 +454,6 @@ export default async function CollectionPage({
                 for the institutional voice. */}
             {chipBlock}
             {traitIndexInline}
-
-            {/* Institutional metadata - chain, contract, edition. Reinforces fund-grade
-                posture without adding visual weight. Contract is click-to-copy.
-                Suppressed on filtered views since the contract is collection-level
-                context, not relevant to a trait subset. */}
-            {!traitFilter && (col.contractAddress || editionType !== "1/1") && (
-              <div className="mt-8 max-w-[280px]">
-                <MetadataTable
-                  items={[
-                    { label: "Chain", value: col.contractAddress ? "Ethereum" : null },
-                    {
-                      label: "Contract",
-                      value: col.contractAddress ? <CopyableHash value={col.contractAddress} /> : null,
-                    },
-                    { label: "Type", value: editionType },
-                  ]}
-                />
-              </div>
-            )}
 
             {/* Hivemind Commentary + essay link placement is DYNAMIC -
                 whichever column shortens the path to the art. When the
