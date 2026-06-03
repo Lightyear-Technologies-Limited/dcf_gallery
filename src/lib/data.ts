@@ -3367,6 +3367,7 @@ export const pieces: Piece[] = [
     contractAddress: '0x6d38705ad8af087d86ef505618b77b066ead2006',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x6d38705ad8af087d86ef505618b77b066ead2006/3',
+    originalUri: 'https://icore2loavwuz646h2xjlkj7454pybiawkiooh7v23kih45esjxa.arweave.net/QJ0SaW4FbUz7nj6ulak_53j8BQCykOcf9dbUg_Okkm4/',
   },
   {
     id: 'pxl-dex-105-ecfb',
@@ -5608,9 +5609,10 @@ export const pieces: Piece[] = [
     description: '',
     traits: {},
     tokenId: '2123',
-    contractAddress: '0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0',
+    contractAddress: '0x41a322b28d0ff354040e2cbc676f0320d8c8850d',
     influences: [],
-    openseaUrl: 'https://opensea.io/item/ethereum/0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0/2123',
+    openseaUrl: 'https://opensea.io/item/ethereum/0x41a322b28d0ff354040e2cbc676f0320d8c8850d/2123',
+    originalUri: 'https://ipfs.pixura.io/ipfs/Qmc42YnjLRciMpDUpaFzCBHfrrGR9ycjoHYixWBLdg7wZP',
     artistSiteUrl: 'https://xcopy.art/works/some-other-asshole',
   },
   {
