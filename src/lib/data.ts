@@ -582,7 +582,7 @@ export const collections: Collection[] = [
     slug: 'tyler-hobbs',
     name: 'Tyler Hobbs',
     artistSlug: 'tyler-hobbs',
-    description: '',
+    description: 'Tyler Hobbs\' personal 1/1 works on his original contract - the standalone pieces he authors outside the Art Blocks generative editions. Includes Elektroanima (2020), the Return Zero pair (2021), and One One Overflow (2022). Each refines a different dimension of his algorithmic vocabulary, distinct from the Fidenza series.',
     curatorNote: 'Hobbs\' personal 1/1 practice - Return Zero, Elektroanima, One One Overflow - represents his most intentional standalone statements outside the generative editions. Each piece refines a different dimension of his algorithmic vocabulary.',
     medium: 'image',
     contractAddress: '0x7fc4a267c44d9f4d31227edeee5df7ef93819345',
