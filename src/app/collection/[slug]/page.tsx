@@ -444,17 +444,16 @@ export default async function CollectionPage({
                   <CopyableHash value={col.contractAddress} />
                 </p>
               )}
-              {/* Holdings fraction only carries meaning against a programmatic
-                  series (Fidenza 1/1/999, Punks 1/1/10000) where "Hivemind
-                  holds N of M" reads as position size against a finite
-                  curated set. For collections of independent 1/1s on a
-                  shared artist contract (Her favorite flowers, Piano
-                  Blossoms) "N of M" lacks the series context to read as
-                  position - the works aren't a set. Suppressed in that
-                  case; the count is implicit from the gallery below. */}
-              {col.totalSupply && editionType !== "1/1" && (
+              {/* "Hivemind holds N of M" + a clarifier suffix for
+                  shared-contract independent 1/1s (Her favorite flowers,
+                  Piano Blossoms): "N of M 1/1s" makes explicit that each
+                  piece is unique, not an edition of M. For programmatic
+                  series the holdings line stands alone since the edition
+                  row above (1/1/999, 1/1/10000) already says it. */}
+              {col.totalSupply && (
                 <p>
                   Hivemind holds {sorted.length} of {col.totalSupply.toLocaleString()}
+                  {editionType === "1/1" && col.totalSupply > 1 ? " 1/1s" : ""}
                 </p>
               )}
             </div>
