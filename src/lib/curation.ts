@@ -4,6 +4,7 @@
 import curation from "./curation.data.json";
 import traitsData from "./traits.data.json";
 import descriptionsData from "./descriptions.data.json";
+import traitTotalsData from "./trait-totals.data.json";
 
 /**
  * Get display name for a collection. Falls back to data name.
@@ -121,8 +122,27 @@ export function getHeroLayout(collectionSlug: string): HeroLayout | null {
  * Resolve the artist-website URL for a piece, using the collection's
  * template from curation.json ({tokenId} placeholder). Returns null if no
  * template is set or no tokenId is available.
+ *
+ * Special case: Grifters use xcopy.art's ARTWORK ID, not the on-chain
+ * tokenId. The artwork id is parseable from the title ("Grifter #087" ->
+ * grifter-87) and named legendaries (Rotten, etc.) live at a title-slug
+ * URL (xcopy.art/works/grifters/rotten). The two diverge by a small,
+ * non-constant offset because some on-chain tokenIds were skipped during
+ * the Async Art mint - so we can't derive the artwork id from the tokenId.
  */
-export function getArtistSiteUrl(collectionSlug: string, tokenId?: string): string | null {
+export function getArtistSiteUrl(
+  collectionSlug: string,
+  tokenId?: string,
+  title?: string,
+): string | null {
+  if (collectionSlug === "grifters" && title) {
+    const numbered = title.match(/^Grifter #0*(\d+)$/i);
+    if (numbered) {
+      return `https://xcopy.art/works/grifters/grifter-${numbered[1]}`;
+    }
+    const slug = title.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    return slug ? `https://xcopy.art/works/grifters/${slug}` : null;
+  }
   if (!tokenId) return null;
   const templates = (curation as { artistSiteTemplates?: Record<string, string> })
     .artistSiteTemplates;
@@ -146,9 +166,13 @@ export function getEditionType(collectionSlug: string): string {
 /**
  * Get the filtered/ordered generative traits for a piece slug, or null if none.
  * Populated from on-chain metadata in scripts/build-traits-data.mjs.
+ *
+ * Values can be string, number, or string[] (used for Punks where a single
+ * "Attribute" key has multiple values - one per accessory).
  */
-export function getPieceTraits(slug: string): Array<[string, string | number]> | null {
-  const data = traitsData as Record<string, Record<string, string | number>>;
+export type TraitValue = string | number | string[];
+export function getPieceTraits(slug: string): Array<[string, TraitValue]> | null {
+  const data = traitsData as Record<string, Record<string, TraitValue>>;
   const row = data[slug];
   if (!row) return null;
   const entries = Object.entries(row);
@@ -164,6 +188,184 @@ export function getPieceTraits(slug: string): Array<[string, string | number]> |
 export function getPieceDescription(slug: string): string | null {
   const data = descriptionsData as Record<string, string>;
   return data[slug] || null;
+}
+
+/**
+ * Per-collection clickability spec for trait keys / values. Drives two
+ * surfaces:
+ *   - Piece page Features panel: which trait values render as filter links
+ *     vs plain catalogue-of-record text.
+ *   - Collection page Browse-by-trait disclosure: which (key, value) pairs
+ *     appear at all - the disclosure is the editorial pivot panel, so only
+ *     clickable traits earn space there.
+ *
+ * Semantics for `CLICKABLE_TRAITS[slug][key]`:
+ *   - "all"      → every value for this key is clickable / shown
+ *   - string[]   → only these specific values are clickable / shown
+ *   - undefined  → that key is not clickable / not in disclosure
+ * Collection absent entirely from this map = no traits clickable / empty
+ * disclosure. Default is conservative (whitelist-only) so a new collection
+ * doesn't accidentally surface marketplace-style facet filtering on its
+ * traits without explicit editorial decision.
+ *
+ * For multi-piece series only (1/1/x collections). 1/1 singletons skip the
+ * map entirely because they have nothing to pivot to.
+ */
+export type ClickableRule = "all" | readonly string[];
+export const CLICKABLE_TRAITS: Record<string, Record<string, ClickableRule>> = {
+  cryptopunks: {
+    Type: "all",
+    Attribute: [
+      "Big Beard",
+      "Cap Forward",
+      "Cowboy Hat",
+      "Fedora",
+      "Hoodie",
+      "Police Cap",
+      "Tiara",
+      "Top Hat",
+    ],
+  },
+  ringers: {
+    Body: "all",
+    Background: "all",
+  },
+  fidenza: {
+    Palette: "all",
+    Scale: "all",
+    Spiral: ["Yes"],
+    "Super Blocks": ["Yes"],
+    // "Shape Angles": ["Sharp"] - source has it; not yet extracted into
+    // traits.data.json. Add once the build pipeline captures it.
+  },
+  "winds-of-yawanawa": {
+    Origin: "all",
+  },
+  "human-unreadable": {
+    "Emotional Climate": "all",
+  },
+  "synthetic-dreams": {
+    Cluster: "all",
+  },
+  "dataland-biome-lumina": {
+    Type: "all",
+  },
+  "masks-of-luci": {
+    Category: "all",
+    "Attendee Type": "all",
+  },
+  "pxl-pod": {
+    Pods: "all",
+  },
+  grifters: {
+    Type: "all",
+    Color: "all",
+    Vision: ["Turbulence"],
+    Noise: ["G to the M"],
+  },
+  // Explicit empty: traits display on the piece page but none are clickable,
+  // and the collection page disclosure stays empty. Distinct from "absent"
+  // because the empty map is an editorial decision documented here.
+  "pxl-dex": {},
+  qql: {},
+};
+
+/**
+ * Trait keys to omit from the piece page Features panel entirely. Used when
+ * an on-chain attribute is metadata that adds no signal for the reader
+ * (PXL DEX exposes both "Pixels" and "Allowance" - only Pixels is the
+ * holder-relevant figure).
+ */
+export const HIDDEN_TRAIT_KEYS: Record<string, readonly string[]> = {
+  "pxl-dex": ["Allowance"],
+};
+
+/**
+ * Collections whose Features panel doesn't render at all. Used when the
+ * on-chain traits are licence / copyright boilerplate or one-off metadata
+ * with no editorial value.
+ */
+export const TRAITS_FULLY_SUPPRESSED: ReadonlySet<string> = new Set([
+  "lightyears",
+  "lights",
+  "skulls-of-luci",
+]);
+
+/**
+ * Whether a specific (collection, key, value) pair should render as a
+ * clickable filter link on the piece page Features panel.
+ */
+export function isTraitClickable(
+  collectionSlug: string | undefined,
+  key: string,
+  value: string,
+): boolean {
+  if (!collectionSlug) return false;
+  const spec = CLICKABLE_TRAITS[collectionSlug];
+  if (!spec) return false;
+  const rule = spec[key];
+  if (rule === undefined) return false;
+  if (rule === "all") return true;
+  return rule.includes(value);
+}
+
+/**
+ * Whether a specific trait key should appear at all on the piece page.
+ * Honours HIDDEN_TRAIT_KEYS + TRAITS_FULLY_SUPPRESSED.
+ */
+export function isTraitKeyDisplayed(
+  collectionSlug: string,
+  key: string,
+): boolean {
+  if (TRAITS_FULLY_SUPPRESSED.has(collectionSlug)) return false;
+  return !HIDDEN_TRAIT_KEYS[collectionSlug]?.includes(key);
+}
+
+/**
+ * Synthetic traits added to every piece in a collection - used for editorial
+ * facts not surfaced in on-chain metadata. QQL's "Minted by: Tyler Hobbs"
+ * is editorial credit; it lives on the piece page like any other trait but
+ * isn't pulled from traits.data.json. Prepended to the piece's actual traits
+ * so it surfaces above the algorithmic features.
+ */
+export const SYNTHETIC_TRAITS: Record<string, Record<string, string>> = {
+  qql: { "Minted by": "Tyler Hobbs" },
+};
+
+// Back-compat alias used by older call sites; new code should use the
+// CLICKABLE_TRAITS structure directly.
+export const CURATED_TRAIT_VALUES = Object.fromEntries(
+  Object.entries(CLICKABLE_TRAITS).map(([slug, spec]) => [
+    slug,
+    Object.fromEntries(
+      Object.entries(spec)
+        .filter(([, rule]) => Array.isArray(rule))
+        .map(([key, rule]) => [key, rule as readonly string[]]),
+    ),
+  ]),
+) as Record<string, Record<string, readonly string[]>>;
+
+/**
+ * Get the global collection-wide count for a (key, value) trait pair, or null
+ * if no totals data exists for the collection or value. Used by the collection
+ * page to render "15 of 146 Big Beards held" framing - so the reader sees not
+ * just how many we own but how rare the trait is across the full collection.
+ *
+ * Source: src/lib/trait-totals.data.json. Currently populated for CryptoPunks
+ * (canonical counts from Larva Labs); extensible to any collection where the
+ * full trait distribution is publicly known.
+ */
+type TraitTotals = Record<string, {
+  totalSupply: number;
+  totals: Record<string, Record<string, number>>;
+}>;
+export function getTraitGlobalCount(
+  collectionSlug: string,
+  traitKey: string,
+  traitValue: string
+): number | null {
+  const data = traitTotalsData as TraitTotals;
+  return data[collectionSlug]?.totals?.[traitKey]?.[traitValue] ?? null;
 }
 
 /**

@@ -14,6 +14,15 @@ export interface Artist {
   website?: string;
   twitter?: string;
   instagram?: string;
+  /** Path to a small identity image - portrait, signature avatar, or icon
+      that best depicts the artist (XCOPY's signature avatar, Tyler Hobbs's
+      portrait, Operator's masked image, etc.). Rendered as a small badge
+      on the artist page next to the holdings count line and on the
+      Artists index next to the name. Recommended: square crop, served at
+      ~256px source so it stays sharp at 32-64px display sizes. Path is
+      relative to /public (e.g., "/artists/xcopy.png"). Optional - when
+      absent the badge slot is skipped entirely. */
+  portrait?: string;
   influences: string[];
   tags: string[];
 }
@@ -35,6 +44,20 @@ export interface Collection {
   name: string;
   artistSlug: string;
   description: string;
+  /** Verbatim quote from the artist about this collection (e.g. the OpenSea
+      "About" copy when the artist wrote it themselves). Optional - included
+      where the artist's voice adds depth alongside the factual description
+      and Hivemind's curator commentary. Whitespace and line breaks are
+      preserved at render time so free-verse poems read as the artist set
+      them. */
+  artistStatement?: string;
+  /** When true, the per-piece description metadata is suppressed for every
+      piece in this collection - the artistStatement at the collection level
+      covers them and per-piece repetition would be noise. Used for collections
+      like Ringers where the on-chain description is identical across every
+      token and reads as the artist's explanation of the algorithm, not as
+      per-piece context. */
+  suppressPieceDescriptions?: boolean;
   curatorNote: string;
   essayUrl?: string;
   essayTitle?: string;
@@ -42,8 +65,19 @@ export interface Collection {
   contractAddress?: string;
   totalSupply?: number;
   mintDate?: string;
+  /** On-chain code size in kilobytes, for collections where the artwork is
+      fully on-chain and the storage footprint is editorially relevant
+      (Asendorf's Lights at 11 Kb is a small-footprint generative work).
+      Surfaced as a quiet metadata line next to mintDate; absent for
+      collections where code size isn't a meaningful signal. */
+  codeSizeKb?: number;
   /** Public exhibitions / auctions / showings of works in this collection. */
   exhibitions?: Exhibition[];
+  /** Single-line institutional note about the Fund's position in this
+      collection (e.g. "DCF is the largest single holder..."). Surfaces on
+      every piece page in the collection as a quiet eyebrow, and on the
+      collection page itself. */
+  holdingNote?: string;
   tags: string[];
   influences: string[];
 }
@@ -105,8 +139,9 @@ export const artists: Artist[] = [
   {
     slug: 'a-c-k',
     name: 'a.c.k.',
-    bio: 'Alpha Centauri Kid - a.c.k. - is a painter working natively on-chain. His work pairs painted compositions with extended narrative arcs that often span multiple pieces or move into physical installations.',
+    bio: 'Alpha Centauri Kid - a.c.k. - is an artist working natively on-chain. He minted his first piece in 2021 and attributes his practice to what he calls “the Muse.”',
     curationComment: 'The Digital Culture Fund acquired all five 1/1 artworks presented by a.c.k. at his Piano Blossoms auction in Amsterdam in October 2024 - a complete suite that captures his evolution as a narrative painter working natively on-chain.',
+    portrait: '/artists/a-c-k.svg',
     influences: [],
     tags: ['digital-painting', 'contemporary', 'new-media'],
   },
@@ -115,6 +150,7 @@ export const artists: Artist[] = [
     name: 'Beeple',
     bio: 'Beeple helped define the modern era of digital art - not just through medium, but message. His practice spans daily digital sketches, monumental compositions, and cultural commentary that bridges legacy institutions and the on-chain world.',
     curationComment: 'TIME: The Future of Business captures a cultural moment - a digital-native artist collaborating with a legacy publication to reflect on a world accelerating into the digital age. The 1/1 was acquired by the Digital Culture Fund in April 2025.',
+    portrait: '/artists/beeple.svg',
     influences: [],
     tags: ['crypto-native', 'digital-culture', 'glitch'],
   },
@@ -123,6 +159,7 @@ export const artists: Artist[] = [
     name: 'Refik Anadol',
     bio: 'Refik Anadol uses machine learning to render datasets as moving image. His data paintings have shown at MoMA - Unsupervised was the first tokenized work acquired into its permanent collection - and live now at Dataland, his Museum of AI Arts in Los Angeles.',
     curationComment: 'Winds of Yawanawa is a groundbreaking project that showcases the potential of AI and blockchain technology for social good and cultural exchange. Biome Lumina extends this into fully dynamic living paintings for Dataland, Refik\u2019s ambitious Museum of AI Arts.',
+    portrait: '/artists/refik-anadol.svg',
     influences: [],
     tags: ['ai-generated', 'machine-learning', 'data-art'],
   },
@@ -131,6 +168,7 @@ export const artists: Artist[] = [
     name: 'Larva Labs',
     bio: 'In the landscape of digital collectibles, CryptoPunks stand as a foundational symbol - blending crypto, art, and identity. Created in 2017, this 10,000-piece algorithmic collection helped pioneer on-chain generative art and sparked the NFT movement.',
     curationComment: 'CryptoPunks are the origin point. DCF holds a significant position including sealed physical lithographs printed by Larva Labs - artifacts that bridge the digital provenance layer with a tangible art object.',
+    portrait: '/artists/larva-labs.svg',
     influences: [],
     tags: ['pfp', 'cultural-icon', 'provenance'],
   },
@@ -139,6 +177,7 @@ export const artists: Artist[] = [
     name: 'Tyler Hobbs',
     bio: 'Tyler Hobbs is an eloquent champion of code as a creative medium and a central figure in the generative art movement. His work showcases a mastery of blending precise digital processes with the chaos that comes from human input and computational surprises.',
     curationComment: 'DCF holds one of the deepest Tyler Hobbs positions in any institutional collection - multiple 1/1s including Elektroanima, One One Overflow, and Return Zero alongside a significant Fidenza holding. Harbor Scene #2 was acquired through a private sale via LACMA and Cactoid Labs.',
+    portrait: '/artists/tyler-hobbs.svg',
     influences: [],
     tags: ['generative', 'algorithmic', 'on-chain'],
   },
@@ -147,6 +186,7 @@ export const artists: Artist[] = [
     name: 'Dmitri Cherniak',
     bio: 'Dmitri Cherniak is known for his extensive use of long-form generative art, paying homage to 20th-century art movements through algorithmic reinterpretation. His collaboration with The Estate of L\u00e1szl\u00f3 Moholy-Nagy on Light Years bridges the Bauhaus tradition with on-chain computation.',
     curationComment: 'Using simple pegs and strings, Cherniak\u2019s Ringers algorithm emphasizes control through randomness. \u2018The Goose\u2019 sold for $6.2M at Sotheby\u2019s in 2023, securing Ringers as a landmark in on-chain generative art. DCF holds 34 Ringers and 6 Light Years.',
+    portrait: '/artists/dmitri-cherniak.svg',
     influences: [],
     tags: ['generative', 'algorithmic', 'on-chain'],
   },
@@ -155,6 +195,7 @@ export const artists: Artist[] = [
     name: 'XCOPY',
     bio: 'XCOPY\u2019s instantly recognizable glitch aesthetic explores death, dystopia, and apathy - delivering a raw critique of capitalism and technology. His work confronts viewers with scenes of exploitation, decay, and digital-era disillusionment.',
     curationComment: 'DCF holds key 1/1s alongside a significant Grifters position. The 666-piece Grifters collection, minted in December 2021, remains one of the space\u2019s most sought-after series - revered for its symbolism, holder network, and connection to the artist\u2019s broader universe.',
+    portrait: '/artists/xcopy.svg',
     influences: [],
     tags: ['crypto-native', 'digital-culture', 'glitch'],
   },
@@ -163,14 +204,16 @@ export const artists: Artist[] = [
     name: 'Operator',
     bio: 'Operator is an award-winning art duo exploring the interplay of systems, structure, and control. Known for their large-scale conceptual works and generative practice, their acclaimed Human Unreadable series embodies the balance between human movement and machine logic.',
     curationComment: 'The X-Ray Machine - a monumental physical sculpture - is currently in the Infinite Images exhibition at Toledo Museum of Art. DCF\u2019s holding spans both the generative NFT series and this landmark physical work.',
+    portrait: '/artists/operator.svg',
     influences: [],
     tags: ['digital-painting', 'contemporary', 'new-media'],
   },
   {
     slug: 'sam-spratt',
     name: 'Sam Spratt',
-    bio: 'Sam Spratt is a generational talent who has spent over a decade mastering digital tools with old-world craftsmanship. Through Luci, he has built one of digital art\u2019s most expansive narrative ecosystems, reframing blockchain as a medium for myth-making and community participation.',
+    bio: 'Sam Spratt has spent over a decade mastering digital tools with old-world craftsmanship. Through Luci, he has built one of digital art\u2019s most expansive narrative ecosystems, reframing blockchain as a medium for myth-making and community participation.',
     curationComment: 'Spratt\u2019s Luci universe represents the most ambitious narrative project in on-chain art - a multi-chapter mythology with deep community participation. DCF holds works across Skulls of Luci and Masks of Luci.',
+    portrait: '/artists/sam-spratt.svg',
     influences: [],
     tags: ['digital-painting', 'contemporary', 'new-media'],
   },
@@ -179,6 +222,7 @@ export const artists: Artist[] = [
     name: 'Kim Asendorf',
     bio: 'Kim Asendorf is a code-based artist working at the intersection of code, pixels, and visual systems. His practice spans generative and interactive works that foreground the raw materiality of the digital image - pixel sorting, compression artifacts, and algorithmic pattern-making.',
     curationComment: 'Asendorf\u2019s PXL DEX and PXL POD collections represent a distinct voice in on-chain art: systematic, visually precise, and rooted in the formal language of computation rather than illustration.',
+    portrait: '/artists/kim-asendorf.svg',
     influences: [],
     tags: ['crypto-native', 'digital-culture', 'glitch'],
   },
@@ -212,7 +256,10 @@ export const collections: Collection[] = [
     name: 'Piano Blossoms',
     artistSlug: 'a-c-k',
     description: 'Five 1/1 artworks presented at a.c.k.\'s Piano Blossoms auction in Amsterdam, October 2024. Each piece is a unique narrative painting exploring the artist\'s evolving relationship with the Muse.',
+    artistStatement: 'The Piano Blossoms are the consequence,\nof my pursuit of the Muse’s energy, to be in Her presence,\nin the garden, under the Almond Blossoms,\nin the depths of Wonderland,\nbeyond the surface.\n\na dance with the darkness,\na reflection of the madness within,\na triumphant discovery through pain,\nand uncertainty,\nfollowed by disbelief and wonder.',
     curatorNote: 'a.c.k.\'s narrative practice processes the digital condition through painterly figuration. The Piano Blossoms auction marked a pivotal moment in his maturation - five works that read as a coherent emotional arc.',
+    essayUrl: 'https://www.hivemind.capital/content/inside-the-collection-alpha-centauri-kid-a-c-k-piano-blossoms-2024',
+    essayTitle: 'Inside the Collection: Piano Blossoms',
     medium: 'image',
     contractAddress: '0x728d7a5133068e3c7e5afe72de8999076bc940f9',
     exhibitions: [
@@ -226,7 +273,7 @@ export const collections: Collection[] = [
         date: 'September 2025',
         title: 'Grand Skull Piano',
         location: 'Carnegie Hall, New York',
-        url: 'https://nftnow.com/features/alpha-centauri-kid-market-rise-grand-exhibition-xcopy/',
+        url: 'https://x.com/AlphaCentauriKid/status/1967212646111035720',
       },
     ],
     tags: ['digital-painting', 'contemporary', 'new-media'],
@@ -236,10 +283,11 @@ export const collections: Collection[] = [
     slug: 'her-favorite-flowers',
     name: 'Her favorite flowers',
     artistSlug: 'a-c-k',
-    description: 'A two-painting contract by a.c.k., extending his narrative practice into botanical imagery and the language of flowers. The Fund holds one of the two works.',
+    description: 'Two works by a.c.k. on a single contract, drawing on the botanical imagery that runs through his practice.',
     curatorNote: 'A reference point in a.c.k.\'s practice, bridging his crypto-native sensibility with traditional botanical painting. A reminder that digital art holds quiet, intimate registers.',
     medium: 'image',
     contractAddress: '0xa3cdefc4aea0407937ac3ea127b7491f24e5fe63',
+    totalSupply: 2,
     tags: ['digital-painting', 'contemporary', 'new-media'],
     influences: [],
   },
@@ -284,6 +332,8 @@ export const collections: Collection[] = [
     artistSlug: 'tyler-hobbs',
     description: 'Day Gardens extends Tyler Hobbs\' generative practice into quieter, more contemplative territory - algorithmic compositions that evoke natural light and seasonal rhythm.',
     curatorNote: 'Day Gardens shows Hobbs returning to the painterly with the discipline of his algorithmic practice intact - gestural, observational works that document the artist\'s continued evolution.',
+    artistStatement: '"Day Gardens" is a series of 50 unique iterations, plus an artist\'s iteration, produced from a single generative algorithm.\n\nArtist: Tyler Hobbs\n\nYear: 2025\n\nMedium: Algorithmic Design\n\nDimensions: 8400 x 10500 px',
+    suppressPieceDescriptions: true,
     medium: 'image',
     contractAddress: '0xa7644d0a70dacce6a8468287e1aa888a0766c0fd',
     totalSupply: 50,
@@ -296,6 +346,8 @@ export const collections: Collection[] = [
     artistSlug: 'dmitri-cherniak',
     description: 'Dmitri Cherniak\'s singular works explore the tension between systematic process and aesthetic surprise, extending his generative practice beyond the long-form series format.',
     curatorNote: 'Cherniak\'s two-part SuperRare diptych explores the formal interest in symmetry and asymmetry that runs through his Art Blocks practice, bringing his generative thinking into the 1/1 register.',
+    essayUrl: 'https://www.hivemind.capital/content/into-the-collection-dmitri-cherniak-ringers-2021-a-slight-lack-of-symmetry-can-cause-so-much-pain-2021',
+    essayTitle: 'Into the Collection: A Slight Lack of Symmetry',
     medium: 'image',
     contractAddress: '0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0',
     tags: ['generative', 'algorithmic', 'on-chain'],
@@ -305,8 +357,10 @@ export const collections: Collection[] = [
     slug: 'fidenza',
     name: 'Fidenza',
     artistSlug: 'tyler-hobbs',
-    description: 'Fidenza has helped define the generative art era, blending visual clarity with algorithmic depth. Visually elegant, endlessly variable, and instantly recognizable - a landmark work in on-chain art. DCF holds 27 of 999.',
+    description: 'Fidenza has helped define the generative art era, blending visual clarity with algorithmic depth. Visually elegant, endlessly variable, and instantly recognizable - a landmark work in on-chain art.',
     curatorNote: 'Fidenza is the canonical Art Blocks work and a cornerstone of the generative art canon. DCF\'s 30-piece holding is built around extreme palettes and rare scales - intended to read as a cohesive sub-collection rather than a representative sample.',
+    essayUrl: 'https://www.hivemind.capital/content/inside-the-collection-tyler-hobbs-fidenza-2021-harbor-scene-after-john-henry-twachtman-2024',
+    essayTitle: 'Inside the Collection: Fidenza',
     medium: 'generative',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     totalSupply: 999,
@@ -331,6 +385,8 @@ export const collections: Collection[] = [
     artistSlug: 'operator',
     description: 'The acclaimed Human Unreadable series embodies the balance between human movement and machine logic. Operator\'s practice transforms choreographic data into generative visual output, questioning where the human ends and the system begins.',
     curatorNote: 'Human Unreadable maps choreography onto generative algorithms, producing what Operator calls \'unreadable\' bodies - figures shaped by code. The series is a milestone in performance-informed digital art.',
+    artistStatement: 'Human Unreadable (Privacy Collection - Lot 03)\n\nHuman Unreadable is a three-act, embodied generative artwork hiding the human body in plain sight (on-chain). Bringing together choreography, code, blockchain, generative art, and cryptography, the work culminates in a live performance. Each output is driven by the motion data of its underlying unique, on-chain choreographic sequence. The sequences behind the first 100 minted works (mint #2 to #101) will be performed during the IRL premiere. The hosting art institution will be announced in 2023.\n\nA journey of slowly recovering the human unfolds as such: 1) reveal on Art Blocks, 2) uncover the choreographic score, and 3) final performance. After the reveal, the human is still unreadable, visible only through the results of movement on glass, obfuscated by code, rendered as a still image. In the next phase of the work, collectors get a glimpse at their underlying choreography by unlocking the secondary token—an on-chain choreographic score. In the final phase, the performance, life is breathed into the human movement that has been lying dormant inside the pieces. Human Unreadable brings flesh and viscerality into code and "vulnerability as a feature" into long-form generative art. What you don’t immediately see in the visual artwork outputs is the invisible potentiality of performance, inscripted on-chain and able to be brought to life by a dancer at any moment.\n\nHuman Unreadable intentionally punctures the safety of modernist design and the idea of a universal voice, pushing the limits of human expression within rigid technical systems. With a focus on the body, the collection brings risk, chaos, confusion, and vulnerability to the reveal, everything that function-focused design systems normally prevent. Each piece is an invitation, a transparent layer through which the messy human experience can come into focus through the three phases of the work. This work is a continuation of the pivot away from modernism, clean lines, and the quietly gendered values therein, in favor of a more embodied and sensual approach to human-machine collaboration pioneered by early women in digital art. Human Unreadable\'s 6 distinct looks derive from the core materiality of Operator’s Privacy Collection: glass, light, x-ray and the human body. The transparent and illuminating nature of these materials reveal what is below the surface.\n\nWhat are you revealing when you reveal?\n\nHuman Unreadable has roots in various histories such as computational choreography (Analivia Cordeiro, Jeanne Beaman), Merce Cunningham\'s Chance Dance, and the Experiments in Art and Technology movement. With Ti’s extensive background as an HCI technologist and multimedia artist and Catherine’s background as a choreographer and performance artist, Operator architected a bespoke team, 25+ individuals ranging from specialized engineers to dancers, who embarked on a 9 month process to realize the work. Operator\'s on-chain generative choreography method is the technical backbone of Human Unreadable—the process and open source tooling for which will be made available via white paper in 2023.\n\n*Additional Information*\n\nFirst Minter Benefits\n\nThe first 100 minted pieces (mint #2 to #101) from the collection will be performed in the IRL premiere in an art institution.\n\n-Mint #2 to #101 will be counted as the first 100 mints. Mint #0 and #1 are artist mints held by Operator.\n\n-Hosting art institution will be announced in 2023.\n\n-Additionally, Privacy Key 00 holders will have one of their collected Human Unreadable sequences performed.\n\nChoreographic Score (secondary token)\n\n-The secondary token will be released at the end of June 2023.\n\n-The secondary token is a choreographic score that represents the unique choreography that generated the output minted on Art Blocks. For this reason, the Art Blocks token and the secondary token are bound together and cannot be transferred separately.\n\n-The underlying choreographic score visible through the secondary token can be performed by a choreographer or dancer at the collector\'s discretion.\n\nGPU Intensive Rendering / Live Preview\n\nThis piece involves GPU intensive composition and rendering of programmatically drawn body parts, generative glass objects, x-ray shaders as well as motion paths. As a result the ‘live preview’ on your laptop or phone may look less detailed than the PNG on Art Blocks which is rendered by a high powered computer. Not to worry!\n\nOfficial Token-gated Prints\n\nHuman Unreadable collectors will be able to purchase Operator official, signed, token-gated prints (on hand-selected materials) of their collected piece(s).',
+    suppressPieceDescriptions: true,
     medium: 'generative',
     contractAddress: '0x99a9b7c1116f9ceeb1652de04d5969cce509b069',
     totalSupply: 400,
@@ -343,6 +399,8 @@ export const collections: Collection[] = [
     artistSlug: 'dmitri-cherniak',
     description: 'A collaboration with The Estate of L\u00e1szl\u00f3 Moholy-Nagy, Light Years bridges the Bauhaus tradition with on-chain computation - generative art paying homage to 20th-century visual experimentation.',
     curatorNote: 'Light Years is one of Cherniak\'s quieter projects: a Bauhaus-informed exploration of color and form done in collaboration with the Estate of László Moholy-Nagy. It connects his algorithmic practice with 20th-century modernism.',
+    artistStatement: 'Light Years is a project from generative artist Dmitri Cherniak in partnership with The Estate of László Moholy-Nagy. It is an homage to the photogram as a medium, but with a digitally native twist. Each of the 100 unique editions was created by a code-based generative system, then hand-prepared and printed to a film negative. A high definition scan of the negative was used to develop the image as a silver gelatin print which can be claimed by the first collector of the artwork.',
+    suppressPieceDescriptions: true,
     medium: 'generative',
     contractAddress: '0x082dcab372505ae56eafde58204ba5b12ff3f3f5',
     totalSupply: 200,
@@ -355,6 +413,8 @@ export const collections: Collection[] = [
     artistSlug: 'sam-spratt',
     description: 'Masks of Luci is a chapter in Sam Spratt\'s expansive Luci mythology - an on-chain narrative ecosystem that reframes blockchain as a medium for myth-making and community participation.',
     curatorNote: 'Sam Spratt\'s most ambitious narrative work - a digital masquerade where each mask carries authored language and ritualized meaning. DCF holds both Council Mask 1/1s alongside a curated set of generative entries.',
+    artistStatement: 'Sam Spratt’s collection of 613 Masks of Luci. Part of Luci’s story beginning with LUCI: Chapter 6 - Masquerade',
+    suppressPieceDescriptions: true,
     medium: 'image',
     contractAddress: '0x4440732b0d85e2a77dcb2caedfd940154241249a',
     totalSupply: 613,
@@ -388,6 +448,7 @@ export const collections: Collection[] = [
     name: 'Lights',
     artistSlug: 'kim-asendorf',
     description: 'Kim Asendorf\'s Lights explores the fundamental properties of digital illumination - algorithmic compositions built from the raw behavior of light rendered through code.',
+    codeSizeKb: 11,
     curatorNote: 'Lights is Asendorf\'s earliest exploration of light-as-medium on-chain - a foundational entry point into pixel-native art and the throughline of his practice.',
     medium: 'image',
     contractAddress: '0x6d38705ad8af087d86ef505618b77b066ead2006',
@@ -401,6 +462,8 @@ export const collections: Collection[] = [
     artistSlug: 'kim-asendorf',
     description: 'PXL DEX is part of Kim Asendorf\'s systematic investigation of the pixel as a primary unit of digital expression - precise, formally rigorous, and rooted in the language of computation.',
     curatorNote: 'PXL DEX is Kim Asendorf\'s most rigorous statement on pixel-as-currency. Each piece\'s pixel allowance is a finite, depletable resource - work that thinks of itself as both image and economic primitive.',
+    artistStatement: 'PXL DEX is a series of fully on-chain real time animations, where each pixel is a token in itself. PXL DEX is the first artwork within the PXL ecosystem, an ongoing work series to experiment with pixels as utility tokens. The collection consists of 256 NFTs that are deployed via a custom Smart Contract on the Ethereum Mainnet. Kim Asendorf, 2025.',
+    suppressPieceDescriptions: true,
     medium: 'image',
     contractAddress: '0x81345761670fc8b90665466a94c196e26b92ecfb',
     totalSupply: 256,
@@ -413,6 +476,8 @@ export const collections: Collection[] = [
     artistSlug: 'kim-asendorf',
     description: 'PXL POD extends Asendorf\'s pixel-centric practice into a distinct formal territory, emphasizing modular composition and the tension between grid structure and visual emergence.',
     curatorNote: 'PXL POD continues Asendorf\'s pixel-native practice into modular composition, where each piece reads as both discrete artwork and node in a larger formal grammar.',
+    artistStatement: 'PXL POD is a series of fully on-chain real time animations, where each pixel is a token in itself. PXL POD is the second artwork within the PXL ecosystem, an ongoing work series to experiment with pixels as utility tokens. The collection consists of 256 NFTs that are deployed via a custom Smart Contract on the Ethereum Mainnet. Kim Asendorf, 2026.',
+    suppressPieceDescriptions: true,
     medium: 'image',
     contractAddress: '0xaee022552b539db18297d7481b6d547c622488b3',
     totalSupply: 256,
@@ -434,7 +499,7 @@ export const collections: Collection[] = [
     slug: 'qql',
     name: 'QQL',
     artistSlug: 'tyler-hobbs-and-dandelion-wist',
-    description: 'QQL is a generative art algorithm by Tyler Hobbs and Dandelion Wist that invites collectors to compose their own outputs - blending the artist\'s system with the collector\'s creative input. DCF holds pieces minted directly by Tyler Hobbs.',
+    description: 'QQL is a generative art algorithm by Tyler Hobbs and Dandelion Wist that invites collectors to compose their own outputs - blending the artist\'s system with the collector\'s creative input.',
     curatorNote: 'QQL turned generative art into a participatory medium: collectors compose their own outputs from Hobbs and Wist\'s algorithm. DCF holds two minted compositions alongside ten unspent Mint Passes - a position on both authorship and reserve.',
     medium: 'generative',
     contractAddress: '0x845dd2a7ee2a92a0518ab2135365ed63fdba0c88',
@@ -466,8 +531,12 @@ export const collections: Collection[] = [
     slug: 'ringers',
     name: 'Ringers',
     artistSlug: 'dmitri-cherniak',
-    description: 'Using simple pegs and strings, Cherniak\'s Ringers algorithm emphasizes control through randomness. \u2018The Goose\u2019 sold for $6.2M at Sotheby\'s in 2023, securing Ringers as a landmark in on-chain generative art. DCF holds 34 of 1,000.',
+    description: 'Using simple pegs and strings, Cherniak\'s Ringers algorithm emphasizes control through randomness. \u2018The Goose\u2019 sold for $6.2M at Sotheby\'s in 2023, securing Ringers as a landmark in on-chain generative art.',
+    artistStatement: 'There are an almost infinite number of ways to wrap a string around a set of pegs. On the surface it may seem like a simple concept but prepare to be surprised and delighted at the variety of combinations the algorithm can produce. Each output from \'Ringers\' is derived from a unique transaction hash and generated in Javascript in the browser. Feature variations include peg count, sizing, layout, wrap orientation, and a few colorful flourishes for good measure.',
     curatorNote: 'Ringers is the algorithmic counterpart to Fidenza - proof that constraint produces inexhaustible variety. DCF\'s 36-piece holding is among the largest single-collector positions in the project, organized to read as a coherent visual taxonomy.',
+    essayUrl: 'https://www.hivemind.capital/content/into-the-collection-dmitri-cherniak-ringers-2021-a-slight-lack-of-symmetry-can-cause-so-much-pain-2021',
+    essayTitle: 'Into the Collection: Ringers',
+    suppressPieceDescriptions: true,
     medium: 'generative',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     totalSupply: 1000,
@@ -480,6 +549,8 @@ export const collections: Collection[] = [
     artistSlug: 'refik-anadol',
     description: 'Synthetic Dreams extends Refik Anadol\'s AI-driven practice into the territory of machine imagination - neural networks trained on vast datasets producing outputs that hover between the photographic and the hallucinatory.',
     curatorNote: 'Created for the Google Quantum Summer Symposium 2021, each piece is generated from quantum random states. The work documents an early collaboration between a major artist and bleeding-edge computational research.',
+    essayUrl: 'https://www.hivemind.capital/content/inside-the-collection-refik-anadol-synthetic-dreams---landscapes-2021-winds-of-yawanawa-2023',
+    essayTitle: 'Inside the Collection: Synthetic Dreams',
     medium: 'generative',
     contractAddress: '0x183368d767b299681fdf660233e39f9f8cf8be3a',
     totalSupply: 1000,
@@ -497,8 +568,10 @@ export const collections: Collection[] = [
     slug: 'skulls-of-luci',
     name: 'Skulls of Luci',
     artistSlug: 'sam-spratt',
-    description: 'Skulls of Luci marks an earlier chapter in Spratt\'s Luci universe, establishing the visual and narrative foundations for the mythology that would grow into one of digital art\'s most ambitious storytelling projects.',
+    description: 'The Skulls of Luci are a gift to the collectors, collaborators, and each individual who placed an offer on my genesis series: LUCI Chapter 1.\n\nThere are 50 unique paintings; 49 can be seen here. The origin point each skull is based on - the Blueprint Skull - lives on SuperRare.',
+    artistStatement: 'The Partition is formed ... End Chapter 1\n\nThese former husks\nVessels adorned with ancestry\nCarry the code\nOf shared memory\n\nThough flayed and quartered\nThe bone is porous\nFertile grounds\nRipe for the return\n\nNew flesh grows\nOnce we learn how to die\nSouls for the bankless\nThe tree decides\n\nPower sown in urns and ashes\nEternity learned\nin collective demise.',
     curatorNote: 'The precursor to Masks of Luci - Sam Spratt\'s earlier exploration of the same formal language with rawer, more elemental material. Historical anchors for the larger Masks practice.',
+    suppressPieceDescriptions: true,
     medium: 'image',
     contractAddress: '0xc9041f80dce73721a5f6a779672ec57ef255d27c',
     totalSupply: 50,
@@ -522,6 +595,8 @@ export const collections: Collection[] = [
     artistSlug: 'tyler-hobbs',
     description: 'Harbor Scene #2 (after John Henry Twachtman) was acquired through a private sale via LACMA and Cactoid Labs - a generative reinterpretation of Twachtman\'s Impressionist harbor painting through Hobbs\' algorithmic lens.',
     curatorNote: 'Acquired through a private LACMA exhibition - a contemporary generative response to American Impressionism. Belongs to a small body of works where Hobbs explicitly converses with art history.',
+    essayUrl: 'https://www.hivemind.capital/content/inside-the-collection-tyler-hobbs-fidenza-2021-harbor-scene-after-john-henry-twachtman-2024',
+    essayTitle: 'Inside the Collection: Harbor Scene',
     medium: 'image',
     contractAddress: '0x7fc4a267c44d9f4d31227edeee5df7ef93819345',
     exhibitions: [
@@ -539,8 +614,12 @@ export const collections: Collection[] = [
     slug: 'winds-of-yawanawa',
     name: 'Winds of Yawanawa',
     artistSlug: 'refik-anadol',
-    description: 'Winds of Yawanawa is a groundbreaking project that showcases the potential of AI and blockchain technology for social good and cultural exchange. DCF holds 45 of 1,000.',
-    curatorNote: 'Anadol\'s data-painting practice paired with the Yawanawa community of the Brazilian Amazon. The project channels collector capital toward indigenous cultural preservation; DCF\'s 50-piece holding is among the largest single positions.',
+    description: 'Winds of Yawanawa is a project by Refik Anadol Studio in collaboration with the Yawanawa community of the Brazilian Amazon.',
+    artistStatement: 'Winds of Yawanawa is a collection of 1000 unique Data Paintings that harness weather data from the tribe’s village in the Amazon rainforest including wind speed, gusts, direction and temperature. This data then merges with the works of young Yawanawa artists, resulting in a mesmerizing play of traditional shapes and colors of data pigmentation.\n\nThe Winds of Yawanawa collection will bring the nuances of Yawanawa art to the digital world with the aim of preserving their rich culture.\n\nNFT Data Paintings\n\nFormat: MP4 | 60 second loop\n\nEach NFT comes with an archival museum quality physical print (44x22 inches) signed by Chief Nixiwaka Yawanawa & Refik Anadol',
+    curatorNote: 'Anadol\'s data-painting practice paired with the Yawanawa community of the Brazilian Amazon. The project channels collector capital toward indigenous cultural preservation.',
+    essayUrl: 'https://www.hivemind.capital/content/inside-the-collection-refik-anadol-synthetic-dreams---landscapes-2021-winds-of-yawanawa-2023',
+    essayTitle: 'Inside the Collection: Winds of Yawanawa',
+    suppressPieceDescriptions: true,
     medium: 'image',
     contractAddress: '0x7a63d17f5a59bca04b6702f461b1f1a1c59b100b',
     totalSupply: 1000,
@@ -2591,6 +2670,7 @@ export const pieces: Piece[] = [
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/455000124',
     originalUri: 'https://media-proxy.artblocks.io/1/0x99a9b7c1116f9ceeb1652de04d5969cce509b069/455000124.png',
+    companionSlug: 'x-ray-machine-1',
   },
   {
     id: 'human-unreadable-455000140-b069',

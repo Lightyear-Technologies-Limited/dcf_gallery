@@ -20,60 +20,68 @@ const OUT = resolve(__dirname, "..", "src/lib/descriptions.data.json");
 
 const meta = JSON.parse(readFileSync(META, "utf8"));
 
-// Parse data.ts -> {slug -> collectionSlug}
+// Parse data.ts -> {slug -> collectionSlug} for pieces, plus the set of
+// collection slugs that opt out of per-piece descriptions (suppressPieceDescriptions: true).
+// data.ts orders the arrays as: artists -> collections -> pieces -> influences.
 const src = readFileSync(SRC_DATA, "utf8");
+const collectionsStart = src.indexOf("export const collections: Collection[] = [");
 const piecesStart = src.indexOf("export const pieces: Piece[] = [");
-const body = src.slice(piecesStart);
-const blocks = body.split(/^  \{/m).slice(1);
+const collectionsBody = src.slice(collectionsStart, piecesStart);
+const piecesBody = src.slice(piecesStart);
+
 const pieceCol = {};
-for (const b of blocks) {
+for (const b of piecesBody.split(/^  \{/m).slice(1)) {
   const slug = b.match(/^\s*slug:\s*'([^']+)'/m)?.[1];
   const col = b.match(/^\s*collectionSlug:\s*'([^']+)'/m)?.[1];
   if (slug && col) pieceCol[slug] = col;
 }
 
+const suppressedCollections = new Set();
+for (const b of collectionsBody.split(/^  \{/m).slice(1)) {
+  const slug = b.match(/^\s*slug:\s*'([^']+)'/m)?.[1];
+  const suppressed = /suppressPieceDescriptions:\s*true/.test(b);
+  if (slug && suppressed) suppressedCollections.add(slug);
+}
+if (suppressedCollections.size > 0) {
+  console.log(`Suppressing per-piece descriptions for: ${[...suppressedCollections].join(", ")}`);
+}
+
 function clean(s) {
   if (!s || typeof s !== "string") return "";
-  return s.replace(/\s+/g, " ").trim();
+  // Normalize line endings and treat every newline as a paragraph break.
+  // Artists embed \n in NFT description metadata as the paragraph separator
+  // for prose statements (Piano Blossoms, Tyler Hobbs 1/1s, etc.); rendering
+  // them at single line-height collapses paragraphs into one block. Promote
+  // any 1+ newline to \n\n so whitespace-pre-line surfaces them as proper
+  // paragraph breaks with vertical space.
+  let out = s.replace(/\r\n/g, "\n");
+  out = out.replace(/[ \t]+/g, " ");
+  out = out.split("\n").map((l) => l.trim()).join("\n");
+  out = out.replace(/\n+/g, "\n\n").trim();
+  return out;
 }
 
-// Group descriptions by collection to detect boilerplate
-const byCol = new Map();
-for (const slug of Object.keys(meta)) {
-  const col = pieceCol[slug];
-  if (!col) continue;
-  const d = clean(meta[slug]?.description);
-  if (!d || d.length < 10) continue;
-  if (!byCol.has(col)) byCol.set(col, []);
-  byCol.get(col).push({ slug, d });
-}
-
-// For each collection, count description duplicates. If the most-common
-// description appears in >= 70% of pieces, treat it as boilerplate and skip.
-const boilerplate = new Set();
-for (const [col, items] of byCol) {
-  const counts = new Map();
-  for (const { d } of items) counts.set(d, (counts.get(d) || 0) + 1);
-  const total = items.length;
-  for (const [d, n] of counts) {
-    if (total >= 3 && n / total >= 0.7) {
-      boilerplate.add(d);
-      console.log(`[boilerplate] ${col}: "${d.slice(0, 60)}..." (${n}/${total})`);
-    }
-  }
-}
+// Earlier versions of this script dropped descriptions that repeated across
+// >= 70% of a collection's pieces, treating them as boilerplate that belonged
+// on the collection page rather than per-piece. In practice that stripped
+// useful artist-voice context from many series (Day Gardens, Ringers, Winds
+// of Yawanawa, etc.) where every token shares the same description because
+// that IS the artist's statement for the work. We now keep every non-empty
+// description and let the reader compare across pieces.
 
 const out = {};
 let kept = 0;
 let dropped = 0;
+let suppressed = 0;
 for (const slug of Object.keys(meta)) {
   const d = clean(meta[slug]?.description);
   if (!d) { dropped++; continue; }
   if (d.length < 10) { dropped++; continue; }
-  if (boilerplate.has(d)) { dropped++; continue; }
+  if (suppressedCollections.has(pieceCol[slug])) { suppressed++; continue; }
   out[slug] = d;
   kept++;
 }
+if (suppressed > 0) console.log(`Suppressed: ${suppressed}`);
 
 writeFileSync(OUT, JSON.stringify(out, null, 2) + "\n");
 console.log(`Wrote ${OUT}: ${kept} kept, ${dropped} dropped`);

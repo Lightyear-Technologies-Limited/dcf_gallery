@@ -1584,160 +1584,313 @@
     "Glitch": "Twilight Blue",
     "Setting": "Nocturne"
   },
-  "her-favorite-flowers-2-fe63": {
-    "Blossoms": "Hivemind"
-  },
   "cryptopunks-269-3BBB": {
-    "Type": "Male 1",
-    "Attribute": "Small Shades"
+    "Type": "Male",
+    "Attribute": [
+      "Luxurious Beard",
+      "Earring",
+      "Hoodie",
+      "Small Shades"
+    ]
   },
   "cryptopunks-1568-3BBB": {
-    "Type": "Male 1",
-    "Attribute": "Clown Eyes Green"
+    "Type": "Male",
+    "Attribute": [
+      "Mustache",
+      "Hoodie",
+      "Clown Eyes Green"
+    ]
   },
   "cryptopunks-1775-3BBB": {
-    "Type": "Female 2",
-    "Attribute": "Purple Eye Shadow"
+    "Type": "Female",
+    "Attribute": [
+      "Earring",
+      "Tiara",
+      "Purple Eye Shadow"
+    ]
   },
   "cryptopunks-1887-13f6": {
     "Type": "Male",
-    "Attribute": "Nerd Glasses"
+    "Attribute": [
+      "Police Cap",
+      "Nerd Glasses"
+    ]
   },
   "cryptopunks-2412-3BBB": {
-    "Type": "Male 2",
-    "Attribute": "Classic Shades"
+    "Type": "Male",
+    "Attribute": [
+      "Front Beard",
+      "Cap Forward",
+      "Classic Shades"
+    ]
   },
   "cryptopunks-2550-3BBB": {
-    "Type": "Male 2",
-    "Attribute": "Hoodie"
+    "Type": "Male",
+    "Attribute": [
+      "Goat",
+      "Hoodie"
+    ]
   },
   "cryptopunks-2758-3BBB": {
-    "Type": "Male 1",
-    "Attribute": "Clown Eyes Green"
+    "Type": "Male",
+    "Attribute": [
+      "Cap Forward",
+      "Cigarette",
+      "Clown Eyes Green"
+    ]
   },
   "cryptopunks-3017-3BBB": {
-    "Type": "Male 1",
-    "Attribute": "Eye Mask"
+    "Type": "Male",
+    "Attribute": [
+      "Frown",
+      "Big Beard",
+      "Knitted Cap",
+      "Eye Mask"
+    ]
   },
   "cryptopunks-3745-3BBB": {
-    "Type": "Male 2",
-    "Attribute": "Headband"
+    "Type": "Male",
+    "Attribute": [
+      "Big Beard",
+      "Headband"
+    ]
   },
   "cryptopunks-4063-3BBB": {
-    "Type": "Male 3",
-    "Attribute": "Classic Shades"
+    "Type": "Male",
+    "Attribute": [
+      "Cap Forward",
+      "Classic Shades"
+    ]
   },
   "cryptopunks-4081-3BBB": {
-    "Type": "Male 1",
-    "Attribute": "Peak Spike"
+    "Type": "Male",
+    "Attribute": [
+      "Big Beard",
+      "Peak Spike"
+    ]
   },
   "cryptopunks-4253-3BBB": {
-    "Type": "Male 4",
-    "Attribute": "Fedora"
+    "Type": "Male",
+    "Attribute": [
+      "Earring",
+      "Fedora"
+    ]
   },
   "cryptopunks-4558-3BBB": {
-    "Type": "Male 1",
-    "Attribute": "Cap Forward"
+    "Type": "Male",
+    "Attribute": [
+      "Smile",
+      "Normal Beard",
+      "Cap Forward"
+    ]
   },
   "cryptopunks-4633-3BBB": {
-    "Type": "Male 1",
-    "Attribute": "Stringy Hair"
+    "Type": "Male",
+    "Attribute": [
+      "Big Beard",
+      "Stringy Hair"
+    ]
   },
   "cryptopunks-4776-3BBB": {
-    "Type": "Male 3",
-    "Attribute": "Eye Patch"
+    "Type": "Male",
+    "Attribute": [
+      "Big Beard",
+      "Frumpy Hair",
+      "Cigarette",
+      "Eye Patch"
+    ]
   },
   "cryptopunks-4853-13f6": {
     "Type": "Male",
-    "Attribute": "Classic Shades"
+    "Attribute": [
+      "Big Beard",
+      "Peak Spike",
+      "Vape",
+      "Classic Shades"
+    ]
   },
   "cryptopunks-4926-3BBB": {
-    "Type": "Male 1",
-    "Attribute": "Hoodie"
+    "Type": "Male",
+    "Attribute": [
+      "Mole",
+      "Hoodie"
+    ]
   },
   "cryptopunks-4978-3BBB": {
-    "Type": "Male 1",
-    "Attribute": "Cigarette"
+    "Type": "Male",
+    "Attribute": [
+      "Chinstrap",
+      "Cap Forward",
+      "Cigarette"
+    ]
   },
   "cryptopunks-5061-3BBB": {
-    "Type": "Male 1",
-    "Attribute": "Frumpy Hair"
+    "Type": "Male",
+    "Attribute": [
+      "Big Beard",
+      "Frumpy Hair"
+    ]
   },
   "cryptopunks-5528-3BBB": {
-    "Type": "Male 2",
-    "Attribute": "Cap Forward"
+    "Type": "Male",
+    "Attribute": [
+      "Spots",
+      "Cap Forward"
+    ]
   },
   "cryptopunks-6194-3BBB": {
-    "Type": "Male 3",
-    "Attribute": "Eye Patch"
+    "Type": "Male",
+    "Attribute": [
+      "Big Beard",
+      "Mohawk Thin",
+      "Eye Patch"
+    ]
   },
   "cryptopunks-6435-3BBB": {
-    "Type": "Male 1",
-    "Attribute": "Classic Shades"
+    "Type": "Male",
+    "Attribute": [
+      "Front Beard",
+      "Fedora",
+      "Classic Shades"
+    ]
   },
   "cryptopunks-6479-3BBB": {
-    "Type": "Male 2",
-    "Attribute": "Horned Rim Glasses"
+    "Type": "Male",
+    "Attribute": [
+      "Normal Beard",
+      "Cap Forward",
+      "Horned Rim Glasses"
+    ]
   },
   "cryptopunks-6583-3BBB": {
-    "Type": "Male 2",
-    "Attribute": "Bandana"
+    "Type": "Male",
+    "Attribute": [
+      "Big Beard",
+      "Bandana"
+    ]
   },
   "cryptopunks-6788-3BBB": {
-    "Type": "Male 1",
-    "Attribute": "Stringy Hair"
+    "Type": "Male",
+    "Attribute": [
+      "Big Beard",
+      "Earring",
+      "Stringy Hair"
+    ]
   },
   "cryptopunks-6932-3BBB": {
-    "Type": "Female 1",
-    "Attribute": "Clown Eyes Blue"
+    "Type": "Female",
+    "Attribute": [
+      "Earring",
+      "Tiara",
+      "Clown Eyes Blue"
+    ]
   },
   "cryptopunks-7144-3BBB": {
-    "Type": "Male 2",
-    "Attribute": "Vape"
+    "Type": "Male",
+    "Attribute": [
+      "Hoodie",
+      "Vape"
+    ]
   },
   "cryptopunks-7364-3BBB": {
-    "Type": "Male 2",
-    "Attribute": "Vape"
+    "Type": "Male",
+    "Attribute": [
+      "Big Beard",
+      "Shaved Head",
+      "Vape"
+    ]
   },
   "cryptopunks-7728-3BBB": {
-    "Type": "Male 2",
-    "Attribute": "Small Shades"
+    "Type": "Male",
+    "Attribute": [
+      "Buck Teeth",
+      "Headband",
+      "Small Shades"
+    ]
   },
   "cryptopunks-8259-3BBB": {
-    "Type": "Male 2",
-    "Attribute": "Horned Rim Glasses"
+    "Type": "Male",
+    "Attribute": [
+      "Handlebars",
+      "Fedora",
+      "Horned Rim Glasses"
+    ]
+  },
+  "cryptopunks-8561-13f6": {
+    "Type": "Male",
+    "Attribute": [
+      "Cap Forward",
+      "Rosy Cheeks"
+    ]
+  },
+  "cryptopunks-8564-13f6": {
+    "Type": "Male",
+    "Attribute": [
+      "Big Beard",
+      "Cap Forward"
+    ]
   },
   "cryptopunks-8779-3BBB": {
-    "Type": "Female 4",
-    "Attribute": "Clown Eyes Blue"
+    "Type": "Female",
+    "Attribute": [
+      "Tiara",
+      "Clown Eyes Blue"
+    ]
   },
   "cryptopunks-9019-3BBB": {
-    "Type": "Male 3",
-    "Attribute": "Vr"
+    "Type": "Male",
+    "Attribute": [
+      "Big Beard",
+      "Bandana",
+      "Medical Mask",
+      "VR"
+    ]
   },
   "cryptopunks-9363-3BBB": {
-    "Type": "Male 3",
-    "Attribute": "Clown Eyes Green"
+    "Type": "Male",
+    "Attribute": [
+      "Cap Forward",
+      "Clown Eyes Green"
+    ]
   },
   "cryptopunks-9405-3BBB": {
-    "Type": "Male 2",
-    "Attribute": "Small Shades"
+    "Type": "Male",
+    "Attribute": [
+      "Big Beard",
+      "Knitted Cap",
+      "Small Shades"
+    ]
   },
   "cryptopunks-9665-3BBB": {
-    "Type": "Male 4",
-    "Attribute": "Horned Rim Glasses"
+    "Type": "Male",
+    "Attribute": [
+      "Earring",
+      "Police Cap",
+      "Horned Rim Glasses"
+    ]
   },
   "cryptopunks-9968-3BBB": {
-    "Type": "Male 3",
-    "Attribute": "Big Shades"
+    "Type": "Male",
+    "Attribute": [
+      "Big Beard",
+      "Vampire Hair",
+      "Big Shades"
+    ]
   },
   "cryptopunks-9985-3BBB": {
-    "Type": "Male 3",
-    "Attribute": "Vampire Hair"
+    "Type": "Male",
+    "Attribute": [
+      "Big Beard",
+      "Vampire Hair"
+    ]
   },
   "cryptopunks-9133-3BBB": {
-    "Type": "Male 1",
-    "Attribute": "Clown Eyes Green"
+    "Type": "Male",
+    "Attribute": [
+      "Luxurious Beard",
+      "Top Hat",
+      "Clown Eyes Green"
+    ]
   },
   "lightyears-1-f3f5": {
     "Copyright": "© 2022 DLC Arts LLC. All Rights Reserved."

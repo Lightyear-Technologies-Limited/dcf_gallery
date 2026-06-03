@@ -5,7 +5,7 @@
   "collectionNames": {
     "piano-blossoms": "Piano Blossoms",
     "her-favorite-flowers": "Her favorite flowers",
-    "superrare-beeple": "Beeple",
+    "superrare-beeple": "Beeple 1/1s",
     "superrare-dmitri-cherniak": "Dmitri Cherniak 1/1s",
     "lightyears": "Lightyears",
     "ringers": "Ringers",
@@ -16,7 +16,7 @@
     "human-unreadable": "Human Unreadable",
     "repeat-as-necessary": "Repeat as Necessary",
     "winds-of-yawanawa": "Winds of Yawanawa",
-    "dataland-biome-lumina": "Dataland - Biome Lumina",
+    "dataland-biome-lumina": "Biome Lumina",
     "synthetic-dreams": "Synthetic Dreams",
     "skulls-of-luci": "Skulls of Luci",
     "masks-of-luci": "Masks of Luci",
@@ -112,7 +112,6 @@
   "artistSiteTemplates": {
     "pxl-dex": "https://pxl.onl/dex/id/{tokenId}",
     "pxl-pod": "https://pxl.onl/pod/id/{tokenId}",
-    "grifters": "https://xcopy.art/works/grifters",
     "cope-salada": "https://xcopy.art/works/cope-salada"
   },
   "_editions_note": "Edition shorthand per collection. Default for all collections is '1/1' (each piece is unique). Override here only for generative series where each piece is unique within an edition of N (e.g. '1/1/999').",

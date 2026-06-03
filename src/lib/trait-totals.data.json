@@ -1,0 +1,282 @@
+{
+  "cryptopunks": {
+    "totalSupply": 10000,
+    "totals": {
+      "Type": {
+        "Male": 6039,
+        "Female": 3840,
+        "Zombie": 88,
+        "Ape": 24,
+        "Alien": 9
+      },
+      "Attribute": {
+        "3D Glasses": 286,
+        "Bandana": 481,
+        "Beanie": 44,
+        "Big Beard": 146,
+        "Big Shades": 535,
+        "Black Lipstick": 617,
+        "Blonde Bob": 147,
+        "Blonde Short": 129,
+        "Blue Eye Shadow": 266,
+        "Buck Teeth": 78,
+        "Cap": 351,
+        "Cap Forward": 254,
+        "Chinstrap": 282,
+        "Choker": 48,
+        "Cigarette": 961,
+        "Classic Shades": 502,
+        "Clown Eyes Blue": 384,
+        "Clown Eyes Green": 382,
+        "Clown Hair Green": 148,
+        "Clown Nose": 212,
+        "Cowboy Hat": 142,
+        "Crazy Hair": 414,
+        "Dark Hair": 157,
+        "Do-rag": 300,
+        "Earring": 2459,
+        "Eye Mask": 293,
+        "Eye Patch": 461,
+        "Fedora": 186,
+        "Front Beard": 273,
+        "Front Beard Dark": 260,
+        "Frown": 261,
+        "Frumpy Hair": 442,
+        "Goat": 295,
+        "Gold Chain": 169,
+        "Green Eye Shadow": 271,
+        "Half Shaved": 147,
+        "Handlebars": 263,
+        "Headband": 406,
+        "Hoodie": 259,
+        "Horned Rim Glasses": 535,
+        "Hot Lipstick": 696,
+        "Knitted Cap": 419,
+        "Luxurious Beard": 286,
+        "Medical Mask": 175,
+        "Messy Hair": 460,
+        "Mohawk": 441,
+        "Mohawk Dark": 429,
+        "Mohawk Thin": 441,
+        "Mole": 644,
+        "Mustache": 288,
+        "Muttonchops": 303,
+        "Nerd Glasses": 572,
+        "Normal Beard": 292,
+        "Normal Beard Black": 289,
+        "Orange Side": 68,
+        "Peak Spike": 303,
+        "Pigtails": 94,
+        "Pilot Helmet": 54,
+        "Pink With Hat": 95,
+        "Pipe": 317,
+        "Police Cap": 203,
+        "Purple Eye Shadow": 262,
+        "Purple Hair": 165,
+        "Purple Lipstick": 655,
+        "Red Mohawk": 147,
+        "Regular Shades": 527,
+        "Rosy Cheeks": 128,
+        "Shadow Beard": 526,
+        "Shaved Head": 300,
+        "Silver Chain": 156,
+        "Small Shades": 378,
+        "Smile": 238,
+        "Spots": 124,
+        "Straight Hair": 151,
+        "Straight Hair Blonde": 144,
+        "Straight Hair Dark": 148,
+        "Stringy Hair": 463,
+        "Tassle Hat": 178,
+        "Tiara": 55,
+        "Top Hat": 115,
+        "Vampire Hair": 147,
+        "Vape": 272,
+        "VR": 332,
+        "Welding Goggles": 86,
+        "Wild Blonde": 144,
+        "Wild Hair": 447,
+        "Wild White Hair": 136
+      }
+    }
+  },
+  "fidenza": {
+    "totalSupply": 999,
+    "totals": {
+      "Density": {
+        "High": 580,
+        "Medium": 266,
+        "High AF": 65,
+        "Low": 45
+      },
+      "Palette": {
+        "Luxe": 501,
+        "Golf Socks": 109,
+        "Rad": 84,
+        "Politique": 60,
+        "Baked": 44,
+        "White Mono": 36,
+        "AM": 29,
+        "Black": 26,
+        "Rose": 22,
+        "Cool": 11,
+        "Luxe-Derived": 11,
+        "White on Cream": 10,
+        "Party Time": 8,
+        "Dark Lifestyle": 5
+      },
+      "Scale": {
+        "Jumbo": 491,
+        "Uniform": 183,
+        "Large": 172,
+        "Micro-Uniform": 37,
+        "Medium": 31,
+        "Jumbo XL": 28,
+        "Small": 14
+      },
+      "Spiral": {
+        "No": 922,
+        "Yes": 34
+      },
+      "Super Blocks": {
+        "No": 724,
+        "Yes": 232
+      },
+      "Turbulence": {
+        "Med": 412,
+        "Low": 211,
+        "High": 191,
+        "None": 142
+      }
+    }
+  },
+  "ringers": {
+    "totalSupply": 1000,
+    "totals": {
+      "Background": {
+        "White": 793,
+        "Yellow": 66,
+        "Red": 53,
+        "Beige": 46,
+        "Black": 14,
+        "Blue": 11,
+        "Green": 2
+      },
+      "Body": {
+        "White": 512,
+        "Black": 395,
+        "Yellow": 54,
+        "Red": 18,
+        "Blue": 6
+      },
+      "Layout": {
+        "3x3 grid": 241,
+        "5x5 grid": 234,
+        "4x4 grid": 212,
+        "Recursive grid": 133,
+        "Tiled 3,2": 33,
+        "Tiled 5,4": 30,
+        "Tiled 3,4": 29,
+        "Tiled 4,5": 24,
+        "Tiled 4,3": 23,
+        "Tiled 2,3": 22,
+        "6x6 grid": 2,
+        "Tiled 5,6": 2
+      },
+      "Pegs": {
+        "3": 4,
+        "4": 36,
+        "5": 64,
+        "6": 54,
+        "7": 31,
+        "8": 54,
+        "9": 143,
+        "10": 33,
+        "11": 24,
+        "12": 32,
+        "13": 26,
+        "14": 52,
+        "15": 28,
+        "16": 134,
+        "17": 25,
+        "18": 24,
+        "19": 14,
+        "20": 9,
+        "21": 1,
+        "22": 17,
+        "23": 21,
+        "24": 2,
+        "25": 116,
+        "26": 4,
+        "27": 2,
+        "28": 6,
+        "29": 5,
+        "30": 1,
+        "31": 3,
+        "33": 2,
+        "34": 2,
+        "36": 3,
+        "37": 2,
+        "39": 4,
+        "41": 2,
+        "42": 2,
+        "44": 1,
+        "45": 1,
+        "55": 1
+      },
+      "Size": {
+        "Normal": 949,
+        "smol boi": 36
+      },
+      "Wrap orientation": {
+        "Balanced": 774,
+        "Off-center": 211
+      },
+      "Wrap style": {
+        "Loop": 499,
+        "Weave": 486
+      }
+    }
+  },
+  "winds-of-yawanawa": {
+    "totalSupply": 1000,
+    "totals": {
+      "Color Temperature": {
+        "Mild": 471,
+        "Hot": 248,
+        "Cold": 239,
+        "Freezing": 25,
+        "Scorching": 16
+      },
+      "Origin": {
+        "Niwe - Wind": 145,
+        "Vari - Sun": 115,
+        "Ishtī - Star": 111,
+        "Txii - Fire": 107,
+        "Nay - Sky": 101,
+        "Mai - Earth": 100,
+        "Waka - Water": 100,
+        "Nii - Forest": 99,
+        "Uwa - Flower": 69,
+        "Ushe - Moon": 52
+      },
+      "Particle Type": {
+        "Cubical": 726,
+        "Spherical": 273
+      },
+      "Soundtrack": {
+        "Track 01": 266,
+        "Track 02": 255,
+        "Track 04": 252,
+        "Track 03": 226
+      },
+      "Wind Intensity": {
+        "Moderate": 618,
+        "Intense": 166,
+        "Tranquil": 139,
+        "Still": 61,
+        "Tempestuous": 15
+      }
+    }
+  }
+}

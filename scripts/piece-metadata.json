@@ -1806,14 +1806,22 @@
     ]
   },
   "cryptopunks-8561-13f6": {
-    "name": "",
+    "name": "CryptoPunks",
     "description": "",
-    "attributes": []
+    "attributes": [
+      { "key": "type", "value": "Male 2" },
+      { "key": "attribute", "value": " Cap Forward" },
+      { "key": "attribute", "value": " Rosy Cheeks" }
+    ]
   },
   "cryptopunks-8564-13f6": {
-    "name": "",
+    "name": "CryptoPunks",
     "description": "",
-    "attributes": []
+    "attributes": [
+      { "key": "type", "value": "Male 1" },
+      { "key": "attribute", "value": " Big Beard" },
+      { "key": "attribute", "value": " Cap Forward" }
+    ]
   },
   "cryptopunks-8779-3BBB": {
     "name": "CryptoPunks",
