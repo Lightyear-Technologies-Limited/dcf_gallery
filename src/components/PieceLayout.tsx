@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import ShareButton from "./ShareButton";
 
 interface Props {
   image: string | null;
@@ -243,54 +244,53 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, aspe
 
       <div className="mt-10">{metadata}</div>
 
-      {(artistSiteUrl || rasterUrl || cryptopunksUrl || original) && (
-        // Link order: original (verify on-chain provenance), then artist site
-        // (canonical artist-curated view), then marketplace(s) (trading view).
-        // Punks get both CryptoPunks.app and Raster under marketplace, with
-        // CryptoPunks.app first as canonical.
-        <div className="mt-6 flex flex-col gap-2 text-[12px] text-muted">
-          {original && (
-            <a
-              href={original.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-foreground transition-colors duration-200"
-            >
-              View original
-            </a>
-          )}
-          {artistSiteUrl && artistHost && (
-            <a
-              href={artistSiteUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-foreground transition-colors duration-200"
-            >
-              View on {artistHost}
-            </a>
-          )}
-          {cryptopunksUrl && (
-            <a
-              href={cryptopunksUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-foreground transition-colors duration-200"
-            >
-              View on CryptoPunks.app
-            </a>
-          )}
-          {rasterUrl && (
-            <a
-              href={rasterUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-foreground transition-colors duration-200"
-            >
-              View on Raster
-            </a>
-          )}
-        </div>
-      )}
+      {/* Link order: original (verify on-chain provenance), then artist site
+          (canonical artist-curated view), then marketplace(s) (trading view),
+          then Share. Punks get both CryptoPunks.app and Raster under marketplace,
+          CryptoPunks.app first as canonical. */}
+      <div className="mt-6 flex flex-col gap-2 text-[12px] text-muted">
+        {original && (
+          <a
+            href={original.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-foreground transition-colors duration-200"
+          >
+            View original
+          </a>
+        )}
+        {artistSiteUrl && artistHost && (
+          <a
+            href={artistSiteUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-foreground transition-colors duration-200"
+          >
+            View on {artistHost}
+          </a>
+        )}
+        {cryptopunksUrl && (
+          <a
+            href={cryptopunksUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-foreground transition-colors duration-200"
+          >
+            View on CryptoPunks.app
+          </a>
+        )}
+        {rasterUrl && (
+          <a
+            href={rasterUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-foreground transition-colors duration-200"
+          >
+            View on Raster
+          </a>
+        )}
+        <ShareButton title={artistName ? `${title} by ${artistName}` : title} />
+      </div>
     </div>
   );
 

@@ -1,9 +1,10 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { pieces, getArtist, getCollection, getPiecesByCollection } from "@/lib/data";
 import { getArtworkImage, getArtworkAspect, resolveTokenId } from "@/lib/images";
-import { getDetailVariants, getArtworkBlur, getProvenance } from "@/lib/provenance";
-import { getEditionType, getArtistSiteUrl, getPieceTraits, getPieceDescription, getCollectionDisplayName, SYNTHETIC_TRAITS } from "@/lib/curation";
+import { getDetailVariants, getArtworkBlur, getProvenance, getOgImage } from "@/lib/provenance";
+import { getEditionType, getArtistSiteUrl, getPieceTraits, getPieceDescription, getCollectionDisplayName, getArtistDisplayName, SYNTHETIC_TRAITS } from "@/lib/curation";
 import type { TraitValue } from "@/lib/curation";
 import PlaceholderArt from "@/components/PlaceholderArt";
 import BackButton from "@/components/BackButton";
@@ -38,6 +39,29 @@ function deriveStorage(originalUri?: string, contractAddress?: string): string |
 
 export function generateStaticParams() {
   return pieces.map((p) => ({ slug: p.slug }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const piece = pieces.find((p) => p.slug === slug);
+  if (!piece) return {};
+  const artist = getArtist(piece.artistSlug);
+  const collection = getCollection(piece.collectionSlug);
+  const artistName = artist ? getArtistDisplayName(artist.slug, artist.name) : undefined;
+  const title = artistName ? `${piece.title} — ${artistName}` : piece.title;
+  const collName = collection ? getCollectionDisplayName(collection.slug, collection.name) : undefined;
+  const description = (
+    getPieceDescription(piece.slug) ||
+    piece.description ||
+    (collName ? `${piece.title}, from ${collName} — in the Hivemind Digital Culture Fund collection.` : "Held by the Hivemind Digital Culture Fund.")
+  ).slice(0, 200);
+  const og = getOgImage(piece.slug);
+  return {
+    title,
+    description,
+    openGraph: { title, description, type: "article", images: og ? [{ url: og, width: 1200, alt: piece.title }] : undefined },
+    twitter: { card: "summary_large_image", title, description, images: og ? [og] : undefined },
+  };
 }
 
 export default async function PiecePage({

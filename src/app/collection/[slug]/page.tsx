@@ -1,5 +1,7 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import Link from "next/link";
+import { getOgImage } from "@/lib/provenance";
 import { collections, getArtist, getCollectionsByArtist, getPiecesByCollection } from "@/lib/data";
 import { getArtworkImage } from "@/lib/images";
 import {
@@ -26,6 +28,25 @@ import CopyableHash from "@/components/CopyableHash";
 
 export function generateStaticParams() {
   return collections.filter((c) => !isCollectionHidden(c.slug)).map((c) => ({ slug: c.slug }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const col = collections.find((c) => c.slug === slug);
+  if (!col) return {};
+  const name = getCollectionDisplayName(col.slug, col.name);
+  const artist = getArtist(col.artistSlug);
+  const artistName = artist ? getArtistDisplayName(artist.slug, artist.name) : undefined;
+  const title = artistName ? `${name} — ${artistName}` : name;
+  const description = (col.description || `${name} in the Hivemind Digital Culture Fund collection.`).slice(0, 200);
+  const first = getPiecesByCollection(col.slug)[0];
+  const og = first ? getOgImage(first.slug) : undefined;
+  return {
+    title,
+    description,
+    openGraph: { title, description, type: "website", images: og ? [{ url: og, width: 1200 }] : undefined },
+    twitter: { card: "summary_large_image", title, description, images: og ? [og] : undefined },
+  };
 }
 
 

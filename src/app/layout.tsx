@@ -22,9 +22,24 @@ const instrumentSans = localFont({
   display: "swap",
 });
 
+// Public site origin for resolving relative OG/canonical URLs. Set the final
+// domain via NEXT_PUBLIC_SITE_URL when known (the brief lists the domain as TBD).
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://gallery.hivemind.capital";
+
 export const metadata: Metadata = {
-  title: "Hivemind - Digital Culture Fund Gallery",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Hivemind — Digital Culture Fund Gallery",
+    template: "%s — Hivemind DCF",
+  },
   description: "A curated showcase of the Hivemind Digital Culture Fund collection.",
+  openGraph: {
+    siteName: "Hivemind Digital Culture Fund",
+    type: "website",
+    title: "Hivemind — Digital Culture Fund Gallery",
+    description: "A curated showcase of the Hivemind Digital Culture Fund collection.",
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

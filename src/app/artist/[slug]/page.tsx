@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { artists, collections, getPiecesByCollection } from "@/lib/data";
@@ -28,6 +29,20 @@ export function generateStaticParams() {
   return artists
     .filter((a) => !MERGE_INTO[a.slug])
     .map((a) => ({ slug: a.slug }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const artist = artists.find((a) => a.slug === slug);
+  if (!artist) return {};
+  const name = getArtistDisplayName(artist.slug, artist.name);
+  const description = (artist.bio || `${name} in the Hivemind Digital Culture Fund collection.`).slice(0, 200);
+  return {
+    title: name,
+    description,
+    openGraph: { title: name, description, type: "profile" },
+    twitter: { card: "summary_large_image", title: name, description },
+  };
 }
 
 export default async function ArtistPage({ params }: { params: Promise<{ slug: string }> }) {

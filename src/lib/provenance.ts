@@ -50,3 +50,14 @@ export function getDetailVariants(slug: string): { src: string; srcSet: string }
 export function getArtworkBlur(slug: string): string | undefined {
   return PROVENANCE[slug]?.lqip;
 }
+
+/** Social-card (OG) image for a piece: a 1200px JPG via the gateway, for the
+ *  widest unfurler compatibility. Raster pieces only — SVG/punks return
+ *  undefined and the caller falls back to the site default card. (C.3) */
+export function getOgImage(slug: string): string | undefined {
+  const p = PROVENANCE[slug];
+  if (p?.cid && p.mime && !p.mime.includes("svg")) {
+    return `https://${FILEBASE_GATEWAY}/ipfs/${p.cid}?img-width=1200&img-format=jpg`;
+  }
+  return undefined;
+}

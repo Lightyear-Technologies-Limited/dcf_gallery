@@ -167,7 +167,7 @@ by a `/fb:how` validation pass and should be reviewed whenever the plan changes.
 
 - [x] **C.1 — Provenance manifest + verification** · ✅ done — `scripts/verify-pins.mjs`
   (`npm run verify-pins`): re-fetch each CID → recompute sha256 → assert match → stamp
-  `verifiedAt`; exits non-zero on mismatch. Subset verified 6/6; full run + CI wiring → D.4.
+  `verifiedAt`; exits non-zero on mismatch. **Full run: 312/312 verified, 0 mismatch.** CI wiring → D.4.
   Per-piece `{ source, cid, sha256, byteLength, pins[], pinnedAt, verifiedAt }` in
   the derived layer; a CI job re-fetches each CID, recomputes the hash, asserts match.
   - Files: new `src/lib/provenance.data.json` (+ generator), `scripts/verify-pins.mjs`,
@@ -187,12 +187,11 @@ by a `/fb:how` validation pass and should be reviewed whenever the plan changes.
   - Acceptance: badge reflects real data; full metadata reachable via disclosure,
     closed by default; IPFS pieces link to your gateway CID.
 
-- [ ] **C.3 — Per-page OG / social metadata** · M · _B.3_
-  Today every shared link unfurls as one generic, image-less card. (Vercel: can use
-  `@vercel/og` for composed share cards.)
-  - Files: add `generateMetadata` to `piece/[slug]`, `artist/[slug]`,
-    `collection/[slug]`; `openGraph`/`twitter` tags with a per-piece image
-  - Acceptance: a shared piece URL unfurls with the artwork, title, and artist.
+- [x] **C.3 — Per-page OG / social metadata** · ✅ done — `generateMetadata` on
+  piece/artist/collection routes; per-piece **og:image** (gateway 1200px JPG), title
+  template (`… — Hivemind DCF`), `twitter:summary_large_image`; `metadataBase` via
+  `NEXT_PUBLIC_SITE_URL` (domain TBD). Verified: a shared piece unfurls with artwork
+  + title + artist + description.
 
 - [ ] **C.4 — Content/copy segregation (three-layer model) + Tina-ready** · L · _P0.1_
   Promote the P0.1 extraction into the real build join: facts ⨝ editorial ⨝ derived,
@@ -203,9 +202,8 @@ by a `/fb:how` validation pass and should be reviewed whenever the plan changes.
   - Acceptance: editing a curator note = editing one valid file; build fails with a
     precise path on invalid editorial data; no field has two writers.
 
-- [ ] **C.5 — Social share affordance on piece pages** · S · _C.3_
-  - Files: `PieceLayout.tsx` / new share control (X intent + `navigator.share` on mobile)
-  - Acceptance: a piece can be shared to X / native share sheet.
+- [x] **C.5 — Share affordance** · ✅ done — `ShareButton` (native Web Share sheet on
+  mobile, X-intent fallback) in the piece-page link list.
 
 - [ ] **C.6 — Fill the 5 empty collection curator notes + audit artist notes** · M · _C.4_
   (Content task, owner = Michael/marketing.) Acceptance: no `curatorNote: ''`.
