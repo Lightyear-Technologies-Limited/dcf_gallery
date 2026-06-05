@@ -265,12 +265,16 @@ by a `/fb:how` validation pass and should be reviewed whenever the plan changes.
   `?view=&chapter=&artist=&q=`, SSR'd + shareable); responsive per-row. Added "Explore" to
   the header nav. Design brief: `docs/EXPLORER-BRIEF.md`.
 
-- [~] **E.3 — Deluxe multi-view explorer** · 🟦 foundation + Index view done (E.2)
+- [x] **E.3 — Deluxe multi-view explorer** · ✅ shipped (commit `e2b7fab`)
   Per the agreed brief (`docs/EXPLORER-BRIEF.md`): a switchable, persisted multi-view system
   (Salon / Index / Chapters / Constellation), mobile-aware, on `/explore` + a homepage
-  switcher, with a first-run tutorial + keyboard nav. **Remaining:** the **Chapters**
-  (cinematic) + **Constellation** (experiential, desktop-only) views, the view-switcher +
-  persistence, tutorial/keyboard, and the `.impeccable.md` principle-5 update.
+  switcher, with a first-run tutorial + keyboard nav. **Done:** `ChaptersView` (cinematic
+  procession — full-height title cards, filmstrip, position rail, reduced-motion-safe reveal);
+  `ConstellationView` (experiential star-field — deterministic phyllotaxis clusters per chapter,
+  faint figure-lines, gentle CSS drift, hover preview, desktop-only with a graceful mobile
+  redirect); shared `ViewSwitcher` (URL `?view=` routing, localStorage persistence + restore,
+  ←/→ cycle + 1–4 jump, first-run tutorial) on `/explore` **and** the homepage masthead.
+  **Remaining:** the `.impeccable.md` principle-5 update (brand sign-off, not code).
 
 ---
 
