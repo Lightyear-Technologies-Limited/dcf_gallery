@@ -24,14 +24,20 @@
 .DS_Store
 *.pem
 
-# Raw downloaded artwork - too large for git (~4GB locally). Only optimized
-# WebP is committed for non-Punk pieces. Punk SVGs are an explicit exception:
-# images.ts routes Punks directly to /art/all/{contract}-{tokenId}.svg, so the
-# 40 CryptoPunk SVGs (~850KB total) ship to make the Punks chapter render
-# on a fresh clone.
+# Artwork now lives on Filebase IPFS (served via the gateway). Only a small
+# KEEP-SET stays in git: the 40 CryptoPunk SVGs, the curated crops / Asendorf
+# screengrabs / physical-piece render referenced by images.ts, and the on-chain
+# SVG pieces. The auto-pulled optimized/thumbs webp and raw masters are dead
+# weight and are NOT committed. See scripts/prune-local-art.mjs.
 /public/art/all/*
 !/public/art/all/0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb-*.svg
 /public/art/grifters/
+/public/art/optimized/*
+!/public/art/optimized/curated-*.webp
+!/public/art/optimized/operator-x-ray-machine.webp
+/public/art/thumbs/*
+!/public/art/thumbs/curated-*.webp
+!/public/art/thumbs/operator-x-ray-machine.webp
 
 # Claude tooling
 /.flashback/
@@ -45,6 +51,7 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # vercel
 .vercel
@@ -52,3 +59,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Claude Code frameworks (exclude all)
+.claude/

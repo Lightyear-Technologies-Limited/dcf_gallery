@@ -97,7 +97,9 @@ export default function FixedRowGallery({ pieces, rowMap, fallbackPerRow, gap = 
             {row.map((piece) => {
               const aspect = aspects[piece.id] || 1;
               const w = aspect * rowHeight;
-              const src = getArtworkImage(piece.slug, piece.contractAddress, piece.tokenId, "detail");
+              // Grid tiles render small — request the thumb tier (≤400px), not
+              // detail (≤1200px). Hero/piece-page views use detail. (plan A.1)
+              const src = getArtworkImage(piece.slug, piece.contractAddress, piece.tokenId, "thumb");
               const isPunk = piece.collectionSlug === "cryptopunks";
               return (
                 <Link

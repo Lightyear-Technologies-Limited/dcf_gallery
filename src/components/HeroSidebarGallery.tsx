@@ -112,6 +112,7 @@ export default function HeroSidebarGallery({
               width={1200}
               height={1200}
               className={`w-full h-full ${isPunkHero ? "[image-rendering:pixelated] object-contain" : "object-cover"}`}
+              quality={95}
               sizes="(max-width: 1024px) 60vw, 720px"
             />
           ) : (
@@ -125,7 +126,8 @@ export default function HeroSidebarGallery({
 
         {/* Sidebar - fills the remaining cells row-major */}
         {sidebarPieces.map((p) => {
-          const src = getArtworkImage(p.slug, p.contractAddress, p.tokenId, "detail");
+          // Sidebar tiles are small — use the thumb tier, not detail. (plan A.1)
+          const src = getArtworkImage(p.slug, p.contractAddress, p.tokenId, "thumb");
           const isPunk = p.collectionSlug === "cryptopunks";
           return (
             <Link

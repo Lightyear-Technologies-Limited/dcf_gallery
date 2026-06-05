@@ -6,6 +6,14 @@ import { useState } from "react";
 
 interface Props {
   image: string | null;
+  /** Path B hybrid: sharp detail-variant src + srcSet (served raw via a plain
+      <img>, bypassing next/image so the gateway doesn't re-resize/re-soften
+      them). When present, the detail hero uses these instead of next/image. */
+  detailSrc?: string;
+  detailSrcSet?: string;
+  /** Tiny blurred LQIP data URI shown as a background until the sharp image
+      paints (blur-up / progressive load). */
+  lqip?: string;
   /** Natural pixel dimensions of the artwork file, when known. Used to size
       the Image box at the true intrinsic aspect (else next/image defaults to
       the 4:3 of the placeholder width/height props and tall pieces letterbox). */
@@ -104,7 +112,7 @@ function resolveOriginal(uri: string): { href: string; label: string } | null {
 /**
  * Piece layout: image on the left, details on the right.
  */
-export default function PieceLayout({ image, aspect, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, holdingNote, description, collectionDescription, physical, companion, metadata, rasterUrl, cryptopunksUrl, artistSiteUrl, originalUri, placeholder }: Props) {
+export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, aspect, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, holdingNote, description, collectionDescription, physical, companion, metadata, rasterUrl, cryptopunksUrl, artistSiteUrl, originalUri, placeholder }: Props) {
   const artistHost = artistSiteUrl ? hostLabel(artistSiteUrl) : null;
   const original = originalUri ? resolveOriginal(originalUri) : null;
   // When natural aspect is known, pass it as width/height props so next/image
@@ -132,6 +140,22 @@ export default function PieceLayout({ image, aspect, title, isPunk, artistName, 
           sizes="(max-width: 768px) 90vw, 60vw"
         />
       </div>
+    ) : detailSrcSet ? (
+      // Sharp detail variants served raw via a plain <img> (no next/image, so
+      // the gateway loader can't re-resize/re-soften them). The LQIP shows as a
+      // blurred background until the sharp image paints. (plan B.3 / Path B)
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={detailSrc}
+        srcSet={detailSrcSet}
+        sizes="(max-width: 768px) 90vw, 60vw"
+        alt={title}
+        width={imgW}
+        height={imgH}
+        decoding="async"
+        className="block w-auto h-auto max-w-full max-h-[80vh] object-contain"
+        style={lqip ? { backgroundImage: `url(${lqip})`, backgroundSize: "cover", backgroundPosition: "center" } : undefined}
+      />
     ) : (
       <Image
         src={image}
@@ -140,6 +164,7 @@ export default function PieceLayout({ image, aspect, title, isPunk, artistName, 
         height={imgH}
         className="block w-auto h-auto max-w-full max-h-[80vh] object-contain"
         priority
+        quality={95}
         sizes="(max-width: 768px) 90vw, 60vw"
       />
     )

@@ -8,12 +8,45 @@
  */
 
 import { execSync } from "child_process";
-import { writeFileSync } from "fs";
+import { writeFileSync, existsSync } from "fs";
 import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
+
+// ---------------------------------------------------------------------------
+// SAFETY GUARD (added 2026-06-04, see docs/UPGRADE-PLAN.md P0.2)
+// ---------------------------------------------------------------------------
+// This script REGENERATES src/lib/data.ts from scratch. The live data.ts has
+// since been hand-edited (bios, curator notes, descriptions, originalUri,
+// traits, physical specs) and carries richer schema fields this generator does
+// NOT produce. Re-running would DESTROY all of that and DOWNGRADE the schema.
+// It is a one-shot bootstrap, not a refresh. Refuse to clobber an existing
+// data.ts unless explicitly forced.
+const FORCE = process.argv.includes("--force");
+const DATA_PATH = resolve(ROOT, "src/lib/data.ts");
+if (existsSync(DATA_PATH) && !FORCE) {
+  console.error(
+    [
+      "",
+      `✋ Refusing to run: ${DATA_PATH} already exists.`,
+      "",
+      "This script GENERATES data.ts from scratch and will DESTROY all",
+      "hand-edited editorial content (bios, curator notes, descriptions,",
+      "originalUri, traits, physical specs) plus richer schema fields it does",
+      "not produce.",
+      "",
+      "To add NEW pieces, do NOT re-run this importer — append to data.ts or",
+      "use the editorial build pipeline (see docs/UPGRADE-PLAN.md, Phase 0 / C.4).",
+      "",
+      "If you genuinely intend to overwrite everything, re-run with --force:",
+      "    node scripts/import-portfolio.mjs --force",
+      "",
+    ].join("\n"),
+  );
+  process.exit(1);
+}
 
 // ---------------------------------------------------------------------------
 // 1. Read spreadsheet via xlsx-cli

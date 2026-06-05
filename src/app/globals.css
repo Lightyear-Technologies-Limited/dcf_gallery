@@ -86,3 +86,22 @@ body {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+/* Accessibility: respect reduced-motion (plan A.4). Functional transitions are
+   the only motion in use today; this neutralizes them for users who opt out and
+   pre-empts the playback/explorer motion coming in Phase E. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Keyboard focus: a quiet, theme-aware ring on interactive surfaces that lack
+   their own (gallery tiles, links). Mouse users are unaffected. (plan A.4) */
+:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 2px;
+}

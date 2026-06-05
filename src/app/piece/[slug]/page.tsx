@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { pieces, getArtist, getCollection, getPiecesByCollection } from "@/lib/data";
 import { getArtworkImage, getArtworkAspect, resolveTokenId } from "@/lib/images";
+import { getDetailVariants, getArtworkBlur } from "@/lib/provenance";
 import { getEditionType, getArtistSiteUrl, getPieceTraits, getPieceDescription, getCollectionDisplayName, SYNTHETIC_TRAITS } from "@/lib/curation";
 import type { TraitValue } from "@/lib/curation";
 import PlaceholderArt from "@/components/PlaceholderArt";
@@ -28,6 +29,9 @@ function deriveStorage(originalUri?: string, contractAddress?: string): string |
   if (/^(Qm[1-9A-HJ-NP-Za-km-z]{44}|bafy[a-z0-9]+|bafk[a-z0-9]+)$/.test(originalUri)) return "IPFS";
   if (originalUri.startsWith("ar://") || originalUri.includes("arweave.net")) return "Arweave";
   if (originalUri.includes("media-proxy.artblocks.io")) return "IPFS (Art Blocks proxy)";
+  // IPFS served over an HTTP gateway (ipfs.pixura.io/ipfs/…, …ipfs.io/…) must be
+  // detected before the generic https → Centralized fallback. (plan A.5)
+  if (originalUri.includes("/ipfs/") || /^https?:\/\/[^/]*\bipfs\./.test(originalUri)) return "IPFS";
   if (originalUri.startsWith("https://") || originalUri.startsWith("http://")) return "Centralized";
   return undefined;
 }
@@ -222,6 +226,9 @@ export default async function PiecePage({
       <div className="pt-6 pb-24">
         <PieceLayout
           image={realImage}
+          detailSrc={getDetailVariants(piece.slug)?.src}
+          detailSrcSet={getDetailVariants(piece.slug)?.srcSet}
+          lqip={getArtworkBlur(piece.slug)}
           aspect={getArtworkAspect(piece.slug, piece.contractAddress, piece.tokenId)}
           title={piece.title}
           isPunk={isPunk}
