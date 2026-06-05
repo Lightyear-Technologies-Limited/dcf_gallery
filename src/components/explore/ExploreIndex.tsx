@@ -113,13 +113,7 @@ export default function ExploreIndex({ items, chapters, artists, collections, me
   const hrefSearch = artist || collection || chapter ? "" : ""; // piece pages don't read these; keep Back clean
 
   return (
-    <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 pt-8 pb-24">
-      {/* View switcher — Salon (homepage) + Index. Chapters/Constellation join here. */}
-      <nav className="flex gap-5 text-[11px] tracking-[0.12em] uppercase mb-8">
-        <Link href="/" className="text-muted hover:text-foreground transition-colors duration-200">Salon</Link>
-        <span className="text-foreground font-medium">Index</span>
-      </nav>
-
+    <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 pb-24">
       {/* Search + filters */}
       <div className="flex flex-col gap-4 mb-6">
         <input

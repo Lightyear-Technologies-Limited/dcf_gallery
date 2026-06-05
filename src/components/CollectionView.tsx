@@ -10,6 +10,7 @@ import SinglePieceDisplay from "./SinglePieceDisplay";
 import { getArtworkImage } from "@/lib/images";
 import { getHeroLayout } from "@/lib/curation";
 import { CHAPTERS, CHAPTER_COLORS } from "@/lib/chapters";
+import ViewSwitcher from "./explore/ViewSwitcher";
 
 interface PieceData {
   id: string;
@@ -146,10 +147,11 @@ export default function CollectionView({ sections, artists }: Props) {
           the h1 anchors at the same vertical as the masthead wordmark
           across the gutter; eye reads "Hivemind" on the rail and
           "Hivemind Digital Culture Fund" on the page at the same line. */}
-      <div className="pt-6">
+      <div className="pt-6 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3">
         <h1 className="font-serif display-sm">
           Hivemind Digital Culture Fund
         </h1>
+        <ViewSwitcher active="salon" explicit suppressTip />
       </div>
       {/* Filters - ARTIST row, then CHAPTER row. Removing a filter is done
           by clicking its active label; no "All" / "Clear" button needed
