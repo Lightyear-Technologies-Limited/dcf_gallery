@@ -236,10 +236,12 @@ by a `/fb:how` validation pass and should be reviewed whenever the plan changes.
   exits non-zero on any gap. Verified: 313 → 251 gateway / 22 curated / 40 punk, 0 issues.
   Architecture-aware replacement for the old local-only audit scripts.
 
-- [~] **D.4 — CI pipeline** · 🟦 core done — `.github/workflows/ci.yml`: `npm ci` → lint →
-  typecheck → audit → build (all verified green locally), plus `.github/dependabot.yml`
-  (weekly npm + actions, grouped minor/patch). **Remaining:** Playwright smoke/visual +
-  Lighthouse budget (needs `@playwright/test` + baseline snapshots).
+- [x] **D.4 — CI pipeline** · ✅ done — `.github/workflows/ci.yml`: `npm ci` → lint →
+  typecheck → audit → **content (Zod)** → build → **E2E smoke (Playwright)**, plus
+  `.github/dependabot.yml` (weekly npm + actions, grouped minor/patch). The Playwright
+  suite (`tests/smoke.spec.ts`, 6 specs, all green) boots the prod build and exercises the
+  routes, the Constellation interactivity fix, and back-to-origin nav. **Remaining (opt):**
+  a Lighthouse performance budget once a baseline is agreed — deferred, not blocking.
 
 - [ ] **D.5 — Vercel hosting hardening** · S · _B.4_ · (host decided: Vercel ✅)
   Confirm SSG build on Vercel; ensure Filebase art isn't re-optimized by Vercel;

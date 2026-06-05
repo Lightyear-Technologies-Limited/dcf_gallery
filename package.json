@@ -15,6 +15,7 @@
     "pin-videos": "node scripts/pin-videos.mjs",
     "verify-pins": "node scripts/verify-pins.mjs",
     "audit": "node scripts/audit-assets.mjs",
+    "test:e2e": "playwright test",
     "onboard": "node scripts/onboard.mjs",
     "curate": "node scripts/fix-curation.mjs"
   },
@@ -27,6 +28,7 @@
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.1062.0",
     "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "@playwright/test": "^1.60.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

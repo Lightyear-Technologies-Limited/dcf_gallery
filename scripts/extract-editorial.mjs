@@ -44,7 +44,6 @@ function extractArray(varName) {
     else if (c === "[") depth++;
     else if (c === "]") { depth--; if (depth === 0) { i++; break; } }
   }
-  // eslint-disable-next-line no-new-func
   return new Function(`return (${text.slice(start, i)})`)();
 }
 

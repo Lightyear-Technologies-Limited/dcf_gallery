@@ -28,5 +28,8 @@ jobs:
         run: npm run content
       - name: Build (static generation of all pages)
         run: npm run build
-      # Follow-up (D.4): Playwright visual/smoke + Lighthouse budget once
-      # @playwright/test + baseline snapshots are added.
+      - name: E2E smoke (Playwright)
+        run: |
+          npx playwright install --with-deps chromium
+          npm run test:e2e
+      # Follow-up (D.4): Lighthouse performance budget once a baseline is agreed.
