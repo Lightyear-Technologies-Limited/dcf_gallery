@@ -15,8 +15,8 @@ const argent = localFont({
 
 const instrumentSans = localFont({
   src: [
-    { path: "../fonts/InstrumentSans-Variable.ttf", weight: "100 900", style: "normal" },
-    { path: "../fonts/InstrumentSans-Italic-Variable.ttf", weight: "100 900", style: "italic" },
+    { path: "../fonts/InstrumentSans-Variable.woff2", weight: "100 900", style: "normal" },
+    { path: "../fonts/InstrumentSans-Italic-Variable.woff2", weight: "100 900", style: "italic" },
   ],
   variable: "--font-instrument",
   display: "swap",

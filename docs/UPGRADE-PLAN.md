@@ -69,10 +69,9 @@ by a `/fb:how` validation pass and should be reviewed whenever the plan changes.
   routing introduced (the old probe was loading 34 MB originals to measure aspect).
   - Follow-up (optional): server-feed the aspect as a prop for zero-CLS first paint.
 
-- [ ] **A.3 — Convert Instrument Sans TTF → woff2 (+ subset, preload)** · S · _no deps_
-  - Files: `src/fonts/InstrumentSans-*.ttf` → `.woff2`, `src/app/layout.tsx` (font defs)
-  - Acceptance: font payload ~40–50% smaller; one above-the-fold weight preloaded;
-    `font-display: swap` retained.
+- [x] **A.3 — Fonts → woff2** · ✅ done — Instrument Sans variable TTFs converted to woff2
+  (192K→88K, 200K→96K; ~54% smaller); removed the dead Argent `.woff`. `next/font/local`
+  handles preload + `display: swap`. ~258 KB of font weight removed.
 
 - [x] **A.4 — Add `prefers-reduced-motion` guard + focus-visible rings** · S · ✅ done (globals.css)
   - Files: `src/app/globals.css`, gallery tile `Link`s
@@ -212,18 +211,18 @@ by a `/fb:how` validation pass and should be reviewed whenever the plan changes.
 
 ## Phase D — Tier 1: quality gates, security, hosting
 
-- [ ] **D.1 — Site-wide security headers / CSP** · M · _no deps_
-  Only the image optimizer has a CSP today. Add a global CSP (hash the inline theme
-  script — no `'unsafe-inline'`), `X-Content-Type-Options`, `Referrer-Policy`, HSTS,
-  `frame-ancestors`. Allow the Filebase gateway in `img-src`/`media-src`. Validate
-  `rel="noopener noreferrer"` on external links; scheme-validate `originalUri`.
-  - Files: `next.config.ts` `headers()` / Vercel config, `src/app/layout.tsx`
-  - Acceptance: securityheaders.com-style A grade; no inline-script CSP hole.
+- [x] **D.1 — Site-wide security headers / CSP** · ✅ done — `next.config.ts` `headers()`
+  emits a tight CSP (gateway scoped to `img-src`/`media-src` only) + `X-Content-Type-Options`,
+  `Referrer-Policy`, `X-Frame-Options: DENY`, HSTS, `Permissions-Policy`. Verified live.
+  `script-src`/`style-src` keep `'unsafe-inline'` (Next injects inline RSC/hydration scripts;
+  a nonce CSP would force all pages dynamic — not worth it for a static no-auth site).
 
-- [ ] **D.2 — Dependency hygiene** · S · _no deps_
-  Move `playwright` to `devDependencies`; `npm audit`; enable Dependabot; scan git
-  history + `.gitignore` for any leaked build-script API keys.
-  - Acceptance: prod dep tree lean; no secrets in history; audit clean.
+- [~] **D.2 — Dependency hygiene** · 🟦 mostly done
+  `playwright` moved to `devDependencies`. `npm audit`: 2 moderate are a build-time
+  transitive `postcss` in Next 16 (CSS-stringify XSS, not exploitable — we don't process
+  untrusted CSS); the auto-"fix" wants to **downgrade Next to 9.3.3**, so we leave it
+  (resolves when Next bumps its bundled postcss). **Remaining:** Dependabot config (fold
+  into D.4 CI) + a git-history secret scan.
 
 - [ ] **D.3 — Extend audit scripts into one `npm run audit` gate** · M · _A.1, B.3_
   Make `audit-images.mjs` **import** the real `getArtworkImage`/`resolveTokenId`
