@@ -196,7 +196,7 @@ export default async function PiecePage({
   // Animated/video pieces (E.1): play the pinned video with the sharp still as poster.
   const animatedVideo =
     provenance?.animation?.cid && provenance.animation.type === "video" && provenance.animation.gateway
-      ? { src: provenance.animation.gateway, poster: getDetailVariants(piece.slug)?.src }
+      ? { src: provenance.animation.gateway, poster: getDetailVariants(piece.slug)?.src, original: provenance.animation.source }
       : undefined;
   const STORAGE_LABEL: Record<string, string> = {
     ipfs: "IPFS", arweave: "Arweave", onchain: "On-chain", centralized: "Centralized",

@@ -1,19 +1,23 @@
 #!/usr/bin/env node
 /**
- * E.1 — pin video/gif animation sources to Filebase IPFS.
+ * E.1 — transcode + pin video animations to Filebase IPFS.
  *
- * The stills (posters) are already pinned by pin-assets. This pins the actual
- * video/gif for the 50 video pieces, recording animation.{cid,sha256,bytes,mime,
- * gateway} into the manifest so the piece page can play it (still = poster).
- * Interactive-HTML generators are handled separately (iframe embed), not here.
+ * We serve ONLY a lightweight web transcode (1080p H.264, faststart) — never the
+ * 250MB+ masters. The master is downloaded only to transcode it, then discarded;
+ * anyone who wants the full original uses the "View original" link to the source.
+ * Records animation.{cid,sha256,bytes,gateway} (the transcode) + keeps
+ * animation.source (the master URL) for that link. Still = poster.
  *
  * Usage: node scripts/pin-videos.mjs [--refresh] [--limit N] [--only a,b]
  */
-import { readFileSync, writeFileSync } from "fs";
+import { readFileSync, writeFileSync, unlinkSync } from "fs";
 import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
+import { tmpdir } from "os";
 import { createHash } from "crypto";
+import { spawnSync } from "child_process";
 import { S3Client, PutObjectCommand, HeadObjectCommand } from "@aws-sdk/client-s3";
+import ffmpeg from "@ffmpeg-installer/ffmpeg";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
@@ -48,30 +52,49 @@ function toFetchUrl(u) {
   return null;
 }
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const sha = (b) => createHash("sha256").update(b).digest("hex");
+
 async function dl(url, attempt = 1) {
   const c = new AbortController();
-  const t = setTimeout(() => c.abort(), 180000);
+  const t = setTimeout(() => c.abort(), 300000);
   try {
     const r = await fetch(url, { signal: c.signal, headers: { "User-Agent": "dcf-gallery-pinner" } });
     if (!r.ok) throw new Error("HTTP " + r.status);
-    return { buf: Buffer.from(await r.arrayBuffer()), mime: (r.headers.get("content-type") || "video/mp4").split(";")[0] };
+    return Buffer.from(await r.arrayBuffer());
   } catch (e) {
-    if (attempt < 3) { await sleep(3000 * attempt); return dl(url, attempt + 1); }
+    if (attempt < 3) { await sleep(4000 * attempt); return dl(url, attempt + 1); }
     throw e;
   } finally { clearTimeout(t); }
 }
-async function pin(key, buf, mime) {
-  await s3.send(new PutObjectCommand({ Bucket: BUCKET, Key: key, Body: buf, ContentType: mime }));
-  const h = await s3.send(new HeadObjectCommand({ Bucket: BUCKET, Key: key }));
-  return h.Metadata?.cid;
+
+// 1080p H.264 web transcode (faststart for streaming, AAC audio). No upscaling.
+function transcode(masterBuf, slug) {
+  const inPath = resolve(tmpdir(), `dcf-${slug.replace(/[^a-z0-9]/gi, "")}-in`);
+  const outPath = resolve(tmpdir(), `dcf-${slug.replace(/[^a-z0-9]/gi, "")}-out.mp4`);
+  writeFileSync(inPath, masterBuf);
+  const r = spawnSync(ffmpeg.path, [
+    "-y", "-i", inPath,
+    "-vf", "scale=-2:'min(1080,ih)'",
+    "-c:v", "libx264", "-preset", "fast", "-crf", "22", "-pix_fmt", "yuv420p",
+    "-movflags", "+faststart",
+    "-c:a", "aac", "-b:a", "128k",
+    outPath,
+  ], { stdio: "ignore", maxBuffer: 1 << 30 });
+  let out = null;
+  try { out = readFileSyncSafe(outPath); } catch { /* */ }
+  try { unlinkSync(inPath); } catch { /* */ }
+  try { unlinkSync(outPath); } catch { /* */ }
+  if (r.status !== 0 || !out) throw new Error(`ffmpeg failed (status ${r.status})`);
+  return out;
 }
+function readFileSyncSafe(p) { return readFileSync(p); }
 
 const man = JSON.parse(readFileSync(OUT, "utf8"));
 let targets = Object.entries(man).filter(
-  ([, v]) => v.animation && ["video", "gif"].includes(v.animation.type) && (REFRESH || !v.animation.cid),
+  ([, v]) => v.animation && ["video", "gif"].includes(v.animation.type) && (REFRESH || !v.animation.transcoded),
 );
 if (ONLY) targets = targets.filter(([slug]) => ONLY.has(slug));
-console.log(`${targets.length} video/gif animations to pin`);
+console.log(`${targets.length} video/gif animations to transcode + pin`);
 
 let done = 0, ok = 0, fail = 0;
 for (const [slug, v] of targets) {
@@ -79,18 +102,23 @@ for (const [slug, v] of targets) {
   try {
     const url = toFetchUrl(v.animation.source);
     if (!url) { fail++; console.log(`  ✗ ${slug}: unfetchable`); done++; continue; }
-    const { buf, mime } = await dl(url);
-    const cid = await pin(`animations/${slug}`, buf, mime);
-    Object.assign(v.animation, {
-      cid, sha256: createHash("sha256").update(buf).digest("hex"),
-      bytes: buf.length, mime, gateway: `https://${GATEWAY}/ipfs/${cid}`, pinned: true,
-    });
-    ok++; process.stdout.write("●");
-  } catch (e) { fail++; console.log(`\n  ✗ ${slug}: ${e.message}`); }
+    const master = await dl(url);
+    const out = transcode(master, slug);
+    const cid = (await (async () => {
+      await s3.send(new PutObjectCommand({ Bucket: BUCKET, Key: `animations/${slug}`, Body: out, ContentType: "video/mp4" }));
+      const h = await s3.send(new HeadObjectCommand({ Bucket: BUCKET, Key: `animations/${slug}` }));
+      return h.Metadata?.cid;
+    })());
+    v.animation = {
+      ...v.animation, cid, sha256: sha(out), bytes: out.length, mime: "video/mp4",
+      gateway: `https://${GATEWAY}/ipfs/${cid}`, pinned: true, transcoded: true,
+      masterBytes: master.length, // for reference; master is NOT pinned
+    };
+    ok++;
+    console.log(`  ● ${slug}: ${Math.round(master.length / 1048576)}MB → ${Math.round(out.length / 1048576 * 10) / 10}MB`);
+  } catch (e) { fail++; console.log(`  ✗ ${slug}: ${e.message}`); }
   done++;
   if (done % 2 === 0) writeFileSync(OUT, JSON.stringify(man, null, 2) + "\n");
-  process.stdout.write(` ${ok}✓ ${fail}✗\n`);
-  await sleep(200);
 }
 writeFileSync(OUT, JSON.stringify(man, null, 2) + "\n");
-console.log(`\nPinned ${ok} | Failed ${fail} / ${done}`);
+console.log(`\nTranscoded + pinned ${ok} | Failed ${fail} / ${done}`);

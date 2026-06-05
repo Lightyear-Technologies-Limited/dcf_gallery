@@ -18,7 +18,7 @@ interface Props {
   lqip?: string;
   /** When present, the artwork is a video — rendered with PieceVideo (still
       poster + opt-in autoplay) instead of the static image. (E.1) */
-  video?: { src: string; poster?: string };
+  video?: { src: string; poster?: string; original?: string };
   /** Natural pixel dimensions of the artwork file, when known. Used to size
       the Image box at the true intrinsic aspect (else next/image defaults to
       the 4:3 of the placeholder width/height props and tall pieces letterbox). */
@@ -127,7 +127,7 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
   const imgW = aspect?.w ?? 1600;
   const imgH = aspect?.h ?? 1200;
   const artworkBlock = video ? (
-    <PieceVideo src={video.src} poster={video.poster} title={title} />
+    <PieceVideo src={video.src} poster={video.poster} title={title} original={video.original} />
   ) : image ? (
     isPunk ? (
       // Punks render the on-chain SVG at full container dimensions on the
