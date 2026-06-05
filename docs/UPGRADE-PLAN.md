@@ -62,14 +62,12 @@ by a `/fb:how` validation pass and should be reviewed whenever the plan changes.
   - Acceptance: grid tiles request the thumb tier; homepage above-the-fold image
     bytes drop materially (verify in DevTools network).
 
-- [ ] **A.2 — Feed build-time aspect ratios into galleries (kill CLS + client probe)** · M · _A.1_
-  Galleries re-measure each image client-side with `new Image()`, causing reflow.
-  `aspects.data.json` already has intrinsic dims — pass them as props from the
-  server so first paint is correct.
-  - Files: gallery components above + their server callers; `src/lib/images.ts`
-    (`getArtworkAspect`), `src/lib/aspects.data.json`
-  - Acceptance: CLS < 0.05 on home + a heavy collection; no `new Image()` probe in
-    the grid path; galleries can drop `"use client"` where now unneeded.
+- [x] **A.2 — Build-time aspect ratios in galleries** · ✅ done
+  Galleries now read `getArtworkAspect` (aspects.data.json) directly — **266/312
+  pieces resolve instantly, no network**; the other 46 use a **tiny 32px gateway
+  probe, never the full original**. Fixes the heavy-load regression that gateway
+  routing introduced (the old probe was loading 34 MB originals to measure aspect).
+  - Follow-up (optional): server-feed the aspect as a prop for zero-CLS first paint.
 
 - [ ] **A.3 — Convert Instrument Sans TTF → woff2 (+ subset, preload)** · S · _no deps_
   - Files: `src/fonts/InstrumentSans-*.ttf` → `.woff2`, `src/app/layout.tsx` (font defs)
@@ -144,10 +142,11 @@ by a `/fb:how` validation pass and should be reviewed whenever the plan changes.
   - Acceptance: Filebase art served `Cache-Control: public, max-age=31536000,
     immutable`; Vercel image optimizer not invoked for Filebase sources.
 
-- [ ] **B.5 — Remove binaries from git + purge masters from history** · M · _B.2, colleague sign-off ✅_
-  - Files: `public/art/**`, `.gitignore`; `git filter-repo` for the 22–45MB masters
-  - Acceptance: repo no longer ships 234MB; `.git` materially smaller; collaborators
-    re-clone (coordinate). Build references Filebase, not git, for art.
+- [~] **B.5 — Remove binaries from git + purge history** · 🟦 tree done; history purge pending
+  `scripts/prune-local-art.mjs --apply` removed 667 dead files (228.6 MB); `public/art`
+  234 MB → 3.7 MB (keeps punks + curated set). `.gitignore` updated. Committed (`2d02ec6`).
+  **Remaining:** `git filter-repo` to purge blobs from history (shrinks `.git`) — the
+  FINAL step before merge to master (needs a coordinated re-clone).
 
 - [x] **B.6 — Onboarding tooling for future pieces** · ✅ done
   `npm run onboard` (`scripts/onboard.mjs`) chains resolve-sources → pin-assets

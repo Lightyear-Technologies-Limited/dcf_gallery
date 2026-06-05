@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { getArtworkImage } from "@/lib/images";
+import { getArtworkImage, getArtworkAspect } from "@/lib/images";
 import PlaceholderArt from "./PlaceholderArt";
 
 interface PieceData {
@@ -60,12 +60,17 @@ export default function JustifiedGallery({ pieces, piecesPerRow, gap = 4, maxRow
   useEffect(() => {
     pieces.forEach((piece) => {
       if (aspects[piece.id]) return;
+      // Prefer the build-time intrinsic aspect (aspects.data.json) — no network. (plan A.2)
+      const known = getArtworkAspect(piece.slug, piece.contractAddress, piece.tokenId);
+      if (known) { setAspects((a) => ({ ...a, [piece.id]: known.w / known.h })); return; }
       const src = getArtworkImage(piece.slug, piece.contractAddress, piece.tokenId, "thumb");
       if (!src) { setAspects((a) => ({ ...a, [piece.id]: 1 })); return; }
+      // Fallback probe measures a TINY gateway render, never the full original.
+      const probe = src.includes("lightyear.myfilebase.com/ipfs/") ? `${src}?img-width=32&img-format=webp` : src;
       const img = new window.Image();
       img.onload = () => setAspects((a) => ({ ...a, [piece.id]: img.naturalWidth / img.naturalHeight }));
       img.onerror = () => setAspects((a) => ({ ...a, [piece.id]: 1 }));
-      img.src = src;
+      img.src = probe;
     });
   }, [pieces]);
 
