@@ -19,9 +19,10 @@ by a `/fb:how` validation pass and should be reviewed whenever the plan changes.
 > The single highest-severity issue in the repo is **data loss**, independent of
 > any feature. Close it before anything else.
 
-- [→] **P0.1 — Freeze & extract editorial content** · M · ↪ folded into C.4
-  (acute data-loss risk is now closed by P0.2's guard; doing the full extraction
-  once in C.4 avoids throwaway interim work — flagged to user 2026-06-04)
+- [x] **P0.1 — Freeze & extract editorial content** · ✅ done in C.4 (commit below)
+  (acute data-loss risk was closed by P0.2's guard; the full extraction landed with
+  C.4 — `scripts/extract-editorial.mjs` pulled every artist bio/essay + collection
+  curator note/essay out of `data.ts` into `content/editorial/*.json`.)
   Extract every human-written field out of the 5,703-line `src/lib/data.ts` into a
   separate, valid, schema-validated source before anyone re-runs the importer.
   - Files: new `content/editorial/*.json` (or `.md`), `scripts/extract-editorial.mjs` (new)
@@ -191,14 +192,20 @@ by a `/fb:how` validation pass and should be reviewed whenever the plan changes.
   `NEXT_PUBLIC_SITE_URL` (domain TBD). Verified: a shared piece unfurls with artwork
   + title + artist + description.
 
-- [ ] **C.4 — Content/copy segregation (three-layer model) + Tina-ready** · L · _P0.1_
-  Promote the P0.1 extraction into the real build join: facts ⨝ editorial ⨝ derived,
-  validated by Zod; `data.ts` becomes generated; structure files so a git-backed CMS
-  (Tina/Decap) can edit them later.
-  - Files: `content/editorial/*`, `scripts/build-data.mjs` (new join), `src/lib/data.ts`
-    (generated), `src/lib/curation.ts` (replace `as unknown as` casts with Zod types)
-  - Acceptance: editing a curator note = editing one valid file; build fails with a
-    precise path on invalid editorial data; no field has two writers.
+- [x] **C.4 — Content/copy segregation + Zod + Tina-ready** · ✅ core shipped
+  The editorial layer (the data-loss-critical slice) is live: human prose is now
+  authored in `content/editorial/{artists,collections}.json`, Zod-validated by
+  `scripts/build-editorial.mjs` (a `prebuild` + CI step) into `src/lib/editorial.data.json`,
+  and read through `src/lib/editorial.ts` (`withArtistEditorial` / `withCollectionEditorial`
+  overlay the generated `data.ts` at the fetch site, so editorial is the authoritative
+  writer; `data.ts` is a resilient fallback only).
+  - **Acceptance met:** editing a curator note = editing one valid file; the build fails
+    with a precise field path on invalid editorial (`.strict()` also rejects stray keys →
+    no field has two writers).
+  - **Deferred (smaller, lower-risk follow-ups):** rewire `scripts/import-portfolio.mjs`
+    to emit the *facts* layer only (so re-import never touches editorial — today the
+    overlay already protects it); replace the `as unknown as` casts in `curation.ts` with
+    Zod-inferred types. Both are independent of the now-complete prose extraction.
 
 - [x] **C.5 — Share affordance** · ✅ done — `ShareButton` (native Web Share sheet on
   mobile, X-intent fallback) in the piece-page link list.

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { artists, collections, getPiecesByCollection } from "@/lib/data";
+import { withArtistEditorial } from "@/lib/editorial";
 import { getArtworkImage } from "@/lib/images";
 import {
   getArtistDisplayName,
@@ -33,7 +34,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const artist = artists.find((a) => a.slug === slug);
+  const artist = withArtistEditorial(artists.find((a) => a.slug === slug));
   if (!artist) return {};
   const name = getArtistDisplayName(artist.slug, artist.name);
   const description = (artist.bio || `${name} in the Hivemind Digital Culture Fund collection.`).slice(0, 200);
@@ -47,7 +48,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function ArtistPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const artist = artists.find((a) => a.slug === slug);
+  const artist = withArtistEditorial(artists.find((a) => a.slug === slug));
   if (!artist) notFound();
 
   const artistName = getArtistDisplayName(artist.slug, artist.name);

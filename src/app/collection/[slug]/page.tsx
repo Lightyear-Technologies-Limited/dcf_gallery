@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getOgImage } from "@/lib/provenance";
 import { collections, getArtist, getCollectionsByArtist, getPiecesByCollection } from "@/lib/data";
+import { withCollectionEditorial } from "@/lib/editorial";
 import { getArtworkImage } from "@/lib/images";
 import {
   getArtistDisplayName,
@@ -32,7 +33,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const col = collections.find((c) => c.slug === slug);
+  const col = withCollectionEditorial(collections.find((c) => c.slug === slug));
   if (!col) return {};
   const name = getCollectionDisplayName(col.slug, col.name);
   const artist = getArtist(col.artistSlug);
@@ -59,7 +60,7 @@ export default async function CollectionPage({
 }) {
   const { slug } = await params;
   const sp = await searchParams;
-  const col = collections.find((c) => c.slug === slug);
+  const col = withCollectionEditorial(collections.find((c) => c.slug === slug));
   if (!col) notFound();
   if (isCollectionHidden(slug)) notFound();
 

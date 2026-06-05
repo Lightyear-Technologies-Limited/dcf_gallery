@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "content": "node scripts/build-editorial.mjs",
+    "prebuild": "npm run content",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
@@ -33,6 +35,7 @@
     "eslint-config-next": "16.2.1",
     "playwright": "^1.59.1",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "zod": "^4.4.3"
   }
 }

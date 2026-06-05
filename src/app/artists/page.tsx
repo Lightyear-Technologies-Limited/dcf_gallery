@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { artists, getPiecesByArtist, getCollectionsByArtist } from "@/lib/data";
+import { getArtistEditorial } from "@/lib/editorial";
 import { getArtworkImage } from "@/lib/images";
 import {
   getArtistDisplayName,
@@ -106,9 +107,9 @@ export default function ArtistsPage() {
                 <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mt-4 tabular-nums">
                   {visibleCols.length} collection{visibleCols.length !== 1 ? "s" : ""} &middot; {allWorks.length} works
                 </p>
-                {artist.bio && (
+                {(getArtistEditorial(artist.slug)?.bio ?? artist.bio) && (
                   <p className="text-[15px] text-foreground-secondary leading-[1.65] mt-6 max-w-[400px]">
-                    {artist.bio}
+                    {(getArtistEditorial(artist.slug)?.bio ?? artist.bio)}
                   </p>
                 )}
               </div>
