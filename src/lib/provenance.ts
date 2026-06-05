@@ -21,7 +21,16 @@ export type ProvenanceEntry = {
   verified?: boolean;
   variants?: { w: number; cid: string; bytes: number }[];
   lqip?: string;
-  animation?: { source: string; type: string; pinned: boolean };
+  animation?: {
+    source: string;
+    type: string;
+    pinned: boolean;
+    cid?: string;
+    sha256?: string;
+    bytes?: number;
+    mime?: string;
+    gateway?: string;
+  };
 };
 
 const PROVENANCE = provenanceRaw as Record<string, ProvenanceEntry>;

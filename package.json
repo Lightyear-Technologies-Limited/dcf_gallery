@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit",
     "sources": "node scripts/resolve-sources.mjs",
     "pin": "node scripts/pin-assets.mjs",
+    "pin-videos": "node scripts/pin-videos.mjs",
     "verify-pins": "node scripts/verify-pins.mjs",
     "audit": "node scripts/audit-assets.mjs",
     "onboard": "node scripts/onboard.mjs",

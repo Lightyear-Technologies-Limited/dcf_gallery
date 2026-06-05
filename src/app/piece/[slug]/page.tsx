@@ -193,6 +193,11 @@ export default async function PiecePage({
   const isMultiPieceSeries = /^1\/1\/\d/.test(collectionEditionType);
   // Preservation provenance (C.2): real CID + sha256 from the Filebase pin.
   const provenance = getProvenance(piece.slug);
+  // Animated/video pieces (E.1): play the pinned video with the sharp still as poster.
+  const animatedVideo =
+    provenance?.animation?.cid && provenance.animation.type === "video" && provenance.animation.gateway
+      ? { src: provenance.animation.gateway, poster: getDetailVariants(piece.slug)?.src }
+      : undefined;
   const STORAGE_LABEL: Record<string, string> = {
     ipfs: "IPFS", arweave: "Arweave", onchain: "On-chain", centralized: "Centralized",
   };
@@ -271,6 +276,7 @@ export default async function PiecePage({
           detailSrc={getDetailVariants(piece.slug)?.src}
           detailSrcSet={getDetailVariants(piece.slug)?.srcSet}
           lqip={getArtworkBlur(piece.slug)}
+          video={animatedVideo}
           aspect={getArtworkAspect(piece.slug, piece.contractAddress, piece.tokenId)}
           title={piece.title}
           isPunk={isPunk}
