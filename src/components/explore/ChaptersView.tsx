@@ -146,7 +146,7 @@ export default function ChaptersView({ chapters }: { chapters: ChapterData[] }) 
                     return (
                       <Link
                         key={w.id}
-                        href={`/piece/${w.slug}`}
+                        href={`/piece/${w.slug}?from=chapters`}
                         title={w.title}
                         style={{ aspectRatio: `${ratio}` }}
                         className={`group relative block h-[180px] sm:h-[220px] lg:h-[260px] shrink-0 overflow-hidden bg-surface ${

@@ -22,6 +22,7 @@ interface Props {
   rowMap: Record<string, number>; // pieceSlug -> rowNumber
   fallbackPerRow: number; // for pieces not in rowMap
   gap?: number;
+  hrefSearch?: string;
 }
 
 /**
@@ -30,7 +31,7 @@ interface Props {
  * Pieces without explicit rows are appended at the end using fallbackPerRow.
  * Each row fills container width; row heights vary by aspect.
  */
-export default function FixedRowGallery({ pieces, rowMap, fallbackPerRow, gap = 4 }: Props) {
+export default function FixedRowGallery({ pieces, rowMap, fallbackPerRow, gap = 4, hrefSearch }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0);
   const [aspects, setAspects] = useState<Record<string, number>>({});
@@ -109,7 +110,7 @@ export default function FixedRowGallery({ pieces, rowMap, fallbackPerRow, gap = 
               return (
                 <Link
                   key={piece.id}
-                  href={`/piece/${piece.slug}`}
+                  href={`/piece/${piece.slug}${hrefSearch ? `?${hrefSearch}` : ""}`}
                   style={{ width: w > 0 ? `${w}px` : undefined, height: "100%" }}
                   className={`block shrink-0 overflow-hidden ${isPunk ? "bg-[#638596]" : ""}`}
                 >

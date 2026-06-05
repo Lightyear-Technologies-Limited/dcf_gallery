@@ -33,6 +33,7 @@ interface Props {
   /** Pieces-per-row for the leftover pieces below the composite block. */
   fallbackPerRow: number;
   gap?: number;
+  hrefSearch?: string;
 }
 
 /**
@@ -50,11 +51,12 @@ export default function HeroSidebarGallery({
   sidebarSlugs,
   fallbackPerRow,
   gap = 4,
+  hrefSearch,
 }: Props) {
   const hero = pieces.find((p) => p.slug === heroSlug);
   if (!hero) {
     // Hero not in this collection - fall back to plain justified gallery.
-    return <JustifiedGallery pieces={pieces} piecesPerRow={fallbackPerRow} gap={gap} />;
+    return <JustifiedGallery pieces={pieces} piecesPerRow={fallbackPerRow} gap={gap} hrefSearch={hrefSearch} />;
   }
 
   const heroSrc = getArtworkImage(hero.slug, hero.contractAddress, hero.tokenId, "detail");
@@ -98,7 +100,7 @@ export default function HeroSidebarGallery({
       >
         {/* Hero - spans the first sidebarRows × sidebarRows cells */}
         <Link
-          href={`/piece/${hero.slug}`}
+          href={`/piece/${hero.slug}${hrefSearch ? `?${hrefSearch}` : ""}`}
           className={`block overflow-hidden ${isPunkHero ? "bg-[#638596]" : ""}`}
           style={{
             gridColumn: `1 / span ${sidebarRows}`,
@@ -132,7 +134,7 @@ export default function HeroSidebarGallery({
           return (
             <Link
               key={p.id}
-              href={`/piece/${p.slug}`}
+              href={`/piece/${p.slug}${hrefSearch ? `?${hrefSearch}` : ""}`}
               className={`block overflow-hidden ${isPunk ? "bg-[#638596]" : ""}`}
             >
               {src ? (
@@ -159,7 +161,7 @@ export default function HeroSidebarGallery({
       {/* Leftover pieces below the composite block */}
       {leftover.length > 0 && (
         <div style={{ marginTop: `${gap}px` }}>
-          <JustifiedGallery pieces={leftover} piecesPerRow={fallbackPerRow} gap={gap} />
+          <JustifiedGallery pieces={leftover} piecesPerRow={fallbackPerRow} gap={gap} hrefSearch={hrefSearch} />
         </div>
       )}
     </div>

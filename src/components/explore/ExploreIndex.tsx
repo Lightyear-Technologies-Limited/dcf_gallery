@@ -110,7 +110,17 @@ export default function ExploreIndex({ items, chapters, artists, collections, me
   }, [filtered]);
 
   const hasFilters = chapter || artist || collection || medium || query;
-  const hrefSearch = artist || collection || chapter ? "" : ""; // piece pages don't read these; keep Back clean
+  // Tile links carry the origin (+ active filters) so the piece page's Back link
+  // returns here, to the Index in its current filtered state.
+  const hrefSearch = useMemo(() => {
+    const p = new URLSearchParams({ from: "index" });
+    if (chapter) p.set("chapter", chapter);
+    if (artist) p.set("artist", artist);
+    if (collection) p.set("collection", collection);
+    if (medium) p.set("medium", medium);
+    if (query) p.set("q", query);
+    return p.toString();
+  }, [chapter, artist, collection, medium, query]);
 
   return (
     <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 pb-24">

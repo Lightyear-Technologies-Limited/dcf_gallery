@@ -81,7 +81,7 @@ export default function ConstellationView({ chapters }: { chapters: ChapterData[
       <div className="hidden lg:block">
         <div className="relative w-full h-[calc(100vh-200px)] min-h-[560px] overflow-hidden">
           {/* Faint constellation figure-lines (one polyline per chapter). */}
-          <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden>
+          <svg className="pointer-events-none absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden>
             {clusters.map((c) => (
               <polyline
                 key={c.slug}
@@ -99,12 +99,12 @@ export default function ConstellationView({ chapters }: { chapters: ChapterData[
           {clusters.map((c, ci) => (
             <div
               key={c.slug}
-              className="dcf-drift absolute inset-0"
+              className="dcf-drift pointer-events-none absolute inset-0"
               style={{ ["--dur"]: `${19 + ci * 2.6}s`, ["--dly"]: `${ci * 1.6}s` } as React.CSSProperties}
             >
               <Link
                 href={`/explore?view=index&chapter=${c.slug}`}
-                className="absolute -translate-x-1/2 -translate-y-1/2 whitespace-nowrap font-serif text-[clamp(1.3rem,2.3vw,2.3rem)] text-foreground/[0.14] hover:text-foreground/30 transition-colors duration-300"
+                className="pointer-events-auto absolute -translate-x-1/2 -translate-y-1/2 whitespace-nowrap font-serif text-[clamp(1.3rem,2.3vw,2.3rem)] text-foreground/[0.14] hover:text-foreground/30 transition-colors duration-300"
                 style={{ left: `${c.center.x}%`, top: `${c.center.y}%` }}
                 aria-label={`View all works in ${c.name}`}
               >
@@ -114,12 +114,12 @@ export default function ConstellationView({ chapters }: { chapters: ChapterData[
               {c.nodes.map((nd) => (
                 <Link
                   key={nd.w.id}
-                  href={`/piece/${nd.w.slug}`}
+                  href={`/piece/${nd.w.slug}?from=constellation`}
                   onMouseEnter={() => setHover(nd)}
                   onMouseLeave={() => setHover((h) => (h?.w.id === nd.w.id ? null : h))}
                   onFocus={() => setHover(nd)}
                   onBlur={() => setHover((h) => (h?.w.id === nd.w.id ? null : h))}
-                  className="group absolute -translate-x-1/2 -translate-y-1/2 block p-2"
+                  className="group pointer-events-auto absolute -translate-x-1/2 -translate-y-1/2 block p-2"
                   style={{ left: `${nd.x}%`, top: `${nd.y}%` }}
                   aria-label={`${nd.w.title} — ${nd.w.artistName}, ${nd.chapter}`}
                 >

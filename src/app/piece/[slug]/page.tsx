@@ -91,7 +91,29 @@ export default async function PiecePage({
   const filterQs = incomingFilter
     ? `trait=${encodeURIComponent(incomingFilter.key)}&value=${encodeURIComponent(incomingFilter.value)}`
     : "";
-  const pieceHref = (s: string) => `/piece/${s}${filterQs ? `?${filterQs}` : ""}`;
+  // Origin view (?from=…) so Back returns to where the reader came from — the
+  // Salon, the Index (with its filters), Chapters, or the Constellation — not just
+  // up to the parent collection. Absent → fall back to the collection (legacy).
+  const from = typeof sp.from === "string" ? sp.from : "";
+  const viewParams = new URLSearchParams();
+  for (const k of ["chapter", "artist", "collection", "medium", "q"] as const) {
+    const v = typeof sp[k] === "string" ? (sp[k] as string) : "";
+    if (v) viewParams.set(k, v);
+  }
+  let originHref: string | null = null;
+  let originLabel = "";
+  if (from === "salon") { originHref = `/${viewParams.toString() ? `?${viewParams}` : ""}`; originLabel = "Salon"; }
+  else if (from === "index") { originHref = `/explore?view=index${viewParams.toString() ? `&${viewParams}` : ""}`; originLabel = "Index"; }
+  else if (from === "chapters") { originHref = "/explore?view=chapters"; originLabel = "Chapters"; }
+  else if (from === "constellation") { originHref = "/explore?view=constellation"; originLabel = "Constellation"; }
+
+  // Carry the origin (and any active filters) onto Prev/Next so sibling browsing
+  // keeps the same Back destination.
+  const carry = new URLSearchParams(filterQs);
+  if (from) { carry.set("from", from); for (const [k, v] of viewParams) carry.set(k, v); }
+  const carryQs = carry.toString();
+
+  const pieceHref = (s: string) => `/piece/${s}${carryQs ? `?${carryQs}` : ""}`;
   const collectionHref = collection
     ? `/collection/${collection.slug}${filterQs ? `?${filterQs}` : ""}`
     : "/";
@@ -239,13 +261,15 @@ export default async function PiecePage({
           extended with "· {trait: value}" when filtered so the destination
           is unambiguous. */}
       <BackButton
-        href={collectionHref}
+        href={originHref || collectionHref}
         label={
-          collection
-            ? `${getCollectionDisplayName(collection.slug, collection.name)}${
-                incomingFilter ? ` · ${incomingFilter.key}: ${incomingFilter.value}` : ""
-              }`
-            : "Back"
+          originHref
+            ? originLabel
+            : collection
+              ? `${getCollectionDisplayName(collection.slug, collection.name)}${
+                  incomingFilter ? ` · ${incomingFilter.key}: ${incomingFilter.value}` : ""
+                }`
+              : "Back"
         }
       />
       {(prevPiece || nextPiece) && (

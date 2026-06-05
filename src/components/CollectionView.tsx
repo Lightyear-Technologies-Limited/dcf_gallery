@@ -129,6 +129,15 @@ export default function CollectionView({ sections, artists }: Props) {
   const hasFilters = artistFilter || chapterFilter;
   const activeChapter = chapterFilter ? CHAPTERS.find((c) => c.slug === chapterFilter) : null;
 
+  // Salon-origin breadcrumb for piece links: ?from=salon (+ active filter) so a
+  // piece's Back link returns to the homepage in its current filtered state.
+  const salonHrefSearch = (() => {
+    const p = new URLSearchParams({ from: "salon" });
+    if (artistFilter) p.set("artist", artistFilter);
+    if (chapterFilter) p.set("chapter", chapterFilter);
+    return p.toString();
+  })();
+
   // Counts for the result-count line under filters.
   const totalPieces = sections.reduce(
     (sum, s) => sum + s.collections.reduce((cs, c) => cs + c.pieces.length, 0),
@@ -280,7 +289,7 @@ export default function CollectionView({ sections, artists }: Props) {
                     </Link>
                     {(() => {
                       const heroLayout = getHeroLayout(col.slug);
-                      if (n === 1 && piece) return <SinglePieceDisplayLazy piece={piece} />;
+                      if (n === 1 && piece) return <SinglePieceDisplayLazy piece={piece} hrefSearch={salonHrefSearch} />;
                       if (heroLayout) {
                         return (
                           <HeroSidebarGallery
@@ -290,6 +299,7 @@ export default function CollectionView({ sections, artists }: Props) {
                             sidebarRows={heroLayout.sidebarRows}
                             sidebarSlugs={heroLayout.sidebarPieces}
                             fallbackPerRow={ideal}
+                            hrefSearch={salonHrefSearch}
                           />
                         );
                       }
@@ -299,10 +309,11 @@ export default function CollectionView({ sections, artists }: Props) {
                             pieces={col.pieces}
                             rowMap={col.pieceRows}
                             fallbackPerRow={ideal}
+                            hrefSearch={salonHrefSearch}
                           />
                         );
                       }
-                      return <JustifiedGallery pieces={col.pieces} piecesPerRow={ideal} />;
+                      return <JustifiedGallery pieces={col.pieces} piecesPerRow={ideal} hrefSearch={salonHrefSearch} />;
                     })()}
                   </div>
                 );
@@ -315,7 +326,7 @@ export default function CollectionView({ sections, artists }: Props) {
   );
 }
 
-function SinglePieceDisplayLazy({ piece }: { piece: PieceData }) {
+function SinglePieceDisplayLazy({ piece, hrefSearch }: { piece: PieceData; hrefSearch?: string }) {
   const src = getArtworkImage(piece.slug, piece.contractAddress, piece.tokenId, "detail");
   if (!src) return null;
   return (
@@ -324,6 +335,7 @@ function SinglePieceDisplayLazy({ piece }: { piece: PieceData }) {
       src={src}
       title={piece.title}
       isPunk={piece.collectionSlug === "cryptopunks"}
+      hrefSearch={hrefSearch}
     />
   );
 }
