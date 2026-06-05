@@ -259,23 +259,18 @@ by a `/fb:how` validation pass and should be reviewed whenever the plan changes.
   - Acceptance: the 26 pieces play per the rules above; no autoplay under reduced-
     motion or on mobile-by-default; off-screen videos paused; within perf budget.
 
-- [ ] **E.2 — Filters + free-text search** · M · _A.2_
-  Brief's full set — Artist / Collection / Movement(Chapter) / Medium — plus text
-  search, as a refined secondary surface (not replacing curation).
-  - Files: new filter/search components, `CollectionView.tsx`, a client search index
-    built from `data.ts` at build (keep it tiny / server-fed)
-  - Acceptance: filter + search work across all pieces; URL-encoded so state survives
-    nav (mirrors existing `?trait=` pattern); no heavy client payload regression.
+- [x] **E.2 — Filters + free-text search (Index view)** · ✅ done — new `/explore` route +
+  `ExploreIndex`: chapter rail + Artist/Collection/Medium filters + free-text search over a
+  re-flowing justified grid (308 works). Filters read **server-side** (URL
+  `?view=&chapter=&artist=&q=`, SSR'd + shareable); responsive per-row. Added "Explore" to
+  the header nav. Design brief: `docs/EXPLORER-BRIEF.md`.
 
-- [ ] **E.3 — Deluxe chapter-explorer navigation** · L · _A.2, E.2_ · design-led
-  An immersive, high-craft way to move between the 5 chapters and *feel* where you
-  are — the "lobby" experience. Run `shape` to design, then `impeccable`/`overdrive`/
-  `animate` to build. GPU-cheap (transforms/opacity), reduced-motion fallback, inside
-  CWV budget. Piece/gallery pages stay restrained.
-  - Files: new explorer component(s), `src/lib/chapters.ts`, home route; update
-    `.impeccable.md` principle 5 to reflect the lobby-vs-gallery split
-  - Acceptance: a distinctive, professional chapter navigation; LCP/CLS/INP budgets
-    held; degrades gracefully under reduced-motion and on mobile.
+- [~] **E.3 — Deluxe multi-view explorer** · 🟦 foundation + Index view done (E.2)
+  Per the agreed brief (`docs/EXPLORER-BRIEF.md`): a switchable, persisted multi-view system
+  (Salon / Index / Chapters / Constellation), mobile-aware, on `/explore` + a homepage
+  switcher, with a first-run tutorial + keyboard nav. **Remaining:** the **Chapters**
+  (cinematic) + **Constellation** (experiential, desktop-only) views, the view-switcher +
+  persistence, tutorial/keyboard, and the `.impeccable.md` principle-5 update.
 
 ---
 
