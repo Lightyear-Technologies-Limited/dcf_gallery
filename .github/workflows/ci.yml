@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [master, asset-pipeline-filebase]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Lint
+        run: npm run lint
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Asset audit (every piece resolves to a servable image)
+        run: npm run audit
+      - name: Build (static generation of all pages)
+        run: npm run build
+      # Follow-up (D.4): Playwright visual/smoke + Lighthouse budget once
+      # @playwright/test + baseline snapshots are added.

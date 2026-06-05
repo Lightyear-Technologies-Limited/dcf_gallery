@@ -32,7 +32,15 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   async headers() {
-    return [{ source: "/:path*", headers: securityHeaders }];
+    return [
+      { source: "/:path*", headers: securityHeaders },
+      // Local art (punk SVGs, curated crops, on-chain SVGs) is immutable; the
+      // Filebase gateway already serves its own immutable Cache-Control. (B.4)
+      {
+        source: "/art/:path*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+      },
+    ];
   },
   images: {
     // Filebase gateway does our image optimization (img-width + webp). A custom

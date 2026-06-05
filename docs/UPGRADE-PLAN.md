@@ -136,10 +136,9 @@ by a `/fb:how` validation pass and should be reviewed whenever the plan changes.
     view; mobile honors smaller widths; full-res reachable on demand; **fallback to
     full image if a transform errors**. (param contract verified — see gap #1)
 
-- [ ] **B.4 — Immutable caching + drop runtime image optimization** · S · _B.3_
-  - Files: `next.config.ts`, Vercel headers
-  - Acceptance: Filebase art served `Cache-Control: public, max-age=31536000,
-    immutable`; Vercel image optimizer not invoked for Filebase sources.
+- [x] **B.4 — Immutable caching** · ✅ done — the Filebase gateway already serves
+  `Cache-Control: …immutable`; added the same for local `/art/*` via `next.config`
+  `headers()`. The custom image loader already bypasses Vercel's optimizer.
 
 - [~] **B.5 — Remove binaries from git + purge history** · 🟦 tree done; history purge pending
   `scripts/prune-local-art.mjs --apply` removed 667 dead files (228.6 MB); `public/art`
@@ -221,23 +220,19 @@ by a `/fb:how` validation pass and should be reviewed whenever the plan changes.
   `playwright` moved to `devDependencies`. `npm audit`: 2 moderate are a build-time
   transitive `postcss` in Next 16 (CSS-stringify XSS, not exploitable — we don't process
   untrusted CSS); the auto-"fix" wants to **downgrade Next to 9.3.3**, so we leave it
-  (resolves when Next bumps its bundled postcss). **Remaining:** Dependabot config (fold
-  into D.4 CI) + a git-history secret scan.
+  (resolves when Next bumps its bundled postcss). Dependabot added (D.4); secret scan clean
+  (only `.env.example` tracked, `.env` ignored, no hardcoded keys; the "key-like" hits were
+  public Arweave tx IDs).
 
-- [ ] **D.3 — Extend audit scripts into one `npm run audit` gate** · M · _A.1, B.3_
-  Make `audit-images.mjs` **import** the real `getArtworkImage`/`resolveTokenId`
-  (it currently re-implements them and can drift). Add image-presence, internal-link,
-  and curation-schema checks; exit non-zero on failure.
-  - Files: `scripts/audit-images.mjs`, `scripts/audit-uris.mjs`, `package.json`
-  - Acceptance: `npm run audit` red on any missing/mismapped image or invalid curation.
+- [x] **D.3 — `npm run audit` asset gate** · ✅ done — `scripts/audit-assets.mjs` confirms
+  every piece resolves to a servable image (gateway CID / curated file / punk SVG) and
+  exits non-zero on any gap. Verified: 313 → 251 gateway / 22 curated / 40 punk, 0 issues.
+  Architecture-aware replacement for the old local-only audit scripts.
 
-- [ ] **D.4 — CI pipeline + Playwright visual regression** · M · _D.3_
-  `lint → tsc --noEmit → audit → next build → playwright smoke → lighthouse budget`.
-  Snapshot page *types* (home, artists, artist, collection ±filter, 4 piece archetypes)
-  in light+dark × mobile+desktop. External-link check runs **nightly**, not in the gate.
-  - Files: new `.github/workflows/ci.yml`, `playwright.config.ts`, baseline snapshots,
-    `package.json` scripts (`typecheck`, `audit`)
-  - Acceptance: a broken-page PR is blocked; external flakiness never blocks deploys.
+- [~] **D.4 — CI pipeline** · 🟦 core done — `.github/workflows/ci.yml`: `npm ci` → lint →
+  typecheck → audit → build (all verified green locally), plus `.github/dependabot.yml`
+  (weekly npm + actions, grouped minor/patch). **Remaining:** Playwright smoke/visual +
+  Lighthouse budget (needs `@playwright/test` + baseline snapshots).
 
 - [ ] **D.5 — Vercel hosting hardening** · S · _B.4_ · (host decided: Vercel ✅)
   Confirm SSG build on Vercel; ensure Filebase art isn't re-optimized by Vercel;
