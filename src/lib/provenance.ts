@@ -17,6 +17,8 @@ export type ProvenanceEntry = {
   mime?: string;
   gateway?: string;
   pinnedAt?: string;
+  verifiedAt?: string;
+  verified?: boolean;
   variants?: { w: number; cid: string; bytes: number }[];
   lqip?: string;
   animation?: { source: string; type: string; pinned: boolean };

@@ -165,7 +165,9 @@ by a `/fb:how` validation pass and should be reviewed whenever the plan changes.
 
 ## Phase C — Tier 1: content architecture, provenance & credibility
 
-- [ ] **C.1 — Provenance manifest + CI verification** · M · _B.2_
+- [x] **C.1 — Provenance manifest + verification** · ✅ done — `scripts/verify-pins.mjs`
+  (`npm run verify-pins`): re-fetch each CID → recompute sha256 → assert match → stamp
+  `verifiedAt`; exits non-zero on mismatch. Subset verified 6/6; full run + CI wiring → D.4.
   Per-piece `{ source, cid, sha256, byteLength, pins[], pinnedAt, verifiedAt }` in
   the derived layer; a CI job re-fetches each CID, recomputes the hash, asserts match.
   - Files: new `src/lib/provenance.data.json` (+ generator), `scripts/verify-pins.mjs`,
@@ -173,7 +175,10 @@ by a `/fb:how` validation pass and should be reviewed whenever the plan changes.
   - Acceptance: build/CI fails (or degrades the badge) on a hash mismatch;
     `verifiedAt` refreshed on each verification run.
 
-- [ ] **C.2 — Render preservation indicator + expandable full metadata** · M · _C.1_
+- [x] **C.2 — Preservation indicator + provenance rows** · ✅ done — visible "Preserved by
+  DCF — pinned to IPFS[· integrity verified]" line + CID(→gateway) / SHA-256 / date rows in
+  the expandable OnChainDetails, from the server-only manifest. Storage label now from real
+  provenance data.
   Surface "Preserved · pinned · CID … · verified {date}" **from the manifest**, and
   an **expandable (not default-open) full-metadata panel** with the complete
   on-chain attributes + storage provenance. "View original" → the pinned CID URL.

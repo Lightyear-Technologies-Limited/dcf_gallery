@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { pieces, getArtist, getCollection, getPiecesByCollection } from "@/lib/data";
 import { getArtworkImage, getArtworkAspect, resolveTokenId } from "@/lib/images";
-import { getDetailVariants, getArtworkBlur } from "@/lib/provenance";
+import { getDetailVariants, getArtworkBlur, getProvenance } from "@/lib/provenance";
 import { getEditionType, getArtistSiteUrl, getPieceTraits, getPieceDescription, getCollectionDisplayName, SYNTHETIC_TRAITS } from "@/lib/curation";
 import type { TraitValue } from "@/lib/curation";
 import PlaceholderArt from "@/components/PlaceholderArt";
@@ -167,6 +167,14 @@ export default async function PiecePage({
   // as plain catalogue metadata without link affordance.
   const collectionEditionType = getEditionType(piece.collectionSlug);
   const isMultiPieceSeries = /^1\/1\/\d/.test(collectionEditionType);
+  // Preservation provenance (C.2): real CID + sha256 from the Filebase pin.
+  const provenance = getProvenance(piece.slug);
+  const STORAGE_LABEL: Record<string, string> = {
+    ipfs: "IPFS", arweave: "Arweave", onchain: "On-chain", centralized: "Centralized",
+  };
+  const storageLabel =
+    (provenance?.storage && STORAGE_LABEL[provenance.storage]) ||
+    deriveStorage(piece.originalUri, piece.contractAddress);
   const metadata = (
     <div className="space-y-6">
       <Features
@@ -175,11 +183,21 @@ export default async function PiecePage({
         defaultOpen={featuresDefaultOpen}
         label={isPunk ? "Attributes" : "Traits"}
       />
+      {provenance?.cid && (
+        <p className="text-[10px] tracking-[0.12em] uppercase text-muted font-medium">
+          Preserved by DCF — pinned to IPFS{provenance.verifiedAt ? " · integrity verified" : ""}
+        </p>
+      )}
       <OnChainDetails
         contractAddress={piece.contractAddress}
         tokenId={piece.tokenId}
         editionType={collectionEditionType}
-        storage={deriveStorage(piece.originalUri, piece.contractAddress)}
+        storage={storageLabel}
+        provenance={
+          provenance?.cid
+            ? { cid: provenance.cid, sha256: provenance.sha256, pinnedAt: provenance.pinnedAt, verifiedAt: provenance.verifiedAt }
+            : undefined
+        }
       />
     </div>
   );
