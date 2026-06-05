@@ -97,6 +97,18 @@ export default function ExploreIndex({ items, chapters, artists, collections, me
     [artist, collections, items],
   );
 
+  // Group filtered pieces by collection so different collections don't run into
+  // one another — a labelled break between them. Order = first appearance.
+  const groups = useMemo(() => {
+    const map = new Map<string, { slug: string; name: string; artistName: string; items: Item[] }>();
+    for (const it of filtered) {
+      if (!map.has(it.collectionSlug))
+        map.set(it.collectionSlug, { slug: it.collectionSlug, name: it.collectionName, artistName: it.artistName, items: [] });
+      map.get(it.collectionSlug)!.items.push(it);
+    }
+    return [...map.values()];
+  }, [filtered]);
+
   const hasFilters = chapter || artist || collection || medium || query;
   const hrefSearch = artist || collection || chapter ? "" : ""; // piece pages don't read these; keep Back clean
 
@@ -146,9 +158,25 @@ export default function ExploreIndex({ items, chapters, artists, collections, me
         ))}
       </div>
 
-      {/* Grid */}
-      {filtered.length > 0 ? (
-        <JustifiedGallery pieces={filtered} piecesPerRow={perRow} hrefSearch={hrefSearch} maxRowHeight={420} />
+      {/* Grid — grouped by collection so pieces don't run into one another */}
+      {groups.length > 0 ? (
+        <div className="space-y-14">
+          {groups.map((g) => (
+            <section key={g.slug}>
+              <div className="mb-3 flex items-baseline gap-3 border-b border-border pb-2">
+                <Link
+                  href={`/collection/${g.slug}`}
+                  className="font-serif text-[19px] text-foreground-secondary hover:text-foreground transition-colors duration-200"
+                >
+                  {g.name}
+                </Link>
+                <span className="text-[12px] text-muted">{g.artistName}</span>
+                <span className="ml-auto text-[11px] text-muted font-mono tabular-nums">{g.items.length}</span>
+              </div>
+              <JustifiedGallery pieces={g.items} piecesPerRow={perRow} hrefSearch={hrefSearch} maxRowHeight={420} />
+            </section>
+          ))}
+        </div>
       ) : (
         <div className="py-24 text-center">
           <p className="font-serif text-2xl text-foreground-secondary mb-3">No works match.</p>

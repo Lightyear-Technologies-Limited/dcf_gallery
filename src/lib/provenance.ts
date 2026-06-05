@@ -65,8 +65,10 @@ export function getArtworkBlur(slug: string): string | undefined {
  *  undefined and the caller falls back to the site default card. (C.3) */
 export function getOgImage(slug: string): string | undefined {
   const p = PROVENANCE[slug];
-  if (p?.cid && p.mime && !p.mime.includes("svg")) {
-    return `https://${FILEBASE_GATEWAY}/ipfs/${p.cid}?img-width=1200&img-format=jpg`;
-  }
-  return undefined;
+  if (!p?.cid || (p.mime && p.mime.includes("svg"))) return undefined;
+  // Downscale from our sharp VARIANT, never the preservation master (which can be
+  // 50–160MB and exceeds the gateway's transform limit). SVG/no-variant fall back.
+  const v = p.variants?.find((x) => x.w === 1280) || p.variants?.[p.variants.length - 1];
+  const cid = v ? v.cid : p.cid;
+  return `https://${FILEBASE_GATEWAY}/ipfs/${cid}?img-width=1200&img-format=jpg`;
 }
