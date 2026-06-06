@@ -210,8 +210,12 @@ by a `/fb:how` validation pass and should be reviewed whenever the plan changes.
 - [x] **C.5 — Share affordance** · ✅ done — `ShareButton` (native Web Share sheet on
   mobile, X-intent fallback) in the piece-page link list.
 
-- [ ] **C.6 — Fill the 5 empty collection curator notes + audit artist notes** · M · _C.4_
-  (Content task, owner = Michael/marketing.) Acceptance: no `curatorNote: ''`.
+- [~] **C.6 — Fill the 5 empty collection curator notes + audit artist notes** · 🟦 unblocked
+  + documented; copy itself is owner = Michael/marketing. Authoring guide written:
+  `content/editorial/README.md` (what each field is, where it shows, voice, the JSON
+  rules, and the exact five to fill: `ack-editions`, `notable-pepes`, `meebit`, `x0x`,
+  `cope-salada`). Editing is now a one-file change validated on PR. Acceptance: no
+  empty `curatorNote`.
 
 ---
 
@@ -243,11 +247,14 @@ by a `/fb:how` validation pass and should be reviewed whenever the plan changes.
   routes, the Constellation interactivity fix, and back-to-origin nav. **Remaining (opt):**
   a Lighthouse performance budget once a baseline is agreed — deferred, not blocking.
 
-- [ ] **D.5 — Vercel hosting hardening** · S · _B.4_ · (host decided: Vercel ✅)
-  Confirm SSG build on Vercel; ensure Filebase art isn't re-optimized by Vercel;
-  wire env vars into Vercel project; confirm per-PR preview deploys for content review.
-  - Acceptance: production deploy from `main`; preview per PR; image bandwidth on
-    Vercel near-zero (art served by Filebase).
+- [~] **D.5 — Vercel hosting hardening** · 🟦 in-repo done + runbook; one-time dashboard
+  setup is the user's. Verified the build is SSG and that the **custom image loader
+  already bypasses Vercel's optimizer** (art served straight from Filebase / as static
+  files → Vercel image bandwidth ~0, no config change needed). Only env var Vercel needs
+  is `NEXT_PUBLIC_SITE_URL`; pipeline secrets stay local. Node pinned via `engines`.
+  Runbook: `docs/DEPLOYMENT.md` (import, env, domain, verification, preview deploys,
+  acceptance checklist). **Remaining (user):** import the repo into Vercel, set the env
+  var, point DNS — then tick the checklist.
 
 ---
 
