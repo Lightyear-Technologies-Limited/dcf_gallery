@@ -1,0 +1,66 @@
+"use client";
+
+import Image from "next/image";
+import { useState } from "react";
+
+/**
+ * On-chain interactive HTML artwork (E.1) — e.g. Kim Asendorf's generative pixel
+ * works, whose canonical form is a self-contained HTML/JS data URI. Poster-still
+ * by default (motion + reduced-motion courtesy); a "Run interactive" action loads
+ * the live render into a **sandboxed** iframe (`allow-scripts`, no same-origin —
+ * the art runs but is fully isolated from this origin). CSP allows `frame-src data:`.
+ */
+export default function InteractiveArtwork({
+  src,
+  poster,
+  title,
+}: {
+  src: string;
+  poster?: string | null;
+  title: string;
+}) {
+  const [running, setRunning] = useState(false);
+
+  return (
+    <div className="relative mx-auto aspect-square w-full max-w-[80vh] overflow-hidden bg-surface">
+      {running ? (
+        <>
+          <iframe
+            src={src}
+            title={`${title} (interactive)`}
+            sandbox="allow-scripts"
+            className="absolute inset-0 h-full w-full border-0"
+          />
+          <button
+            onClick={() => setRunning(false)}
+            className="absolute right-2 top-2 z-10 border border-border bg-background/90 px-2 py-1 text-[10px] uppercase tracking-[0.08em] text-muted backdrop-blur-sm transition-colors duration-200 hover:text-foreground"
+          >
+            Show still
+          </button>
+        </>
+      ) : (
+        <>
+          {poster && (
+            <Image
+              src={poster}
+              alt={title}
+              width={1200}
+              height={1200}
+              sizes="(max-width: 768px) 90vw, 60vw"
+              className="h-full w-full object-contain"
+            />
+          )}
+          <button
+            onClick={() => setRunning(true)}
+            aria-label={`Run ${title} interactive`}
+            className="group absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-200 hover:bg-black/10"
+          >
+            <span className="flex items-center gap-2 border border-border bg-background/90 px-4 py-2 text-[12px] uppercase tracking-[0.08em] text-foreground backdrop-blur-sm">
+              <span aria-hidden>▶</span> Run interactive
+            </span>
+          </button>
+        </>
+      )}
+    </div>
+  );
+}

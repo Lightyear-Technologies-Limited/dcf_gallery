@@ -12,6 +12,7 @@ interface Props {
   imgSrc: string;
   isPunk?: boolean;
   sizes?: string;
+  quality?: number;
 }
 
 /**
@@ -23,7 +24,7 @@ interface Props {
  * A small glyph marks reels. The tile remains a link to the piece (the parent
  * wraps this), so on touch a tap opens the piece where the reel plays full.
  */
-export default function GridArtwork({ slug, title, imgSrc, isPunk = false, sizes = "500px" }: Props) {
+export default function GridArtwork({ slug, title, imgSrc, isPunk = false, sizes = "500px", quality }: Props) {
   const video = getVideoSrc(slug);
   const { mode, reduced } = useMotion();
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -66,6 +67,7 @@ export default function GridArtwork({ slug, title, imgSrc, isPunk = false, sizes
         width={800}
         height={800}
         sizes={sizes}
+        quality={quality}
         className={`h-full w-full ${isPunk ? "[image-rendering:pixelated] object-contain" : "object-cover"}`}
       />
       {video && showVideo && (

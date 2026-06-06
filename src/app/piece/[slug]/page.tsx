@@ -220,6 +220,12 @@ export default async function PiecePage({
     provenance?.animation?.cid && provenance.animation.type === "video" && provenance.animation.gateway
       ? { src: provenance.animation.gateway, poster: getDetailVariants(piece.slug)?.src, original: provenance.animation.source }
       : undefined;
+  // Generative/interactive HTML pieces (E.1): the still stays the canonical
+  // display; expose the live generator as a "Launch interactive" link.
+  const interactive =
+    provenance?.animation?.type === "interactive-html" && provenance.animation.source
+      ? { src: provenance.animation.source }
+      : undefined;
   const STORAGE_LABEL: Record<string, string> = {
     ipfs: "IPFS", arweave: "Arweave", onchain: "On-chain", centralized: "Centralized",
   };
@@ -301,6 +307,7 @@ export default async function PiecePage({
           detailSrcSet={getDetailVariants(piece.slug)?.srcSet}
           lqip={getArtworkBlur(piece.slug)}
           video={animatedVideo}
+          interactive={interactive}
           aspect={getArtworkAspect(piece.slug, piece.contractAddress, piece.tokenId)}
           title={piece.title}
           isPunk={isPunk}

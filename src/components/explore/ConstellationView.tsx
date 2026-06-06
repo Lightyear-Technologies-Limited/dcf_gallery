@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 import { getArtworkImage } from "@/lib/images";
+import { isVideo } from "@/lib/videos";
 
 interface Work {
   id: string;
@@ -158,6 +159,7 @@ function Preview({ node }: { node: Node }) {
   const src = getArtworkImage(node.w.slug, node.w.contractAddress, node.w.tokenId, "thumb");
   const below = node.y < 30;
   const isPunk = node.w.collectionSlug === "cryptopunks";
+  const reel = isVideo(node.w.slug);
   return (
     <div
       className="pointer-events-none absolute z-20 w-44"
@@ -178,6 +180,14 @@ function Preview({ node }: { node: Node }) {
               sizes="176px"
               className={`h-full w-full ${isPunk ? "[image-rendering:pixelated] object-contain" : "object-cover"}`}
             />
+          )}
+          {reel && (
+            <span
+              aria-hidden
+              className="absolute bottom-1.5 right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-black/45 text-[7px] text-white"
+            >
+              ▶
+            </span>
           )}
         </div>
         <div className="px-3 py-2.5">

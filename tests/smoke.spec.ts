@@ -86,6 +86,14 @@ test.describe("smoke", () => {
     await expect(page.locator("video").first()).toBeAttached({ timeout: 15000 });
   });
 
+  test("interactive: on-chain HTML runs in a sandboxed iframe on demand", async ({ page }) => {
+    await page.goto("/piece/pxl-dex-105-ecfb");
+    const run = page.getByRole("button", { name: /Run .* interactive/i });
+    await expect(run).toBeVisible();
+    await run.click();
+    await expect(page.locator('iframe[sandbox="allow-scripts"]')).toBeVisible();
+  });
+
   test("back-to-origin: salon tiles tag from=salon and back to Salon", async ({ page }) => {
     await page.goto("/");
     const tile = page.locator('a[href^="/piece/"]').first();

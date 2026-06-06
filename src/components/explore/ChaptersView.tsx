@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { getArtworkImage, getArtworkAspect } from "@/lib/images";
 import PlaceholderArt from "../PlaceholderArt";
+import GridArtwork from "../GridArtwork";
 
 interface Work {
   id: string;
@@ -154,16 +154,7 @@ export default function ChaptersView({ chapters }: { chapters: ChapterData[] }) 
                         }`}
                       >
                         {src ? (
-                          <Image
-                            src={src}
-                            alt={w.title}
-                            width={700}
-                            height={700}
-                            sizes="320px"
-                            className={`h-full w-full transition-opacity duration-300 group-hover:opacity-90 ${
-                              isPunk ? "[image-rendering:pixelated] object-contain" : "object-cover"
-                            }`}
-                          />
+                          <GridArtwork slug={w.slug} title={w.title} imgSrc={src} isPunk={isPunk} sizes="320px" />
                         ) : (
                           <PlaceholderArt collectionSlug={w.collectionSlug} pieceSlug={w.slug} className="h-full w-full" />
                         )}

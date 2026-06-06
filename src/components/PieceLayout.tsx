@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import ShareButton from "./ShareButton";
 import PieceVideo from "./PieceVideo";
+import InteractiveArtwork from "./InteractiveArtwork";
 
 interface Props {
   image: string | null;
@@ -19,6 +20,9 @@ interface Props {
   /** When present, the artwork is a video — rendered with PieceVideo (still
       poster + opt-in autoplay) instead of the static image. (E.1) */
   video?: { src: string; poster?: string; original?: string };
+  /** When the piece is an interactive on-chain HTML work, its data: URI — shown
+      poster-by-default and run on demand inside a sandboxed iframe. (E.1) */
+  interactive?: { src: string };
   /** Natural pixel dimensions of the artwork file, when known. Used to size
       the Image box at the true intrinsic aspect (else next/image defaults to
       the 4:3 of the placeholder width/height props and tall pieces letterbox). */
@@ -117,7 +121,7 @@ function resolveOriginal(uri: string): { href: string; label: string } | null {
 /**
  * Piece layout: image on the left, details on the right.
  */
-export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, video, aspect, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, holdingNote, description, collectionDescription, physical, companion, metadata, rasterUrl, cryptopunksUrl, artistSiteUrl, originalUri, placeholder }: Props) {
+export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, video, interactive, aspect, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, holdingNote, description, collectionDescription, physical, companion, metadata, rasterUrl, cryptopunksUrl, artistSiteUrl, originalUri, placeholder }: Props) {
   const artistHost = artistSiteUrl ? hostLabel(artistSiteUrl) : null;
   const original = originalUri ? resolveOriginal(originalUri) : null;
   // When natural aspect is known, pass it as width/height props so next/image
@@ -128,6 +132,8 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
   const imgH = aspect?.h ?? 1200;
   const artworkBlock = video ? (
     <PieceVideo src={video.src} poster={video.poster} title={title} original={video.original} />
+  ) : interactive ? (
+    <InteractiveArtwork src={interactive.src} poster={image} title={title} />
   ) : image ? (
     isPunk ? (
       // Punks render the on-chain SVG at full container dimensions on the

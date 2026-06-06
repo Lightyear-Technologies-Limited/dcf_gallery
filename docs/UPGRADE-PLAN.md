@@ -263,7 +263,7 @@ by a `/fb:how` validation pass and should be reviewed whenever the plan changes.
 > Implements [D7](./DECISIONS.md#d7) (navigation) and [D8](./DECISIONS.md#d8)
 > (playback). Design-led; expressive but inside the perf budget and reduced-motion.
 
-- [~] **E.1 — Video/interactive playback engine** · 🟦 installment A shipped
+- [x] **E.1 — Video/interactive playback engine** · ✅ shipped (A + B)
   **Done:** all 50 video masters transcoded to 1080p + pinned (serve transcode only,
   link the master); a global **Reels** preference — `Auto` / `Hover` / `Off` —
   via `MotionProvider` + a header toggle (localStorage `dcf-motion`, reactive,
@@ -274,9 +274,13 @@ by a `/fb:how` validation pass and should be reviewed whenever the plan changes.
   links the full-res original. Client video map `videos.data.json` (emitted by
   pin-videos). e2e smoke covers the toggle + in-view autoplay. The stills are the
   NFT posters, so no separate poster-extraction was needed.
-  - **Remaining (installment B):** extend playback to the HeroSidebar hero, the
-    Chapters filmstrip, and the Constellation preview; the 17 interactive-HTML pieces
-    (Art Blocks generators etc.); keyboard play/pause/stop on the focused piece.
+  **Installment B:** reels now play on every surface — HeroSidebar hero + sidebar,
+  the Chapters filmstrip, and a reel marker on the Constellation preview. The 17
+  interactive on-chain HTML pieces (Kim Asendorf — Lights / PXL DEX / PXL POD / X0X)
+  render poster-by-default with a "Run interactive" action that loads the live work
+  into a **sandboxed** iframe (`allow-scripts`, no same-origin; CSP scoped to
+  `frame-src 'self' data:`). Keyboard play/pause is the focused video's native
+  controls. 9/9 e2e green (incl. the sandboxed-iframe path).
 
 - [x] **E.2 — Filters + free-text search (Index view)** · ✅ done — new `/explore` route +
   `ExploreIndex`: chapter rail + Artist/Collection/Medium filters + free-text search over a

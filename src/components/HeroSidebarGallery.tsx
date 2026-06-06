@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { getArtworkImage } from "@/lib/images";
 import PlaceholderArt from "./PlaceholderArt";
 import JustifiedGallery from "./JustifiedGallery";
+import GridArtwork from "./GridArtwork";
 
 interface PieceData {
   id: string;
@@ -108,15 +108,7 @@ export default function HeroSidebarGallery({
           }}
         >
           {heroSrc ? (
-            <Image
-              src={heroSrc}
-              alt={hero.title}
-              width={1200}
-              height={1200}
-              className={`w-full h-full ${isPunkHero ? "[image-rendering:pixelated] object-contain" : "object-cover"}`}
-              quality={95}
-              sizes="(max-width: 1024px) 60vw, 720px"
-            />
+            <GridArtwork slug={hero.slug} title={hero.title} imgSrc={heroSrc} isPunk={isPunkHero} quality={95} sizes="(max-width: 1024px) 60vw, 720px" />
           ) : (
             <PlaceholderArt
               collectionSlug={hero.collectionSlug}
@@ -138,14 +130,7 @@ export default function HeroSidebarGallery({
               className={`block overflow-hidden ${isPunk ? "bg-[#638596]" : ""}`}
             >
               {src ? (
-                <Image
-                  src={src}
-                  alt={p.title}
-                  width={400}
-                  height={400}
-                  className={`w-full h-full ${isPunk ? "[image-rendering:pixelated] object-contain" : "object-cover"}`}
-                  sizes="240px"
-                />
+                <GridArtwork slug={p.slug} title={p.title} imgSrc={src} isPunk={isPunk} sizes="240px" />
               ) : (
                 <PlaceholderArt
                   collectionSlug={p.collectionSlug}
