@@ -122,14 +122,5 @@ for (const [slug, v] of targets) {
 }
 writeFileSync(OUT, JSON.stringify(man, null, 2) + "\n");
 
-// Slim slug→transcode-URL map for the CLIENT (motion-aware galleries + piece
-// page), so the heavy full manifest never reaches the bundle. (E.1)
-const videoMap = {};
-for (const [slug, v] of Object.entries(man)) {
-  if (v.animation && v.animation.type === "video" && v.animation.cid) {
-    videoMap[slug] = v.animation.gateway || `https://${GATEWAY}/ipfs/${v.animation.cid}`;
-  }
-}
-writeFileSync(resolve(ROOT, "src/lib/videos.data.json"), JSON.stringify(videoMap) + "\n");
 console.log(`\nTranscoded + pinned ${ok} | Failed ${fail} / ${done}`);
-console.log(`Wrote videos.data.json (${Object.keys(videoMap).length} reels)`);
+console.log("Run `node scripts/build-motion.mjs` to refresh the client motion map.");

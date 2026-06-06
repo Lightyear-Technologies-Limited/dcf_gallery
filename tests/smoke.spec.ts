@@ -81,7 +81,7 @@ test.describe("smoke", () => {
     });
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto("/collection/winds-of-yawanawa");
-    await expect(page.locator('[title="Reel"]').first()).toBeVisible();
+    await expect(page.locator('[title="Animated"]').first()).toBeVisible();
     // In "Auto" on desktop, an in-view tile mounts its <video> element.
     await expect(page.locator("video").first()).toBeAttached({ timeout: 15000 });
   });

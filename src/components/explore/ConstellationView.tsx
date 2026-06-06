@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 import { getArtworkImage } from "@/lib/images";
-import { isVideo } from "@/lib/videos";
+import { hasMotion } from "@/lib/motion";
 
 interface Work {
   id: string;
@@ -159,7 +159,7 @@ function Preview({ node }: { node: Node }) {
   const src = getArtworkImage(node.w.slug, node.w.contractAddress, node.w.tokenId, "thumb");
   const below = node.y < 30;
   const isPunk = node.w.collectionSlug === "cryptopunks";
-  const reel = isVideo(node.w.slug);
+  const reel = hasMotion(node.w.slug);
   return (
     <div
       className="pointer-events-none absolute z-20 w-44"
