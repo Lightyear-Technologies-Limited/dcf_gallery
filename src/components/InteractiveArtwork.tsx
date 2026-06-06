@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useMotion } from "./MotionPreference";
 
 /**
  * On-chain interactive HTML artwork (E.1) — e.g. Kim Asendorf's generative pixel
@@ -20,6 +21,14 @@ export default function InteractiveArtwork({
   title: string;
 }) {
   const [running, setRunning] = useState(false);
+  const { mode, reduced } = useMotion();
+
+  // On "Auto", run the live work immediately (it IS the artwork); otherwise the
+  // still shows with a "Run interactive" action. Mobile/reduced-motion stay still.
+  useEffect(() => {
+    const small = window.matchMedia("(max-width: 768px)").matches;
+    if (mode === "play-all" && !reduced && !small) setRunning(true);
+  }, [mode, reduced]);
 
   return (
     <div className="relative mx-auto aspect-square w-full max-w-[80vh] overflow-hidden bg-surface">

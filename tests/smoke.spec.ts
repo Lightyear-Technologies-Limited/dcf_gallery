@@ -94,6 +94,15 @@ test.describe("smoke", () => {
     await expect(page.locator('iframe[sandbox="allow-scripts"]')).toBeVisible();
   });
 
+  test("interactive: Auto runs on-chain HTML in galleries (sandboxed iframe)", async ({ page }) => {
+    await page.addInitScript(() => {
+      try { localStorage.setItem("dcf-motion", "play-all"); } catch { /* ignore */ }
+    });
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/collection/pxl-dex");
+    await expect(page.locator('iframe[sandbox="allow-scripts"]').first()).toBeAttached({ timeout: 15000 });
+  });
+
   test("back-to-origin: salon tiles tag from=salon and back to Salon", async ({ page }) => {
     await page.goto("/");
     const tile = page.locator('a[href^="/piece/"]').first();

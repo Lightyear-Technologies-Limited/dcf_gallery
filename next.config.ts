@@ -15,9 +15,10 @@ const csp = [
   "script-src 'self' 'unsafe-inline'",
   "font-src 'self'",
   "connect-src 'self'",
-  // On-chain interactive HTML art (Kim Asendorf, etc.) is embedded as a data: URI
-  // in a sandboxed iframe (allow-scripts, no same-origin). Scoped to that. (E.1)
-  "frame-src 'self' data:",
+  // On-chain interactive HTML art (Kim Asendorf, etc.) runs in a sandboxed iframe
+  // (allow-scripts, no same-origin) — pinned HTML from the gateway in galleries,
+  // or the data: URI on the piece page. Scoped to those. (E.1)
+  "frame-src 'self' data: https://lightyear.myfilebase.com",
   "frame-ancestors 'none'",
   "base-uri 'self'",
   "form-action 'self'",
