@@ -57,6 +57,28 @@ export default function ExploreIndex({ items, chapters, artists, collections, me
     return () => window.removeEventListener("resize", calc);
   }, []);
 
+  // Restore position on return from a piece: the Index back-link carries a
+  // #c-<collection> anchor. Scroll to it once the justified galleries have laid
+  // out (they measure width async), then once more after they settle.
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (!hash) return;
+    const id = decodeURIComponent(hash.slice(1));
+    let tries = 0;
+    let timer = 0;
+    const tryScroll = () => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ block: "start" });
+        timer = window.setTimeout(() => el.scrollIntoView({ block: "start" }), 400);
+      } else if (tries++ < 30) {
+        timer = window.setTimeout(tryScroll, 80);
+      }
+    };
+    timer = window.setTimeout(tryScroll, 80);
+    return () => window.clearTimeout(timer);
+  }, []);
+
   const sync = useCallback(
     (s: { chapter: string; artist: string; collection: string; medium: string; q: string }) => {
       const p = new URLSearchParams({ view: "index" });
@@ -166,7 +188,7 @@ export default function ExploreIndex({ items, chapters, artists, collections, me
       {groups.length > 0 ? (
         <div className="space-y-14">
           {groups.map((g) => (
-            <section key={g.slug}>
+            <section key={g.slug} id={`c-${g.slug}`} className="scroll-mt-20">
               <div className="mb-3 flex items-baseline gap-3 border-b border-border pb-2">
                 <Link
                   href={`/collection/${g.slug}`}

@@ -103,7 +103,7 @@ export default async function PiecePage({
   let originHref: string | null = null;
   let originLabel = "";
   if (from === "salon") { originHref = `/${viewParams.toString() ? `?${viewParams}` : ""}`; originLabel = "Salon"; }
-  else if (from === "index") { originHref = `/explore?view=index${viewParams.toString() ? `&${viewParams}` : ""}`; originLabel = "Index"; }
+  else if (from === "index") { originHref = `/explore?view=index${viewParams.toString() ? `&${viewParams}` : ""}#c-${piece.collectionSlug}`; originLabel = "Index"; }
   else if (from === "chapters") { originHref = "/explore?view=chapters"; originLabel = "Chapters"; }
   else if (from === "constellation") { originHref = "/explore?view=constellation"; originLabel = "Constellation"; }
 
