@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { getArtworkImage, getArtworkAspect } from "@/lib/images";
 import PlaceholderArt from "./PlaceholderArt";
+import GridArtwork from "./GridArtwork";
 
 interface PieceData {
   id: string;
@@ -115,14 +115,7 @@ export default function JustifiedGallery({ pieces, piecesPerRow, gap = 4, maxRow
                     className={`block overflow-hidden ${isPunk ? "bg-[#638596]" : ""}`}
                   >
                     {src ? (
-                      <Image
-                        src={src}
-                        alt={piece.title}
-                        width={800}
-                        height={800}
-                        className={`w-full h-full ${isPunk ? "[image-rendering:pixelated] object-contain" : "object-cover"}`}
-                        sizes="500px"
-                      />
+                      <GridArtwork slug={piece.slug} title={piece.title} imgSrc={src} isPunk={isPunk} sizes="500px" />
                     ) : (
                       <PlaceholderArt
                         collectionSlug={piece.collectionSlug}

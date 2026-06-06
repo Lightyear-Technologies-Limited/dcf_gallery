@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useMotion } from "./MotionPreference";
 
 /**
  * Piece-page video playback (E.1). Shows the still as a poster by default with
@@ -23,19 +24,21 @@ export default function PieceVideo({
   original?: string;
 }) {
   const ref = useRef<HTMLVideoElement>(null);
+  const { mode, reduced } = useMotion();
 
+  // Honor the global reel preference, reactively. Never autoplay under
+  // reduced-motion or on a small/mobile viewport (data). Controls always remain.
   useEffect(() => {
     const v = ref.current;
     if (!v) return;
-    let pref: string | null = null;
-    try { pref = localStorage.getItem("dcf-motion"); } catch { /* private mode */ }
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const small = window.matchMedia("(max-width: 768px)").matches;
-    if (pref === "play-all" && !reduced && !small) {
+    if (mode === "play-all" && !reduced && !small) {
       v.muted = true;
       v.play().catch(() => { /* autoplay blocked — poster + controls remain */ });
+    } else {
+      v.pause();
     }
-  }, []);
+  }, [mode, reduced]);
 
   return (
     <div>

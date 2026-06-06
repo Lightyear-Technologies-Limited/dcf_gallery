@@ -67,6 +67,25 @@ test.describe("smoke", () => {
     await expect(back).toHaveAttribute("href", /view=constellation/);
   });
 
+  test("reels: motion toggle persists the preference", async ({ page }) => {
+    await page.goto("/");
+    await page.getByRole("radio", { name: "Off" }).first().click();
+    expect(await page.evaluate(() => localStorage.getItem("dcf-motion"))).toBe("off");
+    await page.getByRole("radio", { name: "Auto" }).first().click();
+    expect(await page.evaluate(() => localStorage.getItem("dcf-motion"))).toBe("play-all");
+  });
+
+  test("reels: video tiles show a reel marker and Auto autoplays in view", async ({ page }) => {
+    await page.addInitScript(() => {
+      try { localStorage.setItem("dcf-motion", "play-all"); } catch { /* ignore */ }
+    });
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/collection/winds-of-yawanawa");
+    await expect(page.locator('[title="Reel"]').first()).toBeVisible();
+    // In "Auto" on desktop, an in-view tile mounts its <video> element.
+    await expect(page.locator("video").first()).toBeAttached({ timeout: 15000 });
+  });
+
   test("back-to-origin: salon tiles tag from=salon and back to Salon", async ({ page }) => {
     await page.goto("/");
     const tile = page.locator('a[href^="/piece/"]').first();

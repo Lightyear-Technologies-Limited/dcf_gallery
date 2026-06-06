@@ -263,17 +263,20 @@ by a `/fb:how` validation pass and should be reviewed whenever the plan changes.
 > Implements [D7](./DECISIONS.md#d7) (navigation) and [D8](./DECISIONS.md#d8)
 > (playback). Design-led; expressive but inside the perf budget and reduced-motion.
 
-- [ ] **E.1 — Video/interactive playback engine** · L · _B.2, A.4_
-  Poster-still-by-default + "motion" indicator; global **"Play all"** preference in
-  `localStorage` (pre-paint, like theme); hover-to-play (desktop) / tap-to-play
-  (touch); keyboard play/pause/stop on focused piece; in-view autoplay (muted,
-  looped, lazy, paused off-screen) when "Play all"; `prefers-reduced-motion` honored;
-  mobile-data guard; clear video/interactive labelling.
-  - Files: new `MotionPreference` context + toggle (header), poster-extraction step
-    (`scripts/extract-posters.mjs`, ffmpeg), `PieceLayout.tsx`, gallery components,
-    `src/app/layout.tsx` (pre-paint pref script)
-  - Acceptance: the 26 pieces play per the rules above; no autoplay under reduced-
-    motion or on mobile-by-default; off-screen videos paused; within perf budget.
+- [~] **E.1 — Video/interactive playback engine** · 🟦 installment A shipped
+  **Done:** all 50 video masters transcoded to 1080p + pinned (serve transcode only,
+  link the master); a global **Reels** preference — `Auto` / `Hover` / `Off` —
+  via `MotionProvider` + a header toggle (localStorage `dcf-motion`, reactive,
+  cross-tab); motion-aware `GridArtwork` tiles in JustifiedGallery + FixedRowGallery
+  (still + reel marker; `Auto` autoplays muted/looped in-view and unmounts off-screen;
+  `Hover` plays on hover (desktop); `prefers-reduced-motion` + small-viewport data
+  guards suppress autoplay); the piece page `PieceVideo` reacts to the preference and
+  links the full-res original. Client video map `videos.data.json` (emitted by
+  pin-videos). e2e smoke covers the toggle + in-view autoplay. The stills are the
+  NFT posters, so no separate poster-extraction was needed.
+  - **Remaining (installment B):** extend playback to the HeroSidebar hero, the
+    Chapters filmstrip, and the Constellation preview; the 17 interactive-HTML pieces
+    (Art Blocks generators etc.); keyboard play/pause/stop on the focused piece.
 
 - [x] **E.2 — Filters + free-text search (Index view)** · ✅ done — new `/explore` route +
   `ExploreIndex`: chapter rail + Artist/Collection/Medium filters + free-text search over a

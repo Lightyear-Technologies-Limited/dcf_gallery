@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Header from "@/components/Header";
 import Link from "next/link";
+import { MotionProvider } from "@/components/MotionPreference";
 import "./globals.css";
 
 const argent = localFont({
@@ -61,6 +62,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         >
           Skip to content
         </a>
+        <MotionProvider>
         <Header />
         <main id="main" className="flex-1 pt-14 md:pt-0 md:pl-32 xl:pl-36">{children}</main>
         <footer className="border-t border-border py-8 md:pl-32 xl:pl-36">
@@ -83,6 +85,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             </div>
           </div>
         </footer>
+        </MotionProvider>
       </body>
     </html>
   );
