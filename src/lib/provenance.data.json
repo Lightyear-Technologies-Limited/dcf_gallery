@@ -148,7 +148,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0020.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmetGkTK8xEuMSC6a8mmam9CYmm4e4tkCfA2NGYFg8dzGF",
+      "sha256": "221f1abb2c127ba34df2e7fccb708ee1eb92a50b903451d8e92207fe2523a7e4",
+      "bytes": 71502270,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmetGkTK8xEuMSC6a8mmam9CYmm4e4tkCfA2NGYFg8dzGF",
+      "transcoded": true,
+      "masterBytes": 264557848
     },
     "verifiedAt": "2026-06-05T13:03:33.431Z",
     "verified": true
@@ -6812,7 +6819,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0062.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmWLPWxfQXmRFCM1DKjJ6ajhXorzx9JtosBDPDwUKEzz44",
+      "sha256": "5ec7c787d029e8bf34a4e2e1e5945f92a2757265dc734000569c46141fa5c51e",
+      "bytes": 91061966,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmWLPWxfQXmRFCM1DKjJ6ajhXorzx9JtosBDPDwUKEzz44",
+      "transcoded": true,
+      "masterBytes": 265031312
     },
     "verifiedAt": "2026-06-05T13:13:39.666Z",
     "verified": true
@@ -6847,7 +6861,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0103.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmT6HkDgsWt8MkJKQT6iP4GYCrLYuJ4LRFoVbBaBKS56kP",
+      "sha256": "c9d17fe2bf89518905280a79a33a3d1e33e663c684ec47ea8b6993c10bbe420d",
+      "bytes": 82881473,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmT6HkDgsWt8MkJKQT6iP4GYCrLYuJ4LRFoVbBaBKS56kP",
+      "transcoded": true,
+      "masterBytes": 264544887
     },
     "verifiedAt": "2026-06-05T13:13:43.206Z",
     "verified": true
@@ -6882,7 +6903,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0118.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmYkPFKQrCuyrDNT3uGYZWW3F4iaNtjgECmbnYzZAwGKGV",
+      "sha256": "7581e43f8e194c59c54b31ef354a517b359aac38cd7f6e68b0b6f5e9a4a47f3c",
+      "bytes": 142044573,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmYkPFKQrCuyrDNT3uGYZWW3F4iaNtjgECmbnYzZAwGKGV",
+      "transcoded": true,
+      "masterBytes": 264995725
     },
     "verifiedAt": "2026-06-05T13:13:57.493Z",
     "verified": true
@@ -6917,7 +6945,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0154.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmRHK83VSSvBpq7aZnA1nDqv3JH1Nhom1wj5TbprBnyg5M",
+      "sha256": "c9558d4afb1c44629f0db69bd72508806da0941af0e4621b423c7a553af4b093",
+      "bytes": 45672434,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmRHK83VSSvBpq7aZnA1nDqv3JH1Nhom1wj5TbprBnyg5M",
+      "transcoded": true,
+      "masterBytes": 264924587
     },
     "verifiedAt": "2026-06-05T13:14:07.511Z",
     "verified": true
@@ -6952,7 +6987,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0178.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmcwHhRRBCptTUkWDrDNqTYBcoksbb3vVmCWWPzTMpcjpD",
+      "sha256": "461f248484bcba8c5c3a3956aec3d10560fc754d1531e7bc8be83df56e1b5bb0",
+      "bytes": 37609627,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmcwHhRRBCptTUkWDrDNqTYBcoksbb3vVmCWWPzTMpcjpD",
+      "transcoded": true,
+      "masterBytes": 264606488
     },
     "verifiedAt": "2026-06-05T13:14:12.245Z",
     "verified": true
@@ -6987,7 +7029,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0227.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "Qmav3P8RZ2DWVxokP6xdUJ3k13c7vhYyyPjpL32wh2SDMt",
+      "sha256": "2f6946e3882900d290fcfd8bcb755f3f2654ac5a00477a994ab7e1cc410abc6c",
+      "bytes": 123880356,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/Qmav3P8RZ2DWVxokP6xdUJ3k13c7vhYyyPjpL32wh2SDMt",
+      "transcoded": true,
+      "masterBytes": 265067231
     },
     "verifiedAt": "2026-06-05T13:14:16.846Z",
     "verified": true
@@ -7022,7 +7071,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0265.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmW3hoxaStV48UdF95dBv4JTeFuVY8EtoPeWtnebYwE6EE",
+      "sha256": "1b1db4a4c37c952d2cc101264334af340b700bdc09a7e425866e453632762a88",
+      "bytes": 85317869,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmW3hoxaStV48UdF95dBv4JTeFuVY8EtoPeWtnebYwE6EE",
+      "transcoded": true,
+      "masterBytes": 264985765
     },
     "verifiedAt": "2026-06-05T13:14:21.556Z",
     "verified": true
@@ -7057,7 +7113,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0281.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmabJukGLG1e3dkdMV3zofbMXQxLVntga7SQT8RaCixCPA",
+      "sha256": "3d12ad7f2c707fbdc6882c1ae9726f2c369c8749c0edefe48d62971411f22826",
+      "bytes": 103129593,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmabJukGLG1e3dkdMV3zofbMXQxLVntga7SQT8RaCixCPA",
+      "transcoded": true,
+      "masterBytes": 264316788
     },
     "verifiedAt": "2026-06-05T13:14:26.549Z",
     "verified": true
@@ -7092,7 +7155,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0369.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "Qmd8QSqxKyX5XqiHuA1wT9pJkzD5tyUGrq3PhexVPv5aK9",
+      "sha256": "e9e3105cb8113abe9d581fa5367f634abd562ca4fec3ef90473b0ab2861145f4",
+      "bytes": 132153315,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/Qmd8QSqxKyX5XqiHuA1wT9pJkzD5tyUGrq3PhexVPv5aK9",
+      "transcoded": true,
+      "masterBytes": 264338620
     },
     "verifiedAt": "2026-06-05T13:14:30.923Z",
     "verified": true
@@ -7127,7 +7197,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0371.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmR187DdguWCJHyTCb5bERePkPpG7ZLDisnvUC1s2NoVc6",
+      "sha256": "e40661f855e809a259a78afe0dd9f274b50f3d94c5e903f04023299a19300a22",
+      "bytes": 132349470,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmR187DdguWCJHyTCb5bERePkPpG7ZLDisnvUC1s2NoVc6",
+      "transcoded": true,
+      "masterBytes": 264588317
     },
     "verifiedAt": "2026-06-05T13:14:34.820Z",
     "verified": true
@@ -7162,7 +7239,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0373.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmeTVXciTiKgsaKb5XgnKnfqpaN1BiZks4mohjuHUkgS57",
+      "sha256": "43a40a2ceec7a94059dbaa511fa083aee9af87428bc7cb3b5fd57fa9c0a5350e",
+      "bytes": 116798889,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmeTVXciTiKgsaKb5XgnKnfqpaN1BiZks4mohjuHUkgS57",
+      "transcoded": true,
+      "masterBytes": 264910025
     },
     "verifiedAt": "2026-06-05T13:14:45.230Z",
     "verified": true
@@ -7197,7 +7281,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0442.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "Qmd9Pozgxg47KwVKGw6wYmRaWV3cBJYUYx1bgvJCKb69Jx",
+      "sha256": "7bdff062674ac4365bc31b1b9b035664ecce4209e71fc785869d8895f8fde164",
+      "bytes": 96710479,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/Qmd9Pozgxg47KwVKGw6wYmRaWV3cBJYUYx1bgvJCKb69Jx",
+      "transcoded": true,
+      "masterBytes": 264781566
     },
     "verifiedAt": "2026-06-05T13:14:49.841Z",
     "verified": true
@@ -7232,7 +7323,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0451.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmWhnduq4gM4AQgrMLaCmLfo8DyWb4zzjZ4JLomPt5btNK",
+      "sha256": "28299a86a9c7c9b58c1ed8228c3b1943a302b331125462830282c52923519591",
+      "bytes": 86342332,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmWhnduq4gM4AQgrMLaCmLfo8DyWb4zzjZ4JLomPt5btNK",
+      "transcoded": true,
+      "masterBytes": 264314699
     },
     "verifiedAt": "2026-06-05T13:15:02.154Z",
     "verified": true
@@ -7267,7 +7365,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0487.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmT5kzJZRNqRCeEaVSmDXnyuTYA75X87esCaKae3p2Q888",
+      "sha256": "d2ec1d815389f1cace5ca2f587548e1ea01e762fbf31ced7d15eea78cde07b8f",
+      "bytes": 101323087,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmT5kzJZRNqRCeEaVSmDXnyuTYA75X87esCaKae3p2Q888",
+      "transcoded": true,
+      "masterBytes": 264963521
     },
     "verifiedAt": "2026-06-05T13:15:07.973Z",
     "verified": true
@@ -7302,7 +7407,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0495.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmYobpzd67uPC7dui6CaUGrfrW8Zysg86erEPbq7GA3fSx",
+      "sha256": "c718bafdb0f8efd3ef786623ef9fafa527cff918d593d288fa45082a91ad6e69",
+      "bytes": 95854689,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmYobpzd67uPC7dui6CaUGrfrW8Zysg86erEPbq7GA3fSx",
+      "transcoded": true,
+      "masterBytes": 264673365
     },
     "verifiedAt": "2026-06-05T13:15:34.343Z",
     "verified": true
@@ -7337,7 +7449,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0524.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmUJbLFyuHiQJERMY8MrPJtUhyT6Kjt5kHAcCrDzx7u4gT",
+      "sha256": "0d51f68ba6b251fdea5d3ac3a20c0cc84e841ba5d6760e4720a1be2329bad4ef",
+      "bytes": 103831281,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmUJbLFyuHiQJERMY8MrPJtUhyT6Kjt5kHAcCrDzx7u4gT",
+      "transcoded": true,
+      "masterBytes": 264920290
     },
     "verifiedAt": "2026-06-05T13:15:54.223Z",
     "verified": true
@@ -7372,7 +7491,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0554.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmV4szeDmdUgC4D3ycTHxeYyAnGPyFwaGd15xPUfkiAHKh",
+      "sha256": "89bc034c02de35bcd5f84b20adeb7023119cc1b3e580873ba1e7838ad667b3b5",
+      "bytes": 84639059,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmV4szeDmdUgC4D3ycTHxeYyAnGPyFwaGd15xPUfkiAHKh",
+      "transcoded": true,
+      "masterBytes": 264827529
     },
     "verifiedAt": "2026-06-05T13:16:10.813Z",
     "verified": true
@@ -7407,7 +7533,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0572.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmSgF2tqCBWPJ4wQjSwHuMLdsEpMyVsGPMwcnrbEwNHcqi",
+      "sha256": "6a25fba03ec23813a8007b50589f325d85ba22f1c538358a1b1893bc8007fcee",
+      "bytes": 124273338,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmSgF2tqCBWPJ4wQjSwHuMLdsEpMyVsGPMwcnrbEwNHcqi",
+      "transcoded": true,
+      "masterBytes": 264899789
     },
     "verifiedAt": "2026-06-05T13:16:16.846Z",
     "verified": true
@@ -7442,7 +7575,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0600.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmUGfc5RxJP29aAWpVfCpiW6M8tdbFoyvdpp58To6zUabT",
+      "sha256": "4257a6ac71ee2bec233a51b72e195b89a09b1954f0640e59125e8f4d4a05b102",
+      "bytes": 107755832,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmUGfc5RxJP29aAWpVfCpiW6M8tdbFoyvdpp58To6zUabT",
+      "transcoded": true,
+      "masterBytes": 264646129
     },
     "verifiedAt": "2026-06-05T13:16:22.670Z",
     "verified": true
@@ -7477,7 +7617,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0629.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmdMEUQiEa1j2AdWgRPoFCJRis9LRHk3ZVgS4RLWj6fYLV",
+      "sha256": "6ce9fcfab12adfafda0f950087e22e0c0b4c19b72b20616e5ced640a5ce7eb01",
+      "bytes": 84854979,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmdMEUQiEa1j2AdWgRPoFCJRis9LRHk3ZVgS4RLWj6fYLV",
+      "transcoded": true,
+      "masterBytes": 264625340
     },
     "verifiedAt": "2026-06-05T13:16:27.599Z",
     "verified": true
@@ -7512,7 +7659,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0637.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmZj4syXg8QoADBV4YY9nAu1NtEHKb7HGHytUovSyZUiXq",
+      "sha256": "fb8cacefefe74d2d355fd8dd43d5619b930e18537a514c8d6c6d766417e79463",
+      "bytes": 94846074,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmZj4syXg8QoADBV4YY9nAu1NtEHKb7HGHytUovSyZUiXq",
+      "transcoded": true,
+      "masterBytes": 264930163
     },
     "verifiedAt": "2026-06-05T13:16:32.298Z",
     "verified": true
@@ -7547,7 +7701,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0638.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmQpUTpbnDT7JxX4ZztkL5j1HJ54BLESwS426zDMGQANM6",
+      "sha256": "d105c28e4fab13cb745f43b9df25a30e25824a7781435478040fff9e5933c1a6",
+      "bytes": 121153483,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmQpUTpbnDT7JxX4ZztkL5j1HJ54BLESwS426zDMGQANM6",
+      "transcoded": true,
+      "masterBytes": 264504871
     },
     "verifiedAt": "2026-06-05T13:16:41.785Z",
     "verified": true
@@ -7582,7 +7743,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0681.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmdbyoiG4nubNxwjkPDvXQzLttRnk87ZbsmK5mTKawdxk7",
+      "sha256": "a989d6a7db2ae886ba10c0a7a165ce776c9c64aa385deae2d3adc580bbecd2f0",
+      "bytes": 100448223,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmdbyoiG4nubNxwjkPDvXQzLttRnk87ZbsmK5mTKawdxk7",
+      "transcoded": true,
+      "masterBytes": 264650669
     },
     "verifiedAt": "2026-06-05T13:16:46.832Z",
     "verified": true
@@ -7617,7 +7785,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0688.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmZVt4QtSbjTmg2qDE5bUHeuQyGrRZSJst55PLyAza52hE",
+      "sha256": "78e93f67c1d3ac7348c6644e620d63c436d91580ea78f86c9aaff14979f1ccc3",
+      "bytes": 117395173,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmZVt4QtSbjTmg2qDE5bUHeuQyGrRZSJst55PLyAza52hE",
+      "transcoded": true,
+      "masterBytes": 264989208
     },
     "verifiedAt": "2026-06-05T13:16:51.562Z",
     "verified": true
@@ -7652,7 +7827,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0692.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmZAAEzqayDiqhxsBuESYfJsLCPEqxYA1osxWrTucxVmCj",
+      "sha256": "262044a774bcdc9b95ae621b784f6373711417edb9151626515326bbce07be06",
+      "bytes": 92745359,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmZAAEzqayDiqhxsBuESYfJsLCPEqxYA1osxWrTucxVmCj",
+      "transcoded": true,
+      "masterBytes": 264398966
     },
     "verifiedAt": "2026-06-05T13:17:21.070Z",
     "verified": true
@@ -7687,7 +7869,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0695.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmPpqsvmNKpRqKQjFapyuRQeDmyvHLnwxHm7Z4eCC3MrFd",
+      "sha256": "616ff3b9f1334c5ce0db9672fb6ec5ead355af275775dbf4b65fb6f211812bd5",
+      "bytes": 107278722,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmPpqsvmNKpRqKQjFapyuRQeDmyvHLnwxHm7Z4eCC3MrFd",
+      "transcoded": true,
+      "masterBytes": 264584574
     },
     "verifiedAt": "2026-06-05T13:17:25.450Z",
     "verified": true
@@ -7722,7 +7911,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0697.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmXp9jWBVxkTEedzehemqmALnWBik3bebow2LJk8rWoWSN",
+      "sha256": "2b455821748f237648fdeadb4d0627d99cb26050c0e8ea1cbe75404ec84b957b",
+      "bytes": 148688322,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmXp9jWBVxkTEedzehemqmALnWBik3bebow2LJk8rWoWSN",
+      "transcoded": true,
+      "masterBytes": 264338016
     },
     "verifiedAt": "2026-06-05T13:17:30.797Z",
     "verified": true
@@ -7757,7 +7953,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0700.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmeYCQQCjD1MJyBvMnaQxfNWmTYepXmVKV9oTpqo3m11jC",
+      "sha256": "b5c56b8adaa8f066d9f27aa8f4e1e1ae6b29eacbb7b0c500691d815f6a96abcf",
+      "bytes": 125129144,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmeYCQQCjD1MJyBvMnaQxfNWmTYepXmVKV9oTpqo3m11jC",
+      "transcoded": true,
+      "masterBytes": 264657229
     },
     "verifiedAt": "2026-06-05T13:17:36.155Z",
     "verified": true
@@ -7792,7 +7995,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0701.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmQSyZY3Fr2XGaktMHaaViaMSfbM93Hudd4qaxW97mzWUf",
+      "sha256": "1b853320171f3d3a606c96bcef2a95004a81851502da95d13591f76272738e15",
+      "bytes": 94116453,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmQSyZY3Fr2XGaktMHaaViaMSfbM93Hudd4qaxW97mzWUf",
+      "transcoded": true,
+      "masterBytes": 264724159
     },
     "verifiedAt": "2026-06-05T13:17:40.291Z",
     "verified": true
@@ -7827,7 +8037,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0704.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmVcdhX2W7RzpsLHYdjQNnjHJmFoNvtkAFfhU7ScXSDGHA",
+      "sha256": "72ff32d13ab543c2e98b5daeb40a94ceb0944bea241f59db85b0d1870817831f",
+      "bytes": 97246488,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmVcdhX2W7RzpsLHYdjQNnjHJmFoNvtkAFfhU7ScXSDGHA",
+      "transcoded": true,
+      "masterBytes": 264954002
     },
     "verifiedAt": "2026-06-05T13:17:45.093Z",
     "verified": true
@@ -7862,7 +8079,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0712.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmaFJzEXrJdpGGWATqTn96X5iESoqmk7uKGn3R6sQ8PNCM",
+      "sha256": "bb1eb260ff202ff72c787547d52ba8a1248836386c452b83060776d7d21f0ca5",
+      "bytes": 104848421,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmaFJzEXrJdpGGWATqTn96X5iESoqmk7uKGn3R6sQ8PNCM",
+      "transcoded": true,
+      "masterBytes": 264756634
     },
     "verifiedAt": "2026-06-05T13:17:51.748Z",
     "verified": true
@@ -7897,7 +8121,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0717.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmedumNsvAx3iQ5vGPNuUs9uNGYKPvCJkzeeqvrvJUws8N",
+      "sha256": "4cb14fff4822421205df5e5bbd0195d052a05acd4c99e4188695a037747e58be",
+      "bytes": 122133423,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmedumNsvAx3iQ5vGPNuUs9uNGYKPvCJkzeeqvrvJUws8N",
+      "transcoded": true,
+      "masterBytes": 264682536
     },
     "verifiedAt": "2026-06-05T13:17:57.974Z",
     "verified": true
@@ -7932,7 +8163,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0738.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmQMVDi8Hrj485SwcHuR2DGentWNKhXc4pBP42HDasL5ju",
+      "sha256": "a61ad0560ebcb83b27ce757068a0d488756f96ddcde7b89bde5c6686d143a828",
+      "bytes": 57743440,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmQMVDi8Hrj485SwcHuR2DGentWNKhXc4pBP42HDasL5ju",
+      "transcoded": true,
+      "masterBytes": 264484254
     },
     "verifiedAt": "2026-06-05T13:18:10.139Z",
     "verified": true
@@ -7967,7 +8205,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0741.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmV4WHuEi77LZ5zfDbJuTudvmvy51VRU6wQ61XhGX9cUTk",
+      "sha256": "791c0c8001c89a413c995bb6c243030f18be805a90d2e54f9082960570536347",
+      "bytes": 103690075,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmV4WHuEi77LZ5zfDbJuTudvmvy51VRU6wQ61XhGX9cUTk",
+      "transcoded": true,
+      "masterBytes": 264830445
     },
     "verifiedAt": "2026-06-05T13:18:15.142Z",
     "verified": true
@@ -8002,7 +8247,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0745.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmY6ZQ8Qj9FQ3ZSoDUDY28GbHw8DZheTgCFcbFmummVkhr",
+      "sha256": "201537f16ffeaacb6fb5bbc5a4b6c94a84e13efb3cc5dafe7cf24387530508b2",
+      "bytes": 65772396,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmY6ZQ8Qj9FQ3ZSoDUDY28GbHw8DZheTgCFcbFmummVkhr",
+      "transcoded": true,
+      "masterBytes": 264506261
     },
     "verifiedAt": "2026-06-05T13:18:20.665Z",
     "verified": true
@@ -8037,7 +8289,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0746.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "Qmer7bxkN2VwXiXhUWJhy7eFJU6y68UJjKbW1YAqNiNWNx",
+      "sha256": "94de2cd915cac9b9c05452da6dc18c8aab14590221ea41e84e8acb772c14dfac",
+      "bytes": 99995490,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/Qmer7bxkN2VwXiXhUWJhy7eFJU6y68UJjKbW1YAqNiNWNx",
+      "transcoded": true,
+      "masterBytes": 265111998
     },
     "verifiedAt": "2026-06-05T13:18:26.958Z",
     "verified": true
@@ -8072,7 +8331,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0754.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmcKfcbR33NqJY69sR98vNJiFsYG9cBR5AeAbg9UDnjhmB",
+      "sha256": "3235444d70c42a04409a2ab3be79049f0caaa538c12bebf3cad7ab6630dc6cc7",
+      "bytes": 124404525,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmcKfcbR33NqJY69sR98vNJiFsYG9cBR5AeAbg9UDnjhmB",
+      "transcoded": true,
+      "masterBytes": 264620187
     },
     "verifiedAt": "2026-06-05T13:18:31.874Z",
     "verified": true
@@ -8107,7 +8373,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0755.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmY2759cUc9GjFAi77UKe321MsYRjSz4ceMYJpXs5U5hKR",
+      "sha256": "ed0fa9560c4de817d816a29751790e797816189f4f4901264b3993723132bae9",
+      "bytes": 71996954,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmY2759cUc9GjFAi77UKe321MsYRjSz4ceMYJpXs5U5hKR",
+      "transcoded": true,
+      "masterBytes": 264583233
     },
     "verifiedAt": "2026-06-05T13:18:38.059Z",
     "verified": true
@@ -8142,7 +8415,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0764.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmcY6js8ZQiszHb5BZAr9pXTP91XYfVvSoSc19PY5eY6mD",
+      "sha256": "5a37a1c5afac9a8668add137944311fc51162e865afb404f0df74db2ece6751d",
+      "bytes": 133450928,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmcY6js8ZQiszHb5BZAr9pXTP91XYfVvSoSc19PY5eY6mD",
+      "transcoded": true,
+      "masterBytes": 264285760
     },
     "verifiedAt": "2026-06-05T13:18:42.626Z",
     "verified": true
@@ -8177,7 +8457,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0856.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmUCj18iNw8Dtr7bokLXcnmarcK4Vk57G731c5GN7AAdDQ",
+      "sha256": "015b0b809159fa3a69c430093b1e31149ee7337105d91d741bd613126554ecde",
+      "bytes": 78297327,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmUCj18iNw8Dtr7bokLXcnmarcK4Vk57G731c5GN7AAdDQ",
+      "transcoded": true,
+      "masterBytes": 264646855
     },
     "verifiedAt": "2026-06-05T13:18:47.775Z",
     "verified": true
@@ -8212,7 +8499,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0863.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmTJyL4DceaadNryC5TnUNFq7VG6NKPLznFJTrKP52haH3",
+      "sha256": "01279c3d77f73b29deca8593ca6fa1c107a9578701286295472e512dd652c0f4",
+      "bytes": 98987216,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmTJyL4DceaadNryC5TnUNFq7VG6NKPLznFJTrKP52haH3",
+      "transcoded": true,
+      "masterBytes": 264722191
     },
     "verifiedAt": "2026-06-05T13:18:54.675Z",
     "verified": true
@@ -8247,7 +8541,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0870.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmPJigb5a9c5CvrHeSxdn5o1u25Ukg9KwiPUuVkF3HRJiN",
+      "sha256": "ca4d652137d2b27109fce3f3e6d2a28d73498016741dd580dc4a493f83c6e74b",
+      "bytes": 95176134,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmPJigb5a9c5CvrHeSxdn5o1u25Ukg9KwiPUuVkF3HRJiN",
+      "transcoded": true,
+      "masterBytes": 265096950
     },
     "verifiedAt": "2026-06-05T13:19:02.892Z",
     "verified": true
@@ -8282,7 +8583,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0878.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmVRUqV6xSUmrovsxknReF36mPSnQ5BQtowespsXWtBJuB",
+      "sha256": "9c751aaefa25e66d39118e3668c493f642dec291d1b07aac96fb5cfd5dee5502",
+      "bytes": 88817813,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmVRUqV6xSUmrovsxknReF36mPSnQ5BQtowespsXWtBJuB",
+      "transcoded": true,
+      "masterBytes": 264867831
     },
     "verifiedAt": "2026-06-05T13:19:08.024Z",
     "verified": true
@@ -8317,7 +8625,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0888.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmQa8Qh86isjWdNJip1q5hGAVcApSwWGFtVQCBJAfQ7UX6",
+      "sha256": "b2fd7c3e28dbe7218fb1b3663d34b56006a306a0eda611e02fb7c3971fc14448",
+      "bytes": 117191012,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmQa8Qh86isjWdNJip1q5hGAVcApSwWGFtVQCBJAfQ7UX6",
+      "transcoded": true,
+      "masterBytes": 265102060
     },
     "verifiedAt": "2026-06-05T13:19:14.455Z",
     "verified": true
@@ -8352,7 +8667,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0912.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmajUp26gLq8DHMSdd9xCFFZTu5NrMrmAwcezL3nHxeNgG",
+      "sha256": "374c4f155e8b16c912d74f4f0c98f1290d0e297982c33135663bc27e30e353f1",
+      "bytes": 150406997,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmajUp26gLq8DHMSdd9xCFFZTu5NrMrmAwcezL3nHxeNgG",
+      "transcoded": true,
+      "masterBytes": 264883189
     },
     "verifiedAt": "2026-06-05T13:19:28.736Z",
     "verified": true
@@ -8387,7 +8709,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0917.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmXuaj9CH9Kbrdhz82B1RYar8UgFAstkE9vycxhv9Bq5XP",
+      "sha256": "0eb7ae71d2bef00631e2f43bf9650399a1bf93c0f7ad1b53bf06a66bbe2fe973",
+      "bytes": 97892588,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmXuaj9CH9Kbrdhz82B1RYar8UgFAstkE9vycxhv9Bq5XP",
+      "transcoded": true,
+      "masterBytes": 265201567
     },
     "verifiedAt": "2026-06-05T13:19:33.938Z",
     "verified": true
@@ -8422,7 +8751,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0921.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmPJXGVJNEM5r664wJ1rZvTHe28YXgaU1FU3ZcknaRMX3F",
+      "sha256": "61a053239130159c9104209a148699894337b094b8273e4a9ab035f5850cc643",
+      "bytes": 125182471,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmPJXGVJNEM5r664wJ1rZvTHe28YXgaU1FU3ZcknaRMX3F",
+      "transcoded": true,
+      "masterBytes": 264806512
     },
     "verifiedAt": "2026-06-05T13:19:38.614Z",
     "verified": true
@@ -8457,7 +8793,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0962.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmdvRUFc8LDYsLas3vi9aymEyx46rzPnEykZAXRhcGwwUC",
+      "sha256": "3202ebff1d8520d0257d470fc1c0a531b1819192a071a220c73f0f1fc88db9bc",
+      "bytes": 104627570,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmdvRUFc8LDYsLas3vi9aymEyx46rzPnEykZAXRhcGwwUC",
+      "transcoded": true,
+      "masterBytes": 264941730
     },
     "verifiedAt": "2026-06-05T13:19:44.489Z",
     "verified": true
@@ -8492,7 +8835,14 @@
     "animation": {
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0989.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmQxCr2nusHbgpoCE1RUXb44mLm329pJ31yE5yjZvpUwej",
+      "sha256": "5a1cfcf3a7142db6222b1127dd08a89771d395e3cb8d34e9bc5ad6e2a2dc18fb",
+      "bytes": 110952005,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmQxCr2nusHbgpoCE1RUXb44mLm329pJ31yE5yjZvpUwej",
+      "transcoded": true,
+      "masterBytes": 264847578
     },
     "verifiedAt": "2026-06-05T13:19:50.856Z",
     "verified": true
