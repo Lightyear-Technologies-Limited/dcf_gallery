@@ -372,8 +372,15 @@
     "lqip": "data:image/webp;base64,UklGRuoAAABXRUJQVlA4IN4AAACwBgCdASoYACsAPu12slQppySjJWgBMB2JQBZwtpgM3Eb/MKmP05ZjFo23v8F/UQGYCKFuoKtgKd/QyDAgAAD+ozhiS4cUjr7VW1aSmMSSnsZu/0qwDjg6rArTWLXMkIG38LupqcB3tlC6Cw41qllF4z2P7BX+HVCNlMcvdRVB4uxOUbk0wLALchR4Re+2rJHUviVu3oEueS5RJNM2le3agUGwioPNAcL+gNifYnxhu5p1Y1rVrb0g7vjGuiswXMGrIK61v0Exc/zRYXeihpgRe0GA5Tgjni6X9abQuAA=",
     "animation": {
       "source": "https://arweave.net/aPdY4cA-3_ofj6hMt4H2AX5pFOC8elDA3pKNuFZW6iM",
-      "type": "unknown",
-      "pinned": false
+      "type": "video",
+      "pinned": true,
+      "cid": "QmfCQWGCHZ7S76ZbkYiLRWE6zC3NN4roKjKj4L1gZyzBnV",
+      "sha256": "081ebed573092873f05b0c0b36de5e1ac085cc847350efa723f1f55e1d5fa691",
+      "bytes": 20837281,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmfCQWGCHZ7S76ZbkYiLRWE6zC3NN4roKjKj4L1gZyzBnV",
+      "transcoded": true,
+      "masterBytes": 324673556
     },
     "verifiedAt": "2026-06-05T13:05:56.150Z",
     "verified": true
@@ -407,8 +414,15 @@
     "lqip": "data:image/webp;base64,UklGRvAAAABXRUJQVlA4IOQAAABwBwCdASoYACsAPuFcp02opSOiNVv4ARAcCWYAqSbxyqAgg9fo9TDBl/fkPvqK0FmuAC6iYQD9RidoWESxa7dwbbKp0AD+3PvIdMdI2R41VCMeGn7DzSIYUBeEncAAGcUTWsYvf3NuVz8sDCFcNB12A/Z9Js1m/O8R9WeHVzoXe+CwCMmSmZCu+4ZQthSJa4KaBGl25HjXsaAO24uIEREX8f1VukZt8Km1anBm/s/VpnDcX+VoZAdQQtRAmig0p4lT0j+Qi87cYdznGBGWsLxemoBR/+YMJ1/soLpj/MXdFYMkAAA=",
     "animation": {
       "source": "https://arweave.net/5e5B3-LD4RjfVRm1KW4mMtxKldlAaBkQnKn6O1NawWM",
-      "type": "unknown",
-      "pinned": false
+      "type": "video",
+      "pinned": true,
+      "cid": "QmczGfiCdeYs9AXyNFQ4UrbC6xshXtmRQdgmX8LVtg7vt8",
+      "sha256": "d6aced549f6944e5879a228124e20dce097b6414cd7e7b6d85e9ee00fdf75c82",
+      "bytes": 35688730,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmczGfiCdeYs9AXyNFQ4UrbC6xshXtmRQdgmX8LVtg7vt8",
+      "transcoded": true,
+      "masterBytes": 323462402
     },
     "verifiedAt": "2026-06-05T13:05:58.436Z",
     "verified": true
@@ -502,8 +516,15 @@
     "lqip": "data:image/webp;base64,UklGRtQAAABXRUJQVlA4IMgAAADwBgCdASoYACsAPu1orFAppaQisBVYATAdiWQArk+TikannHKRc/aPN7u/EUc/dWdqW9CJszdW5/jz9PWRJHsAAP79UcQzcTnH5UzkcFoyTykzVg7SHpN93A76/5RopsRLHcICyxD/UrVHJMmzyUv+Tc/L4DqfrigkFqRMd9drMb2WHRkaL0T1jlhFxsu5hm8DG3T9tdzLsXx6ZLW5IyicH6pQkkSg4z9PKPA/CtvHSIQ9XuK5Epdy+Bpv6FTUU7BBvzB0AAAAAA==",
     "animation": {
       "source": "https://arweave.net/GV3avzO-H4B04-ZeH4tipWKNFvRgVlepXh0on6kcn9k",
-      "type": "unknown",
-      "pinned": false
+      "type": "video",
+      "pinned": true,
+      "cid": "QmZBg1tbWKtgNjJATFG2WbBvRv8FBcFUVJptce5SWR2Prb",
+      "sha256": "0b88427100de659ba0150d3b5bb49779307f271bb3f5e3142c81de3a45417866",
+      "bytes": 45983873,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmZBg1tbWKtgNjJATFG2WbBvRv8FBcFUVJptce5SWR2Prb",
+      "transcoded": true,
+      "masterBytes": 312895800
     },
     "verifiedAt": "2026-06-05T13:06:02.006Z",
     "verified": true
@@ -537,8 +558,15 @@
     "lqip": "data:image/webp;base64,UklGRvQAAABXRUJQVlA4IOgAAADQBwCdASoYACsAPu1orFGppaQiqrgKATAdiWgAsR/BcYBHLb+jz7cS//jikeQopgCMRcRcaNBZgwzLF9aQb/DCo3YnDd1cAAD7HaR0ic6w7F5UddNBHsfBY8EBl0pAfUp2p8GfXrKFI+Xeos+x3DAikLoC0CVhG02saAbF0cHQpCzBuXyNN1PnXcqK+a6SX5UnnhPiT+7DRzhFkYTRMEFExX3EWc/FqGc1SyUQ91x5VR+tS2yyS2QKPKaXT25MVwB0+C8Ikm3/lWMWjgHRIz/PW/Z6ic3uW3LAb7Z4+CqXmaqhSzOsoAAA",
     "animation": {
       "source": "https://arweave.net/YRTtIypcnUzLbrV_xroAzsCPVXR3c0n5REgOidsc18o",
-      "type": "unknown",
-      "pinned": false
+      "type": "video",
+      "pinned": true,
+      "cid": "Qmah4DKJgrwgceRZKHsekZYKfK7GFb26vm3x91hY7Sppsm",
+      "sha256": "1258a4e350e5888f9c462c7137033b4c5db170446e87a161e464e9e875e7148e",
+      "bytes": 54004012,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/Qmah4DKJgrwgceRZKHsekZYKfK7GFb26vm3x91hY7Sppsm",
+      "transcoded": true,
+      "masterBytes": 323206472
     },
     "verifiedAt": "2026-06-05T13:06:06.032Z",
     "verified": true
@@ -572,7 +600,7 @@
     "lqip": "data:image/webp;base64,UklGRhABAABXRUJQVlA4IAQBAACQBwCdASoYACsAPu1iqU+ppSOiMBVaqTAdiWgAnQBOd45N3pAmRxl7+g50T2dJrbQbo7fgWh9Id4wOAc/bjZZCWFPA0RgAzYxLsPF5nHXfoWq8JA3gXZXJ+sOq3CaP6zoWP+HflPg2W9Hg6d3Q94a/hsV3R9YjXCf0eR8IbQqDUyXQEAPnjS5+pPK9Ae+g1AlnH8Bb7kXnU9Qr5pP1z9+Sc+5GZAvFfZjzLt75dDw65FfERidz3HDFxXWoYDOaxV25jHzB0vncqV9oTMBwYVk6KIvl/MW0o9UAIhWriRkv5sw5+lItzFPym7AMEsSOdYWTKuRYJXh6KFeuE89kNOCd0lwAAA==",
     "animation": {
       "source": "https://arweave.net/Hu6D5vrLpcOR2FdKKonTFvHj4RnCgas3Fgf5IKyUCC8",
-      "type": "unknown",
+      "type": "video",
       "pinned": false
     },
     "verifiedAt": "2026-06-05T13:06:08.777Z",
@@ -607,8 +635,15 @@
     "lqip": "data:image/webp;base64,UklGRuoAAABXRUJQVlA4IN4AAADwBgCdASoYACsAPu1ur1GppiQipWsxMB2JQBcGBWvgxtWDktCci8Vc5qbVl5R6PMoEPIoOATeO5EL3YOlLvaAAAP71e7ZlrVD8S+tPpYJ59e8aQtSQ3zdyzRdhm5UrCxUISyvN9A2omcjTywhXVR9KR7+N9zHaY5ZMIq4j1cb1At4SJzbp/Wv9S7xlGldusYBx1Dhp7EM1T4lpTiVpISjf2RH1HUY0pRoIw8vVf+hCjCZLuFzTa7GRJNjzOlS2YIBZ7Is5Q0aBH7WIzw+tDjbq2cG19adR5xrDSK9CAAA=",
     "animation": {
       "source": "https://arweave.net/xCiaZAxN6ryzztKjFoAtYhxjAbaMzmPYpApMMrlkY4o",
-      "type": "unknown",
-      "pinned": false
+      "type": "video",
+      "pinned": true,
+      "cid": "QmUdQDy9hSi3Vq4hUJWRM19mZUpDX6utRPC2cnWfPjdiYs",
+      "sha256": "accc7ee04eeaf58fa986efde2643913716896849034189205245a8d7b2489e6a",
+      "bytes": 52791090,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmUdQDy9hSi3Vq4hUJWRM19mZUpDX6utRPC2cnWfPjdiYs",
+      "transcoded": true,
+      "masterBytes": 319169262
     },
     "verifiedAt": "2026-06-05T13:06:10.168Z",
     "verified": true
@@ -642,8 +677,15 @@
     "lqip": "data:image/webp;base64,UklGRvoAAABXRUJQVlA4IO4AAACwBwCdASoYACsAPu1gp0+ppSMiMBVdUTAdiWoAnTKEfxSA8QOSUC5AC00t5xhChCvunghttfkobEtx5yjdx575zRaUlkCAANQLixhRVPjF/t2GbN+51MRyNYSBrPfwrF9OG1RVEkcZ7DNnun9IWDYk4g+1H7wu83AIdeWWSAMHRPhssOpgHVtLBowuuBnsKI9nP3kcW48H+QM82Hn8kYYtHqoTjYo9UZD3BFzebEQx3nYoM7TA5rZXlapOrAcedQ1cT4un/iGm+QO6Xu1x7MtAom03+ffDxjm1flQdNXN8GPV+w/VubPovU4B0gAAA",
     "animation": {
       "source": "https://arweave.net/5gJsQX3FBZ2SKTnIsf65ncScqAwAfVC5-KnS6AN6K7c",
-      "type": "unknown",
-      "pinned": false
+      "type": "video",
+      "pinned": true,
+      "cid": "QmchUkBQCCkLykaur4Hrno4ZCGPkiLrJXtGVN1NTqqxtyM",
+      "sha256": "291796bbfd9959c1961fb39b0b31b173c2dee33f73e0d6258b271ed25f14f764",
+      "bytes": 34910798,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmchUkBQCCkLykaur4Hrno4ZCGPkiLrJXtGVN1NTqqxtyM",
+      "transcoded": true,
+      "masterBytes": 317777260
     },
     "verifiedAt": "2026-06-05T13:06:13.423Z",
     "verified": true
@@ -677,8 +719,15 @@
     "lqip": "data:image/webp;base64,UklGRswAAABXRUJQVlA4IMAAAAAQBwCdASoYACsAPu1wr1CppqQiqqgBMB2JZgCsOUFV/gOAWQH4XkfG5/epRhmGb9T8geZ4S2Wpo9L5pTSy+GuDBAD+6dWJ00BcPN/88ie/o617PpH1vFdZMnO8kyWiBlcyQoHD1fnWq/Lad1YV+oKWLXScnvVXrdE8HWWJXAmItKzvMNjo+lyTqX6oalJsSHxRp9GinEDdBiyISVdjFWnyHttSUa4dJQnvqkyRnXORtVcr2UtmXfgsTtYD0xA8AAA=",
     "animation": {
       "source": "https://arweave.net/Xs2diyfUUqfUOydgdlYiO_UwEEkS2Hfi35_PVxY6ze0",
-      "type": "unknown",
-      "pinned": false
+      "type": "video",
+      "pinned": true,
+      "cid": "QmZhJKeCSt91WqauqYQKK6yF2jtWPKV7MypxssSubN8vBZ",
+      "sha256": "3567c44f77e17b099ea6b020aed74765238f8b7749b318c814b8019acddec2a6",
+      "bytes": 22053433,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmZhJKeCSt91WqauqYQKK6yF2jtWPKV7MypxssSubN8vBZ",
+      "transcoded": true,
+      "masterBytes": 328367500
     },
     "verifiedAt": "2026-06-05T13:06:18.518Z",
     "verified": true
@@ -742,8 +791,15 @@
     "lqip": "data:image/webp;base64,UklGRuAAAABXRUJQVlA4INQAAADwBQCdASoYACsAPuVkq02pJiQiMBVdUSAciUATpl/W2gCxMbzgtNaFI0AsCpBdNFUMyUlv3vsUAAD9nBYciNB0VJqdpPezScj4cUTbhEd58zjK1F1WU3qC+hdgdA3IjCNog+DD7uD/psgdXyEnEsaqoh/tMpgGXrn1NVgLy/Wa+RquR/5QwH41/W3N2U0sAqiAkh9UdmBDxvZt77wkgV4Igcqaj2VHMwu0wJ3OXAXkBRr0eMz5sNujZfXvWHA1sy07Fk2yFoSdbz8UbpvIYASDc3gAAA==",
     "animation": {
       "source": "https://arweave.net/QJtolfHcFj3dSodSOCAkjQKrHvEdzvaDtj5ohTsjeCY",
-      "type": "unknown",
-      "pinned": false
+      "type": "video",
+      "pinned": true,
+      "cid": "QmbjdgbxGNXjR64xXCU8K1tPKegBQhoQYpTFRgJmBLmiVB",
+      "sha256": "0004336ea9ea852111bf2a02626ba88d14b9f9c593448cc3905a228bcce35cee",
+      "bytes": 60616377,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmbjdgbxGNXjR64xXCU8K1tPKegBQhoQYpTFRgJmBLmiVB",
+      "transcoded": true,
+      "masterBytes": 309966256
     },
     "verifiedAt": "2026-06-05T13:06:23.433Z",
     "verified": true
@@ -777,8 +833,15 @@
     "lqip": "data:image/webp;base64,UklGRuAAAABXRUJQVlA4INQAAADQBgCdASoYACsAPu1kq1EppSOiqrgMATAdiUAVhmBv/8/4BNxxmeCxfmbiSSE5IMCk2wCGAcCk/un8+drqrgAA/t2bBXrHhDkIE+fdhwrnK/2N0hBE2LL7RTwj6di8/ZKPt/X98kdnB5N99S0KQAevvUXYlDaHlXLJBfBRtoa51znA6HQ7ht6InBfC+7NsCj16UMZuyPjo2ZC/B5A+hpj/8J7BKM2ZaMzgUyEliWVtZYcMrNEtjb5uBnsVHcDkNL+OrV8H54oMxjTpe4zLjPIR/DgAAA==",
     "animation": {
       "source": "https://arweave.net/6R8lf2JGlMG1z_hA4rcV6HvaweuWw_TWKVN9UO_L3xo",
-      "type": "unknown",
-      "pinned": false
+      "type": "video",
+      "pinned": true,
+      "cid": "QmUS25K6A5CHFivgDm2gxjEufjsqwpsVP2U1tQM64uZsh5",
+      "sha256": "295f1d99a42f6d339f9f5b4af0880945f4093b5b28092fa450220adcd081a407",
+      "bytes": 38575538,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmUS25K6A5CHFivgDm2gxjEufjsqwpsVP2U1tQM64uZsh5",
+      "transcoded": true,
+      "masterBytes": 338368893
     },
     "verifiedAt": "2026-06-05T13:06:27.621Z",
     "verified": true
@@ -812,8 +875,15 @@
     "lqip": "data:image/webp;base64,UklGRv4AAABXRUJQVlA4IPIAAACQBwCdASoYACsAPu1oqk6ppiOiKqwBMB2JaACdMsWqU/8vSATWywH1iE8/Kafaukg0jK8VYTkaJMQTYnYIlsamzb3C2wAA/tD6BlGnGOktXdgkuMaOGZrRY9Y+pVTKR1Ol7G9O8r+RJOVgNG/ptyr33M0aPourBl5MEddD70CzbuYXBad7Pe1lKdViy/Rs27LHVvzCh9GUeM/lvBWFAn5XG5hsY1i6k2ou8TddvYZEheMVbwGLVK7kLYTAFf8HF4nPKmY9lBy99AijEwvk12rkiH01nsjRI7NbRnj577POAkKTo8pTViT8IovZlYTMg3MMAA==",
     "animation": {
       "source": "https://arweave.net/tr29rwc5KCQtYm2jWi4tUaFSNCboo4cwe8fvlWe-PX4",
-      "type": "unknown",
-      "pinned": false
+      "type": "video",
+      "pinned": true,
+      "cid": "QmNsjEEVQ836BUqfcca2DA77UwBnJQ1TVJbJEahuHVFXYN",
+      "sha256": "bfd468be6da09f28d905b5e02bb68fef6bc0f7276bc38002c5b4e66175cee5c8",
+      "bytes": 40842047,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmNsjEEVQ836BUqfcca2DA77UwBnJQ1TVJbJEahuHVFXYN",
+      "transcoded": true,
+      "masterBytes": 314640937
     },
     "verifiedAt": "2026-06-05T13:06:30.471Z",
     "verified": true
@@ -847,8 +917,15 @@
     "lqip": "data:image/webp;base64,UklGRsQAAABXRUJQVlA4ILgAAADwBgCdASoYACsAPu1opk+ppiMiKqwBMB2JZACdM5NGUBwt39ctE7hf40Y/MFLwCRENnKjLks/WnHyLFY61RISwAP7bKobndhrWT2Yq+3NXGOGQpQALSjZp3xPzV9P3rKKNwryQLdZDYV2sP6BoAnjh+UIstjx2RmnQ8+MNgUI8CHjF9Id+/45iCvjC6pbgQfxRonwUYWGeABpb28FvPqmidNNcLYa9eaI4BbrdsRpBaCNI1kKZQAAA",
     "animation": {
       "source": "https://arweave.net/BMMiFcLb5ZqibA3Hu4-rmXznH6lKLpAISrJcBaP6klg",
-      "type": "unknown",
-      "pinned": false
+      "type": "video",
+      "pinned": true,
+      "cid": "QmdkuToCXj7WhJAhWATWE5yuDuUN85UWdRv8ihDhUFTDuX",
+      "sha256": "8734278581e2367b891ffdecf58f48c310376e187395027159c4680b049db104",
+      "bytes": 41358735,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmdkuToCXj7WhJAhWATWE5yuDuUN85UWdRv8ihDhUFTDuX",
+      "transcoded": true,
+      "masterBytes": 319794405
     },
     "verifiedAt": "2026-06-05T13:06:33.680Z",
     "verified": true
