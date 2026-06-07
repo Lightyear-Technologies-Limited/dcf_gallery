@@ -71,8 +71,14 @@ export default async function ExplorePage({
 
   return (
     <div>
-      <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 pt-8">
-        <ViewSwitcher active={view} explicit={!!s("view")} />
+      {/* Masthead — mirrors the Salon masthead (CollectionView): the catalogue
+          names itself, and the view-switcher holds the SAME top-right position
+          across / and /explore, so toggling lenses never makes it jump sides. */}
+      <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12">
+        <div className="pt-6 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3">
+          <h1 className="font-serif display-sm">Hivemind Digital Culture Fund</h1>
+          <ViewSwitcher active={view} explicit={!!s("view")} />
+        </div>
       </div>
 
       {view === "chapters" ? (

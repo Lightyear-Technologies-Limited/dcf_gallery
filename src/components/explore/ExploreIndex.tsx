@@ -197,7 +197,9 @@ export default function ExploreIndex({ items, chapters, artists, collections, me
                 <span className="text-[12px] text-muted">{g.artistName}</span>
                 <span className="ml-auto text-[11px] text-muted font-mono tabular-nums">{g.items.length}</span>
               </div>
-              <JustifiedGallery pieces={g.items} piecesPerRow={perRow} hrefSearch={hrefSearch} maxRowHeight={420} />
+              {/* Cap underfilled rows nearer the typical multi-up row height (~280px)
+                  so a single-work collection reads as a deliberate plate, not a bulge. */}
+              <JustifiedGallery pieces={g.items} piecesPerRow={perRow} hrefSearch={hrefSearch} maxRowHeight={360} />
             </section>
           ))}
         </div>
