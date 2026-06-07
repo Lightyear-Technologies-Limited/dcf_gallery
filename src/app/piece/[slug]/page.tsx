@@ -259,8 +259,27 @@ export default async function PiecePage({
     </div>
   );
 
+  const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://gallery.hivemind.capital";
+  const artistDisplay = artist ? getArtistDisplayName(artist.slug, artist.name) : undefined;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "VisualArtwork",
+    name: piece.title,
+    url: `${SITE}/piece/${piece.slug}`,
+    artform: "Digital art",
+    ...(getOgImage(piece.slug) ? { image: getOgImage(piece.slug) } : {}),
+    ...(artistDisplay
+      ? { creator: { "@type": "Person", name: artistDisplay, ...(artist ? { url: `${SITE}/artist/${artist.slug}` } : {}) } }
+      : {}),
+    ...(getPieceDescription(piece.slug) || piece.description
+      ? { description: getPieceDescription(piece.slug) || piece.description }
+      : {}),
+    ...(collection ? { isPartOf: { "@type": "Collection", name: getCollectionDisplayName(collection.slug, collection.name) } } : {}),
+  };
+
   return (
     <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {/* Back link goes up one level to the parent collection, preserving
           any active trait filter so the reader returns to the filtered view
           they came from. Label uses the curated display name and is

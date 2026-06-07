@@ -62,6 +62,18 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         >
           Skip to content
         </a>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                { "@type": "Organization", "@id": `${SITE_URL}/#org`, name: "Hivemind Digital Culture Fund", url: SITE_URL, logo: `${SITE_URL}/icon-512.png` },
+                { "@type": "WebSite", "@id": `${SITE_URL}/#site`, name: "Hivemind Digital Culture Fund", url: SITE_URL, publisher: { "@id": `${SITE_URL}/#org` } },
+              ],
+            }),
+          }}
+        />
         <MotionProvider>
         <Header />
         <main id="main" className="flex-1 pt-14 md:pt-0 md:pl-32 xl:pl-36">{children}</main>
