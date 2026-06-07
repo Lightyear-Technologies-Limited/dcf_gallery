@@ -16,32 +16,29 @@ else needs to be touched.
 
 | File | Holds | Shows up on |
 |---|---|---|
-| `artists.json` | each artist's **bio** (+ optional essay link) | the artist page, the artists index |
-| `collections.json` | each collection's **curator note** (+ optional essay link) | the collection page, under "Hivemind Commentary" |
+| `content/editorial/artists/<slug>.json` | one **artist** — `bio` (+ optional essay) | the artist page, the artists index |
+| `content/editorial/collections/<slug>.json` | one **collection** — `curatorNote` (+ optional essay) | the collection page, under "Hivemind Commentary" |
 
-Each file is a list of entries keyed by a short id (the "slug", e.g. `fidenza`).
-**Only edit the text inside the quotation marks. Do not rename the ids or the field
-names** (`bio`, `curatorNote`, …) and keep the commas and braces as they are.
+One JSON file per entity; the filename is the slug (e.g. `fidenza.json`). **Only edit the
+text inside the quotation marks. Do not rename the field names** (`bio`, `curatorNote`, …)
+and keep the commas and braces as they are. (A visual editor — TinaCMS — can edit these
+without touching JSON; see `docs/CMS-TINA.md`.)
 
-### What an entry looks like
+### What a file looks like
 
-`collections.json`:
+`content/editorial/collections/fidenza.json`:
 ```json
 {
-  "fidenza": {
-    "curatorNote": "Fidenza is the canonical Art Blocks work and a cornerstone of the generative art canon. Hivemind's 30-piece holding is built around extreme palettes and rare scales — intended to read as a cohesive sub-collection rather than a representative sample.",
-    "essayUrl": "https://www.hivemind.capital/content/inside-the-collection-...",
-    "essayTitle": "Inside the Collection: Fidenza"
-  }
+  "curatorNote": "Fidenza is the canonical Art Blocks work and a cornerstone of the generative art canon. Hivemind's 30-piece holding is built around extreme palettes and rare scales — intended to read as a cohesive sub-collection rather than a representative sample.",
+  "essayUrl": "https://www.hivemind.capital/content/inside-the-collection-...",
+  "essayTitle": "Inside the Collection: Fidenza"
 }
 ```
 
-`artists.json`:
+`content/editorial/artists/xcopy.json`:
 ```json
 {
-  "xcopy": {
-    "bio": "XCOPY's instantly recognizable glitch aesthetic explores death, dystopia, and apathy — delivering a raw critique of capitalism and technology."
-  }
+  "bio": "XCOPY's instantly recognizable glitch aesthetic explores death, dystopia, and apathy — delivering a raw critique of capitalism and technology."
 }
 ```
 
@@ -70,9 +67,10 @@ why Hivemind assembled the set the way it did.
 
 ## ✅ To do (plan item C.6)
 
-**1. Fill these five empty curator notes** in `collections.json` (they're currently `""`):
+**1. Fill these five empty curator notes** (each is `content/editorial/collections/<id>.json`
+with `"curatorNote": ""`):
 
-| Edit the entry with id… | Collection | Artist |
+| Edit the file `collections/<id>.json` | Collection | Artist |
 |---|---|---|
 | `ack-editions` | ACK Editions | Alpha Centauri Kid (a.c.k.) |
 | `notable-pepes` | Notable Pepes | Alpha Centauri Kid (a.c.k.) |
@@ -80,8 +78,8 @@ why Hivemind assembled the set the way it did.
 | `x0x` | X0X | Kim Asendorf |
 | `cope-salada` | Cope Salada | XCOPY |
 
-**2. Audit the artist bios** in `artists.json` — read all 11, confirm each is current,
-accurate, and in the right voice; revise as needed.
+**2. Audit the artist bios** in `content/editorial/artists/<slug>.json` — read all 11,
+confirm each is current, accurate, and in the right voice; revise as needed.
 
 ---
 

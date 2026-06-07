@@ -65,13 +65,16 @@ for (const c of collections) {
   collectionsOut[c.slug] = e;
 }
 
-mkdirSync(OUT_DIR, { recursive: true });
+// Per-entity files (one JSON per slug) — the layout TinaCMS edits.
 for (const [name, data] of [["artists", artistsOut], ["collections", collectionsOut]]) {
-  const path = resolve(OUT_DIR, `${name}.json`);
-  if (existsSync(path) && !FORCE) {
-    console.log(`! ${name}.json exists — skipping (pass --force to overwrite)`);
-    continue;
+  const dir = resolve(OUT_DIR, name);
+  mkdirSync(dir, { recursive: true });
+  let n = 0;
+  for (const [slug, entry] of Object.entries(data)) {
+    const path = resolve(dir, `${slug}.json`);
+    if (existsSync(path) && !FORCE) continue;
+    writeFileSync(path, JSON.stringify(entry, null, 2) + "\n");
+    n++;
   }
-  writeFileSync(path, JSON.stringify(data, null, 2) + "\n");
-  console.log(`✓ wrote content/editorial/${name}.json (${Object.keys(data).length} entries)`);
+  console.log(`✓ content/editorial/${name}/ — ${n} file(s) written`);
 }
