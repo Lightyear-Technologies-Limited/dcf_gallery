@@ -87,7 +87,19 @@
     ],
     "lqip": "data:image/webp;base64,UklGRpwAAABXRUJQVlA4IJAAAABwBQCdASoYABgAPu1wr1KppiQiqAgBMB2JQBbfXkA1qGD9u3xbFd6vPrMtZTI4jdjOZQSAAP7azw59lLKxNorFcGz0lSiTCc6ca6+VFGL4GQSoYvPhZLytXUvwQd2R0G4d3HmYGE1q1VdcwzcRtOglK0As0qclIu5eJPp1nP2+4H0uMuT2+f/qbbMNhklAAAA=",
     "verifiedAt": "2026-06-05T13:03:31.138Z",
-    "verified": true
+    "verified": true,
+    "animation": {
+      "source": "https://arweave.net/VeA6qddyk8YJbV-QrlzQMyX5E4tu0QZRBPdiTxUIbw4",
+      "type": "video",
+      "pinned": true,
+      "cid": "QmVQA2YryvGEa3eb2pcNGqJp2Jy1oPeCqR4aKZCCamrTLS",
+      "sha256": "2bc14ea26d399387b896874d5ff482c008614dc051155e9f40b9b111742c8682",
+      "bytes": 67274379,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmVQA2YryvGEa3eb2pcNGqJp2Jy1oPeCqR4aKZCCamrTLS",
+      "transcoded": true,
+      "masterBytes": 338389222
+    }
   },
   "cryptopunks-269-3BBB": {
     "storage": "onchain",
@@ -455,7 +467,19 @@
     ],
     "lqip": "data:image/webp;base64,UklGRoIAAABXRUJQVlA4IHYAAACwBACdASoYABgAPtFUoU2oJKMiN+gBABoJY2R5Uc0dZ3oyj8ri3sbNw5mi1ncAAP7wXOdqbpY2Eg/wdR/KEK20taJ1SrDmAPzsyW35uNzc3SXcVsK06Vf87lY2GbfoqMBAxm0SELmrJve8DpkCIvKzhWsaAAAA",
     "verifiedAt": "2026-06-05T13:05:58.722Z",
-    "verified": true
+    "verified": true,
+    "animation": {
+      "source": "https://arweave.net/951E6vku1SSDkDpP_Yd0LXr_YlL9F9uuyJWfJt91wac",
+      "type": "video",
+      "pinned": true,
+      "cid": "Qmd5UjrgYK89wRZ1izsFXKperJcZssbLu1WgoibLGJsYAE",
+      "sha256": "0809b26f9ba76ebebcea25caacb0f460b5f9d6c4af1a672d710876d69aa23f64",
+      "bytes": 74550982,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/Qmd5UjrgYK89wRZ1izsFXKperJcZssbLu1WgoibLGJsYAE",
+      "transcoded": true,
+      "masterBytes": 320369833
+    }
   },
   "dataland-biome-lumina-207-1c9d": {
     "storage": "centralized",
@@ -485,7 +509,19 @@
     ],
     "lqip": "data:image/webp;base64,UklGRnYAAABXRUJQVlA4IGoAAAAQBQCdASoYABgAPulep02pJSOiN/VYASAdCWMAsOwL2q0U9wE5lG9J9YvOGPw8pkcAAPuRvhGZIm2c7ocA0qF7b1lSrXaNtNJBRuIJRKmBgiqoTsXi+Jtj4IKQ2SsNXSFt+YlG2tU+AAAA",
     "verifiedAt": "2026-06-05T13:05:59.179Z",
-    "verified": true
+    "verified": true,
+    "animation": {
+      "source": "https://arweave.net/GsdsgX5vMsIeWaqiw_xzd3VHn9__ZvusdAsT10lgp-E",
+      "type": "video",
+      "pinned": true,
+      "cid": "QmTNyAdVD4cBhCYsqiHMJstYFELK2RkqzKyAeBKZwQ1ayw",
+      "sha256": "70a0006ae8690a2de6154ec866b55f4a738a47cab6f844e369414ee6e126eb47",
+      "bytes": 57709442,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmTNyAdVD4cBhCYsqiHMJstYFELK2RkqzKyAeBKZwQ1ayw",
+      "transcoded": true,
+      "masterBytes": 315842703
+    }
   },
   "dataland-biome-lumina-242-1c9d": {
     "storage": "arweave",
@@ -599,9 +635,16 @@
     ],
     "lqip": "data:image/webp;base64,UklGRhABAABXRUJQVlA4IAQBAACQBwCdASoYACsAPu1iqU+ppSOiMBVaqTAdiWgAnQBOd45N3pAmRxl7+g50T2dJrbQbo7fgWh9Id4wOAc/bjZZCWFPA0RgAzYxLsPF5nHXfoWq8JA3gXZXJ+sOq3CaP6zoWP+HflPg2W9Hg6d3Q94a/hsV3R9YjXCf0eR8IbQqDUyXQEAPnjS5+pPK9Ae+g1AlnH8Bb7kXnU9Qr5pP1z9+Sc+5GZAvFfZjzLt75dDw65FfERidz3HDFxXWoYDOaxV25jHzB0vncqV9oTMBwYVk6KIvl/MW0o9UAIhWriRkv5sw5+lItzFPym7AMEsSOdYWTKuRYJXh6KFeuE89kNOCd0lwAAA==",
     "animation": {
-      "source": "https://arweave.net/Hu6D5vrLpcOR2FdKKonTFvHj4RnCgas3Fgf5IKyUCC8",
+      "source": "https://storage.googleapis.com/biome-lumina-35cbr/0108_2205628EF8641569BCE8105FD57562A9C2F3E350.mp4",
       "type": "video",
-      "pinned": false
+      "pinned": true,
+      "cid": "QmdWuRsesWzQim9qTKBuWpGPXdthY3eQs4LpiUPYp9VWcm",
+      "sha256": "c67b14203ccbde4cc6d9905018cc5bfc7daf51603b46f5224ba06d16d8d6fc55",
+      "bytes": 69576161,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmdWuRsesWzQim9qTKBuWpGPXdthY3eQs4LpiUPYp9VWcm",
+      "transcoded": true,
+      "masterBytes": 263628101
     },
     "verifiedAt": "2026-06-05T13:06:08.777Z",
     "verified": true
@@ -760,7 +803,19 @@
     ],
     "lqip": "data:image/webp;base64,UklGRrYAAABXRUJQVlA4IKoAAABwBQCdASoYABgAPu1kqE2ppaOiMBgMATAdiUAW/V0QImqTm/YRd1zCe+gvlDxwMcQedn8AAPZmYSjLCLv27ICewEoxlyTSp0/n53sCoYgnXkuGPWHqIwUQyAej7bcseKVYByi4WuqG5zgzy3p4wxKynnITUE6rOJ6wPV2ac5iUqh7gyU9ptNa6JE4wvN76E5C6sA88d4UVhN2JlGQL8JbIBXKhmXYikkmAAA==",
     "verifiedAt": "2026-06-05T13:06:18.803Z",
-    "verified": true
+    "verified": true,
+    "animation": {
+      "source": "https://arweave.net/SfhlY81Ly5qUOTIanEErGVmsG4ohhyCRfXOQ4unaXLs",
+      "type": "video",
+      "pinned": true,
+      "cid": "QmXTccSyEVSYprsNZNjimb2JoqQRsQCXBVDq5b82ZLjR5Z",
+      "sha256": "283860fee0bba0b41f960a55437718a58b6e7d4b910a2b73041ed8d612252014",
+      "bytes": 68520441,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmXTccSyEVSYprsNZNjimb2JoqQRsQCXBVDq5b82ZLjR5Z",
+      "transcoded": true,
+      "masterBytes": 321255400
+    }
   },
   "dataland-biome-lumina-665-1c9d": {
     "storage": "arweave",
@@ -958,7 +1013,19 @@
     ],
     "lqip": "data:image/webp;base64,UklGRpoAAABXRUJQVlA4II4AAABQBQCdASoYABgAPu1sq1EppaOiqAqpMB2JQBOmXHAf8bAqYFsfM62Q7RhB8Glgwn+BtAAA/uQi844KvfzAGjavyt2KaULNLwG0GkSwflhc57xbz9HymvZuF0ETbeNeO7dvXX+p6O1Kf5H1f6Sed5azT83Tm3L0honf3YSUHi2Z+nu18kK3DcBZk6oLBwAA",
     "verifiedAt": "2026-06-05T13:06:34.031Z",
-    "verified": true
+    "verified": true,
+    "animation": {
+      "source": "https://arweave.net/hfjnIJV31s-POECHH5DmrmgkYc0zqCQXjWMDytm5ppY",
+      "type": "video",
+      "pinned": true,
+      "cid": "Qmb3dmF84bxyKzLdoGVCn2GihfjqpfzK1PQTbzdtNEZoZP",
+      "sha256": "af0db0782f085a01e7834588d131e6aba97b0d23a6bc38112fcd44c4b3f13ad3",
+      "bytes": 60525989,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/Qmb3dmF84bxyKzLdoGVCn2GihfjqpfzK1PQTbzdtNEZoZP",
+      "transcoded": true,
+      "masterBytes": 318374381
+    }
   },
   "dataland-biome-lumina-999-1c9d": {
     "storage": "centralized",
@@ -988,7 +1055,19 @@
     ],
     "lqip": "data:image/webp;base64,UklGRpYAAABXRUJQVlA4IIoAAADQBACdASoYABgAPt1epU2opaOiN/qoARAbiWgAuyEgAduWaT02REz5rol9s7mn2AD+vII+24v7ERPfPsReJuU2DXejP+2suU4anp2rApMVbDE/lbovBWXWof7a9nFQqx3f8APtrghjpxGe70kfL/QFfJXS6xxq4x9JwTlso3biCJ0OVp57vRI4AAA=",
     "verifiedAt": "2026-06-05T13:06:34.318Z",
-    "verified": true
+    "verified": true,
+    "animation": {
+      "source": "https://arweave.net/VyTU_OLfF5YmnM3Rq-4F8Vu2FvgCOYtECzHGti-1YpY",
+      "type": "video",
+      "pinned": true,
+      "cid": "QmdXARiYZ9UNdGYrSYh2K1cN3ajkSXjuXn4bYUnEHQUAbv",
+      "sha256": "ce49c4ce2ed8470a76671782f34373a5b48c875b6be2d26e907808029ad08b1b",
+      "bytes": 48852416,
+      "mime": "video/mp4",
+      "gateway": "https://lightyear.myfilebase.com/ipfs/QmdXARiYZ9UNdGYrSYh2K1cN3ajkSXjuXn4bYUnEHQUAbv",
+      "transcoded": true,
+      "masterBytes": 338369872
+    }
   },
   "cryptopunks-1568-3BBB": {
     "storage": "onchain",

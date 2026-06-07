@@ -106,7 +106,10 @@ function classify(uri) {
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 async function fetchMeta(contract, tokenId, attempt = 1) {
-  const url = `https://eth-mainnet.g.alchemy.com/nft/v3/${KEY}/getNFTMetadata?contractAddress=${contract}&tokenId=${tokenId}&refreshCache=false`;
+  // refreshCache=true on --refresh forces Alchemy to re-read the on-chain tokenURI
+  // (not its possibly-stale cache). Some Dataland animation_urls only appear after
+  // this; without it they came back image-only or as an arweave CDN redirect page.
+  const url = `https://eth-mainnet.g.alchemy.com/nft/v3/${KEY}/getNFTMetadata?contractAddress=${contract}&tokenId=${tokenId}&refreshCache=${REFRESH ? "true" : "false"}`;
   const ctl = new AbortController();
   const t = setTimeout(() => ctl.abort(), 20000);
   try {
