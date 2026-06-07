@@ -4,6 +4,7 @@ import Link from "next/link";
 import { getOgImage } from "@/lib/provenance";
 import { collections, getArtist, getCollectionsByArtist, getPiecesByCollection } from "@/lib/data";
 import { withCollectionEditorial } from "@/lib/editorial";
+import { SITE_URL } from "@/lib/site";
 import { getArtworkImage } from "@/lib/images";
 import {
   getArtistDisplayName,
@@ -447,8 +448,17 @@ export default async function CollectionPage({
     </div>
   ) : null;
 
+  const collectionLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: collectionName,
+    url: `${SITE_URL}/collection/${col.slug}`,
+    ...(col.curatorNote ? { description: col.curatorNote.slice(0, 320) } : {}),
+  };
+
   return (
     <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionLd) }} />
       {/* Breadcrumb + sibling nav. Prev (artist's other works) and next
           collection sit at the top alongside the trail so a returning
           reader can jump laterally without first scrolling to the bottom

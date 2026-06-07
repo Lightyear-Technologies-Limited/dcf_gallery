@@ -1,8 +1,8 @@
 import type { MetadataRoute } from "next";
 import { artists, collections, pieces } from "@/lib/data";
 import { isCollectionHidden } from "@/lib/curation";
+import { SITE_URL as SITE } from "@/lib/site";
 
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://gallery.hivemind.capital";
 // Artists folded into another on the site have no standalone page (see generateStaticParams).
 const MERGED = new Set(["tyler-hobbs-and-dandelion-wist"]);
 

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { pieces, getArtist, getCollection, getPiecesByCollection } from "@/lib/data";
 import { getArtworkImage, getArtworkAspect, resolveTokenId } from "@/lib/images";
 import { getDetailVariants, getArtworkBlur, getProvenance, getOgImage } from "@/lib/provenance";
+import { SITE_URL as SITE } from "@/lib/site";
 import { getEditionType, getArtistSiteUrl, getPieceTraits, getPieceDescription, getCollectionDisplayName, getArtistDisplayName, SYNTHETIC_TRAITS } from "@/lib/curation";
 import type { TraitValue } from "@/lib/curation";
 import PlaceholderArt from "@/components/PlaceholderArt";
@@ -259,7 +260,6 @@ export default async function PiecePage({
     </div>
   );
 
-  const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://gallery.hivemind.capital";
   const artistDisplay = artist ? getArtistDisplayName(artist.slug, artist.name) : undefined;
   const jsonLd = {
     "@context": "https://schema.org",

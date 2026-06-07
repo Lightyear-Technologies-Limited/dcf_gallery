@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import Header from "@/components/Header";
 import Link from "next/link";
 import { MotionProvider } from "@/components/MotionPreference";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const argent = localFont({
@@ -23,9 +24,7 @@ const instrumentSans = localFont({
   display: "swap",
 });
 
-// Public site origin for resolving relative OG/canonical URLs. Set the final
-// domain via NEXT_PUBLIC_SITE_URL when known (the brief lists the domain as TBD).
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://gallery.hivemind.capital";
+// SITE_URL is resolved in @/lib/site: NEXT_PUBLIC_SITE_URL → Vercel domain → default.
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

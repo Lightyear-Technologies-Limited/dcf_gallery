@@ -1,12 +1,12 @@
 import { artists, collections } from "@/lib/data";
 import { getArtistDisplayName, getCollectionDisplayName, isCollectionHidden } from "@/lib/curation";
 import { CHAPTERS } from "@/lib/chapters";
+import { SITE_URL as SITE } from "@/lib/site";
 
 // llms.txt (llmstxt.org) — a concise, linked map of the site for LLM agents.
 // Generated from the data so it stays accurate. Served statically at /llms.txt.
 export const dynamic = "force-static";
 
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://gallery.hivemind.capital";
 const MERGED = new Set(["tyler-hobbs-and-dandelion-wist"]);
 
 export function GET() {

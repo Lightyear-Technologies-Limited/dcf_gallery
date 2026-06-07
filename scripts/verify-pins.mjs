@@ -32,8 +32,13 @@ const ONLY = onlyArg !== -1 ? new Set(process.argv[onlyArg + 1].split(",")) : nu
 const limitArg = process.argv.indexOf("--limit");
 const LIMIT = limitArg !== -1 ? parseInt(process.argv[limitArg + 1], 10) : Infinity;
 
+const ANIM = process.argv.includes("--animations");
+
 const man = JSON.parse(readFileSync(OUT, "utf8"));
 let slugs = Object.keys(man).filter((s) => man[s].cid && man[s].sha256);
+// --animations: only pieces with a pinned video transcode or interactive HTML
+// (skip re-downloading the already-verified stills).
+if (ANIM) slugs = slugs.filter((s) => man[s].animation && (man[s].animation.cid || man[s].animation.htmlCid));
 if (ONLY) slugs = slugs.filter((s) => ONLY.has(s));
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -56,10 +61,24 @@ for (const slug of slugs) {
   if (done >= LIMIT) break;
   const e = man[slug];
   try {
-    const buf = await dl(`https://${GW}/ipfs/${e.cid}`);
-    const h = createHash("sha256").update(buf).digest("hex");
-    if (h === e.sha256) { e.verifiedAt = new Date().toISOString(); e.verified = true; ok++; process.stdout.write("."); }
-    else { e.verified = false; mismatch++; bad.push(slug); process.stdout.write("M"); }
+    if (!ANIM) {
+      const buf = await dl(`https://${GW}/ipfs/${e.cid}`);
+      if (createHash("sha256").update(buf).digest("hex") === e.sha256) { e.verifiedAt = new Date().toISOString(); e.verified = true; ok++; process.stdout.write("."); }
+      else { e.verified = false; mismatch++; bad.push(slug); process.stdout.write("M"); }
+    }
+    // Pinned video transcode + interactive HTML (content-addressed, but we still
+    // confirm the gateway serves bytes matching the hash recorded at pin time).
+    const a = e.animation;
+    if (a?.cid && a.sha256) {
+      const ab = await dl(`https://${GW}/ipfs/${a.cid}`);
+      if (createHash("sha256").update(ab).digest("hex") === a.sha256) { a.verifiedAt = new Date().toISOString(); a.verified = true; ok++; process.stdout.write("v"); }
+      else { a.verified = false; mismatch++; bad.push(slug + "(video)"); process.stdout.write("M"); }
+    }
+    if (a?.htmlCid && a.htmlSha256) {
+      const hb = await dl(`https://${GW}/ipfs/${a.htmlCid}`);
+      if (createHash("sha256").update(hb).digest("hex") === a.htmlSha256) { a.htmlVerifiedAt = new Date().toISOString(); ok++; process.stdout.write("h"); }
+      else { mismatch++; bad.push(slug + "(html)"); process.stdout.write("M"); }
+    }
   } catch { fail++; process.stdout.write("x"); }
   done++;
   if (done % 10 === 0) writeFileSync(OUT, JSON.stringify(man, null, 2) + "\n");
