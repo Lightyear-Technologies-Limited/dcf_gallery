@@ -69,12 +69,12 @@ for (const slug of slugs) {
     // Pinned video transcode + interactive HTML (content-addressed, but we still
     // confirm the gateway serves bytes matching the hash recorded at pin time).
     const a = e.animation;
-    if (a?.cid && a.sha256) {
+    if (a?.cid && a.sha256 && !a.verified) {
       const ab = await dl(`https://${GW}/ipfs/${a.cid}`);
       if (createHash("sha256").update(ab).digest("hex") === a.sha256) { a.verifiedAt = new Date().toISOString(); a.verified = true; ok++; process.stdout.write("v"); }
       else { a.verified = false; mismatch++; bad.push(slug + "(video)"); process.stdout.write("M"); }
     }
-    if (a?.htmlCid && a.htmlSha256) {
+    if (a?.htmlCid && a.htmlSha256 && !a.htmlVerifiedAt) {
       const hb = await dl(`https://${GW}/ipfs/${a.htmlCid}`);
       if (createHash("sha256").update(hb).digest("hex") === a.htmlSha256) { a.htmlVerifiedAt = new Date().toISOString(); ok++; process.stdout.write("h"); }
       else { mismatch++; bad.push(slug + "(html)"); process.stdout.write("M"); }
