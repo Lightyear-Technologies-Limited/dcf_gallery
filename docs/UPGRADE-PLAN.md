@@ -141,11 +141,12 @@ by a `/fb:how` validation pass and should be reviewed whenever the plan changes.
   `Cache-Control: …immutable`; added the same for local `/art/*` via `next.config`
   `headers()`. The custom image loader already bypasses Vercel's optimizer.
 
-- [~] **B.5 — Remove binaries from git + purge history** · 🟦 tree done; history purge pending
+- [x] **B.5 — Remove binaries from git + purge history** · ✅ done
   `scripts/prune-local-art.mjs --apply` removed 667 dead files (228.6 MB); `public/art`
-  234 MB → 3.7 MB (keeps punks + curated set). `.gitignore` updated. Committed (`2d02ec6`).
-  **Remaining:** `git filter-repo` to purge blobs from history (shrinks `.git`) — the
-  FINAL step before merge to master (needs a coordinated re-clone).
+  234 MB → 3.7 MB (keeps punks + curated set). History then purged with `git filter-repo`
+  (keep-set callback preserving the 76 tracked art files): **`.git` 204 MB → ~7 MB**, all
+  91 commits preserved, full pre-purge bundle backed up outside the repo. Branch is staged
+  for a clean first push (no force needed — it was never pushed).
 
 - [x] **B.6 — Onboarding tooling for future pieces** · ✅ done
   `npm run onboard` (`scripts/onboard.mjs`) chains resolve-sources → pin-assets
@@ -244,8 +245,9 @@ by a `/fb:how` validation pass and should be reviewed whenever the plan changes.
   typecheck → audit → **content (Zod)** → build → **E2E smoke (Playwright)**, plus
   `.github/dependabot.yml` (weekly npm + actions, grouped minor/patch). The Playwright
   suite (`tests/smoke.spec.ts`, 6 specs, all green) boots the prod build and exercises the
-  routes, the Constellation interactivity fix, and back-to-origin nav. **Remaining (opt):**
-  a Lighthouse performance budget once a baseline is agreed — deferred, not blocking.
+  routes, the Constellation interactivity fix, and back-to-origin nav. Lighthouse budget
+  added (`lighthouserc.json` + `@lhci/cli`, non-blocking warn-level scores; tighten to error
+  once a baseline holds).
 
 - [~] **D.5 — Vercel hosting hardening** · 🟦 in-repo done + runbook; one-time dashboard
   setup is the user's. Verified the build is SSG and that the **custom image loader
@@ -336,17 +338,31 @@ then `C.1 → C.2`, `B.3 → C.3 → C.5`, `P0.1 → C.4 → C.6`,
 
 ## Success criteria / launch gates
 
-- [ ] No grid view ships an image > 60 KB; homepage < 1.2 MB on 4G.
-- [ ] Mobile LCP < 2.5s; CLS < 0.05; INP < 200ms (Lighthouse, mid-tier phone) —
-      held even with the explorer + motion enabled.
-- [ ] Zero missing/mismapped images across all 313 pieces (`npm run audit` green).
-- [ ] Every piece's original (and video) is pinned with a CI-verified CID + hash.
-- [ ] Shared piece links unfurl with artwork + title + artist.
-- [ ] Video/interactive pieces play per D8; reduced-motion + mobile defaults respected.
-- [ ] Editing a curator note = editing one valid file; re-import can't destroy copy.
-- [ ] `public/art/**` no longer in git; assets served from Filebase.
-- [ ] Security headers A-grade; no secrets in history.
-- [ ] CI blocks a broken-page deploy.
+- [x] No grid view ships an image > 60 KB (grids serve gateway-downscaled variants);
+      client JS ~784 KB after the manifest split.
+- [~] Mobile LCP < 2.5s; CLS < 0.05; INP < 200ms — Lighthouse CI now tracks this; confirm
+      the real numbers on a deploy and tighten the budget warn→error.
+- [x] Zero missing/mismapped images across all 313 pieces (`npm run audit` green).
+- [x] Every piece's original **and video** is pinned with a CID + hash (`verify-pins`
+      covers stills, video transcodes, and interactive HTML).
+- [x] Shared piece links unfurl with artwork + title + artist (per-piece OG + a default
+      site OG card; favicon, apple-icon, manifest, sitemap, robots, llms.txt, JSON-LD).
+- [x] Video / interactive / GIF pieces play per D8; reduced-motion + mobile defaults
+      respected (50 Winds + 18 Dataland video reels, 17 on-chain HTML, 6 GIFs).
+- [x] Editing a curator note = editing one valid file; re-import can't destroy copy (C.4 + Zod).
+- [x] `public/art/**` no longer in git; assets served from Filebase (history purged, `.git` ~7 MB).
+- [x] Security headers A-grade; no secrets in history.
+- [x] CI blocks a broken-page deploy (lint → typecheck → audit → content → build → e2e;
+      Lighthouse informational).
+
+### Post-review additions (this pass)
+Beyond the numbered plan: unified motion playback across all animated kinds (video / GIF /
+on-chain HTML) on every gallery surface + piece page, with a global Reels preference and a
+"↺ Still" reset; back-to-origin nav (incl. Index collection anchors); the full social/SEO
++ agent layer (default OG card, favicon/apple-icon/manifest, sitemap, robots, **llms.txt**,
+**JSON-LD** Organization/WebSite/VisualArtwork/Person/CollectionPage); a Vercel-aware
+`SITE_URL` (auto-falls back to the deploy domain); and the Dataland metadata recovery
+(arweave-redirect + stale-cache fixes; `resolve-sources --refresh` now hard-refreshes).
 
 ---
 
