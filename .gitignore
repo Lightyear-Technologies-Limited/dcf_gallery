@@ -16,6 +16,7 @@
 /playwright-report/
 /playwright/.cache/
 .last-run.json
+/.lighthouseci/
 
 # next.js
 /.next/

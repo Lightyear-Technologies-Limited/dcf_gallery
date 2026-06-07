@@ -32,4 +32,6 @@ jobs:
         run: |
           npx playwright install --with-deps chromium
           npm run test:e2e
-      # Follow-up (D.4): Lighthouse performance budget once a baseline is agreed.
+      - name: Lighthouse budget (informational)
+        run: npx @lhci/cli autorun
+        continue-on-error: true
