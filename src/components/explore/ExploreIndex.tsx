@@ -146,36 +146,34 @@ export default function ExploreIndex({ items, chapters, artists, collections, me
 
   return (
     <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 pb-24">
-      {/* Search + filters */}
-      <div className="flex flex-col gap-4 mb-6">
+      {/* Search + filters — one compact row so the art rises sooner */}
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-3 mb-5">
         <input
           type="search"
           value={query}
           onChange={(e) => apply({ q: e.target.value })}
           placeholder="Search the collection…"
           aria-label="Search the collection"
-          className="w-full max-w-md bg-transparent border-b border-border focus:border-foreground outline-none py-2 text-[15px] placeholder:text-muted transition-colors duration-200"
+          className="w-full sm:w-auto sm:min-w-[14rem] sm:max-w-xs bg-transparent border-b border-border focus:border-foreground outline-none py-2 text-[15px] placeholder:text-muted transition-colors duration-200"
         />
-        <div className="flex flex-wrap gap-3 items-center">
-          <Select label="Artist" value={artist} options={artists} onChange={(v) => apply({ artist: v })} />
-          <Select label="Collection" value={collection} options={visibleCollections} onChange={(v) => apply({ collection: v })} />
-          <Select label="Medium" value={medium} options={mediums.map((m) => ({ slug: m, name: cap(m) }))} onChange={(v) => apply({ medium: v })} />
-          {hasFilters && (
-            <button
-              onClick={() => apply({ chapter: "", artist: "", collection: "", medium: "", q: "" })}
-              className="text-[11px] tracking-[0.1em] uppercase text-muted hover:text-foreground transition-colors duration-200"
-            >
-              Clear
-            </button>
-          )}
-          <span className="ml-auto text-[12px] text-muted font-mono tabular-nums">
-            {filtered.length} {filtered.length === 1 ? "work" : "works"}
-          </span>
-        </div>
+        <Select label="Artist" value={artist} options={artists} onChange={(v) => apply({ artist: v })} />
+        <Select label="Collection" value={collection} options={visibleCollections} onChange={(v) => apply({ collection: v })} />
+        <Select label="Medium" value={medium} options={mediums.map((m) => ({ slug: m, name: cap(m) }))} onChange={(v) => apply({ medium: v })} />
+        {hasFilters && (
+          <button
+            onClick={() => apply({ chapter: "", artist: "", collection: "", medium: "", q: "" })}
+            className="text-[11px] tracking-[0.1em] uppercase text-muted hover:text-foreground transition-colors duration-200"
+          >
+            Clear
+          </button>
+        )}
+        <span className="ml-auto text-[12px] text-muted font-mono tabular-nums">
+          {filtered.length} {filtered.length === 1 ? "work" : "works"}
+        </span>
       </div>
 
       {/* Chapter rail (the Movement axis) */}
-      <div className="flex flex-wrap gap-x-6 gap-y-2 mb-8 border-b border-border pb-4">
+      <div className="flex flex-wrap gap-x-6 gap-y-2 mb-6 border-b border-border pb-4">
         <ChapterBtn active={!chapter} onClick={() => apply({ chapter: "" })}>All chapters</ChapterBtn>
         {chapters.map((c) => (
           <ChapterBtn key={c.slug} active={chapter === c.slug} onClick={() => apply({ chapter: c.slug })}>

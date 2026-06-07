@@ -99,7 +99,7 @@ export default function GridArtwork({ slug, title, imgSrc, isPunk = false, sizes
       {motion && !show && (
         <span
           aria-hidden
-          className="absolute bottom-1.5 right-1.5 z-10 flex h-4 w-4 items-center justify-center rounded-full bg-black/45 text-[7px] text-white backdrop-blur-sm"
+          className="absolute bottom-1.5 right-1.5 z-10 flex h-4 w-4 items-center justify-center rounded-full bg-black/55 text-[7px] text-white"
           title="Animated"
         >
           ▶

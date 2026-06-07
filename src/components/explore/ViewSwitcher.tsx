@@ -103,12 +103,12 @@ export default function ViewSwitcher({
 
   return (
     <div className="relative">
-      <nav className="flex flex-wrap gap-x-5 gap-y-2 text-[11px] tracking-[0.12em] uppercase" aria-label="Explore views">
+      <nav className="flex flex-wrap gap-x-5 gap-y-2 text-[12px] tracking-[0.12em] uppercase" aria-label="Explore views">
         {views.map((v) =>
           active === v.id ? (
-            <span key={v.id} className="text-foreground font-medium" aria-current="page">{v.label}</span>
+            <span key={v.id} className="text-foreground font-medium underline underline-offset-[6px] decoration-1" aria-current="page">{v.label}</span>
           ) : (
-            <Link key={v.id} href={v.href} className="text-muted hover:text-foreground transition-colors duration-200">
+            <Link key={v.id} href={v.href} className="text-foreground-secondary hover:text-foreground transition-colors duration-200">
               {v.label}
             </Link>
           ),
@@ -119,7 +119,7 @@ export default function ViewSwitcher({
         <div
           role="dialog"
           aria-label="How to explore"
-          className="absolute left-0 top-full mt-3 z-40 w-[min(22rem,calc(100vw-3rem))] border border-border bg-surface/95 backdrop-blur-sm shadow-lg p-5"
+          className="fixed bottom-6 right-6 z-40 w-[min(22rem,calc(100vw-3rem))] border border-border bg-surface p-5"
         >
           <p className="font-serif text-[19px] mb-2">Four ways in</p>
           <p className="text-[13px] leading-[1.55] text-foreground-secondary mb-3">

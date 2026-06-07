@@ -87,19 +87,6 @@ body {
   display: none;
 }
 
-/* Constellation view (E.3): each chapter cluster drifts gently so the field
-   feels alive. Per-cluster --dur / --dly vary the motion. The reduced-motion
-   block below neutralizes it automatically (no extra guard needed). */
-@keyframes dcf-drift {
-  0%, 100% { transform: translate3d(0, 0, 0); }
-  50% { transform: translate3d(0, -9px, 0); }
-}
-.dcf-drift {
-  animation: dcf-drift var(--dur, 22s) ease-in-out infinite;
-  animation-delay: var(--dly, 0s);
-  will-change: transform;
-}
-
 /* Accessibility: respect reduced-motion (plan A.4). Functional transitions are
    the only motion in use today; this neutralizes them for users who opt out and
    pre-empts the playback/explorer motion coming in Phase E. */

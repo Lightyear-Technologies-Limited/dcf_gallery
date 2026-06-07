@@ -42,7 +42,7 @@ export default function InteractiveArtwork({
           />
           <button
             onClick={() => setRunning(false)}
-            className="absolute right-2 top-2 z-10 border border-border bg-background/90 px-2 py-1 text-[10px] uppercase tracking-[0.08em] text-muted backdrop-blur-sm transition-colors duration-200 hover:text-foreground"
+            className="absolute right-2 top-2 z-10 border border-border bg-background px-2 py-1 text-[10px] uppercase tracking-[0.08em] text-muted transition-colors duration-200 hover:text-foreground"
           >
             Show still
           </button>
@@ -64,7 +64,7 @@ export default function InteractiveArtwork({
             aria-label={`Run ${title} interactive`}
             className="group absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-200 hover:bg-black/10"
           >
-            <span className="flex items-center gap-2 border border-border bg-background/90 px-4 py-2 text-[12px] uppercase tracking-[0.08em] text-foreground backdrop-blur-sm">
+            <span className="flex items-center gap-2 border border-border bg-background px-4 py-2 text-[12px] uppercase tracking-[0.08em] text-foreground">
               <span aria-hidden>▶</span> Run interactive
             </span>
           </button>

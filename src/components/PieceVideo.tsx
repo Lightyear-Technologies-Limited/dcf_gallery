@@ -68,7 +68,7 @@ export default function PieceVideo({
           onClick={reset}
           title="Back to the still"
           aria-label="Back to the still"
-          className="absolute right-2 top-2 z-10 border border-border bg-background/80 px-2 py-1 text-[10px] uppercase tracking-[0.08em] text-muted backdrop-blur-sm transition-colors duration-200 hover:text-foreground"
+          className="absolute right-2 top-2 z-10 border border-border bg-background px-2 py-1 text-[10px] uppercase tracking-[0.08em] text-muted transition-colors duration-200 hover:text-foreground"
         >
           ↺ Still
         </button>

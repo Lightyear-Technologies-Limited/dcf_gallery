@@ -30,20 +30,15 @@ const roman = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"];
  * Chapters view (E.3) — the cinematic entry. Each curatorial chapter is a
  * full-height title card with a refined filmstrip of its works; a fixed
  * position rail lets you feel where you are in the procession and jump between
- * chapters. Restrained (Argent titles, no colour accent) with a single quiet
- * motion: each card rises into view as you reach it. Reduced-motion safe;
- * the rail is desktop-only (it sits beside the body text).
+ * chapters. Restrained (Argent titles, no colour accent); static — the big titles
+ * carry the cinema, no decorative entrance motion. The rail is desktop-only.
  */
 export default function ChaptersView({ chapters }: { chapters: ChapterData[] }) {
   const [active, setActive] = useState(0);
-  const [shown, setShown] = useState<boolean[]>(() => chapters.map((_, i) => i === 0));
   const refs = useRef<(HTMLElement | null)[]>([]);
 
+  // Track which chapter is centred → drives the position rail (functional, not motion).
   useEffect(() => {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) setShown(chapters.map(() => true));
-
-    // Which chapter is centred → drives the position rail.
     const activeObs = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
@@ -55,29 +50,8 @@ export default function ChaptersView({ chapters }: { chapters: ChapterData[] }) 
       },
       { rootMargin: "-45% 0px -45% 0px" },
     );
-
-    // Reveal-on-enter (skipped under reduced motion — everything starts shown).
-    const revealObs = reduce
-      ? null
-      : new IntersectionObserver(
-          (entries) => {
-            setShown((prev) => {
-              let changed = false;
-              const next = [...prev];
-              for (const e of entries) {
-                if (e.isIntersecting) {
-                  const i = refs.current.indexOf(e.target as HTMLElement);
-                  if (i !== -1 && !next[i]) { next[i] = true; changed = true; }
-                }
-              }
-              return changed ? next : prev;
-            });
-          },
-          { threshold: 0.2 },
-        );
-
-    refs.current.forEach((el) => { if (el) { activeObs.observe(el); revealObs?.observe(el); } });
-    return () => { activeObs.disconnect(); revealObs?.disconnect(); };
+    refs.current.forEach((el) => el && activeObs.observe(el));
+    return () => activeObs.disconnect();
   }, [chapters]);
 
   const jump = (i: number) => refs.current[i]?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -119,13 +93,9 @@ export default function ChaptersView({ chapters }: { chapters: ChapterData[] }) 
             ref={(el) => { refs.current[i] = el; }}
             className="min-h-[78vh] flex flex-col justify-center py-16 border-b border-border last:border-b-0"
           >
-            <div
-              className={`transition-all duration-700 ease-out ${
-                shown[i] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-              }`}
-            >
+            <div>
               <p className="text-[10px] tracking-[0.22em] uppercase text-muted font-medium mb-4">
-                Chapter {roman[i]} · {String(i + 1).padStart(2, "0")} / {String(chapters.length).padStart(2, "0")}
+                Chapter {roman[i]} of {roman[chapters.length - 1]}
               </p>
               <h2 className="font-serif display-lg leading-[0.95] mb-5">{c.name}</h2>
               <p className="max-w-2xl text-[17px] sm:text-[18px] leading-[1.6] text-foreground-secondary mb-3">
