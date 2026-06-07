@@ -377,3 +377,19 @@ on-chain HTML) on every gallery surface + piece page, with a global Reels prefer
 - Credentials for `.env` (RPC + Filebase) — see P0.3.
 - Brand sign-off to evolve `.impeccable.md` principle 5 for the explorer (E.3).
 - Confirm acceptable video weights / whether any piece must stay still-only.
+
+---
+
+## Roadmap / future (post-launch)
+
+- **Turn on the visual CMS (TinaCMS).** Deferred by decision — for the current handful
+  of editorial items the JSON-edit-via-PR flow is sufficient, so we're not paying the
+  TinaCloud cost or taking the Next 16 / React 19 compat risk yet. The content layer is
+  already wired for it (per-entity files + `tina/config.ts`); enable when non-technical
+  editing becomes regular: `npm install tinacms @tinacms/cli` + a TinaCloud project (free
+  tier, paid for more seats) **or** a self-hosted backend — full steps in
+  [`docs/CMS-TINA.md`](./CMS-TINA.md). Verify the Next 16 / React 19 compatibility on install.
+- **Tighten the Lighthouse budget** (warn → error) once a real baseline holds (D.4).
+- **Harden `resolve-sources` classification** — follow redirects + sniff content-type so a
+  re-import can't mis-tag a video as "unknown" (as happened with Dataland; `--refresh`
+  already hard-refreshes the metadata cache).
