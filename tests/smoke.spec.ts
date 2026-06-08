@@ -58,9 +58,16 @@ test.describe("smoke", () => {
   test("back-to-origin: constellation → piece → back to Constellation", async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto("/explore?view=constellation");
-    // Freeze the gentle cluster drift so the star is a stable click target.
+    // Freeze the gentle cluster drift so the star is a stable target.
     await page.addStyleTag({ content: "*{animation:none!important;transition:none!important;}" });
-    await page.locator('a[href^="/piece/"]').first().click();
+    // Activate the first star by keyboard rather than clicking: in a dense island
+    // the 26px hit boxes overlap, so a later-painted sibling sits over this star's
+    // centre and intercepts a mouse click. Focus + Enter navigates regardless of
+    // paint order (and mirrors the keyboard path the field is built to support).
+    const star = page.locator('a[href^="/piece/"]').first();
+    await expect(star).toBeVisible();
+    await star.focus();
+    await page.keyboard.press("Enter");
     await expect(page).toHaveURL(/\/piece\//);
     const back = page.getByRole("link", { name: /Constellation/ });
     await expect(back).toBeVisible();
