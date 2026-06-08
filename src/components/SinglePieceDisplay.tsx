@@ -24,7 +24,7 @@ export default function SinglePieceDisplay({ slug, src, title, isPunk = false, h
   return (
     <Link
       href={`/piece/${slug}${hrefSearch ? `?${hrefSearch}` : ""}`}
-      className={`block ${isPunk ? "bg-[#638596] inline-block" : ""}`}
+      className={`block ${isPunk ? "bg-punk inline-block" : ""}`}
       style={!isWide && aspect !== null ? { width: "fit-content", maxWidth: "100%" } : undefined}
     >
       <Image

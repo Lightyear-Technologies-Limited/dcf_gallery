@@ -63,7 +63,10 @@ export default function CollectionView({ sections, artists }: Props) {
   // the hero collapses and the user finds themselves stranded mid-gallery.
   function scrollToTop() {
     if (typeof window !== "undefined") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      // Honor reduced-motion: an explicit `behavior` overrides the global CSS
+      // scroll-behavior rule, so check the preference here too.
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
     }
   }
 
@@ -184,6 +187,7 @@ export default function CollectionView({ sections, artists }: Props) {
               <button
                 key={a.slug}
                 onClick={() => !isDisabled && selectArtist(a.slug)}
+                aria-pressed={isActive}
                 className={`text-[13px] whitespace-nowrap shrink-0 transition-colors duration-200 ${
                   isDisabled
                     ? "text-muted/30 cursor-default"
@@ -214,6 +218,7 @@ export default function CollectionView({ sections, artists }: Props) {
             <button
               key={ch.slug}
               onClick={() => selectChapter(ch.slug)}
+              aria-pressed={chapterFilter === ch.slug}
               className={`text-[13px] whitespace-nowrap shrink-0 transition-colors duration-200 ${
                 chapterFilter === ch.slug ? "text-foreground" : "text-muted hover:text-foreground"
               }`}

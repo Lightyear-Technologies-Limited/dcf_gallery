@@ -12,7 +12,7 @@
   --background:           oklch(0.975 0.006 80);   /* warm eggshell */
   --foreground:           oklch(0.180 0.004 80);   /* warm near-black */
   --foreground-secondary: oklch(0.330 0.005 80);
-  --muted:                oklch(0.620 0.005 80);
+  --muted:                oklch(0.530 0.005 80);   /* AA: 4.5:1 on surface, 4.9:1 on bg */
   --border:               oklch(0.920 0.005 80);
   --surface:              oklch(0.945 0.006 80);
 }
@@ -24,6 +24,10 @@
   --color-muted: var(--muted);
   --color-border: var(--border);
   --color-surface: var(--surface);
+  /* CryptoPunks canonical backdrop — a fixed brand/data constant (not a theme
+     token; it does not switch with light/dark). Named so the hex stops recurring
+     inline across the gallery tiles. */
+  --color-punk: #638596;
   --font-sans: var(--font-instrument), "Instrument Sans", system-ui, sans-serif;
   --font-serif: var(--font-argent), "Argent", Georgia, serif;
   --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
@@ -33,7 +37,7 @@
   --background:           oklch(0.135 0.003 80);
   --foreground:           oklch(0.925 0.004 80);
   --foreground-secondary: oklch(0.745 0.004 80);
-  --muted:                oklch(0.500 0.004 80);
+  --muted:                oklch(0.580 0.004 80);   /* AA: 4.5:1 on surface, 4.7:1 on bg */
   --border:               oklch(0.225 0.004 80);
   --surface:              oklch(0.165 0.003 80);
 }

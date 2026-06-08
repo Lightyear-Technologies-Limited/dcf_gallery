@@ -54,7 +54,12 @@ export default function ChaptersView({ chapters }: { chapters: ChapterData[] }) 
     return () => activeObs.disconnect();
   }, [chapters]);
 
-  const jump = (i: number) => refs.current[i]?.scrollIntoView({ behavior: "smooth", block: "start" });
+  const jump = (i: number) => {
+    // Honor reduced-motion: the explicit `behavior` option overrides the global
+    // `scroll-behavior:auto` reduced-motion rule in globals.css, so check here too.
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    refs.current[i]?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  };
 
   return (
     <div className="relative">
@@ -72,14 +77,14 @@ export default function ChaptersView({ chapters }: { chapters: ChapterData[] }) 
           >
             <span
               className={`text-[10px] tracking-[0.14em] uppercase whitespace-nowrap transition-opacity duration-300 ${
-                i === active ? "text-foreground opacity-100" : "text-muted opacity-0 group-hover:opacity-100"
+                i === active ? "text-foreground opacity-100" : "text-muted opacity-0 group-hover:opacity-100 group-focus-within:opacity-100"
               }`}
             >
               {c.name}
             </span>
             <span
               className={`block h-px transition-all duration-300 ${
-                i === active ? "w-9 bg-foreground" : "w-4 bg-border group-hover:bg-foreground"
+                i === active ? "w-9 bg-foreground" : "w-4 bg-border group-hover:bg-foreground group-focus-within:bg-foreground"
               }`}
             />
           </button>
@@ -101,12 +106,19 @@ export default function ChaptersView({ chapters }: { chapters: ChapterData[] }) 
               <p className="max-w-2xl text-[17px] sm:text-[18px] leading-[1.6] text-foreground-secondary mb-3">
                 {c.description}
               </p>
-              <p className="text-[12px] text-muted mb-9">
+              <p className="text-[12px] text-muted mb-9 tabular-nums">
                 {c.artistNames.join(" · ")} — {c.total} {c.total === 1 ? "work" : "works"}
               </p>
 
-              {/* Filmstrip — uniform height, aspect-true widths. */}
-              <div className="-mx-6 sm:-mx-8 lg:-mx-12 px-6 sm:px-8 lg:px-12 overflow-x-auto scrollbar-hide">
+              {/* Filmstrip — uniform height, aspect-true widths. Focusable,
+                  labelled scroll region so it's keyboard-operable (arrow-scroll)
+                  even though the scrollbar is hidden (WCAG 2.1.1 / discoverability). */}
+              <div
+                role="group"
+                aria-label={`${c.name} — works (scroll horizontally)`}
+                tabIndex={0}
+                className="-mx-6 sm:-mx-8 lg:-mx-12 px-6 sm:px-8 lg:px-12 overflow-x-auto scrollbar-hide"
+              >
                 <div className="flex gap-3 pb-1">
                   {c.works.map((w) => {
                     const aspect = getArtworkAspect(w.slug, w.contractAddress, w.tokenId);
@@ -120,7 +132,7 @@ export default function ChaptersView({ chapters }: { chapters: ChapterData[] }) 
                         title={w.title}
                         style={{ aspectRatio: `${ratio}` }}
                         className={`group relative block h-[180px] sm:h-[220px] lg:h-[260px] shrink-0 overflow-hidden bg-surface ${
-                          isPunk ? "bg-[#638596]" : ""
+                          isPunk ? "bg-punk" : ""
                         }`}
                       >
                         {src ? (
@@ -136,7 +148,7 @@ export default function ChaptersView({ chapters }: { chapters: ChapterData[] }) 
 
               <Link
                 href={`/explore?view=index&chapter=${c.slug}`}
-                className="mt-7 inline-flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase text-muted hover:text-foreground transition-colors duration-200"
+                className="mt-7 inline-flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase text-muted hover:text-foreground transition-colors duration-200 tabular-nums"
               >
                 View all {c.total} in {c.name}
                 <span aria-hidden>→</span>

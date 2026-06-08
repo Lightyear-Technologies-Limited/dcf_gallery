@@ -24,6 +24,7 @@ export default async function ExplorePage({
   const sp = await searchParams;
   const s = (k: string) => (typeof sp[k] === "string" ? (sp[k] as string) : "");
   const view = VIEWS.has(s("view")) ? s("view") : "index";
+  const viewLabel = view === "chapters" ? "Chapters" : view === "constellation" ? "Constellation" : "Index";
 
   const items = pieces
     .filter((p) => !isCollectionHidden(p.collectionSlug))
@@ -76,7 +77,12 @@ export default async function ExplorePage({
           across / and /explore, so toggling lenses never makes it jump sides. */}
       <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12">
         <div className="pt-6 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3">
-          <h1 className="font-serif display-sm">Hivemind Digital Culture Fund</h1>
+          <h1 className="font-serif display-sm">
+            Hivemind Digital Culture Fund
+            {/* Visually-hidden current-view context so the page heading tells AT
+                users which lens is active, without altering the catalogue masthead. */}
+            <span className="sr-only"> — {viewLabel}</span>
+          </h1>
           <ViewSwitcher active={view} explicit={!!s("view")} />
         </div>
       </div>

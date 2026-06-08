@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { memo, useMemo, useState, type Dispatch, type SetStateAction } from "react";
 import { getArtworkImage } from "@/lib/images";
 import { hasMotion } from "@/lib/motion";
 
@@ -154,6 +154,14 @@ export default function ConstellationView({ chapters }: { chapters: ChapterData[
     <>
       {/* Desktop: the constellation. */}
       <div className="hidden lg:block">
+        {/* Bypass: the field is ~308 focusable stars. Let keyboard/SR users jump
+            past it to the readout in one step (WCAG 2.4.1). */}
+        <a
+          href="#constellation-end"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-2 focus:top-2 focus:z-50 focus:bg-background focus:text-foreground focus:px-3 focus:py-2 focus:border focus:border-border focus:text-[13px]"
+        >
+          Skip the star-field
+        </a>
         <div className="relative w-full h-[calc(100vh-200px)] min-h-[560px] overflow-hidden">
           {/* Maker figure-lines — one per island, drawn only for the traced maker. */}
           <svg className="pointer-events-none absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden>
@@ -187,42 +195,28 @@ export default function ConstellationView({ chapters }: { chapters: ChapterData[
                   className="pointer-events-auto absolute text-center transition-opacity duration-200"
                   style={{ left: `${c.center.x}%`, top: `${c.labelTop}%`, transform: "translate(-50%, -100%)", opacity: dimRegion ? 0.4 : 1 }}
                 >
-                  <Link
-                    href={`/explore?view=index&chapter=${c.slug}`}
-                    className="font-serif text-[clamp(1rem,1.5vw,1.4rem)] leading-none text-foreground-secondary hover:text-foreground transition-colors duration-200"
-                    aria-label={`View all works in ${c.name}`}
-                  >
-                    {c.name}
-                  </Link>
+                  {/* Region = chapter: a real heading so AT can navigate the field
+                      by structure rather than 308 ungrouped links (WCAG 1.3.1). */}
+                  <h2 className="m-0 font-serif text-[clamp(1rem,1.5vw,1.4rem)] leading-none">
+                    <Link
+                      href={`/explore?view=index&chapter=${c.slug}`}
+                      className="text-foreground-secondary hover:text-foreground transition-colors duration-200"
+                      aria-label={`View all works in ${c.name}`}
+                    >
+                      {c.name}
+                    </Link>
+                  </h2>
                   <p className="mt-1.5 text-[10px] tracking-[0.16em] uppercase text-muted tabular-nums">{c.total} works</p>
                 </div>
 
-                {c.nodes.map((nd) => {
-                  const state = activeArtist == null ? "idle" : nd.artistSlug === activeArtist ? "on" : "off";
-                  return (
-                    <Link
-                      key={nd.w.id}
-                      href={`/piece/${nd.w.slug}?from=constellation`}
-                      onMouseEnter={() => setHover(nd)}
-                      onMouseLeave={() => setHover((h) => (h?.w.id === nd.w.id ? null : h))}
-                      onFocus={() => setHover(nd)}
-                      onBlur={() => setHover((h) => (h?.w.id === nd.w.id ? null : h))}
-                      className="group pointer-events-auto absolute -translate-x-1/2 -translate-y-1/2 block p-2"
-                      style={{ left: `${nd.x}%`, top: `${nd.y}%` }}
-                      aria-label={`${nd.w.title} — ${nd.w.artistName}, ${nd.chapter}`}
-                    >
-                      <span
-                        className={`block h-[6px] w-[6px] rounded-full transition-[background-color,opacity] duration-200 ${
-                          state === "on"
-                            ? "bg-foreground"
-                            : state === "off"
-                              ? "bg-foreground/10"
-                              : "bg-foreground/35 group-hover:bg-foreground"
-                        }`}
-                      />
-                    </Link>
-                  );
-                })}
+                {c.nodes.map((nd) => (
+                  <Star
+                    key={nd.w.id}
+                    node={nd}
+                    state={activeArtist == null ? "idle" : nd.artistSlug === activeArtist ? "on" : "off"}
+                    setHover={setHover}
+                  />
+                ))}
               </div>
             );
           })}
@@ -230,8 +224,9 @@ export default function ConstellationView({ chapters }: { chapters: ChapterData[
           {hover && <Preview node={hover} />}
         </div>
 
-        {/* Readout — teaches the encoding at rest; names the traced body on hover. */}
-        <p className="mt-3 text-center text-[11px] tracking-[0.14em] uppercase text-muted tabular-nums">
+        {/* Readout — teaches the encoding at rest; names the traced body on hover.
+            Also the bypass target for the "Skip the star-field" link. */}
+        <p id="constellation-end" tabIndex={-1} className="mt-3 text-center text-[11px] tracking-[0.14em] uppercase text-muted tabular-nums outline-none">
           {activeIsland ? (
             <>
               <span className="text-foreground">{activeIsland.artistName}</span> — {activeIsland.count}{" "}
@@ -260,6 +255,46 @@ export default function ConstellationView({ chapters }: { chapters: ChapterData[
   );
 }
 
+/** One star. Memoized so sweeping the field only re-renders nodes whose state
+ *  actually changes (idle/on/off) — not all ~308 on every pointer move (L6).
+ *  Handlers close over the stable `node` and `setHover`, so props stay referentially
+ *  steady and `memo` can do its job. `prefetch={false}`: a screen full of stars must
+ *  not prefetch ~308 piece routes on load (M8). */
+type StarState = "idle" | "on" | "off";
+const Star = memo(function Star({
+  node,
+  state,
+  setHover,
+}: {
+  node: Node;
+  state: StarState;
+  setHover: Dispatch<SetStateAction<Node | null>>;
+}) {
+  return (
+    <Link
+      href={`/piece/${node.w.slug}?from=constellation`}
+      prefetch={false}
+      onMouseEnter={() => setHover(node)}
+      onMouseLeave={() => setHover((h) => (h?.w.id === node.w.id ? null : h))}
+      onFocus={() => setHover(node)}
+      onBlur={() => setHover((h) => (h?.w.id === node.w.id ? null : h))}
+      className="group pointer-events-auto absolute -translate-x-1/2 -translate-y-1/2 block p-2.5"
+      style={{ left: `${node.x}%`, top: `${node.y}%` }}
+      aria-label={`${node.w.title} — ${node.w.artistName}, ${node.chapter}`}
+    >
+      <span
+        className={`block h-[6px] w-[6px] rounded-full transition-[background-color,opacity] duration-200 ${
+          state === "on"
+            ? "bg-foreground"
+            : state === "off"
+              ? "bg-foreground/10"
+              : "bg-foreground/50 group-hover:bg-foreground"
+        }`}
+      />
+    </Link>
+  );
+});
+
 /** Preview pinned near the hovered/focused star. Flips below the node when it sits
  *  high in the field so it never clips off the top. Solid surface + hairline border
  *  (no glass / shadow — house style). */
@@ -278,7 +313,7 @@ function Preview({ node }: { node: Node }) {
       }}
     >
       <div className="border border-border bg-surface overflow-hidden">
-        <div className={`relative aspect-square ${isPunk ? "bg-[#638596]" : "bg-background"}`}>
+        <div className={`relative aspect-square ${isPunk ? "bg-punk" : "bg-background"}`}>
           {src && (
             <Image
               src={src}
@@ -298,7 +333,7 @@ function Preview({ node }: { node: Node }) {
         <div className="px-3 py-2.5">
           <p className="font-serif text-[15px] leading-tight text-foreground truncate">{node.w.title}</p>
           <p className="text-[11px] text-muted truncate mt-0.5">{node.w.artistName}</p>
-          <p className="text-[9px] tracking-[0.14em] uppercase text-muted/70 mt-1.5">{node.chapter}</p>
+          <p className="text-[9px] tracking-[0.14em] uppercase text-muted mt-1.5">{node.chapter}</p>
         </div>
       </div>
     </div>

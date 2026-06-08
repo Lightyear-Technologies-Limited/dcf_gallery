@@ -112,7 +112,7 @@ export default function JustifiedGallery({ pieces, piecesPerRow, gap = 4, maxRow
                   <Link
                     href={tileHref}
                     style={{ height: rowHeight > 0 ? `${rowHeight}px` : undefined }}
-                    className={`block overflow-hidden ${isPunk ? "bg-[#638596]" : ""}`}
+                    className={`block overflow-hidden ${isPunk ? "bg-punk" : ""}`}
                   >
                     {src ? (
                       <GridArtwork slug={piece.slug} title={piece.title} imgSrc={src} isPunk={isPunk} sizes="500px" />
@@ -125,8 +125,13 @@ export default function JustifiedGallery({ pieces, piecesPerRow, gap = 4, maxRow
                     )}
                   </Link>
                   {showCaptions && (
+                    // Visual caption only — the tile above already links to the
+                    // piece (named via the image alt), so hide this duplicate from
+                    // AT and the tab order (WCAG 2.4.4: no redundant adjacent link).
                     <Link
                       href={tileHref}
+                      aria-hidden
+                      tabIndex={-1}
                       className="mt-2 block text-[11px] text-muted hover:text-foreground transition-colors duration-200 truncate"
                       title={piece.title}
                     >

@@ -15,7 +15,7 @@ export default function ArtworkCard({ piece, showArtist = true }: {
   return (
     <Link href={`/piece/${piece.slug}`} className="block group">
       {realImage ? (
-        <div className={isPunk ? "bg-[#638596] inline-block" : ""}>
+        <div className={isPunk ? "bg-punk inline-block" : ""}>
           <Image
             src={realImage}
             alt={piece.title}

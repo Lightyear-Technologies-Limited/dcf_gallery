@@ -61,7 +61,7 @@ export default function ArtistHero({ artistSlug, candidates }: Props) {
       // their classic teal background to frame the pixel art; everything
       // else has no background fill so the artwork sits on the page colour
       // (no visible frame border around the art).
-      className={`block w-full aspect-[9/8] flex items-center justify-center overflow-hidden ${hero.isPunk ? "bg-[#638596]" : ""}`}
+      className={`block w-full aspect-[9/8] flex items-center justify-center overflow-hidden ${hero.isPunk ? "bg-punk" : ""}`}
     >
       <Image
         src={hero.src}

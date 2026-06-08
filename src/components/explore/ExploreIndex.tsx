@@ -162,12 +162,12 @@ export default function ExploreIndex({ items, chapters, artists, collections, me
         {hasFilters && (
           <button
             onClick={() => apply({ chapter: "", artist: "", collection: "", medium: "", q: "" })}
-            className="text-[11px] tracking-[0.1em] uppercase text-muted hover:text-foreground transition-colors duration-200"
+            className="py-1.5 text-[11px] tracking-[0.1em] uppercase text-muted hover:text-foreground transition-colors duration-200"
           >
             Clear
           </button>
         )}
-        <span className="ml-auto text-[12px] text-muted font-mono tabular-nums">
+        <span role="status" aria-live="polite" className="ml-auto text-[12px] text-muted font-mono tabular-nums">
           {filtered.length} {filtered.length === 1 ? "work" : "works"}
         </span>
       </div>
@@ -188,12 +188,17 @@ export default function ExploreIndex({ items, chapters, artists, collections, me
           {groups.map((g) => (
             <section key={g.slug} id={`c-${g.slug}`} className="scroll-mt-20">
               <div className="mb-3 flex items-baseline gap-3 border-b border-border pb-2">
-                <Link
-                  href={`/collection/${g.slug}`}
-                  className="font-serif text-[19px] text-foreground-secondary hover:text-foreground transition-colors duration-200"
-                >
-                  {g.name}
-                </Link>
+                {/* Real heading so AT can navigate sections by structure (WCAG
+                    1.3.1). h2 is a baseline flex item; preflight resets its size/
+                    weight to inherit, so the Link keeps the intended type. */}
+                <h2 className="m-0">
+                  <Link
+                    href={`/collection/${g.slug}`}
+                    className="font-serif text-[19px] text-foreground-secondary hover:text-foreground transition-colors duration-200"
+                  >
+                    {g.name}
+                  </Link>
+                </h2>
                 <span className="text-[12px] text-muted">{g.artistName}</span>
                 <span className="ml-auto text-[11px] text-muted font-mono tabular-nums">{g.items.length}</span>
               </div>
@@ -208,7 +213,7 @@ export default function ExploreIndex({ items, chapters, artists, collections, me
           <p className="font-serif text-2xl text-foreground-secondary mb-3">No works match.</p>
           <button
             onClick={() => apply({ chapter: "", artist: "", collection: "", medium: "", q: "" })}
-            className="text-[11px] tracking-[0.1em] uppercase text-muted hover:text-foreground transition-colors duration-200"
+            className="py-1.5 text-[11px] tracking-[0.1em] uppercase text-muted hover:text-foreground transition-colors duration-200"
           >
             Clear filters
           </button>
@@ -241,7 +246,8 @@ function ChapterBtn({ active, onClick, children }: { active: boolean; onClick: (
   return (
     <button
       onClick={onClick}
-      className={`text-[12px] tracking-[0.04em] transition-colors duration-200 ${active ? "text-foreground font-medium" : "text-muted hover:text-foreground"}`}
+      aria-pressed={active}
+      className={`py-1.5 text-[12px] tracking-[0.04em] transition-colors duration-200 ${active ? "text-foreground font-medium" : "text-muted hover:text-foreground"}`}
     >
       {children}
     </button>

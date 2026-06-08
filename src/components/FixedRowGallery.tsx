@@ -112,7 +112,7 @@ export default function FixedRowGallery({ pieces, rowMap, fallbackPerRow, gap = 
                   key={piece.id}
                   href={`/piece/${piece.slug}${hrefSearch ? `?${hrefSearch}` : ""}`}
                   style={{ width: w > 0 ? `${w}px` : undefined, height: "100%" }}
-                  className={`block shrink-0 overflow-hidden ${isPunk ? "bg-[#638596]" : ""}`}
+                  className={`block shrink-0 overflow-hidden ${isPunk ? "bg-punk" : ""}`}
                 >
                   {src ? (
                     <GridArtwork slug={piece.slug} title={piece.title} imgSrc={src} isPunk={isPunk} sizes="500px" />

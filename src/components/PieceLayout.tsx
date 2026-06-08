@@ -142,7 +142,7 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
       // image's own max-height to truncate it - which was clipping the
       // image element shorter than the container and leaving a teal gap
       // under the punk on wider desktops.
-      <div className="bg-[#638596] w-full aspect-square max-w-[80vh] mx-auto">
+      <div className="bg-punk w-full aspect-square max-w-[80vh] mx-auto">
         <Image
           src={image}
           alt={title}

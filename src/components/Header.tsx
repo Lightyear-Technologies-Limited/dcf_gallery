@@ -47,7 +47,7 @@ export default function Header() {
         {/* Nav - Collection leads (the curatorial surface), then Artists, then About.
             Active state uses font-medium + foreground so it survives hover (hover
             also raises non-active items to foreground, so color alone wasn't enough). */}
-        <nav className="flex flex-col items-start w-full px-6 pt-4">
+        <nav aria-label="Primary" className="flex flex-col items-start w-full px-6 pt-4">
           {NAV.map((n) => (
             <Link
               key={n.href}
