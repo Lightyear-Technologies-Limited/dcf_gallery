@@ -71,6 +71,9 @@ export default function GridArtwork({ slug, title, imgSrc, isPunk = false, sizes
         quality={quality}
         className={`h-full w-full ${isPunk ? "[image-rendering:pixelated] object-contain" : "object-cover"}`}
       />
+      {/* All reel overlays are pointer-events-none: the tile is a Link to the
+          piece, and a playing <video>/<iframe> would otherwise swallow the click
+          (interaction belongs on the piece page, not the grid). Keep them inert. */}
       {motion && show && motion.type === "video" && (
         <video
           src={motion.src}
@@ -80,12 +83,12 @@ export default function GridArtwork({ slug, title, imgSrc, isPunk = false, sizes
           playsInline
           preload="auto"
           aria-hidden
-          className={`absolute inset-0 h-full w-full ${fit}`}
+          className={`pointer-events-none absolute inset-0 h-full w-full ${fit}`}
         />
       )}
       {motion && show && motion.type === "gif" && (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={motion.src} alt="" aria-hidden className={`absolute inset-0 h-full w-full ${fit}`} />
+        <img src={motion.src} alt="" aria-hidden className={`pointer-events-none absolute inset-0 h-full w-full ${fit}`} />
       )}
       {motion && show && motion.type === "interactive" && (
         <iframe
@@ -93,7 +96,8 @@ export default function GridArtwork({ slug, title, imgSrc, isPunk = false, sizes
           title={title}
           sandbox="allow-scripts"
           aria-hidden
-          className="absolute inset-0 h-full w-full border-0"
+          tabIndex={-1}
+          className="pointer-events-none absolute inset-0 h-full w-full border-0"
         />
       )}
       {motion && !show && (
