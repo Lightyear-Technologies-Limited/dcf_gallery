@@ -8,6 +8,12 @@ updates:
     groups:
       minor-and-patch:
         update-types: [minor, patch]
+    ignore:
+      # eslint 10 breaks eslint-config-next 16.x: its bundled eslint-plugin-react
+      # calls the removed context.getFilename(), so the Next flat config fails to
+      # load. Hold the major until eslint-config-next ships an eslint-10 build.
+      - dependency-name: eslint
+        update-types: [version-update:semver-major]
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
