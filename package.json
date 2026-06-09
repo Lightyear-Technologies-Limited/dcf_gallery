@@ -2,26 +2,46 @@
   "name": "dcf_gallery",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "next dev",
+    "content": "node scripts/build-editorial.mjs",
+    "prebuild": "npm run content",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "sources": "node scripts/resolve-sources.mjs",
+    "pin": "node scripts/pin-assets.mjs",
+    "pin-videos": "node scripts/pin-videos.mjs",
+    "verify-pins": "node scripts/verify-pins.mjs",
+    "audit": "node scripts/audit-assets.mjs",
+    "test:e2e": "playwright test",
+    "onboard": "node scripts/onboard.mjs",
+    "curate": "node scripts/fix-curation.mjs"
   },
   "dependencies": {
     "next": "^16.2.6",
-    "playwright": "^1.59.1",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "sharp": "^0.34.5"
   },
   "devDependencies": {
+    "@aws-sdk/client-s3": "^3.1062.0",
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "@lhci/cli": "^0.15.1",
+    "@playwright/test": "^1.60.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.1",
+    "playwright": "^1.59.1",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "zod": "^4.4.3"
   }
 }

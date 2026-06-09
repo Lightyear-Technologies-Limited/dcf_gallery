@@ -1,7 +1,10 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { artists, collections, getPiecesByCollection } from "@/lib/data";
+import { withArtistEditorial } from "@/lib/editorial";
+import { SITE_URL } from "@/lib/site";
 import { getArtworkImage } from "@/lib/images";
 import {
   getArtistDisplayName,
@@ -30,9 +33,23 @@ export function generateStaticParams() {
     .map((a) => ({ slug: a.slug }));
 }
 
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const artist = withArtistEditorial(artists.find((a) => a.slug === slug));
+  if (!artist) return {};
+  const name = getArtistDisplayName(artist.slug, artist.name);
+  const description = (artist.bio || `${name} in the Hivemind Digital Culture Fund collection.`).slice(0, 200);
+  return {
+    title: name,
+    description,
+    openGraph: { title: name, description, type: "profile" },
+    twitter: { card: "summary_large_image", title: name, description },
+  };
+}
+
 export default async function ArtistPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const artist = artists.find((a) => a.slug === slug);
+  const artist = withArtistEditorial(artists.find((a) => a.slug === slug));
   if (!artist) notFound();
 
   const artistName = getArtistDisplayName(artist.slug, artist.name);
@@ -75,8 +92,17 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
 
   const totalWorks = artistCollections.reduce((s, c) => s + c.pieces.length, 0);
 
+  const personLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: getArtistDisplayName(artist.slug, artist.name),
+    url: `${SITE_URL}/artist/${artist.slug}`,
+    ...(artist.bio ? { description: artist.bio.slice(0, 320) } : {}),
+  };
+
   return (
     <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personLd) }} />
       {/* Top row mirrors the collection page's breadcrumb + sibling-nav
           structure so the h1 below sits at the same vertical position
           on both routes (no jump when navigating Artist <-> Collection).

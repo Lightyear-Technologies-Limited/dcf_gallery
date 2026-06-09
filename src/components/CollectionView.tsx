@@ -10,6 +10,7 @@ import SinglePieceDisplay from "./SinglePieceDisplay";
 import { getArtworkImage } from "@/lib/images";
 import { getHeroLayout } from "@/lib/curation";
 import { CHAPTERS, CHAPTER_COLORS } from "@/lib/chapters";
+import ViewSwitcher from "./explore/ViewSwitcher";
 
 interface PieceData {
   id: string;
@@ -62,7 +63,10 @@ export default function CollectionView({ sections, artists }: Props) {
   // the hero collapses and the user finds themselves stranded mid-gallery.
   function scrollToTop() {
     if (typeof window !== "undefined") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      // Honor reduced-motion: an explicit `behavior` overrides the global CSS
+      // scroll-behavior rule, so check the preference here too.
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
     }
   }
 
@@ -128,6 +132,15 @@ export default function CollectionView({ sections, artists }: Props) {
   const hasFilters = artistFilter || chapterFilter;
   const activeChapter = chapterFilter ? CHAPTERS.find((c) => c.slug === chapterFilter) : null;
 
+  // Salon-origin breadcrumb for piece links: ?from=salon (+ active filter) so a
+  // piece's Back link returns to the homepage in its current filtered state.
+  const salonHrefSearch = (() => {
+    const p = new URLSearchParams({ from: "salon" });
+    if (artistFilter) p.set("artist", artistFilter);
+    if (chapterFilter) p.set("chapter", chapterFilter);
+    return p.toString();
+  })();
+
   // Counts for the result-count line under filters.
   const totalPieces = sections.reduce(
     (sum, s) => sum + s.collections.reduce((cs, c) => cs + c.pieces.length, 0),
@@ -146,10 +159,11 @@ export default function CollectionView({ sections, artists }: Props) {
           the h1 anchors at the same vertical as the masthead wordmark
           across the gutter; eye reads "Hivemind" on the rail and
           "Hivemind Digital Culture Fund" on the page at the same line. */}
-      <div className="pt-6">
+      <div className="pt-6 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3">
         <h1 className="font-serif display-sm">
           Hivemind Digital Culture Fund
         </h1>
+        <ViewSwitcher active="salon" explicit suppressTip />
       </div>
       {/* Filters - ARTIST row, then CHAPTER row. Removing a filter is done
           by clicking its active label; no "All" / "Clear" button needed
@@ -173,6 +187,7 @@ export default function CollectionView({ sections, artists }: Props) {
               <button
                 key={a.slug}
                 onClick={() => !isDisabled && selectArtist(a.slug)}
+                aria-pressed={isActive}
                 className={`text-[13px] whitespace-nowrap shrink-0 transition-colors duration-200 ${
                   isDisabled
                     ? "text-muted/30 cursor-default"
@@ -203,6 +218,7 @@ export default function CollectionView({ sections, artists }: Props) {
             <button
               key={ch.slug}
               onClick={() => selectChapter(ch.slug)}
+              aria-pressed={chapterFilter === ch.slug}
               className={`text-[13px] whitespace-nowrap shrink-0 transition-colors duration-200 ${
                 chapterFilter === ch.slug ? "text-foreground" : "text-muted hover:text-foreground"
               }`}
@@ -278,7 +294,7 @@ export default function CollectionView({ sections, artists }: Props) {
                     </Link>
                     {(() => {
                       const heroLayout = getHeroLayout(col.slug);
-                      if (n === 1 && piece) return <SinglePieceDisplayLazy piece={piece} />;
+                      if (n === 1 && piece) return <SinglePieceDisplayLazy piece={piece} hrefSearch={salonHrefSearch} />;
                       if (heroLayout) {
                         return (
                           <HeroSidebarGallery
@@ -288,6 +304,7 @@ export default function CollectionView({ sections, artists }: Props) {
                             sidebarRows={heroLayout.sidebarRows}
                             sidebarSlugs={heroLayout.sidebarPieces}
                             fallbackPerRow={ideal}
+                            hrefSearch={salonHrefSearch}
                           />
                         );
                       }
@@ -297,10 +314,11 @@ export default function CollectionView({ sections, artists }: Props) {
                             pieces={col.pieces}
                             rowMap={col.pieceRows}
                             fallbackPerRow={ideal}
+                            hrefSearch={salonHrefSearch}
                           />
                         );
                       }
-                      return <JustifiedGallery pieces={col.pieces} piecesPerRow={ideal} />;
+                      return <JustifiedGallery pieces={col.pieces} piecesPerRow={ideal} hrefSearch={salonHrefSearch} />;
                     })()}
                   </div>
                 );
@@ -313,7 +331,7 @@ export default function CollectionView({ sections, artists }: Props) {
   );
 }
 
-function SinglePieceDisplayLazy({ piece }: { piece: PieceData }) {
+function SinglePieceDisplayLazy({ piece, hrefSearch }: { piece: PieceData; hrefSearch?: string }) {
   const src = getArtworkImage(piece.slug, piece.contractAddress, piece.tokenId, "detail");
   if (!src) return null;
   return (
@@ -322,6 +340,7 @@ function SinglePieceDisplayLazy({ piece }: { piece: PieceData }) {
       src={src}
       title={piece.title}
       isPunk={piece.collectionSlug === "cryptopunks"}
+      hrefSearch={hrefSearch}
     />
   );
 }

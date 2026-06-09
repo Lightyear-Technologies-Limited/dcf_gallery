@@ -10,6 +10,10 @@
 
 // Hand-curated overrides for hero/featured pieces
 const CURATED_DETAIL: Record<string, string> = {
+  // XCOPY "Cope Salada" #125 lives on Shape (L2) as an animated on-chain SVG,
+  // decoded from the contract's data:image/svg+xml tokenURI. Served raw locally
+  // (the gateway can't transform SVG); the external marketplace URL is dead.
+  "cope-salada-125-2e9e": "/art/cope-salada-125.svg",
   "fidenza-145": "/art/optimized/curated-fidenza-145.webp",
   "ringers-13000014": "/art/optimized/curated-ringers-13000014.webp",
   "woy-103": "/art/optimized/curated-woy-103.webp",
@@ -17,23 +21,24 @@ const CURATED_DETAIL: Record<string, string> = {
   "lightyears-1": "/art/optimized/curated-lightyears-001.webp",
   "masksofluci-442": "/art/optimized/curated-masks-442.webp",
   "x-ray-machine-1": "/art/optimized/operator-x-ray-machine.webp",
-  // Kim Asendorf - static PNG screengrabs (Alchemy/Cloudinary 1000px renders)
+  // Kim Asendorf — lossless WebP detail (pixel-perfect for hard-edged pixel art,
+  // and smaller than the source PNG). lights/x0x keep their existing PNG.
   "lights-3-2006": "/art/lights-3-2006.png",
-  "pxl-dex-105-ecfb": "/art/pxl-dex-105-ecfb.png",
-  "pxl-dex-107-ecfb": "/art/pxl-dex-107-ecfb.png",
-  "pxl-dex-130-ecfb": "/art/pxl-dex-130-ecfb.png",
-  "pxl-dex-139-ecfb": "/art/pxl-dex-139-ecfb.png",
-  "pxl-dex-141-ecfb": "/art/pxl-dex-141-ecfb.png",
-  "pxl-pod-42-88b3": "/art/pxl-pod-42-88b3.png",
-  "pxl-pod-55-88b3": "/art/pxl-pod-55-88b3.png",
-  "pxl-pod-61-88b3": "/art/pxl-pod-61-88b3.png",
-  "pxl-pod-108-88b3": "/art/pxl-pod-108-88b3.png",
-  "pxl-pod-122-88b3": "/art/pxl-pod-122-88b3.png",
-  "pxl-pod-175-88b3": "/art/pxl-pod-175-88b3.png",
-  "pxl-pod-209-88b3": "/art/pxl-pod-209-88b3.png",
-  "pxl-pod-215-88b3": "/art/pxl-pod-215-88b3.png",
-  "pxl-pod-241-88b3": "/art/pxl-pod-241-88b3.png",
-  "pxl-pod-242-88b3": "/art/pxl-pod-242-88b3.png",
+  "pxl-dex-105-ecfb": "/art/optimized/curated-pxl-dex-105.webp",
+  "pxl-dex-107-ecfb": "/art/optimized/curated-pxl-dex-107.webp",
+  "pxl-dex-130-ecfb": "/art/optimized/curated-pxl-dex-130.webp",
+  "pxl-dex-139-ecfb": "/art/optimized/curated-pxl-dex-139.webp",
+  "pxl-dex-141-ecfb": "/art/optimized/curated-pxl-dex-141.webp",
+  "pxl-pod-42-88b3": "/art/optimized/curated-pxl-pod-42.webp",
+  "pxl-pod-55-88b3": "/art/optimized/curated-pxl-pod-55.webp",
+  "pxl-pod-61-88b3": "/art/optimized/curated-pxl-pod-61.webp",
+  "pxl-pod-108-88b3": "/art/optimized/curated-pxl-pod-108.webp",
+  "pxl-pod-122-88b3": "/art/optimized/curated-pxl-pod-122.webp",
+  "pxl-pod-175-88b3": "/art/optimized/curated-pxl-pod-175.webp",
+  "pxl-pod-209-88b3": "/art/optimized/curated-pxl-pod-209.webp",
+  "pxl-pod-215-88b3": "/art/optimized/curated-pxl-pod-215.webp",
+  "pxl-pod-241-88b3": "/art/optimized/curated-pxl-pod-241.webp",
+  "pxl-pod-242-88b3": "/art/optimized/curated-pxl-pod-242.webp",
   "x0x-576-3753": "/art/x0x-576-3753.png",
   // Operator - Repeat as Necessary (Art Blocks Engine via Verse, contract
   // ...2ee0). Stored as raw SVG decoded from the contract's tokenURI
@@ -45,6 +50,7 @@ const CURATED_DETAIL: Record<string, string> = {
 };
 
 const CURATED_THUMB: Record<string, string> = {
+  "cope-salada-125-2e9e": "/art/cope-salada-125.svg",
   "fidenza-145": "/art/thumbs/curated-fidenza-145.webp",
   "ringers-13000014": "/art/thumbs/curated-ringers-13000014.webp",
   "woy-103": "/art/thumbs/curated-woy-103.webp",
@@ -52,23 +58,23 @@ const CURATED_THUMB: Record<string, string> = {
   "lightyears-1": "/art/thumbs/curated-lightyears-001.webp",
   "masksofluci-442": "/art/thumbs/curated-masks-442.webp",
   "x-ray-machine-1": "/art/thumbs/operator-x-ray-machine.webp",
-  // Kim Asendorf - same PNGs serve both sizes (1000px is sufficient for thumbs)
+  // Kim Asendorf — WebP thumbs (≤400px, lossy q80). lights/x0x keep their PNG.
   "lights-3-2006": "/art/lights-3-2006.png",
-  "pxl-dex-105-ecfb": "/art/pxl-dex-105-ecfb.png",
-  "pxl-dex-107-ecfb": "/art/pxl-dex-107-ecfb.png",
-  "pxl-dex-130-ecfb": "/art/pxl-dex-130-ecfb.png",
-  "pxl-dex-139-ecfb": "/art/pxl-dex-139-ecfb.png",
-  "pxl-dex-141-ecfb": "/art/pxl-dex-141-ecfb.png",
-  "pxl-pod-42-88b3": "/art/pxl-pod-42-88b3.png",
-  "pxl-pod-55-88b3": "/art/pxl-pod-55-88b3.png",
-  "pxl-pod-61-88b3": "/art/pxl-pod-61-88b3.png",
-  "pxl-pod-108-88b3": "/art/pxl-pod-108-88b3.png",
-  "pxl-pod-122-88b3": "/art/pxl-pod-122-88b3.png",
-  "pxl-pod-175-88b3": "/art/pxl-pod-175-88b3.png",
-  "pxl-pod-209-88b3": "/art/pxl-pod-209-88b3.png",
-  "pxl-pod-215-88b3": "/art/pxl-pod-215-88b3.png",
-  "pxl-pod-241-88b3": "/art/pxl-pod-241-88b3.png",
-  "pxl-pod-242-88b3": "/art/pxl-pod-242-88b3.png",
+  "pxl-dex-105-ecfb": "/art/thumbs/curated-pxl-dex-105.webp",
+  "pxl-dex-107-ecfb": "/art/thumbs/curated-pxl-dex-107.webp",
+  "pxl-dex-130-ecfb": "/art/thumbs/curated-pxl-dex-130.webp",
+  "pxl-dex-139-ecfb": "/art/thumbs/curated-pxl-dex-139.webp",
+  "pxl-dex-141-ecfb": "/art/thumbs/curated-pxl-dex-141.webp",
+  "pxl-pod-42-88b3": "/art/thumbs/curated-pxl-pod-42.webp",
+  "pxl-pod-55-88b3": "/art/thumbs/curated-pxl-pod-55.webp",
+  "pxl-pod-61-88b3": "/art/thumbs/curated-pxl-pod-61.webp",
+  "pxl-pod-108-88b3": "/art/thumbs/curated-pxl-pod-108.webp",
+  "pxl-pod-122-88b3": "/art/thumbs/curated-pxl-pod-122.webp",
+  "pxl-pod-175-88b3": "/art/thumbs/curated-pxl-pod-175.webp",
+  "pxl-pod-209-88b3": "/art/thumbs/curated-pxl-pod-209.webp",
+  "pxl-pod-215-88b3": "/art/thumbs/curated-pxl-pod-215.webp",
+  "pxl-pod-241-88b3": "/art/thumbs/curated-pxl-pod-241.webp",
+  "pxl-pod-242-88b3": "/art/thumbs/curated-pxl-pod-242.webp",
   "x0x-576-3753": "/art/x0x-576-3753.png",
   // Operator - Repeat as Necessary (same SVGs as detail; vector scales).
   "repeat-as-necessary-1": "/art/repeat-as-necessary-1.svg",
@@ -113,6 +119,25 @@ export function resolveTokenId(
 import aspectsRaw from "./aspects.data.json";
 const ASPECTS = aspectsRaw as Record<string, { w: number; h: number }>;
 
+import cidsRaw from "./provenance.cids.json";
+// Slim slug→CID map for RASTER pinned originals (SVG/unpinned excluded). Kept
+// separate from the full provenance manifest so the heavy manifest (~1.7MB of
+// CIDs + variants + LQIP) never reaches the CLIENT bundle — galleries only need
+// the grid gateway URL. Full manifest + detail variants live in provenance.ts
+// (server-only). (plan A.2 / bundle hygiene)
+const CIDS = cidsRaw as Record<string, string>;
+
+/** Filebase dedicated IPFS gateway (public, not a secret). Serves pinned CIDs
+ *  and does on-the-fly resize/webp via the custom image loader (image-loader.js). */
+export const FILEBASE_GATEWAY = "lightyear.myfilebase.com";
+
+/** Gateway base URL for a pinned RASTER original, or null. SVG/unpinned pieces
+ *  aren't in the CID map, so they fall through to the local path below. */
+function gatewayUrl(slug: string): string | null {
+  const cid = CIDS[slug];
+  return cid ? `https://${FILEBASE_GATEWAY}/ipfs/${cid}` : null;
+}
+
 /**
  * Get natural (width, height) of the optimized artwork file, if known.
  * Returns null for Punks, curated samples, and any piece without a stored
@@ -152,6 +177,12 @@ export function getArtworkImage(
     const prefix = parts.slice(0, len).join("-");
     if (curatedMap[prefix]) return curatedMap[prefix];
   }
+
+  // Filebase gateway (pinned raster originals). The custom image loader
+  // (src/lib/image-loader.js) appends img-width + img-format=webp per requested
+  // width. SVG returns null here and falls through to the local path. (plan B.3)
+  const gw = gatewayUrl(slug);
+  if (gw) return gw;
 
   // Auto-pulled: /art/{optimized|thumbs}/{contract}-{tokenId}.webp
   if (contractAddress && tokenId) {

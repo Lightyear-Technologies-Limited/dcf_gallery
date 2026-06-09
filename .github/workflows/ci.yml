@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [master, asset-pipeline-filebase]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Lint
+        run: npm run lint
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Asset audit (every piece resolves to a servable image)
+        run: npm run audit
+      - name: Validate editorial content (Zod)
+        run: npm run content
+      - name: Build (static generation of all pages)
+        run: npm run build
+      - name: E2E smoke (Playwright)
+        run: |
+          npx playwright install --with-deps chromium
+          npm run test:e2e
+      - name: Lighthouse budget (informational)
+        run: npx @lhci/cli autorun
+        continue-on-error: true

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Header from "@/components/Header";
 import Link from "next/link";
+import { MotionProvider } from "@/components/MotionPreference";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const argent = localFont({
@@ -15,16 +17,29 @@ const argent = localFont({
 
 const instrumentSans = localFont({
   src: [
-    { path: "../fonts/InstrumentSans-Variable.ttf", weight: "100 900", style: "normal" },
-    { path: "../fonts/InstrumentSans-Italic-Variable.ttf", weight: "100 900", style: "italic" },
+    { path: "../fonts/InstrumentSans-Variable.woff2", weight: "100 900", style: "normal" },
+    { path: "../fonts/InstrumentSans-Italic-Variable.woff2", weight: "100 900", style: "italic" },
   ],
   variable: "--font-instrument",
   display: "swap",
 });
 
+// SITE_URL is resolved in @/lib/site: NEXT_PUBLIC_SITE_URL → Vercel domain → default.
+
 export const metadata: Metadata = {
-  title: "Hivemind - Digital Culture Fund Gallery",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Hivemind — Digital Culture Fund Gallery",
+    template: "%s — Hivemind DCF",
+  },
   description: "A curated showcase of the Hivemind Digital Culture Fund collection.",
+  openGraph: {
+    siteName: "Hivemind Digital Culture Fund",
+    type: "website",
+    title: "Hivemind — Digital Culture Fund Gallery",
+    description: "A curated showcase of the Hivemind Digital Culture Fund collection.",
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
@@ -46,6 +61,19 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         >
           Skip to content
         </a>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                { "@type": "Organization", "@id": `${SITE_URL}/#org`, name: "Hivemind Digital Culture Fund", url: SITE_URL, logo: `${SITE_URL}/icon-512.png` },
+                { "@type": "WebSite", "@id": `${SITE_URL}/#site`, name: "Hivemind Digital Culture Fund", url: SITE_URL, publisher: { "@id": `${SITE_URL}/#org` } },
+              ],
+            }),
+          }}
+        />
+        <MotionProvider>
         <Header />
         <main id="main" className="flex-1 pt-14 md:pt-0 md:pl-32 xl:pl-36">{children}</main>
         <footer className="border-t border-border py-8 md:pl-32 xl:pl-36">
@@ -68,6 +96,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             </div>
           </div>
         </footer>
+        </MotionProvider>
       </body>
     </html>
   );

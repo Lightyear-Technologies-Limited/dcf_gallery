@@ -9,6 +9,13 @@ interface Props {
   tokenStandard?: string;
   chain?: string;
   storage?: string;
+  /** Preservation provenance from the Filebase pin (C.2): the content-addressed
+      CID + sha256 of the preserved bytes, plus pin / last-verified timestamps.
+      When present, a "Preservation" block renders — the substance behind the
+      "preserved & pinned" claim (anyone can fetch the CID and re-hash it). */
+  provenance?: { cid?: string; sha256?: string; pinnedAt?: string; verifiedAt?: string };
+  /** Gateway base for resolving the pinned CID. */
+  gatewayBase?: string;
 }
 
 /**
@@ -23,8 +30,12 @@ export default function OnChainDetails({
   tokenStandard = "ERC-721",
   chain = "Ethereum",
   storage,
+  provenance,
+  gatewayBase = "https://lightyear.myfilebase.com/ipfs/",
 }: Props) {
-  if (!contractAddress && !tokenId) return null;
+  if (!contractAddress && !tokenId && !provenance?.cid) return null;
+
+  const pinnedDate = provenance?.verifiedAt || provenance?.pinnedAt;
 
   return (
     <details className="group text-[13px] [&_summary::-webkit-details-marker]:hidden">
@@ -73,6 +84,38 @@ export default function OnChainDetails({
               {storage}
             </span>
           </Row>
+        )}
+        {provenance?.cid && (
+          <>
+            <Row label="Pinned">
+              <span className="text-foreground">
+                IPFS · Filebase{provenance.verifiedAt ? " · verified" : ""}
+              </span>
+            </Row>
+            <Row label="CID">
+              <a
+                href={`${gatewayBase}${provenance.cid}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono tabular-nums text-foreground-secondary hover:text-foreground transition-colors duration-200"
+                title={`${provenance.cid} — open the preserved copy`}
+              >
+                {provenance.cid.slice(0, 8)}…{provenance.cid.slice(-6)}
+              </a>
+            </Row>
+            {provenance.sha256 && (
+              <Row label="SHA-256">
+                <CopyableHash value={provenance.sha256} />
+              </Row>
+            )}
+            {pinnedDate && (
+              <Row label={provenance.verifiedAt ? "Verified" : "Pinned"}>
+                <span className="font-mono tabular-nums text-foreground">
+                  {pinnedDate.slice(0, 10)}
+                </span>
+              </Row>
+            )}
+          </>
         )}
       </div>
     </details>

@@ -1,8 +1,11 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { pieces, getArtist, getCollection, getPiecesByCollection } from "@/lib/data";
 import { getArtworkImage, getArtworkAspect, resolveTokenId } from "@/lib/images";
-import { getEditionType, getArtistSiteUrl, getPieceTraits, getPieceDescription, getCollectionDisplayName, SYNTHETIC_TRAITS } from "@/lib/curation";
+import { getDetailVariants, getArtworkBlur, getProvenance, getOgImage } from "@/lib/provenance";
+import { SITE_URL as SITE } from "@/lib/site";
+import { getEditionType, getArtistSiteUrl, getPieceTraits, getPieceDescription, getCollectionDisplayName, getArtistDisplayName, SYNTHETIC_TRAITS } from "@/lib/curation";
 import type { TraitValue } from "@/lib/curation";
 import PlaceholderArt from "@/components/PlaceholderArt";
 import BackButton from "@/components/BackButton";
@@ -28,12 +31,38 @@ function deriveStorage(originalUri?: string, contractAddress?: string): string |
   if (/^(Qm[1-9A-HJ-NP-Za-km-z]{44}|bafy[a-z0-9]+|bafk[a-z0-9]+)$/.test(originalUri)) return "IPFS";
   if (originalUri.startsWith("ar://") || originalUri.includes("arweave.net")) return "Arweave";
   if (originalUri.includes("media-proxy.artblocks.io")) return "IPFS (Art Blocks proxy)";
+  // IPFS served over an HTTP gateway (ipfs.pixura.io/ipfs/…, …ipfs.io/…) must be
+  // detected before the generic https → Centralized fallback. (plan A.5)
+  if (originalUri.includes("/ipfs/") || /^https?:\/\/[^/]*\bipfs\./.test(originalUri)) return "IPFS";
   if (originalUri.startsWith("https://") || originalUri.startsWith("http://")) return "Centralized";
   return undefined;
 }
 
 export function generateStaticParams() {
   return pieces.map((p) => ({ slug: p.slug }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const piece = pieces.find((p) => p.slug === slug);
+  if (!piece) return {};
+  const artist = getArtist(piece.artistSlug);
+  const collection = getCollection(piece.collectionSlug);
+  const artistName = artist ? getArtistDisplayName(artist.slug, artist.name) : undefined;
+  const title = artistName ? `${piece.title} — ${artistName}` : piece.title;
+  const collName = collection ? getCollectionDisplayName(collection.slug, collection.name) : undefined;
+  const description = (
+    getPieceDescription(piece.slug) ||
+    piece.description ||
+    (collName ? `${piece.title}, from ${collName} — in the Hivemind Digital Culture Fund collection.` : "Held by the Hivemind Digital Culture Fund.")
+  ).slice(0, 200);
+  const og = getOgImage(piece.slug);
+  return {
+    title,
+    description,
+    openGraph: { title, description, type: "article", images: og ? [{ url: og, width: 1200, alt: piece.title }] : undefined },
+    twitter: { card: "summary_large_image", title, description, images: og ? [og] : undefined },
+  };
 }
 
 export default async function PiecePage({
@@ -63,7 +92,29 @@ export default async function PiecePage({
   const filterQs = incomingFilter
     ? `trait=${encodeURIComponent(incomingFilter.key)}&value=${encodeURIComponent(incomingFilter.value)}`
     : "";
-  const pieceHref = (s: string) => `/piece/${s}${filterQs ? `?${filterQs}` : ""}`;
+  // Origin view (?from=…) so Back returns to where the reader came from — the
+  // Salon, the Index (with its filters), Chapters, or the Constellation — not just
+  // up to the parent collection. Absent → fall back to the collection (legacy).
+  const from = typeof sp.from === "string" ? sp.from : "";
+  const viewParams = new URLSearchParams();
+  for (const k of ["chapter", "artist", "collection", "medium", "q"] as const) {
+    const v = typeof sp[k] === "string" ? (sp[k] as string) : "";
+    if (v) viewParams.set(k, v);
+  }
+  let originHref: string | null = null;
+  let originLabel = "";
+  if (from === "salon") { originHref = `/${viewParams.toString() ? `?${viewParams}` : ""}`; originLabel = "Salon"; }
+  else if (from === "index") { originHref = `/explore?view=index${viewParams.toString() ? `&${viewParams}` : ""}#c-${piece.collectionSlug}`; originLabel = "Index"; }
+  else if (from === "chapters") { originHref = "/explore?view=chapters"; originLabel = "Chapters"; }
+  else if (from === "constellation") { originHref = "/explore?view=constellation"; originLabel = "Constellation"; }
+
+  // Carry the origin (and any active filters) onto Prev/Next so sibling browsing
+  // keeps the same Back destination.
+  const carry = new URLSearchParams(filterQs);
+  if (from) { carry.set("from", from); for (const [k, v] of viewParams) carry.set(k, v); }
+  const carryQs = carry.toString();
+
+  const pieceHref = (s: string) => `/piece/${s}${carryQs ? `?${carryQs}` : ""}`;
   const collectionHref = collection
     ? `/collection/${collection.slug}${filterQs ? `?${filterQs}` : ""}`
     : "/";
@@ -163,6 +214,25 @@ export default async function PiecePage({
   // as plain catalogue metadata without link affordance.
   const collectionEditionType = getEditionType(piece.collectionSlug);
   const isMultiPieceSeries = /^1\/1\/\d/.test(collectionEditionType);
+  // Preservation provenance (C.2): real CID + sha256 from the Filebase pin.
+  const provenance = getProvenance(piece.slug);
+  // Animated/video pieces (E.1): play the pinned video with the sharp still as poster.
+  const animatedVideo =
+    provenance?.animation?.cid && provenance.animation.type === "video" && provenance.animation.gateway
+      ? { src: provenance.animation.gateway, poster: getDetailVariants(piece.slug)?.src, original: provenance.animation.source }
+      : undefined;
+  // Generative/interactive HTML pieces (E.1): the still stays the canonical
+  // display; expose the live generator as a "Launch interactive" link.
+  const interactive =
+    provenance?.animation?.type === "interactive-html" && provenance.animation.source
+      ? { src: provenance.animation.source }
+      : undefined;
+  const STORAGE_LABEL: Record<string, string> = {
+    ipfs: "IPFS", arweave: "Arweave", onchain: "On-chain", centralized: "Centralized",
+  };
+  const storageLabel =
+    (provenance?.storage && STORAGE_LABEL[provenance.storage]) ||
+    deriveStorage(piece.originalUri, piece.contractAddress);
   const metadata = (
     <div className="space-y-6">
       <Features
@@ -171,30 +241,60 @@ export default async function PiecePage({
         defaultOpen={featuresDefaultOpen}
         label={isPunk ? "Attributes" : "Traits"}
       />
+      {provenance?.cid && (
+        <p className="text-[10px] tracking-[0.12em] uppercase text-muted font-medium">
+          Preserved by DCF — pinned to IPFS{provenance.verifiedAt ? " · integrity verified" : ""}
+        </p>
+      )}
       <OnChainDetails
         contractAddress={piece.contractAddress}
         tokenId={piece.tokenId}
         editionType={collectionEditionType}
-        storage={deriveStorage(piece.originalUri, piece.contractAddress)}
+        storage={storageLabel}
+        provenance={
+          provenance?.cid
+            ? { cid: provenance.cid, sha256: provenance.sha256, pinnedAt: provenance.pinnedAt, verifiedAt: provenance.verifiedAt }
+            : undefined
+        }
       />
     </div>
   );
 
+  const artistDisplay = artist ? getArtistDisplayName(artist.slug, artist.name) : undefined;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "VisualArtwork",
+    name: piece.title,
+    url: `${SITE}/piece/${piece.slug}`,
+    artform: "Digital art",
+    ...(getOgImage(piece.slug) ? { image: getOgImage(piece.slug) } : {}),
+    ...(artistDisplay
+      ? { creator: { "@type": "Person", name: artistDisplay, ...(artist ? { url: `${SITE}/artist/${artist.slug}` } : {}) } }
+      : {}),
+    ...(getPieceDescription(piece.slug) || piece.description
+      ? { description: getPieceDescription(piece.slug) || piece.description }
+      : {}),
+    ...(collection ? { isPartOf: { "@type": "Collection", name: getCollectionDisplayName(collection.slug, collection.name) } } : {}),
+  };
+
   return (
     <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {/* Back link goes up one level to the parent collection, preserving
           any active trait filter so the reader returns to the filtered view
           they came from. Label uses the curated display name and is
           extended with "· {trait: value}" when filtered so the destination
           is unambiguous. */}
       <BackButton
-        href={collectionHref}
+        href={originHref || collectionHref}
         label={
-          collection
-            ? `${getCollectionDisplayName(collection.slug, collection.name)}${
-                incomingFilter ? ` · ${incomingFilter.key}: ${incomingFilter.value}` : ""
-              }`
-            : "Back"
+          originHref
+            ? originLabel
+            : collection
+              ? `${getCollectionDisplayName(collection.slug, collection.name)}${
+                  incomingFilter ? ` · ${incomingFilter.key}: ${incomingFilter.value}` : ""
+                }`
+              : "Back"
         }
       />
       {(prevPiece || nextPiece) && (
@@ -222,6 +322,11 @@ export default async function PiecePage({
       <div className="pt-6 pb-24">
         <PieceLayout
           image={realImage}
+          detailSrc={getDetailVariants(piece.slug)?.src}
+          detailSrcSet={getDetailVariants(piece.slug)?.srcSet}
+          lqip={getArtworkBlur(piece.slug)}
+          video={animatedVideo}
+          interactive={interactive}
           aspect={getArtworkAspect(piece.slug, piece.contractAddress, piece.tokenId)}
           title={piece.title}
           isPunk={isPunk}

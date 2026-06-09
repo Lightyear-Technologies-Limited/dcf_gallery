@@ -1,6 +1,10 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import Link from "next/link";
+import { getOgImage } from "@/lib/provenance";
 import { collections, getArtist, getCollectionsByArtist, getPiecesByCollection } from "@/lib/data";
+import { withCollectionEditorial } from "@/lib/editorial";
+import { SITE_URL } from "@/lib/site";
 import { getArtworkImage } from "@/lib/images";
 import {
   getArtistDisplayName,
@@ -28,6 +32,25 @@ export function generateStaticParams() {
   return collections.filter((c) => !isCollectionHidden(c.slug)).map((c) => ({ slug: c.slug }));
 }
 
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const col = withCollectionEditorial(collections.find((c) => c.slug === slug));
+  if (!col) return {};
+  const name = getCollectionDisplayName(col.slug, col.name);
+  const artist = getArtist(col.artistSlug);
+  const artistName = artist ? getArtistDisplayName(artist.slug, artist.name) : undefined;
+  const title = artistName ? `${name} — ${artistName}` : name;
+  const description = (col.description || `${name} in the Hivemind Digital Culture Fund collection.`).slice(0, 200);
+  const first = getPiecesByCollection(col.slug)[0];
+  const og = first ? getOgImage(first.slug) : undefined;
+  return {
+    title,
+    description,
+    openGraph: { title, description, type: "website", images: og ? [{ url: og, width: 1200 }] : undefined },
+    twitter: { card: "summary_large_image", title, description, images: og ? [og] : undefined },
+  };
+}
+
 
 export default async function CollectionPage({
   params,
@@ -38,7 +61,7 @@ export default async function CollectionPage({
 }) {
   const { slug } = await params;
   const sp = await searchParams;
-  const col = collections.find((c) => c.slug === slug);
+  const col = withCollectionEditorial(collections.find((c) => c.slug === slug));
   if (!col) notFound();
   if (isCollectionHidden(slug)) notFound();
 
@@ -425,8 +448,17 @@ export default async function CollectionPage({
     </div>
   ) : null;
 
+  const collectionLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: collectionName,
+    url: `${SITE_URL}/collection/${col.slug}`,
+    ...(col.curatorNote ? { description: col.curatorNote.slice(0, 320) } : {}),
+  };
+
   return (
     <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionLd) }} />
       {/* Breadcrumb + sibling nav. Prev (artist's other works) and next
           collection sit at the top alongside the trail so a returning
           reader can jump laterally without first scrolling to the bottom

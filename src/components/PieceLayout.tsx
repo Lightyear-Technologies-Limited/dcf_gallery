@@ -3,9 +3,26 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import ShareButton from "./ShareButton";
+import PieceVideo from "./PieceVideo";
+import InteractiveArtwork from "./InteractiveArtwork";
 
 interface Props {
   image: string | null;
+  /** Path B hybrid: sharp detail-variant src + srcSet (served raw via a plain
+      <img>, bypassing next/image so the gateway doesn't re-resize/re-soften
+      them). When present, the detail hero uses these instead of next/image. */
+  detailSrc?: string;
+  detailSrcSet?: string;
+  /** Tiny blurred LQIP data URI shown as a background until the sharp image
+      paints (blur-up / progressive load). */
+  lqip?: string;
+  /** When present, the artwork is a video — rendered with PieceVideo (still
+      poster + opt-in autoplay) instead of the static image. (E.1) */
+  video?: { src: string; poster?: string; original?: string };
+  /** When the piece is an interactive on-chain HTML work, its data: URI — shown
+      poster-by-default and run on demand inside a sandboxed iframe. (E.1) */
+  interactive?: { src: string };
   /** Natural pixel dimensions of the artwork file, when known. Used to size
       the Image box at the true intrinsic aspect (else next/image defaults to
       the 4:3 of the placeholder width/height props and tall pieces letterbox). */
@@ -104,7 +121,7 @@ function resolveOriginal(uri: string): { href: string; label: string } | null {
 /**
  * Piece layout: image on the left, details on the right.
  */
-export default function PieceLayout({ image, aspect, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, holdingNote, description, collectionDescription, physical, companion, metadata, rasterUrl, cryptopunksUrl, artistSiteUrl, originalUri, placeholder }: Props) {
+export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, video, interactive, aspect, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, holdingNote, description, collectionDescription, physical, companion, metadata, rasterUrl, cryptopunksUrl, artistSiteUrl, originalUri, placeholder }: Props) {
   const artistHost = artistSiteUrl ? hostLabel(artistSiteUrl) : null;
   const original = originalUri ? resolveOriginal(originalUri) : null;
   // When natural aspect is known, pass it as width/height props so next/image
@@ -113,7 +130,11 @@ export default function PieceLayout({ image, aspect, title, isPunk, artistName, 
   // letterbox slightly but the gallery 320-of-321 has real dimensions.
   const imgW = aspect?.w ?? 1600;
   const imgH = aspect?.h ?? 1200;
-  const artworkBlock = image ? (
+  const artworkBlock = video ? (
+    <PieceVideo src={video.src} poster={video.poster} title={title} original={video.original} />
+  ) : interactive ? (
+    <InteractiveArtwork src={interactive.src} poster={image} title={title} />
+  ) : image ? (
     isPunk ? (
       // Punks render the on-chain SVG at full container dimensions on the
       // colorway background. The container is aspect-square AND capped by
@@ -121,7 +142,7 @@ export default function PieceLayout({ image, aspect, title, isPunk, artistName, 
       // image's own max-height to truncate it - which was clipping the
       // image element shorter than the container and leaving a teal gap
       // under the punk on wider desktops.
-      <div className="bg-[#638596] w-full aspect-square max-w-[80vh] mx-auto">
+      <div className="bg-punk w-full aspect-square max-w-[80vh] mx-auto">
         <Image
           src={image}
           alt={title}
@@ -132,6 +153,22 @@ export default function PieceLayout({ image, aspect, title, isPunk, artistName, 
           sizes="(max-width: 768px) 90vw, 60vw"
         />
       </div>
+    ) : detailSrcSet ? (
+      // Sharp detail variants served raw via a plain <img> (no next/image, so
+      // the gateway loader can't re-resize/re-soften them). The LQIP shows as a
+      // blurred background until the sharp image paints. (plan B.3 / Path B)
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={detailSrc}
+        srcSet={detailSrcSet}
+        sizes="(max-width: 768px) 90vw, 60vw"
+        alt={title}
+        width={imgW}
+        height={imgH}
+        decoding="async"
+        className="block w-auto h-auto max-w-full max-h-[80vh] object-contain"
+        style={lqip ? { backgroundImage: `url(${lqip})`, backgroundSize: "cover", backgroundPosition: "center" } : undefined}
+      />
     ) : (
       <Image
         src={image}
@@ -140,6 +177,7 @@ export default function PieceLayout({ image, aspect, title, isPunk, artistName, 
         height={imgH}
         className="block w-auto h-auto max-w-full max-h-[80vh] object-contain"
         priority
+        quality={95}
         sizes="(max-width: 768px) 90vw, 60vw"
       />
     )
@@ -218,54 +256,53 @@ export default function PieceLayout({ image, aspect, title, isPunk, artistName, 
 
       <div className="mt-10">{metadata}</div>
 
-      {(artistSiteUrl || rasterUrl || cryptopunksUrl || original) && (
-        // Link order: original (verify on-chain provenance), then artist site
-        // (canonical artist-curated view), then marketplace(s) (trading view).
-        // Punks get both CryptoPunks.app and Raster under marketplace, with
-        // CryptoPunks.app first as canonical.
-        <div className="mt-6 flex flex-col gap-2 text-[12px] text-muted">
-          {original && (
-            <a
-              href={original.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-foreground transition-colors duration-200"
-            >
-              View original
-            </a>
-          )}
-          {artistSiteUrl && artistHost && (
-            <a
-              href={artistSiteUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-foreground transition-colors duration-200"
-            >
-              View on {artistHost}
-            </a>
-          )}
-          {cryptopunksUrl && (
-            <a
-              href={cryptopunksUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-foreground transition-colors duration-200"
-            >
-              View on CryptoPunks.app
-            </a>
-          )}
-          {rasterUrl && (
-            <a
-              href={rasterUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-foreground transition-colors duration-200"
-            >
-              View on Raster
-            </a>
-          )}
-        </div>
-      )}
+      {/* Link order: original (verify on-chain provenance), then artist site
+          (canonical artist-curated view), then marketplace(s) (trading view),
+          then Share. Punks get both CryptoPunks.app and Raster under marketplace,
+          CryptoPunks.app first as canonical. */}
+      <div className="mt-6 flex flex-col gap-2 text-[12px] text-muted">
+        {original && (
+          <a
+            href={original.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-foreground transition-colors duration-200"
+          >
+            View original
+          </a>
+        )}
+        {artistSiteUrl && artistHost && (
+          <a
+            href={artistSiteUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-foreground transition-colors duration-200"
+          >
+            View on {artistHost}
+          </a>
+        )}
+        {cryptopunksUrl && (
+          <a
+            href={cryptopunksUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-foreground transition-colors duration-200"
+          >
+            View on CryptoPunks.app
+          </a>
+        )}
+        {rasterUrl && (
+          <a
+            href={rasterUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-foreground transition-colors duration-200"
+          >
+            View on Raster
+          </a>
+        )}
+        <ShareButton title={artistName ? `${title} by ${artistName}` : title} />
+      </div>
     </div>
   );
 
