@@ -26,11 +26,16 @@ npm run start    # serve the production build
 npm run lint     # eslint (flat config, eslint-config-next)
 ```
 
-There is **no test framework**. `playwright` is a dependency but is used only by
-the `scripts/` tooling, not a test suite. Verify changes with `npm run build`
-(catches type + static-generation errors) and the dev server.
+Testing is minimal — a single Playwright smoke test (`tests/smoke.spec.ts`, run
+with `npm run test:e2e`); there is no unit-test suite. **`npm run build` is the
+primary check** (catches type + static-generation errors); `npm run typecheck`
+and the dev server cover the rest.
 
-Data-pipeline scripts are plain ESM, run directly: `node scripts/<name>.mjs`.
+Data-pipeline scripts are plain ESM. Most have an npm alias — `npm run onboard`
+(add pieces), `npm run curate` (apply `curation.json`), `npm run content`
+(validate + build editorial copy; also runs as `prebuild`), plus `sources`,
+`pin`, `pin-videos`, `verify-pins`, `audit` — or run any directly:
+`node scripts/<name>.mjs`.
 
 ## Architecture
 
@@ -69,7 +74,21 @@ baked into `data.ts` — they live in a separate editable layer read through
 The `/curate` skill runs both steps. `curation.ts` exposes display names, all
 ordering (`artistOrder`, `collectionOrder`, `pieceOrder`, `pieceRows`,
 `heroLayouts`), hide flags, edition types, and the trait-interactivity rules
-(`CLICKABLE_TRAITS`, `SYNTHETIC_TRAITS`, `getTraitGlobalCount`).
+(`CLICKABLE_TRAITS`, `SYNTHETIC_TRAITS`, `getTraitGlobalCount`). For the
+non-engineer authoring view of `curation.json`, see [`docs/CURATION.md`](docs/CURATION.md).
+
+### The editorial copy layer (prose, Zod-validated)
+
+Long-form copy — artist **bios** and collection **curator notes** ("Hivemind
+Commentary"), plus essay links — is **not** in `data.ts`. It lives as one JSON
+file per entity under `content/editorial/{artists,collections}/<slug>.json`
+(human-/CMS-editable; **`content/editorial/README.md` is the authoring guide** —
+point non-engineers there). `scripts/build-editorial.mjs` (npm `content`, wired
+as `prebuild`) validates each file with Zod (`scripts/content-schema.mjs`) and
+emits `src/lib/editorial.data.json`, which the app reads via `src/lib/editorial.ts`.
+A missing required field or stray key **fails the build** with a precise path.
+`tina/config.ts` describes these same files for the (deferred) TinaCMS visual
+editor — see `docs/CMS-TINA.md`.
 
 ### Other generated `src/lib/*.data.json` (do not hand-edit)
 
@@ -79,6 +98,8 @@ ordering (`artistOrder`, `collectionOrder`, `pieceOrder`, `pieceRows`,
 | `descriptions.data.json` | `build-descriptions.mjs` | per-piece prose; drops boilerplate repeating across ≥70% of a collection |
 | `trait-totals.data.json` | `fetch-trait-totals.mjs` | collection-wide rarity counts (e.g. CryptoPunks) for "15 of 146" framing |
 | `aspects.data.json` | `extract-aspects.mjs` | intrinsic `{w,h}` of optimized images, keyed `{contract}-{tokenId}` |
+| `provenance.data.json` / `provenance.cids.json` | `pin-assets.mjs` (`pin`) | pinned-asset manifest — CIDs, sha256, `sharp` detail-variant CIDs, LQIP. The slim `cids.json` is the client-safe slug→CID map (`images.ts`); the full manifest stays server-only (`provenance.ts`) |
+| `editorial.data.json` | `build-editorial.mjs` (`content`/`prebuild`) | consolidated artist bios + curator notes from `content/editorial/*`, Zod-validated |
 
 The general pattern: `fetch-*.mjs` pull on-chain metadata/images into
 `scripts/*.json` intermediates, then `build-*.mjs` consolidate those into the
@@ -86,13 +107,23 @@ The general pattern: `fetch-*.mjs` pull on-chain metadata/images into
 
 ### Images — `src/lib/images.ts`
 
-`getArtworkImage(slug, contract, tokenId, size)` resolves a public path. Two
-sizes: `/art/optimized/{key}.webp` (detail) and `/art/thumbs/{key}.webp` (thumb),
-where `key = {contractAddress}-{tokenId}` lowercased. **CryptoPunks** are served
-as SVG from `/art/all/` (pixel art, not WebP). Hero/featured pieces use the
-hardcoded `CURATED_DETAIL` / `CURATED_THUMB` overrides. `resolveTokenId`
-normalizes **Art Blocks** IDs (`project*1_000_000 + serial`; Fidenza = project
-78, Ringers = project 13) so raw serials and full token IDs both resolve.
+`getArtworkImage(slug, contract, tokenId, size)` resolves a **grid/thumb** URL,
+trying in order: (1) a hardcoded `CURATED_DETAIL` / `CURATED_THUMB` override
+(hero/featured pieces, plus the Kim Asendorf pixel decks served as local WebP);
+(2) a curated slug-prefix match; (3) the **Filebase IPFS gateway** — pinned
+raster originals (`CIDS` from `provenance.cids.json`) served as
+`https://{gateway}/ipfs/{cid}` and resized/transcoded to WebP on the fly by the
+custom loader `src/lib/image-loader.js`; (4) a local fallback
+`/art/{optimized|thumbs}/{contract}-{tokenId}.webp`. **CryptoPunks** short-circuit
+to on-chain SVG from `/art/all/` (vector — the gateway can't transform it).
+
+**Detail / hero** pages don't use that path — they render locally-generated
+`sharp` variants (768/1280/1920w WebP) through `<img srcset>` with an **LQIP
+blur-up**, sourced from the heavy provenance manifest in `src/lib/provenance.ts`
+(server-only, kept out of the client bundle). `resolveTokenId` normalizes **Art
+Blocks** IDs (`project*1_000_000 + serial`; Fidenza = project 78, Ringers =
+project 13) so raw serials and full token IDs both resolve. See
+`docs/ADDING-PIECES.md` for the end-to-end pipeline.
 
 ### Routing — `src/app/`
 

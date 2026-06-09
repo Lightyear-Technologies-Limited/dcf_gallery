@@ -64,8 +64,8 @@ Both skip pieces already done, so re-running is cheap and safe.
   (`…/ipfs/{cid}?img-width=N&img-format=webp`, auto-responsive, q90). Routed by
   `getArtworkImage` + the custom loader `src/lib/image-loader.js`.
 - **Detail / hero** → our **sharp variants** via a plain `<img srcset>`
-  (`getDetailVariants` in `images.ts`, rendered in `PieceLayout`), with **LQIP
-  blur-up** (`getArtworkBlur`). Served raw so the gateway can't re-soften them.
+  (`getDetailVariants` in `provenance.ts` — server-only, rendered in `PieceLayout`),
+  with **LQIP blur-up** (`getArtworkBlur`). Served raw so the gateway can't re-soften them.
 - **CryptoPunks** → on-chain SVG, served from `/art/all/…svg` (no variants —
   vector). The gateway can't transform SVG.
 - The genuine original stays pinned + reachable via the piece's **"View original"** link.
