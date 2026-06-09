@@ -3,6 +3,7 @@ import { artists, collections, getPiecesByCollection } from "@/lib/data";
 import { getArtistDisplayName, getCollectionDisplayName, isCollectionHidden, getArtistOrder, sortCollections, sortPieces } from "@/lib/curation";
 import { CHAPTERS, getChapterForArtist } from "@/lib/chapters";
 import ChaptersView from "@/components/explore/ChaptersView";
+import ScrollRestore from "@/components/ScrollRestore";
 
 export const metadata: Metadata = {
   title: "Chapters",
@@ -78,6 +79,7 @@ export default function ChaptersPage() {
 
   return (
     <div>
+      <ScrollRestore />
       {/* Masthead — mirrors the Salon masthead (CollectionView) at the same
           max-w-[1200px] so the "Hivemind Digital Culture Fund" wordmark holds the
           same position when moving between Collection and Chapters. */}

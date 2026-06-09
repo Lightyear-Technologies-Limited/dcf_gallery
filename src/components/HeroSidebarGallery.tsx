@@ -100,6 +100,7 @@ export default function HeroSidebarGallery({
       >
         {/* Hero - spans the first sidebarRows × sidebarRows cells */}
         <Link
+          id={`p-${hero.slug}`}
           href={`/piece/${hero.slug}${hrefSearch ? `?${hrefSearch}` : ""}`}
           className={`block overflow-hidden ${isPunkHero ? "bg-punk" : ""}`}
           style={{
@@ -126,6 +127,7 @@ export default function HeroSidebarGallery({
           return (
             <Link
               key={p.id}
+              id={`p-${p.slug}`}
               href={`/piece/${p.slug}${hrefSearch ? `?${hrefSearch}` : ""}`}
               className={`block overflow-hidden ${isPunk ? "bg-punk" : ""}`}
             >

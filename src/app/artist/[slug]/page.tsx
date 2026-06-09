@@ -22,6 +22,7 @@ import FixedRowGallery from "@/components/FixedRowGallery";
 import HeroSidebarGallery from "@/components/HeroSidebarGallery";
 import SinglePieceDisplay from "@/components/SinglePieceDisplay";
 import CuratorNote from "@/components/CuratorNote";
+import ScrollRestore from "@/components/ScrollRestore";
 
 const MERGE_INTO: Record<string, string> = {
   "tyler-hobbs-and-dandelion-wist": "tyler-hobbs",
@@ -54,6 +55,13 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
 
   const artistName = getArtistDisplayName(artist.slug, artist.name);
   const chapter = getChapterForArtist(artist.slug);
+
+  // Tag pieces opened from this page's inline galleries with their origin so the
+  // piece-page Back link returns here (anchored to the tile), not to the piece's
+  // collection page. Carry the page artist slug explicitly — a merged artist's
+  // piece (e.g. Dandelion Wist under Tyler Hobbs) has a different artistSlug, and
+  // its own /artist route isn't generated.
+  const artistFrom = `from=artist&artist=${artist.slug}`;
 
   // Include merged artists (e.g., Dandelion Wist under Tyler Hobbs).
   const mergedSlugs = Object.entries(MERGE_INTO)
@@ -102,6 +110,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
 
   return (
     <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
+      <ScrollRestore />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personLd) }} />
       {/* Top row mirrors the collection page's breadcrumb + sibling-nav
           structure so the h1 below sits at the same vertical position
@@ -308,6 +317,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
                       src={heroImage}
                       title={piece.title}
                       isPunk={piece.collectionSlug === "cryptopunks"}
+                      hrefSearch={artistFrom}
                     />
                   );
                 }
@@ -320,6 +330,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
                       sidebarRows={heroLayout.sidebarRows}
                       sidebarSlugs={heroLayout.sidebarPieces}
                       fallbackPerRow={ideal}
+                      hrefSearch={artistFrom}
                     />
                   );
                 }
@@ -329,10 +340,11 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
                       pieces={col.pieces}
                       rowMap={col.pieceRows}
                       fallbackPerRow={ideal}
+                      hrefSearch={artistFrom}
                     />
                   );
                 }
-                return <JustifiedGallery pieces={col.pieces} piecesPerRow={ideal} />;
+                return <JustifiedGallery pieces={col.pieces} piecesPerRow={ideal} hrefSearch={artistFrom} />;
               })()}
             </section>
           );

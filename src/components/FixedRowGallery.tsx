@@ -110,6 +110,7 @@ export default function FixedRowGallery({ pieces, rowMap, fallbackPerRow, gap = 
               return (
                 <Link
                   key={piece.id}
+                  id={`p-${piece.slug}`}
                   href={`/piece/${piece.slug}${hrefSearch ? `?${hrefSearch}` : ""}`}
                   style={{ width: w > 0 ? `${w}px` : undefined, height: "100%" }}
                   className={`block shrink-0 overflow-hidden ${isPunk ? "bg-punk" : ""}`}

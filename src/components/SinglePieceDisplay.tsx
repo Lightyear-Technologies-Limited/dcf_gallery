@@ -62,6 +62,7 @@ export default function SinglePieceDisplay({ slug, src, title, isPunk = false, h
   return (
     <Link
       ref={ref}
+      id={`p-${slug}`}
       href={`/piece/${slug}${hrefSearch ? `?${hrefSearch}` : ""}`}
       onPointerEnter={() => setHovering(true)}
       onPointerLeave={() => setHovering(false)}

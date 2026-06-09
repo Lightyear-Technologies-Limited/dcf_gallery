@@ -103,10 +103,21 @@ export default async function PiecePage({
     const v = typeof sp[k] === "string" ? (sp[k] as string) : "";
     if (v) viewParams.set(k, v);
   }
+  // Anchor the Back link to the exact tile the reader opened (`#p-<slug>`), so
+  // returning to the origin restores their scroll position instead of jumping to
+  // the top. ScrollRestore on each surface re-scrolls to this id once the async
+  // gallery has laid out.
+  const anchor = `#p-${piece.slug}`;
   let originHref: string | null = null;
   let originLabel = "";
-  if (from === "salon") { originHref = `/${viewParams.toString() ? `?${viewParams}` : ""}`; originLabel = "Collection"; }
-  else if (from === "chapters") { originHref = "/chapters"; originLabel = "Chapters"; }
+  if (from === "salon") { originHref = `/${viewParams.toString() ? `?${viewParams}` : ""}${anchor}`; originLabel = "Collection"; }
+  else if (from === "chapters") { originHref = `/chapters${anchor}`; originLabel = "Chapters"; }
+  else if (from === "artist") {
+    const a = viewParams.get("artist") || piece.artistSlug;
+    const fa = getArtist(a);
+    originHref = `/artist/${a}${anchor}`;
+    originLabel = fa ? getArtistDisplayName(fa.slug, fa.name) : "Artist";
+  }
 
   // Carry the origin (and any active filters) onto Prev/Next so sibling browsing
   // keeps the same Back destination.
@@ -273,7 +284,7 @@ export default async function PiecePage({
   // collection page, carrying the filter so the reader lands in the same subset.
   const collectionPieceCount = getPiecesByCollection(piece.collectionSlug).length;
   const upToArtist = !incomingFilter && collectionPieceCount === 1 && !!artist;
-  const upHref = upToArtist ? `/artist/${artist!.slug}` : collectionHref;
+  const upHref = (upToArtist ? `/artist/${artist!.slug}` : collectionHref) + anchor;
   const upLabel = upToArtist
     ? artistDisplay ?? "Artist"
     : collection

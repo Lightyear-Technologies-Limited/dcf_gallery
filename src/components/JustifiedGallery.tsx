@@ -108,7 +108,7 @@ export default function JustifiedGallery({ pieces, piecesPerRow, gap = 4, maxRow
               const isPunk = piece.collectionSlug === "cryptopunks";
               const tileHref = `/piece/${piece.slug}${hrefSearch ? `?${hrefSearch}` : ""}`;
               return (
-                <div key={piece.id} className="shrink-0" style={{ width: w > 0 ? `${w}px` : undefined }}>
+                <div key={piece.id} id={`p-${piece.slug}`} className="shrink-0" style={{ width: w > 0 ? `${w}px` : undefined }}>
                   <Link
                     href={tileHref}
                     style={{ height: rowHeight > 0 ? `${rowHeight}px` : undefined }}

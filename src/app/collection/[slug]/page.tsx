@@ -27,6 +27,7 @@ import HeroSidebarGallery from "@/components/HeroSidebarGallery";
 import SinglePieceDisplay from "@/components/SinglePieceDisplay";
 import ExpandableProse from "@/components/ExpandableProse";
 import CopyableHash from "@/components/CopyableHash";
+import ScrollRestore from "@/components/ScrollRestore";
 
 export function generateStaticParams() {
   return collections.filter((c) => !isCollectionHidden(c.slug)).map((c) => ({ slug: c.slug }));
@@ -458,6 +459,7 @@ export default async function CollectionPage({
 
   return (
     <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
+      <ScrollRestore />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionLd) }} />
       {/* Breadcrumb + sibling nav. Prev (artist's other works) and next
           collection sit at the top alongside the trail so a returning

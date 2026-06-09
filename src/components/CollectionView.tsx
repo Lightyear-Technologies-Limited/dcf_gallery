@@ -10,6 +10,7 @@ import SinglePieceDisplay from "./SinglePieceDisplay";
 import { getArtworkImage } from "@/lib/images";
 import { getHeroLayout } from "@/lib/curation";
 import { CHAPTERS, CHAPTER_COLORS } from "@/lib/chapters";
+import ScrollRestore from "./ScrollRestore";
 
 interface PieceData {
   id: string;
@@ -152,6 +153,7 @@ export default function CollectionView({ sections, artists }: Props) {
 
   return (
     <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
+      <ScrollRestore />
       {/* Masthead - "Hivemind Digital Culture Fund" rendered prominently
           above the filter rows so the catalogue identifies itself before
           any interaction. Top padding matches the sidebar logo's pt-6 so
