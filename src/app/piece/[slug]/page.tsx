@@ -4,6 +4,7 @@ import Link from "next/link";
 import { pieces, getArtist, getCollection, getPiecesByCollection } from "@/lib/data";
 import { getArtworkImage, getArtworkAspect, resolveTokenId } from "@/lib/images";
 import { getDetailVariants, getArtworkBlur, getProvenance, getOgImage } from "@/lib/provenance";
+import { getMotion } from "@/lib/motion";
 import { SITE_URL as SITE } from "@/lib/site";
 import { getEditionType, getArtistSiteUrl, getPieceTraits, getPieceDescription, getCollectionDisplayName, getArtistDisplayName, SYNTHETIC_TRAITS } from "@/lib/curation";
 import type { TraitValue } from "@/lib/curation";
@@ -220,11 +221,15 @@ export default async function PiecePage({
     provenance?.animation?.cid && provenance.animation.type === "video" && provenance.animation.gateway
       ? { src: provenance.animation.gateway, poster: getDetailVariants(piece.slug)?.src, original: provenance.animation.source }
       : undefined;
-  // Generative/interactive HTML pieces (E.1): the still stays the canonical
-  // display; expose the live generator as a "Launch interactive" link.
+  // Generative/interactive HTML pieces (E.1). Run the **pinned gateway copy**
+  // (the same URL the gallery tiles use via getMotion), NOT the raw on-chain
+  // `data:` URI: the artwork spawns a Web Worker from a blob URL, which browsers
+  // block inside a `data:`/opaque-origin document — so the data-URI iframe paints
+  // a black square, while the https gateway origin runs it correctly.
+  const interactiveMotion = getMotion(piece.slug);
   const interactive =
-    provenance?.animation?.type === "interactive-html" && provenance.animation.source
-      ? { src: provenance.animation.source }
+    interactiveMotion?.type === "interactive"
+      ? { src: interactiveMotion.src }
       : undefined;
   const STORAGE_LABEL: Record<string, string> = {
     ipfs: "IPFS", arweave: "Arweave", onchain: "On-chain", centralized: "Centralized",

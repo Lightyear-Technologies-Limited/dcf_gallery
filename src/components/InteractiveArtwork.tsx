@@ -6,10 +6,13 @@ import { useMotion } from "./MotionPreference";
 
 /**
  * On-chain interactive HTML artwork (E.1) — e.g. Kim Asendorf's generative pixel
- * works, whose canonical form is a self-contained HTML/JS data URI. Poster-still
- * by default (motion + reduced-motion courtesy); a "Run interactive" action loads
- * the live render into a **sandboxed** iframe (`allow-scripts`, no same-origin —
- * the art runs but is fully isolated from this origin). CSP allows `frame-src data:`.
+ * works, self-contained HTML/JS. Poster-still by default (motion + reduced-motion
+ * courtesy); a "Run interactive" action loads the live render into a **sandboxed**
+ * iframe (`allow-scripts`, no same-origin — the art runs but is fully isolated from
+ * this origin). The `src` is the **pinned gateway copy** (an https URL on
+ * lightyear.myfilebase.com, allowed by the CSP `frame-src`), never the raw on-chain
+ * `data:` URI: the art spawns a Web Worker from a blob URL, which browsers block in
+ * a `data:`/opaque-origin document (→ black square) but run from the https origin.
  */
 export default function InteractiveArtwork({
   src,
