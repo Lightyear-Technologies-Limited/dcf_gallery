@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { pieces, artists, collections } from "@/lib/data";
-import { getArtistDisplayName, getCollectionDisplayName, isCollectionHidden } from "@/lib/curation";
+import { artists, collections, getPiecesByCollection } from "@/lib/data";
+import { getArtistDisplayName, getCollectionDisplayName, isCollectionHidden, getArtistOrder, sortCollections, sortPieces } from "@/lib/curation";
 import { CHAPTERS, getChapterForArtist } from "@/lib/chapters";
 import ExploreIndex from "@/components/explore/ExploreIndex";
 import ChaptersView from "@/components/explore/ChaptersView";
@@ -26,27 +26,58 @@ export default async function ExplorePage({
   const view = VIEWS.has(s("view")) ? s("view") : "index";
   const viewLabel = view === "chapters" ? "Chapters" : view === "constellation" ? "Constellation" : "Index";
 
-  const items = pieces
-    .filter((p) => !isCollectionHidden(p.collectionSlug))
-    .map((p) => {
-      const artistSlug = MERGE_INTO[p.artistSlug] || p.artistSlug;
-      const artist = artists.find((a) => a.slug === artistSlug);
-      const collection = collections.find((c) => c.slug === p.collectionSlug);
-      const chapter = getChapterForArtist(artistSlug);
-      return {
+  // Build the flat work list in the SAME curated order the Salon (homepage) uses:
+  // artist order → collection order → piece order. ExploreIndex groups works by
+  // collection in first-appearance order, so a curated-contiguous traversal makes
+  // the Index mirror the Salon rather than raw spreadsheet order.
+  const primaryArtists = artists.filter((a) => !MERGE_INTO[a.slug]);
+  const artistOrder = getArtistOrder();
+  const orderedArtists = artistOrder
+    ? [
+        ...(artistOrder
+          .map((slug) => primaryArtists.find((a) => a.slug === slug))
+          .filter(Boolean) as typeof primaryArtists),
+        ...primaryArtists
+          .filter((a) => !artistOrder.includes(a.slug))
+          .sort((a, b) =>
+            getArtistDisplayName(a.slug, a.name).localeCompare(getArtistDisplayName(b.slug, b.name)),
+          ),
+      ]
+    : [...primaryArtists].sort((a, b) =>
+        getArtistDisplayName(a.slug, a.name).localeCompare(getArtistDisplayName(b.slug, b.name)),
+      );
+
+  const items = orderedArtists.flatMap((artist) => {
+    const mergedSlugs = Object.entries(MERGE_INTO)
+      .filter(([, parent]) => parent === artist.slug)
+      .map(([child]) => child);
+    const allSlugs = [artist.slug, ...mergedSlugs];
+    const artistName = getArtistDisplayName(artist.slug, artist.name);
+    const chapter = getChapterForArtist(artist.slug);
+
+    const artistCollections = sortCollections(
+      artist.slug,
+      collections
+        .filter((c) => allSlugs.includes(c.artistSlug) && !isCollectionHidden(c.slug))
+        .map((c) => ({ slug: c.slug, name: getCollectionDisplayName(c.slug, c.name) })),
+    );
+
+    return artistCollections.flatMap((col) =>
+      sortPieces(col.slug, getPiecesByCollection(col.slug)).map((p) => ({
         id: p.id,
         slug: p.slug,
         title: p.title,
-        artistSlug,
-        artistName: artist ? getArtistDisplayName(artist.slug, artist.name) : artistSlug,
-        collectionSlug: p.collectionSlug,
-        collectionName: collection ? getCollectionDisplayName(collection.slug, collection.name) : p.collectionSlug,
+        artistSlug: artist.slug,
+        artistName,
+        collectionSlug: col.slug,
+        collectionName: col.name,
         chapterSlug: chapter?.slug ?? null,
         medium: p.medium,
         contractAddress: p.contractAddress,
         tokenId: p.tokenId,
-      };
-    });
+      })),
+    );
+  });
 
   const dedupe = (arr: { slug: string; name: string }[]) =>
     [...new Map(arr.map((o) => [o.slug, o])).values()].sort((a, b) => a.name.localeCompare(b.name));

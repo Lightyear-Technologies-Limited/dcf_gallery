@@ -66,12 +66,13 @@ export default function ViewSwitcher({
     [router],
   );
 
-  // ←/→ cycle the explorer views (Salon excluded — it leaves the explorer).
-  // Arrow keys are navigation keys, exempt from WCAG 2.1.4, so this can be global
-  // without a single-character-shortcut concern. Still guarded twice: never while
-  // focus is in a text field/select (so typing in the Index search isn't
-  // hijacked), and deferring to a focused scroll region (role="group" — the
-  // Chapters filmstrip) so its native arrow-scroll survives.
+  // ←/→ cycle all four views (Salon ⇄ Index ⇄ Chapters ⇄ Constellation) — the
+  // homepage's switcher steps straight into the explorer and back. Arrow keys are
+  // navigation keys, exempt from WCAG 2.1.4, so this can be global without a
+  // single-character-shortcut concern. Still guarded twice: never while focus is
+  // in a text field/select (so typing in the Index search isn't hijacked), and
+  // deferring to a focused scroll region (role="group" — the Chapters filmstrip)
+  // so its native arrow-scroll survives.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
@@ -80,7 +81,7 @@ export default function ViewSwitcher({
       if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT" || t.isContentEditable)) return;
       const ae = document.activeElement;
       if (ae instanceof HTMLElement && ae.getAttribute("role") === "group") return;
-      const cycle = VIEWS.filter((v) => isDesktop || !v.desktopOnly).filter((v) => v.id !== "salon").map((v) => v.id);
+      const cycle = VIEWS.filter((v) => isDesktop || !v.desktopOnly).map((v) => v.id);
       const idx = cycle.indexOf(active);
       if (idx === -1) return;
       e.preventDefault();
