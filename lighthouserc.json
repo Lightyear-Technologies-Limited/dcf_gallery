@@ -4,7 +4,7 @@
       "startServerCommand": "npm run start",
       "url": [
         "http://localhost:3000/",
-        "http://localhost:3000/explore?view=index",
+        "http://localhost:3000/chapters",
         "http://localhost:3000/artists",
         "http://localhost:3000/piece/grifters-8-c1f3"
       ],

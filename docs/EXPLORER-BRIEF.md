@@ -1,5 +1,14 @@
 # DCF Gallery — Explorer Design Brief
 
+> ⚠️ **Superseded (2026-06-09).** This brief describes a four-view explorer
+> (Salon / Index / Chapters / Constellation) with a `?view=` switcher on a dedicated
+> `/explore` route. After UAT, that was pared back to **Chapters only** — now a
+> top-level **`/chapters`** route reached from the sidebar nav (Collection · Artists ·
+> Chapters · About). The Index and Constellation views, the `ViewSwitcher`, and the
+> `/explore` route were removed; the Index's per-collection piece count was kept and
+> ported onto the Salon + collection pages. See [`DECISIONS.md` → D10](./DECISIONS.md).
+> The rest of this document is retained as the original design record.
+
 Design brief (from the `shape` skill) for the deluxe navigation (plan E.2 + E.3).
 Captures the direction agreed with the user; hand to `impeccable craft` to build.
 

@@ -523,9 +523,17 @@ export default async function CollectionPage({
           the header structure stays constant. */}
       <div className="pt-6 grid grid-cols-1 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-12 md:gap-16">
           <div>
-            <h1 className="font-serif display-sm">
-              {collectionName}
-            </h1>
+            {/* Title + held piece count (the kept Index affordance — a quick
+                "how many works" read next to the name). Suppressed on filtered
+                views and for singletons where the count carries no information. */}
+            <div className="flex items-baseline gap-2.5">
+              <h1 className="font-serif display-sm">
+                {collectionName}
+              </h1>
+              {!traitFilter && sorted.length > 1 && (
+                <span className="text-[12px] text-muted font-mono tabular-nums">{sorted.length}</span>
+              )}
+            </div>
             {artist && (
               <Link
                 href={`/artist/${artist.slug}`}

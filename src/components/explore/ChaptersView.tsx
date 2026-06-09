@@ -91,7 +91,7 @@ export default function ChaptersView({ chapters }: { chapters: ChapterData[] }) 
         ))}
       </nav>
 
-      <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12">
+      <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
         {chapters.map((c, i) => (
           <section
             key={c.slug}
@@ -147,7 +147,7 @@ export default function ChaptersView({ chapters }: { chapters: ChapterData[] }) 
               </div>
 
               <Link
-                href={`/explore?view=index&chapter=${c.slug}`}
+                href={`/?chapter=${c.slug}`}
                 className="mt-7 inline-flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase text-muted hover:text-foreground transition-colors duration-200 tabular-nums"
               >
                 View all {c.total} in {c.name}

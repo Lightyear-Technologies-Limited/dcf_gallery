@@ -74,7 +74,7 @@ gotchas, see [`CLAUDE.md`](CLAUDE.md).
 | [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) | Build & deploy (Vercel) runbook. |
 | [`docs/CMS-TINA.md`](docs/CMS-TINA.md) | Enabling the TinaCMS visual editor for the editorial layer. |
 | [`docs/DECISIONS.md`](docs/DECISIONS.md) | Architectural decision record. |
-| [`docs/EXPLORER-BRIEF.md`](docs/EXPLORER-BRIEF.md) | Design brief for the multi-view `/explore` experience. |
+| [`docs/EXPLORER-BRIEF.md`](docs/EXPLORER-BRIEF.md) | Historical design brief for the original multi-view `/explore` experience — **superseded**; simplified post-UAT to a single `/chapters` view (see [`DECISIONS.md` → D10](docs/DECISIONS.md)). |
 
 ## Deployment
 

@@ -93,8 +93,9 @@ export default async function PiecePage({
     ? `trait=${encodeURIComponent(incomingFilter.key)}&value=${encodeURIComponent(incomingFilter.value)}`
     : "";
   // Origin view (?from=…) so Back returns to where the reader came from — the
-  // Salon, the Index (with its filters), Chapters, or the Constellation — not just
-  // up to the parent collection. Absent → fall back to the collection (legacy).
+  // Collection (the Salon homepage, with any active chapter/artist filter) or the
+  // Chapters page — not just up to the parent collection. Absent → fall back up
+  // the hierarchy (collection page, or the artist for single-piece collections).
   const from = typeof sp.from === "string" ? sp.from : "";
   const viewParams = new URLSearchParams();
   for (const k of ["chapter", "artist", "collection", "medium", "q"] as const) {
@@ -103,10 +104,8 @@ export default async function PiecePage({
   }
   let originHref: string | null = null;
   let originLabel = "";
-  if (from === "salon") { originHref = `/${viewParams.toString() ? `?${viewParams}` : ""}`; originLabel = "Salon"; }
-  else if (from === "index") { originHref = `/explore?view=index${viewParams.toString() ? `&${viewParams}` : ""}#c-${piece.collectionSlug}`; originLabel = "Index"; }
-  else if (from === "chapters") { originHref = "/explore?view=chapters"; originLabel = "Chapters"; }
-  else if (from === "constellation") { originHref = "/explore?view=constellation"; originLabel = "Constellation"; }
+  if (from === "salon") { originHref = `/${viewParams.toString() ? `?${viewParams}` : ""}`; originLabel = "Collection"; }
+  else if (from === "chapters") { originHref = "/chapters"; originLabel = "Chapters"; }
 
   // Carry the origin (and any active filters) onto Prev/Next so sibling browsing
   // keeps the same Back destination.
@@ -261,6 +260,23 @@ export default async function PiecePage({
   );
 
   const artistDisplay = artist ? getArtistDisplayName(artist.slug, artist.name) : undefined;
+
+  // Up-the-hierarchy fallback for Back when there's no explicit ?from origin.
+  // A single-piece collection is redundant chrome (the title links straight to
+  // the piece everywhere), so its natural parent is the artist, not a one-item
+  // collection page. Multi-piece collections — and any active filter — go to the
+  // collection page, carrying the filter so the reader lands in the same subset.
+  const collectionPieceCount = getPiecesByCollection(piece.collectionSlug).length;
+  const upToArtist = !incomingFilter && collectionPieceCount === 1 && !!artist;
+  const upHref = upToArtist ? `/artist/${artist!.slug}` : collectionHref;
+  const upLabel = upToArtist
+    ? artistDisplay ?? "Artist"
+    : collection
+      ? `${getCollectionDisplayName(collection.slug, collection.name)}${
+          incomingFilter ? ` · ${incomingFilter.key}: ${incomingFilter.value}` : ""
+        }`
+      : "Back";
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "VisualArtwork",
@@ -280,22 +296,15 @@ export default async function PiecePage({
   return (
     <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      {/* Back link goes up one level to the parent collection, preserving
-          any active trait filter so the reader returns to the filtered view
-          they came from. Label uses the curated display name and is
-          extended with "· {trait: value}" when filtered so the destination
-          is unambiguous. */}
+      {/* Back link. With an explicit origin (?from=) it returns there (Collection
+          or Chapters). Otherwise it goes UP one level: multi-piece collections —
+          and any active trait filter — return to the collection page; single-piece
+          collections, whose collection page is redundant chrome, return to the
+          artist page instead. Label uses the curated display name, extended with
+          "· {trait: value}" when filtered so the destination is unambiguous. */}
       <BackButton
-        href={originHref || collectionHref}
-        label={
-          originHref
-            ? originLabel
-            : collection
-              ? `${getCollectionDisplayName(collection.slug, collection.name)}${
-                  incomingFilter ? ` · ${incomingFilter.key}: ${incomingFilter.value}` : ""
-                }`
-              : "Back"
-        }
+        href={originHref || upHref}
+        label={originHref ? originLabel : upLabel}
       />
       {(prevPiece || nextPiece) && (
         <div className="mt-4 flex flex-col sm:flex-row sm:justify-between gap-2 text-[13px] text-muted">

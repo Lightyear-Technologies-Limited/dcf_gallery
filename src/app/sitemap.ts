@@ -10,8 +10,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const paths = [
     "",
     "/artists",
+    "/chapters",
     "/about",
-    "/explore",
     ...artists.filter((a) => !MERGED.has(a.slug)).map((a) => `/artist/${a.slug}`),
     ...collections.filter((c) => !isCollectionHidden(c.slug)).map((c) => `/collection/${c.slug}`),
     ...pieces.filter((p) => !isCollectionHidden(p.collectionSlug)).map((p) => `/piece/${p.slug}`),

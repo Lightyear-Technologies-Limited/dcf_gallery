@@ -36,8 +36,8 @@ artwork has its own page with on-chain provenance (contract, token ID, pinned IP
 ${chapterList}
 
 ## Key routes
-- ${SITE}/ — the Salon (curated homepage)
-- ${SITE}/explore — multi-view explorer (Index / Chapters / Constellation); filter via \`?view=index|chapters|constellation&chapter=&artist=&collection=&medium=&q=\`
+- ${SITE}/ — the curated homepage (the whole collection; filter via \`?chapter=&artist=\`)
+- ${SITE}/chapters — the five curatorial chapters, each with a filmstrip of its works
 - ${SITE}/artists — all artists; ${SITE}/artist/{slug} — one artist
 - ${SITE}/collection/{slug} — one collection
 - ${SITE}/piece/{slug} — one artwork (on-piece trait filter: \`?trait={Key}&value={Value}\`)

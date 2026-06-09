@@ -183,3 +183,34 @@ Filebase, extract a poster frame (ffmpeg). Keep video web-weight (MP4/WebM).
 images/links/curation → Lighthouse budget → Playwright smoke). None exists today;
 `playwright` is already a dependency. Right-sized to a non-dev team: hard-fail on
 broken-page signals, warn on external-link rot (checked nightly, not in the gate).
+
+---
+
+## D10 — Explorer simplified to a single Chapters view (post-UAT) ✅
+
+**Decision (amends [D7](#d7)).** After UAT with users, retire the multi-view
+explorer. Remove the **Index** and **Constellation** views, the `?view=`
+**view-switcher**, and the **`/explore`** route. Keep the **Chapters** view and
+promote it to a top-level **`/chapters`** route reached from the sidebar nav, which
+becomes **Collection · Artists · Chapters · About**.
+
+**Why.** Across the four lenses, users navigated almost entirely via the Salon
+(homepage) and Chapters. The Index duplicated filtering the Salon already offers, and
+the Constellation — a nice "wow" — wasn't a door people actually used. The switcher
+added a mode-y surface (and a keyboard/a11y burden) for views that didn't earn their
+keep. Fewer, clearer entrances beat four switchable lenses.
+
+**Kept from the Index.** Its per-collection **piece count** — now shown next to each
+collection title on the Salon and on the collection page (a quick "how many works"
+read).
+
+**Navigation consequences.** The piece-page back-link resolves up the hierarchy: to
+**Chapters** (arriving from a filmstrip), the **collection page** (multi-piece
+collections, and the Salon homepage), or the **artist page** (single-piece
+collections, whose collection page is redundant chrome). Chapter width was aligned to
+the Salon (`max-w-[1200px]`) so the wordmark holds position across views.
+
+**Doctrine note.** This *eases* the [D7](#d7) tension with `.impeccable.md`
+principle 5 ("curated, not queried") rather than deepening it: the queried Index is
+gone; the homepage stays the curated front door, with Chapters as the one immersive
+lens.

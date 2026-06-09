@@ -301,6 +301,15 @@ by a `/fb:how` validation pass and should be reviewed whenever the plan changes.
   ←/→ cycle + 1–4 jump, first-run tutorial) on `/explore` **and** the homepage masthead.
   **Remaining:** the `.impeccable.md` principle-5 update (brand sign-off, not code).
 
+- [x] **E.3.1 — Explorer simplified after UAT (2026-06-09)** · ✅ done — UAT feedback
+  pared the four-view explorer back to **Chapters only**. Removed the Index +
+  Constellation views, the `ViewSwitcher`, and the `/explore` route; `ChaptersView`
+  now lives at a top-level **`/chapters`** route in the sidebar nav (Collection ·
+  Artists · Chapters · About). Kept the Index's per-collection **piece count** and
+  ported it onto the Salon + collection pages; the piece back-link resolves to the
+  collection, chapters, or artist page as appropriate; chapter width aligned to the
+  Salon (`max-w-[1200px]`). See `DECISIONS.md → D10`.
+
 ---
 
 ## Gaps, risks & dependencies (`/fb:how` validation pass)

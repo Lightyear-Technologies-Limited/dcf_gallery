@@ -128,7 +128,8 @@ project 13) so raw serials and full token IDs both resolve. See
 ### Routing — `src/app/`
 
 `page.tsx` (home: all artists/collections), `/artists`, `/artist/[slug]`,
-`/collection/[slug]`, `/piece/[slug]`, `/about`. All static. Trait filtering uses
+`/collection/[slug]`, `/piece/[slug]`, `/chapters` (the five curatorial chapters),
+`/about`. All static. Trait filtering uses
 the URL convention `?trait=Key&value=Value`, preserved across Back / Prev / Next
 navigation so filtered browsing survives page transitions.
 

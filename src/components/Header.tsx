@@ -8,8 +8,8 @@ import MotionToggle from "./MotionToggle";
 
 const NAV = [
   { label: "Collection", href: "/" },
-  { label: "Explore", href: "/explore" },
   { label: "Artists", href: "/artists" },
+  { label: "Chapters", href: "/chapters" },
   { label: "About", href: "/about" },
 ];
 

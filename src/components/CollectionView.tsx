@@ -10,7 +10,6 @@ import SinglePieceDisplay from "./SinglePieceDisplay";
 import { getArtworkImage } from "@/lib/images";
 import { getHeroLayout } from "@/lib/curation";
 import { CHAPTERS, CHAPTER_COLORS } from "@/lib/chapters";
-import ViewSwitcher from "./explore/ViewSwitcher";
 
 interface PieceData {
   id: string;
@@ -159,11 +158,10 @@ export default function CollectionView({ sections, artists }: Props) {
           the h1 anchors at the same vertical as the masthead wordmark
           across the gutter; eye reads "Hivemind" on the rail and
           "Hivemind Digital Culture Fund" on the page at the same line. */}
-      <div className="pt-6 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3">
+      <div className="pt-6">
         <h1 className="font-serif display-sm">
           Hivemind Digital Culture Fund
         </h1>
-        <ViewSwitcher active="salon" explicit suppressTip />
       </div>
       {/* Filters - ARTIST row, then CHAPTER row. Removing a filter is done
           by clicking its active label; no "All" / "Clear" button needed
@@ -285,13 +283,20 @@ export default function CollectionView({ sections, artists }: Props) {
                   <div key={`${artist.slug}-${col.slug}`}>
                     {/* Single-piece collections link the title directly to
                         the piece - the collection page would be redundant
-                        chrome for what is effectively one artwork. */}
-                    <Link
-                      href={n === 1 && piece ? `/piece/${piece.slug}` : `/collection/${col.slug}`}
-                      className="font-serif text-[22px] sm:text-[28px] text-foreground-secondary hover:opacity-60 transition-opacity duration-200 block mb-2"
-                    >
-                      {col.name}
-                    </Link>
+                        chrome for what is effectively one artwork. The muted
+                        piece count (the kept Index affordance) sits inline to
+                        the right; suppressed for singletons where "1" is noise. */}
+                    <div className="flex items-baseline gap-2.5 mb-2">
+                      <Link
+                        href={n === 1 && piece ? `/piece/${piece.slug}` : `/collection/${col.slug}`}
+                        className="font-serif text-[22px] sm:text-[28px] text-foreground-secondary hover:opacity-60 transition-opacity duration-200"
+                      >
+                        {col.name}
+                      </Link>
+                      {n > 1 && (
+                        <span className="text-[11px] text-muted font-mono tabular-nums">{n}</span>
+                      )}
+                    </div>
                     {(() => {
                       const heroLayout = getHeroLayout(col.slug);
                       if (n === 1 && piece) return <SinglePieceDisplayLazy piece={piece} hrefSearch={salonHrefSearch} />;
