@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useState, type KeyboardEvent as ReactKeyboardEvent } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 /**
  * Explore view switcher (E.3). Toggles between Salon (the homepage), Index,
@@ -66,25 +66,30 @@ export default function ViewSwitcher({
     [router],
   );
 
-  // Keyboard shortcuts are scoped to the switcher — active only while it holds
-  // focus (WCAG 2.1.4) — so the single-character keys never hijack typing or the
-  // Chapters filmstrip's arrow-scroll elsewhere on the page. ←/→ cycle the
-  // explorer views (Salon excluded — it leaves the explorer); 1–9 jump directly.
-  const onNavKey = (e: ReactKeyboardEvent<HTMLElement>) => {
-    if (e.metaKey || e.ctrlKey || e.altKey) return;
-    const cycle = views.filter((v) => v.id !== "salon").map((v) => v.id);
-    const idx = cycle.indexOf(active);
-    if (e.key === "ArrowRight" && idx !== -1) {
+  // ←/→ cycle the explorer views (Salon excluded — it leaves the explorer).
+  // Arrow keys are navigation keys, exempt from WCAG 2.1.4, so this can be global
+  // without a single-character-shortcut concern. Still guarded twice: never while
+  // focus is in a text field/select (so typing in the Index search isn't
+  // hijacked), and deferring to a focused scroll region (role="group" — the
+  // Chapters filmstrip) so its native arrow-scroll survives.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      const t = e.target as HTMLElement | null;
+      if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT" || t.isContentEditable)) return;
+      const ae = document.activeElement;
+      if (ae instanceof HTMLElement && ae.getAttribute("role") === "group") return;
+      const cycle = VIEWS.filter((v) => isDesktop || !v.desktopOnly).filter((v) => v.id !== "salon").map((v) => v.id);
+      const idx = cycle.indexOf(active);
+      if (idx === -1) return;
       e.preventDefault();
-      go(cycle[(idx + 1) % cycle.length]);
-    } else if (e.key === "ArrowLeft" && idx !== -1) {
-      e.preventDefault();
-      go(cycle[(idx - 1 + cycle.length) % cycle.length]);
-    } else if (/^[1-9]$/.test(e.key)) {
-      const v = views[parseInt(e.key, 10) - 1];
-      if (v) { e.preventDefault(); go(v.id); }
-    }
-  };
+      const dir = e.key === "ArrowRight" ? 1 : -1;
+      go(cycle[(idx + dir + cycle.length) % cycle.length]);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isDesktop, active, go]);
 
   // One-time tutorial on first visit (suppressed on the homepage — it belongs on
   // the explorer, where the views actually live).
@@ -99,7 +104,7 @@ export default function ViewSwitcher({
 
   return (
     <div className="relative">
-      <nav onKeyDown={onNavKey} className="flex flex-wrap gap-x-5 gap-y-2 text-[12px] tracking-[0.12em] uppercase" aria-label="Explore views">
+      <nav className="flex flex-wrap gap-x-5 gap-y-2 text-[12px] tracking-[0.12em] uppercase" aria-label="Explore views">
         {views.map((v) =>
           active === v.id ? (
             <span key={v.id} className="text-foreground font-medium underline underline-offset-[6px] decoration-1" aria-current="page">{v.label}</span>
@@ -125,8 +130,7 @@ export default function ViewSwitcher({
             <strong className="font-medium text-foreground">Constellation</strong> maps the whole collection as a star-field.
           </p>
           <p className="hidden lg:block text-[12px] text-muted mb-4">
-            With the switcher focused, use <kbd className="font-mono">←</kbd>/<kbd className="font-mono">→</kbd> to move between views, or{" "}
-            <kbd className="font-mono">1</kbd>–<kbd className="font-mono">4</kbd> to jump.
+            Press <kbd className="font-mono">←</kbd>/<kbd className="font-mono">→</kbd> to move between views.
           </p>
           <button
             onClick={dismissTip}
