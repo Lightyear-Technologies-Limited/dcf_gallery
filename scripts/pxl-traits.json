@@ -1,0 +1,62 @@
+{
+  "pxl-dex-105-ecfb": {
+    "Pixels": "500000",
+    "Allowance": "500000"
+  },
+  "pxl-dex-107-ecfb": {
+    "Pixels": "450000",
+    "Allowance": "0"
+  },
+  "pxl-dex-130-ecfb": {
+    "Pixels": "500000",
+    "Allowance": "500000"
+  },
+  "pxl-dex-139-ecfb": {
+    "Pixels": "500000",
+    "Allowance": "500000"
+  },
+  "pxl-dex-141-ecfb": {
+    "Pixels": "1000000",
+    "Allowance": "0"
+  },
+  "pxl-pod-42-88b3": {
+    "Pixels": "1000000",
+    "Pods": "1"
+  },
+  "pxl-pod-55-88b3": {
+    "Pixels": "1000000",
+    "Pods": "1"
+  },
+  "pxl-pod-61-88b3": {
+    "Pixels": "1000000",
+    "Pods": "1"
+  },
+  "pxl-pod-108-88b3": {
+    "Pixels": "1000000",
+    "Pods": "1"
+  },
+  "pxl-pod-122-88b3": {
+    "Pixels": "1000000",
+    "Pods": "1"
+  },
+  "pxl-pod-175-88b3": {
+    "Pixels": "1000000",
+    "Pods": "1"
+  },
+  "pxl-pod-209-88b3": {
+    "Pixels": "1000000",
+    "Pods": "1"
+  },
+  "pxl-pod-215-88b3": {
+    "Pixels": "1000000",
+    "Pods": "1"
+  },
+  "pxl-pod-241-88b3": {
+    "Pixels": "1000000",
+    "Pods": "2"
+  },
+  "pxl-pod-242-88b3": {
+    "Pixels": "1000000",
+    "Pods": "2"
+  }
+}

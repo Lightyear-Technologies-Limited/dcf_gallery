@@ -2,6 +2,13 @@
 // Consolidate per-collection trait JSONs into src/lib/traits.data.json.
 // Normalizes keys (Title Case, short names) so the display component can
 // iterate a simple slug → {trait: value} map.
+//
+// MERGES into the existing file (does not overwrite from scratch).
+// traits.data.json carries entries this consolidator does NOT (re)produce —
+// CryptoPunks attributes, lightyears, lights, x0x, skulls, a few 1/1s — and
+// richer per-piece keys than some blocks below emit (e.g. Ringers' Peg style /
+// Extra color / Peg scaling). A from-scratch overwrite silently dropped all of
+// that, so we shallow-merge per slug: refresh the keys we own, leave the rest.
 import { readFileSync, writeFileSync } from "fs";
 import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
@@ -162,21 +169,43 @@ try {
   }
 } catch (e) { console.warn("Skipping qql:", e.message); }
 
-// PXL DEX: Pixels + Allowance counters fetched ad-hoc (no per-collection json yet)
-const PXL_DEX_TRAITS = {
-  "pxl-dex-105-ecfb": { Pixels: 500000, Allowance: 500000 },
-  "pxl-dex-107-ecfb": { Pixels: 450000, Allowance: 0 },
-  "pxl-dex-130-ecfb": { Pixels: 500000, Allowance: 500000 },
-  "pxl-dex-139-ecfb": { Pixels: 500000, Allowance: 500000 },
-  "pxl-dex-141-ecfb": { Pixels: 0, Allowance: 0 },
-};
-for (const [slug, traits] of Object.entries(PXL_DEX_TRAITS)) {
-  out[slug] = traits;
-}
+// PXL DEX + PXL POD: Pixels / Allowance / Pods counters read on-chain per token
+// from each token's tokenURI (scripts/fetch-pxl-traits.mjs → pxl-traits.json).
+// These are LIVE values that drift as pixels are deposited into / withdrawn from
+// a deck, so they are fetched, never hand-entered. (Both collections are emitted
+// here — POD used to be omitted, which silently dropped it on any full regen.)
+try {
+  const pxl = JSON.parse(readFileSync(resolve(__dirname, "pxl-traits.json"), "utf-8"));
+  for (const [slug, traits] of Object.entries(pxl)) {
+    if (traits && Object.keys(traits).length) out[slug] = traits;
+  }
+} catch (e) { console.warn("Skipping pxl (run fetch-pxl-traits.mjs first):", e.message); }
+
+// Curated / externally-sourced entries that have no live fetcher — CryptoPunks
+// attributes, lightyears, lights-3, x0x, a handful of 1/1s — PLUS per-piece keys
+// some blocks above don't emit (Ringers' Peg style / Extra color / Peg scaling).
+// Held in scripts/manual-traits.json and overlaid LAST so it LAYERS onto (does
+// not replace) whatever a collection block produced for the same slug. This is
+// what lets a from-scratch regen reproduce traits.data.json exactly.
+try {
+  const manual = JSON.parse(readFileSync(resolve(__dirname, "manual-traits.json"), "utf-8"));
+  for (const [slug, traits] of Object.entries(manual)) {
+    out[slug] = { ...out[slug], ...traits };
+  }
+} catch (e) { console.warn("Skipping manual-traits:", e.message); }
 
 function titleCase(str) {
   return String(str).toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
-writeFileSync(OUT, JSON.stringify(out, null, 2) + "\n");
-console.log(`Wrote ${Object.keys(out).length} entries to src/lib/traits.data.json`);
+// Shallow-merge over whatever is already on disk. With the manual overlay above
+// the script now reproduces the whole file, so this is a safety net (preserves
+// any not-yet-captured hand edit) rather than load-bearing.
+let existing = {};
+try { existing = JSON.parse(readFileSync(OUT, "utf-8")); } catch (e) { console.warn("No existing traits.data.json:", e.message); }
+const merged = { ...existing };
+for (const [slug, t] of Object.entries(out)) {
+  merged[slug] = { ...merged[slug], ...t };
+}
+writeFileSync(OUT, JSON.stringify(merged, null, 2) + "\n");
+console.log(`Wrote ${Object.keys(merged).length} entries (${Object.keys(out).length} refreshed) to src/lib/traits.data.json`);

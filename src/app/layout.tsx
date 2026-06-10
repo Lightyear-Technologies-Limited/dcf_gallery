@@ -84,6 +84,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <div className="flex flex-wrap gap-8 text-[13px] text-muted">
               <Link href="/" className="hover:text-foreground transition-colors duration-200">Collection</Link>
               <Link href="/artists" className="hover:text-foreground transition-colors duration-200">Artists</Link>
+              <Link href="/chapters" className="hover:text-foreground transition-colors duration-200">Chapters</Link>
               <Link href="/about" className="hover:text-foreground transition-colors duration-200">About</Link>
               <a
                 href="mailto:dcf@hivemind.capital?subject=Hivemind%20Inquiry"

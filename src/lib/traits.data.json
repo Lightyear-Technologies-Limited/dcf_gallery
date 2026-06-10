@@ -1668,24 +1668,24 @@
     "Background": "Fidenza Newsprint"
   },
   "pxl-dex-105-ecfb": {
-    "Pixels": 500000,
-    "Allowance": 500000
+    "Pixels": "500000",
+    "Allowance": "500000"
   },
   "pxl-dex-107-ecfb": {
-    "Pixels": 450000,
-    "Allowance": 0
+    "Pixels": "450000",
+    "Allowance": "0"
   },
   "pxl-dex-130-ecfb": {
-    "Pixels": 500000,
-    "Allowance": 500000
+    "Pixels": "500000",
+    "Allowance": "500000"
   },
   "pxl-dex-139-ecfb": {
-    "Pixels": 500000,
-    "Allowance": 500000
+    "Pixels": "500000",
+    "Allowance": "500000"
   },
   "pxl-dex-141-ecfb": {
-    "Pixels": 0,
-    "Allowance": 0
+    "Pixels": "1000000",
+    "Allowance": "0"
   },
   "ack-editions-8-7102": {
     "Funders Token": "StarryNight Capital",

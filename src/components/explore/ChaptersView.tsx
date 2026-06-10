@@ -12,6 +12,7 @@ interface Work {
   title: string;
   collectionSlug: string;
   artistName: string;
+  artistSlug?: string;
   contractAddress?: string;
   tokenId?: string;
 }
@@ -20,7 +21,7 @@ interface ChapterData {
   name: string;
   description: string;
   total: number;
-  artistNames: string[];
+  artists: { slug: string; name: string }[];
   works: Work[];
 }
 
@@ -107,7 +108,19 @@ export default function ChaptersView({ chapters }: { chapters: ChapterData[] }) 
                 {c.description}
               </p>
               <p className="text-[12px] text-muted mb-9 tabular-nums">
-                {c.artistNames.join(" · ")} — {c.total} {c.total === 1 ? "work" : "works"}
+                {c.artists.map((a, j) => (
+                  <span key={a.slug}>
+                    {j > 0 && " · "}
+                    <Link
+                      href={`/artist/${a.slug}`}
+                      className="hover:text-foreground transition-colors duration-200"
+                    >
+                      {a.name}
+                    </Link>
+                  </span>
+                ))}
+                {" - "}
+                {c.total} {c.total === 1 ? "work" : "works"}
               </p>
 
               {/* Filmstrip — uniform height, aspect-true widths. Focusable,
