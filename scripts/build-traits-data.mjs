@@ -181,12 +181,26 @@ try {
   }
 } catch (e) { console.warn("Skipping pxl (run fetch-pxl-traits.mjs first):", e.message); }
 
+// Curated / externally-sourced entries that have no live fetcher — CryptoPunks
+// attributes, lightyears, lights-3, x0x, a handful of 1/1s — PLUS per-piece keys
+// some blocks above don't emit (Ringers' Peg style / Extra color / Peg scaling).
+// Held in scripts/manual-traits.json and overlaid LAST so it LAYERS onto (does
+// not replace) whatever a collection block produced for the same slug. This is
+// what lets a from-scratch regen reproduce traits.data.json exactly.
+try {
+  const manual = JSON.parse(readFileSync(resolve(__dirname, "manual-traits.json"), "utf-8"));
+  for (const [slug, traits] of Object.entries(manual)) {
+    out[slug] = { ...out[slug], ...traits };
+  }
+} catch (e) { console.warn("Skipping manual-traits:", e.message); }
+
 function titleCase(str) {
   return String(str).toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
-// Shallow-merge the freshly-computed traits over whatever is already on disk,
-// preserving entries (and extra keys) this script doesn't generate.
+// Shallow-merge over whatever is already on disk. With the manual overlay above
+// the script now reproduces the whole file, so this is a safety net (preserves
+// any not-yet-captured hand edit) rather than load-bearing.
 let existing = {};
 try { existing = JSON.parse(readFileSync(OUT, "utf-8")); } catch (e) { console.warn("No existing traits.data.json:", e.message); }
 const merged = { ...existing };
