@@ -125,12 +125,16 @@ export default function ChaptersView({ chapters }: { chapters: ChapterData[] }) 
 
               {/* Filmstrip — uniform height, aspect-true widths. Focusable,
                   labelled scroll region so it's keyboard-operable (arrow-scroll)
-                  even though the scrollbar is hidden (WCAG 2.1.1 / discoverability). */}
+                  even though the scrollbar is hidden (WCAG 2.1.1 / discoverability).
+                  Scrolls WITHIN the container padding (no full-bleed) so it keeps
+                  the same side white-gap as the Salon grid — consistent inset
+                  whatever the screen width. A trailing pad-right lets the last
+                  tile clear the chapter rail and hints there's more to scroll. */}
               <div
                 role="group"
                 aria-label={`${c.name} — works (scroll horizontally)`}
                 tabIndex={0}
-                className="-mx-6 sm:-mx-8 lg:-mx-12 px-6 sm:px-8 lg:px-12 overflow-x-auto scrollbar-hide"
+                className="overflow-x-auto scrollbar-hide pr-6 lg:pr-10"
               >
                 <div className="flex gap-3 pb-1">
                   {c.works.map((w) => {

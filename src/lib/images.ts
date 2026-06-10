@@ -22,8 +22,9 @@ const CURATED_DETAIL: Record<string, string> = {
   "masksofluci-442": "/art/optimized/curated-masks-442.webp",
   "x-ray-machine-1": "/art/optimized/operator-x-ray-machine.webp",
   // Kim Asendorf — lossless WebP detail (pixel-perfect for hard-edged pixel art,
-  // and smaller than the source PNG). lights/x0x keep their existing PNG.
-  "lights-3-2006": "/art/lights-3-2006.png",
+  // and smaller than the source PNG). x0x keeps its existing PNG; lights-3-2006
+  // (Raster und Spektrum) uses the artist-gallery 2400×1561 render as its still.
+  "lights-3-2006": "/art/lights-3-2006-detail.webp",
   "pxl-dex-105-ecfb": "/art/optimized/curated-pxl-dex-105.webp",
   "pxl-dex-107-ecfb": "/art/optimized/curated-pxl-dex-107.webp",
   "pxl-dex-130-ecfb": "/art/optimized/curated-pxl-dex-130.webp",
@@ -58,8 +59,9 @@ const CURATED_THUMB: Record<string, string> = {
   "lightyears-1": "/art/thumbs/curated-lightyears-001.webp",
   "masksofluci-442": "/art/thumbs/curated-masks-442.webp",
   "x-ray-machine-1": "/art/thumbs/operator-x-ray-machine.webp",
-  // Kim Asendorf — WebP thumbs (≤400px, lossy q80). lights/x0x keep their PNG.
-  "lights-3-2006": "/art/lights-3-2006.png",
+  // Kim Asendorf — WebP thumbs (≤400px, lossy q80). x0x keeps its PNG;
+  // lights-3-2006 (Raster und Spektrum) uses the artist-gallery render.
+  "lights-3-2006": "/art/lights-3-2006-thumb.webp",
   "pxl-dex-105-ecfb": "/art/thumbs/curated-pxl-dex-105.webp",
   "pxl-dex-107-ecfb": "/art/thumbs/curated-pxl-dex-107.webp",
   "pxl-dex-130-ecfb": "/art/thumbs/curated-pxl-dex-130.webp",

@@ -242,6 +242,12 @@ export default async function PiecePage({
     interactiveMotion?.type === "interactive"
       ? { src: interactiveMotion.src }
       : undefined;
+  // Animated GIF 1/1s (XCOPY): the motion *is* the work, so the piece page
+  // auto-animates the GIF by default (still as placeholder; reduced-motion /
+  // Reels-off restores the still). Distinct from the <video> transcodes above,
+  // which stay opt-in.
+  const animatedGif =
+    interactiveMotion?.type === "gif" ? { src: interactiveMotion.src } : undefined;
   const STORAGE_LABEL: Record<string, string> = {
     ipfs: "IPFS", arweave: "Arweave", onchain: "On-chain", centralized: "Centralized",
   };
@@ -352,6 +358,7 @@ export default async function PiecePage({
           lqip={getArtworkBlur(piece.slug)}
           video={animatedVideo}
           interactive={interactive}
+          animatedGif={animatedGif}
           aspect={getArtworkAspect(piece.slug, piece.contractAddress, piece.tokenId)}
           title={piece.title}
           isPunk={isPunk}

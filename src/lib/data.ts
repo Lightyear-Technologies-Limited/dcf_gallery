@@ -4648,7 +4648,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc9041f80dce73721a5f6a779672ec57ef255d27c',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc9041f80dce73721a5f6a779672ec57ef255d27c/12',
-    originalUri: 'https://i2c.seadn.io/ethereum/0xc9041f80dce73721a5f6a779672ec57ef255d27c/c2cf734c0d383dd7cd9dccbb99036f/59c2cf734c0d383dd7cd9dccbb99036f.jpeg',
+    originalUri: 'https://arweave.net/mnnvYqIxCkPj7Hx5B_YBaOAkVwspaNnb4D3b39RIc1g',
   },
   {
     id: 'skulls-of-luci-20-d27c',
@@ -4664,7 +4664,7 @@ export const pieces: Piece[] = [
     contractAddress: '0xc9041f80dce73721a5f6a779672ec57ef255d27c',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xc9041f80dce73721a5f6a779672ec57ef255d27c/20',
-    originalUri: 'https://i2c.seadn.io/ethereum/0xc9041f80dce73721a5f6a779672ec57ef255d27c/b07fc6b252579cddddd475200af4cb/49b07fc6b252579cddddd475200af4cb.jpeg',
+    originalUri: 'https://arweave.net/lyjTnF_faOuiMUNUSvCeiZ9fhaI4kuOh8elK0icZBtE',
   },
   {
     id: 'tyler-hobbs-1-9345',

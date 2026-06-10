@@ -6872,64 +6872,62 @@
     "verified": true
   },
   "skulls-of-luci-12-d27c": {
-    "storage": "centralized",
-    "source": "https://i2c.seadn.io/ethereum/0xc9041f80dce73721a5f6a779672ec57ef255d27c/c2cf734c0d383dd7cd9dccbb99036f/59c2cf734c0d383dd7cd9dccbb99036f.jpeg",
-    "cid": "QmPBABe9BebtvUXEaDtAwzMUa7aSasUVgDyU3RaxKci4BK",
-    "sha256": "ccdcbb1b63604d537071fc5de8a93fd25bcc50544e661bd9b66eb7fd6cf8a732",
-    "bytes": 7638,
-    "mime": "image/avif",
-    "gateway": "https://lightyear.myfilebase.com/ipfs/QmPBABe9BebtvUXEaDtAwzMUa7aSasUVgDyU3RaxKci4BK",
-    "pinnedAt": "2026-06-05T10:39:25.146Z",
+    "storage": "arweave",
+    "source": "https://arweave.net/mnnvYqIxCkPj7Hx5B_YBaOAkVwspaNnb4D3b39RIc1g",
+    "cid": "Qmctu16ZK7mKxhM85AZg9uUSASEfAkUKXatvvDN7H8a2wx",
+    "sha256": "b5fb49a3918a0e0fbd021100774601bc40a547fec98c61a1174b488d0f552fce",
+    "bytes": 1577793,
+    "mime": "image/jpeg",
+    "gateway": "https://lightyear.myfilebase.com/ipfs/Qmctu16ZK7mKxhM85AZg9uUSASEfAkUKXatvvDN7H8a2wx",
+    "pinnedAt": "2026-06-10T12:10:11.679Z",
+    "display": "transparent-tondo",
     "variants": [
       {
         "w": 768,
-        "cid": "QmSRhUsyJVoXzvntMxQJzx2TytAF7eDCPF68fknxkwND5N",
-        "bytes": 35716
+        "cid": "QmVjas2eiy8r32KbaSbrsxc6gMrth9BMHhGz48U7RgCVDL",
+        "bytes": 159274
       },
       {
         "w": 1280,
-        "cid": "QmSRhUsyJVoXzvntMxQJzx2TytAF7eDCPF68fknxkwND5N",
-        "bytes": 35716
+        "cid": "QmW3EUeaktTPjYx12smhRhFg9ynsuXwaSTwPBhMj8sUD6V",
+        "bytes": 461416
       },
       {
         "w": 1920,
-        "cid": "QmSRhUsyJVoXzvntMxQJzx2TytAF7eDCPF68fknxkwND5N",
-        "bytes": 35716
+        "cid": "QmPHsTwQEJYjSPbGNs3LC4bWgtpha7btLUH1tpjFU6ix4s",
+        "bytes": 1029110
       }
     ],
-    "lqip": "data:image/webp;base64,UklGRqAAAABXRUJQVlA4IJQAAADwBACdASoYABgALrV2u12jqampiYC0SzAFYAI/uzRrW6+ZdsWsFFTZFP745XCjWOAA/vc+nYvwznT7jEVlcjXuyUjlh55hmRPRJ6NejJk1yha4UnrzDrZJ8iXVHlTzGH/PTbW7hl7UYwzKa3H56hkFw13+4MarWJeQPEIMO1wzUxSI6Y5Wv3+BOh3FDZtMXiiPgAAA",
-    "verifiedAt": "2026-06-05T13:13:14.277Z",
-    "verified": true
+    "lqip": "data:image/webp;base64,UklGRnoBAABXRUJQVlA4WAoAAAAQAAAAFwAAFwAAQUxQSMEAAAABBre1ti1NXEpWoLdZ2IABoGUHGIA56KCXEUIZt8pd0MiXDd4vIhS4baNkeIyvAFBvCqruxosTFjHrqtCs11BZT9ScIFmfHox1Ejia2KtX1pcMb3hOkQFIwUPPkPr1MpescPNMPwFvQkvq1VuiGR4/so/kGJoiC5q3ec++JNh4Gqv28PnDgJSHtqr7558GpOzr7uBF4cVutEopgKPZKSPJiY8PGnykQy/Qu9Anot8n/f7p70V/X/p/IP+fP/4b+X8CAFZQOCCSAAAAUAUAnQEqGAAYAD7lYqNNqSWjIjAMASAciWYAnTLHX6AL/7aJ0Q+yeM4mQmD3ZAb1U++AAP7yvM9zD+GnmtsJDhvKGgnm9OTaBB3VEV9Yy0v63n6+LhmGqjKnMJ7Ba6m37cuMHr9hLuhcWDuvskFSdm8E/1+wyLIkYE5k8RIhejuKOfs4kzzECgdKB8gvCf3vYAA="
   },
   "skulls-of-luci-20-d27c": {
-    "storage": "centralized",
-    "source": "https://i2c.seadn.io/ethereum/0xc9041f80dce73721a5f6a779672ec57ef255d27c/b07fc6b252579cddddd475200af4cb/49b07fc6b252579cddddd475200af4cb.jpeg",
-    "cid": "QmNPQpqGsW7ps9niQHBNcefNbCz7Qo4aU2gJAdke7WJHMm",
-    "sha256": "f9d1467484ab21e1c71535d7d236860a90295b632c726a87972c659dba71c0c5",
-    "bytes": 10371,
-    "mime": "image/avif",
-    "gateway": "https://lightyear.myfilebase.com/ipfs/QmNPQpqGsW7ps9niQHBNcefNbCz7Qo4aU2gJAdke7WJHMm",
-    "pinnedAt": "2026-06-05T10:39:27.463Z",
+    "storage": "arweave",
+    "source": "https://arweave.net/lyjTnF_faOuiMUNUSvCeiZ9fhaI4kuOh8elK0icZBtE",
+    "cid": "QmZnCwEzPzovPHtis44xhhfoEWC4qhcRBSHAudwj8jNg3s",
+    "sha256": "eedb234e0a82449270788e76684e8da1f8a22a1e33011d0d5d6cd8fbda2766a5",
+    "bytes": 1675121,
+    "mime": "image/jpeg",
+    "gateway": "https://lightyear.myfilebase.com/ipfs/QmZnCwEzPzovPHtis44xhhfoEWC4qhcRBSHAudwj8jNg3s",
+    "pinnedAt": "2026-06-10T12:10:23.056Z",
+    "display": "transparent-tondo",
     "variants": [
       {
         "w": 768,
-        "cid": "QmazCA1AAndjv8L14vc3LTmosWDwdtSpTkTJ1jUqpAcuYR",
-        "bytes": 40142
+        "cid": "QmNcRWcLuzZichoRLY8SkpSKSEFa1C6N3GT49j3mSYspJE",
+        "bytes": 181148
       },
       {
         "w": 1280,
-        "cid": "QmazCA1AAndjv8L14vc3LTmosWDwdtSpTkTJ1jUqpAcuYR",
-        "bytes": 40142
+        "cid": "QmRJzn76mhnbotZiUUb5kvcY9rtZ2Zz6ThGHdEwuBvyeQr",
+        "bytes": 518558
       },
       {
         "w": 1920,
-        "cid": "QmazCA1AAndjv8L14vc3LTmosWDwdtSpTkTJ1jUqpAcuYR",
-        "bytes": 40142
+        "cid": "QmUrR2AB96kZJdASau2CzXVGfJg8kNdPbBgyxPwSqofXQY",
+        "bytes": 1150842
       }
     ],
-    "lqip": "data:image/webp;base64,UklGRpoAAABXRUJQVlA4II4AAABwBQCdASoYABgAPu1gqk4ppSQiMBgMATAdiUAXYAG7LpYCtWG/FxQHD8+XblJIpQD12lAAAP7x35dDBJmuuQYJFx3K9Hmz3HDCX55SPV+4ocaNu225LzNI3TEtAYL6bVGo33bDJwUqmZHo6P4Jki3HtWl+JMESbE/pMxIZnWaUpuhsA9vfuJFtNwQaOoAA",
-    "verifiedAt": "2026-06-05T13:13:14.506Z",
-    "verified": true
+    "lqip": "data:image/webp;base64,UklGRpYBAABXRUJQVlA4WAoAAAAQAAAAFwAAFwAAQUxQSMEAAAABBre1ti1NXEpWoLdZ2IABoGUHGIA56KCXEUIZt8pd0MiXDd4vIhS4baNkeIyvAFBvCqruxosTFjHrqtCs11BZT9ScIFmfHox1Ejia2KtX1pcMb3hOkQFIwUPPkPr1MpescPNMPwFvQkvq1VuiGR4/so/kGJoiC5q3ec++JNh4Gqv28PnDgJSHtqr7558GpOzr7uBF4cVutEopgKPZKSPJiY8PGnykQy/Qu9Anot8n/f7p70V/X/p/IP+fP/4b+X8CAFZQOCCuAAAAMAUAnQEqGAAYAD7tYKxNqaWkojAYDAEwHYlAF2Zl+Cs3nbJTGatg9O3ZK6eWh5Ff9IAA/rawGT7cxU3+a5a+NiUyFeU2WCHJ8YhUWJGPDeTpyoOoXr4pfIPb5f/isSJJCGPMZo1JUIWvv39OiiYj/QEa20kl2kPfprc7nNF7qSU/Rc/LscGWlS2blmA+XGzAoqB2LigpnG3SzEP3zS4mNzqeowrdgpMJibohlYAA"
   },
   "tyler-hobbs-1-9345": {
     "storage": "arweave",

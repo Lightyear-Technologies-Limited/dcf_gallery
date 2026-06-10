@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import ShareButton from "./ShareButton";
 import PieceVideo from "./PieceVideo";
+import PieceGif from "./PieceGif";
 import InteractiveArtwork from "./InteractiveArtwork";
 
 interface Props {
@@ -23,6 +24,10 @@ interface Props {
   /** When the piece is an interactive on-chain HTML work, its data: URI — shown
       poster-by-default and run on demand inside a sandboxed iframe. (E.1) */
   interactive?: { src: string };
+  /** When the artwork is an animated GIF 1/1 (XCOPY) — auto-animates on the piece
+      page (its motion is the work), falling back to the still under reduced-motion
+      or Reels-off. (E.1) */
+  animatedGif?: { src: string };
   /** Natural pixel dimensions of the artwork file, when known. Used to size
       the Image box at the true intrinsic aspect (else next/image defaults to
       the 4:3 of the placeholder width/height props and tall pieces letterbox). */
@@ -121,7 +126,7 @@ function resolveOriginal(uri: string): { href: string; label: string } | null {
 /**
  * Piece layout: image on the left, details on the right.
  */
-export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, video, interactive, aspect, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, holdingNote, description, collectionDescription, physical, companion, metadata, rasterUrl, cryptopunksUrl, artistSiteUrl, originalUri, placeholder }: Props) {
+export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, video, interactive, animatedGif, aspect, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, holdingNote, description, collectionDescription, physical, companion, metadata, rasterUrl, cryptopunksUrl, artistSiteUrl, originalUri, placeholder }: Props) {
   const artistHost = artistSiteUrl ? hostLabel(artistSiteUrl) : null;
   const original = originalUri ? resolveOriginal(originalUri) : null;
   // When natural aspect is known, pass it as width/height props so next/image
@@ -134,6 +139,8 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
     <PieceVideo src={video.src} poster={video.poster} title={title} original={video.original} />
   ) : interactive ? (
     <InteractiveArtwork src={interactive.src} poster={image} title={title} />
+  ) : animatedGif ? (
+    <PieceGif src={animatedGif.src} poster={detailSrc ?? image ?? undefined} lqip={lqip} title={title} />
   ) : image ? (
     isPunk ? (
       // Punks render the on-chain SVG at full container dimensions on the
