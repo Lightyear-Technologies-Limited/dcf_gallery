@@ -55,6 +55,7 @@ export default function ChaptersPage() {
         slug: p.slug,
         title: p.title,
         artistName,
+        artistSlug: artist.slug,
         collectionSlug: col.slug,
         chapterSlug: chapter?.slug ?? null,
         contractAddress: p.contractAddress,
@@ -67,12 +68,18 @@ export default function ChaptersPage() {
   // selection; the per-chapter "View all" link reaches the full set on the Salon.
   const chapterData = CHAPTERS.map((c) => {
     const works = items.filter((i) => i.chapterSlug === c.slug);
+    // Unique artists for the chapter, keyed by slug so each name can link to
+    // its artist page (and a maker appearing in two collections lists once).
+    const artistMap = new Map<string, string>();
+    for (const w of works) {
+      if (!artistMap.has(w.artistSlug)) artistMap.set(w.artistSlug, w.artistName);
+    }
     return {
       slug: c.slug,
       name: c.name,
       description: c.description,
       total: works.length,
-      artistNames: [...new Set(works.map((w) => w.artistName))],
+      artists: [...artistMap].map(([slug, name]) => ({ slug, name })),
       works: works.slice(0, 14),
     };
   }).filter((c) => c.total > 0);

@@ -287,7 +287,8 @@ export default function CollectionView({ sections, artists }: Props) {
                         the piece - the collection page would be redundant
                         chrome for what is effectively one artwork. The muted
                         piece count (the kept Index affordance) sits inline to
-                        the right; suppressed for singletons where "1" is noise. */}
+                        the right; shown for every collection, single-piece
+                        holdings included (a "1" reads as conviction depth). */}
                     <div className="flex items-baseline gap-2.5 mb-2">
                       <Link
                         href={n === 1 && piece ? `/piece/${piece.slug}` : `/collection/${col.slug}`}
@@ -295,9 +296,7 @@ export default function CollectionView({ sections, artists }: Props) {
                       >
                         {col.name}
                       </Link>
-                      {n > 1 && (
-                        <span className="text-[11px] text-muted font-mono tabular-nums">{n}</span>
-                      )}
+                      <span className="text-[11px] text-muted font-mono tabular-nums">{n}</span>
                     </div>
                     {(() => {
                       const heroLayout = getHeroLayout(col.slug);

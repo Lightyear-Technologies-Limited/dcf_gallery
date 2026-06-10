@@ -23,13 +23,22 @@ const sorted = [...artists]
 
 export default function ArtistsPage() {
   return (
-    <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 pt-16 pb-24">
-      {/* Page-level H1 so the index has a document title and parity with
-          About + collection/piece detail pages. */}
-      <div className="max-w-[680px] mb-8">
-        <h1 className="font-serif display">Artists</h1>
-        <p className="text-[13px] text-muted mt-6 tabular-nums">
-          {sorted.length} artists
+    <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 pt-6 pb-24">
+      {/* Masthead — mirrors the Chapters / Salon masthead (same component +
+          display-sm scale) so the "Hivemind Digital Culture Fund" wordmark
+          holds position across the index pages. */}
+      <h1 className="font-serif display-sm">Hivemind Digital Culture Fund</h1>
+      {/* Section title + framing copy, structured to match a Chapters chapter
+          entry: the section title sits at the chapter-title scale, with a
+          framing paragraph below (replacing the old "N artists" count line). */}
+      <div className="mt-16 mb-16 max-w-2xl">
+        <h2 className="font-serif display-lg leading-[0.95] mb-5">Artists</h2>
+        {/* HOLDING COPY — placeholder, to be replaced before launch (issue #13). */}
+        <p className="text-[17px] sm:text-[18px] leading-[1.6] text-foreground-secondary">
+          Hivemind Digital Culture Fund consists of {sorted.length} of the most
+          prominent digital artists working today. Each anchors a chapter of
+          digital art&rsquo;s first decades, and each is held with conviction
+          depth rather than breadth.
         </p>
       </div>
       {sorted.map((artist, idx) => {
@@ -96,9 +105,9 @@ export default function ArtistsPage() {
                       className="w-10 h-10 rounded-full object-cover shrink-0"
                     />
                   )}
-                  <h2 className="font-serif text-[32px] sm:text-[40px] tracking-tight leading-tight group-hover:opacity-60 transition-opacity duration-200">
+                  <h3 className="font-serif text-[32px] sm:text-[40px] tracking-tight leading-tight group-hover:opacity-60 transition-opacity duration-200">
                     {artistName}
-                  </h2>
+                  </h3>
                 </Link>
                 {/* Single eyebrow line - count only. The collection list used
                     to be inlined here as a comma-separated link row, but it

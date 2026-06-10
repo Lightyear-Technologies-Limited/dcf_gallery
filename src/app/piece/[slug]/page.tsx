@@ -258,7 +258,7 @@ export default async function PiecePage({
       />
       {provenance?.cid && (
         <p className="text-[10px] tracking-[0.12em] uppercase text-muted font-medium">
-          Preserved by DCF — pinned to IPFS{provenance.verifiedAt ? " · integrity verified" : ""}
+          Preserved by Hivemind - pinned to IPFS{provenance.verifiedAt ? ", integrity verified" : ""}
         </p>
       )}
       <OnChainDetails

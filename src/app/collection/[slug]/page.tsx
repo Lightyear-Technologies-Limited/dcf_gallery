@@ -526,13 +526,14 @@ export default async function CollectionPage({
       <div className="pt-6 grid grid-cols-1 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-12 md:gap-16">
           <div>
             {/* Title + held piece count (the kept Index affordance — a quick
-                "how many works" read next to the name). Suppressed on filtered
-                views and for singletons where the count carries no information. */}
+                "how many works" read next to the name). Still suppressed on
+                filtered views (the total would misrepresent the visible
+                subset); single-piece collections now show "1" for parity. */}
             <div className="flex items-baseline gap-2.5">
               <h1 className="font-serif display-sm">
                 {collectionName}
               </h1>
-              {!traitFilter && sorted.length > 1 && (
+              {!traitFilter && (
                 <span className="text-[12px] text-muted font-mono tabular-nums">{sorted.length}</span>
               )}
             </div>
