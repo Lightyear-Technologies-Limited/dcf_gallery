@@ -14,10 +14,15 @@ export default function AboutPage() {
     <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 pb-24">
       {/* Hero */}
       <div className="max-w-[680px] pt-16">
-        <h1 className="font-serif display">
+        <h1 className="font-serif display-sm">
           Hivemind Digital Culture Fund
         </h1>
-        <p className="text-[20px] text-foreground-secondary mt-8 leading-[1.6]">
+        {/* "Thesis" subheading at the index-page subject scale (display-lg),
+            mirroring the "Artists" page / chapter-title structure so About reads
+            as Masthead → Thesis → [sections] like the other index pages. The
+            section H2s below stay display-sm, now reading as third-level. */}
+        <h2 className="font-serif display-lg leading-[0.95] mt-6 mb-5">Thesis</h2>
+        <p className="text-[20px] text-foreground-secondary leading-[1.6]">
           A curated portfolio of digital art&rsquo;s emergent canon, acquired
           after the first market cycle - when the artists, collections, and
           individual works that define the medium can be identified with the

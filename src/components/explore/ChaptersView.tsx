@@ -100,10 +100,7 @@ export default function ChaptersView({ chapters }: { chapters: ChapterData[] }) 
             className="min-h-[78vh] flex flex-col justify-center py-16 border-b border-border last:border-b-0"
           >
             <div>
-              <p className="text-[10px] tracking-[0.22em] uppercase text-muted font-medium mb-4">
-                Chapter {roman[i]} of {roman[chapters.length - 1]}
-              </p>
-              <h2 className="font-serif display-lg leading-[0.95] mb-5">{c.name}</h2>
+              <h2 className="font-serif display-lg leading-[0.95] mb-5">{roman[i]}. {c.name}</h2>
               <p className="max-w-2xl text-[17px] sm:text-[18px] leading-[1.6] text-foreground-secondary mb-3">
                 {c.description}
               </p>
@@ -129,12 +126,16 @@ export default function ChaptersView({ chapters }: { chapters: ChapterData[] }) 
                   Scrolls WITHIN the container padding (no full-bleed) so it keeps
                   the same side white-gap as the Salon grid — consistent inset
                   whatever the screen width. A trailing pad-right lets the last
-                  tile clear the chapter rail and hints there's more to scroll. */}
+                  tile clear the chapter rail and hints there's more to scroll.
+                  At lg (1024–1279px) the fixed rail (right-10) sits INSIDE the
+                  centred content edge, so pr-32 reserves enough room that
+                  artwork never reaches the rail zone; at xl+ the rail clears in
+                  the right margin and pr-10 is sufficient (issue #17). */}
               <div
                 role="group"
                 aria-label={`${c.name} — works (scroll horizontally)`}
                 tabIndex={0}
-                className="overflow-x-auto scrollbar-hide pr-6 lg:pr-10"
+                className="overflow-x-auto scrollbar-hide pr-6 lg:pr-32 xl:pr-10"
               >
                 <div className="flex gap-3 pb-1">
                   {c.works.map((w) => {

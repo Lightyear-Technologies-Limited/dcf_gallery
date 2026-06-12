@@ -144,7 +144,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
       {/* Editorial header - name left, bio right */}
       <div className="pt-6 grid grid-cols-1 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-10 md:gap-16">
         <div>
-          <h1 className="font-serif display text-balance">
+          <h1 className="font-serif display-sm text-balance">
             {artistName}
           </h1>
           {/* Portrait + count line. Portrait acts as the artist's identity

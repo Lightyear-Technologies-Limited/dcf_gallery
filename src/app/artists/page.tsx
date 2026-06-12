@@ -31,7 +31,7 @@ export default function ArtistsPage() {
       {/* Section title + framing copy, structured to match a Chapters chapter
           entry: the section title sits at the chapter-title scale, with a
           framing paragraph below (replacing the old "N artists" count line). */}
-      <div className="mt-16 mb-16 max-w-2xl">
+      <div className="mt-6 mb-8 max-w-2xl">
         <h2 className="font-serif display-lg leading-[0.95] mb-5">Artists</h2>
         {/* HOLDING COPY — placeholder, to be replaced before launch (issue #13). */}
         <p className="text-[17px] sm:text-[18px] leading-[1.6] text-foreground-secondary">
@@ -74,7 +74,7 @@ export default function ArtistsPage() {
         return (
           <div
             key={artist.slug}
-            className="border-b border-border py-16 first:pt-8"
+            className="border-b border-border py-16"
           >
             <div className={`grid grid-cols-1 ${heroOnRight ? "md:grid-cols-[45fr_55fr]" : "md:grid-cols-[55fr_45fr]"} gap-8 md:gap-16 items-start`}>
               {/* On odd rows the hero is on the right; markup-order stays
