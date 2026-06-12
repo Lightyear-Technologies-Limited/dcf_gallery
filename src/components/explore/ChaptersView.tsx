@@ -97,7 +97,14 @@ export default function ChaptersView({ chapters }: { chapters: ChapterData[] }) 
           <section
             key={c.slug}
             ref={(el) => { refs.current[i] = el; }}
-            className="min-h-[78vh] flex flex-col justify-center py-16 border-b border-border last:border-b-0"
+            // First chapter is TOP-anchored (justify-start + pt-6) so its title
+            // sits 24px under the masthead — the same masthead→subtitle rhythm as
+            // the Artists ("Artists") and About ("Thesis") pages, so the heading
+            // doesn't jump when moving between index pages. Chapters 2+ keep the
+            // cinematic full-height vertical centering as you scroll the procession.
+            className={`min-h-[78vh] flex flex-col border-b border-border last:border-b-0 ${
+              i === 0 ? "justify-start pt-6 pb-16" : "justify-center py-16"
+            }`}
           >
             <div>
               <h2 className="font-serif display-lg leading-[0.95] mb-5">{roman[i]}. {c.name}</h2>

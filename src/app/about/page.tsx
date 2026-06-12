@@ -12,8 +12,11 @@ export default function AboutPage() {
 
   return (
     <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 pb-24">
-      {/* Hero */}
-      <div className="max-w-[680px] pt-16">
+      {/* Hero — masthead anchored at pt-6 so the "Hivemind Digital Culture Fund"
+          wordmark holds the SAME vertical position as the Salon / Artists /
+          Chapters mastheads (and aligns with the sidebar logo across the gutter).
+          The page-to-page jump came from this block previously starting at pt-16. */}
+      <div className="max-w-[680px] pt-6">
         <h1 className="font-serif display-sm">
           Hivemind Digital Culture Fund
         </h1>
