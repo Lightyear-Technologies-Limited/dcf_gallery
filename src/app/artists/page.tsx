@@ -33,12 +33,10 @@ export default function ArtistsPage() {
           framing paragraph below (replacing the old "N artists" count line). */}
       <div className="mt-6 mb-8 max-w-2xl">
         <h2 className="font-serif display-lg leading-[0.95] mb-5">Artists</h2>
-        {/* HOLDING COPY — placeholder, to be replaced before launch (issue #13). */}
         <p className="text-[17px] sm:text-[18px] leading-[1.6] text-foreground-secondary">
-          Hivemind Digital Culture Fund consists of {sorted.length} of the most
-          prominent digital artists working today. Each anchors a chapter of
-          digital art&rsquo;s first decades, and each is held with conviction
-          depth rather than breadth.
+          The Hivemind Digital Culture Fund collection brings together ten
+          artists whose work spans digital art&rsquo;s defining chapters, from
+          its on-chain origins to the present.
         </p>
       </div>
       {sorted.map((artist, idx) => {
