@@ -27,7 +27,7 @@ export const CHAPTERS: Chapter[] = [
     color: "var(--foreground)",
     artists: ["xcopy", "beeple", "kim-asendorf"],
     description:
-      "Art that is native to the blockchain and deeply tied to crypto culture and the early digital art movement.",
+      "Blockchain-native art with deep ties to crypto culture and the early digital art movement.",
   },
   {
     name: "Digital Canvas",
@@ -35,7 +35,7 @@ export const CHAPTERS: Chapter[] = [
     color: "var(--foreground)",
     artists: ["a-c-k", "operator", "sam-spratt"],
     description:
-      "Digital art that combines image-making with concept, performance, and participation.",
+      "Art that combines digital media with concept, performance, and participation.",
   },
   {
     name: "Digital Identity",
