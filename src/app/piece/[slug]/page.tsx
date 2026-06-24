@@ -263,7 +263,7 @@ export default async function PiecePage({
         label={isPunk ? "Attributes" : "Traits"}
       />
       {provenance?.cid && (
-        <p className="text-[10px] tracking-[0.12em] uppercase text-muted font-medium">
+        <p className="text-[13px] text-muted">
           Preserved by Hivemind - pinned to IPFS{provenance.verifiedAt ? ", integrity verified" : ""}
         </p>
       )}
