@@ -50,12 +50,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const artist = getArtist(piece.artistSlug);
   const collection = getCollection(piece.collectionSlug);
   const artistName = artist ? getArtistDisplayName(artist.slug, artist.name) : undefined;
-  const title = artistName ? `${piece.title} — ${artistName}` : piece.title;
+  const title = artistName ? `${piece.title} - ${artistName}` : piece.title;
   const collName = collection ? getCollectionDisplayName(collection.slug, collection.name) : undefined;
   const description = (
     getPieceDescription(piece.slug) ||
     piece.description ||
-    (collName ? `${piece.title}, from ${collName} — in the Hivemind Digital Culture Fund collection.` : "Held by the Hivemind Digital Culture Fund.")
+    (collName ? `${piece.title}, from ${collName} - in the Hivemind Digital Culture Fund collection.` : "Held by the Hivemind Digital Culture Fund.")
   ).slice(0, 200);
   const og = getOgImage(piece.slug);
   return {
