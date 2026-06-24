@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const name = getCollectionDisplayName(col.slug, col.name);
   const artist = getArtist(col.artistSlug);
   const artistName = artist ? getArtistDisplayName(artist.slug, artist.name) : undefined;
-  const title = artistName ? `${name} — ${artistName}` : name;
+  const title = artistName ? `${name} - ${artistName}` : name;
   const description = (col.description || `${name} in the Hivemind Digital Culture Fund collection.`).slice(0, 200);
   const first = getPiecesByCollection(col.slug)[0];
   const og = first ? getOgImage(first.slug) : undefined;
@@ -662,21 +662,13 @@ export default async function CollectionPage({
               unfiltered AND filtered views so the page structure stays
               consistent when a reader applies a filter (only chrome
               should be added by the filter, never editorial subtracted).
-              - About description
-              - Hivemind Commentary (same serif 16px register as Artist
-                Statement so the two voices have visual parity)
+              - Hivemind Commentary (single block; About removed per
+                editorial decision - the curator note carries the only
+                Hivemind voice on the page)
               - Artist Statement (when present)
               - Essay link nested under Commentary, or standalone if no
                 Commentary */}
           <div className="space-y-6 md:pt-4">
-              {col.description && (
-                <div className="border-l border-border pl-5">
-                  <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
-                    About {collectionName}
-                  </p>
-                  <ExpandableProse text={col.description} />
-                </div>
-              )}
               {/* Commentary + essay link grouped under the same border-l
                   rule. Essay link sits inside the Commentary container so
                   it indents to match the prose (pl-5 from the rule),
@@ -691,6 +683,7 @@ export default async function CollectionPage({
                   <ExpandableProse
                     text={col.curatorNote}
                     threshold={400}
+                    respectMultiline={false}
                     className="font-serif text-[16px] leading-[1.65] text-foreground-secondary whitespace-pre-line"
                   />
                   {col.essayUrl && (

@@ -50,12 +50,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const artist = getArtist(piece.artistSlug);
   const collection = getCollection(piece.collectionSlug);
   const artistName = artist ? getArtistDisplayName(artist.slug, artist.name) : undefined;
-  const title = artistName ? `${piece.title} — ${artistName}` : piece.title;
+  const title = artistName ? `${piece.title} - ${artistName}` : piece.title;
   const collName = collection ? getCollectionDisplayName(collection.slug, collection.name) : undefined;
   const description = (
     getPieceDescription(piece.slug) ||
     piece.description ||
-    (collName ? `${piece.title}, from ${collName} — in the Hivemind Digital Culture Fund collection.` : "Held by the Hivemind Digital Culture Fund.")
+    (collName ? `${piece.title}, from ${collName} - in the Hivemind Digital Culture Fund collection.` : "Held by the Hivemind Digital Culture Fund.")
   ).slice(0, 200);
   const og = getOgImage(piece.slug);
   return {
@@ -263,8 +263,10 @@ export default async function PiecePage({
         label={isPunk ? "Attributes" : "Traits"}
       />
       {provenance?.cid && (
-        <p className="text-[10px] tracking-[0.12em] uppercase text-muted font-medium">
-          Preserved by Hivemind - pinned to IPFS{provenance.verifiedAt ? ", integrity verified" : ""}
+        <p className="text-[13px] text-muted">
+          <span className="text-foreground-secondary">Preserved by Hivemind:</span>
+          <br />
+          Pinned to IPFS{provenance.verifiedAt ? ", integrity verified" : ""}
         </p>
       )}
       <OnChainDetails
