@@ -1,7 +1,5 @@
 import Link from "next/link";
-import { getArtworkImage, getArtworkAspect } from "@/lib/images";
-import PlaceholderArt from "../PlaceholderArt";
-import GridArtwork from "../GridArtwork";
+import ChapterFilmstrip from "./ChapterFilmstrip";
 
 interface Work {
   id: string;
@@ -28,7 +26,8 @@ const roman = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"];
  * Chapters view (E.3) — the cinematic entry. Each curatorial chapter is a
  * full-height title card with a refined filmstrip of its works. Restrained
  * (Argent titles, no colour accent); static — the big titles carry the
- * cinema, no decorative entrance motion.
+ * cinema, no decorative entrance motion. The filmstrip itself is the only
+ * client-side surface (ChapterFilmstrip handles scroll + chevrons).
  */
 export default function ChaptersView({ chapters }: { chapters: ChapterData[] }) {
   return (
@@ -67,45 +66,7 @@ export default function ChaptersView({ chapters }: { chapters: ChapterData[] }) 
                 {c.total} {c.total === 1 ? "work" : "works"}
               </p>
 
-              {/* Filmstrip — uniform height, aspect-true widths. Focusable,
-                  labelled scroll region so it's keyboard-operable (arrow-scroll)
-                  even though the scrollbar is hidden (WCAG 2.1.1 / discoverability).
-                  Scrolls WITHIN the container padding (no full-bleed) so it keeps
-                  the same side white-gap as the Salon grid — consistent inset
-                  whatever the screen width. */}
-              <div
-                role="group"
-                aria-label={`${c.name} — works (scroll horizontally)`}
-                tabIndex={0}
-                className="overflow-x-auto scrollbar-hide pr-6"
-              >
-                <div className="flex gap-3 pb-1">
-                  {c.works.map((w) => {
-                    const aspect = getArtworkAspect(w.slug, w.contractAddress, w.tokenId);
-                    const ratio = aspect ? aspect.w / aspect.h : 1;
-                    const src = getArtworkImage(w.slug, w.contractAddress, w.tokenId, "thumb");
-                    const isPunk = w.collectionSlug === "cryptopunks";
-                    return (
-                      <Link
-                        key={w.id}
-                        id={`p-${w.slug}`}
-                        href={`/piece/${w.slug}?from=chapters`}
-                        title={w.title}
-                        style={{ aspectRatio: `${ratio}` }}
-                        className={`group relative block h-[180px] sm:h-[220px] lg:h-[260px] shrink-0 overflow-hidden bg-surface ${
-                          isPunk ? "bg-punk" : ""
-                        }`}
-                      >
-                        {src ? (
-                          <GridArtwork slug={w.slug} title={w.title} imgSrc={src} isPunk={isPunk} sizes="320px" />
-                        ) : (
-                          <PlaceholderArt collectionSlug={w.collectionSlug} pieceSlug={w.slug} className="h-full w-full" />
-                        )}
-                      </Link>
-                    );
-                  })}
-                </div>
-              </div>
+              <ChapterFilmstrip name={c.name} works={c.works} />
 
               <Link
                 href={`/?chapter=${c.slug}`}
