@@ -85,7 +85,7 @@ export default function ChaptersPage() {
   }).filter((c) => c.total > 0);
 
   return (
-    <div className="chapters-page">
+    <div>
       <ScrollRestore />
       {/* Masthead — mirrors the Salon masthead (CollectionView) at the same
           max-w-[1200px] so the "Hivemind Digital Culture Fund" wordmark holds the
