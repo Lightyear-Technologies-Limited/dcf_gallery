@@ -8,6 +8,14 @@ interface Props {
   threshold?: number;
   /** Tailwind classes for the prose styling. */
   className?: string;
+  /**
+   * When `false`, multi-line content (a paragraph break) does NOT force
+   * the collapse mechanism. Only the character threshold is honoured.
+   * Use for prose where paragraph breaks structure content (e.g. the
+   * two-part curator note) rather than indicating long-form text (poems,
+   * artist statements).
+   */
+  respectMultiline?: boolean;
 }
 
 /**
@@ -25,16 +33,18 @@ export default function ExpandableProse({
   text,
   threshold = 280,
   className = "text-[20px] text-foreground-secondary leading-[1.6] whitespace-pre-line",
+  respectMultiline = true,
 }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
   const proseId = useId();
 
-  // Multi-line content always engages the collapse mechanism even when
-  // under the character threshold - a 300-char poem with 4 paragraph
-  // breaks adds significant vertical space and should fold behind Read
-  // more so the gallery climbs faster.
-  const isMultiline = text.includes("\n");
+  // Multi-line content engages the collapse mechanism even when under
+  // the character threshold - a 300-char poem with 4 paragraph breaks
+  // adds significant vertical space and should fold behind Read more.
+  // Disabled when paragraphs structure (rather than length) the prose;
+  // see `respectMultiline` prop.
+  const isMultiline = respectMultiline && text.includes("\n");
   if (text.length <= threshold && !isMultiline) {
     return <p className={className}>{text}</p>;
   }
