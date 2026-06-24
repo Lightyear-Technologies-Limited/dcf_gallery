@@ -107,7 +107,15 @@ export default function ChaptersView({ chapters }: { chapters: ChapterData[] }) 
             }`}
           >
             <div>
-              <h2 className="font-serif display-lg leading-[0.95] mb-5">{roman[i]}. {c.name}</h2>
+              {/* Roman numeral and chapter name stack on two lines so the
+                  title sits at consistent width across all five chapters
+                  (the single-line "III. Digital Identity" form ran too
+                  wide and broke the rhythm). leading-[0.95] tightens the
+                  vertical gap between numeral and name. */}
+              <h2 className="font-serif display-lg leading-[0.95] mb-5">
+                <span className="block">{roman[i]}.</span>
+                <span className="block">{c.name}</span>
+              </h2>
               <p className="max-w-2xl text-[17px] sm:text-[18px] leading-[1.6] text-foreground-secondary mb-3">
                 {c.description}
               </p>
