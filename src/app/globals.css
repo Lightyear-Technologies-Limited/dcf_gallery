@@ -91,6 +91,25 @@ body {
   display: none;
 }
 
+/* Reserve scrollbar gutter globally so the masthead doesn't shift width
+   between scrollbar-on and scrollbar-off pages (e.g. into /chapters). */
+html {
+  scrollbar-gutter: stable;
+}
+
+/* /chapters hides the global page scrollbar: the chapter position rail
+   already provides the "where am I in the procession" signal, and a
+   browser-default scrollbar competes with it visually over the
+   filmstrip artwork. Other pages keep the scrollbar (it's the only
+   "more below" affordance there). */
+html:has(.chapters-page) {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+html:has(.chapters-page)::-webkit-scrollbar {
+  display: none;
+}
+
 /* Accessibility: respect reduced-motion (plan A.4). Functional transitions are
    the only motion in use today; this neutralizes them for users who opt out and
    pre-empts the playback/explorer motion coming in Phase E. */
