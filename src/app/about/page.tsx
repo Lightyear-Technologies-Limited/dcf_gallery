@@ -29,8 +29,8 @@ export default function AboutPage() {
           Hivemind Digital Culture Fund is a curated portfolio of digital
           art&rsquo;s emergent canon, acquired after the first market cycle -
           when the artists, collections, and individual works that define the
-          medium can be identified with the benefit of great contextualization
-          and data.
+          medium can be identified with the benefit of historical context and
+          data.
         </p>
         <p className="text-[13px] text-muted mt-6 tabular-nums">
           {visiblePieces.length} works &middot; {primaryArtists.length} artists &middot; {visibleCollections.length} collections
@@ -42,18 +42,17 @@ export default function AboutPage() {
       <div className="max-w-[680px] pt-16 space-y-6 text-[16px] text-foreground-secondary leading-[1.65]">
         <p>
           Technological advancements have consistently created new wealth, and
-          downstream a new class of investors and collectors looking for art
-          that resonates with the cultural moment. The Ethereum blockchain has
+          with it a new class of investors and collectors looking for art that
+          resonates with the cultural moment. The Ethereum blockchain has
           redefined how digital art is created, owned, traded, and seen, and
-          the culture is largely developed online.
+          online communities now drive its value.
         </p>
         <p>
-          With the first major market cycle for digital art behind us, in 2024
-          Hivemind Digital Culture Fund began deliberately acquiring works by
-          those established artists who had survived the cycle and now traded
-          well below their peaks. Today, our collection is comprehensive,
-          targeted and includes grail works by many of the medium&rsquo;s
-          defining names.
+          With the first major market cycle for digital art now past, in 2024
+          Hivemind began deliberately acquiring works by those established
+          artists who had survived the cycle and whose work traded well below
+          its peaks. Today, the collection is comprehensive and targeted, with
+          grail works by many of the medium&rsquo;s defining names.
         </p>
       </div>
 
@@ -70,12 +69,12 @@ export default function AboutPage() {
       <div className="max-w-[680px] space-y-6">
         <h2 className="font-serif display-sm">Working Backwards</h2>
         <p className="text-[16px] text-foreground-secondary leading-[1.65]">
-          For a more illiquid asset class, the most desirable end state has to
-          be defined first, then the plan to reach it works backward from there.
-          Hivemind Digital Culture Fund is built around ten artists, each
-          anchoring a chapter of digital art&rsquo;s first decades. Within each
-          chapter, collections are acquired deep rather than wide, and 1/1
-          pieces are added to elevate the curation of specific movements.
+          For an illiquid asset class, the most desirable end state has to be
+          defined first, then the plan to reach it works backward from there.
+          Hivemind is built around ten artists, each anchoring a chapter of
+          digital art&rsquo;s first decades. Within each chapter, collections
+          are acquired deep rather than wide, and 1/1 pieces are added to
+          elevate the curation of specific movements.
         </p>
         <p className="text-[16px] text-foreground-secondary leading-[1.65]">
           Value in this medium is expected to follow a power-law rather than a
@@ -98,7 +97,7 @@ export default function AboutPage() {
             Digital art sits within Contemporary Art, where the actions of a
             living artist still shape an artwork&rsquo;s enduring value. An
             artist with the right profile is necessary but not sufficient; the
-            collection must also be significant within its chapter. The Fund
+            collection must also be significant within its chapter. Hivemind
             approves blue-chip collections from blue-chip artists, not artists
             wholesale.
           </p>
@@ -106,7 +105,7 @@ export default function AboutPage() {
         <div>
           <p className="text-[16px] font-medium text-foreground">Trait Concentration</p>
           <p className="text-[16px] text-foreground-secondary leading-[1.65] mt-1">
-            Within a collection, the Fund leans into desirable traits when
+            Within a collection, Hivemind leans into desirable traits when
             pricing is opportunistic. For example, Tyler Hobbs&rsquo;s Fidenza
             series is held with a focus on the White Mono trait - pure white
             forms on a colored ground, the inverse of the standard Fidenza
@@ -131,7 +130,7 @@ export default function AboutPage() {
       <div className="pt-16 pb-8">
         <h2 className="font-serif display-sm max-w-[680px]">Five Chapters</h2>
         <p className="text-[16px] text-foreground-secondary leading-[1.65] mt-4 max-w-[680px]">
-          The ten artists in the Fund are grouped into five chapters of digital
+          The ten artists are grouped into five chapters of digital
           art&rsquo;s first decades.
         </p>
         <div className="mt-8 space-y-6 max-w-[820px]">
@@ -163,11 +162,11 @@ export default function AboutPage() {
       <div className="max-w-[680px] pt-16">
         <h2 className="font-serif display-sm">Hivemind Capital Partners</h2>
         <p className="text-[16px] text-foreground-secondary leading-[1.65] mt-6">
-          Hivemind is a crypto-focused investment firm with positions across
-          infrastructure, applications, and culture. The Digital Culture Fund
-          is Hivemind&rsquo;s vehicle for collecting the art of this period -
-          held to the custody, security, and operational standards LPs apply to
-          any other asset on their book.
+          Hivemind Capital Partners is a crypto-focused investment firm with
+          positions across infrastructure, applications, and culture. The
+          Digital Culture Fund is the firm&rsquo;s vehicle for collecting the
+          art of this period - held to the custody, security, and operational
+          standards LPs apply to any other asset on their book.
         </p>
 
         <div className="mt-8 flex flex-col sm:flex-row gap-6 sm:gap-10 text-[13px]">
