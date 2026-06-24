@@ -683,6 +683,7 @@ export default async function CollectionPage({
                   <ExpandableProse
                     text={col.curatorNote}
                     threshold={400}
+                    respectMultiline={false}
                     className="font-serif text-[16px] leading-[1.65] text-foreground-secondary whitespace-pre-line"
                   />
                   {col.essayUrl && (
