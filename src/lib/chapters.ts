@@ -27,7 +27,7 @@ export const CHAPTERS: Chapter[] = [
     color: "var(--foreground)",
     artists: ["xcopy", "beeple", "kim-asendorf"],
     description:
-      "Blockchain-native art with deep ties to crypto culture and the early digital art movement.",
+      "Blockchain-native art deeply tied to crypto culture and the digital art movement.",
   },
   {
     name: "Digital Canvas",
