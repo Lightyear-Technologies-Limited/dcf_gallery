@@ -26,10 +26,11 @@ export default function AboutPage() {
             section H2s below stay display-sm, now reading as third-level. */}
         <h2 className="font-serif display-lg leading-[0.95] mt-6 mb-5">Thesis</h2>
         <p className="text-[20px] text-foreground-secondary leading-[1.6]">
-          A curated portfolio of digital art&rsquo;s emergent canon, acquired
-          after the first market cycle - when the artists, collections, and
-          individual works that define the medium can be identified with the
-          benefit of a full cycle of data.
+          Hivemind Digital Culture Fund is a curated portfolio of digital
+          art&rsquo;s emergent canon, acquired after the first market cycle -
+          when the artists, collections, and individual works that define the
+          medium can be identified with the benefit of great contextualization
+          and data.
         </p>
         <p className="text-[13px] text-muted mt-6 tabular-nums">
           {visiblePieces.length} works &middot; {primaryArtists.length} artists &middot; {visibleCollections.length} collections
@@ -40,18 +41,19 @@ export default function AboutPage() {
           "A Fund is Born" sections of the source thesis. */}
       <div className="max-w-[680px] pt-16 space-y-6 text-[16px] text-foreground-secondary leading-[1.65]">
         <p>
-          Technological advancement has consistently created new wealth, and
-          with it a new class of investors and collectors looking for art that
-          resonates with their moment. Blockchain has redefined how digital art
-          is owned, traded, and seen; online communities now influence the
-          markets that price it.
+          Technological advancements have consistently created new wealth, and
+          downstream a new class of investors and collectors looking for art
+          that resonates with the cultural moment. The Ethereum blockchain has
+          redefined how digital art is created, owned, traded, and seen, and
+          the culture is largely developed online.
         </p>
         <p>
-          The first digital culture market cycle is behind us. A handful of
-          artists and collections have broken out and now stand as the
-          established canon - names that have survived the cycle and trade well
-          below their peaks. The Fund acquires deliberately at this point in
-          the curve.
+          With the first major market cycle for digital art behind us, in 2024
+          Hivemind Digital Culture Fund began deliberately acquiring works by
+          those established artists who had survived the cycle and now traded
+          well below their peaks. Today, our collection is comprehensive,
+          targeted and includes grail works by many of the medium&rsquo;s
+          defining names.
         </p>
       </div>
 
@@ -68,12 +70,12 @@ export default function AboutPage() {
       <div className="max-w-[680px] space-y-6">
         <h2 className="font-serif display-sm">Working Backwards</h2>
         <p className="text-[16px] text-foreground-secondary leading-[1.65]">
-          For an asset class this illiquid, the most desirable end state has to
+          For a more illiquid asset class, the most desirable end state has to
           be defined first, then the plan to reach it works backward from there.
-          The Fund is built around ten artists, each anchoring a chapter of
-          digital art&rsquo;s first decades. Within each chapter, collections
-          are acquired deep rather than wide, and 1/1 pieces are added to
-          elevate the curation of specific movements.
+          Hivemind Digital Culture Fund is built around ten artists, each
+          anchoring a chapter of digital art&rsquo;s first decades. Within each
+          chapter, collections are acquired deep rather than wide, and 1/1
+          pieces are added to elevate the curation of specific movements.
         </p>
         <p className="text-[16px] text-foreground-secondary leading-[1.65]">
           Value in this medium is expected to follow a power-law rather than a
@@ -105,10 +107,11 @@ export default function AboutPage() {
           <p className="text-[16px] font-medium text-foreground">Trait Concentration</p>
           <p className="text-[16px] text-foreground-secondary leading-[1.65] mt-1">
             Within a collection, the Fund leans into desirable traits when
-            pricing is opportunistic. Tyler Hobbs&rsquo;s Fidenza series is held
-            with a focus on the White Mono trait - pure white forms on a colored
-            ground, the inverse of the standard Fidenza palette, and the variant
-            that most clearly exposes the algorithm&rsquo;s drawing logic.
+            pricing is opportunistic. For example, Tyler Hobbs&rsquo;s Fidenza
+            series is held with a focus on the White Mono trait - pure white
+            forms on a colored ground, the inverse of the standard Fidenza
+            palette, and the variant that most clearly exposes the
+            algorithm&rsquo;s drawing logic.
           </p>
         </div>
         <div>
