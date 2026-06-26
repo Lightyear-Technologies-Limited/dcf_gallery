@@ -44,10 +44,12 @@ export default function ChaptersView({ chapters }: { chapters: ChapterData[] }) 
             }`}
           >
             <div>
-              {/* Per-chapter title at text-[28px] sm:text-[32px] - matches
-                  the artist-name register on the collection page so the
-                  "title / subject" rhythm is consistent across pages. */}
-              <h3 className="font-serif text-[28px] sm:text-[32px] leading-[1.05] mb-5">{roman[i]}. {c.name}</h3>
+              {/* Per-chapter title at text-[32px] sm:text-[40px] - same
+                  register as artist names on the Artists index, the
+                  artist credit on the Collection page, and the body-
+                  section H2s on the Thesis page. Site-wide subject-tier
+                  heading. */}
+              <h3 className="font-serif text-[32px] sm:text-[40px] tracking-tight leading-tight mb-5">{roman[i]}. {c.name}</h3>
               <p className="max-w-2xl text-[17px] sm:text-[18px] leading-[1.6] text-foreground-secondary mb-3">
                 {c.description}
               </p>

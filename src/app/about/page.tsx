@@ -63,7 +63,7 @@ export default function AboutPage() {
           updated to reflect the portfolio's actual ten-artist shape rather
           than the thesis's aspirational 6-10 core collections target. */}
       <div className="max-w-[680px] space-y-6">
-        <h2 className="font-serif display-sm">Working Backwards</h2>
+        <h2 className="font-serif text-[32px] sm:text-[40px] tracking-tight leading-tight">Working Backwards</h2>
         <p className="text-[16px] text-foreground-secondary leading-[1.65]">
           For an illiquid asset class, the most desirable end state has to be
           defined first, then the plan to reach it works backward from there.
@@ -86,7 +86,7 @@ export default function AboutPage() {
           matter for a public reader; examples are verified DCF holdings
           (White Mono Fidenza, Return Zero, A Slight Lack of Symmetry). */}
       <div className="max-w-[680px] pt-16 space-y-6">
-        <h2 className="font-serif display-sm">The Curation</h2>
+        <h2 className="font-serif text-[32px] sm:text-[40px] tracking-tight leading-tight">The Curation</h2>
         <div>
           <p className="text-[16px] font-medium text-foreground">Artist and Collection</p>
           <p className="text-[16px] text-foreground-secondary leading-[1.65] mt-1">
@@ -124,7 +124,7 @@ export default function AboutPage() {
 
       {/* Five Chapters */}
       <div className="pt-16 pb-8">
-        <h2 className="font-serif display-sm max-w-[680px]">Five Chapters</h2>
+        <h2 className="font-serif text-[32px] sm:text-[40px] tracking-tight leading-tight max-w-[680px]">Five Chapters</h2>
         <p className="text-[16px] text-foreground-secondary leading-[1.65] mt-4 max-w-[680px]">
           The ten artists are grouped into five chapters of digital
           art&rsquo;s first decades.
@@ -156,7 +156,7 @@ export default function AboutPage() {
           folded in (custody / standards), then CTAs to gallery + source essay,
           then a separately-labelled IR block. */}
       <div className="max-w-[680px] pt-16">
-        <h2 className="font-serif display-sm">Hivemind Capital Partners</h2>
+        <h2 className="font-serif text-[32px] sm:text-[40px] tracking-tight leading-tight">Hivemind Capital Partners</h2>
         <p className="text-[16px] text-foreground-secondary leading-[1.65] mt-6">
           Hivemind Capital Partners is a crypto-focused investment firm with
           positions across infrastructure, applications, and culture. The
