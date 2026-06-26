@@ -118,6 +118,20 @@ export default function CollectionView({ sections, artists }: Props) {
     };
   }, []);
 
+  // On filter change while the reader is past the masthead, snap to the
+  // top of the new (filtered) gallery. Without this, scroll position
+  // sticks at the absolute scrollY of the old view - if the new
+  // collection is shorter, the browser caps at max scroll, dumping the
+  // reader at the bottom of the new content. When at/above the
+  // masthead, no scroll - the reader stays where they are.
+  function scrollToFilterIfPast() {
+    if (typeof window === "undefined" || !filterRef.current) return;
+    const top = filterRef.current.offsetTop;
+    if (window.scrollY > top) {
+      window.scrollTo(0, top);
+    }
+  }
+
   function selectArtist(slug: string) {
     if (chapterFilter) {
       const ch = CHAPTERS.find((c) => c.slug === chapterFilter);
@@ -129,6 +143,7 @@ export default function CollectionView({ sections, artists }: Props) {
         setExcludedArtists([]);
         setArtistFilter(slug);
         syncUrl(slug, null);
+        scrollToFilterIfPast();
         return;
       }
       // In-chapter artist: toggle exclude (the original chapter-mode
@@ -138,11 +153,13 @@ export default function CollectionView({ sections, artists }: Props) {
       } else {
         setExcludedArtists([...excludedArtists, slug]);
       }
+      scrollToFilterIfPast();
       return;
     }
     const next = artistFilter === slug ? null : slug;
     setArtistFilter(next);
     syncUrl(next, null);
+    scrollToFilterIfPast();
   }
 
   function selectChapter(slug: string | null) {
@@ -156,6 +173,7 @@ export default function CollectionView({ sections, artists }: Props) {
       setExcludedArtists([]);
       syncUrl(null, slug);
     }
+    scrollToFilterIfPast();
   }
 
   function clearAll() {
@@ -163,6 +181,7 @@ export default function CollectionView({ sections, artists }: Props) {
     setChapterFilter(null);
     setExcludedArtists([]);
     syncUrl(null, null);
+    scrollToFilterIfPast();
   }
 
   useEffect(() => {
