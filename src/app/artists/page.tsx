@@ -40,6 +40,14 @@ const HERO_PIECE_SLUGS: Record<string, string> = {
 const HERO_COLLECTION_OVERRIDES: Record<string, string[]> = {
   "kim-asendorf": ["lights"],
 };
+// Optional hero frame aspect override (width/height). When present,
+// ArtistHero uses the override and crops via object-cover instead of
+// the default 9/8 letterbox. Kim's Lights is a single landscape piece
+// that visually dominated the row at 9/8 letterbox; forcing 1:1 brings
+// its width down to match the other heroes.
+const HERO_ASPECT_OVERRIDES: Record<string, number> = {
+  "kim-asendorf": 1,
+};
 
 export default function ArtistsPage() {
   return (
@@ -106,7 +114,7 @@ export default function ArtistsPage() {
                   hero-first so reading order matches visual order on mobile
                   (single column), and the desktop swap is column-order only. */}
               <div className={heroOnRight ? "md:order-2" : ""}>
-                <ArtistHero artistSlug={artist.slug} candidates={candidates} />
+                <ArtistHero artistSlug={artist.slug} candidates={candidates} aspect={HERO_ASPECT_OVERRIDES[artist.slug]} />
               </div>
 
               {/* Info - on heroOnRight rows, the info column lands on
