@@ -274,7 +274,7 @@ export default async function PiecePage({
       />
       {piece.exhibition && (
         <p className="text-[13px] text-muted">
-          <span className="text-foreground-secondary">Currently on display:</span>
+          <span className="text-foreground-secondary">Exhibited at:</span>
           <br />
           {piece.exhibition.url ? (
             <a
@@ -283,10 +283,14 @@ export default async function PiecePage({
               rel="noopener noreferrer"
               className="hover:text-foreground transition-colors duration-200 underline underline-offset-4 decoration-border hover:decoration-foreground"
             >
-              {piece.exhibition.name} →
+              {piece.exhibition.name}
+              {piece.exhibition.date ? `, ${piece.exhibition.date}` : ""} →
             </a>
           ) : (
-            piece.exhibition.name
+            <>
+              {piece.exhibition.name}
+              {piece.exhibition.date ? `, ${piece.exhibition.date}` : ""}
+            </>
           )}
         </p>
       )}

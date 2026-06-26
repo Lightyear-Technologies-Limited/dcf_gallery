@@ -126,12 +126,13 @@ export interface Piece {
   // a physical sculpture extends). Rendered as a "Companion: {Title}" link
   // on the piece page so the catalogue can express the pairing.
   companionSlug?: string;
-  // Currently-on-display exhibition info. Renders a small "Currently on
-  // display: {name}" line at the top of the piece's metadata stack, with
-  // the name linking out (when a URL is provided) so a reader can find
-  // out more about visiting in person. Editorial / human-owned.
+  // Exhibition history. Renders a small "Exhibited at: {name}, {date}"
+  // line in the piece's metadata stack, with the name linking out when a
+  // URL is provided. Use for both past and current shows - the date field
+  // carries the timing context. Editorial / human-owned.
   exhibition?: {
     name: string;
+    date?: string; // free-form, e.g. "April 2025" or "Apr 5–May 12, 2025"
     url?: string;
   };
 }
@@ -1962,6 +1963,7 @@ export const pieces: Piece[] = [
     originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000253.png',
     exhibition: {
       name: 'Rhizome World, NYC',
+      date: 'April 2025',
       url: 'https://x.com/paintboxed1981/status/1913986525806625009/photo/3',
     },
   },
@@ -2238,6 +2240,7 @@ export const pieces: Piece[] = [
     originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000943.png',
     exhibition: {
       name: 'Rhizome World, NYC',
+      date: 'April 2025',
       url: 'https://x.com/paintboxed1981/status/1913986525806625009/photo/3',
     },
   },
