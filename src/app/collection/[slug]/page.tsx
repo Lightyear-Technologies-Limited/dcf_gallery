@@ -569,23 +569,26 @@ export default async function CollectionPage({
               {!traitFilter &&
                 col.totalSupply !== undefined &&
                 col.totalSupply > 1 && <p>{editionType}</p>}
+              {/* Hivemind holdings line sits directly under the edition
+                  row so the reader's eye reads "1/1/999 -> Hivemind
+                  holds N works" as a paired figure. "of M" dropped
+                  because the edition row above already states the
+                  total - "Hivemind holds N of 999 works" right under
+                  "1/1/999" doubled the number. Clarifier "1/1s" stays
+                  for shared-contract independent 1/1s (Piano Blossoms,
+                  Her favorite flowers) where the unit isn't implied by
+                  the edition row. */}
+              {col.totalSupply && (
+                <p>
+                  Hivemind holds {sorted.length}{" "}
+                  {editionType === "1/1" && col.totalSupply > 1 ? "1/1s" : "works"}
+                </p>
+              )}
               {!traitFilter && col.platform && <p>{col.platform}</p>}
               {!traitFilter && col.contractAddress && (
                 <p className="inline-flex items-baseline gap-x-2">
                   <span>Contract:</span>
                   <CopyableHash value={col.contractAddress} />
-                </p>
-              )}
-              {/* "Hivemind holds N of M" + a clarifier suffix for
-                  shared-contract independent 1/1s (Her favorite flowers,
-                  Piano Blossoms): "N of M 1/1s" makes explicit that each
-                  piece is unique, not an edition of M. For programmatic
-                  series the holdings line stands alone since the edition
-                  row above (1/1/999, 1/1/10000) already says it. */}
-              {col.totalSupply && (
-                <p>
-                  Hivemind holds {sorted.length} of {col.totalSupply.toLocaleString()}{" "}
-                  {editionType === "1/1" && col.totalSupply > 1 ? "1/1s" : "works"}
                 </p>
               )}
             </div>
