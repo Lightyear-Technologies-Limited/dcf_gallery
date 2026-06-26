@@ -267,27 +267,24 @@ export default function CollectionView({ sections, artists }: Props) {
         >
           Artist
         </span>
-        {/* "All" reset button - leads the artist row. Active when no
-            artist-side filtering is happening (no artistFilter, no
-            chapter-mode exclusions); clicking it clears any artist-side
-            state and keeps the chapter filter as-is. */}
-        {(() => {
-          const isArtistAllActive = !artistFilter && excludedArtists.length === 0;
-          return (
-            <button
-              type="button"
-              onClick={selectArtistAll}
-              aria-label="Show all artists"
-              className={`text-[13px] whitespace-nowrap shrink-0 transition-colors duration-200 ${
-                isArtistAllActive
-                  ? "text-foreground"
-                  : "text-muted/40 hover:text-foreground"
-              }`}
-            >
-              All
-            </button>
-          );
-        })()}
+        {/* "All" reset button - leads the artist row. Foreground only
+            when nothing is filtered anywhere (no artistFilter, no
+            chapter, no exclusions). Dims whenever ANY filter is active
+            so the row reads as "you're not at All" - matches Chapter
+            row's All treatment for symmetry. Clicking still clears just
+            the artist-side state and keeps the chapter filter. */}
+        <button
+          type="button"
+          onClick={selectArtistAll}
+          aria-label="Show all artists"
+          className={`text-[13px] whitespace-nowrap shrink-0 transition-colors duration-200 ${
+            !hasFilters
+              ? "text-foreground"
+              : "text-muted/40 hover:text-foreground"
+          }`}
+        >
+          All
+        </button>
         {artists.map((a) => {
           const inChapter = activeChapter ? activeChapter.artists.includes(a.slug) : true;
           const excluded = excludedArtists.includes(a.slug);
@@ -332,15 +329,16 @@ export default function CollectionView({ sections, artists }: Props) {
       {/* Row 2: Chapters */}
       <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide [mask-image:linear-gradient(to_right,black_calc(100%-24px),transparent)]">
         <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium shrink-0 w-20">Chapter</span>
-        {/* "All" reset button - leads the chapter row. Active when no
-            chapter is selected; clicking it clears the chapter filter
-            (and tied exclusions) and keeps the artist filter as-is. */}
+        {/* "All" reset button - leads the chapter row. Foreground only
+            when nothing is filtered anywhere; dims whenever any filter
+            is active (matches the Artist row's All). Clicking still
+            clears just the chapter filter and keeps the artist as-is. */}
         <button
           type="button"
           onClick={selectChapterAll}
           aria-label="Show all chapters"
           className={`text-[13px] whitespace-nowrap shrink-0 transition-colors duration-200 ${
-            !chapterFilter
+            !hasFilters
               ? "text-foreground"
               : "text-muted/40 hover:text-foreground"
           }`}
