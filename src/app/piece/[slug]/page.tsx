@@ -341,13 +341,18 @@ export default async function PiecePage({
         label={originHref ? originLabel : upLabel}
       />
       {(prevPiece || nextPiece) && (
-        <div className="mt-4 flex flex-col sm:flex-row sm:justify-between gap-2 text-[13px] text-muted">
+        <div className="mt-6 flex flex-col sm:flex-row sm:justify-between gap-4 sm:gap-2">
           {prevPiece ? (
             <Link
               href={pieceHref(prevPiece.slug)}
-              className="hover:text-foreground transition-colors duration-200 truncate max-w-full sm:max-w-[45%]"
+              className="group inline-flex flex-col gap-1 max-w-full sm:max-w-[45%]"
             >
-              ← {prevPiece.title}
+              <span className="text-[10px] tracking-[0.12em] uppercase text-muted font-medium group-hover:text-foreground transition-colors duration-200">
+                ← Previous work
+              </span>
+              <span className="font-serif italic text-[15px] text-foreground-secondary group-hover:text-foreground transition-colors duration-200 truncate">
+                {prevPiece.title}
+              </span>
             </Link>
           ) : (
             <span />
@@ -355,9 +360,14 @@ export default async function PiecePage({
           {nextPiece && (
             <Link
               href={pieceHref(nextPiece.slug)}
-              className="hover:text-foreground transition-colors duration-200 text-right truncate max-w-full sm:max-w-[45%]"
+              className="group inline-flex flex-col gap-1 max-w-full sm:max-w-[45%] sm:items-end sm:text-right"
             >
-              {nextPiece.title} →
+              <span className="text-[10px] tracking-[0.12em] uppercase text-muted font-medium group-hover:text-foreground transition-colors duration-200">
+                Next work →
+              </span>
+              <span className="font-serif italic text-[15px] text-foreground-secondary group-hover:text-foreground transition-colors duration-200 truncate">
+                {nextPiece.title}
+              </span>
             </Link>
           )}
         </div>

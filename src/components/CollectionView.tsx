@@ -131,6 +131,14 @@ export default function CollectionView({ sections, artists }: Props) {
 
   const hasFilters = artistFilter || chapterFilter;
   const activeChapter = chapterFilter ? CHAPTERS.find((c) => c.slug === chapterFilter) : null;
+  // When an artist is selected without an explicit chapter, surface the
+  // chapter that artist belongs to in the chapter row - same highlight as
+  // an explicit chapter click. Visual cue only: the chapter description
+  // and result-count line still key off the explicit chapter filter.
+  const impliedChapter =
+    !chapterFilter && artistFilter
+      ? CHAPTERS.find((c) => c.artists.includes(artistFilter))
+      : null;
 
   // Salon-origin breadcrumb for piece links: ?from=salon (+ active filter) so a
   // piece's Back link returns to the homepage in its current filtered state.
@@ -214,19 +222,24 @@ export default function CollectionView({ sections, artists }: Props) {
         {/* Row 2: Chapters */}
         <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide [mask-image:linear-gradient(to_right,black_calc(100%-24px),transparent)]">
           <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium shrink-0 w-20">Chapter</span>
-          {CHAPTERS.map((ch) => (
-            <button
-              key={ch.slug}
-              onClick={() => selectChapter(ch.slug)}
-              aria-pressed={chapterFilter === ch.slug}
-              className={`text-[13px] whitespace-nowrap shrink-0 transition-colors duration-200 ${
-                chapterFilter === ch.slug ? "text-foreground" : "text-muted hover:text-foreground"
-              }`}
-              style={chapterFilter === ch.slug ? { color: ch.color } : undefined}
-            >
-              {ch.name}
-            </button>
-          ))}
+          {CHAPTERS.map((ch) => {
+            const isExplicit = chapterFilter === ch.slug;
+            const isImplied = impliedChapter?.slug === ch.slug;
+            const isHighlighted = isExplicit || isImplied;
+            return (
+              <button
+                key={ch.slug}
+                onClick={() => selectChapter(ch.slug)}
+                aria-pressed={isExplicit}
+                className={`text-[13px] whitespace-nowrap shrink-0 transition-colors duration-200 ${
+                  isHighlighted ? "text-foreground" : "text-muted hover:text-foreground"
+                }`}
+                style={isHighlighted ? { color: ch.color } : undefined}
+              >
+                {ch.name}
+              </button>
+            );
+          })}
         </div>
 
         {/* Chapter description - only when a chapter is active */}

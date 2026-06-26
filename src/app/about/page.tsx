@@ -131,9 +131,7 @@ export default function AboutPage() {
         <h2 className="font-serif display-sm max-w-[680px]">Five Chapters</h2>
         <p className="text-[16px] text-foreground-secondary leading-[1.65] mt-4 max-w-[680px]">
           The ten artists are grouped into five chapters of digital
-          art&rsquo;s first decades. They&rsquo;re chapters rather than
-          categories - each marks a distinct moment in the medium&rsquo;s
-          emergence, read in sequence rather than sorted by type.
+          art&rsquo;s first decades.
         </p>
         <div className="mt-8 space-y-6 max-w-[820px]">
           {CHAPTERS.map((ch) => (
