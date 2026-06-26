@@ -215,10 +215,9 @@ export default function CollectionView({ sections, artists }: Props) {
           clicking its active label. */}
       <section
         ref={filterRef}
-        className="sticky top-14 md:top-0 z-30 bg-background pt-6 pb-4 border-b border-border space-y-2 transition-transform duration-300 ease-out will-change-transform"
-        style={{
-          transform: filterHidden ? "translateY(-100%)" : "translateY(0)",
-        }}
+        className={`sticky top-14 md:top-0 z-30 bg-background pt-6 pb-4 border-b border-border space-y-2 ${
+          filterHidden ? "hidden" : ""
+        }`}
       >
         {/* Row 1: Artists. Mask gives a fade on the trailing edge when overflowing. */}
         <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide [mask-image:linear-gradient(to_right,black_calc(100%-24px),transparent)]">
