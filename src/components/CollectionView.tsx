@@ -357,12 +357,15 @@ export default function CollectionView({ sections, artists }: Props) {
         })}
       </div>
 
-      {/* Result count - only when filters are active. */}
-      {hasFilters && (
-        <p className="text-[11px] text-muted tabular-nums pt-2">
-          {visiblePieces} of {totalPieces} works in the Hivemind collection
-        </p>
-      )}
+      {/* Result count - always renders, including the All state, so the
+          reader sees the collection scale even when nothing is filtered.
+          "All N works..." reads as institutional scope; "X of N works..."
+          reads as filter subset. */}
+      <p className="text-[11px] text-muted tabular-nums pt-2">
+        {hasFilters
+          ? `${visiblePieces} of ${totalPieces} works in the Hivemind collection`
+          : `All ${totalPieces} works in the Hivemind collection`}
+      </p>
     </>
   );
 

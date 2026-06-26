@@ -32,7 +32,7 @@ export default function ArtistsPage() {
           entry: the section title sits at the chapter-title scale, with a
           framing paragraph below (replacing the old "N artists" count line). */}
       <div className="mt-6 mb-8 max-w-2xl">
-        <h2 className="font-serif display-lg leading-[0.95] mb-5">Artists</h2>
+        <h2 className="font-serif display-sm mb-5">Artists</h2>
         <p className="text-[17px] sm:text-[18px] leading-[1.6] text-foreground-secondary">
           Hivemind brings together ten artists whose work spans digital
           art&rsquo;s first decades.

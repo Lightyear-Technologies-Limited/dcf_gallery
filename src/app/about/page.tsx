@@ -1,15 +1,7 @@
 import Link from "next/link";
-import { artists, collections, pieces } from "@/lib/data";
-import { isCollectionHidden } from "@/lib/curation";
 import { CHAPTERS } from "@/lib/chapters";
 
 export default function AboutPage() {
-  const visibleCollections = collections.filter((c) => !isCollectionHidden(c.slug));
-  const visiblePieces = pieces.filter((p) => !isCollectionHidden(p.collectionSlug));
-  const primaryArtists = artists.filter(
-    (a) => a.slug !== "tyler-hobbs-and-dandelion-wist"
-  );
-
   return (
     <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 pb-24">
       {/* Hero — masthead anchored at pt-6 so the "Hivemind Digital Culture Fund"
@@ -20,11 +12,10 @@ export default function AboutPage() {
         <h1 className="font-serif display-sm">
           Hivemind Digital Culture Fund
         </h1>
-        {/* "Thesis" subheading at the index-page subject scale (display-lg),
-            mirroring the "Artists" page / chapter-title structure so About reads
-            as Masthead → Thesis → [sections] like the other index pages. The
-            section H2s below stay display-sm, now reading as third-level. */}
-        <h2 className="font-serif display-lg leading-[0.95] mt-6 mb-5">Thesis</h2>
+        {/* "Thesis" subheading matches masthead at display-sm so brand +
+            subject read as equal partners (museum-grade restraint).
+            Mirrored on Artists and Chapters indexes. */}
+        <h2 className="font-serif display-sm mt-6 mb-5">Thesis</h2>
         <p className="text-[20px] text-foreground-secondary leading-[1.6]">
           Hivemind Digital Culture Fund is a curated portfolio of digital
           art&rsquo;s emergent canon, acquired after the first market cycle -
@@ -32,14 +23,14 @@ export default function AboutPage() {
           medium can be identified with the benefit of historical context and
           data.
         </p>
-        <p className="text-[13px] text-muted mt-6 tabular-nums">
-          {visiblePieces.length} works &middot; {primaryArtists.length} artists &middot; {visibleCollections.length} collections
-        </p>
       </div>
 
       {/* Cycle-timing context - paraphrases the "Technology Drives Wealth" and
-          "A Fund is Born" sections of the source thesis. */}
-      <div className="max-w-[680px] pt-16 space-y-6 text-[16px] text-foreground-secondary leading-[1.65]">
+          "A Fund is Born" sections of the source thesis. Tightened pt
+          from pt-16 to pt-10 since the stats line (308 works · 10 artists
+          ...) was dropped from above and the previous spacing read as a
+          void. */}
+      <div className="max-w-[680px] pt-10 space-y-6 text-[16px] text-foreground-secondary leading-[1.65]">
         <p>
           Technological advancements have consistently created new wealth, and
           with it a new class of investors and collectors looking for art that
@@ -56,8 +47,13 @@ export default function AboutPage() {
         </p>
       </div>
 
-      <blockquote className="max-w-[680px] mx-auto text-center py-12">
-        <p className="font-serif text-[28px] leading-relaxed tracking-tight text-foreground">
+      {/* Pull-quote: left-aligned with the body column (max-w-[680px], no
+          mx-auto) so it doesn't appear shifted right of the prose on wide
+          screens. Museum-wall treatment - serif italic with a hairline
+          border-l indent rule - earns its bigger size and signals it's
+          the thesis's defining beat. */}
+      <blockquote className="max-w-[680px] py-12">
+        <p className="font-serif italic text-[28px] sm:text-[32px] leading-snug tracking-tight text-foreground border-l border-border pl-6">
           Technology drives wealth. Wealth drives culture.
         </p>
       </blockquote>
