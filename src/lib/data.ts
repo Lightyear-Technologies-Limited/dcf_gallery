@@ -126,15 +126,11 @@ export interface Piece {
   // a physical sculpture extends). Rendered as a "Companion: {Title}" link
   // on the piece page so the catalogue can express the pairing.
   companionSlug?: string;
-  // Exhibition history. Renders a small "Exhibited at: {name}, {date}"
-  // line in the piece's metadata stack, with the name linking out when a
-  // URL is provided. Use for both past and current shows - the date field
-  // carries the timing context. Editorial / human-owned.
-  exhibition?: {
-    name: string;
-    date?: string; // free-form, e.g. "April 2025" or "Apr 5–May 12, 2025"
-    url?: string;
-  };
+  // Public exhibitions / showings of THIS piece. Same shape and render
+  // style as `Collection.exhibitions` (used by ACK / Operator on the
+  // collection page) - EXHIBITIONS eyebrow + "date - title, location"
+  // rows, title italicised in serif. Editorial / human-owned.
+  exhibitions?: Exhibition[];
 }
 
 export interface Influence {
@@ -1961,11 +1957,14 @@ export const pieces: Piece[] = [
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000253',
     originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000253.png',
-    exhibition: {
-      name: 'Rhizome World, NYC',
-      date: 'April 2025',
-      url: 'https://x.com/paintboxed1981/status/1913986525806625009/photo/3',
-    },
+    exhibitions: [
+      {
+        date: 'April 2025',
+        title: 'Rhizome World',
+        location: 'NYC',
+        url: 'https://x.com/paintboxed1981/status/1913986525806625009/photo/3',
+      },
+    ],
   },
   {
     id: 'fidenza-256-d270',
@@ -2238,11 +2237,14 @@ export const pieces: Piece[] = [
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000943',
     originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000943.png',
-    exhibition: {
-      name: 'Rhizome World, NYC',
-      date: 'April 2025',
-      url: 'https://x.com/paintboxed1981/status/1913986525806625009/photo/3',
-    },
+    exhibitions: [
+      {
+        date: 'April 2025',
+        title: 'Rhizome World',
+        location: 'NYC',
+        url: 'https://x.com/paintboxed1981/status/1913986525806625009/photo/3',
+      },
+    ],
   },
   {
     id: 'fidenza-984-d270',
