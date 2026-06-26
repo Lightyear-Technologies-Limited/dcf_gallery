@@ -59,14 +59,16 @@ export default function CollectionView({ sections, artists }: Props) {
 
   const [excludedArtists, setExcludedArtists] = useState<string[]>([]);
 
-  // Reset scroll on filter change so the filter bar is visible. Without this,
-  // the hero collapses and the user finds themselves stranded mid-gallery.
+  // Reset scroll on filter change so the masthead is visible and the new
+  // filtered set reads from the top. Instant (no animation): when the
+  // sticky filter row is in use, smooth-scroll over long distances feels
+  // sluggish AND the page reflows the moment the filter applies, so the
+  // animation traverses offsets that no longer match the rendered DOM.
+  // One-frame jump avoids both. Reduced-motion is honoured trivially since
+  // there's no motion to suppress.
   function scrollToTop() {
     if (typeof window !== "undefined") {
-      // Honor reduced-motion: an explicit `behavior` overrides the global CSS
-      // scroll-behavior rule, so check the preference here too.
-      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+      window.scrollTo(0, 0);
     }
   }
 
@@ -257,7 +259,7 @@ export default function CollectionView({ sections, artists }: Props) {
             explainer reads as "this chapter contains N of the fund's whole." */}
         {hasFilters && (
           <p className="text-[11px] text-muted tabular-nums pt-2">
-            {visiblePieces} of {totalPieces} works in the collection
+            {visiblePieces} of {totalPieces} works in the Hivemind collection
           </p>
         )}
       </section>
