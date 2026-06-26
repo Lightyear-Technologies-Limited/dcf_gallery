@@ -89,10 +89,16 @@ export default function ChaptersPage() {
       <ScrollRestore />
       {/* Masthead — mirrors the Salon masthead (CollectionView) at the same
           max-w-[1200px] so the "Hivemind Digital Culture Fund" wordmark holds the
-          same position when moving between Collection and Chapters. */}
-      <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="pt-6">
-          <h1 className="font-serif display-sm">Hivemind Digital Culture Fund</h1>
+          same position when moving between Collection and Chapters. The
+          "Chapters" subject heading + one-line framing match the Artists /
+          About index-page pattern so the three reads as a consistent set. */}
+      <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 pt-6">
+        <h1 className="font-serif display-sm">Hivemind Digital Culture Fund</h1>
+        <div className="mt-6 mb-8 max-w-2xl">
+          <h2 className="font-serif display-sm mb-5">Chapters</h2>
+          <p className="text-[17px] sm:text-[18px] leading-[1.6] text-foreground-secondary">
+            Five chapters that have shaped the digital art movement.
+          </p>
         </div>
       </div>
       <ChaptersView chapters={chapterData} />
