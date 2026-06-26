@@ -106,7 +106,7 @@ export default function ArtistsPage() {
             // row's gap below the index lede.
             className="border-b border-border py-12"
           >
-            <div className={`grid grid-cols-1 ${heroOnRight ? "md:grid-cols-[45fr_55fr]" : "md:grid-cols-[55fr_45fr]"} gap-8 md:gap-16 items-start`}>
+            <div className={`grid grid-cols-1 ${heroOnRight ? "md:grid-cols-[45fr_55fr]" : "md:grid-cols-[55fr_45fr]"} gap-8 md:gap-16 items-start md:items-center`}>
               {/* On odd rows the hero is on the right; markup-order stays
                   hero-first so reading order matches visual order on mobile
                   (single column), and the desktop swap is column-order only. */}
@@ -147,7 +147,7 @@ export default function ArtistsPage() {
                   {visibleCols.length} collection{visibleCols.length !== 1 ? "s" : ""} &middot; {allWorks.length} works
                 </p>
                 {(getArtistEditorial(artist.slug)?.bio ?? artist.bio) && (
-                  <p className="text-[15px] text-foreground-secondary leading-[1.65] mt-6 max-w-[400px]">
+                  <p className="text-[15px] text-foreground-secondary leading-[1.65] mt-6 max-w-[440px]">
                     {(getArtistEditorial(artist.slug)?.bio ?? artist.bio)}
                   </p>
                 )}
