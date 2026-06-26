@@ -699,6 +699,16 @@ export default async function CollectionPage({
                       →
                     </a>
                   )}
+                  {col.xUrl && (
+                    <a
+                      href={col.xUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-3 text-[13px] text-muted hover:text-foreground transition-colors duration-200 inline-block"
+                    >
+                      {col.xLabel ?? "Read the thread on X"} →
+                    </a>
+                  )}
                 </div>
               )}
               {!col.curatorNote && col.essayUrl && (

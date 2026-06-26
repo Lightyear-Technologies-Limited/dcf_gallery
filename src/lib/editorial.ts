@@ -19,6 +19,10 @@ export interface CollectionEditorial {
   curatorNote: string;
   essayUrl?: string;
   essayTitle?: string;
+  /** Optional X (Twitter) thread / announcement post link. */
+  xUrl?: string;
+  /** Optional override label for the X link (defaults to "Read the thread on X"). */
+  xLabel?: string;
 }
 
 const ED = editorial as {
@@ -46,12 +50,22 @@ export function withArtistEditorial<
   return { ...a, bio: ed.bio, essayUrl: ed.essayUrl ?? a.essayUrl, essayTitle: ed.essayTitle ?? a.essayTitle };
 }
 
-/** Overlay the editorial record onto a generated Collection (curator note + essay). */
+/** Overlay the editorial record onto a generated Collection (curator note
+ *  + essay + optional X link). The xUrl/xLabel fields are editorial-only
+ *  (no counterpart in data.ts), so the return type widens to include them. */
 export function withCollectionEditorial<
   T extends { slug: string; curatorNote: string; essayUrl?: string; essayTitle?: string },
->(c: T | undefined): T | undefined {
+>(c: T | undefined): (T & { xUrl?: string; xLabel?: string }) | undefined {
   if (!c) return c;
   const ed = ED.collections[c.slug];
-  if (!ed) return c;
-  return { ...c, curatorNote: ed.curatorNote, essayUrl: ed.essayUrl ?? c.essayUrl, essayTitle: ed.essayTitle ?? c.essayTitle };
+  const base = c as T & { xUrl?: string; xLabel?: string };
+  if (!ed) return base;
+  return {
+    ...base,
+    curatorNote: ed.curatorNote,
+    essayUrl: ed.essayUrl ?? base.essayUrl,
+    essayTitle: ed.essayTitle ?? base.essayTitle,
+    xUrl: ed.xUrl,
+    xLabel: ed.xLabel,
+  };
 }

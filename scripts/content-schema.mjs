@@ -8,6 +8,14 @@ const essay = {
   essayTitle: z.string().min(1, "essayTitle must not be empty").optional(),
 };
 
+// Optional X (Twitter) thread / announcement-post link. Renders alongside
+// the essay link on the collection page. Authoritative source is the
+// same per-collection JSON; populate when a thread exists.
+const xLink = {
+  xUrl: z.url("xUrl must be a valid URL").optional(),
+  xLabel: z.string().min(1, "xLabel must not be empty").optional(),
+};
+
 export const ArtistEditorial = z
   .object({
     bio: z.string().min(1, "bio is required"),
@@ -20,6 +28,7 @@ export const CollectionEditorial = z
     // May be empty for not-yet-written notes (tracked by plan item C.6).
     curatorNote: z.string(),
     ...essay,
+    ...xLink,
   })
   .strict();
 
