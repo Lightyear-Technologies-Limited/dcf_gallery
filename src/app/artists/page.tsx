@@ -119,7 +119,7 @@ export default function ArtistsPage() {
                   to the gutter; the bio container uses md:ml-auto +
                   md:text-left to push its block to the right edge while
                   keeping body text left-aligned for readability. */}
-              <div className={heroOnRight ? "md:order-1 md:text-right" : ""}>
+              <div className={`md:pt-4 ${heroOnRight ? "md:order-1" : ""}`}>
                 <Link
                   href={`/artist/${artist.slug}`}
                   className="inline-flex items-center gap-3"
@@ -141,7 +141,7 @@ export default function ArtistsPage() {
                   {visibleCols.length} collection{visibleCols.length !== 1 ? "s" : ""} &middot; {allWorks.length} works
                 </p>
                 {(getArtistEditorial(artist.slug)?.bio ?? artist.bio) && (
-                  <p className={`text-[15px] text-foreground-secondary leading-[1.65] mt-6 max-w-[440px] ${heroOnRight ? "md:ml-auto md:text-left" : ""}`}>
+                  <p className="text-[15px] text-foreground-secondary leading-[1.65] mt-6 max-w-[440px]">
                     {(getArtistEditorial(artist.slug)?.bio ?? artist.bio)}
                   </p>
                 )}
