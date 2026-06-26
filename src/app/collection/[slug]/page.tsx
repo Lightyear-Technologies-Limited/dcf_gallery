@@ -413,40 +413,37 @@ export default async function CollectionPage({
     </div>
   ) : null;
 
-  // Browse-by-trait disclosure - rendered BELOW the editorial grid on
-  // UNFILTERED pages only. On filtered views the inline traitIndexInline
-  // above takes over instead, sitting directly under the chip in the left
-  // column.
-  // Unfiltered placement wraps the same inline layout in a <details>
-  // disclosure so the trait index stays collapsed by default (the
-  // unfiltered page subject is the artwork, not the pivot affordance).
-  // When opened, it renders the exact same tight inline rows the
-  // filtered view shows always-visible - no structural mismatch
-  // between filter states.
-  // Pure-CSS checkbox+peer disclosure. The rows are always rendered so
-  // the column reserves their height, and visibility toggles with the
-  // checkbox state. Net: opening never grows the column or pushes the
-  // gallery down — the closed state just shows the summary above the
-  // reserved (empty) space the rows would occupy. We don't use a native
-  // `<details>` element because its browser-default `display: none` on
-  // closed children would collapse the height we want to reserve.
-  const traitToggleId = `trait-toggle-${slug}`;
+  // Browse-by-trait disclosure - rendered in the LEFT editorial column on
+  // unfiltered pages. Filtered views render the inline trait index
+  // directly (no disclosure) so the available pivots stay visible.
+  //
+  // Native <details> matching the piece-page Features pattern - same
+  // chevron rotation, same hover affordance, same open animation. Drops
+  // an earlier checkbox+peer reserved-height hack: the dead empty space
+  // it created read as a hole in the column, and the consistency win
+  // with Features.tsx is worth a small gallery push-down on open.
+  // Default-open: for trait-heavy collections (Fidenza palette, Punks
+  // types), trait-pivoting IS the curatorial story; surfacing the index
+  // by default saves a click and tells the reader the catalogue is
+  // queryable. We treat any collection with a non-trivial index as
+  // trait-heavy (>= 4 rows).
+  const traitDisclosureDefaultOpen = traitIndexRows.length >= 4;
   const traitDisclosure = traitIndexRows.length > 0 ? (
-    <div className="max-w-[520px]">
-      <input id={traitToggleId} type="checkbox" className="peer sr-only" />
-      <label
-        htmlFor={traitToggleId}
-        className="cursor-pointer text-muted hover:text-foreground transition-colors duration-200 inline-flex items-center gap-2 select-none peer-checked:[&_.tt-chev]:rotate-90"
-      >
+    <details
+      className="group max-w-[520px] [&_summary::-webkit-details-marker]:hidden"
+      open={traitDisclosureDefaultOpen}
+    >
+      <summary className="cursor-pointer list-none text-muted hover:text-foreground transition-colors duration-200 inline-flex items-center gap-2 select-none">
         <span className="text-[10px] uppercase">Browse by trait</span>
-        <span aria-hidden className="tt-chev inline-block transition-transform duration-200">
+        <span
+          aria-hidden
+          className="inline-block transition-transform duration-200 group-open:rotate-90"
+        >
           &rsaquo;
         </span>
-      </label>
-      <div className="invisible peer-checked:visible">
-        {traitIndexInline}
-      </div>
-    </div>
+      </summary>
+      {traitIndexInline}
+    </details>
   ) : null;
 
   const collectionLd = {
@@ -748,8 +745,28 @@ export default async function CollectionPage({
             </div>
         </div>
 
+      {/* Filter reminder above the gallery: the chipBlock at the top of
+          the editorial column carries the full status row, but a reader
+          who has scrolled past the editorial header should still see at
+          a glance that they're filtered and have a one-click escape. */}
+      {traitFilter && pieces.length > 0 && (
+        <div className="pt-6 flex items-baseline gap-2 text-[11px] text-muted">
+          <span className="uppercase tracking-[0.08em]">Filter</span>
+          <span className="text-foreground-secondary">
+            {traitFilter.key}: <span className="font-medium">{traitFilter.value}</span>
+          </span>
+          <Link
+            href={`/collection/${slug}`}
+            aria-label="Clear filter"
+            className="ml-auto text-foreground-secondary hover:text-foreground transition-colors duration-200"
+          >
+            Clear
+          </Link>
+        </div>
+      )}
+
       {/* Gallery. */}
-      <div className={`${traitFilter ? "pt-8" : "pt-6"} pb-24`}>
+      <div className={`${traitFilter ? "pt-4" : "pt-6"} pb-24`}>
         {(() => {
           const heroLayout = getHeroLayout(slug);
           // Filtered view: bypass hero / fixed-row / single-piece layouts
