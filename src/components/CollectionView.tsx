@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import JustifiedGallery from "./JustifiedGallery";
@@ -59,18 +59,44 @@ export default function CollectionView({ sections, artists }: Props) {
 
   const [excludedArtists, setExcludedArtists] = useState<string[]>([]);
 
-  // Reset scroll on filter change so the masthead is visible and the new
-  // filtered set reads from the top. Instant (no animation): when the
-  // sticky filter row is in use, smooth-scroll over long distances feels
-  // sluggish AND the page reflows the moment the filter applies, so the
-  // animation traverses offsets that no longer match the rendered DOM.
-  // One-frame jump avoids both. Reduced-motion is honoured trivially since
-  // there's no motion to suppress.
-  function scrollToTop() {
-    if (typeof window !== "undefined") {
-      window.scrollTo(0, 0);
-    }
+  // Ref to the sticky filter section. Used for two things:
+  //  1) On filter change, snap scroll to the section's natural offsetTop
+  //     instead of 0. Keeps the reader in "browse mode" (masthead off-
+  //     screen, filter pinned to top) rather than bouncing back to the
+  //     wordmark every time they select a different artist.
+  //  2) Scroll-direction hide: when the reader scrolls down past the
+  //     filter, the section translates up out of view, freeing the full
+  //     viewport for tall artworks. An upward scroll gesture brings it
+  //     back so navigation is always one motion away.
+  const filterRef = useRef<HTMLElement>(null);
+  const [filterHidden, setFilterHidden] = useState(false);
+
+  function scrollToFilter() {
+    if (typeof window === "undefined") return;
+    const top = filterRef.current?.offsetTop ?? 0;
+    window.scrollTo(0, top);
   }
+
+  useEffect(() => {
+    let lastY = typeof window !== "undefined" ? window.scrollY : 0;
+    function onScroll() {
+      const y = window.scrollY;
+      // Always visible while above the filter's natural top + a small
+      // buffer so the reader doesn't see the filter flicker at the
+      // boundary between masthead and sticky state.
+      const showAboveThreshold = (filterRef.current?.offsetTop ?? 0) + 80;
+      if (y < showAboveThreshold) {
+        setFilterHidden(false);
+      } else if (y > lastY + 5) {
+        setFilterHidden(true);
+      } else if (y < lastY - 5) {
+        setFilterHidden(false);
+      }
+      lastY = y;
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   function selectArtist(slug: string) {
     if (chapterFilter) {
@@ -79,13 +105,13 @@ export default function CollectionView({ sections, artists }: Props) {
       } else {
         setExcludedArtists([...excludedArtists, slug]);
       }
-      scrollToTop();
+      scrollToFilter();
       return;
     }
     const next = artistFilter === slug ? null : slug;
     setArtistFilter(next);
     syncUrl(next, null);
-    scrollToTop();
+    scrollToFilter();
   }
 
   function selectChapter(slug: string | null) {
@@ -99,7 +125,7 @@ export default function CollectionView({ sections, artists }: Props) {
       setExcludedArtists([]);
       syncUrl(null, slug);
     }
-    scrollToTop();
+    scrollToFilter();
   }
 
   function clearAll() {
@@ -107,7 +133,7 @@ export default function CollectionView({ sections, artists }: Props) {
     setChapterFilter(null);
     setExcludedArtists([]);
     syncUrl(null, null);
-    scrollToTop();
+    scrollToFilter();
   }
 
   useEffect(() => {
@@ -181,8 +207,16 @@ export default function CollectionView({ sections, artists }: Props) {
           above scrolls away cleanly. top-14 on mobile clears the fixed
           mobile header (h-14); top-0 from md+ where the header is in the
           left rail. bg-background covers the masthead as it slides under.
-          Removing a filter is done by clicking its active label. */}
-      <section className="sticky top-14 md:top-0 z-30 bg-background pt-6 pb-4 border-b border-border space-y-2">
+          The section slides up out of view on downward scroll past the
+          masthead, restoring full vertical room for tall artworks; any
+          upward gesture brings it back. Removing a filter is done by
+          clicking its active label. */}
+      <section
+        ref={filterRef}
+        className={`sticky top-14 md:top-0 z-30 bg-background pt-6 pb-4 border-b border-border space-y-2 transition-transform duration-300 ease-out ${
+          filterHidden ? "-translate-y-full" : "translate-y-0"
+        }`}
+      >
         {/* Row 1: Artists. Mask gives a fade on the trailing edge when overflowing. */}
         <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide [mask-image:linear-gradient(to_right,black_calc(100%-24px),transparent)]">
           <span
@@ -257,7 +291,7 @@ export default function CollectionView({ sections, artists }: Props) {
             explainer reads as "this chapter contains N of the fund's whole." */}
         {hasFilters && (
           <p className="text-[11px] text-muted tabular-nums pt-2">
-            {visiblePieces} of {totalPieces} works in the Hivemind collection
+            {visiblePieces} of {totalPieces} works
           </p>
         )}
       </section>
