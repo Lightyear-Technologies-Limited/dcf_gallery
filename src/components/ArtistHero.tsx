@@ -54,14 +54,15 @@ export default function ArtistHero({ artistSlug, candidates }: Props) {
   return (
     <Link
       href={`/artist/${artistSlug}`}
-      // Uniform aspect-[9/8] frame per artist so every row on /artists has
-      // the same hero footprint regardless of the artwork's natural ratio.
-      // Image inside is object-contain (never cropped) - tall pieces render
-      // narrower than the frame; wide pieces render shorter. Punks keep
-      // their classic teal background to frame the pixel art; everything
-      // else has no background fill so the artwork sits on the page colour
-      // (no visible frame border around the art).
-      className={`block w-full aspect-[9/8] flex items-center justify-center overflow-hidden ${hero.isPunk ? "bg-punk" : ""}`}
+      // Uniform aspect-[16/9] frame per artist so every row on /artists
+      // has the same hero footprint regardless of the artwork's natural
+      // ratio. Reduced from 9:8 (~1.125:1) because that aspect ran
+      // the hero ~590px tall on desktop while the info column was
+      // ~280px, leaving a big air pocket below the bio. 16:9 brings the
+      // frame to ~370px - much closer to info-column height. Image
+      // inside is object-contain (never cropped). Punks keep their
+      // classic teal background; everything else sits on page colour.
+      className={`block w-full aspect-[16/9] flex items-center justify-center overflow-hidden ${hero.isPunk ? "bg-punk" : ""}`}
     >
       <Image
         src={hero.src}
