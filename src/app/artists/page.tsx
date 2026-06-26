@@ -71,7 +71,11 @@ export default function ArtistsPage() {
         return (
           <div
             key={artist.slug}
-            className="border-b border-border py-16"
+            // py-12 (was py-16) - sized to the current 16:9 hero, not
+            // the earlier taller 9:8 frame. py-16 left the rows feeling
+            // hollow once the hero was shortened, especially the first
+            // row's gap below the index lede.
+            className="border-b border-border py-12"
           >
             <div className={`grid grid-cols-1 ${heroOnRight ? "md:grid-cols-[45fr_55fr]" : "md:grid-cols-[55fr_45fr]"} gap-8 md:gap-16 items-start`}>
               {/* On odd rows the hero is on the right; markup-order stays
