@@ -125,16 +125,20 @@ export default function ArtistsPage() {
             // with each piece's aspect rather than locking to 16:9.
             className="border-b border-border py-10"
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start md:items-center">
+            <div className={`grid grid-cols-1 ${heroOnRight ? "md:grid-cols-[60fr_40fr]" : "md:grid-cols-[40fr_60fr]"} gap-8 md:gap-12 items-start`}>
               {/* On odd rows the hero is on the right; markup-order stays
                   hero-first so reading order matches visual order on mobile
-                  (single column), and the desktop swap is column-order only. */}
+                  (single column), and the desktop swap is column-order only.
+                  Grid template flips alongside the order swap so the hero
+                  is always in the smaller 40fr column - never the 60fr. */}
               <div className={heroOnRight ? "md:order-2" : ""}>
                 <ArtistHero artistSlug={artist.slug} candidates={candidates} aspect={heroAspect} />
               </div>
 
-              {/* Info */}
-              <div className={heroOnRight ? "md:order-1" : ""}>
+              {/* Info - md:pt-4 lands the artist name just below the top
+                  of the artwork rather than flush with the hero's top
+                  edge; gentle offset for breathing room. */}
+              <div className={`md:pt-4 ${heroOnRight ? "md:order-1" : ""}`}>
                 {/* Portrait + wordmark. Portrait sits inline with the h2
                     as the artist's identity badge - small enough not to
                     compete with the artwork hero across the gutter,
