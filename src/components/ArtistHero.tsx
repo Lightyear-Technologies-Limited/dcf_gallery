@@ -34,7 +34,7 @@ export default function ArtistHero({ artistSlug, candidates, aspect }: Props) {
         className="block w-full overflow-hidden"
       >
         {hero.isPunk ? (
-          <div className="w-full h-full bg-punk flex items-center justify-center overflow-hidden">
+          <div className="w-full h-full bg-punk flex items-start justify-center overflow-hidden">
             <Image
               src={hero.src}
               alt={hero.title}
@@ -62,7 +62,7 @@ export default function ArtistHero({ artistSlug, candidates, aspect }: Props) {
   return (
     <Link
       href={`/artist/${artistSlug}`}
-      className={`block w-full aspect-[9/8] flex items-center justify-center overflow-hidden ${hero.isPunk ? "bg-punk" : ""}`}
+      className={`block w-full aspect-[9/8] flex items-start justify-center overflow-hidden ${hero.isPunk ? "bg-punk" : ""}`}
     >
       <Image
         src={hero.src}

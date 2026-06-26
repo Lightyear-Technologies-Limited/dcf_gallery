@@ -127,7 +127,7 @@ export default function ArtistsPage() {
                   to the gutter; the bio container uses md:ml-auto +
                   md:text-left to push its block to the right edge while
                   keeping body text left-aligned for readability. */}
-              <div className={`${artist.slug === "a-c-k" ? "md:pt-12" : "md:pt-4"} ${heroOnRight ? "md:order-1" : ""}`}>
+              <div className={`md:pt-4 ${heroOnRight ? "md:order-1" : ""}`}>
                 <Link
                   href={`/artist/${artist.slug}`}
                   className="inline-flex items-center gap-3"
