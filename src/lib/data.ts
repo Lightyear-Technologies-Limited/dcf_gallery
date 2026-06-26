@@ -37,6 +37,11 @@ export interface Exhibition {
   /** Optional link to event details (press, recap, catalogue). Renders the
       title + location as an external link when present. */
   url?: string;
+  /** Optional list of specific pieces featured in the exhibition - rendered
+      as a "(#253, #943)" suffix when the show featured only a subset of
+      the collection. Free-form strings so curators can use whatever piece
+      shorthand fits ("#253", "Fidenza #253", "Hero piece", etc.). */
+  pieces?: string[];
 }
 
 export interface Collection {
@@ -376,6 +381,15 @@ export const collections: Collection[] = [
     medium: 'generative',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     totalSupply: 999,
+    exhibitions: [
+      {
+        date: 'April 2025',
+        title: 'Rhizome World',
+        location: 'NYC',
+        url: 'https://x.com/paintboxed1981/status/1913986525806625009/photo/3',
+        pieces: ['#253', '#943'],
+      },
+    ],
     tags: ['generative', 'algorithmic', 'on-chain'],
     influences: [],
   },
@@ -1957,14 +1971,6 @@ export const pieces: Piece[] = [
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000253',
     originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000253.png',
-    exhibitions: [
-      {
-        date: 'April 2025',
-        title: 'Rhizome World',
-        location: 'NYC',
-        url: 'https://x.com/paintboxed1981/status/1913986525806625009/photo/3',
-      },
-    ],
   },
   {
     id: 'fidenza-256-d270',
@@ -2237,14 +2243,6 @@ export const pieces: Piece[] = [
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000943',
     originalUri: 'https://media-proxy.artblocks.io/1/0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270/78000943.png',
-    exhibitions: [
-      {
-        date: 'April 2025',
-        title: 'Rhizome World',
-        location: 'NYC',
-        url: 'https://x.com/paintboxed1981/status/1913986525806625009/photo/3',
-      },
-    ],
   },
   {
     id: 'fidenza-984-d270',

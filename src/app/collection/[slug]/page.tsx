@@ -640,6 +640,9 @@ export default async function CollectionPage({
                           )}
                         </>
                       )}
+                      {ex.pieces && ex.pieces.length > 0 && (
+                        <span className="text-muted"> ({ex.pieces.join(", ")})</span>
+                      )}
                     </li>
                   ))}
                 </ul>
