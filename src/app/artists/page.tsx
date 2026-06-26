@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { artists, getPiecesByArtist, getCollectionsByArtist } from "@/lib/data";
 import { getArtistEditorial } from "@/lib/editorial";
-import { getArtworkImage, getArtworkAspect } from "@/lib/images";
+import { getArtworkImage } from "@/lib/images";
 import {
   getArtistDisplayName,
   getCollectionDisplayName,
@@ -40,13 +40,6 @@ const HERO_PIECE_SLUGS: Record<string, string> = {
 const HERO_COLLECTION_OVERRIDES: Record<string, string[]> = {
   "kim-asendorf": ["lights"],
 };
-// Hero frame aspect override (width/height). Most artists get the
-// piece's intrinsic aspect via getArtworkAspect; Kim's Lights is
-// dynamically generated and can render at any aspect, so we force
-// 1:1 square to land it in the page's square-majority cadence.
-const HERO_ASPECT_OVERRIDES: Record<string, number> = {
-  "kim-asendorf": 1,
-};
 
 export default function ArtistsPage() {
   return (
@@ -58,11 +51,10 @@ export default function ArtistsPage() {
       {/* Section title + framing copy, structured to match a Chapters chapter
           entry: the section title sits at the chapter-title scale, with a
           framing paragraph below (replacing the old "N artists" count line). */}
-      <div className="mt-6 mb-8 max-w-2xl">
+      <div className="mt-6 mb-8 max-w-3xl">
         <h2 className="font-serif display-sm mb-5">Artists</h2>
         <p className="text-[17px] sm:text-[18px] leading-[1.6] text-foreground-secondary">
-          Hivemind brings together ten artists whose work spans digital
-          art&rsquo;s first decades.
+          Hivemind collects work by ten of digital art&rsquo;s most influential artists.
         </p>
       </div>
       {sorted.map((artist, idx) => {
@@ -87,29 +79,16 @@ export default function ArtistsPage() {
         const heroWorks = pinnedSlug
           ? allWorks.filter((w) => w.slug === pinnedSlug)
           : allWorks;
-        const sortedHeroPieces = heroCols.flatMap((col) =>
-          sortPieces(col.slug, heroWorks.filter((w) => w.collectionSlug === col.slug))
-        );
-        const candidates = sortedHeroPieces
+        const candidates = heroCols
+          .flatMap((col) =>
+            sortPieces(col.slug, heroWorks.filter((w) => w.collectionSlug === col.slug))
+          )
           .map((p) => {
             const src = getArtworkImage(p.slug, p.contractAddress, p.tokenId, "detail");
             if (!src) return null;
             return { src, title: p.title, isPunk: p.collectionSlug === "cryptopunks" };
           })
           .filter((c): c is NonNullable<typeof c> => c !== null);
-
-        // Hero frame aspect = the piece's own intrinsic aspect (fit-
-        // to-the-art) so no piece is letterboxed. Falls back to 1:1
-        // when no intrinsic dimension is available (curated samples,
-        // pieces without an optimized variant). Overrides force a
-        // specific aspect for dynamic pieces - Kim's Lights renders
-        // 1:1 via crop so the page's square-majority cadence holds.
-        const heroPiece = sortedHeroPieces[0];
-        const intrinsic = heroPiece
-          ? getArtworkAspect(heroPiece.slug, heroPiece.contractAddress, heroPiece.tokenId)
-          : null;
-        const heroAspect = HERO_ASPECT_OVERRIDES[artist.slug]
-          ?? (intrinsic ? intrinsic.w / intrinsic.h : 1);
 
         // Alternate image-left and image-right across rows so the eye has
         // something to track. Eleven identical 55/45 rows read as wallpaper;
@@ -120,34 +99,30 @@ export default function ArtistsPage() {
         return (
           <div
             key={artist.slug}
-            // py-10 (was py-12) - lighter row padding alongside the
-            // fit-to-the-art frame, where rows now vary in height
-            // with each piece's aspect rather than locking to 16:9.
-            className="border-b border-border py-10"
+            className="border-b border-border py-16 group"
           >
-            <div className={`grid grid-cols-1 ${heroOnRight ? "md:grid-cols-[60fr_40fr]" : "md:grid-cols-[40fr_60fr]"} gap-8 md:gap-12 items-start`}>
+            <div className={`grid grid-cols-1 ${heroOnRight ? "md:grid-cols-[45fr_55fr]" : "md:grid-cols-[55fr_45fr]"} gap-8 md:gap-16 items-start md:items-center`}>
               {/* On odd rows the hero is on the right; markup-order stays
                   hero-first so reading order matches visual order on mobile
-                  (single column), and the desktop swap is column-order only.
-                  Grid template flips alongside the order swap so the hero
-                  is always in the smaller 40fr column - never the 60fr. */}
+                  (single column), and the desktop swap is column-order only. */}
               <div className={heroOnRight ? "md:order-2" : ""}>
-                <ArtistHero artistSlug={artist.slug} candidates={candidates} aspect={heroAspect} />
+                <ArtistHero artistSlug={artist.slug} candidates={candidates} />
               </div>
 
-              {/* Info - md:pt-4 lands the artist name just below the top
-                  of the artwork rather than flush with the hero's top
-                  edge; gentle offset for breathing room. */}
-              <div className={`md:pt-4 ${heroOnRight ? "md:order-1" : ""}`}>
-                {/* Portrait + wordmark. Portrait sits inline with the h2
-                    as the artist's identity badge - small enough not to
-                    compete with the artwork hero across the gutter,
-                    consistent across rows so the index reads as a roster.
-                    Absent portrait gracefully degrades to a plain
-                    wordmark row. */}
+              {/* Info - on heroOnRight rows, the info column lands on
+                  the LEFT (md:order-1) with the hero on the right. Default
+                  left-alignment would push text content flush against the
+                  page's left edge with empty space across to the hero -
+                  visually disconnected. md:text-right on the wrapper
+                  re-anchors the inline portrait+name Link and the
+                  eyebrow label to the right edge of the column, adjacent
+                  to the gutter; the bio container uses md:ml-auto +
+                  md:text-left to push its block to the right edge while
+                  keeping body text left-aligned for readability. */}
+              <div className={heroOnRight ? "md:order-1 md:text-right" : ""}>
                 <Link
                   href={`/artist/${artist.slug}`}
-                  className="inline-flex items-center gap-3 group"
+                  className="inline-flex items-center gap-3"
                 >
                   {artist.portrait && (
                     <Image
@@ -162,15 +137,11 @@ export default function ArtistsPage() {
                     {artistName}
                   </h3>
                 </Link>
-                {/* Single eyebrow line - count only. The collection list used
-                    to be inlined here as a comma-separated link row, but it
-                    duplicated what the artist page itself does better and read
-                    as filler. Cut. */}
                 <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mt-4 tabular-nums">
                   {visibleCols.length} collection{visibleCols.length !== 1 ? "s" : ""} &middot; {allWorks.length} works
                 </p>
                 {(getArtistEditorial(artist.slug)?.bio ?? artist.bio) && (
-                  <p className="text-[15px] text-foreground-secondary leading-[1.65] mt-6 max-w-[440px]">
+                  <p className={`text-[15px] text-foreground-secondary leading-[1.65] mt-6 max-w-[440px] ${heroOnRight ? "md:ml-auto md:text-left" : ""}`}>
                     {(getArtistEditorial(artist.slug)?.bio ?? artist.bio)}
                   </p>
                 )}
