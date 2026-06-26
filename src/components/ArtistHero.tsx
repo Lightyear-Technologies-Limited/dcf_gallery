@@ -31,7 +31,7 @@ export default function ArtistHero({ artistSlug, candidates }: Props) {
       // shorter. Punks keep their classic teal background to frame the
       // pixel art; everything else has no background fill so the
       // artwork sits on the page colour (no visible frame border).
-      className={`block w-full aspect-[9/8] flex items-center justify-center overflow-hidden ${hero.isPunk ? "bg-punk" : ""}`}
+      className={`block w-full aspect-[9/8] flex items-center justify-center overflow-hidden group-hover:opacity-90 transition-opacity duration-200 ${hero.isPunk ? "bg-punk" : ""}`}
     >
       <Image
         src={hero.src}

@@ -99,7 +99,7 @@ export default function ArtistsPage() {
         return (
           <div
             key={artist.slug}
-            className="border-b border-border py-16"
+            className="border-b border-border py-16 group"
           >
             <div className={`grid grid-cols-1 ${heroOnRight ? "md:grid-cols-[45fr_55fr]" : "md:grid-cols-[55fr_45fr]"} gap-8 md:gap-16 items-start md:items-center`}>
               {/* On odd rows the hero is on the right; markup-order stays
@@ -119,7 +119,7 @@ export default function ArtistsPage() {
                     wordmark row. */}
                 <Link
                   href={`/artist/${artist.slug}`}
-                  className="inline-flex items-center gap-3 group"
+                  className="inline-flex items-center gap-3"
                 >
                   {artist.portrait && (
                     <Image
