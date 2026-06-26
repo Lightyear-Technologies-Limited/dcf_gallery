@@ -517,15 +517,17 @@ export default async function CollectionPage({
           the header structure stays constant. */}
       <div className="pt-6 grid grid-cols-1 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-12 md:gap-16">
           <div>
-            {/* Title + held piece count (the kept Index affordance — a quick
-                "how many works" read next to the name). Still suppressed on
-                filtered views (the total would misrepresent the visible
-                subset); single-piece collections now show "1" for parity. */}
+            {/* Title. Inline piece-count chip suppressed when the catalogue
+                stack below carries the same count via "Hivemind holds N works"
+                (i.e. when totalSupply is set) - reading "30 works" twice in
+                the first three lines of the page is redundant. Falls back to
+                inline when the holdings line is absent (collections without
+                totalSupply). Always suppressed on filtered views. */}
             <div className="flex items-baseline gap-2.5">
               <h1 className="font-serif display-sm">
                 {collectionName}
               </h1>
-              {!traitFilter && (
+              {!traitFilter && !col.totalSupply && (
                 <span className="text-[12px] text-muted tabular-nums">{sorted.length} {sorted.length === 1 ? "work" : "works"}</span>
               )}
             </div>
