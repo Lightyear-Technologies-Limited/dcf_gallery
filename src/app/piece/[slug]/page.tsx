@@ -6,7 +6,7 @@ import { getArtworkImage, getArtworkAspect, resolveTokenId } from "@/lib/images"
 import { getDetailVariants, getArtworkBlur, getProvenance, getOgImage } from "@/lib/provenance";
 import { getMotion } from "@/lib/motion";
 import { SITE_URL as SITE } from "@/lib/site";
-import { getEditionType, getArtistSiteUrl, getPieceTraits, getPieceDescription, getCollectionDisplayName, getArtistDisplayName, SYNTHETIC_TRAITS } from "@/lib/curation";
+import { getEditionType, getArtistSiteUrl, getPieceTraits, getPieceDescription, getCollectionDisplayName, getArtistDisplayName, sortPieces, SYNTHETIC_TRAITS } from "@/lib/curation";
 import type { TraitValue } from "@/lib/curation";
 import PlaceholderArt from "@/components/PlaceholderArt";
 import BackButton from "@/components/BackButton";
@@ -130,12 +130,20 @@ export default async function PiecePage({
     ? `/collection/${collection.slug}${filterQs ? `?${filterQs}` : ""}`
     : "/";
 
-  // Sibling navigation - previous + next piece in the collection sorted by
-  // numeric tokenId. Predictable forward/backward through the series, even
-  // when the collection page itself uses a curated display order. Falls back
-  // to lexical slug compare when tokenId is missing (physical works, etc.).
-  // When a filter is active, walk only the filtered subset so prev/next
-  // doesn't drop the reader out of their browsing mode.
+  // Sibling navigation - previous + next piece in the collection.
+  //
+  // Unfiltered walk: follow the curated display order from sortPieces (same
+  // function the collection page uses) so prev/next matches the order the
+  // reader saw the works in. Pre-fix this was sorted by raw tokenId, which
+  // diverged from curation for sets like Piano Blossoms (Flower Demons is
+  // displayed first but has tokenId 5 - "Next" from there walked to tokenId
+  // 4, third in display order).
+  //
+  // Filtered walk: when a trait filter is active, walk only the filtered
+  // subset (so prev/next doesn't drop the reader out of their browsing
+  // mode), sorted by numeric tokenId for a predictable scan through the
+  // filtered set - this matches the order the filtered collection view
+  // renders subsets in (see /collection/[slug] sort comment).
   let siblingPieces = [...getPiecesByCollection(piece.collectionSlug)];
   if (incomingFilter) {
     siblingPieces = siblingPieces.filter((p) => {
@@ -147,13 +155,15 @@ export default async function PiecePage({
         return String(v) === incomingFilter.value;
       });
     });
+    siblingPieces.sort((a, b) => {
+      const an = parseInt(a.tokenId || "", 10);
+      const bn = parseInt(b.tokenId || "", 10);
+      if (Number.isFinite(an) && Number.isFinite(bn)) return an - bn;
+      return a.slug.localeCompare(b.slug);
+    });
+  } else {
+    siblingPieces = sortPieces(piece.collectionSlug, siblingPieces);
   }
-  siblingPieces.sort((a, b) => {
-    const an = parseInt(a.tokenId || "", 10);
-    const bn = parseInt(b.tokenId || "", 10);
-    if (Number.isFinite(an) && Number.isFinite(bn)) return an - bn;
-    return a.slug.localeCompare(b.slug);
-  });
   const sibIdx = siblingPieces.findIndex((p) => p.slug === piece.slug);
   const prevPiece = sibIdx > 0 ? siblingPieces[sibIdx - 1] : null;
   const nextPiece = sibIdx >= 0 && sibIdx < siblingPieces.length - 1 ? siblingPieces[sibIdx + 1] : null;

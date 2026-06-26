@@ -296,7 +296,7 @@ export default function CollectionView({ sections, artists }: Props) {
                       >
                         {col.name}
                       </Link>
-                      <span className="text-[11px] text-muted font-mono tabular-nums">{n}</span>
+                      <span className="text-[11px] text-muted tabular-nums">{n} {n === 1 ? "work" : "works"}</span>
                     </div>
                     {(() => {
                       const heroLayout = getHeroLayout(col.slug);

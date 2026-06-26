@@ -534,7 +534,7 @@ export default async function CollectionPage({
                 {collectionName}
               </h1>
               {!traitFilter && (
-                <span className="text-[12px] text-muted font-mono tabular-nums">{sorted.length}</span>
+                <span className="text-[12px] text-muted tabular-nums">{sorted.length} {sorted.length === 1 ? "work" : "works"}</span>
               )}
             </div>
             {artist && (
@@ -680,12 +680,9 @@ export default async function CollectionPage({
                   <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
                     Hivemind Commentary
                   </p>
-                  <ExpandableProse
-                    text={col.curatorNote}
-                    threshold={400}
-                    respectMultiline={false}
-                    className="font-serif text-[16px] leading-[1.65] text-foreground-secondary whitespace-pre-line"
-                  />
+                  <p className="font-serif text-[16px] leading-[1.65] text-foreground-secondary whitespace-pre-line">
+                    {col.curatorNote}
+                  </p>
                   {col.essayUrl && (
                     <a
                       href={col.essayUrl}
