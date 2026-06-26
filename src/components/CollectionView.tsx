@@ -241,7 +241,7 @@ export default function CollectionView({ sections, artists }: Props) {
             explainer reads as "this chapter contains N of the fund's whole." */}
         {hasFilters && (
           <p className="text-[11px] text-muted tabular-nums pt-2">
-            {visiblePieces} of {totalPieces} works in Hivemind Digital Culture Fund
+            {visiblePieces} of {totalPieces} works in the collection
           </p>
         )}
       </section>

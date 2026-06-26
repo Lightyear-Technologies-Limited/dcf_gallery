@@ -34,9 +34,8 @@ export default function ArtistsPage() {
       <div className="mt-6 mb-8 max-w-2xl">
         <h2 className="font-serif display-lg leading-[0.95] mb-5">Artists</h2>
         <p className="text-[17px] sm:text-[18px] leading-[1.6] text-foreground-secondary">
-          The Hivemind Digital Culture Fund collection brings together ten
-          artists whose work spans digital art&rsquo;s defining chapters, from
-          its on-chain origins to the present.
+          Hivemind brings together ten artists whose work spans digital
+          art&rsquo;s first decades.
         </p>
       </div>
       {sorted.map((artist, idx) => {

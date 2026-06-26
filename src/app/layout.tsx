@@ -29,14 +29,14 @@ const instrumentSans = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Hivemind — Digital Culture Fund Gallery",
-    template: "%s — Hivemind DCF",
+    default: "Hivemind - Digital Culture Fund Gallery",
+    template: "%s - Hivemind",
   },
   description: "A curated showcase of the Hivemind Digital Culture Fund collection.",
   openGraph: {
     siteName: "Hivemind Digital Culture Fund",
     type: "website",
-    title: "Hivemind — Digital Culture Fund Gallery",
+    title: "Hivemind - Digital Culture Fund Gallery",
     description: "A curated showcase of the Hivemind Digital Culture Fund collection.",
   },
   twitter: { card: "summary_large_image" },
