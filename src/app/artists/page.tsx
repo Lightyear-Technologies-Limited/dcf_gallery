@@ -27,7 +27,7 @@ const sorted = [...artists]
 // in curation order) because the spec was the collection, not a
 // specific token; the rest pin to a single slug.
 const HERO_PIECE_SLUGS: Record<string, string> = {
-  "a-c-k": "piano-blossoms-3-40f9", // Golden Afternoon
+  "a-c-k": "piano-blossoms-4-40f9", // Muse Blossoms
   "beeple": "superrare-beeple-24644-b9e0", // TIME: The Future of Business
   "dmitri-cherniak": "superrare-dmitri-cherniak-26901-b9e0", // A slight lack of symmetry 1/4
   "larva-labs": "cryptopunks-269-3BBB",
