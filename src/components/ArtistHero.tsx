@@ -1,8 +1,5 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 
 interface Candidate {
   src: string;
@@ -13,64 +10,46 @@ interface Candidate {
 interface Props {
   artistSlug: string;
   candidates: Candidate[];
+  /** width/height. Defaults to 1 (square). Punks always render square
+   *  regardless. When the supplied aspect matches the piece's intrinsic
+   *  aspect (fit-to-the-art), the image fills the frame exactly. When
+   *  it doesn't (Kim Asendorf's dynamic Lights forced to 1:1), the
+   *  object-cover crops to fill rather than compressing. */
+  aspect?: number;
 }
 
-/**
- * Picks a random candidate per session and freezes it across the session, so
- * the hero stays consistent as the user navigates back to /artists. SSR
- * always renders candidate[0] for determinism; after mount we read the
- * sessionStorage pick (or generate + persist one), then snap the image.
- *
- * Earlier behaviour re-rolled the random pick on every page load, which
- * produced a visible flash on hydration. The session-frozen approach removes
- * the swap from any return visit, and the first-visit swap is one-time.
- */
-export default function ArtistHero({ artistSlug, candidates }: Props) {
-  const [pick, setPick] = useState(0);
-
-  useEffect(() => {
-    if (candidates.length <= 1) return;
-    const key = `dcf-hero-${artistSlug}`;
-    let stored: number | null = null;
-    try {
-      const v = sessionStorage.getItem(key);
-      if (v !== null) {
-        const n = parseInt(v, 10);
-        if (Number.isInteger(n) && n >= 0 && n < candidates.length) stored = n;
-      }
-    } catch {
-      // sessionStorage unavailable (private mode, SSR fallback) - just re-pick
-    }
-    const next = stored ?? Math.floor(Math.random() * candidates.length);
-    if (stored === null) {
-      try { sessionStorage.setItem(key, String(next)); } catch {}
-    }
-    setPick(next);
-  }, [artistSlug, candidates.length]);
-
+export default function ArtistHero({ artistSlug, candidates, aspect = 1 }: Props) {
   if (candidates.length === 0) return null;
-  const hero = candidates[pick] ?? candidates[0];
+  const hero = candidates[0];
+  const frameAspect = hero.isPunk ? 1 : aspect;
 
   return (
     <Link
       href={`/artist/${artistSlug}`}
-      // Uniform aspect-[9/8] frame per artist so every row on /artists has
-      // the same hero footprint regardless of the artwork's natural ratio.
-      // Image inside is object-contain (never cropped) - tall pieces render
-      // narrower than the frame; wide pieces render shorter. Punks keep
-      // their classic teal background to frame the pixel art; everything
-      // else has no background fill so the artwork sits on the page colour
-      // (no visible frame border around the art).
-      className={`block w-full aspect-[9/8] flex items-center justify-center overflow-hidden ${hero.isPunk ? "bg-punk" : ""}`}
+      style={{ aspectRatio: String(frameAspect) }}
+      className="block w-full overflow-hidden"
     >
-      <Image
-        src={hero.src}
-        alt={hero.title}
-        width={1200}
-        height={1200}
-        className={`max-w-full max-h-full w-auto h-auto ${hero.isPunk ? "[image-rendering:pixelated]" : ""}`}
-        sizes="(max-width: 768px) 90vw, 55vw"
-      />
+      {hero.isPunk ? (
+        <div className="w-full h-full bg-punk flex items-center justify-center overflow-hidden">
+          <Image
+            src={hero.src}
+            alt={hero.title}
+            width={1200}
+            height={1200}
+            className="max-w-full max-h-full w-auto h-auto [image-rendering:pixelated]"
+            sizes="(max-width: 768px) 90vw, 50vw"
+          />
+        </div>
+      ) : (
+        <Image
+          src={hero.src}
+          alt={hero.title}
+          width={1200}
+          height={1200}
+          className="w-full h-full object-cover"
+          sizes="(max-width: 768px) 90vw, 50vw"
+        />
+      )}
     </Link>
   );
 }

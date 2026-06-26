@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { artists, getPiecesByArtist, getCollectionsByArtist } from "@/lib/data";
 import { getArtistEditorial } from "@/lib/editorial";
-import { getArtworkImage } from "@/lib/images";
+import { getArtworkImage, getArtworkAspect } from "@/lib/images";
 import {
   getArtistDisplayName,
   getCollectionDisplayName,
@@ -21,6 +21,33 @@ const sorted = [...artists]
   .filter((a) => !MERGE_INTO[a.slug])
   .sort((a, b) => a.name.localeCompare(b.name));
 
+// Pinned hero piece per artist on the Artists index. Curated by hand
+// rather than rotated — rotation can be re-introduced later. Kim
+// Asendorf is restricted at the collection level (any Lights piece,
+// in curation order) because the spec was the collection, not a
+// specific token; the rest pin to a single slug.
+const HERO_PIECE_SLUGS: Record<string, string> = {
+  "a-c-k": "piano-blossoms-4-40f9", // Muse Blossoms
+  "beeple": "superrare-beeple-24644-b9e0", // TIME: The Future of Business
+  "dmitri-cherniak": "superrare-dmitri-cherniak-26901-b9e0", // A slight lack of symmetry 1/4
+  "larva-labs": "cryptopunks-269-3BBB",
+  "operator": "human-unreadable-455000124-b069",
+  "refik-anadol": "synthetic-dreams-648-be3a",
+  "sam-spratt": "skulls-of-luci-20-d27c", // Saturnalia Pigmentation (Skull)
+  "tyler-hobbs": "tyler-hobbs-1-9345", // Return Zero [Blue] 0.7
+  "xcopy": "superrare-xcopy-2123-b9e0", // Some Other Asshole
+};
+const HERO_COLLECTION_OVERRIDES: Record<string, string[]> = {
+  "kim-asendorf": ["lights"],
+};
+// Hero frame aspect override (width/height). Most artists get the
+// piece's intrinsic aspect via getArtworkAspect; Kim's Lights is
+// dynamically generated and can render at any aspect, so we force
+// 1:1 square to land it in the page's square-majority cadence.
+const HERO_ASPECT_OVERRIDES: Record<string, number> = {
+  "kim-asendorf": 1,
+};
+
 export default function ArtistsPage() {
   return (
     <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 pt-6 pb-24">
@@ -32,11 +59,10 @@ export default function ArtistsPage() {
           entry: the section title sits at the chapter-title scale, with a
           framing paragraph below (replacing the old "N artists" count line). */}
       <div className="mt-6 mb-8 max-w-2xl">
-        <h2 className="font-serif display-lg leading-[0.95] mb-5">Artists</h2>
+        <h2 className="font-serif display-sm mb-5">Artists</h2>
         <p className="text-[17px] sm:text-[18px] leading-[1.6] text-foreground-secondary">
-          The Hivemind Digital Culture Fund collection brings together ten
-          artists whose work spans digital art&rsquo;s defining chapters, from
-          its on-chain origins to the present.
+          Hivemind brings together ten artists whose work spans digital
+          art&rsquo;s first decades.
         </p>
       </div>
       {sorted.map((artist, idx) => {
@@ -49,19 +75,41 @@ export default function ArtistsPage() {
           (p) => !isCollectionHidden(p.collectionSlug)
         );
 
-        // Build the candidate pool - every visible piece that resolves to a
-        // real image, in curation order. ArtistHero picks one and freezes
-        // it for the session.
-        const candidates = visibleCols
-          .flatMap((col) =>
-            sortPieces(col.slug, allWorks.filter((w) => w.collectionSlug === col.slug))
-          )
+        // Build the candidate pool. The hero renders candidates[0],
+        // so for pinned artists we filter the pool down to the
+        // chosen slug; for Kim we restrict to the Lights collection
+        // and let curation order pick the first one.
+        const pinnedSlug = HERO_PIECE_SLUGS[artist.slug];
+        const allowedSlugs = HERO_COLLECTION_OVERRIDES[artist.slug];
+        const heroCols = allowedSlugs
+          ? visibleCols.filter((c) => allowedSlugs.includes(c.slug))
+          : visibleCols;
+        const heroWorks = pinnedSlug
+          ? allWorks.filter((w) => w.slug === pinnedSlug)
+          : allWorks;
+        const sortedHeroPieces = heroCols.flatMap((col) =>
+          sortPieces(col.slug, heroWorks.filter((w) => w.collectionSlug === col.slug))
+        );
+        const candidates = sortedHeroPieces
           .map((p) => {
             const src = getArtworkImage(p.slug, p.contractAddress, p.tokenId, "detail");
             if (!src) return null;
             return { src, title: p.title, isPunk: p.collectionSlug === "cryptopunks" };
           })
           .filter((c): c is NonNullable<typeof c> => c !== null);
+
+        // Hero frame aspect = the piece's own intrinsic aspect (fit-
+        // to-the-art) so no piece is letterboxed. Falls back to 1:1
+        // when no intrinsic dimension is available (curated samples,
+        // pieces without an optimized variant). Overrides force a
+        // specific aspect for dynamic pieces - Kim's Lights renders
+        // 1:1 via crop so the page's square-majority cadence holds.
+        const heroPiece = sortedHeroPieces[0];
+        const intrinsic = heroPiece
+          ? getArtworkAspect(heroPiece.slug, heroPiece.contractAddress, heroPiece.tokenId)
+          : null;
+        const heroAspect = HERO_ASPECT_OVERRIDES[artist.slug]
+          ?? (intrinsic ? intrinsic.w / intrinsic.h : 1);
 
         // Alternate image-left and image-right across rows so the eye has
         // something to track. Eleven identical 55/45 rows read as wallpaper;
@@ -72,18 +120,21 @@ export default function ArtistsPage() {
         return (
           <div
             key={artist.slug}
-            className="border-b border-border py-16"
+            // py-10 (was py-12) - lighter row padding alongside the
+            // fit-to-the-art frame, where rows now vary in height
+            // with each piece's aspect rather than locking to 16:9.
+            className="border-b border-border py-10"
           >
-            <div className={`grid grid-cols-1 ${heroOnRight ? "md:grid-cols-[45fr_55fr]" : "md:grid-cols-[55fr_45fr]"} gap-8 md:gap-16 items-start`}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start md:items-center">
               {/* On odd rows the hero is on the right; markup-order stays
                   hero-first so reading order matches visual order on mobile
                   (single column), and the desktop swap is column-order only. */}
               <div className={heroOnRight ? "md:order-2" : ""}>
-                <ArtistHero artistSlug={artist.slug} candidates={candidates} />
+                <ArtistHero artistSlug={artist.slug} candidates={candidates} aspect={heroAspect} />
               </div>
 
               {/* Info */}
-              <div className={`md:pt-4 ${heroOnRight ? "md:order-1" : ""}`}>
+              <div className={heroOnRight ? "md:order-1" : ""}>
                 {/* Portrait + wordmark. Portrait sits inline with the h2
                     as the artist's identity badge - small enough not to
                     compete with the artwork hero across the gutter,
@@ -115,7 +166,7 @@ export default function ArtistsPage() {
                   {visibleCols.length} collection{visibleCols.length !== 1 ? "s" : ""} &middot; {allWorks.length} works
                 </p>
                 {(getArtistEditorial(artist.slug)?.bio ?? artist.bio) && (
-                  <p className="text-[15px] text-foreground-secondary leading-[1.65] mt-6 max-w-[400px]">
+                  <p className="text-[15px] text-foreground-secondary leading-[1.65] mt-6 max-w-[440px]">
                     {(getArtistEditorial(artist.slug)?.bio ?? artist.bio)}
                   </p>
                 )}
