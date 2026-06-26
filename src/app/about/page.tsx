@@ -129,11 +129,11 @@ export default function AboutPage() {
           The ten artists are grouped into five chapters of digital
           art&rsquo;s first decades.
         </p>
-        <div className="mt-8 space-y-6 max-w-[820px]">
+        <div className="mt-8 space-y-6 max-w-[1000px]">
           {CHAPTERS.map((ch) => (
             <div
               key={ch.slug}
-              className="grid grid-cols-1 md:grid-cols-[minmax(0,3fr)_minmax(0,7fr)] gap-6 md:gap-12 md:items-baseline"
+              className="grid grid-cols-1 md:grid-cols-[minmax(0,3fr)_minmax(0,7fr)] gap-6 md:gap-8 md:items-baseline"
             >
               <div className="flex items-center gap-3">
                 <span
