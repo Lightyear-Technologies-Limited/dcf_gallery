@@ -21,6 +21,15 @@ const sorted = [...artists]
   .filter((a) => !MERGE_INTO[a.slug])
   .sort((a, b) => a.name.localeCompare(b.name));
 
+// Per-artist override: when present, the hero candidate pool is
+// restricted to these collection slugs only. Use when an artist's
+// default pool surfaces artworks whose aspect ratios don't fill the
+// 16:9 frame well. Kim Asendorf's PXL DEX and X0X are square; Lights
+// is wider and lands in the frame consistently.
+const HERO_COLLECTION_OVERRIDES: Record<string, string[]> = {
+  "kim-asendorf": ["lights"],
+};
+
 export default function ArtistsPage() {
   return (
     <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 pt-6 pb-24">
@@ -50,8 +59,14 @@ export default function ArtistsPage() {
 
         // Build the candidate pool - every visible piece that resolves to a
         // real image, in curation order. ArtistHero picks one and freezes
-        // it for the session.
-        const candidates = visibleCols
+        // it for the session. HERO_COLLECTION_OVERRIDES restricts the pool
+        // to specific collections when an artist's default pool surfaces
+        // ill-fitting aspect ratios.
+        const allowedSlugs = HERO_COLLECTION_OVERRIDES[artist.slug];
+        const heroCols = allowedSlugs
+          ? visibleCols.filter((c) => allowedSlugs.includes(c.slug))
+          : visibleCols;
+        const candidates = heroCols
           .flatMap((col) =>
             sortPieces(col.slug, allWorks.filter((w) => w.collectionSlug === col.slug))
           )
