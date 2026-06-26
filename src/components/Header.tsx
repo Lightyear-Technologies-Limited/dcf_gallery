@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import ThemeToggle from "./ThemeToggle";
 import MotionToggle from "./MotionToggle";
-import { CHAPTERS } from "@/lib/chapters";
 
 const NAV = [
   { label: "Collection", href: "/" },
@@ -14,25 +13,11 @@ const NAV = [
   { label: "About", href: "/about" },
 ];
 
-interface NavArtist {
-  slug: string;
-  name: string;
-}
-
-interface Props {
-  artists: NavArtist[];
-}
-
-export default function Header({ artists }: Props) {
+export default function Header() {
   const [open, setOpen] = useState(false);
   const path = usePathname();
 
-  // Path-only active state. Filter-state highlights (?artist= / ?chapter=
-  // on the Salon) are deliberately NOT reflected here - the Salon's own
-  // filter row carries that signal in-page, and reading searchParams from
-  // the root layout would force every page out of static prerendering.
-
-  function isPrimaryActive(href: string) {
+  function isActive(href: string) {
     if (href === "/") {
       // Collection nav is active on home, collection pages, and piece pages.
       return path === "/" || path.startsWith("/collection/") || path.startsWith("/piece/");
@@ -45,20 +30,12 @@ export default function Header({ artists }: Props) {
     return path.startsWith(href);
   }
 
-  function isArtistActive(slug: string) {
-    return path === `/artist/${slug}`;
-  }
-
-  function isChapterActive(_slug: string) {
-    return false;
-  }
-
   return (
     <>
-      {/* Desktop sidebar - widened to w-44/xl:w-48 so the expanded nav
-          (Artists + Chapters lists) fits artist display names without
-          truncating most. Main content + footer left padding match. */}
-      <aside className="hidden md:flex fixed left-0 top-0 bottom-0 w-44 xl:w-48 z-50 flex-col border-r border-border bg-background">
+      {/* Desktop sidebar - tightens to w-32 below xl so content doesn't right-shift
+          on 1280px laptops, expands to w-36 on xl+ where the extra breathing room
+          is affordable. */}
+      <aside className="hidden md:flex fixed left-0 top-0 bottom-0 w-32 xl:w-36 z-50 flex-col border-r border-border bg-background">
         {/* Masthead: logo at top */}
         <Link href="/" className="text-foreground pt-6 px-6" aria-label="Home">
           <span className="logo-wrap block h-4 w-24">
@@ -67,14 +44,16 @@ export default function Header({ artists }: Props) {
           </span>
         </Link>
 
-        {/* Primary nav - Collection / Artists / Chapters / About. */}
+        {/* Nav - Collection leads (the curatorial surface), then Artists, then About.
+            Active state uses font-medium + foreground so it survives hover (hover
+            also raises non-active items to foreground, so color alone wasn't enough). */}
         <nav aria-label="Primary" className="flex flex-col items-start w-full px-6 pt-4">
           {NAV.map((n) => (
             <Link
               key={n.href}
               href={n.href}
               className={`text-[13px] tracking-[0.02em] transition-colors duration-200 py-1.5 ${
-                isPrimaryActive(n.href)
+                isActive(n.href)
                   ? "text-foreground font-medium"
                   : "text-muted hover:text-foreground"
               }`}
@@ -84,58 +63,8 @@ export default function Header({ artists }: Props) {
           ))}
         </nav>
 
-        {/* Scrollable middle: artist + chapter directory. Always visible so
-            readers can jump between sections from any page (per marketing
-            feedback). Scrollbar hidden; the column overflows only on very
-            short viewports given the small entry count. */}
-        <div className="flex-1 min-h-0 overflow-y-auto scrollbar-hide px-6 pt-8 pb-4">
-          <div>
-            <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-2">
-              Artists
-            </p>
-            <ul className="flex flex-col items-start space-y-1.5">
-              {artists.map((a) => (
-                <li key={a.slug} className="w-full">
-                  <Link
-                    href={`/artist/${a.slug}`}
-                    className={`text-[12px] leading-[1.3] transition-colors duration-200 block truncate ${
-                      isArtistActive(a.slug)
-                        ? "text-foreground font-medium"
-                        : "text-muted hover:text-foreground"
-                    }`}
-                  >
-                    {a.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="mt-6">
-            <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-2">
-              Chapters
-            </p>
-            <ul className="flex flex-col items-start space-y-1.5">
-              {CHAPTERS.map((c) => (
-                <li key={c.slug} className="w-full">
-                  <Link
-                    href={`/?chapter=${c.slug}`}
-                    className={`text-[12px] leading-[1.3] transition-colors duration-200 block truncate ${
-                      isChapterActive(c.slug)
-                        ? "text-foreground font-medium"
-                        : "text-muted hover:text-foreground"
-                    }`}
-                  >
-                    {c.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        {/* Toggles pinned bottom, separated by a hairline so they read as
-            chrome rather than continuation of the nav list. */}
-        <div className="pb-8 px-6 space-y-5 border-t border-border pt-5">
+        {/* Reel + theme toggles pinned bottom */}
+        <div className="mt-auto pb-8 px-6 space-y-5">
           <MotionToggle />
           <ThemeToggle />
         </div>

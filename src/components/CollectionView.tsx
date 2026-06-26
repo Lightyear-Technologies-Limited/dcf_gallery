@@ -173,11 +173,14 @@ export default function CollectionView({ sections, artists }: Props) {
           Hivemind Digital Culture Fund
         </h1>
       </div>
-      {/* Filters - ARTIST row, then CHAPTER row. Removing a filter is done
-          by clicking its active label; no "All" / "Clear" button needed
-          above the rows. The empty state below still offers a "Clear filters"
-          recovery action when a combination returns zero. */}
-      <section className="pt-6 pb-4 border-b border-border space-y-2">
+      {/* Filters - ARTIST row, then CHAPTER row. Sticks to the top of the
+          viewport as the reader scrolls so artist/chapter navigation is
+          always reachable; the "Hivemind Digital Culture Fund" masthead
+          above scrolls away cleanly. top-14 on mobile clears the fixed
+          mobile header (h-14); top-0 from md+ where the header is in the
+          left rail. bg-background covers the masthead as it slides under.
+          Removing a filter is done by clicking its active label. */}
+      <section className="sticky top-14 md:top-0 z-30 bg-background pt-6 pb-4 border-b border-border space-y-2">
         {/* Row 1: Artists. Mask gives a fade on the trailing edge when overflowing. */}
         <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide [mask-image:linear-gradient(to_right,black_calc(100%-24px),transparent)]">
           <span

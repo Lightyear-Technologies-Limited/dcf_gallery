@@ -4,22 +4,7 @@ import Header from "@/components/Header";
 import Link from "next/link";
 import { MotionProvider } from "@/components/MotionPreference";
 import { SITE_URL } from "@/lib/site";
-import { artists as allArtists } from "@/lib/data";
-import { getArtistDisplayName } from "@/lib/curation";
 import "./globals.css";
-
-// Collab artists merged under their primary artist in the directory rail.
-const MERGE_INTO: Record<string, string> = {
-  "tyler-hobbs-and-dandelion-wist": "tyler-hobbs",
-};
-
-// Sidebar artist directory: primary artists only, alphabetical by display
-// name (matches the Artists index sort). Computed once at module load -
-// data.ts is static.
-const NAV_ARTISTS = [...allArtists]
-  .filter((a) => !MERGE_INTO[a.slug])
-  .map((a) => ({ slug: a.slug, name: getArtistDisplayName(a.slug, a.name) }))
-  .sort((a, b) => a.name.localeCompare(b.name));
 
 const argent = localFont({
   src: [
@@ -89,9 +74,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           }}
         />
         <MotionProvider>
-        <Header artists={NAV_ARTISTS} />
-        <main id="main" className="flex-1 pt-14 md:pt-0 md:pl-44 xl:pl-48">{children}</main>
-        <footer className="border-t border-border py-8 md:pl-44 xl:pl-48">
+        <Header />
+        <main id="main" className="flex-1 pt-14 md:pt-0 md:pl-32 xl:pl-36">{children}</main>
+        <footer className="border-t border-border py-8 md:pl-32 xl:pl-36">
           <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
             <div>
               <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium">Hivemind Digital Culture Fund</p>
