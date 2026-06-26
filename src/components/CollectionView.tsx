@@ -200,8 +200,14 @@ export default function CollectionView({ sections, artists }: Props) {
       </div>
       {/* Sentinel: IntersectionObserver tracks this element to know when
           the reader has moved past the masthead. Sticks immediately after
-          the masthead so its viewport intersection mirrors the masthead's. */}
-      <div ref={sentinelRef} aria-hidden className="h-px w-full" />
+          the masthead so its viewport intersection mirrors the masthead's.
+          h-2 (not h-px) so the observer has a real box to track. */}
+      <div ref={sentinelRef} aria-hidden className="h-2 w-full" />
+
+      {/* TEMP DEBUG - remove once verified */}
+      <div className="fixed bottom-4 right-4 z-[999] bg-black text-white text-[11px] px-3 py-1.5 font-mono rounded shadow">
+        filterHidden: {String(filterHidden)}
+      </div>
       {/* Filters - ARTIST row, then CHAPTER row. Sticks to the top of the
           viewport as the reader scrolls so artist/chapter navigation is
           always reachable; the "Hivemind Digital Culture Fund" masthead
