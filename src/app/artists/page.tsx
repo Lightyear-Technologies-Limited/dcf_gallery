@@ -32,10 +32,10 @@ const HERO_PIECE_SLUGS: Record<string, string> = {
   "dmitri-cherniak": "superrare-dmitri-cherniak-26901-b9e0", // A slight lack of symmetry 1/4
   "larva-labs": "cryptopunks-269-3BBB",
   "operator": "human-unreadable-455000124-b069",
-  "refik-anadol": "winds-of-yawanawa-917-100b",
+  "refik-anadol": "synthetic-dreams-648-be3a",
   "sam-spratt": "skulls-of-luci-20-d27c", // Saturnalia Pigmentation (Skull)
-  "tyler-hobbs": "fidenza-718-d270",
-  "xcopy": "superrare-xcopy-29757-b9e0", // DANKRUPT
+  "tyler-hobbs": "tyler-hobbs-1-9345", // Return Zero [Blue] 0.7
+  "xcopy": "superrare-xcopy-2123-b9e0", // Some Other Asshole
 };
 const HERO_COLLECTION_OVERRIDES: Record<string, string[]> = {
   "kim-asendorf": ["lights"],
