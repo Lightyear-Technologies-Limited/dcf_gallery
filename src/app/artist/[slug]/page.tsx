@@ -279,7 +279,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
           without leaving a yawning gap when the 2-col header above is
           uneven (right column commentary often ends before the left
           column's holdings + socials stack does). */}
-      <div className="pt-8 pb-24 space-y-20">
+      <div className="pt-8 pb-24 space-y-3">
         {artistCollections.map((col) => {
           const n = col.pieces.length;
           const piece = col.pieces[0];
@@ -300,13 +300,14 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
           const sectionHref = n === 1 && piece ? `/piece/${piece.slug}` : `/collection/${col.slug}`;
           return (
             <section key={col.slug} id={col.slug}>
-              <div className="mb-2">
+              <div className="flex items-baseline gap-2.5 mb-2">
                 <Link
                   href={sectionHref}
-                  className="font-serif text-[22px] sm:text-[28px] text-foreground-secondary hover:opacity-60 transition-opacity duration-200 inline-block"
+                  className="font-serif text-[22px] sm:text-[28px] text-foreground-secondary hover:opacity-60 transition-opacity duration-200"
                 >
                   {col.name}
                 </Link>
+                <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium tabular-nums">{n} {n === 1 ? "work" : "works"}</span>
               </div>
 
               {/* Gallery */}
