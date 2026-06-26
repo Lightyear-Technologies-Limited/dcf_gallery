@@ -247,12 +247,10 @@ export default function CollectionView({ sections, artists }: Props) {
           })}
         </div>
 
-        {/* Chapter description - only when a chapter is active */}
-        {activeChapter && (
-          <p className="font-serif text-[16px] leading-[1.55] text-foreground-secondary pt-4 max-w-[680px]">
-            {activeChapter.description}
-          </p>
-        )}
+        {/* Chapter description was rendered here when a chapter was active;
+            removed because the line popped into the sticky filter band on
+            chapter select, growing the band by ~30px and pushing the
+            gallery down. /chapters carries the descriptions instead. */}
 
         {/* Result count - only when filters are active. Phrased as institutional
             context (X of Y in DCF) rather than a raw ratio, so the chapter
