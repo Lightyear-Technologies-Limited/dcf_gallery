@@ -59,7 +59,7 @@ export default function ArtistsPage() {
       {/* Section title + framing copy, structured to match a Chapters chapter
           entry: the section title sits at the chapter-title scale, with a
           framing paragraph below (replacing the old "N artists" count line). */}
-      <div className="mt-6 mb-2 max-w-3xl">
+      <div className="mt-6 mb-8 max-w-3xl">
         <h2 className="font-serif display-sm mb-5">Artists</h2>
         <p className="text-[17px] sm:text-[18px] leading-[1.6] text-foreground-secondary">
           Hivemind collects work by ten of digital art&rsquo;s most influential artists.
@@ -107,7 +107,7 @@ export default function ArtistsPage() {
         return (
           <div
             key={artist.slug}
-            className="border-b border-border py-16 first:pt-4 group"
+            className="border-b border-border py-16 first:pt-2"
           >
             <div className={`grid grid-cols-1 ${heroOnRight ? "md:grid-cols-[45fr_55fr]" : "md:grid-cols-[55fr_45fr]"} gap-8 md:gap-16 items-start`}>
               {/* On odd rows the hero is on the right; markup-order stays
@@ -141,7 +141,7 @@ export default function ArtistsPage() {
                       className="w-10 h-10 rounded-full object-cover shrink-0"
                     />
                   )}
-                  <h3 className="font-serif text-[32px] sm:text-[40px] tracking-tight leading-tight group-hover:opacity-60 transition-opacity duration-200">
+                  <h3 className="font-serif text-[32px] sm:text-[40px] tracking-tight leading-tight hover:opacity-60 transition-opacity duration-200">
                     {artistName}
                   </h3>
                 </Link>
