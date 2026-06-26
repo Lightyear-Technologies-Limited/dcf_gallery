@@ -59,31 +59,59 @@ export default function CollectionView({ sections, artists }: Props) {
 
   const [excludedArtists, setExcludedArtists] = useState<string[]>([]);
 
-  // Filter visibility. IntersectionObserver watches a sentinel placed at
-  // the bottom of the masthead block: while the sentinel is in viewport
-  // the reader is "at the top" and the filter shows; once the sentinel
-  // scrolls out (reader has moved past the masthead), the filter hides.
-  // Switched to IntersectionObserver after a scroll-event-based detector
-  // failed to flip state on this layout - the API is more robust to
-  // wherever the scroll actually happens (window / document / a
-  // scrolling ancestor we don't control).
+  // Filter behaves in two modes:
+  //  - "in flow"  (default): filter sits at its natural position below the
+  //    masthead, scrolls naturally with the page. As the reader scrolls
+  //    down past it, it leaves the viewport like any other element - no
+  //    slide animation, no sticky pin.
+  //  - "sticky overlay": filter pins to the top of the viewport. Engaged
+  //    when the reader scrolls UP anywhere past the masthead, so
+  //    navigation is one upward gesture away from any scroll depth.
+  // IntersectionObserver on a sentinel just below the masthead tells us
+  // whether the reader is at the top (sentinel in viewport → in flow).
+  // A scroll listener tracks direction; past the masthead, up-scroll
+  // engages the overlay, down-scroll lets it leave again.
   const sentinelRef = useRef<HTMLDivElement>(null);
   const filterRef = useRef<HTMLElement>(null);
-  const [filterHidden, setFilterHidden] = useState(false);
+  const [showsAsSticky, setShowsAsSticky] = useState(false);
 
   useEffect(() => {
+    let lastY = typeof window !== "undefined" ? window.scrollY : 0;
+    let isAtTop = true;
+
+    function onScroll() {
+      const y = window.scrollY;
+      if (isAtTop) {
+        setShowsAsSticky(false);
+      } else if (y < lastY - 5) {
+        setShowsAsSticky(true);
+      } else if (y > lastY + 5) {
+        setShowsAsSticky(false);
+      }
+      lastY = y;
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    let observer: IntersectionObserver | null = null;
     const sentinel = sentinelRef.current;
-    if (!sentinel) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        if (!entry) return;
-        setFilterHidden(!entry.isIntersecting);
-      },
-      { threshold: 0 },
-    );
-    observer.observe(sentinel);
-    return () => observer.disconnect();
+    if (sentinel) {
+      observer = new IntersectionObserver(
+        (entries) => {
+          const entry = entries[0];
+          if (!entry) return;
+          isAtTop = entry.isIntersecting;
+          if (isAtTop) setShowsAsSticky(false);
+        },
+        { threshold: 0 },
+      );
+      observer.observe(sentinel);
+    }
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      observer?.disconnect();
+    };
   }, []);
 
   function selectArtist(slug: string) {
@@ -214,12 +242,9 @@ export default function CollectionView({ sections, artists }: Props) {
           clicking its active label. */}
       <section
         ref={filterRef}
-        aria-hidden={filterHidden}
-        className="sticky top-14 md:top-0 z-30 bg-background pt-6 pb-4 border-b border-border space-y-2 transition-transform duration-300 ease-out will-change-transform"
-        style={{
-          transform: filterHidden ? "translateY(-100%)" : "translateY(0)",
-          pointerEvents: filterHidden ? "none" : "auto",
-        }}
+        className={`z-30 bg-background pt-6 pb-4 border-b border-border space-y-2 ${
+          showsAsSticky ? "sticky top-14 md:top-0" : ""
+        }`}
       >
         {/* Row 1: Artists. Mask gives a fade on the trailing edge when overflowing. */}
         <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide [mask-image:linear-gradient(to_right,black_calc(100%-24px),transparent)]">
