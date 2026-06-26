@@ -73,7 +73,7 @@ export default function ArtistsPage() {
             key={artist.slug}
             className="border-b border-border py-16"
           >
-            <div className={`grid grid-cols-1 ${heroOnRight ? "md:grid-cols-[45fr_55fr]" : "md:grid-cols-[55fr_45fr]"} gap-8 md:gap-16 md:items-center`}>
+            <div className={`grid grid-cols-1 ${heroOnRight ? "md:grid-cols-[45fr_55fr]" : "md:grid-cols-[55fr_45fr]"} gap-8 md:gap-16 items-start`}>
               {/* On odd rows the hero is on the right; markup-order stays
                   hero-first so reading order matches visual order on mobile
                   (single column), and the desktop swap is column-order only. */}
@@ -81,12 +81,8 @@ export default function ArtistsPage() {
                 <ArtistHero artistSlug={artist.slug} candidates={candidates} />
               </div>
 
-              {/* Info - vertically centered against the artwork hero
-                  (md:items-center on the grid above) so the name/bio sit
-                  at the artwork's visual midpoint rather than pinned to
-                  the top with empty space below. md:pt-4 dropped because
-                  centering now handles the vertical placement. */}
-              <div className={heroOnRight ? "md:order-1" : ""}>
+              {/* Info */}
+              <div className={`md:pt-4 ${heroOnRight ? "md:order-1" : ""}`}>
                 {/* Portrait + wordmark. Portrait sits inline with the h2
                     as the artist's identity badge - small enough not to
                     compete with the artwork hero across the gutter,
