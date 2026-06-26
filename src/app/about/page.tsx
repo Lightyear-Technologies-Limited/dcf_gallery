@@ -3,20 +3,23 @@ import { CHAPTERS } from "@/lib/chapters";
 
 export default function AboutPage() {
   return (
-    <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 pb-24">
-      {/* Hero — masthead anchored at pt-6 so the "Hivemind Digital Culture Fund"
-          wordmark holds the SAME vertical position as the Salon / Artists /
-          Chapters mastheads (and aligns with the sidebar logo across the gutter).
-          The page-to-page jump came from this block previously starting at pt-16. */}
-      <div className="max-w-[680px] pt-6">
-        <h1 className="font-serif display-sm">
-          Hivemind Digital Culture Fund
-        </h1>
-        {/* "Thesis" subheading matches masthead at display-sm so brand +
-            subject read as equal partners (museum-grade restraint).
-            Mirrored on Artists and Chapters indexes. */}
-        <h2 className="font-serif display-sm mt-6 mb-5">Thesis</h2>
-        <p className="text-[20px] text-foreground-secondary leading-[1.6]">
+    <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 pt-6 pb-24">
+      {/* Hero — masthead + Thesis lede mirror the Artists and Chapters
+          index-page structure exactly:
+            pt-6 on the outer container
+            h1 (display-sm) direct child
+            mt-6 mb-8 max-w-2xl wrapper around h2 + lede
+            h2 (display-sm) + mb-5
+            lede at text-[17px] sm:text-[18px], same secondary register
+          Same wrapper, same scale, same gap below across all three
+          index pages so the masthead → subject → lede rhythm doesn't
+          shift between them. */}
+      <h1 className="font-serif display-sm">
+        Hivemind Digital Culture Fund
+      </h1>
+      <div className="mt-6 mb-8 max-w-2xl">
+        <h2 className="font-serif display-sm mb-5">Thesis</h2>
+        <p className="text-[17px] sm:text-[18px] leading-[1.6] text-foreground-secondary">
           Hivemind Digital Culture Fund is a curated portfolio of digital
           art&rsquo;s emergent canon, acquired after the first market cycle -
           when the artists, collections, and individual works that define the
@@ -26,11 +29,8 @@ export default function AboutPage() {
       </div>
 
       {/* Cycle-timing context - paraphrases the "Technology Drives Wealth" and
-          "A Fund is Born" sections of the source thesis. Tightened pt
-          from pt-16 to pt-10 since the stats line (308 works · 10 artists
-          ...) was dropped from above and the previous spacing read as a
-          void. */}
-      <div className="max-w-[680px] pt-10 space-y-6 text-[16px] text-foreground-secondary leading-[1.65]">
+          "A Fund is Born" sections of the source thesis. */}
+      <div className="max-w-[680px] space-y-6 text-[16px] text-foreground-secondary leading-[1.65]">
         <p>
           Technological advancements have consistently created new wealth, and
           with it a new class of investors and collectors looking for art that
