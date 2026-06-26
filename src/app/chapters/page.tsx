@@ -99,8 +99,7 @@ export default function ChaptersPage() {
         <div className="mt-6 mb-8 max-w-2xl">
           <h2 className="font-serif display-lg leading-[0.95] mb-5">Chapters</h2>
           <p className="text-[17px] sm:text-[18px] leading-[1.6] text-foreground-secondary">
-            Hivemind&rsquo;s collection in five chapters, each marking a
-            distinct moment in the medium&rsquo;s emergence.
+            Five chapters that define the digital art movement.
           </p>
         </div>
       </div>
