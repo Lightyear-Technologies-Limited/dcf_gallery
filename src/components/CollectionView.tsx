@@ -59,23 +59,15 @@ export default function CollectionView({ sections, artists }: Props) {
 
   const [excludedArtists, setExcludedArtists] = useState<string[]>([]);
 
-  // Ref to the sticky filter section. Used for two things:
-  //  1) On filter change, snap scroll to the section's natural offsetTop
-  //     instead of 0. Keeps the reader in "browse mode" (masthead off-
-  //     screen, filter pinned to top) rather than bouncing back to the
-  //     wordmark every time they select a different artist.
-  //  2) Scroll-direction hide: when the reader scrolls down past the
-  //     filter, the section translates up out of view, freeing the full
-  //     viewport for tall artworks. An upward scroll gesture brings it
-  //     back so navigation is always one motion away.
+  // Ref to the sticky filter section. Drives the scroll-direction hide:
+  // when the reader scrolls down past the filter, the section translates
+  // up out of view, freeing the full viewport for tall artworks. An
+  // upward scroll gesture brings it back so navigation is always one
+  // motion away. No auto-scroll on filter change - the reader's current
+  // position is preserved, so clicking from the top doesn't force the
+  // masthead off-screen.
   const filterRef = useRef<HTMLElement>(null);
   const [filterHidden, setFilterHidden] = useState(false);
-
-  function scrollToFilter() {
-    if (typeof window === "undefined") return;
-    const top = filterRef.current?.offsetTop ?? 0;
-    window.scrollTo(0, top);
-  }
 
   useEffect(() => {
     let lastY = typeof window !== "undefined" ? window.scrollY : 0;
@@ -100,18 +92,29 @@ export default function CollectionView({ sections, artists }: Props) {
 
   function selectArtist(slug: string) {
     if (chapterFilter) {
+      const ch = CHAPTERS.find((c) => c.slug === chapterFilter);
+      const inChapter = ch?.artists.includes(slug) ?? false;
+      if (!inChapter) {
+        // Out-of-chapter artist: switch the filter from chapter-mode to
+        // this single artist, clearing the chapter context entirely.
+        setChapterFilter(null);
+        setExcludedArtists([]);
+        setArtistFilter(slug);
+        syncUrl(slug, null);
+        return;
+      }
+      // In-chapter artist: toggle exclude (the original chapter-mode
+      // affordance for paring down which artists in the chapter show).
       if (excludedArtists.includes(slug)) {
         setExcludedArtists(excludedArtists.filter((a) => a !== slug));
       } else {
         setExcludedArtists([...excludedArtists, slug]);
       }
-      scrollToFilter();
       return;
     }
     const next = artistFilter === slug ? null : slug;
     setArtistFilter(next);
     syncUrl(next, null);
-    scrollToFilter();
   }
 
   function selectChapter(slug: string | null) {
@@ -125,7 +128,6 @@ export default function CollectionView({ sections, artists }: Props) {
       setExcludedArtists([]);
       syncUrl(null, slug);
     }
-    scrollToFilter();
   }
 
   function clearAll() {
@@ -133,7 +135,6 @@ export default function CollectionView({ sections, artists }: Props) {
     setChapterFilter(null);
     setExcludedArtists([]);
     syncUrl(null, null);
-    scrollToFilter();
   }
 
   useEffect(() => {
@@ -221,7 +222,7 @@ export default function CollectionView({ sections, artists }: Props) {
         <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide [mask-image:linear-gradient(to_right,black_calc(100%-24px),transparent)]">
           <span
             className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium shrink-0 w-20"
-            title={activeChapter ? "With a chapter active, tap an artist to remove them from the chapter" : "Tap an artist to filter"}
+            title="Tap an artist to filter"
           >
             Artist
           </span>
@@ -229,27 +230,33 @@ export default function CollectionView({ sections, artists }: Props) {
             const inChapter = activeChapter ? activeChapter.artists.includes(a.slug) : true;
             const excluded = excludedArtists.includes(a.slug);
             const isActive = artistFilter === a.slug || (inChapter && !excluded && !!chapterFilter);
-            const isDisabled = !!chapterFilter && !inChapter;
+            // When a chapter is active, artists outside that chapter are
+            // still clickable - they switch the filter to that artist
+            // alone (clearing the chapter). Dim styling signals "outside
+            // current chapter"; hover lifts to indicate they're live.
+            const outOfChapter = !!chapterFilter && !inChapter;
             return (
               <button
                 key={a.slug}
-                onClick={() => !isDisabled && selectArtist(a.slug)}
+                onClick={() => selectArtist(a.slug)}
                 aria-pressed={isActive}
                 className={`text-[13px] whitespace-nowrap shrink-0 transition-colors duration-200 ${
-                  isDisabled
-                    ? "text-muted/30 cursor-default"
+                  outOfChapter
+                    ? "text-muted/40 hover:text-foreground"
                     : isActive
                     ? "text-foreground"
                     : excluded
-                    ? "text-muted/40 line-through"
+                    ? "text-muted/40 line-through hover:text-foreground"
                     : "text-muted hover:text-foreground"
                 }`}
                 aria-label={
-                  activeChapter
-                    ? excluded
-                      ? `Include ${a.name} in chapter`
-                      : `Exclude ${a.name} from chapter`
-                    : `Filter by ${a.name}`
+                  outOfChapter
+                    ? `Switch filter to ${a.name}`
+                    : activeChapter
+                      ? excluded
+                        ? `Include ${a.name} in chapter`
+                        : `Exclude ${a.name} from chapter`
+                      : `Filter by ${a.name}`
                 }
               >
                 {a.name}
@@ -291,7 +298,7 @@ export default function CollectionView({ sections, artists }: Props) {
             explainer reads as "this chapter contains N of the fund's whole." */}
         {hasFilters && (
           <p className="text-[11px] text-muted tabular-nums pt-2">
-            {visiblePieces} of {totalPieces} works
+            {visiblePieces} of {totalPieces} works in the Hivemind collection
           </p>
         )}
       </section>
