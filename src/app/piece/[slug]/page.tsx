@@ -272,6 +272,24 @@ export default async function PiecePage({
         defaultOpen={featuresDefaultOpen}
         label={isPunk ? "Attributes" : "Traits"}
       />
+      {piece.exhibition && (
+        <p className="text-[13px] text-muted">
+          <span className="text-foreground-secondary">Currently on display:</span>
+          <br />
+          {piece.exhibition.url ? (
+            <a
+              href={piece.exhibition.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-foreground transition-colors duration-200 underline underline-offset-4 decoration-border hover:decoration-foreground"
+            >
+              {piece.exhibition.name} →
+            </a>
+          ) : (
+            piece.exhibition.name
+          )}
+        </p>
+      )}
       {provenance?.cid && (
         <p className="text-[13px] text-muted">
           <span className="text-foreground-secondary">Preserved by Hivemind:</span>
