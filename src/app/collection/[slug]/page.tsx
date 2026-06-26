@@ -422,16 +422,11 @@ export default async function CollectionPage({
   // an earlier checkbox+peer reserved-height hack: the dead empty space
   // it created read as a hole in the column, and the consistency win
   // with Features.tsx is worth a small gallery push-down on open.
-  // Default-open: for trait-heavy collections (Fidenza palette, Punks
-  // types), trait-pivoting IS the curatorial story; surfacing the index
-  // by default saves a click and tells the reader the catalogue is
-  // queryable. We treat any collection with a non-trivial index as
-  // trait-heavy (>= 4 rows).
-  const traitDisclosureDefaultOpen = traitIndexRows.length >= 4;
+  // Closed by default - the unfiltered page subject is the artwork, not
+  // the pivot affordance; readers who want to filter open it.
   const traitDisclosure = traitIndexRows.length > 0 ? (
     <details
       className="group max-w-[520px] [&_summary::-webkit-details-marker]:hidden"
-      open={traitDisclosureDefaultOpen}
     >
       <summary className="cursor-pointer list-none text-muted hover:text-foreground transition-colors duration-200 inline-flex items-center gap-2 select-none">
         <span className="text-[10px] uppercase">Browse by trait</span>
@@ -589,8 +584,8 @@ export default async function CollectionPage({
                   row above (1/1/999, 1/1/10000) already says it. */}
               {col.totalSupply && (
                 <p>
-                  Hivemind holds {sorted.length} of {col.totalSupply.toLocaleString()}
-                  {editionType === "1/1" && col.totalSupply > 1 ? " 1/1s" : ""}
+                  Hivemind holds {sorted.length} of {col.totalSupply.toLocaleString()}{" "}
+                  {editionType === "1/1" && col.totalSupply > 1 ? "1/1s" : "works"}
                 </p>
               )}
             </div>
