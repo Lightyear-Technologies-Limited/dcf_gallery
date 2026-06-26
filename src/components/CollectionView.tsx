@@ -73,16 +73,17 @@ export default function CollectionView({ sections, artists }: Props) {
     let lastY = typeof window !== "undefined" ? window.scrollY : 0;
     function onScroll() {
       const y = window.scrollY;
-      // Always visible while above the filter's natural top + a small
-      // buffer so the reader doesn't see the filter flicker at the
-      // boundary between masthead and sticky state.
+      // Up-scroll-only reveal. Past the masthead the filter is hidden
+      // by default; an upward scroll motion (>2px) brings it back into
+      // view. Down-scrolls are not detected separately - the default
+      // simply re-asserts on any non-upward scroll event past threshold.
       const showAboveThreshold = (filterRef.current?.offsetTop ?? 0) + 80;
       if (y < showAboveThreshold) {
         setFilterHidden(false);
-      } else if (y > lastY + 5) {
-        setFilterHidden(true);
-      } else if (y < lastY - 5) {
+      } else if (y < lastY - 2) {
         setFilterHidden(false);
+      } else {
+        setFilterHidden(true);
       }
       lastY = y;
     }
