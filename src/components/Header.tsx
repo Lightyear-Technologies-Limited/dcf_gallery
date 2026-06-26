@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import ThemeToggle from "./ThemeToggle";
 import MotionToggle from "./MotionToggle";
@@ -26,9 +26,11 @@ interface Props {
 export default function Header({ artists }: Props) {
   const [open, setOpen] = useState(false);
   const path = usePathname();
-  const searchParams = useSearchParams();
-  const chapterParam = searchParams.get("chapter");
-  const artistParam = searchParams.get("artist");
+
+  // Path-only active state. Filter-state highlights (?artist= / ?chapter=
+  // on the Salon) are deliberately NOT reflected here - the Salon's own
+  // filter row carries that signal in-page, and reading searchParams from
+  // the root layout would force every page out of static prerendering.
 
   function isPrimaryActive(href: string) {
     if (href === "/") {
@@ -44,11 +46,11 @@ export default function Header({ artists }: Props) {
   }
 
   function isArtistActive(slug: string) {
-    return path === `/artist/${slug}` || artistParam === slug;
+    return path === `/artist/${slug}`;
   }
 
-  function isChapterActive(slug: string) {
-    return chapterParam === slug;
+  function isChapterActive(_slug: string) {
+    return false;
   }
 
   return (
