@@ -103,7 +103,11 @@ export default function CollectionView({ sections, artists }: Props) {
           isAtTop = entry.isIntersecting;
           if (isAtTop) setShowsAsSticky(false);
         },
-        { threshold: 0 },
+        // rootMargin extends the observed area 200px above the viewport
+        // top, so the overlay starts hiding (when the reader scrolls up)
+        // 200px before the main filter would naturally come back into
+        // viewport. Avoids a visible overlap between overlay and main.
+        { threshold: 0, rootMargin: "200px 0px 0px 0px" },
       );
       observer.observe(sentinel);
     }
@@ -212,124 +216,135 @@ export default function CollectionView({ sections, artists }: Props) {
     0
   );
 
-  return (
-    <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
-      <ScrollRestore />
-      {/* Masthead - "Hivemind Digital Culture Fund" rendered prominently
-          above the filter rows so the catalogue identifies itself before
-          any interaction. Top padding matches the sidebar logo's pt-6 so
-          the h1 anchors at the same vertical as the masthead wordmark
-          across the gutter; eye reads "Hivemind" on the rail and
-          "Hivemind Digital Culture Fund" on the page at the same line. */}
-      <div className="pt-6">
-        <h1 className="font-serif display-sm">
-          Hivemind Digital Culture Fund
-        </h1>
+  // Filter content - rendered TWICE: once in flow (main) so the page
+  // scrolls past it naturally on the way down, once in a fixed overlay
+  // that slides in from above on scroll-up. Both share state, so
+  // clicking a button in either updates everything.
+  const filterContent = (
+    <>
+      {/* Row 1: Artists. Mask gives a fade on the trailing edge when overflowing. */}
+      <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide [mask-image:linear-gradient(to_right,black_calc(100%-24px),transparent)]">
+        <span
+          className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium shrink-0 w-20"
+          title="Tap an artist to filter"
+        >
+          Artist
+        </span>
+        {artists.map((a) => {
+          const inChapter = activeChapter ? activeChapter.artists.includes(a.slug) : true;
+          const excluded = excludedArtists.includes(a.slug);
+          const isActive = artistFilter === a.slug || (inChapter && !excluded && !!chapterFilter);
+          // When a chapter is active, artists outside that chapter are
+          // still clickable - they switch the filter to that artist
+          // alone (clearing the chapter). Dim styling signals "outside
+          // current chapter"; hover lifts to indicate they're live.
+          const outOfChapter = !!chapterFilter && !inChapter;
+          return (
+            <button
+              key={a.slug}
+              onClick={() => selectArtist(a.slug)}
+              aria-pressed={isActive}
+              className={`text-[13px] whitespace-nowrap shrink-0 transition-colors duration-200 ${
+                outOfChapter
+                  ? "text-muted/40 hover:text-foreground"
+                  : isActive
+                  ? "text-foreground"
+                  : excluded
+                  ? "text-muted/40 line-through hover:text-foreground"
+                  : "text-muted hover:text-foreground"
+              }`}
+              aria-label={
+                outOfChapter
+                  ? `Switch filter to ${a.name}`
+                  : activeChapter
+                    ? excluded
+                      ? `Include ${a.name} in chapter`
+                      : `Exclude ${a.name} from chapter`
+                    : `Filter by ${a.name}`
+              }
+            >
+              {a.name}
+            </button>
+          );
+        })}
       </div>
-      {/* Sentinel: IntersectionObserver tracks this element to know when
-          the reader has moved past the masthead. Sits immediately after
-          the masthead so its viewport intersection mirrors the masthead's. */}
-      <div ref={sentinelRef} aria-hidden className="h-2 w-full" />
-      {/* Filters - ARTIST row, then CHAPTER row. Sticks to the top of the
-          viewport as the reader scrolls so artist/chapter navigation is
-          always reachable; the "Hivemind Digital Culture Fund" masthead
-          above scrolls away cleanly. top-14 on mobile clears the fixed
-          mobile header (h-14); top-0 from md+ where the header is in the
-          left rail. bg-background covers the masthead as it slides under.
-          The section slides up out of view on downward scroll past the
-          masthead, restoring full vertical room for tall artworks; any
-          upward gesture brings it back. Removing a filter is done by
-          clicking its active label. */}
-      <section
-        ref={filterRef}
-        className={`z-30 bg-background pt-6 pb-4 border-b border-border space-y-2 ${
-          showsAsSticky ? "sticky top-14 md:top-0" : ""
-        }`}
+
+      {/* Row 2: Chapters */}
+      <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide [mask-image:linear-gradient(to_right,black_calc(100%-24px),transparent)]">
+        <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium shrink-0 w-20">Chapter</span>
+        {CHAPTERS.map((ch) => {
+          const isExplicit = chapterFilter === ch.slug;
+          const isImplied = impliedChapter?.slug === ch.slug;
+          const isHighlighted = isExplicit || isImplied;
+          return (
+            <button
+              key={ch.slug}
+              onClick={() => selectChapter(ch.slug)}
+              aria-pressed={isExplicit}
+              className={`text-[13px] whitespace-nowrap shrink-0 transition-colors duration-200 ${
+                isHighlighted ? "text-foreground" : "text-muted hover:text-foreground"
+              }`}
+              style={isHighlighted ? { color: ch.color } : undefined}
+            >
+              {ch.name}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Result count - only when filters are active. */}
+      {hasFilters && (
+        <p className="text-[11px] text-muted tabular-nums pt-2">
+          {visiblePieces} of {totalPieces} works in the Hivemind collection
+        </p>
+      )}
+    </>
+  );
+
+  return (
+    <>
+      {/* Sticky overlay - slides in from above on scroll-up past the
+          masthead. Fixed positioning so it sits over the gallery at the
+          viewport top; positioned to clear the desktop left rail. */}
+      <div
+        aria-hidden={!showsAsSticky}
+        className="fixed top-14 md:top-0 left-0 right-0 md:left-32 xl:left-36 z-40 bg-background border-b border-border transition-transform duration-300 ease-out"
+        style={{
+          transform: showsAsSticky ? "translateY(0)" : "translateY(-100%)",
+          pointerEvents: showsAsSticky ? "auto" : "none",
+        }}
       >
-        {/* Row 1: Artists. Mask gives a fade on the trailing edge when overflowing. */}
-        <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide [mask-image:linear-gradient(to_right,black_calc(100%-24px),transparent)]">
-          <span
-            className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium shrink-0 w-20"
-            title="Tap an artist to filter"
-          >
-            Artist
-          </span>
-          {artists.map((a) => {
-            const inChapter = activeChapter ? activeChapter.artists.includes(a.slug) : true;
-            const excluded = excludedArtists.includes(a.slug);
-            const isActive = artistFilter === a.slug || (inChapter && !excluded && !!chapterFilter);
-            // When a chapter is active, artists outside that chapter are
-            // still clickable - they switch the filter to that artist
-            // alone (clearing the chapter). Dim styling signals "outside
-            // current chapter"; hover lifts to indicate they're live.
-            const outOfChapter = !!chapterFilter && !inChapter;
-            return (
-              <button
-                key={a.slug}
-                onClick={() => selectArtist(a.slug)}
-                aria-pressed={isActive}
-                className={`text-[13px] whitespace-nowrap shrink-0 transition-colors duration-200 ${
-                  outOfChapter
-                    ? "text-muted/40 hover:text-foreground"
-                    : isActive
-                    ? "text-foreground"
-                    : excluded
-                    ? "text-muted/40 line-through hover:text-foreground"
-                    : "text-muted hover:text-foreground"
-                }`}
-                aria-label={
-                  outOfChapter
-                    ? `Switch filter to ${a.name}`
-                    : activeChapter
-                      ? excluded
-                        ? `Include ${a.name} in chapter`
-                        : `Exclude ${a.name} from chapter`
-                      : `Filter by ${a.name}`
-                }
-              >
-                {a.name}
-              </button>
-            );
-          })}
+        <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 pt-4 pb-3 space-y-2">
+          {filterContent}
         </div>
+      </div>
 
-        {/* Row 2: Chapters */}
-        <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide [mask-image:linear-gradient(to_right,black_calc(100%-24px),transparent)]">
-          <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium shrink-0 w-20">Chapter</span>
-          {CHAPTERS.map((ch) => {
-            const isExplicit = chapterFilter === ch.slug;
-            const isImplied = impliedChapter?.slug === ch.slug;
-            const isHighlighted = isExplicit || isImplied;
-            return (
-              <button
-                key={ch.slug}
-                onClick={() => selectChapter(ch.slug)}
-                aria-pressed={isExplicit}
-                className={`text-[13px] whitespace-nowrap shrink-0 transition-colors duration-200 ${
-                  isHighlighted ? "text-foreground" : "text-muted hover:text-foreground"
-                }`}
-                style={isHighlighted ? { color: ch.color } : undefined}
-              >
-                {ch.name}
-              </button>
-            );
-          })}
+      <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
+        <ScrollRestore />
+        {/* Masthead - "Hivemind Digital Culture Fund" rendered prominently
+            above the filter rows so the catalogue identifies itself before
+            any interaction. Top padding matches the sidebar logo's pt-6 so
+            the h1 anchors at the same vertical as the masthead wordmark
+            across the gutter; eye reads "Hivemind" on the rail and
+            "Hivemind Digital Culture Fund" on the page at the same line. */}
+        <div className="pt-6">
+          <h1 className="font-serif display-sm">
+            Hivemind Digital Culture Fund
+          </h1>
         </div>
-
-        {/* Chapter description was rendered here when a chapter was active;
-            removed because the line popped into the sticky filter band on
-            chapter select, growing the band by ~30px and pushing the
-            gallery down. /chapters carries the descriptions instead. */}
-
-        {/* Result count - only when filters are active. Phrased as institutional
-            context (X of Y in DCF) rather than a raw ratio, so the chapter
-            explainer reads as "this chapter contains N of the fund's whole." */}
-        {hasFilters && (
-          <p className="text-[11px] text-muted tabular-nums pt-2">
-            {visiblePieces} of {totalPieces} works in the Hivemind collection
-          </p>
-        )}
-      </section>
+        {/* Sentinel: IntersectionObserver tracks this element to know when
+            the reader has moved past the masthead. Sits immediately after
+            the masthead so its viewport intersection mirrors the masthead's. */}
+        <div ref={sentinelRef} aria-hidden className="h-2 w-full" />
+        {/* Main filter - in flow at its natural position. The page scrolls
+            past it naturally on the way down (no sticky, no slide-out);
+            the overlay above handles the sticky-on-scroll-up behaviour. */}
+        <section
+          ref={filterRef}
+          className="bg-background pt-6 pb-4 border-b border-border space-y-2"
+        >
+          {filterContent}
+        </section>
 
       {/* Works - salon wall */}
       <div className="pt-6 pb-20 space-y-10">
@@ -418,7 +433,8 @@ export default function CollectionView({ sections, artists }: Props) {
           ))
         )}
       </div>
-    </div>
+      </div>
+    </>
   );
 }
 
