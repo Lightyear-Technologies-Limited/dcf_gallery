@@ -276,8 +276,12 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
           Commentary at the top of the page already does that work; per-
           collection prose beside each gallery would compete with the
           actual art for attention. Holdings count omitted when n === 1
-          (a single piece IS the gallery; the count carries no info). */}
-      <div className="pt-16 pb-24 space-y-20">
+          (a single piece IS the gallery; the count carries no info).
+          pt-8 separates the collections section from the artist intro
+          without leaving a yawning gap when the 2-col header above is
+          uneven (right column commentary often ends before the left
+          column's holdings + socials stack does). */}
+      <div className="pt-8 pb-24 space-y-20">
         {artistCollections.map((col) => {
           const n = col.pieces.length;
           const piece = col.pieces[0];
