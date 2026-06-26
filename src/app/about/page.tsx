@@ -150,7 +150,7 @@ export default function AboutPage() {
                   {ch.name}
                 </h3>
               </div>
-              <p className="text-[16px] text-foreground-secondary leading-[1.65]">
+              <p className="text-[16px] text-foreground-secondary leading-[1.65] text-pretty">
                 {ch.description}
               </p>
             </div>
