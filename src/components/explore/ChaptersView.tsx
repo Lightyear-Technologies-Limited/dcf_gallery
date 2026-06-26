@@ -44,11 +44,10 @@ export default function ChaptersView({ chapters }: { chapters: ChapterData[] }) 
             }`}
           >
             <div>
-              {/* Per-chapter title at display-sm, smaller than the page-
-                  level "Chapters" h2 (display-lg) above. Matches the
-                  Artists-page rhythm where individual artist names sit
-                  under the "Artists" subject heading at a smaller scale. */}
-              <h3 className="font-serif display-sm leading-[0.95] mb-5">{roman[i]}. {c.name}</h3>
+              {/* Per-chapter title at text-[28px] sm:text-[32px] - matches
+                  the artist-name register on the collection page so the
+                  "title / subject" rhythm is consistent across pages. */}
+              <h3 className="font-serif text-[28px] sm:text-[32px] leading-[1.05] mb-5">{roman[i]}. {c.name}</h3>
               <p className="max-w-2xl text-[17px] sm:text-[18px] leading-[1.6] text-foreground-secondary mb-3">
                 {c.description}
               </p>
