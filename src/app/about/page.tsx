@@ -85,7 +85,7 @@ export default function AboutPage() {
           Keystones) compress the thesis's six subheadings into the ones that
           matter for a public reader; examples are verified DCF holdings
           (White Mono Fidenza, Return Zero, A Slight Lack of Symmetry). */}
-      <div className="max-w-[680px] pt-16 space-y-6">
+      <div className="max-w-[680px] pt-12 space-y-6">
         <h2 className="font-serif text-[32px] sm:text-[40px] tracking-tight leading-tight">The Curation</h2>
         <div>
           <p className="text-[16px] font-medium text-foreground">Artist and Collection</p>
@@ -123,7 +123,7 @@ export default function AboutPage() {
       </div>
 
       {/* Five Chapters */}
-      <div className="pt-16 pb-8">
+      <div className="pt-12 pb-8">
         <h2 className="font-serif text-[32px] sm:text-[40px] tracking-tight leading-tight max-w-[680px]">Five Chapters</h2>
         <p className="text-[16px] text-foreground-secondary leading-[1.65] mt-4 max-w-[680px]">
           The ten artists are grouped into five chapters of digital
@@ -155,7 +155,7 @@ export default function AboutPage() {
       {/* Hivemind closer - firm bio with the institutional-structure language
           folded in (custody / standards), then CTAs to gallery + source essay,
           then a separately-labelled IR block. */}
-      <div className="max-w-[680px] pt-16">
+      <div className="max-w-[680px] pt-12">
         <h2 className="font-serif text-[32px] sm:text-[40px] tracking-tight leading-tight">Hivemind Capital Partners</h2>
         <p className="text-[16px] text-foreground-secondary leading-[1.65] mt-6">
           Hivemind Capital Partners is a crypto-focused investment firm with

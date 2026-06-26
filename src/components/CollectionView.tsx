@@ -429,10 +429,12 @@ export default function CollectionView({ sections, artists }: Props) {
         ) : (
           visible.map(({ artist, collections: cols }) => (
             <div key={artist.slug} className="space-y-3">
-              {/* Artist header */}
+              {/* Artist header - site-wide subject-tier register so the
+                  name reads at the same scale here, on the Artists index,
+                  on the Collection page artist credit, and on Chapters. */}
               <Link href={`/artist/${artist.slug}`} className="inline-block">
                 <h2
-                  className="font-serif text-[28px] sm:text-[32px] tracking-[-0.01em] leading-tight hover:opacity-60 transition-opacity duration-200"
+                  className="font-serif text-[32px] sm:text-[40px] tracking-tight leading-tight hover:opacity-60 transition-opacity duration-200"
                   style={CHAPTER_COLORS[artist.slug] ? { color: CHAPTER_COLORS[artist.slug] } : undefined}
                 >
                   {artist.name}
