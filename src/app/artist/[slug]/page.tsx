@@ -302,13 +302,20 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
           const sectionHref = n === 1 && piece ? `/piece/${piece.slug}` : `/collection/${col.slug}`;
           return (
             <section key={col.slug} id={col.slug}>
-              <div className="mb-2">
+              {/* Collection title + held piece count, inline. Matches the
+                  Salon homepage's per-collection block treatment ("CryptoPunks
+                  15 works") so an artist page with a single-collection
+                  position (Beeple SuperRare 1/1s 1 work, Larva Labs CryptoPunks
+                  15 works) reads with the same rhythm as the Salon entry the
+                  reader arrived from. */}
+              <div className="flex items-baseline gap-2.5 mb-2">
                 <Link
                   href={sectionHref}
-                  className="font-serif text-[22px] sm:text-[28px] text-foreground-secondary hover:opacity-60 transition-opacity duration-200 inline-block"
+                  className="font-serif text-[22px] sm:text-[28px] text-foreground-secondary hover:opacity-60 transition-opacity duration-200"
                 >
                   {col.name}
                 </Link>
+                <span className="text-[11px] text-muted tabular-nums">{n} {n === 1 ? "work" : "works"}</span>
               </div>
 
               {/* Gallery */}

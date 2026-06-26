@@ -534,7 +534,7 @@ export default async function CollectionPage({
             {artist && (
               <Link
                 href={`/artist/${artist.slug}`}
-                className="font-serif italic text-[22px] text-foreground-secondary hover:text-foreground transition-colors duration-200 mt-3 inline-block"
+                className="font-serif italic text-[22px] text-foreground-secondary hover:opacity-60 transition-opacity duration-200 mt-3 inline-block"
               >
                 {artistName}
               </Link>
