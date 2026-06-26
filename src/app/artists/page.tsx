@@ -124,7 +124,7 @@ export default function ArtistsPage() {
             // with each piece's aspect rather than locking to 16:9.
             className="border-b border-border py-10"
           >
-            <div className="grid grid-cols-1 md:grid-cols-[40fr_60fr] gap-8 md:gap-12 items-start md:items-center">
+            <div className={`grid grid-cols-1 ${heroOnRight ? "md:grid-cols-[60fr_40fr]" : "md:grid-cols-[40fr_60fr]"} gap-8 md:gap-12 items-start md:items-center`}>
               {/* On odd rows the hero is on the right; markup-order stays
                   hero-first so reading order matches visual order on mobile
                   (single column), and the desktop swap is column-order only. */}
