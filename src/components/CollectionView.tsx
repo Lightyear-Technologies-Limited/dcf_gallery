@@ -59,36 +59,31 @@ export default function CollectionView({ sections, artists }: Props) {
 
   const [excludedArtists, setExcludedArtists] = useState<string[]>([]);
 
-  // Ref to the sticky filter section. Drives the scroll-direction hide:
-  // when the reader scrolls down past the filter, the section translates
-  // up out of view, freeing the full viewport for tall artworks. An
-  // upward scroll gesture brings it back so navigation is always one
-  // motion away. No auto-scroll on filter change - the reader's current
-  // position is preserved, so clicking from the top doesn't force the
-  // masthead off-screen.
+  // Filter visibility. IntersectionObserver watches a sentinel placed at
+  // the bottom of the masthead block: while the sentinel is in viewport
+  // the reader is "at the top" and the filter shows; once the sentinel
+  // scrolls out (reader has moved past the masthead), the filter hides.
+  // Switched to IntersectionObserver after a scroll-event-based detector
+  // failed to flip state on this layout - the API is more robust to
+  // wherever the scroll actually happens (window / document / a
+  // scrolling ancestor we don't control).
+  const sentinelRef = useRef<HTMLDivElement>(null);
   const filterRef = useRef<HTMLElement>(null);
   const [filterHidden, setFilterHidden] = useState(false);
 
   useEffect(() => {
-    let lastY = typeof window !== "undefined" ? window.scrollY : 0;
-    function onScroll() {
-      const y = window.scrollY;
-      // Up-scroll-only reveal. Past the masthead the filter is hidden
-      // by default; an upward scroll motion (>2px) brings it back into
-      // view. Down-scrolls are not detected separately - the default
-      // simply re-asserts on any non-upward scroll event past threshold.
-      const showAboveThreshold = (filterRef.current?.offsetTop ?? 0) + 80;
-      if (y < showAboveThreshold) {
-        setFilterHidden(false);
-      } else if (y < lastY - 2) {
-        setFilterHidden(false);
-      } else {
-        setFilterHidden(true);
-      }
-      lastY = y;
-    }
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const sentinel = sentinelRef.current;
+    if (!sentinel) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (!entry) return;
+        setFilterHidden(!entry.isIntersecting);
+      },
+      { threshold: 0 },
+    );
+    observer.observe(sentinel);
+    return () => observer.disconnect();
   }, []);
 
   function selectArtist(slug: string) {
@@ -203,6 +198,10 @@ export default function CollectionView({ sections, artists }: Props) {
           Hivemind Digital Culture Fund
         </h1>
       </div>
+      {/* Sentinel: IntersectionObserver tracks this element to know when
+          the reader has moved past the masthead. Sticks immediately after
+          the masthead so its viewport intersection mirrors the masthead's. */}
+      <div ref={sentinelRef} aria-hidden className="h-px w-full" />
       {/* Filters - ARTIST row, then CHAPTER row. Sticks to the top of the
           viewport as the reader scrolls so artist/chapter navigation is
           always reachable; the "Hivemind Digital Culture Fund" masthead
