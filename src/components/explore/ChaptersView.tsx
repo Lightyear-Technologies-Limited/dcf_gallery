@@ -36,17 +36,19 @@ export default function ChaptersView({ chapters }: { chapters: ChapterData[] }) 
         {chapters.map((c, i) => (
           <section
             key={c.slug}
-            // First chapter is TOP-anchored (justify-start + pt-6) so its title
-            // sits 24px under the masthead — the same masthead→subtitle rhythm as
-            // the Artists ("Artists") and About ("Thesis") pages, so the heading
-            // doesn't jump when moving between index pages. Chapters 2+ keep the
-            // cinematic full-height vertical centering as you scroll the procession.
+            // First chapter starts just below the page-level "Chapters"
+            // heading + framing (pt-2). Chapters 2+ keep the cinematic
+            // full-height vertical centering as you scroll the procession.
             className={`min-h-[78vh] flex flex-col border-b border-border last:border-b-0 ${
-              i === 0 ? "justify-start pt-6 pb-16" : "justify-center py-16"
+              i === 0 ? "justify-start pt-2 pb-16" : "justify-center py-16"
             }`}
           >
             <div>
-              <h2 className="font-serif display-lg leading-[0.95] mb-5">{roman[i]}. {c.name}</h2>
+              {/* Per-chapter title at display-sm, smaller than the page-
+                  level "Chapters" h2 (display-lg) above. Matches the
+                  Artists-page rhythm where individual artist names sit
+                  under the "Artists" subject heading at a smaller scale. */}
+              <h3 className="font-serif display-sm leading-[0.95] mb-5">{roman[i]}. {c.name}</h3>
               <p className="max-w-2xl text-[17px] sm:text-[18px] leading-[1.6] text-foreground-secondary mb-3">
                 {c.description}
               </p>
