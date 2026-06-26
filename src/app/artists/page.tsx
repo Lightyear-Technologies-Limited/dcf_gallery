@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { artists, getPiecesByArtist, getCollectionsByArtist } from "@/lib/data";
 import { getArtistEditorial } from "@/lib/editorial";
-import { getArtworkImage, getArtworkAspect } from "@/lib/images";
+import { getArtworkImage } from "@/lib/images";
 import {
   getArtistDisplayName,
   getCollectionDisplayName,
@@ -39,13 +39,6 @@ const HERO_PIECE_SLUGS: Record<string, string> = {
 };
 const HERO_COLLECTION_OVERRIDES: Record<string, string[]> = {
   "kim-asendorf": ["lights"],
-};
-// Hero frame aspect override (width/height). Most artists get the
-// piece's intrinsic aspect via getArtworkAspect; Kim's Lights is
-// dynamically generated and can render at any aspect, so we force
-// 1:1 square to land it in the page's square-majority cadence.
-const HERO_ASPECT_OVERRIDES: Record<string, number> = {
-  "kim-asendorf": 1,
 };
 
 export default function ArtistsPage() {
@@ -86,29 +79,16 @@ export default function ArtistsPage() {
         const heroWorks = pinnedSlug
           ? allWorks.filter((w) => w.slug === pinnedSlug)
           : allWorks;
-        const sortedHeroPieces = heroCols.flatMap((col) =>
-          sortPieces(col.slug, heroWorks.filter((w) => w.collectionSlug === col.slug))
-        );
-        const candidates = sortedHeroPieces
+        const candidates = heroCols
+          .flatMap((col) =>
+            sortPieces(col.slug, heroWorks.filter((w) => w.collectionSlug === col.slug))
+          )
           .map((p) => {
             const src = getArtworkImage(p.slug, p.contractAddress, p.tokenId, "detail");
             if (!src) return null;
             return { src, title: p.title, isPunk: p.collectionSlug === "cryptopunks" };
           })
           .filter((c): c is NonNullable<typeof c> => c !== null);
-
-        // Hero frame aspect = the piece's own intrinsic aspect (fit-
-        // to-the-art) so no piece is letterboxed. Falls back to 1:1
-        // when no intrinsic dimension is available (curated samples,
-        // pieces without an optimized variant). Overrides force a
-        // specific aspect for dynamic pieces - Kim's Lights renders
-        // 1:1 via crop so the page's square-majority cadence holds.
-        const heroPiece = sortedHeroPieces[0];
-        const intrinsic = heroPiece
-          ? getArtworkAspect(heroPiece.slug, heroPiece.contractAddress, heroPiece.tokenId)
-          : null;
-        const heroAspect = HERO_ASPECT_OVERRIDES[artist.slug]
-          ?? (intrinsic ? intrinsic.w / intrinsic.h : 1);
 
         // Alternate image-left and image-right across rows so the eye has
         // something to track. Eleven identical 55/45 rows read as wallpaper;
@@ -119,17 +99,14 @@ export default function ArtistsPage() {
         return (
           <div
             key={artist.slug}
-            // py-10 (was py-12) - lighter row padding alongside the
-            // fit-to-the-art frame, where rows now vary in height
-            // with each piece's aspect rather than locking to 16:9.
-            className="border-b border-border py-10"
+            className="border-b border-border py-16"
           >
-            <div className={`grid grid-cols-1 ${heroOnRight ? "md:grid-cols-[60fr_40fr]" : "md:grid-cols-[40fr_60fr]"} gap-8 md:gap-12 items-start`}>
+            <div className={`grid grid-cols-1 ${heroOnRight ? "md:grid-cols-[45fr_55fr]" : "md:grid-cols-[55fr_45fr]"} gap-8 md:gap-16 items-start`}>
               {/* On odd rows the hero is on the right; markup-order stays
                   hero-first so reading order matches visual order on mobile
                   (single column), and the desktop swap is column-order only. */}
               <div className={heroOnRight ? "md:order-2" : ""}>
-                <ArtistHero artistSlug={artist.slug} candidates={candidates} aspect={heroAspect} />
+                <ArtistHero artistSlug={artist.slug} candidates={candidates} />
               </div>
 
               {/* Info */}
