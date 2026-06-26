@@ -199,15 +199,9 @@ export default function CollectionView({ sections, artists }: Props) {
         </h1>
       </div>
       {/* Sentinel: IntersectionObserver tracks this element to know when
-          the reader has moved past the masthead. Sticks immediately after
-          the masthead so its viewport intersection mirrors the masthead's.
-          h-2 (not h-px) so the observer has a real box to track. */}
+          the reader has moved past the masthead. Sits immediately after
+          the masthead so its viewport intersection mirrors the masthead's. */}
       <div ref={sentinelRef} aria-hidden className="h-2 w-full" />
-
-      {/* TEMP DEBUG - remove once verified */}
-      <div className="fixed bottom-4 right-4 z-[999] bg-black text-white text-[11px] px-3 py-1.5 font-mono rounded shadow">
-        filterHidden: {String(filterHidden)}
-      </div>
       {/* Filters - ARTIST row, then CHAPTER row. Sticks to the top of the
           viewport as the reader scrolls so artist/chapter navigation is
           always reachable; the "Hivemind Digital Culture Fund" masthead
@@ -220,9 +214,12 @@ export default function CollectionView({ sections, artists }: Props) {
           clicking its active label. */}
       <section
         ref={filterRef}
-        className={`sticky top-14 md:top-0 z-30 bg-background pt-6 pb-4 border-b border-border space-y-2 ${
-          filterHidden ? "hidden" : ""
-        }`}
+        aria-hidden={filterHidden}
+        className="sticky top-14 md:top-0 z-30 bg-background pt-6 pb-4 border-b border-border space-y-2 transition-transform duration-300 ease-out will-change-transform"
+        style={{
+          transform: filterHidden ? "translateY(-100%)" : "translateY(0)",
+          pointerEvents: filterHidden ? "none" : "auto",
+        }}
       >
         {/* Row 1: Artists. Mask gives a fade on the trailing edge when overflowing. */}
         <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide [mask-image:linear-gradient(to_right,black_calc(100%-24px),transparent)]">
