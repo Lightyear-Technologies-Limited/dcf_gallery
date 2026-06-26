@@ -184,23 +184,13 @@ export default function CollectionView({ sections, artists }: Props) {
     scrollToFilterIfPast();
   }
 
-  // Reset just the artist-side filter. Clears artistFilter + any chapter-
-  // mode exclusions. Keeps the chapter filter intact if one is active.
-  function selectArtistAll() {
-    setArtistFilter(null);
-    setExcludedArtists([]);
-    syncUrl(null, chapterFilter);
-    scrollToFilterIfPast();
-  }
-
-  // Reset the chapter filter. Exclusions are tied to chapter mode, so clear
-  // them too. Keeps the artist filter intact if one is active.
-  function selectChapterAll() {
-    setChapterFilter(null);
-    setExcludedArtists([]);
-    syncUrl(artistFilter, null);
-    scrollToFilterIfPast();
-  }
+  // Both "All" buttons now clear EVERYTHING (artist + chapter + exclusions)
+  // - they're the "back to full view" affordance regardless of which row
+  // they sit in. Previously each was row-scoped (Artist All kept chapter,
+  // Chapter All kept artist) but that meant Chapter All did nothing when
+  // only an artist was selected, which read as broken. Aliased to clearAll.
+  const selectArtistAll = clearAll;
+  const selectChapterAll = clearAll;
 
   useEffect(() => {
     const a = searchParams.get("artist");
@@ -304,8 +294,6 @@ export default function CollectionView({ sections, artists }: Props) {
                   ? "text-muted/40 hover:text-foreground"
                   : isActive
                   ? "text-foreground"
-                  : excluded
-                  ? "text-muted/40 line-through hover:text-foreground"
                   : hasFilters
                   ? "text-muted/40 hover:text-foreground"
                   : "text-muted hover:text-foreground"
