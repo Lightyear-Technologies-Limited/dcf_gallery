@@ -21,11 +21,22 @@ const sorted = [...artists]
   .filter((a) => !MERGE_INTO[a.slug])
   .sort((a, b) => a.name.localeCompare(b.name));
 
-// Per-artist override: when present, the hero candidate pool is
-// restricted to these collection slugs only. Use when an artist's
-// default pool surfaces artworks whose aspect ratios don't fill the
-// 16:9 frame well. Kim Asendorf's PXL DEX and X0X are square; Lights
-// is wider and lands in the frame consistently.
+// Pinned hero piece per artist on the Artists index. Curated by hand
+// rather than rotated — rotation can be re-introduced later. Kim
+// Asendorf is restricted at the collection level (any Lights piece,
+// in curation order) because the spec was the collection, not a
+// specific token; the rest pin to a single slug.
+const HERO_PIECE_SLUGS: Record<string, string> = {
+  "a-c-k": "piano-blossoms-3-40f9", // Golden Afternoon
+  "beeple": "superrare-beeple-24644-b9e0", // TIME: The Future of Business
+  "dmitri-cherniak": "superrare-dmitri-cherniak-26901-b9e0", // A slight lack of symmetry 1/4
+  "larva-labs": "cryptopunks-269-3BBB",
+  "operator": "human-unreadable-455000124-b069",
+  "refik-anadol": "winds-of-yawanawa-917-100b",
+  "sam-spratt": "skulls-of-luci-20-d27c", // Saturnalia Pigmentation (Skull)
+  "tyler-hobbs": "fidenza-718-d270",
+  "xcopy": "superrare-xcopy-29757-b9e0", // DANKRUPT
+};
 const HERO_COLLECTION_OVERRIDES: Record<string, string[]> = {
   "kim-asendorf": ["lights"],
 };
@@ -57,18 +68,21 @@ export default function ArtistsPage() {
           (p) => !isCollectionHidden(p.collectionSlug)
         );
 
-        // Build the candidate pool - every visible piece that resolves to a
-        // real image, in curation order. ArtistHero picks one and freezes
-        // it for the session. HERO_COLLECTION_OVERRIDES restricts the pool
-        // to specific collections when an artist's default pool surfaces
-        // ill-fitting aspect ratios.
+        // Build the candidate pool. The hero renders candidates[0],
+        // so for pinned artists we filter the pool down to the
+        // chosen slug; for Kim we restrict to the Lights collection
+        // and let curation order pick the first one.
+        const pinnedSlug = HERO_PIECE_SLUGS[artist.slug];
         const allowedSlugs = HERO_COLLECTION_OVERRIDES[artist.slug];
         const heroCols = allowedSlugs
           ? visibleCols.filter((c) => allowedSlugs.includes(c.slug))
           : visibleCols;
+        const heroWorks = pinnedSlug
+          ? allWorks.filter((w) => w.slug === pinnedSlug)
+          : allWorks;
         const candidates = heroCols
           .flatMap((col) =>
-            sortPieces(col.slug, allWorks.filter((w) => w.collectionSlug === col.slug))
+            sortPieces(col.slug, heroWorks.filter((w) => w.collectionSlug === col.slug))
           )
           .map((p) => {
             const src = getArtworkImage(p.slug, p.contractAddress, p.tokenId, "detail");
