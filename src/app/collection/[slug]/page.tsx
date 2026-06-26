@@ -528,7 +528,7 @@ export default async function CollectionPage({
                 {collectionName}
               </h1>
               {!traitFilter && !col.totalSupply && (
-                <span className="text-[12px] text-muted tabular-nums">{sorted.length} {sorted.length === 1 ? "work" : "works"}</span>
+                <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium tabular-nums">{sorted.length} {sorted.length === 1 ? "work" : "works"}</span>
               )}
             </div>
             {artist && (

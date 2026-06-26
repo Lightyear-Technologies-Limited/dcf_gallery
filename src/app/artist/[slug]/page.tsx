@@ -163,8 +163,8 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
                 className="w-12 h-12 rounded-full object-cover shrink-0"
               />
             )}
-            <p className="text-[13px] text-muted tabular-nums">
-              {artistCollections.length} collection{artistCollections.length === 1 ? "" : "s"} · {totalWorks} work{totalWorks === 1 ? "" : "s"}
+            <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium tabular-nums">
+              {artistCollections.length} collection{artistCollections.length === 1 ? "" : "s"} &middot; {totalWorks} work{totalWorks === 1 ? "" : "s"}
             </p>
           </div>
 
