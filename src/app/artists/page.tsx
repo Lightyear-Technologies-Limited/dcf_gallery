@@ -58,11 +58,10 @@ export default function ArtistsPage() {
       {/* Section title + framing copy, structured to match a Chapters chapter
           entry: the section title sits at the chapter-title scale, with a
           framing paragraph below (replacing the old "N artists" count line). */}
-      <div className="mt-6 mb-8 max-w-2xl">
+      <div className="mt-6 mb-8 max-w-3xl">
         <h2 className="font-serif display-sm mb-5">Artists</h2>
         <p className="text-[17px] sm:text-[18px] leading-[1.6] text-foreground-secondary">
-          Hivemind brings together ten artists whose work spans digital
-          art&rsquo;s first decades.
+          Hivemind collects work by ten of digital art&rsquo;s most influential artists.
         </p>
       </div>
       {sorted.map((artist, idx) => {
@@ -125,7 +124,7 @@ export default function ArtistsPage() {
             // with each piece's aspect rather than locking to 16:9.
             className="border-b border-border py-10"
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start md:items-center">
+            <div className="grid grid-cols-1 md:grid-cols-[40fr_60fr] gap-8 md:gap-12 items-start md:items-center">
               {/* On odd rows the hero is on the right; markup-order stays
                   hero-first so reading order matches visual order on mobile
                   (single column), and the desktop swap is column-order only. */}
