@@ -270,6 +270,8 @@ export default function CollectionView({ sections, artists }: Props) {
                   ? "text-foreground"
                   : excluded
                   ? "text-muted/40 line-through hover:text-foreground"
+                  : hasFilters
+                  ? "text-muted/40 hover:text-foreground"
                   : "text-muted hover:text-foreground"
               }`}
               aria-label={
@@ -301,7 +303,11 @@ export default function CollectionView({ sections, artists }: Props) {
               onClick={() => selectChapter(ch.slug)}
               aria-pressed={isExplicit}
               className={`text-[13px] whitespace-nowrap shrink-0 transition-colors duration-200 ${
-                isHighlighted ? "text-foreground" : "text-muted hover:text-foreground"
+                isHighlighted
+                  ? "text-foreground"
+                  : hasFilters
+                  ? "text-muted/40 hover:text-foreground"
+                  : "text-muted hover:text-foreground"
               }`}
               style={isHighlighted ? { color: ch.color } : undefined}
             >
