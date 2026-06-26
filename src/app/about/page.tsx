@@ -129,11 +129,16 @@ export default function AboutPage() {
           The ten artists are grouped into five chapters of digital
           art&rsquo;s first decades.
         </p>
-        <div className="mt-8 space-y-6 max-w-[1000px]">
+        <div className="mt-8 space-y-6 max-w-[900px]">
           {CHAPTERS.map((ch) => (
             <div
               key={ch.slug}
-              className="grid grid-cols-1 md:grid-cols-[minmax(0,3fr)_minmax(0,7fr)] gap-6 md:gap-8 md:items-baseline"
+              // Fixed 220px left column so chapter names sit in a tight
+              // tabular stack (just wide enough for the longest -
+              // "Digital Identity" / "Digital Canvas"). The earlier 3fr/7fr
+              // ratio at max-w-[1000px] gave the left col 290px and let the
+              // descriptions stretch the full page width.
+              className="grid grid-cols-1 md:grid-cols-[220px_minmax(0,1fr)] gap-6 md:gap-8 md:items-baseline"
             >
               <div className="flex items-center gap-3">
                 <span
