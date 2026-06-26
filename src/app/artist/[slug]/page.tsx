@@ -168,18 +168,16 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
             </p>
           </div>
 
-          {/* Collection list for multi-collection artists - links straight
-              to the dedicated collection page rather than scrolling within
-              this page. The in-page sections below (which also link to the
-              same collection pages) act as inline previews; the top list is
-              the catalogue index. Gated to artists with 3+ collections; for
-              1-2 collections the inline sections are reachable without an
-              index and the list reads as duplication. */}
-          {artistCollections.length >= 3 && (
+          {/* Collection inventory - the artist-page catalogue index.
+              Always rendered so every artist (single- or multi-collection)
+              has the same clean "what's held, how many" summary at the
+              top, parallel with the "{N} collections · {M} works" eyebrow.
+              Each row links straight to the dedicated collection page
+              (or the piece, for single-piece collections - the collection
+              page would be redundant chrome there). */}
+          {artistCollections.length > 0 && (
             <ol className="mt-6 space-y-1.5 text-[13px]">
               {artistCollections.map((col) => {
-                /* Single-piece collections link straight to the piece -
-                   the collection page would be redundant chrome. */
                 const onlyPiece = col.pieces.length === 1 ? col.pieces[0] : null;
                 const href = onlyPiece
                   ? `/piece/${onlyPiece.slug}`
@@ -302,20 +300,13 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
           const sectionHref = n === 1 && piece ? `/piece/${piece.slug}` : `/collection/${col.slug}`;
           return (
             <section key={col.slug} id={col.slug}>
-              {/* Collection title + held piece count, inline. Matches the
-                  Salon homepage's per-collection block treatment ("CryptoPunks
-                  15 works") so an artist page with a single-collection
-                  position (Beeple SuperRare 1/1s 1 work, Larva Labs CryptoPunks
-                  15 works) reads with the same rhythm as the Salon entry the
-                  reader arrived from. */}
-              <div className="flex items-baseline gap-2.5 mb-2">
+              <div className="mb-2">
                 <Link
                   href={sectionHref}
-                  className="font-serif text-[22px] sm:text-[28px] text-foreground-secondary hover:opacity-60 transition-opacity duration-200"
+                  className="font-serif text-[22px] sm:text-[28px] text-foreground-secondary hover:opacity-60 transition-opacity duration-200 inline-block"
                 >
                   {col.name}
                 </Link>
-                <span className="text-[11px] text-muted tabular-nums">{n} {n === 1 ? "work" : "works"}</span>
               </div>
 
               {/* Gallery */}
