@@ -1,62 +1,59 @@
 import Link from "next/link";
-import { artists, collections, pieces } from "@/lib/data";
-import { isCollectionHidden } from "@/lib/curation";
 import { CHAPTERS } from "@/lib/chapters";
 
 export default function AboutPage() {
-  const visibleCollections = collections.filter((c) => !isCollectionHidden(c.slug));
-  const visiblePieces = pieces.filter((p) => !isCollectionHidden(p.collectionSlug));
-  const primaryArtists = artists.filter(
-    (a) => a.slug !== "tyler-hobbs-and-dandelion-wist"
-  );
-
   return (
-    <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 pb-24">
-      {/* Hero — masthead anchored at pt-6 so the "Hivemind Digital Culture Fund"
-          wordmark holds the SAME vertical position as the Salon / Artists /
-          Chapters mastheads (and aligns with the sidebar logo across the gutter).
-          The page-to-page jump came from this block previously starting at pt-16. */}
-      <div className="max-w-[680px] pt-6">
-        <h1 className="font-serif display-sm">
-          Hivemind Digital Culture Fund
-        </h1>
-        {/* "Thesis" subheading at the index-page subject scale (display-lg),
-            mirroring the "Artists" page / chapter-title structure so About reads
-            as Masthead → Thesis → [sections] like the other index pages. The
-            section H2s below stay display-sm, now reading as third-level. */}
-        <h2 className="font-serif display-lg leading-[0.95] mt-6 mb-5">Thesis</h2>
-        <p className="text-[20px] text-foreground-secondary leading-[1.6]">
-          A curated portfolio of digital art&rsquo;s emergent canon, acquired
-          after the first market cycle - when the artists, collections, and
-          individual works that define the medium can be identified with the
-          benefit of a full cycle of data.
-        </p>
-        <p className="text-[13px] text-muted mt-6 tabular-nums">
-          {visiblePieces.length} works &middot; {primaryArtists.length} artists &middot; {visibleCollections.length} collections
+    <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 pt-6 pb-24">
+      {/* Hero — masthead + Thesis lede mirror the Artists and Chapters
+          index-page structure exactly:
+            pt-6 on the outer container
+            h1 (display-sm) direct child
+            mt-6 mb-8 max-w-2xl wrapper around h2 + lede
+            h2 (display-sm) + mb-5
+            lede at text-[17px] sm:text-[18px], same secondary register
+          Same wrapper, same scale, same gap below across all three
+          index pages so the masthead → subject → lede rhythm doesn't
+          shift between them. */}
+      <h1 className="font-serif display-sm">
+        Hivemind Digital Culture Fund
+      </h1>
+      <div className="mt-6 mb-8 max-w-2xl">
+        <h2 className="font-serif display-sm mb-5">Thesis</h2>
+        <p className="text-[17px] sm:text-[18px] leading-[1.6] text-foreground-secondary">
+          Hivemind Digital Culture Fund is a curated portfolio of digital
+          art&rsquo;s emergent canon, acquired after the first market cycle -
+          when the artists, collections, and individual works that define the
+          medium can be identified with the benefit of historical context and
+          data.
         </p>
       </div>
 
       {/* Cycle-timing context - paraphrases the "Technology Drives Wealth" and
           "A Fund is Born" sections of the source thesis. */}
-      <div className="max-w-[680px] pt-16 space-y-6 text-[16px] text-foreground-secondary leading-[1.65]">
+      <div className="max-w-[680px] space-y-6 text-[16px] text-foreground-secondary leading-[1.65]">
         <p>
-          Technological advancement has consistently created new wealth, and
+          Technological advancements have consistently created new wealth, and
           with it a new class of investors and collectors looking for art that
-          resonates with their moment. Blockchain has redefined how digital art
-          is owned, traded, and seen; online communities now influence the
-          markets that price it.
+          resonates with the cultural moment. The Ethereum blockchain has
+          redefined how digital art is created, owned, traded, and seen, and
+          online communities now drive its value.
         </p>
         <p>
-          The first digital culture market cycle is behind us. A handful of
-          artists and collections have broken out and now stand as the
-          established canon - names that have survived the cycle and trade well
-          below their peaks. The Fund acquires deliberately at this point in
-          the curve.
+          With the first major market cycle for digital art now past, in 2024
+          Hivemind began deliberately acquiring works by those established
+          artists who had survived the cycle and whose work traded well below
+          its peaks. Today, the collection is comprehensive and targeted, with
+          grail works by many of the medium&rsquo;s defining names.
         </p>
       </div>
 
-      <blockquote className="max-w-[680px] mx-auto text-center py-12">
-        <p className="font-serif text-[28px] leading-relaxed tracking-tight text-foreground">
+      {/* Pull-quote: left-aligned with the body column (max-w-[680px], no
+          mx-auto) so it doesn't appear shifted right of the prose on wide
+          screens. Museum-wall treatment - serif italic with a hairline
+          border-l indent rule - earns its bigger size and signals it's
+          the thesis's defining beat. */}
+      <blockquote className="max-w-[680px] py-12">
+        <p className="font-serif italic text-[28px] sm:text-[32px] leading-snug tracking-tight text-foreground border-l border-border pl-6">
           Technology drives wealth. Wealth drives culture.
         </p>
       </blockquote>
@@ -66,11 +63,11 @@ export default function AboutPage() {
           updated to reflect the portfolio's actual ten-artist shape rather
           than the thesis's aspirational 6-10 core collections target. */}
       <div className="max-w-[680px] space-y-6">
-        <h2 className="font-serif display-sm">Working Backwards</h2>
+        <h2 className="font-serif text-[32px] sm:text-[40px] tracking-tight leading-tight">Working Backwards</h2>
         <p className="text-[16px] text-foreground-secondary leading-[1.65]">
-          For an asset class this illiquid, the most desirable end state has to
-          be defined first, then the plan to reach it works backward from there.
-          The Fund is built around ten artists, each anchoring a chapter of
+          For an illiquid asset class, the most desirable end state has to be
+          defined first, then the plan to reach it works backward from there.
+          Hivemind is built around ten artists, each anchoring a chapter of
           digital art&rsquo;s first decades. Within each chapter, collections
           are acquired deep rather than wide, and 1/1 pieces are added to
           elevate the curation of specific movements.
@@ -88,15 +85,15 @@ export default function AboutPage() {
           Keystones) compress the thesis's six subheadings into the ones that
           matter for a public reader; examples are verified DCF holdings
           (White Mono Fidenza, Return Zero, A Slight Lack of Symmetry). */}
-      <div className="max-w-[680px] pt-16 space-y-6">
-        <h2 className="font-serif display-sm">The Curation</h2>
+      <div className="max-w-[680px] pt-12 space-y-6">
+        <h2 className="font-serif text-[32px] sm:text-[40px] tracking-tight leading-tight">The Curation</h2>
         <div>
           <p className="text-[16px] font-medium text-foreground">Artist and Collection</p>
           <p className="text-[16px] text-foreground-secondary leading-[1.65] mt-1">
             Digital art sits within Contemporary Art, where the actions of a
             living artist still shape an artwork&rsquo;s enduring value. An
             artist with the right profile is necessary but not sufficient; the
-            collection must also be significant within its chapter. The Fund
+            collection must also be significant within its chapter. Hivemind
             approves blue-chip collections from blue-chip artists, not artists
             wholesale.
           </p>
@@ -104,11 +101,12 @@ export default function AboutPage() {
         <div>
           <p className="text-[16px] font-medium text-foreground">Trait Concentration</p>
           <p className="text-[16px] text-foreground-secondary leading-[1.65] mt-1">
-            Within a collection, the Fund leans into desirable traits when
-            pricing is opportunistic. Tyler Hobbs&rsquo;s Fidenza series is held
-            with a focus on the White Mono trait - pure white forms on a colored
-            ground, the inverse of the standard Fidenza palette, and the variant
-            that most clearly exposes the algorithm&rsquo;s drawing logic.
+            Within a collection, Hivemind leans into desirable traits when
+            pricing is opportunistic. For example, Tyler Hobbs&rsquo;s Fidenza
+            series is held with a focus on the White Mono trait - pure white
+            forms on a colored ground, the inverse of the standard Fidenza
+            palette, and the variant that most clearly exposes the
+            algorithm&rsquo;s drawing logic.
           </p>
         </div>
         <div>
@@ -125,17 +123,23 @@ export default function AboutPage() {
       </div>
 
       {/* Five Chapters */}
-      <div className="pt-16 pb-8">
-        <h2 className="font-serif display-sm max-w-[680px]">Five Chapters</h2>
+      <div className="pt-12 pb-8">
+        <h2 className="font-serif text-[32px] sm:text-[40px] tracking-tight leading-tight max-w-[680px]">Five Chapters</h2>
         <p className="text-[16px] text-foreground-secondary leading-[1.65] mt-4 max-w-[680px]">
-          The ten artists in the Fund are grouped into five chapters of digital
+          The ten artists are grouped into five chapters of digital
           art&rsquo;s first decades.
         </p>
-        <div className="mt-8 space-y-6 max-w-[820px]">
+        <div className="mt-8 space-y-6 max-w-[680px]">
           {CHAPTERS.map((ch) => (
             <div
               key={ch.slug}
-              className="grid grid-cols-1 md:grid-cols-[minmax(0,3fr)_minmax(0,7fr)] gap-6 md:gap-12 md:items-baseline"
+              // Matches the rest of the Thesis body at max-w-[680px] so
+              // the Five Chapters block sits in the same column as the
+              // surrounding prose. 2fr/3fr ratio (left:right) keeps the
+              // chapter-name column tight and the descriptions in
+              // proportion - longer ones wrap to two lines, which is
+              // fine.
+              className="grid grid-cols-1 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-6 md:gap-8 md:items-baseline"
             >
               <div className="flex items-center gap-3">
                 <span
@@ -146,7 +150,7 @@ export default function AboutPage() {
                   {ch.name}
                 </h3>
               </div>
-              <p className="text-[16px] text-foreground-secondary leading-[1.65]">
+              <p className="text-[16px] text-foreground-secondary leading-[1.65] text-pretty">
                 {ch.description}
               </p>
             </div>
@@ -157,14 +161,14 @@ export default function AboutPage() {
       {/* Hivemind closer - firm bio with the institutional-structure language
           folded in (custody / standards), then CTAs to gallery + source essay,
           then a separately-labelled IR block. */}
-      <div className="max-w-[680px] pt-16">
-        <h2 className="font-serif display-sm">Hivemind Capital Partners</h2>
+      <div className="max-w-[680px] pt-12">
+        <h2 className="font-serif text-[32px] sm:text-[40px] tracking-tight leading-tight">Hivemind Capital Partners</h2>
         <p className="text-[16px] text-foreground-secondary leading-[1.65] mt-6">
-          Hivemind is a crypto-focused investment firm with positions across
-          infrastructure, applications, and culture. The Digital Culture Fund
-          is Hivemind&rsquo;s vehicle for collecting the art of this period -
-          held to the custody, security, and operational standards LPs apply to
-          any other asset on their book.
+          Hivemind Capital Partners is a crypto-focused investment firm with
+          positions across infrastructure, applications, and culture. The
+          Digital Culture Fund is the firm&rsquo;s vehicle for collecting the
+          art of this period - held to the custody, security, and operational
+          standards LPs apply to any other asset on their book.
         </p>
 
         <div className="mt-8 flex flex-col sm:flex-row gap-6 sm:gap-10 text-[13px]">
