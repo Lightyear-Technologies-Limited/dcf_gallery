@@ -21,6 +21,33 @@ const sorted = [...artists]
   .filter((a) => !MERGE_INTO[a.slug])
   .sort((a, b) => a.name.localeCompare(b.name));
 
+// Pinned hero piece per artist on the Artists index. Curated by hand
+// rather than rotated — rotation can be re-introduced later. Kim
+// Asendorf is restricted at the collection level (any Lights piece,
+// in curation order) because the spec was the collection, not a
+// specific token; the rest pin to a single slug.
+const HERO_PIECE_SLUGS: Record<string, string> = {
+  "a-c-k": "piano-blossoms-4-40f9", // Muse Blossoms
+  "beeple": "superrare-beeple-24644-b9e0", // TIME: The Future of Business
+  "dmitri-cherniak": "superrare-dmitri-cherniak-26901-b9e0", // A slight lack of symmetry 1/4
+  "larva-labs": "cryptopunks-269-3BBB",
+  "operator": "human-unreadable-455000124-b069",
+  "refik-anadol": "synthetic-dreams-648-be3a",
+  "sam-spratt": "skulls-of-luci-20-d27c", // Saturnalia Pigmentation (Skull)
+  "tyler-hobbs": "tyler-hobbs-1-9345", // Return Zero [Blue] 0.7
+  "xcopy": "superrare-xcopy-2123-b9e0", // Some Other Asshole
+};
+const HERO_COLLECTION_OVERRIDES: Record<string, string[]> = {
+  "kim-asendorf": ["lights"],
+};
+// Optional hero frame aspect override (width/height). When present,
+// ArtistHero uses the override and crops via object-cover instead of
+// the default 9/8 letterbox. Kim's Lights renders at 9/8 with crop,
+// matching every other hero's footprint exactly (581x516 at desktop).
+const HERO_ASPECT_OVERRIDES: Record<string, number> = {
+  "kim-asendorf": 9 / 8,
+};
+
 export default function ArtistsPage() {
   return (
     <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 pt-6 pb-24">
@@ -31,12 +58,10 @@ export default function ArtistsPage() {
       {/* Section title + framing copy, structured to match a Chapters chapter
           entry: the section title sits at the chapter-title scale, with a
           framing paragraph below (replacing the old "N artists" count line). */}
-      <div className="mt-6 mb-8 max-w-2xl">
-        <h2 className="font-serif display-lg leading-[0.95] mb-5">Artists</h2>
+      <div className="mt-6 mb-8 max-w-3xl">
+        <h2 className="font-serif display-sm mb-5">Artists</h2>
         <p className="text-[17px] sm:text-[18px] leading-[1.6] text-foreground-secondary">
-          The Hivemind Digital Culture Fund collection brings together ten
-          artists whose work spans digital art&rsquo;s defining chapters, from
-          its on-chain origins to the present.
+          Hivemind collects work by ten of digital art&rsquo;s most influential artists.
         </p>
       </div>
       {sorted.map((artist, idx) => {
@@ -49,12 +74,21 @@ export default function ArtistsPage() {
           (p) => !isCollectionHidden(p.collectionSlug)
         );
 
-        // Build the candidate pool - every visible piece that resolves to a
-        // real image, in curation order. ArtistHero picks one and freezes
-        // it for the session.
-        const candidates = visibleCols
+        // Build the candidate pool. The hero renders candidates[0],
+        // so for pinned artists we filter the pool down to the
+        // chosen slug; for Kim we restrict to the Lights collection
+        // and let curation order pick the first one.
+        const pinnedSlug = HERO_PIECE_SLUGS[artist.slug];
+        const allowedSlugs = HERO_COLLECTION_OVERRIDES[artist.slug];
+        const heroCols = allowedSlugs
+          ? visibleCols.filter((c) => allowedSlugs.includes(c.slug))
+          : visibleCols;
+        const heroWorks = pinnedSlug
+          ? allWorks.filter((w) => w.slug === pinnedSlug)
+          : allWorks;
+        const candidates = heroCols
           .flatMap((col) =>
-            sortPieces(col.slug, allWorks.filter((w) => w.collectionSlug === col.slug))
+            sortPieces(col.slug, heroWorks.filter((w) => w.collectionSlug === col.slug))
           )
           .map((p) => {
             const src = getArtworkImage(p.slug, p.contractAddress, p.tokenId, "detail");
@@ -72,27 +106,30 @@ export default function ArtistsPage() {
         return (
           <div
             key={artist.slug}
-            className="border-b border-border py-16"
+            className={`border-b border-border pb-16 ${idx === 0 ? "pt-4" : "pt-16"}`}
           >
             <div className={`grid grid-cols-1 ${heroOnRight ? "md:grid-cols-[45fr_55fr]" : "md:grid-cols-[55fr_45fr]"} gap-8 md:gap-16 items-start`}>
               {/* On odd rows the hero is on the right; markup-order stays
                   hero-first so reading order matches visual order on mobile
                   (single column), and the desktop swap is column-order only. */}
               <div className={heroOnRight ? "md:order-2" : ""}>
-                <ArtistHero artistSlug={artist.slug} candidates={candidates} />
+                <ArtistHero artistSlug={artist.slug} candidates={candidates} aspect={HERO_ASPECT_OVERRIDES[artist.slug]} />
               </div>
 
-              {/* Info */}
+              {/* Info - on heroOnRight rows, the info column lands on
+                  the LEFT (md:order-1) with the hero on the right. Default
+                  left-alignment would push text content flush against the
+                  page's left edge with empty space across to the hero -
+                  visually disconnected. md:text-right on the wrapper
+                  re-anchors the inline portrait+name Link and the
+                  eyebrow label to the right edge of the column, adjacent
+                  to the gutter; the bio container uses md:ml-auto +
+                  md:text-left to push its block to the right edge while
+                  keeping body text left-aligned for readability. */}
               <div className={`md:pt-4 ${heroOnRight ? "md:order-1" : ""}`}>
-                {/* Portrait + wordmark. Portrait sits inline with the h2
-                    as the artist's identity badge - small enough not to
-                    compete with the artwork hero across the gutter,
-                    consistent across rows so the index reads as a roster.
-                    Absent portrait gracefully degrades to a plain
-                    wordmark row. */}
                 <Link
                   href={`/artist/${artist.slug}`}
-                  className="inline-flex items-center gap-3 group"
+                  className="inline-flex items-center gap-3"
                 >
                   {artist.portrait && (
                     <Image
@@ -103,19 +140,15 @@ export default function ArtistsPage() {
                       className="w-10 h-10 rounded-full object-cover shrink-0"
                     />
                   )}
-                  <h3 className="font-serif text-[32px] sm:text-[40px] tracking-tight leading-tight group-hover:opacity-60 transition-opacity duration-200">
+                  <h3 className="font-serif text-[32px] sm:text-[40px] tracking-tight leading-tight hover:opacity-60 transition-opacity duration-200">
                     {artistName}
                   </h3>
                 </Link>
-                {/* Single eyebrow line - count only. The collection list used
-                    to be inlined here as a comma-separated link row, but it
-                    duplicated what the artist page itself does better and read
-                    as filler. Cut. */}
                 <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mt-4 tabular-nums">
                   {visibleCols.length} collection{visibleCols.length !== 1 ? "s" : ""} &middot; {allWorks.length} works
                 </p>
                 {(getArtistEditorial(artist.slug)?.bio ?? artist.bio) && (
-                  <p className="text-[15px] text-foreground-secondary leading-[1.65] mt-6 max-w-[400px]">
+                  <p className="text-[15px] text-foreground-secondary leading-[1.65] mt-6 max-w-[440px]">
                     {(getArtistEditorial(artist.slug)?.bio ?? artist.bio)}
                   </p>
                 )}
