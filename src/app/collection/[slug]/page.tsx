@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const name = getCollectionDisplayName(col.slug, col.name);
   const artist = getArtist(col.artistSlug);
   const artistName = artist ? getArtistDisplayName(artist.slug, artist.name) : undefined;
-  const title = artistName ? `${name} — ${artistName}` : name;
+  const title = artistName ? `${name} - ${artistName}` : name;
   const description = (col.description || `${name} in the Hivemind Digital Culture Fund collection.`).slice(0, 200);
   const first = getPiecesByCollection(col.slug)[0];
   const og = first ? getOgImage(first.slug) : undefined;
@@ -413,40 +413,32 @@ export default async function CollectionPage({
     </div>
   ) : null;
 
-  // Browse-by-trait disclosure - rendered BELOW the editorial grid on
-  // UNFILTERED pages only. On filtered views the inline traitIndexInline
-  // above takes over instead, sitting directly under the chip in the left
-  // column.
-  // Unfiltered placement wraps the same inline layout in a <details>
-  // disclosure so the trait index stays collapsed by default (the
-  // unfiltered page subject is the artwork, not the pivot affordance).
-  // When opened, it renders the exact same tight inline rows the
-  // filtered view shows always-visible - no structural mismatch
-  // between filter states.
-  // Pure-CSS checkbox+peer disclosure. The rows are always rendered so
-  // the column reserves their height, and visibility toggles with the
-  // checkbox state. Net: opening never grows the column or pushes the
-  // gallery down — the closed state just shows the summary above the
-  // reserved (empty) space the rows would occupy. We don't use a native
-  // `<details>` element because its browser-default `display: none` on
-  // closed children would collapse the height we want to reserve.
-  const traitToggleId = `trait-toggle-${slug}`;
+  // Browse-by-trait disclosure - rendered in the LEFT editorial column on
+  // unfiltered pages. Filtered views render the inline trait index
+  // directly (no disclosure) so the available pivots stay visible.
+  //
+  // Native <details> matching the piece-page Features pattern - same
+  // chevron rotation, same hover affordance, same open animation. Drops
+  // an earlier checkbox+peer reserved-height hack: the dead empty space
+  // it created read as a hole in the column, and the consistency win
+  // with Features.tsx is worth a small gallery push-down on open.
+  // Closed by default - the unfiltered page subject is the artwork, not
+  // the pivot affordance; readers who want to filter open it.
   const traitDisclosure = traitIndexRows.length > 0 ? (
-    <div className="max-w-[520px]">
-      <input id={traitToggleId} type="checkbox" className="peer sr-only" />
-      <label
-        htmlFor={traitToggleId}
-        className="cursor-pointer text-muted hover:text-foreground transition-colors duration-200 inline-flex items-center gap-2 select-none peer-checked:[&_.tt-chev]:rotate-90"
-      >
+    <details
+      className="group max-w-[520px] [&_summary::-webkit-details-marker]:hidden"
+    >
+      <summary className="cursor-pointer list-none text-muted hover:text-foreground transition-colors duration-200 inline-flex items-center gap-2 select-none">
         <span className="text-[10px] uppercase">Browse by trait</span>
-        <span aria-hidden className="tt-chev inline-block transition-transform duration-200">
+        <span
+          aria-hidden
+          className="inline-block transition-transform duration-200 group-open:rotate-90"
+        >
           &rsaquo;
         </span>
-      </label>
-      <div className="invisible peer-checked:visible">
-        {traitIndexInline}
-      </div>
-    </div>
+      </summary>
+      {traitIndexInline}
+    </details>
   ) : null;
 
   const collectionLd = {
@@ -525,22 +517,24 @@ export default async function CollectionPage({
           the header structure stays constant. */}
       <div className="pt-6 grid grid-cols-1 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-12 md:gap-16">
           <div>
-            {/* Title + held piece count (the kept Index affordance — a quick
-                "how many works" read next to the name). Still suppressed on
-                filtered views (the total would misrepresent the visible
-                subset); single-piece collections now show "1" for parity. */}
+            {/* Title. Inline piece-count chip suppressed when the catalogue
+                stack below carries the same count via "Hivemind holds N works"
+                (i.e. when totalSupply is set) - reading "30 works" twice in
+                the first three lines of the page is redundant. Falls back to
+                inline when the holdings line is absent (collections without
+                totalSupply). Always suppressed on filtered views. */}
             <div className="flex items-baseline gap-2.5">
               <h1 className="font-serif display-sm">
                 {collectionName}
               </h1>
-              {!traitFilter && (
-                <span className="text-[12px] text-muted font-mono tabular-nums">{sorted.length}</span>
+              {!traitFilter && !col.totalSupply && (
+                <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium tabular-nums">{sorted.length} {sorted.length === 1 ? "work" : "works"}</span>
               )}
             </div>
             {artist && (
               <Link
                 href={`/artist/${artist.slug}`}
-                className="text-[15px] text-foreground-secondary hover:text-foreground transition-colors duration-200 mt-3 inline-block"
+                className="font-serif text-[32px] sm:text-[40px] tracking-tight leading-tight hover:opacity-60 transition-opacity duration-200 mt-3 inline-block"
               >
                 {artistName}
               </Link>
@@ -577,23 +571,26 @@ export default async function CollectionPage({
               {!traitFilter &&
                 col.totalSupply !== undefined &&
                 col.totalSupply > 1 && <p>{editionType}</p>}
+              {/* Hivemind holdings line sits directly under the edition
+                  row so the reader's eye reads "1/1/999 -> Hivemind
+                  holds N works" as a paired figure. "of M" dropped
+                  because the edition row above already states the
+                  total - "Hivemind holds N of 999 works" right under
+                  "1/1/999" doubled the number. Clarifier "1/1s" stays
+                  for shared-contract independent 1/1s (Piano Blossoms,
+                  Her favorite flowers) where the unit isn't implied by
+                  the edition row. */}
+              {col.totalSupply && (
+                <p>
+                  Hivemind holds {sorted.length}{" "}
+                  {editionType === "1/1" && col.totalSupply > 1 ? "1/1s" : "works"}
+                </p>
+              )}
               {!traitFilter && col.platform && <p>{col.platform}</p>}
               {!traitFilter && col.contractAddress && (
                 <p className="inline-flex items-baseline gap-x-2">
                   <span>Contract:</span>
                   <CopyableHash value={col.contractAddress} />
-                </p>
-              )}
-              {/* "Hivemind holds N of M" + a clarifier suffix for
-                  shared-contract independent 1/1s (Her favorite flowers,
-                  Piano Blossoms): "N of M 1/1s" makes explicit that each
-                  piece is unique, not an edition of M. For programmatic
-                  series the holdings line stands alone since the edition
-                  row above (1/1/999, 1/1/10000) already says it. */}
-              {col.totalSupply && (
-                <p>
-                  Hivemind holds {sorted.length} of {col.totalSupply.toLocaleString()}
-                  {editionType === "1/1" && col.totalSupply > 1 ? " 1/1s" : ""}
                 </p>
               )}
             </div>
@@ -643,6 +640,9 @@ export default async function CollectionPage({
                           )}
                         </>
                       )}
+                      {ex.pieces && ex.pieces.length > 0 && (
+                        <span className="text-muted"> ({ex.pieces.join(", ")})</span>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -662,21 +662,13 @@ export default async function CollectionPage({
               unfiltered AND filtered views so the page structure stays
               consistent when a reader applies a filter (only chrome
               should be added by the filter, never editorial subtracted).
-              - About description
-              - Hivemind Commentary (same serif 16px register as Artist
-                Statement so the two voices have visual parity)
+              - Hivemind Commentary (single block; About removed per
+                editorial decision - the curator note carries the only
+                Hivemind voice on the page)
               - Artist Statement (when present)
               - Essay link nested under Commentary, or standalone if no
                 Commentary */}
           <div className="space-y-6 md:pt-4">
-              {col.description && (
-                <div className="border-l border-border pl-5">
-                  <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
-                    About {collectionName}
-                  </p>
-                  <ExpandableProse text={col.description} />
-                </div>
-              )}
               {/* Commentary + essay link grouped under the same border-l
                   rule. Essay link sits inside the Commentary container so
                   it indents to match the prose (pl-5 from the rule),
@@ -688,11 +680,9 @@ export default async function CollectionPage({
                   <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
                     Hivemind Commentary
                   </p>
-                  <ExpandableProse
-                    text={col.curatorNote}
-                    threshold={400}
-                    className="font-serif text-[16px] leading-[1.65] text-foreground-secondary whitespace-pre-line"
-                  />
+                  <p className="font-serif text-[16px] leading-[1.65] text-foreground-secondary whitespace-pre-line">
+                    {col.curatorNote}
+                  </p>
                   {col.essayUrl && (
                     <a
                       href={col.essayUrl}
@@ -707,6 +697,16 @@ export default async function CollectionPage({
                         </>
                       )}{" "}
                       →
+                    </a>
+                  )}
+                  {col.xUrl && (
+                    <a
+                      href={col.xUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-3 text-[13px] text-muted hover:text-foreground transition-colors duration-200 inline-block"
+                    >
+                      {col.xLabel ?? "Read the thread on X"} →
                     </a>
                   )}
                 </div>
@@ -748,8 +748,28 @@ export default async function CollectionPage({
             </div>
         </div>
 
+      {/* Filter reminder above the gallery: the chipBlock at the top of
+          the editorial column carries the full status row, but a reader
+          who has scrolled past the editorial header should still see at
+          a glance that they're filtered and have a one-click escape. */}
+      {traitFilter && pieces.length > 0 && (
+        <div className="pt-6 flex items-baseline gap-2 text-[11px] text-muted">
+          <span className="uppercase tracking-[0.08em]">Filter</span>
+          <span className="text-foreground-secondary">
+            {traitFilter.key}: <span className="font-medium">{traitFilter.value}</span>
+          </span>
+          <Link
+            href={`/collection/${slug}`}
+            aria-label="Clear filter"
+            className="ml-auto text-foreground-secondary hover:text-foreground transition-colors duration-200"
+          >
+            Clear
+          </Link>
+        </div>
+      )}
+
       {/* Gallery. */}
-      <div className={`${traitFilter ? "pt-8" : "pt-6"} pb-24`}>
+      <div className={`${traitFilter ? "pt-4" : "pt-6"} pb-24`}>
         {(() => {
           const heroLayout = getHeroLayout(slug);
           // Filtered view: bypass hero / fixed-row / single-piece layouts
