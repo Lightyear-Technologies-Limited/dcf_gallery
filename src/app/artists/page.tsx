@@ -107,7 +107,7 @@ export default function ArtistsPage() {
         return (
           <div
             key={artist.slug}
-            className="border-b border-border py-16 first:pt-0"
+            className={`border-b border-border pb-16 ${idx === 0 ? "pt-4" : "pt-16"}`}
           >
             <div className={`grid grid-cols-1 ${heroOnRight ? "md:grid-cols-[45fr_55fr]" : "md:grid-cols-[55fr_45fr]"} gap-8 md:gap-16 items-start`}>
               {/* On odd rows the hero is on the right; markup-order stays
