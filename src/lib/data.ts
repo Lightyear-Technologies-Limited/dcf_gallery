@@ -37,6 +37,11 @@ export interface Exhibition {
   /** Optional link to event details (press, recap, catalogue). Renders the
       title + location as an external link when present. */
   url?: string;
+  /** Optional list of specific pieces featured in the exhibition - rendered
+      as a "(#253, #943)" suffix when the show featured only a subset of
+      the collection. Free-form strings so curators can use whatever piece
+      shorthand fits ("#253", "Fidenza #253", "Hero piece", etc.). */
+  pieces?: string[];
 }
 
 export interface Collection {
@@ -126,6 +131,11 @@ export interface Piece {
   // a physical sculpture extends). Rendered as a "Companion: {Title}" link
   // on the piece page so the catalogue can express the pairing.
   companionSlug?: string;
+  // Public exhibitions / showings of THIS piece. Same shape and render
+  // style as `Collection.exhibitions` (used by ACK / Operator on the
+  // collection page) - EXHIBITIONS eyebrow + "date - title, location"
+  // rows, title italicised in serif. Editorial / human-owned.
+  exhibitions?: Exhibition[];
 }
 
 export interface Influence {
@@ -371,6 +381,15 @@ export const collections: Collection[] = [
     medium: 'generative',
     contractAddress: '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270',
     totalSupply: 999,
+    exhibitions: [
+      {
+        date: 'April 2025',
+        title: 'Rhizome World',
+        location: 'NYC',
+        url: 'https://x.com/paintboxed1981/status/1913986525806625009/photo/3',
+        pieces: ['#253', '#943'],
+      },
+    ],
     tags: ['generative', 'algorithmic', 'on-chain'],
     influences: [],
   },
