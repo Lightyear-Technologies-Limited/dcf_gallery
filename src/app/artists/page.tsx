@@ -42,11 +42,10 @@ const HERO_COLLECTION_OVERRIDES: Record<string, string[]> = {
 };
 // Optional hero frame aspect override (width/height). When present,
 // ArtistHero uses the override and crops via object-cover instead of
-// the default 9/8 letterbox. Kim's Lights is a single landscape piece
-// that visually dominated the row at 9/8 letterbox; forcing 1:1 brings
-// its width down to match the other heroes.
+// the default 9/8 letterbox. Kim's Lights renders at 9/8 with crop,
+// matching every other hero's footprint exactly (581x516 at desktop).
 const HERO_ASPECT_OVERRIDES: Record<string, number> = {
-  "kim-asendorf": 1,
+  "kim-asendorf": 9 / 8,
 };
 
 export default function ArtistsPage() {
