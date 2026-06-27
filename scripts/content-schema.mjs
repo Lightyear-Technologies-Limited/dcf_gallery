@@ -19,6 +19,9 @@ const xLink = {
 export const ArtistEditorial = z
   .object({
     bio: z.string().min(1, "bio is required"),
+    // Hivemind-voice commentary on why we collect this artist. Optional
+    // during migration; once every artist has one this can tighten.
+    curatorNote: z.string().optional(),
     ...essay,
   })
   .strict();
