@@ -19,8 +19,7 @@ export const CHAPTERS: Chapter[] = [
     slug: "ai-art",
     color: "var(--foreground)",
     artists: ["refik-anadol"],
-    description:
-      "Art made with machine learning as a primary medium. Trained models render datasets as moving image.",
+    description: "Art made with machine-learning models trained on data.",
   },
   {
     name: "CryptoArt",
@@ -28,7 +27,7 @@ export const CHAPTERS: Chapter[] = [
     color: "var(--foreground)",
     artists: ["xcopy", "beeple", "kim-asendorf"],
     description:
-      "Artists native to the blockchain - the early on-chain practice that shaped what digital art became.",
+      "Blockchain-native art deeply tied to crypto culture and the digital art movement.",
   },
   {
     name: "Digital Canvas",
@@ -36,7 +35,7 @@ export const CHAPTERS: Chapter[] = [
     color: "var(--foreground)",
     artists: ["a-c-k", "operator", "sam-spratt"],
     description:
-      "Digital-native artists working in the lineage of figurative painting and visual narrative - studio practice translated to on-chain canvas.",
+      "Art that combines digital media with concept, performance, and participation.",
   },
   {
     name: "Digital Identity",
@@ -44,7 +43,7 @@ export const CHAPTERS: Chapter[] = [
     color: "var(--foreground)",
     artists: ["larva-labs"],
     description:
-      "Generative collections where the artwork is also identity - profile picture, status object, membership card.",
+      "Art that doubles as identity - profile pictures (PFPs), social signal, membership.",
   },
   {
     name: "Generative Art",
@@ -52,7 +51,7 @@ export const CHAPTERS: Chapter[] = [
     color: "var(--foreground)",
     artists: ["tyler-hobbs", "dmitri-cherniak"],
     description:
-      "Artists who design algorithms rather than individual works. Each piece is a unique output of one shared system.",
+      "Art produced by artist-designed algorithms, minted on the blockchain.",
   },
 ];
 
