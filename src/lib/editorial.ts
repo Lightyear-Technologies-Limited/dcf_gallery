@@ -42,12 +42,22 @@ export function getCollectionEditorial(slug: string): CollectionEditorial | unde
  *  every downstream read (bio, essay) reflects the authoritative content layer.
  *  Pass-through when there's no editorial record (resilient to new imports). */
 export function withArtistEditorial<
-  T extends { slug: string; bio: string; essayUrl?: string; essayTitle?: string },
+  T extends { slug: string; bio: string; curationComment?: string; essayUrl?: string; essayTitle?: string },
 >(a: T | undefined): T | undefined {
   if (!a) return a;
   const ed = ED.artists[a.slug];
   if (!ed) return a;
-  return { ...a, bio: ed.bio, essayUrl: ed.essayUrl ?? a.essayUrl, essayTitle: ed.essayTitle ?? a.essayTitle };
+  return {
+    ...a,
+    bio: ed.bio,
+    // Editorial layer curatorNote replaces the legacy data.ts
+    // curationComment. When empty/absent, the artist page does not
+    // render the Hivemind Commentary block - the block reappears once
+    // a curatorNote is written into the artist's editorial JSON file.
+    curationComment: ed.curatorNote,
+    essayUrl: ed.essayUrl ?? a.essayUrl,
+    essayTitle: ed.essayTitle ?? a.essayTitle,
+  };
 }
 
 /** Overlay the editorial record onto a generated Collection (curator note
