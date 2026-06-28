@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { pieces, getArtist, getCollection, getPiecesByCollection } from "@/lib/data";
+import { getPieceEditorial } from "@/lib/editorial";
 import { getArtworkImage, getArtworkAspect, resolveTokenId } from "@/lib/images";
 import { getDetailVariants, getArtworkBlur, getProvenance, getOgImage } from "@/lib/provenance";
 import { getMotion } from "@/lib/motion";
@@ -437,6 +438,8 @@ export default async function PiecePage({
           cryptopunksUrl={cryptopunksUrl}
           artistSiteUrl={artistSiteUrl}
           originalUri={piece.originalUri}
+          xUrl={getPieceEditorial(piece.slug)?.xUrl}
+          xLabel={getPieceEditorial(piece.slug)?.xLabel}
           placeholder={<PlaceholderArt collectionSlug={piece.collectionSlug} pieceSlug={piece.slug} className="w-full h-full" />}
         />
       </div>
