@@ -729,8 +729,16 @@ export default async function CollectionPage({
               )}
               {col.artistStatement && (
                 <div className="border-l border-border pl-5">
-                  <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
+                  <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-1">
                     Artist Statement
+                  </p>
+                  {/* Provenance line - makes it clear the block is
+                      inherited content from the collection's original
+                      release / on-chain metadata, not text written for
+                      Hivemind. Reader can read both blocks (Commentary +
+                      Statement) without confusing which voice is which. */}
+                  <p className="text-[11px] italic text-muted mb-3">
+                    From the artist's original release notes.
                   </p>
                   {/* Threshold at 300 chars - medium-length statements
                       (Ringers ~500, Lightyears ~430) collapse to a 3-line
