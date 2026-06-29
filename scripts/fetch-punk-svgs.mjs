@@ -40,11 +40,11 @@ if (existsSync(resolve(ROOT, ".env"))) {
     if (m) env[m[1]] = m[2].trim();
   }
 }
-const KEY = env.ALCHEMY_API_KEY || process.env.ALCHEMY_API_KEY;
-if (!KEY) {
-  console.error("✗ ALCHEMY_API_KEY missing — set in .env or shell.");
-  process.exit(1);
-}
+// Match resolve-sources.mjs: fall back to Alchemy's public "demo" endpoint
+// with a warning, rather than hard-failing. eth_call works on demo (with
+// strict rate limits), so a one-shot fetch of 3 Punks is fine in a pinch.
+const KEY = env.ALCHEMY_API_KEY || process.env.ALCHEMY_API_KEY || "demo";
+if (KEY === "demo") console.warn("⚠ No ALCHEMY_API_KEY in .env — using rate-limited demo endpoint.");
 
 const RPC = `https://eth-mainnet.g.alchemy.com/v2/${KEY}`;
 const PUNK_CANONICAL = "0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb";
