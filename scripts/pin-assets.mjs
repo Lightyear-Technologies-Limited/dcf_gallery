@@ -191,19 +191,22 @@ for (const slug of slugs) {
 
 if (!DRY) {
   writeFileSync(OUT, JSON.stringify(manifest, null, 2) + "\n");
-  // Slim slug→CID map for the CLIENT (galleries) — raster pinned only — so the
-  // heavy full manifest never reaches the client bundle. (plan A.2)
-  // Grids/OG downscale from a sharp VARIANT, never the preservation master (which
-  // can be 50–160MB and exceeds the gateway's on-the-fly transform limit). SVG /
-  // no-variant pieces fall back to the original cid.
+  // Slim slug→CID map for the CLIENT (galleries) — keeps the heavy full
+  // manifest out of the client bundle. (plan A.2)
+  // Grids/OG downscale from a sharp VARIANT, never the preservation master
+  // (which can be 50–160MB and exceeds the gateway's on-the-fly transform
+  // limit). SVG / no-variant pieces fall back to the original cid — the
+  // gateway can serve vector raw even though it can't transform it. This is
+  // what lets CryptoPunks render from IPFS instead of from a committed local
+  // SVG, saving ~26KB per Punk in the repo.
   const cids = {};
   for (const [slug, v] of Object.entries(manifest)) {
-    if (!v.cid || v.cid === "(dry-run)" || (v.mime || "").includes("svg")) continue;
+    if (!v.cid || v.cid === "(dry-run)") continue;
     const v1280 = (v.variants || []).find((x) => x.w === 1280) || (v.variants || []).slice(-1)[0];
     cids[slug] = v1280 ? v1280.cid : v.cid;
   }
   writeFileSync(resolve(ROOT, "src/lib/provenance.cids.json"), JSON.stringify(cids) + "\n");
-  console.log(`Wrote provenance.cids.json (${Object.keys(cids).length} raster cids)`);
+  console.log(`Wrote provenance.cids.json (${Object.keys(cids).length} cids)`);
 }
 console.log(`\nPinned ${pinned} | Skipped ${skipped} | Failed ${failed}${DRY ? " (dry-run)" : ""}`);
 console.log(`Manifest: ${OUT} (${Object.keys(manifest).length} entries)`);
