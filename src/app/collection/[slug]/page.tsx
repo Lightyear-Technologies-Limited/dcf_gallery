@@ -729,8 +729,12 @@ export default async function CollectionPage({
               )}
               {col.artistStatement && (
                 <div className="border-l border-border pl-5">
+                  {/* Eyebrow "Artist metadata description" carries the
+                      provenance on its own - signals at a glance that
+                      the block is inherited content from the work's
+                      original metadata, not text written for Hivemind. */}
                   <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
-                    Artist Statement
+                    Artist metadata description
                   </p>
                   {/* Threshold at 300 chars - medium-length statements
                       (Ringers ~500, Lightyears ~430) collapse to a 3-line

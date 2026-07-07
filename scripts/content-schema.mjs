@@ -19,6 +19,9 @@ const xLink = {
 export const ArtistEditorial = z
   .object({
     bio: z.string().min(1, "bio is required"),
+    // Hivemind-voice commentary on why we collect this artist. Optional
+    // during migration; once every artist has one this can tighten.
+    curatorNote: z.string().optional(),
     ...essay,
   })
   .strict();
@@ -32,5 +35,16 @@ export const CollectionEditorial = z
   })
   .strict();
 
+// Per-piece editorial overlay. Currently only carries an optional X
+// thread / announcement link, rendered on the piece page. Populate
+// `content/editorial/pieces/<slug>.json` only when a piece has a
+// specific thread (TIME, ROTTEN, Fidenza #456, Tyler Hobbs 1/1s, etc).
+export const PieceEditorial = z
+  .object({
+    ...xLink,
+  })
+  .strict();
+
 export const ArtistsFile = z.record(z.string(), ArtistEditorial);
 export const CollectionsFile = z.record(z.string(), CollectionEditorial);
+export const PiecesFile = z.record(z.string(), PieceEditorial);

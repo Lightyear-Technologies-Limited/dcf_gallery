@@ -27,10 +27,18 @@ export interface CollectionEditorial {
   /** Optional override label for the X link (defaults to "Read the thread on X"). */
   xLabel?: string;
 }
+export interface PieceEditorial {
+  /** Optional X (Twitter) thread / announcement post link for a specific
+   *  piece (e.g. TIME, ROTTEN, Fidenza #456). Rendered on the piece page. */
+  xUrl?: string;
+  /** Optional override label for the X link (defaults to "Read the thread on X"). */
+  xLabel?: string;
+}
 
 const ED = editorial as {
   artists: Record<string, ArtistEditorial>;
   collections: Record<string, CollectionEditorial>;
+  pieces?: Record<string, PieceEditorial>;
 };
 
 export function getArtistEditorial(slug: string): ArtistEditorial | undefined {
@@ -39,6 +47,10 @@ export function getArtistEditorial(slug: string): ArtistEditorial | undefined {
 
 export function getCollectionEditorial(slug: string): CollectionEditorial | undefined {
   return ED.collections[slug];
+}
+
+export function getPieceEditorial(slug: string): PieceEditorial | undefined {
+  return ED.pieces?.[slug];
 }
 
 /** Overlay the editorial record onto a generated Artist at the fetch site, so
