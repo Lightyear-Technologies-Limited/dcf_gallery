@@ -12,6 +12,9 @@ import editorial from "./editorial.data.json";
 
 export interface ArtistEditorial {
   bio: string;
+  /** Hivemind-voice commentary on why we collect this artist. Optional
+   *  until every artist has one authored. */
+  curatorNote?: string;
   essayUrl?: string;
   essayTitle?: string;
 }
