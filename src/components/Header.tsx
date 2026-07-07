@@ -10,7 +10,9 @@ const NAV = [
   { label: "Collection", href: "/" },
   { label: "Artists", href: "/artists" },
   { label: "Chapters", href: "/chapters" },
-  { label: "About", href: "/about" },
+  // Labelled "Thesis" to match the page's display-lg h2; URL stays /about
+  // so backlinks aren't broken.
+  { label: "Thesis", href: "/about" },
 ];
 
 export default function Header() {

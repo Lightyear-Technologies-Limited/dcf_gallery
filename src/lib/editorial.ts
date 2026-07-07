@@ -12,6 +12,9 @@ import editorial from "./editorial.data.json";
 
 export interface ArtistEditorial {
   bio: string;
+  /** Hivemind-voice commentary on why we collect this artist. Optional
+   *  until every artist has one authored. */
+  curatorNote?: string;
   essayUrl?: string;
   essayTitle?: string;
 }
@@ -19,6 +22,10 @@ export interface CollectionEditorial {
   curatorNote: string;
   essayUrl?: string;
   essayTitle?: string;
+  /** Optional X (Twitter) thread / announcement post link. */
+  xUrl?: string;
+  /** Optional override label for the X link (defaults to "Read the thread on X"). */
+  xLabel?: string;
 }
 
 const ED = editorial as {
@@ -38,20 +45,40 @@ export function getCollectionEditorial(slug: string): CollectionEditorial | unde
  *  every downstream read (bio, essay) reflects the authoritative content layer.
  *  Pass-through when there's no editorial record (resilient to new imports). */
 export function withArtistEditorial<
-  T extends { slug: string; bio: string; essayUrl?: string; essayTitle?: string },
+  T extends { slug: string; bio: string; curationComment?: string; essayUrl?: string; essayTitle?: string },
 >(a: T | undefined): T | undefined {
   if (!a) return a;
   const ed = ED.artists[a.slug];
   if (!ed) return a;
-  return { ...a, bio: ed.bio, essayUrl: ed.essayUrl ?? a.essayUrl, essayTitle: ed.essayTitle ?? a.essayTitle };
+  return {
+    ...a,
+    bio: ed.bio,
+    // Editorial layer curatorNote replaces the legacy data.ts
+    // curationComment. When empty/absent, the artist page does not
+    // render the Hivemind Commentary block - the block reappears once
+    // a curatorNote is written into the artist's editorial JSON file.
+    curationComment: ed.curatorNote,
+    essayUrl: ed.essayUrl ?? a.essayUrl,
+    essayTitle: ed.essayTitle ?? a.essayTitle,
+  };
 }
 
-/** Overlay the editorial record onto a generated Collection (curator note + essay). */
+/** Overlay the editorial record onto a generated Collection (curator note
+ *  + essay + optional X link). The xUrl/xLabel fields are editorial-only
+ *  (no counterpart in data.ts), so the return type widens to include them. */
 export function withCollectionEditorial<
   T extends { slug: string; curatorNote: string; essayUrl?: string; essayTitle?: string },
->(c: T | undefined): T | undefined {
+>(c: T | undefined): (T & { xUrl?: string; xLabel?: string }) | undefined {
   if (!c) return c;
   const ed = ED.collections[c.slug];
-  if (!ed) return c;
-  return { ...c, curatorNote: ed.curatorNote, essayUrl: ed.essayUrl ?? c.essayUrl, essayTitle: ed.essayTitle ?? c.essayTitle };
+  const base = c as T & { xUrl?: string; xLabel?: string };
+  if (!ed) return base;
+  return {
+    ...base,
+    curatorNote: ed.curatorNote,
+    essayUrl: ed.essayUrl ?? base.essayUrl,
+    essayTitle: ed.essayTitle ?? base.essayTitle,
+    xUrl: ed.xUrl,
+    xLabel: ed.xLabel,
+  };
 }

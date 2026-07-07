@@ -163,23 +163,21 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
                 className="w-12 h-12 rounded-full object-cover shrink-0"
               />
             )}
-            <p className="text-[13px] text-muted tabular-nums">
-              {artistCollections.length} collection{artistCollections.length === 1 ? "" : "s"} · {totalWorks} work{totalWorks === 1 ? "" : "s"}
+            <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium tabular-nums">
+              {artistCollections.length} collection{artistCollections.length === 1 ? "" : "s"} &middot; {totalWorks} work{totalWorks === 1 ? "" : "s"}
             </p>
           </div>
 
-          {/* Collection list for multi-collection artists - links straight
-              to the dedicated collection page rather than scrolling within
-              this page. The in-page sections below (which also link to the
-              same collection pages) act as inline previews; the top list is
-              the catalogue index. Gated to artists with 3+ collections; for
-              1-2 collections the inline sections are reachable without an
-              index and the list reads as duplication. */}
-          {artistCollections.length >= 3 && (
+          {/* Collection inventory - the artist-page catalogue index.
+              Always rendered so every artist (single- or multi-collection)
+              has the same clean "what's held, how many" summary at the
+              top, parallel with the "{N} collections · {M} works" eyebrow.
+              Each row links straight to the dedicated collection page
+              (or the piece, for single-piece collections - the collection
+              page would be redundant chrome there). */}
+          {artistCollections.length > 0 && (
             <ol className="mt-6 space-y-1.5 text-[13px]">
               {artistCollections.map((col) => {
-                /* Single-piece collections link straight to the piece -
-                   the collection page would be redundant chrome. */
                 const onlyPiece = col.pieces.length === 1 ? col.pieces[0] : null;
                 const href = onlyPiece
                   ? `/piece/${onlyPiece.slug}`
@@ -276,8 +274,12 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
           Commentary at the top of the page already does that work; per-
           collection prose beside each gallery would compete with the
           actual art for attention. Holdings count omitted when n === 1
-          (a single piece IS the gallery; the count carries no info). */}
-      <div className="pt-16 pb-24 space-y-20">
+          (a single piece IS the gallery; the count carries no info).
+          pt-8 separates the collections section from the artist intro
+          without leaving a yawning gap when the 2-col header above is
+          uneven (right column commentary often ends before the left
+          column's holdings + socials stack does). */}
+      <div className="pt-8 pb-24 space-y-3">
         {artistCollections.map((col) => {
           const n = col.pieces.length;
           const piece = col.pieces[0];
@@ -298,13 +300,14 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
           const sectionHref = n === 1 && piece ? `/piece/${piece.slug}` : `/collection/${col.slug}`;
           return (
             <section key={col.slug} id={col.slug}>
-              <div className="mb-2">
+              <div className="flex items-baseline gap-2.5 mb-2">
                 <Link
                   href={sectionHref}
-                  className="font-serif text-[22px] sm:text-[28px] text-foreground-secondary hover:opacity-60 transition-opacity duration-200 inline-block"
+                  className="font-serif text-[22px] sm:text-[28px] text-foreground-secondary hover:opacity-60 transition-opacity duration-200"
                 >
                   {col.name}
                 </Link>
+                <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium tabular-nums">{n} {n === 1 ? "work" : "works"}</span>
               </div>
 
               {/* Gallery */}

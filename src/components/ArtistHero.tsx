@@ -1,8 +1,5 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 
 interface Candidate {
   src: string;
@@ -13,55 +10,59 @@ interface Candidate {
 interface Props {
   artistSlug: string;
   candidates: Candidate[];
+  /** Optional width/height aspect override. When provided, the hero
+   *  renders at this aspect with object-cover (image crops to fill).
+   *  When omitted, the hero renders in the default 9/8 letterbox frame
+   *  with object-contain (image preserves intrinsic aspect, letterboxes
+   *  inside the frame). Used by Kim Asendorf to force Lights to a 1:1
+   *  square crop so the landscape Lights piece doesn't visually
+   *  dominate the row. */
+  aspect?: number;
 }
 
-/**
- * Picks a random candidate per session and freezes it across the session, so
- * the hero stays consistent as the user navigates back to /artists. SSR
- * always renders candidate[0] for determinism; after mount we read the
- * sessionStorage pick (or generate + persist one), then snap the image.
- *
- * Earlier behaviour re-rolled the random pick on every page load, which
- * produced a visible flash on hydration. The session-frozen approach removes
- * the swap from any return visit, and the first-visit swap is one-time.
- */
-export default function ArtistHero({ artistSlug, candidates }: Props) {
-  const [pick, setPick] = useState(0);
-
-  useEffect(() => {
-    if (candidates.length <= 1) return;
-    const key = `dcf-hero-${artistSlug}`;
-    let stored: number | null = null;
-    try {
-      const v = sessionStorage.getItem(key);
-      if (v !== null) {
-        const n = parseInt(v, 10);
-        if (Number.isInteger(n) && n >= 0 && n < candidates.length) stored = n;
-      }
-    } catch {
-      // sessionStorage unavailable (private mode, SSR fallback) - just re-pick
-    }
-    const next = stored ?? Math.floor(Math.random() * candidates.length);
-    if (stored === null) {
-      try { sessionStorage.setItem(key, String(next)); } catch {}
-    }
-    setPick(next);
-  }, [artistSlug, candidates.length]);
-
+export default function ArtistHero({ artistSlug, candidates, aspect }: Props) {
   if (candidates.length === 0) return null;
-  const hero = candidates[pick] ?? candidates[0];
+  const hero = candidates[0];
 
+  // Override path: fit-to-aspect with object-cover crop.
+  if (aspect !== undefined) {
+    const frameAspect = hero.isPunk ? 1 : aspect;
+    return (
+      <Link
+        href={`/artist/${artistSlug}`}
+        style={{ aspectRatio: String(frameAspect) }}
+        className="block w-full overflow-hidden"
+      >
+        {hero.isPunk ? (
+          <div className="w-full h-full bg-punk flex items-start justify-center overflow-hidden">
+            <Image
+              src={hero.src}
+              alt={hero.title}
+              width={1200}
+              height={1200}
+              className="max-w-full max-h-full w-auto h-auto [image-rendering:pixelated]"
+              sizes="(max-width: 768px) 90vw, 55vw"
+            />
+          </div>
+        ) : (
+          <Image
+            src={hero.src}
+            alt={hero.title}
+            width={1200}
+            height={1200}
+            className="w-full h-full object-cover"
+            sizes="(max-width: 768px) 90vw, 55vw"
+          />
+        )}
+      </Link>
+    );
+  }
+
+  // Default: 9/8 letterbox frame; image preserves intrinsic aspect.
   return (
     <Link
       href={`/artist/${artistSlug}`}
-      // Uniform aspect-[9/8] frame per artist so every row on /artists has
-      // the same hero footprint regardless of the artwork's natural ratio.
-      // Image inside is object-contain (never cropped) - tall pieces render
-      // narrower than the frame; wide pieces render shorter. Punks keep
-      // their classic teal background to frame the pixel art; everything
-      // else has no background fill so the artwork sits on the page colour
-      // (no visible frame border around the art).
-      className={`block w-full aspect-[9/8] flex items-center justify-center overflow-hidden ${hero.isPunk ? "bg-punk" : ""}`}
+      className={`block w-full aspect-[9/8] flex items-start justify-center overflow-hidden ${hero.isPunk ? "bg-punk" : ""}`}
     >
       <Image
         src={hero.src}

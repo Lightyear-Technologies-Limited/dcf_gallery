@@ -6,7 +6,7 @@ import { getArtworkImage, getArtworkAspect, resolveTokenId } from "@/lib/images"
 import { getDetailVariants, getArtworkBlur, getProvenance, getOgImage } from "@/lib/provenance";
 import { getMotion } from "@/lib/motion";
 import { SITE_URL as SITE } from "@/lib/site";
-import { getEditionType, getArtistSiteUrl, getPieceTraits, getPieceDescription, getCollectionDisplayName, getArtistDisplayName, SYNTHETIC_TRAITS } from "@/lib/curation";
+import { getEditionType, getArtistSiteUrl, getPieceTraits, getPieceDescription, getCollectionDisplayName, getArtistDisplayName, sortPieces, SYNTHETIC_TRAITS } from "@/lib/curation";
 import type { TraitValue } from "@/lib/curation";
 import PlaceholderArt from "@/components/PlaceholderArt";
 import BackButton from "@/components/BackButton";
@@ -50,12 +50,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const artist = getArtist(piece.artistSlug);
   const collection = getCollection(piece.collectionSlug);
   const artistName = artist ? getArtistDisplayName(artist.slug, artist.name) : undefined;
-  const title = artistName ? `${piece.title} — ${artistName}` : piece.title;
+  const title = artistName ? `${piece.title} - ${artistName}` : piece.title;
   const collName = collection ? getCollectionDisplayName(collection.slug, collection.name) : undefined;
   const description = (
     getPieceDescription(piece.slug) ||
     piece.description ||
-    (collName ? `${piece.title}, from ${collName} — in the Hivemind Digital Culture Fund collection.` : "Held by the Hivemind Digital Culture Fund.")
+    (collName ? `${piece.title}, from ${collName} - in the Hivemind Digital Culture Fund collection.` : "Held by the Hivemind Digital Culture Fund.")
   ).slice(0, 200);
   const og = getOgImage(piece.slug);
   return {
@@ -130,12 +130,20 @@ export default async function PiecePage({
     ? `/collection/${collection.slug}${filterQs ? `?${filterQs}` : ""}`
     : "/";
 
-  // Sibling navigation - previous + next piece in the collection sorted by
-  // numeric tokenId. Predictable forward/backward through the series, even
-  // when the collection page itself uses a curated display order. Falls back
-  // to lexical slug compare when tokenId is missing (physical works, etc.).
-  // When a filter is active, walk only the filtered subset so prev/next
-  // doesn't drop the reader out of their browsing mode.
+  // Sibling navigation - previous + next piece in the collection.
+  //
+  // Unfiltered walk: follow the curated display order from sortPieces (same
+  // function the collection page uses) so prev/next matches the order the
+  // reader saw the works in. Pre-fix this was sorted by raw tokenId, which
+  // diverged from curation for sets like Piano Blossoms (Flower Demons is
+  // displayed first but has tokenId 5 - "Next" from there walked to tokenId
+  // 4, third in display order).
+  //
+  // Filtered walk: when a trait filter is active, walk only the filtered
+  // subset (so prev/next doesn't drop the reader out of their browsing
+  // mode), sorted by numeric tokenId for a predictable scan through the
+  // filtered set - this matches the order the filtered collection view
+  // renders subsets in (see /collection/[slug] sort comment).
   let siblingPieces = [...getPiecesByCollection(piece.collectionSlug)];
   if (incomingFilter) {
     siblingPieces = siblingPieces.filter((p) => {
@@ -147,13 +155,15 @@ export default async function PiecePage({
         return String(v) === incomingFilter.value;
       });
     });
+    siblingPieces.sort((a, b) => {
+      const an = parseInt(a.tokenId || "", 10);
+      const bn = parseInt(b.tokenId || "", 10);
+      if (Number.isFinite(an) && Number.isFinite(bn)) return an - bn;
+      return a.slug.localeCompare(b.slug);
+    });
+  } else {
+    siblingPieces = sortPieces(piece.collectionSlug, siblingPieces);
   }
-  siblingPieces.sort((a, b) => {
-    const an = parseInt(a.tokenId || "", 10);
-    const bn = parseInt(b.tokenId || "", 10);
-    if (Number.isFinite(an) && Number.isFinite(bn)) return an - bn;
-    return a.slug.localeCompare(b.slug);
-  });
   const sibIdx = siblingPieces.findIndex((p) => p.slug === piece.slug);
   const prevPiece = sibIdx > 0 ? siblingPieces[sibIdx - 1] : null;
   const nextPiece = sibIdx >= 0 && sibIdx < siblingPieces.length - 1 ? siblingPieces[sibIdx + 1] : null;
@@ -262,9 +272,44 @@ export default async function PiecePage({
         defaultOpen={featuresDefaultOpen}
         label={isPunk ? "Attributes" : "Traits"}
       />
+      {piece.exhibitions && piece.exhibitions.length > 0 && (
+        <div>
+          <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
+            Exhibitions
+          </p>
+          <ul className="space-y-1 text-[13px] leading-snug">
+            {piece.exhibitions.map((ex, i) => (
+              <li key={i}>
+                <span className="text-muted tabular-nums">{ex.date}</span>
+                <span className="text-muted"> - </span>
+                {ex.url ? (
+                  <a
+                    href={ex.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-foreground-secondary hover:text-foreground transition-colors duration-200 underline decoration-border hover:decoration-foreground underline-offset-4"
+                  >
+                    <span className="font-serif italic">{ex.title}</span>
+                    {ex.location && `, ${ex.location}`}
+                  </a>
+                ) : (
+                  <>
+                    <span className="font-serif italic text-foreground-secondary">{ex.title}</span>
+                    {ex.location && (
+                      <span className="text-foreground-secondary">, {ex.location}</span>
+                    )}
+                  </>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       {provenance?.cid && (
-        <p className="text-[10px] tracking-[0.12em] uppercase text-muted font-medium">
-          Preserved by Hivemind - pinned to IPFS{provenance.verifiedAt ? ", integrity verified" : ""}
+        <p className="text-[13px] text-muted">
+          <span className="text-foreground-secondary">Preserved by Hivemind:</span>
+          <br />
+          Pinned to IPFS{provenance.verifiedAt ? ", integrity verified" : ""}
         </p>
       )}
       <OnChainDetails
@@ -329,13 +374,18 @@ export default async function PiecePage({
         label={originHref ? originLabel : upLabel}
       />
       {(prevPiece || nextPiece) && (
-        <div className="mt-4 flex flex-col sm:flex-row sm:justify-between gap-2 text-[13px] text-muted">
+        <div className="mt-6 flex flex-col sm:flex-row sm:justify-between gap-4 sm:gap-2">
           {prevPiece ? (
             <Link
               href={pieceHref(prevPiece.slug)}
-              className="hover:text-foreground transition-colors duration-200 truncate max-w-full sm:max-w-[45%]"
+              className="group inline-flex flex-col gap-1 max-w-full sm:max-w-[45%]"
             >
-              ← {prevPiece.title}
+              <span className="text-[10px] tracking-[0.12em] uppercase text-muted font-medium group-hover:text-foreground transition-colors duration-200">
+                ← Previous work
+              </span>
+              <span className="font-serif italic text-[15px] text-foreground-secondary group-hover:text-foreground transition-colors duration-200 truncate">
+                {prevPiece.title}
+              </span>
             </Link>
           ) : (
             <span />
@@ -343,9 +393,14 @@ export default async function PiecePage({
           {nextPiece && (
             <Link
               href={pieceHref(nextPiece.slug)}
-              className="hover:text-foreground transition-colors duration-200 text-right truncate max-w-full sm:max-w-[45%]"
+              className="group inline-flex flex-col gap-1 max-w-full sm:max-w-[45%] sm:items-end sm:text-right"
             >
-              {nextPiece.title} →
+              <span className="text-[10px] tracking-[0.12em] uppercase text-muted font-medium group-hover:text-foreground transition-colors duration-200">
+                Next work →
+              </span>
+              <span className="font-serif italic text-[15px] text-foreground-secondary group-hover:text-foreground transition-colors duration-200 truncate">
+                {nextPiece.title}
+              </span>
             </Link>
           )}
         </div>
