@@ -111,7 +111,11 @@ for (const tokenId of tokenIds) {
     continue;
   }
   try {
-    const svg = await fetchSvg(tokenId);
+    let svg = await fetchSvg(tokenId);
+    // CryptoPunksData.punkImageSvg returns the SVG wrapped in a
+    // `data:image/svg+xml;utf8,` prefix. Existing 40 Punks in the repo are
+    // stored as raw SVG (no prefix) so we strip it here for consistency.
+    svg = svg.replace(/^data:image\/svg\+xml;utf8,/, "");
     if (!svg.startsWith("<svg")) {
       console.error(`✗ ${tokenId}  response does not look like SVG: ${svg.slice(0, 60)}…`);
       failed++;
