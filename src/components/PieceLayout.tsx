@@ -143,16 +143,16 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
   // letterbox slightly but the gallery 320-of-321 has real dimensions.
   const imgW = aspect?.w ?? 1600;
   const imgH = aspect?.h ?? 1200;
-  // Zoom + fullscreen apply to still artworks and animated GIFs — the reader
-  // wants to inspect detail. Skipped for videos + interactive HTML pieces,
-  // which have their own playback / interaction controls that would fight
-  // with click-to-zoom.
+  // Zoom applies to still artworks and animated GIFs — the reader wants to
+  // inspect detail. Skipped for videos + interactive HTML pieces, which have
+  // their own playback / interaction controls that would fight with a
+  // click-to-zoom on the container.
   const artworkBlock = video ? (
     <PieceVideo src={video.src} poster={video.poster} title={title} original={video.original} />
   ) : interactive ? (
     <InteractiveArtwork src={interactive.src} poster={image} title={title} />
   ) : animatedGif ? (
-    <ZoomableArt fullscreenSrc={animatedGif.src} fullscreenAlt={title}>
+    <ZoomableArt>
       <PieceGif src={animatedGif.src} poster={detailSrc ?? image ?? undefined} lqip={lqip} title={title} />
     </ZoomableArt>
   ) : image ? (
@@ -163,7 +163,7 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
       // image's own max-height to truncate it - which was clipping the
       // image element shorter than the container and leaving a teal gap
       // under the punk on wider desktops.
-      <ZoomableArt fullscreenSrc={image} fullscreenAlt={title} pixelated>
+      <ZoomableArt>
         <div className="bg-punk w-full aspect-square max-w-[80vh] mx-auto">
           <Image
             src={image}
@@ -180,7 +180,7 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
       // Sharp detail variants served raw via a plain <img> (no next/image, so
       // the gateway loader can't re-resize/re-soften them). The LQIP shows as a
       // blurred background until the sharp image paints. (plan B.3 / Path B)
-      <ZoomableArt fullscreenSrc={detailSrc} fullscreenAlt={title}>
+      <ZoomableArt>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={detailSrc}
@@ -195,7 +195,7 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
         />
       </ZoomableArt>
     ) : (
-      <ZoomableArt fullscreenSrc={image} fullscreenAlt={title}>
+      <ZoomableArt>
         <Image
           src={image}
           alt={title}
