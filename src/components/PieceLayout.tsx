@@ -91,6 +91,11 @@ interface Props {
   /** Optional list of external links from the piece editorial layer
    *  (samspratt.com profile, credited collaborator, artist site page). */
   editorialLinks?: { label: string; url: string }[];
+  /** True when the piece is a video work but we're currently rendering its
+   *  still (transcode not yet pinned, e.g. a newly-added Winds piece).
+   *  Suppresses the click-to-zoom wrapper — the still is a poster, not a
+   *  static image the reader should be inspecting like an inkjet print. */
+  intendedAsVideo?: boolean;
   placeholder: React.ReactNode;
 }
 
@@ -141,7 +146,7 @@ function resolveOriginal(uri: string): { href: string; label: string } | null {
 /**
  * Piece layout: image on the left, details on the right.
  */
-export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, video, interactive, animatedGif, aspect, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, holdingNote, description, collectionDescription, physical, companion, metadata, blockchainDetails, preservedBlock, rasterUrl, cryptopunksUrl, artistSiteUrl, originalUri, xUrl, xLabel, editorialLinks, placeholder }: Props) {
+export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, video, interactive, animatedGif, aspect, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, holdingNote, description, collectionDescription, physical, companion, metadata, blockchainDetails, preservedBlock, rasterUrl, cryptopunksUrl, artistSiteUrl, originalUri, xUrl, xLabel, editorialLinks, intendedAsVideo, placeholder }: Props) {
   const artistHost = artistSiteUrl ? hostLabel(artistSiteUrl) : null;
   const original = originalUri ? resolveOriginal(originalUri) : null;
   // When natural aspect is known, pass it as width/height props so next/image
@@ -153,15 +158,21 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
   // Zoom applies to still artworks and animated GIFs — the reader wants to
   // inspect detail. Skipped for videos + interactive HTML pieces, which have
   // their own playback / interaction controls that would fight with a
-  // click-to-zoom on the container.
+  // click-to-zoom on the container. Also skipped when the piece is
+  // *intended* as a video but its transcode isn't pinned yet (Winds 213 at
+  // time of this branch), so the still poster doesn't accidentally invite
+  // the reader to inspect it as a print.
+  const Frame = intendedAsVideo
+    ? ({ children }: { children: React.ReactNode }) => <>{children}</>
+    : ZoomableArt;
   const artworkBlock = video ? (
     <PieceVideo src={video.src} poster={video.poster} title={title} original={video.original} />
   ) : interactive ? (
     <InteractiveArtwork src={interactive.src} poster={image} title={title} />
   ) : animatedGif ? (
-    <ZoomableArt>
+    <Frame>
       <PieceGif src={animatedGif.src} poster={detailSrc ?? image ?? undefined} lqip={lqip} title={title} />
-    </ZoomableArt>
+    </Frame>
   ) : image ? (
     isPunk ? (
       // Punks render the on-chain SVG at full container dimensions on the
@@ -170,8 +181,8 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
       // image's own max-height to truncate it - which was clipping the
       // image element shorter than the container and leaving a teal gap
       // under the punk on wider desktops.
-      <ZoomableArt>
-        <div className="bg-punk w-full aspect-square max-w-[80vh] mx-auto">
+      <Frame>
+        <div className="bg-punk w-full aspect-square max-w-[calc(100dvh-9rem)] mx-auto">
           <Image
             src={image}
             alt={title}
@@ -182,12 +193,12 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
             sizes="(max-width: 768px) 90vw, 60vw"
           />
         </div>
-      </ZoomableArt>
+      </Frame>
     ) : detailSrcSet ? (
       // Sharp detail variants served raw via a plain <img> (no next/image, so
       // the gateway loader can't re-resize/re-soften them). The LQIP shows as a
       // blurred background until the sharp image paints. (plan B.3 / Path B)
-      <ZoomableArt>
+      <Frame>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={detailSrc}
@@ -197,23 +208,23 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
           width={imgW}
           height={imgH}
           decoding="async"
-          className="block w-auto h-auto max-w-full max-h-[88vh] object-contain mx-auto"
+          className="block w-auto h-auto max-w-full max-h-[calc(100dvh-9rem)] object-contain mx-auto"
           style={lqip ? { backgroundImage: `url(${lqip})`, backgroundSize: "cover", backgroundPosition: "center" } : undefined}
         />
-      </ZoomableArt>
+      </Frame>
     ) : (
-      <ZoomableArt>
+      <Frame>
         <Image
           src={image}
           alt={title}
           width={imgW}
           height={imgH}
-          className="block w-auto h-auto max-w-full max-h-[88vh] object-contain mx-auto"
+          className="block w-auto h-auto max-w-full max-h-[calc(100dvh-9rem)] object-contain mx-auto"
           priority
           quality={95}
           sizes="(max-width: 768px) 90vw, 60vw"
         />
-      </ZoomableArt>
+      </Frame>
     )
   ) : (
     <div className="aspect-[4/3] w-full">{placeholder}</div>
