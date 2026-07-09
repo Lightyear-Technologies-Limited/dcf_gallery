@@ -709,6 +709,17 @@ export default async function CollectionPage({
                       {col.xLabel ?? "Read the thread on X"} →
                     </a>
                   )}
+                  {col.links?.map((l) => (
+                    <a
+                      key={l.url}
+                      href={l.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-3 text-[13px] text-muted hover:text-foreground transition-colors duration-200 inline-block"
+                    >
+                      {l.label} →
+                    </a>
+                  ))}
                 </div>
               )}
               {!col.curatorNote && col.essayUrl && (

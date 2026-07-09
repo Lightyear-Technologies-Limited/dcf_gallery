@@ -440,6 +440,7 @@ export default async function PiecePage({
           originalUri={piece.originalUri}
           xUrl={getPieceEditorial(piece.slug)?.xUrl}
           xLabel={getPieceEditorial(piece.slug)?.xLabel}
+          editorialLinks={getPieceEditorial(piece.slug)?.links}
           placeholder={<PlaceholderArt collectionSlug={piece.collectionSlug} pieceSlug={piece.slug} className="w-full h-full" />}
         />
       </div>

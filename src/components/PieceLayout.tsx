@@ -80,6 +80,9 @@ interface Props {
    *  Rendered as a small muted link under the collection link. */
   xUrl?: string;
   xLabel?: string;
+  /** Optional list of external links from the piece editorial layer
+   *  (samspratt.com profile, credited collaborator, artist site page). */
+  editorialLinks?: { label: string; url: string }[];
   placeholder: React.ReactNode;
 }
 
@@ -130,7 +133,7 @@ function resolveOriginal(uri: string): { href: string; label: string } | null {
 /**
  * Piece layout: image on the left, details on the right.
  */
-export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, video, interactive, animatedGif, aspect, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, holdingNote, description, collectionDescription, physical, companion, metadata, rasterUrl, cryptopunksUrl, artistSiteUrl, originalUri, xUrl, xLabel, placeholder }: Props) {
+export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, video, interactive, animatedGif, aspect, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, holdingNote, description, collectionDescription, physical, companion, metadata, rasterUrl, cryptopunksUrl, artistSiteUrl, originalUri, xUrl, xLabel, editorialLinks, placeholder }: Props) {
   const artistHost = artistSiteUrl ? hostLabel(artistSiteUrl) : null;
   const original = originalUri ? resolveOriginal(originalUri) : null;
   // When natural aspect is known, pass it as width/height props so next/image
@@ -322,6 +325,17 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
             View on Raster
           </a>
         )}
+        {editorialLinks?.map((l) => (
+          <a
+            key={l.url}
+            href={l.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-foreground transition-colors duration-200"
+          >
+            {l.label}
+          </a>
+        ))}
         <ShareButton title={artistName ? `${title} by ${artistName}` : title} />
       </div>
     </div>

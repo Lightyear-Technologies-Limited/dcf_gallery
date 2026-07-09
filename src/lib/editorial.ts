@@ -18,6 +18,12 @@ export interface ArtistEditorial {
   essayUrl?: string;
   essayTitle?: string;
 }
+export interface EditorialLink {
+  /** Human-visible link text (e.g. "View on samspratt.com", "Read the essay"). */
+  label: string;
+  /** Absolute URL. */
+  url: string;
+}
 export interface CollectionEditorial {
   curatorNote: string;
   essayUrl?: string;
@@ -26,6 +32,10 @@ export interface CollectionEditorial {
   xUrl?: string;
   /** Optional override label for the X link (defaults to "Read the thread on X"). */
   xLabel?: string;
+  /** Optional list of external links (artist site catalogue page, credited
+   *  collaborator profile, press coverage). Rendered under the collection
+   *  links block. Kept generic so new link types don't need a schema change. */
+  links?: EditorialLink[];
 }
 export interface PieceEditorial {
   /** Optional X (Twitter) thread / announcement post link for a specific
@@ -33,6 +43,10 @@ export interface PieceEditorial {
   xUrl?: string;
   /** Optional override label for the X link (defaults to "Read the thread on X"). */
   xLabel?: string;
+  /** Optional list of external links (samspratt.com profile, credited
+   *  collaborator profile, artist catalogue page). Rendered under the piece
+   *  links block. */
+  links?: EditorialLink[];
 }
 
 const ED = editorial as {
@@ -76,14 +90,15 @@ export function withArtistEditorial<
 }
 
 /** Overlay the editorial record onto a generated Collection (curator note
- *  + essay + optional X link). The xUrl/xLabel fields are editorial-only
- *  (no counterpart in data.ts), so the return type widens to include them. */
+ *  + essay + optional X link + optional generic links). The xUrl/xLabel and
+ *  links fields are editorial-only (no counterpart in data.ts), so the
+ *  return type widens to include them. */
 export function withCollectionEditorial<
   T extends { slug: string; curatorNote: string; essayUrl?: string; essayTitle?: string },
->(c: T | undefined): (T & { xUrl?: string; xLabel?: string }) | undefined {
+>(c: T | undefined): (T & { xUrl?: string; xLabel?: string; links?: EditorialLink[] }) | undefined {
   if (!c) return c;
   const ed = ED.collections[c.slug];
-  const base = c as T & { xUrl?: string; xLabel?: string };
+  const base = c as T & { xUrl?: string; xLabel?: string; links?: EditorialLink[] };
   if (!ed) return base;
   return {
     ...base,
@@ -92,5 +107,6 @@ export function withCollectionEditorial<
     essayTitle: ed.essayTitle ?? base.essayTitle,
     xUrl: ed.xUrl,
     xLabel: ed.xLabel,
+    links: ed.links,
   };
 }
