@@ -274,6 +274,13 @@ export default async function PiecePage({
   const storageLabel =
     (provenance?.storage && STORAGE_LABEL[provenance.storage]) ||
     deriveStorage(piece.originalUri, piece.contractAddress);
+  // The piece page's right-column stack is composed by PieceLayout from
+  // three separate slots so the order matches the editorial brief:
+  //   metadata          -> Traits, Exhibitions (subject-of-the-work data)
+  //   blockchainDetails -> the on-chain expander (data about the token)
+  //   preservedBlock    -> the Hivemind preservation note (data about
+  //                        our custody), rendered after the external
+  //                        links so it sits with Share as a coda.
   const metadata = (
     <div className="space-y-6">
       <Features
@@ -315,26 +322,28 @@ export default async function PiecePage({
           </ul>
         </div>
       )}
-      {provenance?.cid && (
-        <p className="text-[13px] text-muted">
-          <span className="text-foreground-secondary">Preserved by Hivemind:</span>
-          <br />
-          Pinned to IPFS{provenance.verifiedAt ? ", integrity verified" : ""}
-        </p>
-      )}
-      <OnChainDetails
-        contractAddress={piece.contractAddress}
-        tokenId={piece.tokenId}
-        editionType={collectionEditionType}
-        storage={storageLabel}
-        provenance={
-          provenance?.cid
-            ? { cid: provenance.cid, sha256: provenance.sha256, pinnedAt: provenance.pinnedAt, verifiedAt: provenance.verifiedAt }
-            : undefined
-        }
-      />
     </div>
   );
+  const blockchainDetails = (
+    <OnChainDetails
+      contractAddress={piece.contractAddress}
+      tokenId={piece.tokenId}
+      editionType={collectionEditionType}
+      storage={storageLabel}
+      provenance={
+        provenance?.cid
+          ? { cid: provenance.cid, sha256: provenance.sha256, pinnedAt: provenance.pinnedAt, verifiedAt: provenance.verifiedAt }
+          : undefined
+      }
+    />
+  );
+  const preservedBlock = provenance?.cid ? (
+    <p className="text-[13px] text-muted">
+      <span className="text-foreground-secondary">Preserved by Hivemind:</span>
+      <br />
+      Pinned to IPFS{provenance.verifiedAt ? ", integrity verified" : ""}
+    </p>
+  ) : null;
 
   const artistDisplay = artist ? getArtistDisplayName(artist.slug, artist.name) : undefined;
 
@@ -443,6 +452,8 @@ export default async function PiecePage({
             return { slug: c.slug, title: c.title };
           })()}
           metadata={metadata}
+          blockchainDetails={blockchainDetails}
+          preservedBlock={preservedBlock}
           rasterUrl={rasterUrl}
           cryptopunksUrl={cryptopunksUrl}
           artistSiteUrl={artistSiteUrl}

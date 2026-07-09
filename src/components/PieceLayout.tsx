@@ -71,6 +71,13 @@ interface Props {
       extends). Rendered as a small "Companion: {Title}" link. */
   companion?: { slug: string; title: string };
   metadata: React.ReactNode;
+  /** The on-chain details expander (renders "Blockchain details >" until
+   *  opened). Sits between the metadata block and the external links so
+   *  the reader can access the token facts without hunting for them. */
+  blockchainDetails?: React.ReactNode;
+  /** The "Preserved by Hivemind" note (rendered after the external links
+   *  as a preservation-status coda, above the Share button). */
+  preservedBlock?: React.ReactNode;
   rasterUrl?: string;
   /** Optional CryptoPunks Marketplace URL. Only set for Punks; rendered as
       "View on CryptoPunks.app" above the Raster link. */
@@ -134,7 +141,7 @@ function resolveOriginal(uri: string): { href: string; label: string } | null {
 /**
  * Piece layout: image on the left, details on the right.
  */
-export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, video, interactive, animatedGif, aspect, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, holdingNote, description, collectionDescription, physical, companion, metadata, rasterUrl, cryptopunksUrl, artistSiteUrl, originalUri, xUrl, xLabel, editorialLinks, placeholder }: Props) {
+export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, video, interactive, animatedGif, aspect, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, holdingNote, description, collectionDescription, physical, companion, metadata, blockchainDetails, preservedBlock, rasterUrl, cryptopunksUrl, artistSiteUrl, originalUri, xUrl, xLabel, editorialLinks, placeholder }: Props) {
   const artistHost = artistSiteUrl ? hostLabel(artistSiteUrl) : null;
   const original = originalUri ? resolveOriginal(originalUri) : null;
   // When natural aspect is known, pass it as width/height props so next/image
@@ -293,10 +300,15 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
 
       <div className="mt-10">{metadata}</div>
 
-      {/* Link order: original (verify on-chain provenance), then artist site
-          (canonical artist-curated view), then marketplace(s) (trading view),
-          then Share. Punks get both CryptoPunks.app and Raster under marketplace,
-          CryptoPunks.app first as canonical. */}
+      {/* Right-column stack from here down follows the editorial brief:
+       *   1. Blockchain details >          (on-chain expander)
+       *   2. External links                (View original / artist / Raster / editorial)
+       *   3. Preserved by Hivemind         (custody / preservation coda)
+       *   4. Share                         (the reader's outbound action)
+       * Each group is a distinct block with mt-6 between them so the
+       * reader visually parses three groups rather than one long list. */}
+      {blockchainDetails && <div className="mt-6">{blockchainDetails}</div>}
+
       <div className="mt-6 flex flex-col gap-2 text-[12px] text-muted">
         {original && (
           <a
@@ -349,6 +361,11 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
             {l.label}
           </a>
         ))}
+      </div>
+
+      {preservedBlock && <div className="mt-6">{preservedBlock}</div>}
+
+      <div className="mt-3 text-[12px] text-muted">
         <ShareButton title={artistName ? `${title} by ${artistName}` : title} />
       </div>
     </div>
