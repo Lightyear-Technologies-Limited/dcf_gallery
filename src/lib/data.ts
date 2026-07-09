@@ -3219,7 +3219,7 @@ export const pieces: Piece[] = [
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/86',
     originalUri: 'https://media.niftygateway.com/image/upload/v1741829548/0MASQUERADEFINALMASKS/86.jpg',
-    mintDate: '27-Jan-2026',
+    mintDate: '27-Jan-2025',
     mintPlatform: 'Nifty Gateway',
   },
   {
@@ -3237,7 +3237,7 @@ export const pieces: Piece[] = [
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/94',
     originalUri: 'https://media.niftygateway.com/image/upload/v1741829554/0MASQUERADEFINALMASKS/94.jpg',
-    mintDate: '27-Jan-2026',
+    mintDate: '27-Jan-2025',
     mintPlatform: 'Nifty Gateway',
   },
   {
@@ -3255,7 +3255,7 @@ export const pieces: Piece[] = [
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/142',
     originalUri: 'https://media.niftygateway.com/image/upload/v1741829592/0MASQUERADEFINALMASKS/142.jpg',
-    mintDate: '27-Jan-2026',
+    mintDate: '27-Jan-2025',
     mintPlatform: 'Nifty Gateway',
   },
   {
@@ -3273,7 +3273,7 @@ export const pieces: Piece[] = [
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/191',
     originalUri: 'https://media.niftygateway.com/image/upload/v1741829635/0MASQUERADEFINALMASKS/191.jpg',
-    mintDate: '27-Jan-2026',
+    mintDate: '27-Jan-2025',
     mintPlatform: 'Nifty Gateway',
   },
   {
@@ -3291,7 +3291,7 @@ export const pieces: Piece[] = [
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/240',
     originalUri: 'https://media.niftygateway.com/image/upload/v1741829683/0MASQUERADEFINALMASKS/240.jpg',
-    mintDate: '27-Jan-2026',
+    mintDate: '27-Jan-2025',
     mintPlatform: 'Nifty Gateway',
   },
   {
@@ -3309,7 +3309,7 @@ export const pieces: Piece[] = [
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/241',
     originalUri: 'https://media.niftygateway.com/image/upload/v1741829684/0MASQUERADEFINALMASKS/241.jpg',
-    mintDate: '27-Jan-2026',
+    mintDate: '27-Jan-2025',
     mintPlatform: 'Nifty Gateway',
   },
   {
@@ -3327,7 +3327,7 @@ export const pieces: Piece[] = [
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/303',
     originalUri: 'https://media.niftygateway.com/image/upload/v1741829770/0MASQUERADEFINALMASKS/303.jpg',
-    mintDate: '27-Jan-2026',
+    mintDate: '27-Jan-2025',
     mintPlatform: 'Nifty Gateway',
   },
   {
@@ -3345,7 +3345,7 @@ export const pieces: Piece[] = [
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/349',
     originalUri: 'https://media.niftygateway.com/image/upload/v1741829854/0MASQUERADEFINALMASKS/349.jpg',
-    mintDate: '27-Jan-2026',
+    mintDate: '27-Jan-2025',
     mintPlatform: 'Nifty Gateway',
   },
   {
@@ -3363,7 +3363,7 @@ export const pieces: Piece[] = [
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/394',
     originalUri: 'https://media.niftygateway.com/image/upload/v1741829932/0MASQUERADEFINALMASKS/394.jpg',
-    mintDate: '27-Jan-2026',
+    mintDate: '27-Jan-2025',
     mintPlatform: 'Nifty Gateway',
   },
   {
@@ -3381,7 +3381,7 @@ export const pieces: Piece[] = [
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/435',
     originalUri: 'https://media.niftygateway.com/image/upload/v1741830032/0MASQUERADEFINALMASKS/435.jpg',
-    mintDate: '27-Jan-2026',
+    mintDate: '27-Jan-2025',
     mintPlatform: 'Nifty Gateway',
   },
   {
@@ -3399,7 +3399,7 @@ export const pieces: Piece[] = [
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/442',
     originalUri: 'https://media.niftygateway.com/image/upload/v1741830053/0MASQUERADEFINALMASKS/442.jpg',
-    mintDate: '27-Jan-2026',
+    mintDate: '27-Jan-2025',
     mintPlatform: 'Nifty Gateway',
   },
   {
@@ -3417,7 +3417,7 @@ export const pieces: Piece[] = [
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/476',
     originalUri: 'https://media.niftygateway.com/image/upload/v1741830138/0MASQUERADEFINALMASKS/476.jpg',
-    mintDate: '27-Jan-2026',
+    mintDate: '27-Jan-2025',
     mintPlatform: 'Nifty Gateway',
   },
   {
@@ -3435,7 +3435,7 @@ export const pieces: Piece[] = [
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/504',
     originalUri: 'https://media.niftygateway.com/image/upload/v1741830217/0MASQUERADEFINALMASKS/504.jpg',
-    mintDate: '27-Jan-2026',
+    mintDate: '27-Jan-2025',
     mintPlatform: 'Nifty Gateway',
   },
   {
@@ -3453,7 +3453,7 @@ export const pieces: Piece[] = [
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/518',
     originalUri: 'https://media.niftygateway.com/image/upload/v1741830271/0MASQUERADEFINALMASKS/518.jpg',
-    mintDate: '27-Jan-2026',
+    mintDate: '27-Jan-2025',
     mintPlatform: 'Nifty Gateway',
   },
   {
@@ -3471,7 +3471,7 @@ export const pieces: Piece[] = [
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/540',
     originalUri: 'https://media.niftygateway.com/image/upload/v1741830343/0MASQUERADEFINALMASKS/540.jpg',
-    mintDate: '27-Jan-2026',
+    mintDate: '27-Jan-2025',
     mintPlatform: 'Nifty Gateway',
   },
   {
@@ -3489,7 +3489,7 @@ export const pieces: Piece[] = [
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/569',
     originalUri: 'https://media.niftygateway.com/image/upload/v1741830438/0MASQUERADEFINALMASKS/569.jpg',
-    mintDate: '27-Jan-2026',
+    mintDate: '27-Jan-2025',
     mintPlatform: 'Nifty Gateway',
   },
   {
@@ -3507,7 +3507,7 @@ export const pieces: Piece[] = [
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/591',
     originalUri: 'https://media.niftygateway.com/image/upload/v1741830513/0MASQUERADEFINALMASKS/591.jpg',
-    mintDate: '27-Jan-2026',
+    mintDate: '27-Jan-2025',
     mintPlatform: 'Nifty Gateway',
   },
   {
@@ -3525,7 +3525,7 @@ export const pieces: Piece[] = [
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/597',
     originalUri: 'https://media.niftygateway.com/image/upload/v1741830535/0MASQUERADEFINALMASKS/597.jpg',
-    mintDate: '27-Jan-2026',
+    mintDate: '27-Jan-2025',
     mintPlatform: 'Nifty Gateway',
   },
   {
@@ -3543,7 +3543,7 @@ export const pieces: Piece[] = [
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x4440732b0d85e2a77dcb2caedfd940154241249a/609',
     originalUri: 'https://media.niftygateway.com/image/upload/v1741830592/0MASQUERADEFINALMASKS/609.jpg',
-    mintDate: '27-Jan-2026',
+    mintDate: '27-Jan-2025',
     mintPlatform: 'Nifty Gateway',
   },
   {
