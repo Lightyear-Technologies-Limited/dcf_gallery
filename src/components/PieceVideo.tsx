@@ -73,16 +73,11 @@ export default function PieceVideo({
           ↺ Still
         </button>
       </div>
-      {original && (
-        <a
-          href={original}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-2 inline-block text-[11px] text-muted hover:text-foreground transition-colors duration-200"
-        >
-          Full-resolution original ↗
-        </a>
-      )}
+      {/* No "Full-resolution original" link under the video: the right-
+       *  column "View original" already covers it, so the second link
+       *  was duplicative editorial-chrome for the reader. The `original`
+       *  prop is kept in the API for callers that still pass it and for
+       *  any future overlay treatment. */}
     </div>
   );
 }

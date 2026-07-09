@@ -56,10 +56,13 @@ export default function InteractiveArtwork({
           )
         )}
       </div>
-      {/* Controls sit in a row BELOW the artwork rather than overlaid on it,
-          matching the register of the piece's other action links (View
-          original / View on Raster) so they never mask the image. */}
-      <div className="mt-3 flex items-center gap-4 text-[12px] uppercase tracking-[0.08em] text-muted">
+      {/* Controls sit in a row directly under the artwork so the "Run
+          interactive" affordance reads as part of the work rather than
+          part of the metadata block below. Tight mt-1 gap keeps the CTA
+          close to the piece it activates; the button is bumped to 13px
+          + non-muted foreground so it doesn't disappear next to the
+          image. */}
+      <div className="mt-1 flex items-center gap-4 text-[13px] uppercase tracking-[0.08em] text-foreground-secondary">
         {running ? (
           <button
             onClick={() => setRunning(false)}
