@@ -394,38 +394,46 @@ export default async function PiecePage({
         href={originHref || upHref}
         label={originHref ? originLabel : upLabel}
       />
-      {(prevPiece || nextPiece) && (
-        <div className="mt-6 flex flex-col sm:flex-row sm:justify-between gap-4 sm:gap-2">
-          {prevPiece ? (
-            <Link
-              href={pieceHref(prevPiece.slug)}
-              className="group inline-flex flex-col gap-1 max-w-full sm:max-w-[45%]"
-            >
-              <span className="text-[10px] tracking-[0.12em] uppercase text-muted font-medium group-hover:text-foreground transition-colors duration-200">
-                ← Previous work
-              </span>
-              <span className="font-serif italic text-[15px] text-foreground-secondary group-hover:text-foreground transition-colors duration-200 truncate">
-                {prevPiece.title}
-              </span>
-            </Link>
-          ) : (
-            <span />
-          )}
-          {nextPiece && (
-            <Link
-              href={pieceHref(nextPiece.slug)}
-              className="group inline-flex flex-col gap-1 max-w-full sm:max-w-[45%] sm:items-end sm:text-right"
-            >
-              <span className="text-[10px] tracking-[0.12em] uppercase text-muted font-medium group-hover:text-foreground transition-colors duration-200">
-                Next work →
-              </span>
-              <span className="font-serif italic text-[15px] text-foreground-secondary group-hover:text-foreground transition-colors duration-200 truncate">
-                {nextPiece.title}
-              </span>
-            </Link>
-          )}
-        </div>
-      )}
+      {/* Prev/Next work nav. Always rendered — even when the piece is in
+       *  a single-piece collection with no siblings — so that the artwork
+       *  below sits at the same Y position on every piece page. Without
+       *  this reservation, single-piece pages (kissed by the Moonlight,
+       *  meebit, cope-salada, etc.) rendered the artwork ~52px higher
+       *  than multi-piece pages, breaking the reader's sense of place
+       *  when clicking between pieces. Empty spans preserve the layout
+       *  without any visible chrome. */}
+      <div className="mt-6 flex flex-col sm:flex-row sm:justify-between gap-4 sm:gap-2 min-h-[40px]">
+        {prevPiece ? (
+          <Link
+            href={pieceHref(prevPiece.slug)}
+            className="group inline-flex flex-col gap-1 max-w-full sm:max-w-[45%]"
+          >
+            <span className="text-[10px] tracking-[0.12em] uppercase text-muted font-medium group-hover:text-foreground transition-colors duration-200">
+              ← Previous work
+            </span>
+            <span className="font-serif italic text-[15px] text-foreground-secondary group-hover:text-foreground transition-colors duration-200 truncate">
+              {prevPiece.title}
+            </span>
+          </Link>
+        ) : (
+          <span />
+        )}
+        {nextPiece ? (
+          <Link
+            href={pieceHref(nextPiece.slug)}
+            className="group inline-flex flex-col gap-1 max-w-full sm:max-w-[45%] sm:items-end sm:text-right"
+          >
+            <span className="text-[10px] tracking-[0.12em] uppercase text-muted font-medium group-hover:text-foreground transition-colors duration-200">
+              Next work →
+            </span>
+            <span className="font-serif italic text-[15px] text-foreground-secondary group-hover:text-foreground transition-colors duration-200 truncate">
+              {nextPiece.title}
+            </span>
+          </Link>
+        ) : (
+          <span />
+        )}
+      </div>
       <div className="pt-6 pb-24">
         <PieceLayout
           image={realImage}

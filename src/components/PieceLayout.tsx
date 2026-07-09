@@ -123,19 +123,21 @@ function resolveOriginal(uri: string): { href: string; label: string } | null {
     return { href: `https://ipfs.io/ipfs/${path}`, label: "ipfs.io" };
   }
   if (uri.startsWith("ar://")) {
-    return { href: `https://ar-io.dev/${uri.slice(5)}`, label: "ar-io.dev" };
+    return { href: `https://arweave.net/${uri.slice(5)}`, label: "arweave.net" };
   }
   if (uri.startsWith("data:")) return null; // on-chain SVG; no external link
   // Bare IPFS CID (CIDv0 starts with "Qm", CIDv1 with "bafy"/"bafk").
   if (/^(Qm[1-9A-HJ-NP-Za-km-z]{44}|bafy[a-z0-9]+|bafk[a-z0-9]+)$/.test(uri)) {
     return { href: `https://ipfs.io/ipfs/${uri}`, label: "ipfs.io" };
   }
-  // Rewrite literal arweave.net URLs to ar-io.dev - arweave.net's edge is
-  // flaky enough that 4% of our originalUri probes timed out on it; ar-io.dev
-  // resolves the same transactions reliably.
+  // Arweave URLs pass through unchanged to the canonical arweave.net gateway.
+  // (Earlier we rewrote to ar-io.dev to sidestep arweave.net timeout issues,
+  // but ar-io.dev now redirects some transactions to paid Turbo-tier
+  // gateways that ask the reader for a micro-payment — a worse outcome
+  // than an occasional retry on arweave.net's free canonical gateway.)
   const arweaveMatch = uri.match(/^https?:\/\/arweave\.net\/(.+)$/);
   if (arweaveMatch) {
-    return { href: `https://ar-io.dev/${arweaveMatch[1]}`, label: "ar-io.dev" };
+    return { href: `https://arweave.net/${arweaveMatch[1]}`, label: "arweave.net" };
   }
   const host = hostLabel(uri);
   return host ? { href: uri, label: host } : null;
