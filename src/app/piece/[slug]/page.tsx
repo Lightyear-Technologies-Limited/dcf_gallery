@@ -461,7 +461,6 @@ export default async function PiecePage({
           xUrl={getPieceEditorial(piece.slug)?.xUrl}
           xLabel={getPieceEditorial(piece.slug)?.xLabel}
           editorialLinks={getPieceEditorial(piece.slug)?.links}
-          intendedAsVideo={provenance?.animation?.type === "video" && !animatedVideo}
           placeholder={<PlaceholderArt collectionSlug={piece.collectionSlug} pieceSlug={piece.slug} className="w-full h-full" />}
         />
       </div>
