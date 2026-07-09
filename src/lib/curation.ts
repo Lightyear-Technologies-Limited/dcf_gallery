@@ -364,6 +364,8 @@ export const SYNTHETIC_TRAIT_GROUPS: Record<string, SyntheticTraitGroup[]> = {
         { label: "Turbulence", key: "Vision", value: "Turbulence" },
         { label: "G to the M", key: "Noise", value: "G to the M" },
         { label: "Wretch", key: "Type", value: "Wretch" },
+        { label: "Shady", key: "Type", value: "Shady" },
+        { label: "Bubbles", key: "Atmosphere", value: "Bubbles" },
       ],
     },
   ],
