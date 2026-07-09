@@ -13,7 +13,7 @@ interface Props {
       source data provides). Rendered as a "Minted" row above the storage. */
   mintDate?: string;
   /** Where the piece was released — e.g. "Avant Arte", "SuperRare",
-      "Nifty Gateway". Rendered as a "Released by" row alongside mintDate.
+      "Nifty Gateway". Rendered as a "Released on" row alongside mintDate.
       Note: this is the platform / brand that fronted the release
       (Avant Arte, HOFA, Nguyen Wahed), not the underlying mint tech
       (Manifold, custom contract) — that distinction reads correctly to
@@ -93,7 +93,7 @@ export default function OnChainDetails({
           </Row>
         )}
         {mintPlatform && (
-          <Row label="Released by">
+          <Row label="Released on">
             <span className="text-foreground">{mintPlatform}</span>
           </Row>
         )}
