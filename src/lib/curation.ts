@@ -354,7 +354,18 @@ export const SYNTHETIC_TRAITS: Record<string, Record<string, string>> = {
  */
 export type SyntheticTraitGroup = {
   label: string;
-  values: { label: string; key: string; value: string }[];
+  values: {
+    label: string;
+    key: string;
+    value: string;
+    /** Optional explicit curated 3-piece list in the display order the
+     *  reader should see (Yellow / Green / Blue for Grifters). Overrides
+     *  the automatic "first-per-color" picker used for sets without an
+     *  explicit list — needed when the fund holds >3 pieces matching the
+     *  trait and the natural pieceOrder-first pick doesn't match the
+     *  editorial selection. */
+    pieces?: string[];
+  }[];
 };
 export const SYNTHETIC_TRAIT_GROUPS: Record<string, SyntheticTraitGroup[]> = {
   grifters: [
@@ -364,8 +375,18 @@ export const SYNTHETIC_TRAIT_GROUPS: Record<string, SyntheticTraitGroup[]> = {
         { label: "Turbulence", key: "Vision", value: "Turbulence" },
         { label: "G to the M", key: "Noise", value: "G to the M" },
         { label: "Wretch", key: "Type", value: "Wretch" },
-        { label: "Shady", key: "Type", value: "Shady" },
-        { label: "Bubbles", key: "Atmosphere", value: "Bubbles" },
+        {
+          label: "Shady",
+          key: "Type",
+          value: "Shady",
+          pieces: ["grifters-614-c1f3", "grifters-37-c1f3", "grifters-574-c1f3"],
+        },
+        {
+          label: "Bubbles",
+          key: "Atmosphere",
+          value: "Bubbles",
+          pieces: ["grifters-439-c1f3", "grifters-132-c1f3", "grifters-574-c1f3"],
+        },
       ],
     },
   ],

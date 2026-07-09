@@ -131,31 +131,46 @@ export default async function CollectionPage({
     : sorted;
 
   // If the active filter is a synthetic Sets value (Grifters Turbulence,
-  // G to the M, Wretch), reduce the filtered pieces to one representative
-  // per color in Yellow / Blue / Green order. With 5 Wretches across mixed
-  // colors, the gallery surfaces the first Yellow Wretch, first Blue
-  // Wretch, and first Green Wretch (by tokenId) - "1 of each colour".
-  const isSyntheticSetFilter = traitFilter
-    ? !!SYNTHETIC_TRAIT_GROUPS[slug]?.some((g) =>
-        g.values.some(
+  // G to the M, Wretch, Shady, Bubbles), reduce the filtered pieces to
+  // the curated 3-piece display. Two paths:
+  //
+  //   1. The set defines an explicit `pieces` list (editorial curation):
+  //      use those exact slugs in that exact order. Needed when the fund
+  //      holds >3 pieces matching the trait and the natural pieceOrder
+  //      picker wouldn't select the editorial choice.
+  //
+  //   2. No explicit list: auto-pick one representative per color in
+  //      Yellow / Green / Blue reading order (the "1 of each colour"
+  //      curator rule). First-per-color wins, using the current
+  //      pieceOrder as the tiebreaker.
+  const activeSetValue = traitFilter
+    ? SYNTHETIC_TRAIT_GROUPS[slug]
+        ?.flatMap((g) => g.values)
+        .find(
           (v) => v.key === traitFilter.key && v.value === traitFilter.value,
-        ),
-      )
-    : false;
-  if (isSyntheticSetFilter) {
-    const colorOrder = ["Yellow", "Blue", "Green"];
-    const byColor = new Map<string, (typeof pieces)[number]>();
-    for (const p of pieces) {
-      const traits = getPieceTraits(p.slug);
-      const colorEntry = traits?.find(([k]) => k === "Color");
-      const color = colorEntry?.[1];
-      if (typeof color === "string" && !byColor.has(color)) {
-        byColor.set(color, p);
+        )
+    : undefined;
+  if (activeSetValue) {
+    if (activeSetValue.pieces && activeSetValue.pieces.length > 0) {
+      const bySlug = new Map(pieces.map((p) => [p.slug, p]));
+      pieces = activeSetValue.pieces
+        .map((s) => bySlug.get(s))
+        .filter((p): p is (typeof pieces)[number] => p !== undefined);
+    } else {
+      const colorOrder = ["Yellow", "Green", "Blue"];
+      const byColor = new Map<string, (typeof pieces)[number]>();
+      for (const p of pieces) {
+        const traits = getPieceTraits(p.slug);
+        const colorEntry = traits?.find(([k]) => k === "Color");
+        const color = colorEntry?.[1];
+        if (typeof color === "string" && !byColor.has(color)) {
+          byColor.set(color, p);
+        }
       }
+      pieces = colorOrder
+        .map((c) => byColor.get(c))
+        .filter((p): p is (typeof pieces)[number] => p !== undefined);
     }
-    pieces = colorOrder
-      .map((c) => byColor.get(c))
-      .filter((p): p is (typeof pieces)[number] => p !== undefined);
   }
 
   const piecesPerRow = getPiecesPerRow(slug);
@@ -350,14 +365,18 @@ export default async function CollectionPage({
     );
   }
   for (const group of SYNTHETIC_TRAIT_GROUPS[slug] ?? []) {
-    // Set counts cap at 3 - one per color (Yellow / Blue / Green). When
+    // Set counts cap at 3 - one per color (Yellow / Green / Blue). When
     // Hivemind holds 4+ of a set in the same color, the surplus drops
     // from the displayed count so the figure reads "1 of each colour"
-    // rather than total holdings.
+    // rather than total holdings. Sets that supply an explicit `pieces`
+    // list count the length of that list — the editorial curation IS
+    // the truth for those.
     const entries = group.values
       .map((v) => ({
         ...v,
-        count: Math.min(facets.get(v.key)?.get(v.value) ?? 0, 3),
+        count: v.pieces
+          ? v.pieces.length
+          : Math.min(facets.get(v.key)?.get(v.value) ?? 0, 3),
       }))
       .filter((v) => v.count > 0);
     if (!entries.length) continue;
