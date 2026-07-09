@@ -12,8 +12,12 @@ interface Props {
   /** When the token was minted (ISO date, month/year, or year — whatever the
       source data provides). Rendered as a "Minted" row above the storage. */
   mintDate?: string;
-  /** Where the token was minted — e.g. "Manifold", "SuperRare",
-      "Art Blocks". Rendered as a "Minted on" row alongside mintDate. */
+  /** Where the piece was released — e.g. "Avant Arte", "SuperRare",
+      "Nifty Gateway". Rendered as a "Released by" row alongside mintDate.
+      Note: this is the platform / brand that fronted the release
+      (Avant Arte, HOFA, Nguyen Wahed), not the underlying mint tech
+      (Manifold, custom contract) — that distinction reads correctly to
+      an editorial audience. */
   mintPlatform?: string;
   /** Preservation provenance from the Filebase pin (C.2): the content-addressed
       CID + sha256 of the preserved bytes, plus pin / last-verified timestamps.
@@ -89,7 +93,7 @@ export default function OnChainDetails({
           </Row>
         )}
         {mintPlatform && (
-          <Row label="Minted on">
+          <Row label="Released by">
             <span className="text-foreground">{mintPlatform}</span>
           </Row>
         )}
