@@ -230,7 +230,7 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
           >
             {artistName}
           </Link>
-          {year && <span className="text-muted">, {year}</span>}
+          {year && <span>, {year}</span>}
         </span>
       )}
       {collectionSlug && collectionName && (

@@ -129,7 +129,7 @@ export default function OnChainDetails({
             {pinnedDate && (
               <Row label={provenance.verifiedAt ? "Verified" : "Pinned"}>
                 <span className="font-mono tabular-nums text-foreground">
-                  {pinnedDate.slice(0, 10)}
+                  {formatDayMonthYear(pinnedDate)}
                 </span>
               </Row>
             )}
@@ -149,6 +149,20 @@ function storageTooltip(storage: string): string {
   if (storage === "Arweave") return "Image on Arweave - paid-once permanent storage.";
   if (storage === "Centralized") return "Image hosted on a centralized server - depends on that host remaining online.";
   return storage;
+}
+
+/** Render an ISO date (or any Date-parseable string) as DD-MMM-YYYY
+ *  (e.g. "05-Jun-2026"). UTC to avoid off-by-one jumps around midnight
+ *  in the reader's local timezone. Falls back to the raw input if the
+ *  parse fails so nothing crashes on unexpected input. */
+function formatDayMonthYear(input: string): string {
+  const d = new Date(input);
+  if (Number.isNaN(d.getTime())) return input;
+  const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const day = String(d.getUTCDate()).padStart(2, "0");
+  const month = MONTHS[d.getUTCMonth()];
+  const year = d.getUTCFullYear();
+  return `${day}-${month}-${year}`;
 }
 
 function Row({ label, children }: { label: string; children: React.ReactNode }) {
