@@ -215,21 +215,22 @@ export default async function PiecePage({
     undefined;
 
   const rawTraits = getPieceTraits(piece.slug);
-  // Editorial / curator-added "synthetic" traits prepended to the on-chain
-  // attributes - used for facts not in metadata. Two layers:
-  //  - Collection-level (SYNTHETIC_TRAITS) — every piece gets these
-  //    (QQL "Minted by: Tyler Hobbs").
-  //  - Piece-level (PIECE_SYNTHETIC_TRAITS) — only this specific piece
-  //    gets these (Punk 269 "Paper Punk: Yes" for the physical companion).
+  // Editorial / curator-added "synthetic" traits sit either side of the
+  // on-chain attributes depending on layer:
+  //  - Collection-level (SYNTHETIC_TRAITS) prepends — every piece in the
+  //    collection carries the credit (QQL "Minted by: Tyler Hobbs" leads
+  //    the panel above the algorithmic features).
+  //  - Piece-level (PIECE_SYNTHETIC_TRAITS) appends — the fact is unique
+  //    to this piece (Punk 269 "Paper Punk: Yes" for the physical
+  //    companion) and reads as a footnote below the on-chain traits.
   const collectionSynthetic = SYNTHETIC_TRAITS[piece.collectionSlug];
   const pieceSynthetic = PIECE_SYNTHETIC_TRAITS[piece.slug];
-  const prepended = [
-    ...(collectionSynthetic ? Object.entries(collectionSynthetic) : []),
-    ...(pieceSynthetic ? Object.entries(pieceSynthetic) : []),
+  const merged: Array<[string, TraitValue]> = [
+    ...(collectionSynthetic ? (Object.entries(collectionSynthetic) as Array<[string, TraitValue]>) : []),
+    ...(rawTraits || []),
+    ...(pieceSynthetic ? (Object.entries(pieceSynthetic) as Array<[string, TraitValue]>) : []),
   ];
-  const traits: Array<[string, TraitValue]> | null = prepended.length
-    ? [...prepended, ...(rawTraits || [])]
-    : rawTraits;
+  const traits: Array<[string, TraitValue]> | null = merged.length ? merged : null;
   // Collections where traits carry curatorial weight (palette, scale, mood,
   // origin) - open the Features panel by default. Others stay collapsed.
   // Traits / Attributes panel opens by default - the on-chain attributes

@@ -1112,6 +1112,14 @@ export const pieces: Piece[] = [
     contractAddress: '0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB',
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB/269',
+    exhibitions: [
+      {
+        date: '2022',
+        title: 'Perfect & Priceless',
+        location: 'Kate Vass Galerie, Zurich',
+        url: 'https://www.katevassgalerie.com/blog/perfect-amp-priceless-exhibition-3-years-since-opening',
+      },
+    ],
   },
   {
     id: 'cryptopunks-1568-3BBB',
