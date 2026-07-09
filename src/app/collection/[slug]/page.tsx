@@ -865,6 +865,7 @@ export default async function CollectionPage({
                 sidebarRows={heroLayout.sidebarRows}
                 sidebarSlugs={heroLayout.sidebarPieces}
                 fallbackPerRow={ideal}
+                rowMap={pieceRows ?? undefined}
               />
             );
           }

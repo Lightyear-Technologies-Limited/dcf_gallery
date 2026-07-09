@@ -4,6 +4,7 @@ import Link from "next/link";
 import { getArtworkImage } from "@/lib/images";
 import PlaceholderArt from "./PlaceholderArt";
 import JustifiedGallery from "./JustifiedGallery";
+import FixedRowGallery from "./FixedRowGallery";
 import GridArtwork from "./GridArtwork";
 
 interface PieceData {
@@ -32,6 +33,11 @@ interface Props {
   sidebarSlugs?: string[];
   /** Pieces-per-row for the leftover pieces below the composite block. */
   fallbackPerRow: number;
+  /** Optional pieceRows map (slug -> row number). When any leftover piece
+   *  is present in this map, leftovers render through FixedRowGallery so
+   *  the curator's row structure is honoured. When absent or empty for
+   *  the leftovers, the JustifiedGallery fallback applies. */
+  rowMap?: Record<string, number>;
   gap?: number;
   hrefSearch?: string;
 }
@@ -50,6 +56,7 @@ export default function HeroSidebarGallery({
   sidebarRows,
   sidebarSlugs,
   fallbackPerRow,
+  rowMap,
   gap = 4,
   hrefSearch,
 }: Props) {
@@ -145,10 +152,23 @@ export default function HeroSidebarGallery({
         })}
       </div>
 
-      {/* Leftover pieces below the composite block */}
+      {/* Leftover pieces below the composite block. When rowMap has entries
+       *  for any of the leftover pieces, honour the curator's row layout
+       *  through FixedRowGallery; otherwise fall through to the standard
+       *  justified gallery. */}
       {leftover.length > 0 && (
         <div style={{ marginTop: `${gap}px` }}>
-          <JustifiedGallery pieces={leftover} piecesPerRow={fallbackPerRow} gap={gap} hrefSearch={hrefSearch} />
+          {rowMap && leftover.some((p) => typeof rowMap[p.slug] === "number") ? (
+            <FixedRowGallery
+              pieces={leftover}
+              rowMap={rowMap}
+              fallbackPerRow={fallbackPerRow}
+              gap={gap}
+              hrefSearch={hrefSearch}
+            />
+          ) : (
+            <JustifiedGallery pieces={leftover} piecesPerRow={fallbackPerRow} gap={gap} hrefSearch={hrefSearch} />
+          )}
         </div>
       )}
     </div>

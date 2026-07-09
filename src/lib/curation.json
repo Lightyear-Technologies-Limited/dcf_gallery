@@ -99,11 +99,11 @@
       "sidebarCols": 2,
       "sidebarRows": 3,
       "sidebarPieces": [
-        "grifters-368-c1f3",
+        "grifters-614-c1f3",
         "grifters-66-c1f3",
-        "grifters-166-c1f3",
+        "grifters-37-c1f3",
         "grifters-88-c1f3",
-        "grifters-522-c1f3",
+        "grifters-574-c1f3",
         "grifters-308-c1f3"
       ]
     }
@@ -441,31 +441,24 @@
       "qql-978-1088": 3
     },
     "grifters": {
-      "grifters-170-c1f3": 1,
-      "grifters-66-c1f3": 2,
-      "grifters-88-c1f3": 2,
-      "grifters-308-c1f3": 2,
-      "grifters-165-c1f3": 3,
-      "grifters-572-c1f3": 3,
-      "grifters-439-c1f3": 4,
+      "grifters-368-c1f3": 4,
+      "grifters-166-c1f3": 4,
+      "grifters-522-c1f3": 4,
+      "grifters-8-c1f3": 4,
       "grifters-197-c1f3": 4,
-      "grifters-532-c1f3": 4,
-      "grifters-132-c1f3": 4,
-      "grifters-368-c1f3": 5,
-      "grifters-166-c1f3": 5,
-      "grifters-522-c1f3": 5,
-      "grifters-614-c1f3": 6,
-      "grifters-37-c1f3": 6,
-      "grifters-574-c1f3": 6,
-      "grifters-8-c1f3": 7,
-      "grifters-363-c1f3": 7,
-      "grifters-51-c1f3": 7,
-      "grifters-254-c1f3": 8,
-      "grifters-222-c1f3": 8,
-      "grifters-442-c1f3": 8,
-      "grifters-472-c1f3": 9,
-      "grifters-542-c1f3": 9,
-      "grifters-547-c1f3": 9
+      "grifters-572-c1f3": 5,
+      "grifters-532-c1f3": 5,
+      "grifters-542-c1f3": 5,
+      "grifters-51-c1f3": 5,
+      "grifters-254-c1f3": 5,
+      "grifters-165-c1f3": 6,
+      "grifters-132-c1f3": 6,
+      "grifters-222-c1f3": 6,
+      "grifters-363-c1f3": 6,
+      "grifters-472-c1f3": 7,
+      "grifters-439-c1f3": 7,
+      "grifters-547-c1f3": 7,
+      "grifters-442-c1f3": 7
     }
   },
   "pieceOrder": {
@@ -804,31 +797,31 @@
       "superrare-xcopy-2123-b9e0" ()
     ],
     "grifters": [
-      "grifters-170-c1f3", (1)
-      "grifters-66-c1f3", (2)
-      "grifters-88-c1f3", (2)
-      "grifters-308-c1f3", (2)
-      "grifters-165-c1f3", (3)
-      "grifters-572-c1f3", (3)
-      "grifters-439-c1f3", (4)
+      "grifters-170-c1f3", ()
+      "grifters-614-c1f3", ()
+      "grifters-66-c1f3", ()
+      "grifters-37-c1f3", ()
+      "grifters-88-c1f3", ()
+      "grifters-574-c1f3", ()
+      "grifters-308-c1f3", ()
+      "grifters-368-c1f3", (4)
+      "grifters-166-c1f3", (4)
+      "grifters-522-c1f3", (4)
+      "grifters-8-c1f3", (4)
       "grifters-197-c1f3", (4)
-      "grifters-532-c1f3", (4)
-      "grifters-132-c1f3", (4)
-      "grifters-368-c1f3", (5)
-      "grifters-166-c1f3", (5)
-      "grifters-522-c1f3", (5)
-      "grifters-614-c1f3", (6)
-      "grifters-37-c1f3", (6)
-      "grifters-574-c1f3", (6)
-      "grifters-8-c1f3", (7)
-      "grifters-363-c1f3", (7)
-      "grifters-51-c1f3", (7)
-      "grifters-254-c1f3", (8)
-      "grifters-222-c1f3", (8)
-      "grifters-442-c1f3", (8)
-      "grifters-472-c1f3", (9)
-      "grifters-542-c1f3", (9)
-      "grifters-547-c1f3" (9)
+      "grifters-572-c1f3", (5)
+      "grifters-532-c1f3", (5)
+      "grifters-542-c1f3", (5)
+      "grifters-51-c1f3", (5)
+      "grifters-254-c1f3", (5)
+      "grifters-165-c1f3", (6)
+      "grifters-132-c1f3", (6)
+      "grifters-222-c1f3", (6)
+      "grifters-363-c1f3", (6)
+      "grifters-472-c1f3", (7)
+      "grifters-439-c1f3", (7)
+      "grifters-547-c1f3", (7)
+      "grifters-442-c1f3" (7)
     ],
     "cope-salada": [
       "cope-salada-125-2e9e" ()
