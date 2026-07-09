@@ -2093,5 +2093,28 @@
   "skulls-of-luci-20-d27c": {
     "The Blueprint Skull Token Id": "33019",
     "The Blueprint Skull Contract Address": "0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0"
+  },
+  "cryptopunks-4752-3BBB": {
+    "Type": "Female",
+    "Attribute": [
+      "Purple Lipstick",
+      "Tiara",
+      "Horned Rim Glasses"
+    ]
+  },
+  "cryptopunks-5381-3BBB": {
+    "Type": "Male",
+    "Attribute": [
+      "Cowboy Hat",
+      "Clown Eyes Green"
+    ]
+  },
+  "cryptopunks-7036-3BBB": {
+    "Type": "Male",
+    "Attribute": [
+      "Earring",
+      "Fedora",
+      "Clown Eyes Blue"
+    ]
   }
 }
