@@ -80,7 +80,6 @@ export default function ChapterFilmstrip({ name, works }: Props) {
                 key={w.id}
                 id={`p-${w.slug}`}
                 href={`/piece/${w.slug}?from=chapters`}
-                title={w.title}
                 style={{ aspectRatio: `${ratio}` }}
                 className={`group relative block h-[180px] sm:h-[220px] lg:h-[260px] shrink-0 overflow-hidden snap-start ${
                   isPunk ? "bg-punk" : "bg-surface"
