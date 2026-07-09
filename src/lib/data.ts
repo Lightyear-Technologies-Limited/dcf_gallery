@@ -3395,6 +3395,14 @@ export const pieces: Piece[] = [
     influences: [],
     openseaUrl: 'https://opensea.io/item/ethereum/0x6d38705ad8af087d86ef505618b77b066ead2006/3',
     originalUri: 'https://icore2loavwuz646h2xjlkj7454pybiawkiooh7v23kih45esjxa.arweave.net/QJ0SaW4FbUz7nj6ulak_53j8BQCykOcf9dbUg_Okkm4/',
+    exhibitions: [
+      {
+        date: 'December 2025',
+        title: 'Art Basel Miami Beach',
+        location: 'Nguyen Wahed, Miami Beach',
+        url: 'https://nguyenwahed.com/art-fairs/17-art-basel-miami-beach-2025-xcopy-kim-asendorf-and-joe-pease/',
+      },
+    ],
   },
   {
     id: 'pxl-dex-105-ecfb',

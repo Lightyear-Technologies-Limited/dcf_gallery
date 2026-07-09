@@ -36,11 +36,13 @@ export default function ChaptersView({ chapters }: { chapters: ChapterData[] }) 
         {chapters.map((c, i) => (
           <section
             key={c.slug}
-            // First chapter starts just below the page-level "Chapters"
-            // heading + framing (pt-2). Chapters 2+ keep the cinematic
-            // full-height vertical centering as you scroll the procession.
-            className={`min-h-[78vh] flex flex-col border-b border-border last:border-b-0 ${
-              i === 0 ? "justify-start pt-2 pb-16" : "justify-center py-16"
+            // Consistent top/bottom padding between chapters, no min-height
+            // — the earlier "full-height title card" treatment (min-h-[78vh]
+            // + vertical centering) left large dead bands above and below
+            // each chapter that didn't match the density of the rest of
+            // the site.
+            className={`border-b border-border last:border-b-0 ${
+              i === 0 ? "pt-2 pb-14" : "py-14"
             }`}
           >
             <div>
