@@ -7,7 +7,7 @@ import { getArtworkImage, getArtworkAspect, resolveTokenId } from "@/lib/images"
 import { getDetailVariants, getArtworkBlur, getProvenance, getOgImage } from "@/lib/provenance";
 import { getMotion } from "@/lib/motion";
 import { SITE_URL as SITE } from "@/lib/site";
-import { getEditionType, getArtistSiteUrl, getPieceTraits, getPieceDescription, getCollectionDisplayName, getArtistDisplayName, sortPieces, SYNTHETIC_TRAITS } from "@/lib/curation";
+import { getEditionType, getArtistSiteUrl, getPieceTraits, getPieceDescription, getCollectionDisplayName, getArtistDisplayName, sortPieces, SYNTHETIC_TRAITS, PIECE_SYNTHETIC_TRAITS } from "@/lib/curation";
 import type { TraitValue } from "@/lib/curation";
 import PlaceholderArt from "@/components/PlaceholderArt";
 import BackButton from "@/components/BackButton";
@@ -216,11 +216,19 @@ export default async function PiecePage({
 
   const rawTraits = getPieceTraits(piece.slug);
   // Editorial / curator-added "synthetic" traits prepended to the on-chain
-  // attributes - used for facts not in metadata (QQL "Minted by: Tyler
-  // Hobbs"). When the collection has none, the piece's traits pass through.
-  const syntheticEntries = SYNTHETIC_TRAITS[piece.collectionSlug];
-  const traits: Array<[string, TraitValue]> | null = syntheticEntries
-    ? [...Object.entries(syntheticEntries), ...(rawTraits || [])]
+  // attributes - used for facts not in metadata. Two layers:
+  //  - Collection-level (SYNTHETIC_TRAITS) — every piece gets these
+  //    (QQL "Minted by: Tyler Hobbs").
+  //  - Piece-level (PIECE_SYNTHETIC_TRAITS) — only this specific piece
+  //    gets these (Punk 269 "Paper Punk: Yes" for the physical companion).
+  const collectionSynthetic = SYNTHETIC_TRAITS[piece.collectionSlug];
+  const pieceSynthetic = PIECE_SYNTHETIC_TRAITS[piece.slug];
+  const prepended = [
+    ...(collectionSynthetic ? Object.entries(collectionSynthetic) : []),
+    ...(pieceSynthetic ? Object.entries(pieceSynthetic) : []),
+  ];
+  const traits: Array<[string, TraitValue]> | null = prepended.length
+    ? [...prepended, ...(rawTraits || [])]
     : rawTraits;
   // Collections where traits carry curatorial weight (palette, scale, mood,
   // origin) - open the Features panel by default. Others stay collapsed.
