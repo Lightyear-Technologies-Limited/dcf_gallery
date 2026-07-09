@@ -343,15 +343,17 @@ export const SYNTHETIC_TRAITS: Record<string, Record<string, string>> = {
  * Per-piece synthetic traits — for facts about a single piece that don't
  * belong on every piece in the collection. Used for physical companion
  * editions, one-off exhibition markers, and other single-piece attributes
- * that aren't in on-chain metadata. Merged in after the collection-level
- * synthetic traits and before the on-chain attributes.
+ * that aren't in on-chain metadata. Appended after the on-chain traits
+ * on the piece page (footnote-style) so the reader reads it as a
+ * curator-added note rather than confusing it with the token metadata.
+ *
+ * Empty by default; add entries only when a piece genuinely needs a
+ * trait row that doesn't come from traits.data.json. Punk 269's physical
+ * "Paper Punk" companion, for instance, was surfaced here briefly but
+ * ultimately belonged in the Exhibitions block (the Kate Vass show
+ * carries the same information more clearly), so it lives there instead.
  */
-export const PIECE_SYNTHETIC_TRAITS: Record<string, Record<string, string>> = {
-  // Punk 269 has a physical Paper Punk companion, exhibited at Kate Vass
-  // Galerie's "Perfect & Priceless" show (2022). Marker trait; the article
-  // link lives in the piece editorial file.
-  "cryptopunks-269-3BBB": { "Paper Punk": "Yes" },
-};
+export const PIECE_SYNTHETIC_TRAITS: Record<string, Record<string, string>> = {};
 
 /**
  * Synthetic trait groups that render as their own row in the Browse-by-
