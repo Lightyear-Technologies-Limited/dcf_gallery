@@ -4305,7 +4305,9 @@
         "bytes": 1363238
       }
     ],
-    "lqip": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAACwBACdASoYABgAPu1mq08ppaOiKA1RMB2JYgCsL6AA6Nj3aHbcRtghPHUFyA+AAP7C7emdhLM61qTWkBLm5M1CWW50vwHsTFV6iMfGDD3AmpaVsvTTO4AA"
+    "lqip": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAACwBACdASoYABgAPu1mq08ppaOiKA1RMB2JYgCsL6AA6Nj3aHbcRtghPHUFyA+AAP7C7emdhLM61qTWkBLm5M1CWW50vwHsTFV6iMfGDD3AmpaVsvTTO4AA",
+    "verifiedAt": "2026-07-09T14:59:09.773Z",
+    "verified": true
   },
   "masks-of-luci-435-249a": {
     "storage": "centralized",
@@ -6896,7 +6898,9 @@
         "bytes": 1029110
       }
     ],
-    "lqip": "data:image/webp;base64,UklGRnoBAABXRUJQVlA4WAoAAAAQAAAAFwAAFwAAQUxQSMEAAAABBre1ti1NXEpWoLdZ2IABoGUHGIA56KCXEUIZt8pd0MiXDd4vIhS4baNkeIyvAFBvCqruxosTFjHrqtCs11BZT9ScIFmfHox1Ejia2KtX1pcMb3hOkQFIwUPPkPr1MpescPNMPwFvQkvq1VuiGR4/so/kGJoiC5q3ec++JNh4Gqv28PnDgJSHtqr7558GpOzr7uBF4cVutEopgKPZKSPJiY8PGnykQy/Qu9Anot8n/f7p70V/X/p/IP+fP/4b+X8CAFZQOCCSAAAAUAUAnQEqGAAYAD7lYqNNqSWjIjAMASAciWYAnTLHX6AL/7aJ0Q+yeM4mQmD3ZAb1U++AAP7yvM9zD+GnmtsJDhvKGgnm9OTaBB3VEV9Yy0v63n6+LhmGqjKnMJ7Ba6m37cuMHr9hLuhcWDuvskFSdm8E/1+wyLIkYE5k8RIhejuKOfs4kzzECgdKB8gvCf3vYAA="
+    "lqip": "data:image/webp;base64,UklGRnoBAABXRUJQVlA4WAoAAAAQAAAAFwAAFwAAQUxQSMEAAAABBre1ti1NXEpWoLdZ2IABoGUHGIA56KCXEUIZt8pd0MiXDd4vIhS4baNkeIyvAFBvCqruxosTFjHrqtCs11BZT9ScIFmfHox1Ejia2KtX1pcMb3hOkQFIwUPPkPr1MpescPNMPwFvQkvq1VuiGR4/so/kGJoiC5q3ec++JNh4Gqv28PnDgJSHtqr7558GpOzr7uBF4cVutEopgKPZKSPJiY8PGnykQy/Qu9Anot8n/f7p70V/X/p/IP+fP/4b+X8CAFZQOCCSAAAAUAUAnQEqGAAYAD7lYqNNqSWjIjAMASAciWYAnTLHX6AL/7aJ0Q+yeM4mQmD3ZAb1U++AAP7yvM9zD+GnmtsJDhvKGgnm9OTaBB3VEV9Yy0v63n6+LhmGqjKnMJ7Ba6m37cuMHr9hLuhcWDuvskFSdm8E/1+wyLIkYE5k8RIhejuKOfs4kzzECgdKB8gvCf3vYAA=",
+    "verifiedAt": "2026-07-09T14:59:10.784Z",
+    "verified": true
   },
   "skulls-of-luci-20-d27c": {
     "storage": "arweave",
@@ -6925,7 +6929,9 @@
         "bytes": 1150842
       }
     ],
-    "lqip": "data:image/webp;base64,UklGRpYBAABXRUJQVlA4WAoAAAAQAAAAFwAAFwAAQUxQSMEAAAABBre1ti1NXEpWoLdZ2IABoGUHGIA56KCXEUIZt8pd0MiXDd4vIhS4baNkeIyvAFBvCqruxosTFjHrqtCs11BZT9ScIFmfHox1Ejia2KtX1pcMb3hOkQFIwUPPkPr1MpescPNMPwFvQkvq1VuiGR4/so/kGJoiC5q3ec++JNh4Gqv28PnDgJSHtqr7558GpOzr7uBF4cVutEopgKPZKSPJiY8PGnykQy/Qu9Anot8n/f7p70V/X/p/IP+fP/4b+X8CAFZQOCCuAAAAMAUAnQEqGAAYAD7tYKxNqaWkojAYDAEwHYlAF2Zl+Cs3nbJTGatg9O3ZK6eWh5Ff9IAA/rawGT7cxU3+a5a+NiUyFeU2WCHJ8YhUWJGPDeTpyoOoXr4pfIPb5f/isSJJCGPMZo1JUIWvv39OiiYj/QEa20kl2kPfprc7nNF7qSU/Rc/LscGWlS2blmA+XGzAoqB2LigpnG3SzEP3zS4mNzqeowrdgpMJibohlYAA"
+    "lqip": "data:image/webp;base64,UklGRpYBAABXRUJQVlA4WAoAAAAQAAAAFwAAFwAAQUxQSMEAAAABBre1ti1NXEpWoLdZ2IABoGUHGIA56KCXEUIZt8pd0MiXDd4vIhS4baNkeIyvAFBvCqruxosTFjHrqtCs11BZT9ScIFmfHox1Ejia2KtX1pcMb3hOkQFIwUPPkPr1MpescPNMPwFvQkvq1VuiGR4/so/kGJoiC5q3ec++JNh4Gqv28PnDgJSHtqr7558GpOzr7uBF4cVutEopgKPZKSPJiY8PGnykQy/Qu9Anot8n/f7p70V/X/p/IP+fP/4b+X8CAFZQOCCuAAAAMAUAnQEqGAAYAD7tYKxNqaWkojAYDAEwHYlAF2Zl+Cs3nbJTGatg9O3ZK6eWh5Ff9IAA/rawGT7cxU3+a5a+NiUyFeU2WCHJ8YhUWJGPDeTpyoOoXr4pfIPb5f/isSJJCGPMZo1JUIWvv39OiiYj/QEa20kl2kPfprc7nNF7qSU/Rc/LscGWlS2blmA+XGzAoqB2LigpnG3SzEP3zS4mNzqeowrdgpMJibohlYAA",
+    "verifiedAt": "2026-07-09T14:59:11.888Z",
+    "verified": true
   },
   "tyler-hobbs-1-9345": {
     "storage": "arweave",
@@ -9373,7 +9379,9 @@
     "bytes": 13034,
     "mime": "image/svg+xml",
     "gateway": "https://lightyear.myfilebase.com/ipfs/QmZ7jPomrhzYWW3wu7S7VMqGrZnBXKTX31MbAqNnaiYZBQ",
-    "pinnedAt": "2026-07-07T09:58:48.938Z"
+    "pinnedAt": "2026-07-07T09:58:48.938Z",
+    "verifiedAt": "2026-07-09T14:59:12.268Z",
+    "verified": true
   },
   "cryptopunks-5381-3BBB": {
     "storage": "onchain",
@@ -9383,7 +9391,9 @@
     "bytes": 19446,
     "mime": "image/svg+xml",
     "gateway": "https://lightyear.myfilebase.com/ipfs/QmYwYzChYsjJbmaKHT9rJ1rHVRLPyUZAfKvYoWJcaKmm5g",
-    "pinnedAt": "2026-07-07T09:58:49.393Z"
+    "pinnedAt": "2026-07-07T09:58:49.393Z",
+    "verifiedAt": "2026-07-09T14:59:12.479Z",
+    "verified": true
   },
   "cryptopunks-7036-3BBB": {
     "storage": "onchain",
@@ -9393,7 +9403,9 @@
     "bytes": 18843,
     "mime": "image/svg+xml",
     "gateway": "https://lightyear.myfilebase.com/ipfs/QmboXvdKWHh3JKfVjo2DCTX3nfwLy3MX83wUqMVN7iLcay",
-    "pinnedAt": "2026-07-07T09:58:49.840Z"
+    "pinnedAt": "2026-07-07T09:58:49.840Z",
+    "verifiedAt": "2026-07-09T14:59:12.725Z",
+    "verified": true
   },
   "grifters-614-c1f3": {
     "storage": "ipfs",
@@ -9421,7 +9433,9 @@
         "bytes": 1345818
       }
     ],
-    "lqip": "data:image/webp;base64,UklGRqAAAABXRUJQVlA4IJQAAAAQBQCdASoYABgAPt1WpU2opKOiN/qoARAbiWwAxNghbBbCJg8WiNTr3xA+Pcn9SI2AAP72h/ProM98xGEBeaxATRMAHYkf8cNclHYxYKukv3Tg26bbN3R79JKEPuDH0fZelPvzl3/rYqsLFQwCQ1zvwMJZezcRdqe5VL+xtrHxtpvcWQ1M8ETOBVIkVHjbOJ5q0FAA"
+    "lqip": "data:image/webp;base64,UklGRqAAAABXRUJQVlA4IJQAAAAQBQCdASoYABgAPt1WpU2opKOiN/qoARAbiWwAxNghbBbCJg8WiNTr3xA+Pcn9SI2AAP72h/ProM98xGEBeaxATRMAHYkf8cNclHYxYKukv3Tg26bbN3R79JKEPuDH0fZelPvzl3/rYqsLFQwCQ1zvwMJZezcRdqe5VL+xtrHxtpvcWQ1M8ETOBVIkVHjbOJ5q0FAA",
+    "verifiedAt": "2026-07-09T14:59:14.542Z",
+    "verified": true
   },
   "winds-of-yawanawa-213-100b": {
     "storage": "centralized",
@@ -9454,6 +9468,8 @@
       "source": "https://scorpios.blob.core.windows.net/cdn/portal/0213.mp4",
       "type": "video",
       "pinned": false
-    }
+    },
+    "verifiedAt": "2026-07-09T14:59:18.707Z",
+    "verified": true
   }
 }

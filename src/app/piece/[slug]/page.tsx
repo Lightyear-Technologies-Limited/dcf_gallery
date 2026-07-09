@@ -339,7 +339,16 @@ export default async function PiecePage({
       }
     />
   );
-  const preservedBlock = provenance?.cid ? (
+  // Guard: for video pieces, the artwork the reader is looking at IS the
+  // motion piece — a still poster being pinned to IPFS doesn't preserve
+  // the work, only its opening frame. When the animation isn't pinned yet
+  // (winds-of-yawanawa-213 as of this branch), suppress the Preserved
+  // claim so the reader isn't told the artwork is preserved when the
+  // video pin is still pending. The block auto-restores the moment
+  // animation.pinned flips true after a pin-videos run.
+  const videoPinPending =
+    provenance?.animation?.type === "video" && !provenance.animation.pinned;
+  const preservedBlock = provenance?.cid && !videoPinPending ? (
     <p className="text-[13px] text-muted">
       <span className="text-foreground-secondary">Preserved by Hivemind:</span>
       <br />
