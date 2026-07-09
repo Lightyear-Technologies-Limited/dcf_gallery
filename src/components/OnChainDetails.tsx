@@ -122,7 +122,7 @@ export default function OnChainDetails({
               </a>
             </Row>
             {provenance.sha256 && (
-              <Row label="SHA-256">
+              <Row label="SHA-256" hint={SHA256_VERIFY_HINT}>
                 <CopyableHash value={provenance.sha256} />
               </Row>
             )}
@@ -165,10 +165,28 @@ function formatDayMonthYear(input: string): string {
   return `${day}-${month}-${year}`;
 }
 
-function Row({ label, children }: { label: string; children: React.ReactNode }) {
+/** Verify-your-own hint attached to the SHA-256 label. Turns the hash from
+ *  a decorative string into something the reader can actually check: fetch
+ *  the file at the CID, run sha256sum locally, compare. No trust required. */
+const SHA256_VERIFY_HINT =
+  "Verify: fetch the file at the CID above, then run `sha256sum <file>` (macOS: `shasum -a 256 <file>`). The output should match this hash exactly.";
+
+function Row({ label, hint, children }: { label: string; hint?: string; children: React.ReactNode }) {
   return (
     <div className="flex justify-between items-center gap-4 py-2.5 border-b border-border">
-      <span className="text-muted shrink-0">{label}</span>
+      <span className="text-muted shrink-0 inline-flex items-center gap-1.5">
+        {label}
+        {hint && (
+          <span
+            role="img"
+            aria-label={hint}
+            title={hint}
+            className="cursor-help inline-flex items-center justify-center w-3.5 h-3.5 rounded-full border border-border text-[9px] leading-none text-muted hover:text-foreground hover:border-foreground/40 transition-colors duration-200"
+          >
+            ?
+          </span>
+        )}
+      </span>
       {children}
     </div>
   );
