@@ -7,6 +7,7 @@ import ShareButton from "./ShareButton";
 import PieceVideo from "./PieceVideo";
 import PieceGif from "./PieceGif";
 import InteractiveArtwork from "./InteractiveArtwork";
+import ZoomableArt from "./ZoomableArt";
 
 interface Props {
   image: string | null;
@@ -142,12 +143,18 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
   // letterbox slightly but the gallery 320-of-321 has real dimensions.
   const imgW = aspect?.w ?? 1600;
   const imgH = aspect?.h ?? 1200;
+  // Zoom + fullscreen apply to still artworks and animated GIFs — the reader
+  // wants to inspect detail. Skipped for videos + interactive HTML pieces,
+  // which have their own playback / interaction controls that would fight
+  // with click-to-zoom.
   const artworkBlock = video ? (
     <PieceVideo src={video.src} poster={video.poster} title={title} original={video.original} />
   ) : interactive ? (
     <InteractiveArtwork src={interactive.src} poster={image} title={title} />
   ) : animatedGif ? (
-    <PieceGif src={animatedGif.src} poster={detailSrc ?? image ?? undefined} lqip={lqip} title={title} />
+    <ZoomableArt fullscreenSrc={animatedGif.src} fullscreenAlt={title}>
+      <PieceGif src={animatedGif.src} poster={detailSrc ?? image ?? undefined} lqip={lqip} title={title} />
+    </ZoomableArt>
   ) : image ? (
     isPunk ? (
       // Punks render the on-chain SVG at full container dimensions on the
@@ -156,44 +163,50 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
       // image's own max-height to truncate it - which was clipping the
       // image element shorter than the container and leaving a teal gap
       // under the punk on wider desktops.
-      <div className="bg-punk w-full aspect-square max-w-[80vh] mx-auto">
+      <ZoomableArt fullscreenSrc={image} fullscreenAlt={title} pixelated>
+        <div className="bg-punk w-full aspect-square max-w-[80vh] mx-auto">
+          <Image
+            src={image}
+            alt={title}
+            width={imgW}
+            height={imgH}
+            className="block w-full h-full object-contain [image-rendering:pixelated]"
+            priority
+            sizes="(max-width: 768px) 90vw, 60vw"
+          />
+        </div>
+      </ZoomableArt>
+    ) : detailSrcSet ? (
+      // Sharp detail variants served raw via a plain <img> (no next/image, so
+      // the gateway loader can't re-resize/re-soften them). The LQIP shows as a
+      // blurred background until the sharp image paints. (plan B.3 / Path B)
+      <ZoomableArt fullscreenSrc={detailSrc} fullscreenAlt={title}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={detailSrc}
+          srcSet={detailSrcSet}
+          sizes="(max-width: 768px) 90vw, 60vw"
+          alt={title}
+          width={imgW}
+          height={imgH}
+          decoding="async"
+          className="block w-auto h-auto max-w-full max-h-[88vh] object-contain mx-auto"
+          style={lqip ? { backgroundImage: `url(${lqip})`, backgroundSize: "cover", backgroundPosition: "center" } : undefined}
+        />
+      </ZoomableArt>
+    ) : (
+      <ZoomableArt fullscreenSrc={image} fullscreenAlt={title}>
         <Image
           src={image}
           alt={title}
           width={imgW}
           height={imgH}
-          className="block w-full h-full object-contain [image-rendering:pixelated]"
+          className="block w-auto h-auto max-w-full max-h-[88vh] object-contain mx-auto"
           priority
+          quality={95}
           sizes="(max-width: 768px) 90vw, 60vw"
         />
-      </div>
-    ) : detailSrcSet ? (
-      // Sharp detail variants served raw via a plain <img> (no next/image, so
-      // the gateway loader can't re-resize/re-soften them). The LQIP shows as a
-      // blurred background until the sharp image paints. (plan B.3 / Path B)
-      // eslint-disable-next-line @next/next/no-img-element
-      <img
-        src={detailSrc}
-        srcSet={detailSrcSet}
-        sizes="(max-width: 768px) 90vw, 60vw"
-        alt={title}
-        width={imgW}
-        height={imgH}
-        decoding="async"
-        className="block w-auto h-auto max-w-full max-h-[88vh] object-contain"
-        style={lqip ? { backgroundImage: `url(${lqip})`, backgroundSize: "cover", backgroundPosition: "center" } : undefined}
-      />
-    ) : (
-      <Image
-        src={image}
-        alt={title}
-        width={imgW}
-        height={imgH}
-        className="block w-auto h-auto max-w-full max-h-[88vh] object-contain"
-        priority
-        quality={95}
-        sizes="(max-width: 768px) 90vw, 60vw"
-      />
+      </ZoomableArt>
     )
   ) : (
     <div className="aspect-[4/3] w-full">{placeholder}</div>
