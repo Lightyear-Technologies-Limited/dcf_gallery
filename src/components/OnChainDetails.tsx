@@ -169,25 +169,26 @@ function formatDayMonthYear(input: string): string {
   return `${day}-${month}-${year}`;
 }
 
-/** Verify-your-own hint attached to the SHA-256 label. Turns the hash from
- *  a decorative string into something the reader can actually check: fetch
- *  the file at the CID, run sha256sum locally, compare. No trust required. */
-const SHA256_VERIFY_HINT =
-  "Verify: fetch the file at the CID above, then run `sha256sum <file>` (macOS: `shasum -a 256 <file>`). The output should match this hash exactly.";
-
-function Row({ label, hint, children }: { label: string; hint?: string; children: React.ReactNode }) {
+function Row({ label, hint, children }: { label: string; hint?: React.ReactNode; children: React.ReactNode }) {
   return (
     <div className="flex justify-between items-center gap-4 py-2.5 border-b border-border">
-      <span className="text-muted shrink-0 inline-flex items-center gap-1.5">
+      <span className="text-muted shrink-0 inline-flex items-center gap-1.5 relative">
         {label}
         {hint && (
           <span
-            role="img"
-            aria-label={hint}
-            title={hint}
-            className="cursor-help inline-flex items-center justify-center w-3.5 h-3.5 rounded-full border border-border text-[9px] leading-none text-muted hover:text-foreground hover:border-foreground/40 transition-colors duration-200"
+            role="button"
+            tabIndex={0}
+            aria-label="What is this?"
+            className="group cursor-help inline-flex items-center justify-center w-3.5 h-3.5 rounded-full border border-border text-[9px] leading-none text-muted hover:text-foreground hover:border-foreground/40 focus:outline-none focus:text-foreground focus:border-foreground/40 transition-colors duration-200 relative"
           >
             ?
+            {/* Popover: absolute, appears on group-hover / group-focus. */}
+            <span
+              role="tooltip"
+              className="pointer-events-none invisible opacity-0 group-hover:visible group-hover:opacity-100 group-focus:visible group-focus:opacity-100 transition-opacity duration-150 absolute left-0 top-full mt-2 z-20 w-[300px] rounded border border-border bg-background text-foreground-secondary text-[11px] leading-[1.55] p-3 shadow-lg normal-case tracking-normal"
+            >
+              {hint}
+            </span>
           </span>
         )}
       </span>
@@ -195,3 +196,27 @@ function Row({ label, hint, children }: { label: string; hint?: string; children
     </div>
   );
 }
+
+/** Verify-your-own hint attached to the SHA-256 label. Turns the hash from
+ *  a decorative string into something the reader can actually check: fetch
+ *  the file at the CID, run sha256sum locally, compare. No trust required. */
+const SHA256_VERIFY_HINT = (
+  <>
+    <span className="block text-foreground mb-1.5 font-medium">
+      Verify this hash yourself:
+    </span>
+    <span className="block">
+      Download the file from the CID above, then run:
+    </span>
+    <code className="block mt-1.5 font-mono text-[10.5px] text-foreground">
+      sha256sum &lt;file&gt;
+    </code>
+    <span className="block text-muted mt-0.5 text-[10px]">
+      (macOS: <code className="font-mono">shasum -a 256 &lt;file&gt;</code>)
+    </span>
+    <span className="block mt-1.5">
+      The output should match this hash exactly. If it does, the preserved
+      bytes are byte-identical to what was pinned at capture time.
+    </span>
+  </>
+);
