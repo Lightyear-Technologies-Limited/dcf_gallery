@@ -180,7 +180,7 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
         width={imgW}
         height={imgH}
         decoding="async"
-        className="block w-auto h-auto max-w-full max-h-[80vh] object-contain"
+        className="block w-auto h-auto max-w-full max-h-[88vh] object-contain"
         style={lqip ? { backgroundImage: `url(${lqip})`, backgroundSize: "cover", backgroundPosition: "center" } : undefined}
       />
     ) : (
@@ -189,7 +189,7 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
         alt={title}
         width={imgW}
         height={imgH}
-        className="block w-auto h-auto max-w-full max-h-[80vh] object-contain"
+        className="block w-auto h-auto max-w-full max-h-[88vh] object-contain"
         priority
         quality={95}
         sizes="(max-width: 768px) 90vw, 60vw"
@@ -200,7 +200,7 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
   );
 
   const infoBlock = (
-    <div className="flex-1 md:pt-4">
+    <div className="flex-1 md:pt-4 md:max-w-[420px]">
       <h1 className="font-serif display-sm">
         {title}
       </h1>
@@ -341,13 +341,15 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
     </div>
   );
 
-  // Tall pieces (aspect ratio < 1, i.e. taller than wide) collapse the column
-  // to a tighter cap so the dead gutter between artwork and metadata vanishes;
-  // wide/square pieces keep the standard 60-65% column so they have room to
-  // breathe.
+  // Column widths. Wide/square pieces get a generous 65% column so the art
+  // reads as the subject. Tall (portrait) pieces used to collapse to 40% —
+  // which made the artwork a narrow strip next to a huge metadata block on
+  // Fidenza / Ringers / Skulls. Metadata is capped at max-w-[420px] via
+  // infoBlock instead, so the tall column can grow to 60% without the
+  // metadata column bloating on wide monitors.
   const isTall = aspect ? aspect.w / aspect.h < 1 : false;
   const columnClass = isTall
-    ? "w-full md:w-auto md:max-w-[45%] lg:max-w-[40%] shrink-0"
+    ? "w-full md:w-[55%] lg:w-[60%] shrink-0"
     : "w-full md:w-[60%] lg:w-[65%] shrink-0";
   return (
     <div className="flex flex-col md:flex-row gap-8 md:gap-16 items-start">
