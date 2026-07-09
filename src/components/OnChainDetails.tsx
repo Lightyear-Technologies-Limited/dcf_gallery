@@ -9,6 +9,12 @@ interface Props {
   tokenStandard?: string;
   chain?: string;
   storage?: string;
+  /** When the token was minted (ISO date, month/year, or year — whatever the
+      source data provides). Rendered as a "Minted" row above the storage. */
+  mintDate?: string;
+  /** Where the token was minted — e.g. "Manifold", "SuperRare",
+      "Art Blocks". Rendered as a "Minted on" row alongside mintDate. */
+  mintPlatform?: string;
   /** Preservation provenance from the Filebase pin (C.2): the content-addressed
       CID + sha256 of the preserved bytes, plus pin / last-verified timestamps.
       When present, a "Preservation" block renders — the substance behind the
@@ -30,6 +36,8 @@ export default function OnChainDetails({
   tokenStandard = "ERC-721",
   chain = "Ethereum",
   storage,
+  mintDate,
+  mintPlatform,
   provenance,
   gatewayBase = "https://lightyear.myfilebase.com/ipfs/",
 }: Props) {
@@ -73,6 +81,16 @@ export default function OnChainDetails({
         {chain && (
           <Row label="Chain">
             <span className="text-foreground">{chain}</span>
+          </Row>
+        )}
+        {mintDate && (
+          <Row label="Minted">
+            <span className="text-foreground tabular-nums">{mintDate}</span>
+          </Row>
+        )}
+        {mintPlatform && (
+          <Row label="Minted on">
+            <span className="text-foreground">{mintPlatform}</span>
           </Row>
         )}
         {storage && (

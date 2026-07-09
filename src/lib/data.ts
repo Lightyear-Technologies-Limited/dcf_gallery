@@ -105,6 +105,15 @@ export interface Piece {
   tokenId?: string;
   contractAddress?: string;
   mintDate?: string;
+  /** Where the token was minted / issued — e.g. "Manifold", "SuperRare",
+   *  "Art Blocks", "Nifty Gateway", "Foundation". Rendered as a "Minted on"
+   *  row in the Blockchain details panel. Distinct from the marketplace
+   *  where a piece currently trades. */
+  mintPlatform?: string;
+  /** Year the artist made the work (e.g. "2023"). Rendered next to the
+   *  artist credit on the piece page as "Artist, YEAR". Distinct from
+   *  mintDate — a work can be created earlier and minted later. */
+  year?: string;
   lastSalePrice?: string;
   floorPrice?: string;
   influences: string[];
@@ -784,6 +793,8 @@ export const pieces: Piece[] = [
     title: 'kissed by the Moonlight',
     collectionSlug: 'her-favorite-flowers',
     artistSlug: 'a-c-k',
+    year: '2023',
+    mintPlatform: 'Manifold',
     image: '/samples/her-favorite-flowers-2.svg',
     medium: 'image',
     description: '',

@@ -90,6 +90,10 @@ interface Props {
   /** Optional list of external links from the piece editorial layer
    *  (samspratt.com profile, credited collaborator, artist site page). */
   editorialLinks?: { label: string; url: string }[];
+  /** Creation year (e.g. "2023"). Rendered as ", 2023" right after the
+   *  artist credit — outside the artist Link so the year isn't part of
+   *  the click target. */
+  year?: string;
   placeholder: React.ReactNode;
 }
 
@@ -140,7 +144,7 @@ function resolveOriginal(uri: string): { href: string; label: string } | null {
 /**
  * Piece layout: image on the left, details on the right.
  */
-export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, video, interactive, animatedGif, aspect, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, holdingNote, description, collectionDescription, physical, companion, metadata, blockchainDetails, preservedBlock, rasterUrl, cryptopunksUrl, artistSiteUrl, originalUri, xUrl, xLabel, editorialLinks, placeholder }: Props) {
+export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, video, interactive, animatedGif, aspect, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, holdingNote, description, collectionDescription, physical, companion, metadata, blockchainDetails, preservedBlock, rasterUrl, cryptopunksUrl, artistSiteUrl, originalUri, xUrl, xLabel, editorialLinks, year, placeholder }: Props) {
   const artistHost = artistSiteUrl ? hostLabel(artistSiteUrl) : null;
   const original = originalUri ? resolveOriginal(originalUri) : null;
   // When natural aspect is known, pass it as width/height props so next/image
@@ -217,12 +221,15 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
         {title}
       </h1>
       {artistSlug && artistName && (
-        <Link
-          href={`/artist/${artistSlug}`}
-          className="text-[16px] text-foreground-secondary hover:text-foreground transition-colors duration-200 mt-3 inline-block"
-        >
-          {artistName}
-        </Link>
+        <span className="text-[16px] text-foreground-secondary mt-3 inline-block">
+          <Link
+            href={`/artist/${artistSlug}`}
+            className="hover:text-foreground transition-colors duration-200"
+          >
+            {artistName}
+          </Link>
+          {year && <span className="text-muted">, {year}</span>}
+        </span>
       )}
       {collectionSlug && collectionName && (
         <div className="mt-1">

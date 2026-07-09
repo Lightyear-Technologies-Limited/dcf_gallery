@@ -330,6 +330,8 @@ export default async function PiecePage({
       tokenId={piece.tokenId}
       editionType={collectionEditionType}
       storage={storageLabel}
+      mintDate={piece.mintDate}
+      mintPlatform={piece.mintPlatform}
       provenance={
         provenance?.cid
           ? { cid: provenance.cid, sha256: provenance.sha256, pinnedAt: provenance.pinnedAt, verifiedAt: provenance.verifiedAt }
@@ -461,6 +463,7 @@ export default async function PiecePage({
           xUrl={getPieceEditorial(piece.slug)?.xUrl}
           xLabel={getPieceEditorial(piece.slug)?.xLabel}
           editorialLinks={getPieceEditorial(piece.slug)?.links}
+          year={piece.year}
           placeholder={<PlaceholderArt collectionSlug={piece.collectionSlug} pieceSlug={piece.slug} className="w-full h-full" />}
         />
       </div>
