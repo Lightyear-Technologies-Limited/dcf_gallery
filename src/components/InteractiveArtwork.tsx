@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useMotion } from "./MotionPreference";
 
 /**
@@ -36,7 +36,6 @@ export default function InteractiveArtwork({
   const [everRun, setEverRun] = useState(false);
   const [isSmall, setIsSmall] = useState(false);
   const { mode, reduced } = useMotion();
-  const hoverHoldRef = useRef<number | null>(null);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 768px)");
@@ -63,29 +62,21 @@ export default function InteractiveArtwork({
 
   const onEnter = () => {
     if (!canHover) return;
-    if (hoverHoldRef.current !== null) {
-      window.clearTimeout(hoverHoldRef.current);
-      hoverHoldRef.current = null;
-    }
     activate();
   };
-  const onLeave = () => {
-    if (!canHover) return;
-    // Small hold so a stray pointer bump doesn't ping-pong. 120ms is
-    // shorter than the browser's default click-cancel window; feels
-    // instant to a reader.
-    hoverHoldRef.current = window.setTimeout(() => {
-      setRunning(false);
-      hoverHoldRef.current = null;
-    }, 120);
-  };
+  // No onLeave for interactive pieces. Unlike videos (which are passive —
+  // hover-to-play + auto-pause on leave reads correctly), pxl-dex / pxl-pod /
+  // Raster und Spektrum are meant to be *interacted with* — the reader is
+  // clicking, dragging, moving inside the piece. Auto-stopping when the
+  // pointer briefly leaves the container would rip the piece out from
+  // under an active interaction. Once hovered, the piece stays live until
+  // the user hits "Show still" (or the piece unmounts on navigation).
 
   return (
     <div className="mx-auto w-full max-w-[calc(100dvh-9rem)]">
       <div
         className="relative aspect-square w-full overflow-hidden bg-surface"
         onMouseEnter={onEnter}
-        onMouseLeave={onLeave}
       >
         {/* Iframe stays mounted after first activation and is toggled by
             opacity + pointer-events, so hovering in and out of the artwork
@@ -107,8 +98,13 @@ export default function InteractiveArtwork({
             width={1200}
             height={1200}
             sizes="(max-width: 768px) 90vw, 60vw"
+            // pointer-events-none while running so mouse events fall
+            // through to the iframe below (the poster is on top of the
+            // iframe in DOM order — without this, the invisible poster
+            // was swallowing every click and drag intended for the
+            // interactive piece).
             className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-150 ${
-              running ? "opacity-0" : "opacity-100"
+              running ? "opacity-0 pointer-events-none" : "opacity-100"
             }`}
           />
         )}
