@@ -36,6 +36,11 @@ export interface CollectionEditorial {
    *  collaborator profile, press coverage). Rendered under the collection
    *  links block. Kept generic so new link types don't need a schema change. */
   links?: EditorialLink[];
+  /** Optional Context ledger — announcements and third-party responses
+   *  rendered as their own "Context" section below Exhibitions on the
+   *  piece page. Extensible: entries accumulate as the piece attracts
+   *  external commentary. Distinct from `links[]`. */
+  context?: EditorialLink[];
 }
 export interface PieceEditorial {
   /** Optional X (Twitter) thread / announcement post link for a specific
@@ -47,6 +52,10 @@ export interface PieceEditorial {
    *  collaborator profile, artist catalogue page). Rendered under the piece
    *  links block. */
   links?: EditorialLink[];
+  /** Optional Context ledger — announcements + response items rendered as
+   *  their own "Context" section below Exhibitions on the piece page.
+   *  Extensible. Distinct from `links[]`. */
+  context?: EditorialLink[];
 }
 
 const ED = editorial as {
@@ -95,10 +104,10 @@ export function withArtistEditorial<
  *  return type widens to include them. */
 export function withCollectionEditorial<
   T extends { slug: string; curatorNote: string; essayUrl?: string; essayTitle?: string },
->(c: T | undefined): (T & { xUrl?: string; xLabel?: string; links?: EditorialLink[] }) | undefined {
+>(c: T | undefined): (T & { xUrl?: string; xLabel?: string; links?: EditorialLink[]; context?: EditorialLink[] }) | undefined {
   if (!c) return c;
   const ed = ED.collections[c.slug];
-  const base = c as T & { xUrl?: string; xLabel?: string; links?: EditorialLink[] };
+  const base = c as T & { xUrl?: string; xLabel?: string; links?: EditorialLink[]; context?: EditorialLink[] };
   if (!ed) return base;
   return {
     ...base,
@@ -108,5 +117,6 @@ export function withCollectionEditorial<
     xUrl: ed.xUrl,
     xLabel: ed.xLabel,
     links: ed.links,
+    context: ed.context,
   };
 }

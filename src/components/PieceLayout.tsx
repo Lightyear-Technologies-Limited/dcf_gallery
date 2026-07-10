@@ -83,13 +83,14 @@ interface Props {
   cryptopunksUrl?: string;
   artistSiteUrl?: string;
   originalUri?: string;
-  /** Optional X (Twitter) thread / announcement link for this piece.
-   *  Rendered as a small muted link under the collection link. */
-  xUrl?: string;
-  xLabel?: string;
   /** Optional list of external links from the piece editorial layer
    *  (samspratt.com profile, credited collaborator, artist site page). */
   editorialLinks?: { label: string; url: string }[];
+  /** Context ledger — announcements + third-party responses rendered as a
+   *  Context section right below the Exhibitions block in the metadata
+   *  column. Extensible: piece- and collection-level entries are merged
+   *  and dedup'd at the piece-page level before passing here. */
+  contextLinks?: { label: string; url: string }[];
   /** Creation year (e.g. "2023"). Rendered as ", 2023" right after the
    *  artist credit — outside the artist Link so the year isn't part of
    *  the click target. */
@@ -146,7 +147,7 @@ function resolveOriginal(uri: string): { href: string; label: string } | null {
 /**
  * Piece layout: image on the left, details on the right.
  */
-export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, video, interactive, animatedGif, aspect, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, holdingNote, description, collectionDescription, physical, companion, metadata, blockchainDetails, preservedBlock, rasterUrl, cryptopunksUrl, artistSiteUrl, originalUri, xUrl, xLabel, editorialLinks, year, placeholder }: Props) {
+export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, video, interactive, animatedGif, aspect, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, holdingNote, description, collectionDescription, physical, companion, metadata, blockchainDetails, preservedBlock, rasterUrl, cryptopunksUrl, artistSiteUrl, originalUri, editorialLinks, contextLinks, year, placeholder }: Props) {
   const artistHost = artistSiteUrl ? hostLabel(artistSiteUrl) : null;
   const original = originalUri ? resolveOriginal(originalUri) : null;
   // When natural aspect is known, pass it as width/height props so next/image
@@ -243,17 +244,6 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
           </Link>
         </div>
       )}
-      {xUrl && (
-        <a
-          href={xUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-3 text-[13px] text-muted hover:text-foreground transition-colors duration-200 inline-block"
-        >
-          {xLabel ?? "Read the thread on X"} →
-        </a>
-      )}
-
       {description ? (
         <PieceDescription
           text={description}
@@ -300,6 +290,34 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
       )}
 
       <div className="mt-10">{metadata}</div>
+
+      {/* Context ledger — announcements, third-party responses (Tynett
+       *  Ethnograph on Sam Spratt's Masks), press coverage. Sits
+       *  immediately below the Exhibitions block inside the metadata
+       *  region (same "sources of external commentary" register as
+       *  Exhibitions, just a different signal). Same eyebrow treatment
+       *  as Exhibitions so the two read as siblings. */}
+      {contextLinks && contextLinks.length > 0 && (
+        <div className="mt-6">
+          <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
+            Context
+          </p>
+          <ul className="space-y-1 text-[13px] leading-snug">
+            {contextLinks.map((l) => (
+              <li key={l.url}>
+                <a
+                  href={l.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-foreground-secondary hover:text-foreground transition-colors duration-200 underline decoration-border hover:decoration-foreground underline-offset-4"
+                >
+                  {l.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       {/* Right-column stack from here down follows the editorial brief:
        *   1. Blockchain details >          (on-chain expander)

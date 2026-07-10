@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { pieces, getArtist, getCollection, getPiecesByCollection } from "@/lib/data";
-import { getPieceEditorial } from "@/lib/editorial";
+import { getPieceEditorial, getCollectionEditorial } from "@/lib/editorial";
 import { getArtworkImage, getArtworkAspect, resolveTokenId } from "@/lib/images";
 import { getDetailVariants, getArtworkBlur, getProvenance, getOgImage } from "@/lib/provenance";
 import { getMotion } from "@/lib/motion";
@@ -477,9 +477,21 @@ export default async function PiecePage({
           cryptopunksUrl={cryptopunksUrl}
           artistSiteUrl={artistSiteUrl}
           originalUri={piece.originalUri}
-          xUrl={getPieceEditorial(piece.slug)?.xUrl}
-          xLabel={getPieceEditorial(piece.slug)?.xLabel}
           editorialLinks={getPieceEditorial(piece.slug)?.links}
+          contextLinks={(() => {
+            const p = getPieceEditorial(piece.slug)?.context;
+            const c = collection ? getCollectionEditorial(collection.slug)?.context : undefined;
+            // Piece-level context first, then collection-level. Dedup by URL
+            // so a piece that inherits its collection announcement doesn't
+            // list it twice.
+            const merged = [...(p || []), ...(c || [])];
+            const seen = new Set<string>();
+            return merged.filter((l) => {
+              if (seen.has(l.url)) return false;
+              seen.add(l.url);
+              return true;
+            });
+          })()}
           year={piece.year}
           placeholder={<PlaceholderArt collectionSlug={piece.collectionSlug} pieceSlug={piece.slug} className="w-full h-full" />}
         />

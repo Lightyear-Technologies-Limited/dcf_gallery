@@ -718,16 +718,17 @@ export default async function CollectionPage({
                       →
                     </a>
                   )}
-                  {col.xUrl && (
+                  {col.context?.map((l) => (
                     <a
-                      href={col.xUrl}
+                      key={l.url}
+                      href={l.url}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="mt-3 text-[13px] text-muted hover:text-foreground transition-colors duration-200 inline-block"
                     >
-                      {col.xLabel ?? "Read the thread on X"} →
+                      {l.label} →
                     </a>
-                  )}
+                  ))}
                   {col.links?.map((l) => (
                     <a
                       key={l.url}

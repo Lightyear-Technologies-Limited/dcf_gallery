@@ -3915,7 +3915,7 @@ export const pieces: Piece[] = [
       {
         date: 'December 2025',
         title: 'Art Basel Miami Beach',
-        location: 'Nguyen Wahed, Miami Beach',
+        location: 'Nguyen Wahed',
         url: 'https://nguyenwahed.com/art-fairs/17-art-basel-miami-beach-2025-xcopy-kim-asendorf-and-joe-pease/',
       },
     ],

@@ -34,6 +34,26 @@ const linkArray = {
     .optional(),
 };
 
+// Context section — a small ledger of externally-referenced signals about
+// the piece / collection, rendered as a "Context" block right below the
+// Exhibitions block on the piece page. Announcement posts, artist / critic
+// responses (Ethnograph by Tynett on the Masks of Luci), press write-ups.
+// Extensible: append new entries here as the piece accumulates external
+// commentary. Distinct from `links[]` which is the miscellaneous
+// external-links block at the bottom of the info column.
+const contextArray = {
+  context: z
+    .array(
+      z
+        .object({
+          label: z.string().min(1, "context.label must not be empty"),
+          url: z.url("context.url must be a valid URL"),
+        })
+        .strict(),
+    )
+    .optional(),
+};
+
 export const ArtistEditorial = z
   .object({
     bio: z.string().min(1, "bio is required"),
@@ -51,18 +71,20 @@ export const CollectionEditorial = z
     ...essay,
     ...xLink,
     ...linkArray,
+    ...contextArray,
   })
   .strict();
 
-// Per-piece editorial overlay. Currently carries an optional X thread /
-// announcement link plus a generic `links[]` for other externals
-// (samspratt.com profile, credited collaborator, catalogue page).
-// Populate `content/editorial/pieces/<slug>.json` only when a piece has
-// something specific to reference.
+// Per-piece editorial overlay. Carries the optional X thread / announcement
+// link (legacy), the generic `links[]` for external references
+// (samspratt.com profile, catalogue page), and the newer `context[]` for
+// announcement + response items rendered as their own "Context" section
+// below the Exhibitions block on the piece page.
 export const PieceEditorial = z
   .object({
     ...xLink,
     ...linkArray,
+    ...contextArray,
   })
   .strict();
 
