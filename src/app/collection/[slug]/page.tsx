@@ -702,12 +702,15 @@ export default async function CollectionPage({
                   <p className="font-serif text-[16px] leading-[1.65] text-foreground-secondary whitespace-pre-line">
                     {col.curatorNote}
                   </p>
+                  {/* Each link renders on its own line via block display,
+                   *  so essay + context + editorial links stack vertically
+                   *  rather than wrapping mid-line. */}
                   {col.essayUrl && (
                     <a
                       href={col.essayUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-3 text-[13px] text-muted hover:text-foreground transition-colors duration-200 inline-block"
+                      className="mt-3 text-[13px] text-muted hover:text-foreground transition-colors duration-200 block"
                     >
                       Read the essay
                       {col.essayTitle && (
@@ -724,7 +727,7 @@ export default async function CollectionPage({
                       href={l.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-3 text-[13px] text-muted hover:text-foreground transition-colors duration-200 inline-block"
+                      className="mt-3 text-[13px] text-muted hover:text-foreground transition-colors duration-200 block"
                     >
                       {l.label} →
                     </a>
@@ -735,7 +738,7 @@ export default async function CollectionPage({
                       href={l.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-3 text-[13px] text-muted hover:text-foreground transition-colors duration-200 inline-block"
+                      className="mt-3 text-[13px] text-muted hover:text-foreground transition-colors duration-200 block"
                     >
                       {l.label} →
                     </a>

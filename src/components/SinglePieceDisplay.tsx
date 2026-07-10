@@ -16,7 +16,10 @@ interface Props {
 
 /**
  * Single-piece collection display:
- * - Wide pieces (aspect > 1): full container width
+ * - Wide pieces (aspect > 1): fill container width, but never taller than
+ *   the viewport minus ~14rem of chrome — matches the piece page cap so a
+ *   solo hero like Raster und Spektrum doesn't dwarf the reader on tall
+ *   monitors.
  * - Tall/square pieces (aspect <= 1): cap at 70vh so they don't dominate vertically
  *
  * Motion-aware (E.1), mirroring GridArtwork: for pieces with playable motion the
@@ -66,18 +69,19 @@ export default function SinglePieceDisplay({ slug, src, title, isPunk = false, h
       href={`/piece/${slug}${hrefSearch ? `?${hrefSearch}` : ""}`}
       onPointerEnter={() => setHovering(true)}
       onPointerLeave={() => setHovering(false)}
-      className={`relative block ${isPunk ? "bg-punk inline-block" : ""}`}
-      style={!isWide && aspect !== null ? { width: "fit-content", maxWidth: "100%" } : undefined}
+      // Wrapper hugs the image and centres it in the row, so that when
+      // max-h clamps a wide piece (Raster und Spektrum on a tall viewport)
+      // the browser-reduced effective width doesn't strand the image
+      // against the left edge.
+      className={`relative block mx-auto w-fit max-w-full ${isPunk ? "bg-punk" : ""}`}
     >
       <Image
         src={src}
         alt={title}
         width={1600}
         height={1200}
-        className={`block ${
-          isWide
-            ? "w-full h-auto"
-            : "w-auto h-auto max-h-[70vh] max-w-full"
+        className={`block w-auto h-auto max-w-full ${
+          isWide ? "max-h-[calc(100dvh-14rem)]" : "max-h-[70vh]"
         } ${isPunk ? "[image-rendering:pixelated] w-[400px]" : ""}`}
         sizes="(max-width: 1024px) 90vw, 1200px"
         onLoad={(e) => {
