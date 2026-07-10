@@ -68,7 +68,9 @@ export default function ChaptersView({ chapters }: { chapters: ChapterData[] }) 
                   </span>
                 ))}
                 {" - "}
-                {c.total} {c.total === 1 ? "work" : "works"}
+                <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium tabular-nums">
+                  {c.total} {c.total === 1 ? "work" : "works"}
+                </span>
               </p>
 
               <ChapterFilmstrip name={c.name} works={c.works} />
@@ -77,7 +79,7 @@ export default function ChaptersView({ chapters }: { chapters: ChapterData[] }) 
                 href={`/?chapter=${c.slug}`}
                 className="mt-7 inline-flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase text-muted hover:text-foreground transition-colors duration-200 tabular-nums"
               >
-                View all {c.total} in {c.name}
+                View all in {c.name}
                 <span aria-hidden>→</span>
               </Link>
             </div>
