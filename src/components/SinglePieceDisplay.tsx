@@ -12,6 +12,11 @@ interface Props {
   title: string;
   isPunk?: boolean;
   hrefSearch?: string;
+  /** Override the click target. Default is /piece/<slug>. The artist
+   *  page passes /collection/<colSlug> for single-piece collections so
+   *  the reader lands on the collection surface (edition, contract,
+   *  Hivemind holds, essay) instead of skipping straight past it. */
+  href?: string;
 }
 
 /**
@@ -29,7 +34,7 @@ interface Props {
  * (pointer-events-none): a tap still opens the piece page, where the interactive is
  * fully operable. prefers-reduced-motion and small/mobile viewports suppress play.
  */
-export default function SinglePieceDisplay({ slug, src, title, isPunk = false, hrefSearch }: Props) {
+export default function SinglePieceDisplay({ slug, src, title, isPunk = false, hrefSearch, href }: Props) {
   const motion = getMotion(slug);
   const { mode, reduced } = useMotion();
   const ref = useRef<HTMLAnchorElement>(null);
@@ -66,7 +71,7 @@ export default function SinglePieceDisplay({ slug, src, title, isPunk = false, h
     <Link
       ref={ref}
       id={`p-${slug}`}
-      href={`/piece/${slug}${hrefSearch ? `?${hrefSearch}` : ""}`}
+      href={`${href ?? `/piece/${slug}`}${hrefSearch ? `?${hrefSearch}` : ""}`}
       onPointerEnter={() => setHovering(true)}
       onPointerLeave={() => setHovering(false)}
       // Wrapper hugs the image and centres it in the row, so that when

@@ -324,6 +324,13 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
                       title={piece.title}
                       isPunk={piece.collectionSlug === "cryptopunks"}
                       hrefSearch={artistFrom}
+                      // Artist page: single-piece collections route the
+                      // artwork click to the collection page too, matching
+                      // the title link above. Reader lands on the
+                      // collection surface (edition, contract, Hivemind
+                      // holds, essay, announcement) instead of skipping
+                      // it, then can click through to the piece from there.
+                      href={`/collection/${col.slug}`}
                     />
                   );
                 }
