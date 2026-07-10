@@ -262,10 +262,11 @@ export const CLICKABLE_TRAITS: Record<string, Record<string, ClickableRule>> = {
     Pods: "all",
   },
   grifters: {
+    // Non-Sets trait rows sort by count desc (site default) so the reader
+    // sees the fund's concentration in each dimension - Type and Color
+    // both surface their most-held value first.
     Type: "all",
-    // Array order is preserved as display order (Yellow / Blue / Green per
-    // editorial spec, not the default count-desc sort).
-    Color: ["Yellow", "Blue", "Green"],
+    Color: "all",
     // Vision + Noise no longer render as standalone rows; their named-set
     // values surface under the synthetic "Sets" row defined in
     // SYNTHETIC_TRAIT_GROUPS below, alongside Wretch (also in Type).
@@ -387,22 +388,28 @@ export const SYNTHETIC_TRAIT_GROUPS: Record<string, SyntheticTraitGroup[]> = {
   grifters: [
     {
       label: "Sets",
+      // Editorial display order: Shady -> Wretch -> G to the M -> Bubbles
+      // -> Turbulence. Set here rather than sorted by count so the
+      // narrative order (curatorial priority) leads.
       values: [
-        { label: "Turbulence", key: "Vision", value: "Turbulence" },
-        { label: "G to the M", key: "Noise", value: "G to the M" },
-        { label: "Wretch", key: "Type", value: "Wretch" },
         {
           label: "Shady",
           key: "Type",
           value: "Shady",
           pieces: ["grifters-614-c1f3", "grifters-37-c1f3", "grifters-574-c1f3"],
         },
+        { label: "Wretch", key: "Type", value: "Wretch" },
+        { label: "G to the M", key: "Noise", value: "G to the M" },
         {
           label: "Bubbles",
           key: "Atmosphere",
           value: "Bubbles",
-          pieces: ["grifters-439-c1f3", "grifters-132-c1f3", "grifters-574-c1f3"],
+          // Yellow slot swapped from #439 to #165 (both are Yellow +
+          // Bubbles pieces the fund holds). Frees #439 to represent
+          // Yellow in Turbulence if needed.
+          pieces: ["grifters-165-c1f3", "grifters-132-c1f3", "grifters-574-c1f3"],
         },
+        { label: "Turbulence", key: "Vision", value: "Turbulence" },
       ],
     },
   ],
