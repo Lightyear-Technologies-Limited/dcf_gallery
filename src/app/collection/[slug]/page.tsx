@@ -58,7 +58,7 @@ export default async function CollectionPage({
   searchParams,
 }: {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ trait?: string; value?: string }>;
+  searchParams: Promise<{ trait?: string; value?: string; set?: string }>;
 }) {
   const { slug } = await params;
   const sp = await searchParams;
@@ -86,6 +86,15 @@ export default async function CollectionPage({
   // page Features link. Filter pieces whose stored traits contain a matching
   // (key, value) pair. The canonical /collection/{slug} (no params) remains
   // statically generated; filtered views are SSR.
+  // `set=1` flag signals the filter came from a Sets row click (as
+  // opposed to a standalone Type/Color row click on the same value).
+  // Same underlying filter, but the origin drives two divergent
+  // behaviours:
+  //   - Set-mode: reduce the pieces to the curated activeSetValue.pieces
+  //     list, highlight the Sets row only.
+  //   - Trait-mode: show every held piece matching (key, value),
+  //     highlight the standalone Type/Color row only.
+  const isSetFilter = sp.set === "1";
   const traitFilter = sp.trait && sp.value ? { key: sp.trait, value: sp.value } : null;
 
   // Build the (key -> value -> count) facet aggregation over the unfiltered
@@ -143,7 +152,11 @@ export default async function CollectionPage({
   //      Yellow / Green / Blue reading order (the "1 of each colour"
   //      curator rule). First-per-color wins, using the current
   //      pieceOrder as the tiebreaker.
-  const activeSetValue = traitFilter
+  // Set reduction only fires when the filter arrived via a Sets row
+  // click. Clicking Type: Shady in the Type row leaves the pieces
+  // list unreduced (all held Shadys), which is the difference between
+  // a "curated set" affordance and a "standalone trait" affordance.
+  const activeSetValue = traitFilter && isSetFilter
     ? SYNTHETIC_TRAIT_GROUPS[slug]
         ?.flatMap((g) => g.values)
         .find(
@@ -255,7 +268,15 @@ export default async function CollectionPage({
       .sort((a, b) => (orderIndex.get(a[0])! - orderIndex.get(b[0])!));
   };
   const renderTraitLink = (key: string, val: string, count: number) => {
-    const isActive = traitFilter?.key === key && traitFilter?.value === val;
+    // Standalone Type/Color rows only highlight when the current URL
+    // carries the plain trait filter (no set=1 flag). If the same
+    // value is active but arrived via a Sets row click, the highlight
+    // stays on the Sets row alone — clicking Type != clicking a Set,
+    // even when the underlying (key, value) is identical.
+    const isActive =
+      !isSetFilter &&
+      traitFilter?.key === key &&
+      traitFilter?.value === val;
     const globalCount = getTraitGlobalCount(slug, key, val);
     return (
       <Link
@@ -336,12 +357,18 @@ export default async function CollectionPage({
         </span>
         <div className="flex flex-wrap gap-x-4 gap-y-1">
           {entries.map((entry) => {
+            // Sets rows only highlight when the current URL carries
+            // set=1. If the reader clicked the same value from the
+            // Type row instead, the Type row lights up (below); this
+            // stays quiet.
             const isActive =
-              traitFilter?.key === entry.key && traitFilter?.value === entry.value;
+              isSetFilter &&
+              traitFilter?.key === entry.key &&
+              traitFilter?.value === entry.value;
             return (
               <Link
                 key={`${entry.key}:${entry.value}`}
-                href={`/collection/${slug}?trait=${encodeURIComponent(entry.key)}&value=${encodeURIComponent(entry.value)}`}
+                href={`/collection/${slug}?trait=${encodeURIComponent(entry.key)}&value=${encodeURIComponent(entry.value)}&set=1`}
                 className={`inline-flex items-baseline gap-1.5 transition-colors duration-200 underline underline-offset-4 ${
                   isActive
                     ? "text-foreground font-medium decoration-foreground"
