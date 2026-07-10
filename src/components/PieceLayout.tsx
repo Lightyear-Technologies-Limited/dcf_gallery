@@ -46,12 +46,12 @@ interface Props {
       excerpt, etc.). Rendered below the title block and above the metadata
       panel. Collection-level boilerplate is filtered out at build time. */
   description?: string | null;
-  /** Collection-level description used as a fallback About when the piece
-      itself has no per-piece prose (collections where descriptions repeat
-      across every token, e.g. Ringers, Winds, Skulls of Luci). Eyebrow
-      reads "About {Collection}" instead of "About {Piece Title}". The
-      block starts collapsed so the editorial context is reachable but
-      doesn't compete with the artwork. */
+  /** Collection-level description used as a fallback when the piece has
+      no per-piece prose (collections where descriptions repeat across
+      every token, e.g. Ringers, Winds, Skulls of Luci). Same "Artist
+      statement" eyebrow — the reader is still reading the artist's own
+      words, just at collection scope. The block starts collapsed so the
+      editorial context is reachable but doesn't compete with the artwork. */
   collectionDescription?: string | null;
   /** True if the piece has a contract address + token ID. Reserved for
       future use; currently unused since the metadata-attribution line
@@ -257,18 +257,18 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
       {description ? (
         <PieceDescription
           text={description}
-          label={`About ${title}`}
+          label="Artist statement"
         />
       ) : collectionDescription && collectionName ? (
         /* Fallback: the piece has no per-piece prose (descriptions repeat
            across every token in the collection - Ringers, Winds, Skulls,
-           etc.) so borrow the collection's editorial description. A reader
-           who clicks straight from the Collection page to a Piece page
-           still gets editorial grounding instead of nothing. Starts
-           collapsed - the artwork is the subject. */
+           etc.) so borrow the collection's editorial description. Same
+           "Artist statement" label — the reader is still reading the
+           artist's own words, just at collection scope. Starts collapsed:
+           the artwork is the subject. */
         <PieceDescription
           text={collectionDescription}
-          label={`About ${collectionName}`}
+          label="Artist statement"
           defaultCollapsed
         />
       ) : null}
@@ -393,12 +393,11 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
 }
 
 /**
- * Description block - prose for the piece. The eyebrow names the subject
- * ("About {Artwork}" when piece-level, "About {Collection}" when the piece
- * page is borrowing the collection's editorial description because per-
- * piece prose is suppressed or repeats). The metadata-attribution line
- * ("From the artist's metadata description") that used to follow has been
- * dropped - it was chrome more than information.
+ * Description block - prose for the piece. The eyebrow reads "Artist
+ * statement" (museum convention — the reader knows the prose is the
+ * artist's own words from the token metadata, not editorial commentary
+ * written for the fund). Same label whether the prose is piece-level or
+ * borrowed from the collection as a fallback.
  *
  * The left rule sets the block off as quoted material rather than UI text,
  * the way a museum catalogue indents a sourced quote. Long prose collapses
