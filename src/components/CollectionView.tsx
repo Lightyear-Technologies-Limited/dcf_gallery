@@ -382,12 +382,12 @@ export default function CollectionView({ sections, artists }: Props) {
           pointerEvents: showsAsSticky ? "auto" : "none",
         }}
       >
-        <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 pt-4 pb-3 space-y-2">
+        <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12 pt-4 pb-3 space-y-2">
           {filterContent}
         </div>
       </div>
 
-      <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
+      <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12">
         <ScrollRestore />
         {/* Masthead - "Hivemind Digital Culture Fund" rendered prominently
             above the filter rows so the catalogue identifies itself before

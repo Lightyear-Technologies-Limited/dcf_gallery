@@ -109,7 +109,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
   };
 
   return (
-    <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
+    <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12">
       <ScrollRestore />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personLd) }} />
       {/* Top row mirrors the collection page's breadcrumb + sibling-nav

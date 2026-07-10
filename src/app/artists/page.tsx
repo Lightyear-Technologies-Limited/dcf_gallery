@@ -50,7 +50,7 @@ const HERO_ASPECT_OVERRIDES: Record<string, number> = {
 
 export default function ArtistsPage() {
   return (
-    <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 pt-6 pb-24">
+    <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12 pt-6 pb-24">
       {/* Masthead — mirrors the Chapters / Salon masthead (same component +
           display-sm scale) so the "Hivemind Digital Culture Fund" wordmark
           holds position across the index pages. */}

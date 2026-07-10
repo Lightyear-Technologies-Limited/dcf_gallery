@@ -32,7 +32,7 @@ const roman = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"];
 export default function ChaptersView({ chapters }: { chapters: ChapterData[] }) {
   return (
     <div className="relative">
-      <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
+      <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12">
         {chapters.map((c, i) => (
           <section
             key={c.slug}

@@ -3,7 +3,7 @@ import { CHAPTERS } from "@/lib/chapters";
 
 export default function AboutPage() {
   return (
-    <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 pt-6 pb-24">
+    <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12 pt-6 pb-24">
       {/* Hero — masthead + Thesis lede mirror the Artists and Chapters
           index-page structure exactly:
             pt-6 on the outer container
