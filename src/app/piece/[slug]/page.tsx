@@ -421,7 +421,7 @@ export default async function PiecePage({
             <span className="text-[10px] tracking-[0.12em] uppercase text-muted font-medium group-hover:text-foreground transition-colors duration-200">
               ← Previous work
             </span>
-            <span className="font-serif italic text-[15px] text-foreground-secondary group-hover:text-foreground transition-colors duration-200 truncate">
+            <span className="font-serif text-[15px] text-foreground-secondary group-hover:text-foreground transition-colors duration-200 truncate">
               {prevPiece.title}
             </span>
           </Link>
@@ -436,7 +436,7 @@ export default async function PiecePage({
             <span className="text-[10px] tracking-[0.12em] uppercase text-muted font-medium group-hover:text-foreground transition-colors duration-200">
               Next work →
             </span>
-            <span className="font-serif italic text-[15px] text-foreground-secondary group-hover:text-foreground transition-colors duration-200 truncate">
+            <span className="font-serif text-[15px] text-foreground-secondary group-hover:text-foreground transition-colors duration-200 truncate">
               {nextPiece.title}
             </span>
           </Link>
