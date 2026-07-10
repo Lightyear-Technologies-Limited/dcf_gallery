@@ -20,12 +20,14 @@ interface Props {
 }
 
 /**
- * Single-piece collection display:
- * - Wide pieces (aspect > 1): fill container width, but never taller than
- *   the viewport minus ~14rem of chrome — matches the piece page cap so a
- *   solo hero like Raster und Spektrum doesn't dwarf the reader on tall
- *   monitors.
- * - Tall/square pieces (aspect <= 1): cap at 70vh so they don't dominate vertically
+ * Single-piece collection display. Single height cap
+ * (calc(100dvh - 14rem)) applied regardless of aspect — matches the piece
+ * page rule. An earlier version branched on aspect ratio (70vh for tall,
+ * calc(100dvh-14rem) for wide), but the branch depended on a client-side
+ * onLoad callback, so a wide piece like Raster und Spektrum rendered at
+ * the smaller 70vh cap during image download on first open, then grew
+ * once the state flipped. On refresh with the image cached the growth
+ * was invisible, hence "small on first open, bigger on refresh".
  *
  * Motion-aware (E.1), mirroring GridArtwork: for pieces with playable motion the
  * live work overlays the still per the global Reels preference — autoplaying in
@@ -38,11 +40,9 @@ export default function SinglePieceDisplay({ slug, src, title, isPunk = false, h
   const motion = getMotion(slug);
   const { mode, reduced } = useMotion();
   const ref = useRef<HTMLAnchorElement>(null);
-  const [aspect, setAspect] = useState<number | null>(null);
   const [inView, setInView] = useState(false);
   const [hovering, setHovering] = useState(false);
   const [small, setSmall] = useState(false);
-  const isWide = aspect !== null && aspect > 1;
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 768px)");
@@ -85,18 +85,14 @@ export default function SinglePieceDisplay({ slug, src, title, isPunk = false, h
         alt={title}
         width={1600}
         height={1200}
-        className={`block w-auto h-auto max-w-full object-contain ${
-          isWide ? "max-h-[calc(100dvh-14rem)]" : "max-h-[70vh]"
-        } ${isPunk ? "[image-rendering:pixelated] w-[400px]" : ""}`}
+        className={`block w-auto h-auto max-w-full object-contain max-h-[calc(100dvh-14rem)] ${
+          isPunk ? "[image-rendering:pixelated] w-[400px]" : ""
+        }`}
         // Inline style guarantees the max-height applies even if the
         // Tailwind arbitrary value doesn't make it into the built CSS
         // (JIT quirks with calc() have bitten us before on hero pieces).
-        style={isPunk ? undefined : { maxHeight: isWide ? "calc(100dvh - 14rem)" : "70vh" }}
+        style={isPunk ? undefined : { maxHeight: "calc(100dvh - 14rem)" }}
         sizes="(max-width: 1024px) 90vw, 1200px"
-        onLoad={(e) => {
-          const img = e.currentTarget;
-          setAspect(img.naturalWidth / img.naturalHeight);
-        }}
       />
 
       {/* Reel overlays are pointer-events-none: the still is a Link to the piece,
