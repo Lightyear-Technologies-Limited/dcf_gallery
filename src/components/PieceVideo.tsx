@@ -62,7 +62,7 @@ export default function PieceVideo({
           playsInline
           preload="none"
           aria-label={`${title} (video)`}
-          className="block w-auto h-auto max-w-full max-h-[calc(100dvh-9rem)] object-contain"
+          className="block w-auto h-auto max-w-full max-h-[calc(100dvh-14rem)] object-contain"
         />
         <button
           onClick={reset}

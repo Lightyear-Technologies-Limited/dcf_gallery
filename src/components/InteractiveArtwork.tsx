@@ -73,7 +73,7 @@ export default function InteractiveArtwork({
   // the user hits "Show still" (or the piece unmounts on navigation).
 
   return (
-    <div className="mx-auto w-full max-w-[calc(100dvh-9rem)]">
+    <div className="mx-auto w-full max-w-[calc(100dvh-14rem)]">
       <div
         className="relative aspect-square w-full overflow-hidden bg-surface"
         onMouseEnter={onEnter}

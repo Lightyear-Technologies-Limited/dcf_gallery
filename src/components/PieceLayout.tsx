@@ -174,7 +174,7 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
       // own max-height to truncate it — which was clipping the image
       // element shorter than the container and leaving a teal gap under
       // the punk on wider desktops.
-      <div className="bg-punk w-full aspect-square max-w-[calc(100dvh-9rem)] mx-auto">
+      <div className="bg-punk w-full aspect-square max-w-[calc(100dvh-14rem)] mx-auto">
         <Image
           src={image}
           alt={title}
@@ -198,7 +198,7 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
         width={imgW}
         height={imgH}
         decoding="async"
-        className="block w-auto h-auto max-w-full max-h-[calc(100dvh-9rem)] object-contain mx-auto"
+        className="block w-auto h-auto max-w-full max-h-[calc(100dvh-14rem)] object-contain mx-auto"
         style={lqip ? { backgroundImage: `url(${lqip})`, backgroundSize: "cover", backgroundPosition: "center" } : undefined}
       />
     ) : (
@@ -207,7 +207,7 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
         alt={title}
         width={imgW}
         height={imgH}
-        className="block w-auto h-auto max-w-full max-h-[calc(100dvh-9rem)] object-contain mx-auto"
+        className="block w-auto h-auto max-w-full max-h-[calc(100dvh-14rem)] object-contain mx-auto"
         priority
         quality={95}
         sizes="(max-width: 768px) 90vw, 60vw"
