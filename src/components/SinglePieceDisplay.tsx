@@ -80,9 +80,13 @@ export default function SinglePieceDisplay({ slug, src, title, isPunk = false, h
         alt={title}
         width={1600}
         height={1200}
-        className={`block w-auto h-auto max-w-full ${
+        className={`block w-auto h-auto max-w-full object-contain ${
           isWide ? "max-h-[calc(100dvh-14rem)]" : "max-h-[70vh]"
         } ${isPunk ? "[image-rendering:pixelated] w-[400px]" : ""}`}
+        // Inline style guarantees the max-height applies even if the
+        // Tailwind arbitrary value doesn't make it into the built CSS
+        // (JIT quirks with calc() have bitten us before on hero pieces).
+        style={isPunk ? undefined : { maxHeight: isWide ? "calc(100dvh - 14rem)" : "70vh" }}
         sizes="(max-width: 1024px) 90vw, 1200px"
         onLoad={(e) => {
           const img = e.currentTarget;
