@@ -50,12 +50,12 @@ export default function OnChainDetails({
   const pinnedDate = provenance?.verifiedAt || provenance?.pinnedAt;
 
   return (
-    <details className="group text-[13px] [&_summary::-webkit-details-marker]:hidden">
+    <details className="group/details text-[13px] [&_summary::-webkit-details-marker]:hidden">
       <summary className="cursor-pointer list-none text-muted hover:text-foreground transition-colors duration-200 inline-flex items-center gap-2 select-none">
         <span>Blockchain details</span>
         <span
           aria-hidden
-          className="inline-block transition-transform duration-200 group-open:rotate-90"
+          className="inline-block transition-transform duration-200 group-open/details:rotate-90"
         >
           &rsaquo;
         </span>
@@ -177,16 +177,18 @@ function Row({ label, hint, children }: { label: string; hint?: React.ReactNode;
         {hint && (
           <span
             aria-label="What is this?"
-            className="group cursor-help inline-flex items-center justify-center w-3.5 h-3.5 rounded-full border border-border text-[9px] leading-none text-muted hover:text-foreground hover:border-foreground/40 transition-colors duration-200 relative"
+            className="group/hint cursor-help inline-flex items-center justify-center w-3.5 h-3.5 rounded-full border border-border text-[9px] leading-none text-muted hover:text-foreground hover:border-foreground/40 transition-colors duration-200 relative"
           >
             ?
-            {/* Popover strictly on group-hover — NOT focus. The ? was focusable
-                previously (role=button + tabIndex=0), which meant clicking it
-                left the popover open until focus moved elsewhere. Removed
-                both attrs; hover is the only trigger. */}
+            {/* Named group (`group/hint`) so the popover reveal is isolated
+                from any OTHER `.group` ancestor in the tree. The outer
+                <details> uses `group/details` for the chevron-rotate — an
+                unnamed `group-hover:` here would also fire on that outer
+                group, which was making the popover appear whenever the
+                reader hovered any part of the Blockchain details block. */}
             <span
               role="tooltip"
-              className="pointer-events-none invisible opacity-0 group-hover:visible group-hover:opacity-100 absolute left-0 top-full mt-2 z-20 w-[300px] rounded border border-border bg-background text-foreground-secondary text-[11px] leading-[1.55] p-3 shadow-lg normal-case tracking-normal"
+              className="pointer-events-none invisible opacity-0 group-hover/hint:visible group-hover/hint:opacity-100 absolute left-0 top-full mt-2 z-20 w-[300px] rounded border border-border bg-background text-foreground-secondary text-[11px] leading-[1.55] p-3 shadow-lg normal-case tracking-normal"
             >
               {hint}
             </span>
