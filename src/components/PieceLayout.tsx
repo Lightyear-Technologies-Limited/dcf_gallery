@@ -69,11 +69,22 @@ interface Props {
   /** Related piece in the catalogue (e.g. the on-chain NFT this sculpture
       extends). Rendered as a small "Companion: {Title}" link. */
   companion?: { slug: string; title: string };
+  /** The Attributes / Traits panel. Rendered first in the metadata region,
+   *  open by default (the on-chain attributes are the readable signature of
+   *  the work). Was previously grouped with Exhibitions inside a single
+   *  `metadata` prop; those two now render separately so the reader can
+   *  parse Attributes → Blockchain → Exhibitions in a strict sequence. */
   metadata: React.ReactNode;
   /** The on-chain details expander (renders "Blockchain details >" until
-   *  opened). Sits between the metadata block and the external links so
-   *  the reader can access the token facts without hunting for them. */
+   *  opened). Sits directly below Attributes so the reader can access the
+   *  token facts without hunting for them. Closed by default (the
+   *  expander itself is the interaction). */
   blockchainDetails?: React.ReactNode;
+  /** Exhibitions block for the piece — separate prop so its position in the
+   *  stack is explicit rather than buried inside the metadata prop. Render
+   *  order: Attributes → Blockchain → Exhibitions → Other resources →
+   *  Preserved → Share. */
+  exhibitionsBlock?: React.ReactNode;
   /** The "Preserved by Hivemind" note (rendered after the external links
    *  as a preservation-status coda, above the Share button). */
   preservedBlock?: React.ReactNode;
@@ -147,7 +158,7 @@ function resolveOriginal(uri: string): { href: string; label: string } | null {
 /**
  * Piece layout: image on the left, details on the right.
  */
-export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, video, interactive, animatedGif, aspect, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, holdingNote, description, collectionDescription, physical, companion, metadata, blockchainDetails, preservedBlock, rasterUrl, cryptopunksUrl, artistSiteUrl, originalUri, editorialLinks, contextLinks, year, placeholder }: Props) {
+export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, video, interactive, animatedGif, aspect, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, holdingNote, description, collectionDescription, physical, companion, metadata, blockchainDetails, exhibitionsBlock, preservedBlock, rasterUrl, cryptopunksUrl, artistSiteUrl, originalUri, editorialLinks, contextLinks, year, placeholder }: Props) {
   const artistHost = artistSiteUrl ? hostLabel(artistSiteUrl) : null;
   const original = originalUri ? resolveOriginal(originalUri) : null;
   // When natural aspect is known, pass it as width/height props so next/image
@@ -289,98 +300,56 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
         </div>
       )}
 
+      {/* Right-column stack, editorial order:
+       *   1. Attributes / Traits              (open by default)
+       *   2. Blockchain details >             (closed by default)
+       *   3. Exhibitions                      (if applicable)
+       *   4. Other resources                  (articles + external websites)
+       *   5. Preserved by Hivemind            (custody / preservation coda)
+       *   6. Share                            (the reader's outbound action) */}
       <div className="mt-10">{metadata}</div>
 
-      {/* Context ledger — announcements, third-party responses (Tynett
-       *  Ethnograph on Sam Spratt's Masks), press coverage. Sits
-       *  immediately below the Exhibitions block inside the metadata
-       *  region (same "sources of external commentary" register as
-       *  Exhibitions, just a different signal). Same eyebrow treatment
-       *  as Exhibitions so the two read as siblings. */}
-      {contextLinks && contextLinks.length > 0 && (
-        <div className="mt-6">
-          <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
-            Context
-          </p>
-          <ul className="space-y-1 text-[13px] leading-snug">
-            {contextLinks.map((l) => (
-              <li key={l.url}>
-                <a
-                  href={l.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-foreground-secondary hover:text-foreground transition-colors duration-200 underline decoration-border hover:decoration-foreground underline-offset-4"
-                >
-                  {l.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {/* Right-column stack from here down follows the editorial brief:
-       *   1. Blockchain details >          (on-chain expander)
-       *   2. External links                (View original / artist / Raster / editorial)
-       *   3. Preserved by Hivemind         (custody / preservation coda)
-       *   4. Share                         (the reader's outbound action)
-       * Each group is a distinct block with mt-6 between them so the
-       * reader visually parses three groups rather than one long list. */}
       {blockchainDetails && <div className="mt-6">{blockchainDetails}</div>}
 
-      <div className="mt-6 flex flex-col gap-2 text-[12px] text-muted">
-        {original && (
-          <a
-            href={original.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-foreground transition-colors duration-200"
-          >
-            View original
-          </a>
-        )}
-        {artistSiteUrl && artistHost && (
-          <a
-            href={artistSiteUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-foreground transition-colors duration-200"
-          >
-            View on {artistHost}
-          </a>
-        )}
-        {cryptopunksUrl && (
-          <a
-            href={cryptopunksUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-foreground transition-colors duration-200"
-          >
-            View on CryptoPunks.app
-          </a>
-        )}
-        {rasterUrl && (
-          <a
-            href={rasterUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-foreground transition-colors duration-200"
-          >
-            View on Raster
-          </a>
-        )}
-        {editorialLinks?.map((l) => (
-          <a
-            key={l.url}
-            href={l.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-foreground transition-colors duration-200"
-          >
-            {l.label}
-          </a>
-        ))}
-      </div>
+      {exhibitionsBlock && <div className="mt-6">{exhibitionsBlock}</div>}
+
+      {/* Other resources — merged single section for every external
+       *  reference: marketplace links (View original / artist / Raster
+       *  / Punks marketplace), samspratt-style catalogue links, and
+       *  context items (Hivemind announcements, Tynett Ethnograph).
+       *  Order: canonical first (View original), then marketplace, then
+       *  artist / curator references, then editorial context. */}
+      {(() => {
+        const items: { label: string; url: string }[] = [];
+        if (original) items.push({ label: "View original", url: original.href });
+        if (artistSiteUrl && artistHost) items.push({ label: `View on ${artistHost}`, url: artistSiteUrl });
+        if (cryptopunksUrl) items.push({ label: "View on CryptoPunks.app", url: cryptopunksUrl });
+        if (rasterUrl) items.push({ label: "View on Raster", url: rasterUrl });
+        if (editorialLinks) items.push(...editorialLinks);
+        if (contextLinks) items.push(...contextLinks);
+        if (items.length === 0) return null;
+        return (
+          <div className="mt-6">
+            <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
+              Other resources
+            </p>
+            <ul className="space-y-1 text-[13px] leading-snug">
+              {items.map((l) => (
+                <li key={l.url}>
+                  <a
+                    href={l.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-foreground-secondary hover:text-foreground transition-colors duration-200 underline decoration-border hover:decoration-foreground underline-offset-4"
+                  >
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+      })()}
 
       {preservedBlock && <div className="mt-6">{preservedBlock}</div>}
 

@@ -282,48 +282,46 @@ export default async function PiecePage({
   //                        our custody), rendered after the external
   //                        links so it sits with Share as a coda.
   const metadata = (
-    <div className="space-y-6">
-      <Features
-        traits={traits}
-        collectionSlug={isMultiPieceSeries ? piece.collectionSlug : undefined}
-        defaultOpen={featuresDefaultOpen}
-        label={isPunk ? "Attributes" : "Traits"}
-      />
-      {piece.exhibitions && piece.exhibitions.length > 0 && (
-        <div>
-          <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
-            Exhibitions
-          </p>
-          <ul className="space-y-1 text-[13px] leading-snug">
-            {piece.exhibitions.map((ex, i) => (
-              <li key={i}>
-                <span className="text-muted tabular-nums">{ex.date}</span>
-                <span className="text-muted"> - </span>
-                {ex.url ? (
-                  <a
-                    href={ex.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-foreground-secondary hover:text-foreground transition-colors duration-200 underline decoration-border hover:decoration-foreground underline-offset-4"
-                  >
-                    <span className="font-serif italic">{ex.title}</span>
-                    {ex.location && `, ${ex.location}`}
-                  </a>
-                ) : (
-                  <>
-                    <span className="font-serif italic text-foreground-secondary">{ex.title}</span>
-                    {ex.location && (
-                      <span className="text-foreground-secondary">, {ex.location}</span>
-                    )}
-                  </>
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </div>
+    <Features
+      traits={traits}
+      collectionSlug={isMultiPieceSeries ? piece.collectionSlug : undefined}
+      defaultOpen={featuresDefaultOpen}
+      label={isPunk ? "Attributes" : "Traits"}
+    />
   );
+  const exhibitionsBlock = piece.exhibitions && piece.exhibitions.length > 0 ? (
+    <div>
+      <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
+        Exhibitions
+      </p>
+      <ul className="space-y-1 text-[13px] leading-snug">
+        {piece.exhibitions.map((ex, i) => (
+          <li key={i}>
+            <span className="text-muted tabular-nums">{ex.date}</span>
+            <span className="text-muted"> - </span>
+            {ex.url ? (
+              <a
+                href={ex.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground-secondary hover:text-foreground transition-colors duration-200 underline decoration-border hover:decoration-foreground underline-offset-4"
+              >
+                <span className="font-serif italic">{ex.title}</span>
+                {ex.location && `, ${ex.location}`}
+              </a>
+            ) : (
+              <>
+                <span className="font-serif italic text-foreground-secondary">{ex.title}</span>
+                {ex.location && (
+                  <span className="text-foreground-secondary">, {ex.location}</span>
+                )}
+              </>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+  ) : null;
   const blockchainDetails = (
     <OnChainDetails
       contractAddress={piece.contractAddress}
@@ -472,6 +470,7 @@ export default async function PiecePage({
           })()}
           metadata={metadata}
           blockchainDetails={blockchainDetails}
+          exhibitionsBlock={exhibitionsBlock}
           preservedBlock={preservedBlock}
           rasterUrl={rasterUrl}
           cryptopunksUrl={cryptopunksUrl}
