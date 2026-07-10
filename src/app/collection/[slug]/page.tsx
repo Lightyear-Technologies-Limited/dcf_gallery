@@ -314,7 +314,7 @@ export default async function CollectionPage({
     const chipKey = syntheticGroup?.label ?? traitFilter.key;
     return (
       <div className="mt-6 max-w-[520px] flex flex-wrap items-baseline gap-x-3 gap-y-1 border-b border-border pb-3 text-[13px]">
-        <span className="text-[10px] uppercase text-muted">
+        <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium">
           Filter
         </span>
         <span className="text-foreground">
@@ -355,7 +355,7 @@ export default async function CollectionPage({
     if (!visible.length) continue;
     traitIndexRows.push(
       <div key={`r-${key}`} className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-        <span className="text-[10px] uppercase text-muted shrink-0 min-w-[80px]">
+        <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium shrink-0 min-w-[80px]">
           {key}
         </span>
         <div className="flex flex-wrap gap-x-4 gap-y-1">
@@ -382,7 +382,7 @@ export default async function CollectionPage({
     if (!entries.length) continue;
     traitIndexRows.push(
       <div key={`s-${group.label}`} className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-        <span className="text-[10px] uppercase text-muted shrink-0 min-w-[80px]">
+        <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium shrink-0 min-w-[80px]">
           {group.label}
         </span>
         <div className="flex flex-wrap gap-x-4 gap-y-1">
@@ -448,7 +448,7 @@ export default async function CollectionPage({
       className="group max-w-[520px] [&_summary::-webkit-details-marker]:hidden"
     >
       <summary className="cursor-pointer list-none text-muted hover:text-foreground transition-colors duration-200 inline-flex items-center gap-2 select-none">
-        <span className="text-[10px] uppercase">Browse by trait</span>
+        <span className="text-[10px] tracking-[0.1em] uppercase font-medium">Browse by trait</span>
         <span
           aria-hidden
           className="inline-block transition-transform duration-200 group-open:rotate-90"

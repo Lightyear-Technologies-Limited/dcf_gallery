@@ -16,7 +16,7 @@ export default function MotionToggle() {
   const { mode, setMode } = useMotion();
   return (
     <div>
-      <p className="text-[9px] tracking-[0.12em] uppercase text-muted mb-1.5">Media</p>
+      <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-1.5">Media</p>
       <div className="inline-flex gap-2.5 text-[11px]" role="radiogroup" aria-label="Media playback">
         {OPTIONS.map((o) => (
           <button

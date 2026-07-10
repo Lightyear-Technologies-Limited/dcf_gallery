@@ -418,7 +418,7 @@ export default async function PiecePage({
             href={pieceHref(prevPiece.slug)}
             className="group inline-flex flex-col gap-1 max-w-full sm:max-w-[45%]"
           >
-            <span className="text-[10px] tracking-[0.12em] uppercase text-muted font-medium group-hover:text-foreground transition-colors duration-200">
+            <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium group-hover:text-foreground transition-colors duration-200">
               ← Previous work
             </span>
             <span className="font-serif text-[15px] text-foreground-secondary group-hover:text-foreground transition-colors duration-200 truncate">
@@ -433,7 +433,7 @@ export default async function PiecePage({
             href={pieceHref(nextPiece.slug)}
             className="group inline-flex flex-col gap-1 max-w-full sm:max-w-[45%] sm:items-end sm:text-right"
           >
-            <span className="text-[10px] tracking-[0.12em] uppercase text-muted font-medium group-hover:text-foreground transition-colors duration-200">
+            <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium group-hover:text-foreground transition-colors duration-200">
               Next work →
             </span>
             <span className="font-serif text-[15px] text-foreground-secondary group-hover:text-foreground transition-colors duration-200 truncate">

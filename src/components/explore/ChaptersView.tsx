@@ -77,7 +77,7 @@ export default function ChaptersView({ chapters }: { chapters: ChapterData[] }) 
 
               <Link
                 href={`/?chapter=${c.slug}`}
-                className="mt-7 inline-flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase text-muted hover:text-foreground transition-colors duration-200 tabular-nums"
+                className="mt-7 inline-flex items-center gap-2 text-[10px] tracking-[0.1em] uppercase text-muted font-medium hover:text-foreground transition-colors duration-200 tabular-nums"
               >
                 View all in {c.name}
                 <span aria-hidden>→</span>
