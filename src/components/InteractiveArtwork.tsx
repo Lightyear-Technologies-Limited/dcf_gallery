@@ -74,13 +74,14 @@ export default function InteractiveArtwork({
     if (!canHover) return;
     activate();
   };
-  // No onLeave for interactive pieces. Unlike videos (which are passive —
-  // hover-to-play + auto-pause on leave reads correctly), pxl-dex / pxl-pod /
-  // Raster und Spektrum are meant to be *interacted with* — the reader is
-  // clicking, dragging, moving inside the piece. Auto-stopping when the
-  // pointer briefly leaves the container would rip the piece out from
-  // under an active interaction. Once hovered, the piece stays live until
-  // the user hits "Show still" (or the piece unmounts on navigation).
+  // Hover mode reverts to still on pointer-leave so the artwork behaves
+  // the same as the collection-page preview. Reader-driven interaction
+  // keeps the pointer inside the container by definition; the leave
+  // only fires when the reader has genuinely moved away.
+  const onLeave = () => {
+    if (!canHover) return;
+    setRunning(false);
+  };
 
   return (
     <div
@@ -100,6 +101,7 @@ export default function InteractiveArtwork({
         className="relative w-full overflow-hidden bg-surface"
         style={{ aspectRatio: aspect ? `${aspect.w} / ${aspect.h}` : "1 / 1" }}
         onMouseEnter={onEnter}
+        onMouseLeave={onLeave}
       >
         {/* Iframe stays mounted after first activation and is toggled by
             opacity + pointer-events, so hovering in and out of the artwork
