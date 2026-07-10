@@ -27,10 +27,17 @@ export default function InteractiveArtwork({
   src,
   poster,
   title,
+  aspect,
 }: {
   src: string;
   poster?: string | null;
   title: string;
+  /** Intrinsic aspect ratio of the piece, e.g. { w: 2400, h: 1561 } for
+   *  Kim Asendorf's Raster und Spektrum. When present, the container
+   *  and both layers (poster + iframe) size to this ratio instead of
+   *  forcing a 1:1 square. Falls back to square for pieces without a
+   *  known aspect (pxl-dex, pxl-pod, x0x). */
+  aspect?: { w: number; h: number } | null;
 }) {
   const [running, setRunning] = useState(false);
   const [everRun, setEverRun] = useState(false);
@@ -73,9 +80,22 @@ export default function InteractiveArtwork({
   // the user hits "Show still" (or the piece unmounts on navigation).
 
   return (
-    <div className="mx-auto w-full max-w-[calc(100dvh-14rem)]">
+    <div
+      className="mx-auto w-full"
+      style={{
+        // Cap the container width so its natural height (via aspectRatio
+        // below) sits inside the viewport-minus-header budget we use
+        // everywhere else. For a landscape piece (Raster und Spektrum
+        // 2400×1561) this reads as "max height = 100dvh - 14rem, width
+        // scales to keep the piece's own aspect".
+        maxWidth: aspect
+          ? `calc((100dvh - 14rem) * ${aspect.w / aspect.h})`
+          : "calc(100dvh - 14rem)",
+      }}
+    >
       <div
-        className="relative aspect-square w-full overflow-hidden bg-surface"
+        className="relative w-full overflow-hidden bg-surface"
+        style={{ aspectRatio: aspect ? `${aspect.w} / ${aspect.h}` : "1 / 1" }}
         onMouseEnter={onEnter}
       >
         {/* Iframe stays mounted after first activation and is toggled by

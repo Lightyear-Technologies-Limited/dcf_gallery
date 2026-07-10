@@ -163,7 +163,7 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
   const artworkBlock = video ? (
     <PieceVideo src={video.src} poster={video.poster} title={title} original={video.original} />
   ) : interactive ? (
-    <InteractiveArtwork src={interactive.src} poster={image} title={title} />
+    <InteractiveArtwork src={interactive.src} poster={image} title={title} aspect={aspect} />
   ) : animatedGif ? (
     <PieceGif src={animatedGif.src} poster={detailSrc ?? image ?? undefined} lqip={lqip} title={title} />
   ) : image ? (
