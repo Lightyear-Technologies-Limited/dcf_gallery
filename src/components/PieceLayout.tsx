@@ -372,18 +372,22 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
     </div>
   );
 
-  // Column widths. Wide/square pieces get a generous 65% column so the art
-  // reads as the subject. Tall (portrait) pieces used to collapse to 40% —
-  // which made the artwork a narrow strip next to a huge metadata block on
-  // Fidenza / Ringers / Skulls. Metadata is capped at max-w-[420px] via
-  // infoBlock instead, so the tall column can grow to 60% without the
-  // metadata column bloating on wide monitors.
+  // Column widths. Wide/square pieces get a generous 65% column so the
+  // artwork reads as the subject. Tall (portrait) pieces use w-fit with a
+  // 50% cap — the column hugs the artwork's natural width so the metadata
+  // sits close, avoiding the dead-space band that opened up when a
+  // portrait video (Winds #917) rendered inside a fixed 60% column.
+  // The row itself centers on tall pieces so the artwork + metadata
+  // cluster read as a coherent pair rather than drifting to the left edge.
   const isTall = aspect ? aspect.w / aspect.h < 1 : false;
+  const rowClass = isTall
+    ? "flex flex-col md:flex-row gap-8 md:gap-12 items-start md:justify-center"
+    : "flex flex-col md:flex-row gap-8 md:gap-16 items-start";
   const columnClass = isTall
-    ? "w-full md:w-[55%] lg:w-[60%] shrink-0"
+    ? "w-full md:w-fit md:max-w-[55%] shrink-0"
     : "w-full md:w-[60%] lg:w-[65%] shrink-0";
   return (
-    <div className="flex flex-col md:flex-row gap-8 md:gap-16 items-start">
+    <div className={rowClass}>
       <div className={columnClass}>
         {artworkBlock}
       </div>

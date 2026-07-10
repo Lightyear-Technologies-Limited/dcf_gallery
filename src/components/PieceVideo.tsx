@@ -51,7 +51,11 @@ export default function PieceVideo({
   };
 
   return (
-    <div>
+    // text-center on the wrapper centers the inline-block video below,
+    // matching the mx-auto pattern the other artwork paths (still images,
+    // GIFs, Punks) use. Without it a portrait video snapped to the left
+    // of its column, reading as dead space to the right on tall pieces.
+    <div className="text-center">
       <div className="relative inline-block max-w-full">
         <video
           ref={ref}
