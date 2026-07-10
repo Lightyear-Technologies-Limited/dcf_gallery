@@ -324,8 +324,16 @@ export default async function CollectionPage({
     const visible = buildVisibleValues(key, values);
     if (!visible.length) continue;
     traitIndexRows.push(
-      <div key={`r-${key}`} className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-        <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium shrink-0 min-w-[80px]">
+      <div
+        key={`r-${key}`}
+        // Two-column grid: label pinned in its own column, values wrap
+        // within the second column only. Flex-wrap on the parent row
+        // used to let the values collapse under the label on narrow
+        // screens (leaving the label on its own line one row, values
+        // on their own line the next), which read as messy.
+        className="grid grid-cols-[80px_1fr] items-baseline gap-x-4 gap-y-1"
+      >
+        <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium">
           {key}
         </span>
         <div className="flex flex-wrap gap-x-4 gap-y-1">
@@ -351,8 +359,11 @@ export default async function CollectionPage({
       .filter((v) => v.count > 0);
     if (!entries.length) continue;
     traitIndexRows.push(
-      <div key={`s-${group.label}`} className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-        <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium shrink-0 min-w-[80px]">
+      <div
+        key={`s-${group.label}`}
+        className="grid grid-cols-[80px_1fr] items-baseline gap-x-4 gap-y-1"
+      >
+        <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium">
           {group.label}
         </span>
         <div className="flex flex-wrap gap-x-4 gap-y-1">
