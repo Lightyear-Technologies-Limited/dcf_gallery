@@ -376,7 +376,7 @@ export type SyntheticTraitGroup = {
     key: string;
     value: string;
     /** Optional explicit curated 3-piece list in the display order the
-     *  reader should see (Yellow / Green / Blue for Grifters). Overrides
+     *  reader should see (Yellow / Blue / Green for Grifters). Overrides
      *  the automatic "first-per-color" picker used for sets without an
      *  explicit list — needed when the fund holds >3 pieces matching the
      *  trait and the natural pieceOrder-first pick doesn't match the
@@ -396,7 +396,10 @@ export const SYNTHETIC_TRAIT_GROUPS: Record<string, SyntheticTraitGroup[]> = {
           label: "Shady",
           key: "Type",
           value: "Shady",
-          pieces: ["grifters-614-c1f3", "grifters-37-c1f3", "grifters-574-c1f3"],
+          // Yellow -> Blue -> Green order: #614 (Yellow), #574 (Blue),
+          // #37 (Green). Editorial color reading order across every
+          // Set in the group.
+          pieces: ["grifters-614-c1f3", "grifters-574-c1f3", "grifters-37-c1f3"],
         },
         { label: "Wretch", key: "Type", value: "Wretch" },
         { label: "G to the M", key: "Noise", value: "G to the M" },
@@ -404,10 +407,10 @@ export const SYNTHETIC_TRAIT_GROUPS: Record<string, SyntheticTraitGroup[]> = {
           label: "Bubbles",
           key: "Atmosphere",
           value: "Bubbles",
-          // Yellow slot swapped from #439 to #165 (both are Yellow +
-          // Bubbles pieces the fund holds). Frees #439 to represent
-          // Yellow in Turbulence if needed.
-          pieces: ["grifters-165-c1f3", "grifters-132-c1f3", "grifters-574-c1f3"],
+          // Yellow -> Blue -> Green: #165 (Yellow), #574 (Blue), #132
+          // (Green). Yellow slot swapped from #439 to #165; #439 stays
+          // free to represent Yellow under Turbulence if needed.
+          pieces: ["grifters-165-c1f3", "grifters-574-c1f3", "grifters-132-c1f3"],
         },
         { label: "Turbulence", key: "Vision", value: "Turbulence" },
       ],

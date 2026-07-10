@@ -149,7 +149,7 @@ export default async function CollectionPage({
   //      picker wouldn't select the editorial choice.
   //
   //   2. No explicit list: auto-pick one representative per color in
-  //      Yellow / Green / Blue reading order (the "1 of each colour"
+  //      Yellow / Blue / Green reading order (the "1 of each colour"
   //      curator rule). First-per-color wins, using the current
   //      pieceOrder as the tiebreaker.
   // Set reduction only fires when the filter arrived via a Sets row
@@ -170,7 +170,7 @@ export default async function CollectionPage({
         .map((s) => bySlug.get(s))
         .filter((p): p is (typeof pieces)[number] => p !== undefined);
     } else {
-      const colorOrder = ["Yellow", "Green", "Blue"];
+      const colorOrder = ["Yellow", "Blue", "Green"];
       const byColor = new Map<string, (typeof pieces)[number]>();
       for (const p of pieces) {
         const traits = getPieceTraits(p.slug);
@@ -343,7 +343,7 @@ export default async function CollectionPage({
     );
   }
   for (const group of SYNTHETIC_TRAIT_GROUPS[slug] ?? []) {
-    // Set counts cap at 3 - one per color (Yellow / Green / Blue). When
+    // Set counts cap at 3 - one per color (Yellow / Blue / Green). When
     // Hivemind holds 4+ of a set in the same color, the surplus drops
     // from the displayed count so the figure reads "1 of each colour"
     // rather than total holdings. Sets that supply an explicit `pieces`
