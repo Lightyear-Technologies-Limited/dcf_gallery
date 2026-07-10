@@ -289,57 +289,6 @@ export default async function CollectionPage({
     );
   };
 
-  // Filter status line - rendered in the LEFT column under the holdings line
-  // on filtered views. Earlier iterations used a rounded-pill chip with a
-  // surface background; that chrome read as a marketplace facet button
-  // (OpenSea / Blur / Magic Eden all use the same pill grammar), which
-  // undercut the page's institutional register. The current treatment is a
-  // flush status row with a single hairline bottom rule - same content
-  // (filter axis + held figure + clear), same data, same affordance, but
-  // sitting in the rhythm of the page rather than floating as a control.
-  // The held figure stays font-medium so the answer to "how many" remains
-  // the eye's anchor; everything else is muted.
-  const chipBlock = traitFilter ? (() => {
-    const globalCount = getTraitGlobalCount(slug, traitFilter.key, traitFilter.value);
-    // If the active filter targets a (key, value) that's covered by a
-    // synthetic group (Grifters Vision/Noise -> "Sets"), the chip names
-    // the synthetic group instead of the underlying real trait. Reader
-    // sees "Sets: G to the M" rather than the unhelpful "Noise: G to the
-    // M" - matches the affordance they clicked from.
-    const syntheticGroup = SYNTHETIC_TRAIT_GROUPS[slug]?.find((g) =>
-      g.values.some(
-        (v) => v.key === traitFilter.key && v.value === traitFilter.value,
-      ),
-    );
-    const chipKey = syntheticGroup?.label ?? traitFilter.key;
-    return (
-      <div className="mt-6 max-w-[520px] flex flex-wrap items-baseline gap-x-3 gap-y-1 border-b border-border pb-3 text-[13px]">
-        <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium">
-          Filter
-        </span>
-        <span className="text-foreground">
-          {chipKey}: <span className="font-medium">{traitFilter.value}</span>
-        </span>
-        <span className="text-muted">·</span>
-        <span className="text-foreground tabular-nums font-medium">{pieces.length}</span>
-        {globalCount !== null ? (
-          <span className="text-muted tabular-nums">
-            of {globalCount.toLocaleString()} held
-          </span>
-        ) : (
-          <span className="text-muted">held</span>
-        )}
-        <Link
-          href={`/collection/${slug}`}
-          aria-label="Clear filter"
-          className="ml-2 text-[10px] tracking-[0.1em] uppercase text-muted font-medium hover:text-foreground transition-colors duration-200"
-        >
-          Clear
-        </Link>
-      </div>
-    );
-  })() : null;
-
   // Compact inline trait index - single layout used on BOTH filtered and
   // unfiltered views so the disclosure mechanic doesn't change the page
   // structure when a reader applies a filter. Two-column row layout:
@@ -421,7 +370,7 @@ export default async function CollectionPage({
       </div>
     );
   }
-  // Tight rhythm: mt-3 below the summary chip / chipBlock above. The wider
+  // Tight rhythm: mt-3 below the summary. The wider
   // mt-6 read as a void between "Browse by trait >" and the first trait row
   // when the disclosure was opened, and broke the editorial column's
   // space-y-6 rhythm. mt-3 inside the disclosure pairs with space-y-2
@@ -441,11 +390,16 @@ export default async function CollectionPage({
   // an earlier checkbox+peer reserved-height hack: the dead empty space
   // it created read as a hole in the column, and the consistency win
   // with Features.tsx is worth a small gallery push-down on open.
-  // Closed by default - the unfiltered page subject is the artwork, not
-  // the pivot affordance; readers who want to filter open it.
+  // Closed by default; opens by default when a filter is active so
+  // the reader sees the highlighted trait in the same position the
+  // disclosure lives in unfiltered — the row of trait pivots doesn't
+  // move between states, just its open/closed status. A Clear
+  // affordance renders alongside the summary when filtered so the
+  // reader can drop the filter without hunting for a chip.
   const traitDisclosure = traitIndexRows.length > 0 ? (
     <details
       className="group max-w-[520px] [&_summary::-webkit-details-marker]:hidden"
+      open={!!traitFilter}
     >
       <summary className="cursor-pointer list-none text-[10px] tracking-[0.1em] uppercase text-muted font-medium hover:text-foreground transition-colors duration-200 inline-flex items-center gap-2 select-none">
         <span>Browse by trait</span>
@@ -455,6 +409,16 @@ export default async function CollectionPage({
         >
           &rsaquo;
         </span>
+        {traitFilter && (
+          <Link
+            href={`/collection/${slug}`}
+            aria-label="Clear filter"
+            onClick={(e) => e.stopPropagation()}
+            className="ml-3 text-[10px] tracking-[0.1em] uppercase text-muted font-medium hover:text-foreground transition-colors duration-200"
+          >
+            Clear
+          </Link>
+        )}
       </summary>
       {traitIndexInline}
     </details>
@@ -602,15 +566,14 @@ export default async function CollectionPage({
               </div>
             </div>
 
-            {/* Filter chip + compact trait index. On FILTERED views the
-                inline trait rows sit directly under the holdings line so
-                the filter context pairs visually with the fund's position
-                figure (holdings -> chip -> available pivots). On unfiltered
-                views the inline is suppressed: the Browse-by-trait
-                disclosure below handles the same rows, and rendering both
-                would double the pivots above the gallery. */}
-            {chipBlock}
-            {traitFilter && traitIndexInline}
+            {/* Browse-by-trait + Exhibitions render in the SAME positions
+                whether a filter is active or not — the disclosure lives
+                below Exhibitions in both states; when filtered it just
+                opens by default with the selected trait highlighted and
+                a Clear button beside the summary. Previous behaviour
+                flipped the two blocks (chip + inline rows above
+                Exhibitions when filtered, disclosure below when not),
+                which read as a layout jolt on filter click. */}
 
             {/* Exhibitions - tombstone provenance under the holdings stack.
                 Catalogue convention: EXHIBITED sits in the lot tombstone
@@ -660,7 +623,7 @@ export default async function CollectionPage({
                 block when present, otherwise directly under the holdings
                 stack. Editorial prose (About + Hivemind Commentary +
                 Artist Statement) lives in the RIGHT column. */}
-            {!traitFilter && traitDisclosure && (
+            {traitDisclosure && (
               <div className="mt-6">{traitDisclosure}</div>
             )}
           </div>
@@ -775,10 +738,8 @@ export default async function CollectionPage({
             </div>
         </div>
 
-      {/* Gallery. The sidebar chipBlock carries the filter status and
-          clear affordance; a second filter reminder above the gallery
-          duplicated it (right under EXHIBITIONS on the sidebar spread)
-          without adding anything. Removed. */}
+      {/* Gallery. Filter status + Clear live inside the Browse-by-trait
+          disclosure in the sidebar; no chrome needed above the images. */}
       <div className="pt-6 pb-24">
         {(() => {
           const heroLayout = getHeroLayout(slug);
