@@ -332,7 +332,7 @@ export default async function CollectionPage({
         <Link
           href={`/collection/${slug}`}
           aria-label="Clear filter"
-          className="ml-auto text-foreground-secondary hover:text-foreground transition-colors duration-200"
+          className="ml-2 text-[10px] tracking-[0.1em] uppercase text-muted font-medium hover:text-foreground transition-colors duration-200"
         >
           Clear
         </Link>
