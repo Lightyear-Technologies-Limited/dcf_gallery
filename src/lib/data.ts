@@ -484,7 +484,6 @@ export const collections: Collection[] = [
     name: 'Lights',
     artistSlug: 'kim-asendorf',
     description: 'Kim Asendorf\'s Lights explores the fundamental properties of digital illumination - algorithmic compositions built from the raw behavior of light rendered through code.',
-    codeSizeKb: 11,
     curatorNote: 'Lights is Asendorf\'s earliest exploration of light-as-medium on-chain - a foundational entry point into pixel-native art and the throughline of his practice.',
     medium: 'image',
     contractAddress: '0x6d38705ad8af087d86ef505618b77b066ead2006',

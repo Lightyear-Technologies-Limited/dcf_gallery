@@ -35,6 +35,15 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    // The home page IS the collections index — there's no /collections
+    // route. A reader who guesses /collections (natural given the site
+    // uses /artists as the artists index) previously hit a 404; redirect
+    // to the salon instead.
+    return [
+      { source: "/collections", destination: "/", permanent: true },
+    ];
+  },
   async headers() {
     return [
       { source: "/:path*", headers: securityHeaders },

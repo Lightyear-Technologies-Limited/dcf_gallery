@@ -295,9 +295,12 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
           else if (n <= 12) ideal = 4;
           else ideal = 5;
 
-          /* Single-piece collections skip the collection layer entirely;
-             the title links straight to the piece. */
-          const sectionHref = n === 1 && piece ? `/piece/${piece.slug}` : `/collection/${col.slug}`;
+          /* Every collection title routes to its collection page, even
+             single-piece sets. Lights is a 1/1 that still deserves a
+             collection surface (edition, contract, holdings, essay link,
+             announcement) — jumping straight to the piece skipped the
+             editorial layer that reads as the collection's identity. */
+          const sectionHref = `/collection/${col.slug}`;
           return (
             <section key={col.slug} id={col.slug}>
               <div className="flex items-baseline gap-2.5 mb-2">

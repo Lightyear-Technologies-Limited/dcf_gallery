@@ -145,7 +145,7 @@ export default function ArtistsPage() {
                   </h3>
                 </Link>
                 <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mt-4 tabular-nums">
-                  {visibleCols.length} collection{visibleCols.length !== 1 ? "s" : ""} &middot; {allWorks.length} works
+                  {visibleCols.length} collection{visibleCols.length !== 1 ? "s" : ""} &middot; {allWorks.length} work{allWorks.length !== 1 ? "s" : ""}
                 </p>
                 {(getArtistEditorial(artist.slug)?.bio ?? artist.bio) && (
                   <p className="text-[15px] text-foreground-secondary leading-[1.65] mt-6 max-w-[440px]">

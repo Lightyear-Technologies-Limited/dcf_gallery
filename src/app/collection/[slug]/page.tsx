@@ -558,60 +558,48 @@ export default async function CollectionPage({
                 {artistName}
               </Link>
             )}
-            {/* Catalogue-style data stack - reads top-down from work-
-                level facts (mint date, code size, edition) to provenance
-                (contract) to the fund's position last. Each row is one
-                muted 13px tabular-nums line; rows with nothing to say
-                are omitted. Replaces the earlier 3-row MetadataTable.
-                Hivemind holdings line ("Hivemind holds N of M") omitted
-                when:
-                  - n === 1: singleton; the count is inventory tally on
-                    what is fundamentally a single artwork.
-                  - n === totalSupply <= 2: tiny series we hold entire.
-                  - !totalSupply: no series context.
-                Contract + edition rows suppressed on filtered views
-                (collection-level context, not subset-relevant). */}
-            <div className="mt-6 space-y-1 text-[13px] text-muted tabular-nums">
-              {col.mintDate && <p>Minted {col.mintDate}</p>}
-              {col.codeSizeKb !== undefined && (
-                <p>Code size {col.codeSizeKb} Kb</p>
-              )}
-              {/* Edition row shows the canonical web3 shorthand:
-                  - "1/1/N" for curated programmatic series (Fidenza 999,
-                    Punks 10000): each piece is 1 of 1 in a series of N.
-                  - "1/1" alone for collections of independent 1/1s on a
-                    shared artist contract (Her favorite flowers, Piano
-                    Blossoms): each piece is unique, not a series output.
-                    Surfaces when totalSupply > 1 so the reader knows
-                    each piece is 1/1 (not an edition of N), paired with
-                    the holdings line below.
-                  - Suppressed entirely for true singletons (no totalSupply)
-                    where the 1/1 is implicit. */}
-              {!traitFilter &&
-                col.totalSupply !== undefined &&
-                col.totalSupply > 1 && <p>{editionType}</p>}
-              {/* Hivemind holdings line sits directly under the edition
-                  row so the reader's eye reads "1/1/999 -> Hivemind
-                  holds N works" as a paired figure. "of M" dropped
-                  because the edition row above already states the
-                  total - "Hivemind holds N of 999 works" right under
-                  "1/1/999" doubled the number. Clarifier "1/1s" stays
-                  for shared-contract independent 1/1s (Piano Blossoms,
-                  Her favorite flowers) where the unit isn't implied by
-                  the edition row. */}
-              {col.totalSupply && (
-                <p>
-                  Hivemind holds {sorted.length}{" "}
-                  {editionType === "1/1" && col.totalSupply > 1 ? "1/1s" : "works"}
-                </p>
-              )}
-              {!traitFilter && col.platform && <p>{col.platform}</p>}
-              {!traitFilter && col.contractAddress && (
-                <p className="inline-flex items-baseline gap-x-2">
-                  <span>Contract:</span>
-                  <CopyableHash value={col.contractAddress} />
-                </p>
-              )}
+            {/* Collection details block: catalogue-style data stack under
+                a COLLECTION DETAILS eyebrow. Reads top-down as identity
+                (type, contract) → position (Hivemind holds) → secondary
+                tombstone (mint date, platform, code size). Rows with
+                nothing to say are omitted. */}
+            <div className="mt-8">
+              <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
+                Collection Details
+              </p>
+              <div className="space-y-1 text-[13px] text-muted tabular-nums">
+                {/* Type — canonical web3 edition shorthand.
+                    - "1/1/N" for curated programmatic series (Fidenza 999,
+                      Punks 10000): each piece is 1 of 1 in a series of N.
+                    - "1/1" for collections of independent 1/1s on a shared
+                      artist contract (Lights, Piano Blossoms): each piece
+                      is unique, not a series output.
+                    Surfaces when totalSupply > 1; suppressed for true
+                    singletons where the 1/1 is implicit. */}
+                {!traitFilter &&
+                  col.totalSupply !== undefined &&
+                  col.totalSupply > 1 && <p>{editionType}</p>}
+                {!traitFilter && col.contractAddress && (
+                  <p className="inline-flex items-baseline gap-x-2">
+                    <span>Contract:</span>
+                    <CopyableHash value={col.contractAddress} />
+                  </p>
+                )}
+                {/* Hivemind holdings — singular "work" when sorted.length
+                    === 1 (previously always "works", which read as
+                    "Hivemind holds 1 works" on Lights). */}
+                {col.totalSupply && (
+                  <p>
+                    Hivemind holds {sorted.length}{" "}
+                    {sorted.length === 1 ? "work" : "works"}
+                  </p>
+                )}
+                {col.mintDate && <p>Minted {col.mintDate}</p>}
+                {!traitFilter && col.platform && <p>{col.platform}</p>}
+                {col.codeSizeKb !== undefined && (
+                  <p>Code size {col.codeSizeKb} Kb</p>
+                )}
+              </div>
             </div>
 
             {/* Filter chip + compact trait index. On FILTERED views the
@@ -792,15 +780,17 @@ export default async function CollectionPage({
           who has scrolled past the editorial header should still see at
           a glance that they're filtered and have a one-click escape. */}
       {traitFilter && pieces.length > 0 && (
-        <div className="pt-6 flex items-baseline gap-2 text-[11px] text-muted">
-          <span className="uppercase tracking-[0.08em]">Filter</span>
-          <span className="text-foreground-secondary">
-            {traitFilter.key}: <span className="font-medium">{traitFilter.value}</span>
+        <div className="pt-6 flex items-baseline gap-3">
+          <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium">
+            Filter
+          </span>
+          <span className="text-[13px] text-foreground-secondary">
+            {traitFilter.key}: <span className="text-foreground font-medium">{traitFilter.value}</span>
           </span>
           <Link
             href={`/collection/${slug}`}
             aria-label="Clear filter"
-            className="ml-auto text-foreground-secondary hover:text-foreground transition-colors duration-200"
+            className="ml-auto text-[10px] tracking-[0.1em] uppercase text-muted font-medium hover:text-foreground transition-colors duration-200"
           >
             Clear
           </Link>
