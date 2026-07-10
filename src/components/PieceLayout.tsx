@@ -379,15 +379,20 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
   // portrait video (Winds #917) rendered inside a fixed 60% column.
   // The row itself centers on tall pieces so the artwork + metadata
   // cluster read as a coherent pair rather than drifting to the left edge.
+  // Tall (portrait) pieces get a fixed 45% column instead of the fit-content
+  // approach the previous commit tried. That approach + justify-center
+  // clustered the artwork and metadata together with a tiny gap between them,
+  // which read as "too close to the right" for the user. A 45% column
+  // proportionally hosts the artwork (centred inside via mx-auto on the img
+  // element itself), and the metadata sits to the right with normal spacing
+  // — same left-artwork / right-metadata rhythm as Ringers, Fidenza and
+  // every other wide/square piece.
   const isTall = aspect ? aspect.w / aspect.h < 1 : false;
-  const rowClass = isTall
-    ? "flex flex-col md:flex-row gap-8 md:gap-12 items-start md:justify-center"
-    : "flex flex-col md:flex-row gap-8 md:gap-16 items-start";
   const columnClass = isTall
-    ? "w-full md:w-fit md:max-w-[55%] shrink-0"
+    ? "w-full md:w-[45%] lg:w-[45%] shrink-0"
     : "w-full md:w-[60%] lg:w-[65%] shrink-0";
   return (
-    <div className={rowClass}>
+    <div className="flex flex-col md:flex-row gap-8 md:gap-16 items-start">
       <div className={columnClass}>
         {artworkBlock}
       </div>
