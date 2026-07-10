@@ -27,15 +27,15 @@ const sorted = [...artists]
 // in curation order) because the spec was the collection, not a
 // specific token; the rest pin to a single slug.
 const HERO_PIECE_SLUGS: Record<string, string> = {
-  "a-c-k": "piano-blossoms-4-40f9", // Muse Blossoms
-  "beeple": "superrare-beeple-24644-b9e0", // TIME: The Future of Business
-  "dmitri-cherniak": "superrare-dmitri-cherniak-26901-b9e0", // A slight lack of symmetry 1/4
-  "larva-labs": "cryptopunks-269-3BBB",
-  "operator": "human-unreadable-455000124-b069",
-  "refik-anadol": "synthetic-dreams-648-be3a",
-  "sam-spratt": "skulls-of-luci-20-d27c", // Saturnalia Pigmentation (Skull)
-  "tyler-hobbs": "tyler-hobbs-1-9345", // Return Zero [Blue] 0.7
-  "xcopy": "superrare-xcopy-2123-b9e0", // Some Other Asshole
+  "a-c-k": "piano-blossoms-4", // Muse Blossoms
+  "beeple": "superrare-beeple-24644", // TIME: The Future of Business
+  "dmitri-cherniak": "superrare-dmitri-cherniak-26901", // A slight lack of symmetry 1/4
+  "larva-labs": "cryptopunks-269",
+  "operator": "human-unreadable-455000124",
+  "refik-anadol": "synthetic-dreams-648",
+  "sam-spratt": "skulls-of-luci-20", // Saturnalia Pigmentation (Skull)
+  "tyler-hobbs": "tyler-hobbs-1", // Return Zero [Blue] 0.7
+  "xcopy": "superrare-xcopy-2123", // Some Other Asshole
 };
 const HERO_COLLECTION_OVERRIDES: Record<string, string[]> = {
   "kim-asendorf": ["lights"],

@@ -399,7 +399,7 @@ export const SYNTHETIC_TRAIT_GROUPS: Record<string, SyntheticTraitGroup[]> = {
           // Yellow -> Blue -> Green order: #614 (Yellow), #574 (Blue),
           // #37 (Green). Editorial color reading order across every
           // Set in the group.
-          pieces: ["grifters-614-c1f3", "grifters-574-c1f3", "grifters-37-c1f3"],
+          pieces: ["grifters-614", "grifters-574", "grifters-37"],
         },
         { label: "Wretch", key: "Type", value: "Wretch" },
         { label: "G to the M", key: "Noise", value: "G to the M" },
@@ -410,7 +410,7 @@ export const SYNTHETIC_TRAIT_GROUPS: Record<string, SyntheticTraitGroup[]> = {
           // Yellow -> Blue -> Green: #165 (Yellow), #574 (Blue), #132
           // (Green). Yellow slot swapped from #439 to #165; #439 stays
           // free to represent Yellow under Turbulence if needed.
-          pieces: ["grifters-165-c1f3", "grifters-574-c1f3", "grifters-132-c1f3"],
+          pieces: ["grifters-165", "grifters-574", "grifters-132"],
         },
         { label: "Turbulence", key: "Vision", value: "Turbulence" },
       ],

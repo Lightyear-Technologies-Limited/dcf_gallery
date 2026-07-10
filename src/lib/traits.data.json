@@ -1,5 +1,5 @@
 {
-  "fidenza-5-d270": {
+  "fidenza-5": {
     "Palette": "Politique",
     "Scale": "Jumbo",
     "Spiral": "No",
@@ -7,7 +7,7 @@
     "Super Blocks": "No",
     "Density": "High"
   },
-  "fidenza-19-d270": {
+  "fidenza-19": {
     "Palette": "Cool",
     "Scale": "Jumbo",
     "Spiral": "No",
@@ -15,7 +15,7 @@
     "Super Blocks": "No",
     "Density": "High"
   },
-  "fidenza-28-d270": {
+  "fidenza-28": {
     "Palette": "Politique",
     "Scale": "Jumbo",
     "Spiral": "No",
@@ -23,7 +23,7 @@
     "Super Blocks": "No",
     "Density": "High"
   },
-  "fidenza-60-d270": {
+  "fidenza-60": {
     "Palette": "AM",
     "Scale": "Uniform",
     "Spiral": "No",
@@ -31,7 +31,7 @@
     "Super Blocks": "Yes",
     "Density": "Medium"
   },
-  "fidenza-90-d270": {
+  "fidenza-90": {
     "Palette": "Luxe",
     "Scale": "Large",
     "Spiral": "No",
@@ -39,7 +39,7 @@
     "Super Blocks": "No",
     "Density": "Medium"
   },
-  "fidenza-98-d270": {
+  "fidenza-98": {
     "Palette": "White Mono",
     "Scale": "Medium",
     "Spiral": "No",
@@ -47,7 +47,7 @@
     "Super Blocks": "No",
     "Density": "Medium"
   },
-  "fidenza-145-d270": {
+  "fidenza-145": {
     "Palette": "Baked",
     "Scale": "Uniform",
     "Spiral": "No",
@@ -55,7 +55,7 @@
     "Super Blocks": "Yes",
     "Density": "Medium"
   },
-  "fidenza-169-d270": {
+  "fidenza-169": {
     "Palette": "White Mono",
     "Scale": "Jumbo",
     "Spiral": "No",
@@ -63,7 +63,7 @@
     "Super Blocks": "Yes",
     "Density": "High"
   },
-  "fidenza-180-d270": {
+  "fidenza-180": {
     "Palette": "Golf Socks",
     "Scale": "Jumbo",
     "Spiral": "No",
@@ -71,7 +71,7 @@
     "Super Blocks": "No",
     "Density": "High"
   },
-  "fidenza-200-d270": {
+  "fidenza-200": {
     "Palette": "White Mono",
     "Scale": "Jumbo",
     "Spiral": "No",
@@ -79,7 +79,7 @@
     "Super Blocks": "No",
     "Density": "High"
   },
-  "fidenza-231-d270": {
+  "fidenza-231": {
     "Palette": "AM",
     "Scale": "Jumbo",
     "Spiral": "No",
@@ -87,7 +87,7 @@
     "Super Blocks": "No",
     "Density": "High"
   },
-  "fidenza-253-d270": {
+  "fidenza-253": {
     "Palette": "Politique",
     "Scale": "Jumbo",
     "Spiral": "No",
@@ -95,7 +95,7 @@
     "Super Blocks": "No",
     "Density": "High"
   },
-  "fidenza-256-d270": {
+  "fidenza-256": {
     "Palette": "Rad",
     "Scale": "Jumbo",
     "Spiral": "No",
@@ -103,7 +103,7 @@
     "Super Blocks": "Yes",
     "Density": "High"
   },
-  "fidenza-262-d270": {
+  "fidenza-262": {
     "Palette": "Baked",
     "Scale": "Jumbo",
     "Spiral": "No",
@@ -111,7 +111,7 @@
     "Super Blocks": "No",
     "Density": "High"
   },
-  "fidenza-342-d270": {
+  "fidenza-342": {
     "Palette": "Golf Socks",
     "Scale": "Large",
     "Spiral": "No",
@@ -119,7 +119,7 @@
     "Super Blocks": "No",
     "Density": "Medium"
   },
-  "fidenza-378-d270": {
+  "fidenza-378": {
     "Palette": "Golf Socks",
     "Scale": "Jumbo",
     "Spiral": "No",
@@ -127,7 +127,7 @@
     "Super Blocks": "Yes",
     "Density": "High"
   },
-  "fidenza-437-d270": {
+  "fidenza-437": {
     "Palette": "Luxe",
     "Scale": "Jumbo",
     "Spiral": "No",
@@ -135,7 +135,7 @@
     "Super Blocks": "No",
     "Density": "High"
   },
-  "fidenza-456-d270": {
+  "fidenza-456": {
     "Palette": "Black",
     "Scale": "Jumbo XL",
     "Spiral": "No",
@@ -143,7 +143,7 @@
     "Super Blocks": "Yes",
     "Density": "High AF"
   },
-  "fidenza-573-d270": {
+  "fidenza-573": {
     "Palette": "Golf Socks",
     "Scale": "Large",
     "Spiral": "No",
@@ -151,7 +151,7 @@
     "Super Blocks": "No",
     "Density": "Medium"
   },
-  "fidenza-587-d270": {
+  "fidenza-587": {
     "Palette": "Luxe",
     "Scale": "Jumbo",
     "Spiral": "No",
@@ -159,7 +159,7 @@
     "Super Blocks": "No",
     "Density": "High"
   },
-  "fidenza-593-d270": {
+  "fidenza-593": {
     "Palette": "Politique",
     "Scale": "Jumbo",
     "Spiral": "Yes",
@@ -167,7 +167,7 @@
     "Super Blocks": "Yes",
     "Density": "High"
   },
-  "fidenza-609-d270": {
+  "fidenza-609": {
     "Palette": "Rad",
     "Scale": "Jumbo",
     "Spiral": "No",
@@ -175,7 +175,7 @@
     "Super Blocks": "No",
     "Density": "High"
   },
-  "fidenza-647-d270": {
+  "fidenza-647": {
     "Palette": "Rad",
     "Scale": "Large",
     "Spiral": "No",
@@ -183,7 +183,7 @@
     "Super Blocks": "Yes",
     "Density": "Medium"
   },
-  "fidenza-650-d270": {
+  "fidenza-650": {
     "Palette": "Rose",
     "Scale": "Jumbo",
     "Spiral": "No",
@@ -191,7 +191,7 @@
     "Super Blocks": "No",
     "Density": "High"
   },
-  "fidenza-713-d270": {
+  "fidenza-713": {
     "Palette": "Black",
     "Scale": "Uniform",
     "Spiral": "No",
@@ -199,7 +199,7 @@
     "Super Blocks": "No",
     "Density": "High"
   },
-  "fidenza-718-d270": {
+  "fidenza-718": {
     "Palette": "Rad",
     "Scale": "Micro-Uniform",
     "Spiral": "No",
@@ -207,7 +207,7 @@
     "Super Blocks": "No",
     "Density": "High AF"
   },
-  "fidenza-819-d270": {
+  "fidenza-819": {
     "Palette": "Golf Socks",
     "Scale": "Jumbo",
     "Spiral": "No",
@@ -215,7 +215,7 @@
     "Super Blocks": "No",
     "Density": "High"
   },
-  "fidenza-929-d270": {
+  "fidenza-929": {
     "Palette": "Luxe",
     "Scale": "Jumbo",
     "Spiral": "No",
@@ -223,7 +223,7 @@
     "Super Blocks": "Yes",
     "Density": "High"
   },
-  "fidenza-943-d270": {
+  "fidenza-943": {
     "Palette": "White Mono",
     "Scale": "Jumbo",
     "Spiral": "No",
@@ -231,7 +231,7 @@
     "Super Blocks": "Yes",
     "Density": "High"
   },
-  "fidenza-984-d270": {
+  "fidenza-984": {
     "Palette": "White Mono",
     "Scale": "Jumbo",
     "Spiral": "Yes",
@@ -239,7 +239,7 @@
     "Super Blocks": "No",
     "Density": "High"
   },
-  "ringers-13000014-d270": {
+  "ringers-13000014": {
     "Body": "Black",
     "Background": "White",
     "Pegs": 29,
@@ -251,7 +251,7 @@
     "Extra color": "N/A",
     "Peg scaling": "Uniform"
   },
-  "ringers-13000025-d270": {
+  "ringers-13000025": {
     "Body": "Black",
     "Background": "White",
     "Pegs": 10,
@@ -263,7 +263,7 @@
     "Extra color": "N/A",
     "Peg scaling": "Uniform"
   },
-  "ringers-13000058-d270": {
+  "ringers-13000058": {
     "Body": "Black",
     "Background": "White",
     "Pegs": 11,
@@ -275,7 +275,7 @@
     "Extra color": "N/A",
     "Peg scaling": "Uniform"
   },
-  "ringers-13000064-d270": {
+  "ringers-13000064": {
     "Body": "Black",
     "Background": "White",
     "Pegs": 7,
@@ -287,7 +287,7 @@
     "Extra color": "N/A",
     "Peg scaling": "Uniform"
   },
-  "ringers-13000075-d270": {
+  "ringers-13000075": {
     "Body": "Black",
     "Background": "White",
     "Pegs": 5,
@@ -299,7 +299,7 @@
     "Extra color": "N/A",
     "Peg scaling": "Uniform"
   },
-  "ringers-13000086-d270": {
+  "ringers-13000086": {
     "Body": "White",
     "Background": "White",
     "Pegs": 18,
@@ -311,7 +311,7 @@
     "Extra color": "N/A",
     "Peg scaling": "Bigger near center"
   },
-  "ringers-13000089-d270": {
+  "ringers-13000089": {
     "Body": "White",
     "Background": "White",
     "Pegs": 16,
@@ -323,7 +323,7 @@
     "Extra color": "N/A",
     "Peg scaling": "Smaller near center"
   },
-  "ringers-13000108-d270": {
+  "ringers-13000108": {
     "Body": "White",
     "Background": "White",
     "Pegs": 10,
@@ -335,7 +335,7 @@
     "Extra color": "N/A",
     "Peg scaling": "Uniform"
   },
-  "ringers-13000117-d270": {
+  "ringers-13000117": {
     "Body": "Black",
     "Background": "White",
     "Pegs": 14,
@@ -347,7 +347,7 @@
     "Extra color": "N/A",
     "Peg scaling": "Uniform"
   },
-  "ringers-13000174-d270": {
+  "ringers-13000174": {
     "Body": "Black",
     "Background": "White",
     "Pegs": 9,
@@ -359,7 +359,7 @@
     "Extra color": "N/A",
     "Peg scaling": "Uniform"
   },
-  "ringers-13000209-d270": {
+  "ringers-13000209": {
     "Body": "Black",
     "Background": "White",
     "Pegs": 4,
@@ -371,7 +371,7 @@
     "Extra color": "N/A",
     "Peg scaling": "Uniform"
   },
-  "ringers-13000214-d270": {
+  "ringers-13000214": {
     "Body": "Black",
     "Background": "White",
     "Pegs": 8,
@@ -383,7 +383,7 @@
     "Extra color": "N/A",
     "Peg scaling": "Uniform"
   },
-  "ringers-13000241-d270": {
+  "ringers-13000241": {
     "Body": "White",
     "Background": "White",
     "Pegs": 8,
@@ -395,7 +395,7 @@
     "Extra color": "N/A",
     "Peg scaling": "Smaller near center"
   },
-  "ringers-13000268-d270": {
+  "ringers-13000268": {
     "Body": "White",
     "Background": "White",
     "Pegs": 8,
@@ -407,7 +407,7 @@
     "Extra color": "N/A",
     "Peg scaling": "Uniform"
   },
-  "ringers-13000273-d270": {
+  "ringers-13000273": {
     "Body": "White",
     "Background": "Red",
     "Pegs": 5,
@@ -419,7 +419,7 @@
     "Extra color": "N/A",
     "Peg scaling": "Smaller near center"
   },
-  "ringers-13000287-d270": {
+  "ringers-13000287": {
     "Body": "White",
     "Background": "White",
     "Pegs": 12,
@@ -431,7 +431,7 @@
     "Extra color": "N/A",
     "Peg scaling": "Uniform"
   },
-  "ringers-13000303-d270": {
+  "ringers-13000303": {
     "Body": "Black",
     "Background": "Yellow",
     "Pegs": 6,
@@ -443,7 +443,7 @@
     "Extra color": "N/A",
     "Peg scaling": "Smaller near center"
   },
-  "ringers-13000338-d270": {
+  "ringers-13000338": {
     "Body": "White",
     "Background": "Yellow",
     "Pegs": 25,
@@ -455,7 +455,7 @@
     "Extra color": "Red",
     "Peg scaling": "Uniform"
   },
-  "ringers-13000342-d270": {
+  "ringers-13000342": {
     "Body": "Yellow",
     "Background": "White",
     "Pegs": 10,
@@ -467,7 +467,7 @@
     "Extra color": "N/A",
     "Peg scaling": "Uniform"
   },
-  "ringers-13000374-d270": {
+  "ringers-13000374": {
     "Body": "White",
     "Background": "White",
     "Pegs": 4,
@@ -479,7 +479,7 @@
     "Extra color": "N/A",
     "Peg scaling": "Uniform"
   },
-  "ringers-13000391-d270": {
+  "ringers-13000391": {
     "Body": "Black",
     "Background": "White",
     "Pegs": 12,
@@ -491,7 +491,7 @@
     "Extra color": "N/A",
     "Peg scaling": "Smaller near center"
   },
-  "ringers-13000392-d270": {
+  "ringers-13000392": {
     "Body": "Black",
     "Background": "White",
     "Pegs": 10,
@@ -503,7 +503,7 @@
     "Extra color": "N/A",
     "Peg scaling": "Uniform"
   },
-  "ringers-13000492-d270": {
+  "ringers-13000492": {
     "Body": "Black",
     "Background": "White",
     "Pegs": 12,
@@ -515,7 +515,7 @@
     "Extra color": "N/A",
     "Peg scaling": "Uniform"
   },
-  "ringers-13000505-d270": {
+  "ringers-13000505": {
     "Body": "White",
     "Background": "White",
     "Pegs": 9,
@@ -527,7 +527,7 @@
     "Extra color": "N/A",
     "Peg scaling": "Bigger near center"
   },
-  "ringers-13000520-d270": {
+  "ringers-13000520": {
     "Body": "White",
     "Background": "White",
     "Pegs": 5,
@@ -539,7 +539,7 @@
     "Extra color": "N/A",
     "Peg scaling": "Bigger near center"
   },
-  "ringers-13000523-d270": {
+  "ringers-13000523": {
     "Body": "Black",
     "Background": "White",
     "Pegs": 9,
@@ -551,7 +551,7 @@
     "Extra color": "N/A",
     "Peg scaling": "Uniform"
   },
-  "ringers-13000549-d270": {
+  "ringers-13000549": {
     "Body": "Black",
     "Background": "Yellow",
     "Pegs": 10,
@@ -563,7 +563,7 @@
     "Extra color": "N/A",
     "Peg scaling": "Uniform"
   },
-  "ringers-13000654-d270": {
+  "ringers-13000654": {
     "Body": "Black",
     "Background": "White",
     "Pegs": 17,
@@ -575,7 +575,7 @@
     "Extra color": "N/A",
     "Peg scaling": "Uniform"
   },
-  "ringers-13000680-d270": {
+  "ringers-13000680": {
     "Body": "Black",
     "Background": "White",
     "Pegs": 6,
@@ -587,7 +587,7 @@
     "Extra color": "N/A",
     "Peg scaling": "Uniform"
   },
-  "ringers-13000696-d270": {
+  "ringers-13000696": {
     "Body": "Black",
     "Background": "White",
     "Pegs": 13,
@@ -599,7 +599,7 @@
     "Extra color": "N/A",
     "Peg scaling": "Bigger near center"
   },
-  "ringers-13000698-d270": {
+  "ringers-13000698": {
     "Body": "White",
     "Background": "White",
     "Pegs": 22,
@@ -611,7 +611,7 @@
     "Extra color": "N/A",
     "Peg scaling": "Smaller near center"
   },
-  "ringers-13000708-d270": {
+  "ringers-13000708": {
     "Body": "Black",
     "Background": "Red",
     "Pegs": 5,
@@ -623,7 +623,7 @@
     "Extra color": "N/A",
     "Peg scaling": "Uniform"
   },
-  "ringers-13000715-d270": {
+  "ringers-13000715": {
     "Body": "Yellow",
     "Background": "White",
     "Pegs": 14,
@@ -635,7 +635,7 @@
     "Extra color": "N/A",
     "Peg scaling": "Uniform"
   },
-  "ringers-13000792-d270": {
+  "ringers-13000792": {
     "Body": "Black",
     "Background": "White",
     "Pegs": 6,
@@ -647,7 +647,7 @@
     "Extra color": "N/A",
     "Peg scaling": "Uniform"
   },
-  "ringers-13000952-d270": {
+  "ringers-13000952": {
     "Body": "Yellow",
     "Background": "Beige",
     "Pegs": 13,
@@ -659,7 +659,7 @@
     "Extra color": "N/A",
     "Peg scaling": "Uniform"
   },
-  "ringers-13000972-d270": {
+  "ringers-13000972": {
     "Body": "Black",
     "Background": "White",
     "Pegs": 6,
@@ -671,385 +671,385 @@
     "Extra color": "N/A",
     "Peg scaling": "Uniform"
   },
-  "winds-of-yawanawa-20-100b": {
+  "winds-of-yawanawa-20": {
     "Origin": "Mai - Earth",
     "Color Temperature": "Hot",
     "Wind Intensity": "Tranquil",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 03"
   },
-  "winds-of-yawanawa-62-100b": {
+  "winds-of-yawanawa-62": {
     "Origin": "Niwe - Wind",
     "Color Temperature": "Freezing",
     "Wind Intensity": "Moderate",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 01"
   },
-  "winds-of-yawanawa-103-100b": {
+  "winds-of-yawanawa-103": {
     "Origin": "Uwa - Flower",
     "Color Temperature": "Mild",
     "Wind Intensity": "Moderate",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 01"
   },
-  "winds-of-yawanawa-118-100b": {
+  "winds-of-yawanawa-118": {
     "Origin": "Nay - Sky",
     "Color Temperature": "Mild",
     "Wind Intensity": "Intense",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 02"
   },
-  "winds-of-yawanawa-154-100b": {
+  "winds-of-yawanawa-154": {
     "Origin": "Nii - Forest",
     "Color Temperature": "Mild",
     "Wind Intensity": "Still",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 02"
   },
-  "winds-of-yawanawa-178-100b": {
+  "winds-of-yawanawa-178": {
     "Origin": "Waka - Water",
     "Color Temperature": "Cold",
     "Wind Intensity": "Tranquil",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 04"
   },
-  "winds-of-yawanawa-227-100b": {
+  "winds-of-yawanawa-227": {
     "Origin": "Txii - Fire",
     "Color Temperature": "Scorching",
     "Wind Intensity": "Intense",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 04"
   },
-  "winds-of-yawanawa-265-100b": {
+  "winds-of-yawanawa-265": {
     "Origin": "Nay - Sky",
     "Color Temperature": "Mild",
     "Wind Intensity": "Moderate",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 01"
   },
-  "winds-of-yawanawa-281-100b": {
+  "winds-of-yawanawa-281": {
     "Origin": "Nay - Sky",
     "Color Temperature": "Scorching",
     "Wind Intensity": "Moderate",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 02"
   },
-  "winds-of-yawanawa-369-100b": {
+  "winds-of-yawanawa-369": {
     "Origin": "Ushe - Moon",
     "Color Temperature": "Cold",
     "Wind Intensity": "Moderate",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 01"
   },
-  "winds-of-yawanawa-371-100b": {
+  "winds-of-yawanawa-371": {
     "Origin": "Ushe - Moon",
     "Color Temperature": "Freezing",
     "Wind Intensity": "Moderate",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 03"
   },
-  "winds-of-yawanawa-373-100b": {
+  "winds-of-yawanawa-373": {
     "Origin": "Nii - Forest",
     "Color Temperature": "Freezing",
     "Wind Intensity": "Intense",
     "Particle Type": "Spherical",
     "Soundtrack": "Track 01"
   },
-  "winds-of-yawanawa-442-100b": {
+  "winds-of-yawanawa-442": {
     "Origin": "Ushe - Moon",
     "Color Temperature": "Freezing",
     "Wind Intensity": "Moderate",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 02"
   },
-  "winds-of-yawanawa-451-100b": {
+  "winds-of-yawanawa-451": {
     "Origin": "Nii - Forest",
     "Color Temperature": "Hot",
     "Wind Intensity": "Moderate",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 02"
   },
-  "winds-of-yawanawa-487-100b": {
+  "winds-of-yawanawa-487": {
     "Origin": "Uwa - Flower",
     "Color Temperature": "Hot",
     "Wind Intensity": "Moderate",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 02"
   },
-  "winds-of-yawanawa-495-100b": {
+  "winds-of-yawanawa-495": {
     "Origin": "Nay - Sky",
     "Color Temperature": "Cold",
     "Wind Intensity": "Moderate",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 03"
   },
-  "winds-of-yawanawa-524-100b": {
+  "winds-of-yawanawa-524": {
     "Origin": "Txii - Fire",
     "Color Temperature": "Mild",
     "Wind Intensity": "Moderate",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 02"
   },
-  "winds-of-yawanawa-554-100b": {
+  "winds-of-yawanawa-554": {
     "Origin": "Waka - Water",
     "Color Temperature": "Cold",
     "Wind Intensity": "Intense",
     "Particle Type": "Spherical",
     "Soundtrack": "Track 03"
   },
-  "winds-of-yawanawa-572-100b": {
+  "winds-of-yawanawa-572": {
     "Origin": "Nay - Sky",
     "Color Temperature": "Mild",
     "Wind Intensity": "Moderate",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 03"
   },
-  "winds-of-yawanawa-600-100b": {
+  "winds-of-yawanawa-600": {
     "Origin": "Vari - Sun",
     "Color Temperature": "Mild",
     "Wind Intensity": "Moderate",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 04"
   },
-  "winds-of-yawanawa-629-100b": {
+  "winds-of-yawanawa-629": {
     "Origin": "Nay - Sky",
     "Color Temperature": "Mild",
     "Wind Intensity": "Moderate",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 04"
   },
-  "winds-of-yawanawa-637-100b": {
+  "winds-of-yawanawa-637": {
     "Origin": "Nay - Sky",
     "Color Temperature": "Mild",
     "Wind Intensity": "Moderate",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 02"
   },
-  "winds-of-yawanawa-638-100b": {
+  "winds-of-yawanawa-638": {
     "Origin": "Uwa - Flower",
     "Color Temperature": "Mild",
     "Wind Intensity": "Moderate",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 01"
   },
-  "winds-of-yawanawa-681-100b": {
+  "winds-of-yawanawa-681": {
     "Origin": "Ushe - Moon",
     "Color Temperature": "Freezing",
     "Wind Intensity": "Moderate",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 04"
   },
-  "winds-of-yawanawa-688-100b": {
+  "winds-of-yawanawa-688": {
     "Origin": "Niwe - Wind",
     "Color Temperature": "Mild",
     "Wind Intensity": "Moderate",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 04"
   },
-  "winds-of-yawanawa-692-100b": {
+  "winds-of-yawanawa-692": {
     "Origin": "Nay - Sky",
     "Color Temperature": "Cold",
     "Wind Intensity": "Moderate",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 01"
   },
-  "winds-of-yawanawa-695-100b": {
+  "winds-of-yawanawa-695": {
     "Origin": "Mai - Earth",
     "Color Temperature": "Freezing",
     "Wind Intensity": "Moderate",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 02"
   },
-  "winds-of-yawanawa-697-100b": {
+  "winds-of-yawanawa-697": {
     "Origin": "Txii - Fire",
     "Color Temperature": "Hot",
     "Wind Intensity": "Intense",
     "Particle Type": "Spherical",
     "Soundtrack": "Track 04"
   },
-  "winds-of-yawanawa-700-100b": {
+  "winds-of-yawanawa-700": {
     "Origin": "Vari - Sun",
     "Color Temperature": "Hot",
     "Wind Intensity": "Moderate",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 04"
   },
-  "winds-of-yawanawa-701-100b": {
+  "winds-of-yawanawa-701": {
     "Origin": "Uwa - Flower",
     "Color Temperature": "Hot",
     "Wind Intensity": "Moderate",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 02"
   },
-  "winds-of-yawanawa-704-100b": {
+  "winds-of-yawanawa-704": {
     "Origin": "Ishtī - Star",
     "Color Temperature": "Cold",
     "Wind Intensity": "Moderate",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 03"
   },
-  "winds-of-yawanawa-712-100b": {
+  "winds-of-yawanawa-712": {
     "Origin": "Vari - Sun",
     "Color Temperature": "Scorching",
     "Wind Intensity": "Moderate",
     "Particle Type": "Spherical",
     "Soundtrack": "Track 03"
   },
-  "winds-of-yawanawa-717-100b": {
+  "winds-of-yawanawa-717": {
     "Origin": "Niwe - Wind",
     "Color Temperature": "Cold",
     "Wind Intensity": "Moderate",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 02"
   },
-  "winds-of-yawanawa-738-100b": {
+  "winds-of-yawanawa-738": {
     "Origin": "Nii - Forest",
     "Color Temperature": "Cold",
     "Wind Intensity": "Moderate",
     "Particle Type": "Spherical",
     "Soundtrack": "Track 02"
   },
-  "winds-of-yawanawa-741-100b": {
+  "winds-of-yawanawa-741": {
     "Origin": "Ushe - Moon",
     "Color Temperature": "Cold",
     "Wind Intensity": "Moderate",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 01"
   },
-  "winds-of-yawanawa-745-100b": {
+  "winds-of-yawanawa-745": {
     "Origin": "Mai - Earth",
     "Color Temperature": "Mild",
     "Wind Intensity": "Moderate",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 04"
   },
-  "winds-of-yawanawa-746-100b": {
+  "winds-of-yawanawa-746": {
     "Origin": "Txii - Fire",
     "Color Temperature": "Hot",
     "Wind Intensity": "Moderate",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 01"
   },
-  "winds-of-yawanawa-754-100b": {
+  "winds-of-yawanawa-754": {
     "Origin": "Nay - Sky",
     "Color Temperature": "Cold",
     "Wind Intensity": "Moderate",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 04"
   },
-  "winds-of-yawanawa-755-100b": {
+  "winds-of-yawanawa-755": {
     "Origin": "Vari - Sun",
     "Color Temperature": "Scorching",
     "Wind Intensity": "Tranquil",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 04"
   },
-  "winds-of-yawanawa-764-100b": {
+  "winds-of-yawanawa-764": {
     "Origin": "Uwa - Flower",
     "Color Temperature": "Mild",
     "Wind Intensity": "Intense",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 02"
   },
-  "winds-of-yawanawa-856-100b": {
+  "winds-of-yawanawa-856": {
     "Origin": "Txii - Fire",
     "Color Temperature": "Scorching",
     "Wind Intensity": "Tranquil",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 02"
   },
-  "winds-of-yawanawa-863-100b": {
+  "winds-of-yawanawa-863": {
     "Origin": "Niwe - Wind",
     "Color Temperature": "Hot",
     "Wind Intensity": "Moderate",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 01"
   },
-  "winds-of-yawanawa-870-100b": {
+  "winds-of-yawanawa-870": {
     "Origin": "Nay - Sky",
     "Color Temperature": "Mild",
     "Wind Intensity": "Moderate",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 01"
   },
-  "winds-of-yawanawa-878-100b": {
+  "winds-of-yawanawa-878": {
     "Origin": "Ushe - Moon",
     "Color Temperature": "Cold",
     "Wind Intensity": "Moderate",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 03"
   },
-  "winds-of-yawanawa-888-100b": {
+  "winds-of-yawanawa-888": {
     "Origin": "Vari - Sun",
     "Color Temperature": "Scorching",
     "Wind Intensity": "Moderate",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 04"
   },
-  "winds-of-yawanawa-912-100b": {
+  "winds-of-yawanawa-912": {
     "Origin": "Vari - Sun",
     "Color Temperature": "Scorching",
     "Wind Intensity": "Intense",
     "Particle Type": "Spherical",
     "Soundtrack": "Track 04"
   },
-  "winds-of-yawanawa-917-100b": {
+  "winds-of-yawanawa-917": {
     "Origin": "Uwa - Flower",
     "Color Temperature": "Mild",
     "Wind Intensity": "Moderate",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 03"
   },
-  "winds-of-yawanawa-921-100b": {
+  "winds-of-yawanawa-921": {
     "Origin": "Ushe - Moon",
     "Color Temperature": "Freezing",
     "Wind Intensity": "Moderate",
     "Particle Type": "Spherical",
     "Soundtrack": "Track 04"
   },
-  "winds-of-yawanawa-962-100b": {
+  "winds-of-yawanawa-962": {
     "Origin": "Niwe - Wind",
     "Color Temperature": "Hot",
     "Wind Intensity": "Moderate",
     "Particle Type": "Spherical",
     "Soundtrack": "Track 01"
   },
-  "winds-of-yawanawa-989-100b": {
+  "winds-of-yawanawa-989": {
     "Origin": "Uwa - Flower",
     "Color Temperature": "Cold",
     "Wind Intensity": "Moderate",
     "Particle Type": "Cubical",
     "Soundtrack": "Track 04"
   },
-  "human-unreadable-455000095-b069": {
+  "human-unreadable-455000095": {
     "Emotional Climate": "Your crush responded",
     "Vulnerability": "Door cracked open",
     "Signature Bone": "R_Ankle",
     "Unique Moves": 10,
     "Sequence Length": 14
   },
-  "human-unreadable-455000124-b069": {
+  "human-unreadable-455000124": {
     "Emotional Climate": "Current",
     "Vulnerability": "Vulnerable",
     "Signature Bone": "R_Wrist",
     "Unique Moves": 2,
     "Sequence Length": 2
   },
-  "human-unreadable-455000140-b069": {
+  "human-unreadable-455000140": {
     "Emotional Climate": "Just heard bad news",
     "Vulnerability": "Guarded",
     "Signature Bone": "Head",
     "Unique Moves": 4,
     "Sequence Length": 5
   },
-  "human-unreadable-455000141-b069": {
+  "human-unreadable-455000141": {
     "Emotional Climate": "Relaxed",
     "Vulnerability": "Guarded",
     "Signature Bone": "L_Elbow",
     "Unique Moves": 11,
     "Sequence Length": 15
   },
-  "human-unreadable-455000150-b069": {
+  "human-unreadable-455000150": {
     "Emotional Climate": "Relaxed",
     "Vulnerability": "Door cracked open",
     "Signature Bone": "L_Knee",
@@ -1057,7 +1057,7 @@
     "Unique Moves": 6,
     "Sequence Length": 7
   },
-  "human-unreadable-455000155-b069": {
+  "human-unreadable-455000155": {
     "Emotional Climate": "Your crush responded",
     "Vulnerability": "Door cracked open",
     "Signature Bone": "R_Shoulder",
@@ -1065,35 +1065,35 @@
     "Unique Moves": 2,
     "Sequence Length": 2
   },
-  "human-unreadable-455000156-b069": {
+  "human-unreadable-455000156": {
     "Emotional Climate": "Current",
     "Vulnerability": "Door cracked open",
     "Signature Bone": "L_Wrist",
     "Unique Moves": 11,
     "Sequence Length": 13
   },
-  "human-unreadable-455000169-b069": {
+  "human-unreadable-455000169": {
     "Emotional Climate": "Your crush responded",
     "Vulnerability": "Door cracked open",
     "Signature Bone": "R_Wrist",
     "Unique Moves": 7,
     "Sequence Length": 7
   },
-  "human-unreadable-455000180-b069": {
+  "human-unreadable-455000180": {
     "Emotional Climate": "Current",
     "Vulnerability": "Door cracked open",
     "Signature Bone": "L_Elbow",
     "Unique Moves": 2,
     "Sequence Length": 3
   },
-  "human-unreadable-455000201-b069": {
+  "human-unreadable-455000201": {
     "Emotional Climate": "On edge",
     "Vulnerability": "Door cracked open",
     "Signature Bone": "L_Wrist",
     "Unique Moves": 7,
     "Sequence Length": 8
   },
-  "human-unreadable-455000216-b069": {
+  "human-unreadable-455000216": {
     "Emotional Climate": "Just heard bad news",
     "Vulnerability": "Door cracked open",
     "Signature Bone": "L_Knee",
@@ -1101,14 +1101,14 @@
     "Unique Moves": 6,
     "Sequence Length": 6
   },
-  "human-unreadable-455000237-b069": {
+  "human-unreadable-455000237": {
     "Emotional Climate": "Just heard bad news",
     "Vulnerability": "Door cracked open",
     "Signature Bone": "R_Ankle",
     "Unique Moves": 7,
     "Sequence Length": 7
   },
-  "human-unreadable-455000245-b069": {
+  "human-unreadable-455000245": {
     "Emotional Climate": "Some clouds",
     "Vulnerability": "Door cracked open",
     "Signature Bone": "R_Shoulder",
@@ -1116,209 +1116,209 @@
     "Unique Moves": 9,
     "Sequence Length": 12
   },
-  "human-unreadable-455000278-b069": {
+  "human-unreadable-455000278": {
     "Emotional Climate": "Some clouds",
     "Vulnerability": "Door cracked open",
     "Signature Bone": "L_Wrist",
     "Unique Moves": 3,
     "Sequence Length": 3
   },
-  "human-unreadable-455000328-b069": {
+  "human-unreadable-455000328": {
     "Emotional Climate": "Relaxed",
     "Vulnerability": "Door cracked open",
     "Signature Bone": "L_Wrist",
     "Unique Moves": 8,
     "Sequence Length": 9
   },
-  "human-unreadable-455000336-b069": {
+  "human-unreadable-455000336": {
     "Emotional Climate": "Some clouds",
     "Vulnerability": "Door cracked open",
     "Signature Bone": "R_Wrist",
     "Unique Moves": 9,
     "Sequence Length": 11
   },
-  "human-unreadable-455000339-b069": {
+  "human-unreadable-455000339": {
     "Emotional Climate": "Current",
     "Vulnerability": "Door cracked open",
     "Signature Bone": "L_Elbow",
     "Unique Moves": 5,
     "Sequence Length": 8
   },
-  "dataland-biome-lumina-115-1c9d": {
+  "dataland-biome-lumina-115": {
     "Type": "Bioluminescent Flora",
     "Cluster": "Abyssal Petalon",
     "Location": "Tropical Rainforest Understory",
     "Status": "Vulnerable",
     "Movement": "Light-Responsive Swaying"
   },
-  "dataland-biome-lumina-127-1c9d": {
+  "dataland-biome-lumina-127": {
     "Type": "Rare Mystical Variants",
     "Cluster": "Aetherium Arborescens",
     "Location": "Tropical Rainforest Understory",
     "Status": "Vulnerable Habitat Loss",
     "Movement": "Phototropic Growth"
   },
-  "dataland-biome-lumina-161-1c9d": {
+  "dataland-biome-lumina-161": {
     "Type": "Bioluminescent Flora",
     "Cluster": "Luminous Glacies",
     "Location": "Abyssal Ocean Gardens",
     "Status": "Vulnerable",
     "Movement": "Aquatic Undulation"
   },
-  "dataland-biome-lumina-179-1c9d": {
+  "dataland-biome-lumina-179": {
     "Type": "Specialized Bioluminescent Flora",
     "Cluster": "Phantasmae Notani",
     "Location": "Tropical Rainforest Understory",
     "Status": "Rare Protected",
     "Movement": "Gentle Air Swaying"
   },
-  "dataland-biome-lumina-207-1c9d": {
+  "dataland-biome-lumina-207": {
     "Type": "Bioluminescent Flora",
     "Cluster": "Helios Petalate",
     "Location": "Tropical Rainforest Understory",
     "Status": "Rare Stable",
     "Movement": "Bioluminescent Swaying"
   },
-  "dataland-biome-lumina-242-1c9d": {
+  "dataland-biome-lumina-242": {
     "Type": "Specialized Bioluminescent Flora",
     "Cluster": "Petalum Glimmera",
     "Location": "Tropical Rainforest Canopy",
     "Status": "Rare Protected",
     "Movement": "Gentle Air Swaying"
   },
-  "dataland-biome-lumina-458-1c9d": {
+  "dataland-biome-lumina-458": {
     "Type": "Specialized Bioluminescent Flora",
     "Cluster": "Illuminaetherea Petalens",
     "Location": "Hydrothermal Vents",
     "Status": "Vulnerable",
     "Movement": "Aquatic Undulation"
   },
-  "dataland-biome-lumina-461-1c9d": {
+  "dataland-biome-lumina-461": {
     "Type": "Bioluminescent Flora",
     "Cluster": "Galacticae Petalia",
     "Location": "Tropical Rainforest Understory",
     "Status": "Rare Protected",
     "Movement": "Gentle Air Swaying"
   },
-  "dataland-biome-lumina-464-1c9d": {
+  "dataland-biome-lumina-464": {
     "Type": "Bioluminescent Flora",
     "Cluster": "Luminous Glacies",
     "Location": "Tropical Rainforest Understory",
     "Status": "Vulnerable",
     "Movement": "Aquatic Undulation"
   },
-  "dataland-biome-lumina-524-1c9d": {
+  "dataland-biome-lumina-524": {
     "Type": "Bioluminescent Flora",
     "Cluster": "Aurelia Petalina",
     "Location": "Tropical Rainforest Understory",
     "Status": "Near Threatened",
     "Movement": "Gentle Air Swaying"
   },
-  "dataland-biome-lumina-549-1c9d": {
+  "dataland-biome-lumina-549": {
     "Type": "Specialized Bioluminescent Flora",
     "Cluster": "Nocturnalis Flora",
     "Location": "Tropical Rainforest Canopy",
     "Status": "Vulnerable",
     "Movement": "Light-Responsive Swaying"
   },
-  "dataland-biome-lumina-632-1c9d": {
+  "dataland-biome-lumina-632": {
     "Type": "Specialized Bioluminescent Flora",
     "Cluster": "Galacticae Petalia",
     "Location": "Tropical Rainforest Canopy",
     "Status": "Rare Protected",
     "Movement": "Gentle Air Swaying"
   },
-  "dataland-biome-lumina-665-1c9d": {
+  "dataland-biome-lumina-665": {
     "Type": "Bioluminescent Flora",
     "Cluster": "Aurelia Petalina",
     "Location": "Tropical Rainforest Canopy",
     "Status": "Rare Protected",
     "Movement": "Gentle Air Swaying"
   },
-  "dataland-biome-lumina-670-1c9d": {
+  "dataland-biome-lumina-670": {
     "Type": "Bioluminescent Fungi",
     "Cluster": "Aetherium Arborescens",
     "Location": "Tropical Forest Floor",
     "Status": "Rare Stable",
     "Movement": "Immobile"
   },
-  "dataland-biome-lumina-691-1c9d": {
+  "dataland-biome-lumina-691": {
     "Type": "Specialized Bioluminescent Flora",
     "Cluster": "Illuminaetherea Petalens",
     "Location": "Tropical Cave Systems",
     "Status": "Rare Stable",
     "Movement": "Aquatic Undulation"
   },
-  "dataland-biome-lumina-789-1c9d": {
+  "dataland-biome-lumina-789": {
     "Type": "Bioluminescent Flora",
     "Cluster": "Aqua Luminaceae",
     "Location": "Tropical Rainforest Understory",
     "Status": "Rare Stable",
     "Movement": "Rhythmic Pulsation"
   },
-  "dataland-biome-lumina-791-1c9d": {
+  "dataland-biome-lumina-791": {
     "Type": "Specialized Bioluminescent Flora",
     "Cluster": "Helios Petalate",
     "Location": "Temperate Forest Understory",
     "Status": "Rare Stable",
     "Movement": "Gentle Air Swaying"
   },
-  "dataland-biome-lumina-999-1c9d": {
+  "dataland-biome-lumina-999": {
     "Type": "Bioluminescent Fungi",
     "Cluster": "Luminorialis Aurorae",
     "Location": "Tropical Rainforest Canopy",
     "Status": "Rare Locally Abundant",
     "Movement": "Spore Dispersal"
   },
-  "synthetic-dreams-51-be3a": {
+  "synthetic-dreams-51": {
     "Cluster": "Closed Water",
     "Rarity": 2
   },
-  "synthetic-dreams-362-be3a": {
+  "synthetic-dreams-362": {
     "Cluster": "Rocky Landscapes",
     "Rarity": 1
   },
-  "synthetic-dreams-379-be3a": {
+  "synthetic-dreams-379": {
     "Cluster": "Closed Water",
     "Rarity": 2
   },
-  "synthetic-dreams-625-be3a": {
+  "synthetic-dreams-625": {
     "Cluster": "Green Landscapes",
     "Rarity": 1
   },
-  "synthetic-dreams-630-be3a": {
+  "synthetic-dreams-630": {
     "Cluster": "Desert Landscapes",
     "Rarity": 1
   },
-  "synthetic-dreams-648-be3a": {
+  "synthetic-dreams-648": {
     "Cluster": "Closed Water",
     "Rarity": 2
   },
-  "synthetic-dreams-754-be3a": {
+  "synthetic-dreams-754": {
     "Cluster": "Green Landscapes",
     "Rarity": 1
   },
-  "synthetic-dreams-774-be3a": {
+  "synthetic-dreams-774": {
     "Cluster": "Desert Landscapes",
     "Rarity": 1
   },
-  "synthetic-dreams-854-be3a": {
+  "synthetic-dreams-854": {
     "Cluster": "Closed Water",
     "Rarity": 2
   },
-  "synthetic-dreams-858-be3a": {
+  "synthetic-dreams-858": {
     "Cluster": "Rocky Landscapes",
     "Rarity": 1
   },
-  "synthetic-dreams-951-be3a": {
+  "synthetic-dreams-951": {
     "Cluster": "Desert Landscapes",
     "Rarity": 1
   },
-  "synthetic-dreams-957-be3a": {
+  "synthetic-dreams-957": {
     "Cluster": "Green Landscapes",
     "Rarity": 1
   },
-  "grifters-8-c1f3": {
+  "grifters-8": {
     "Asset Type": "Edition",
     "Type": "Shady",
     "Color": "Green",
@@ -1327,7 +1327,7 @@
     "Surface": "No.2",
     "Atmosphere": "Probably"
   },
-  "grifters-37-c1f3": {
+  "grifters-37": {
     "Asset Type": "Edition",
     "Type": "Shady",
     "Color": "Green",
@@ -1336,7 +1336,7 @@
     "Surface": "Sideways Pink",
     "Atmosphere": "Save As"
   },
-  "grifters-66-c1f3": {
+  "grifters-66": {
     "Asset Type": "Edition",
     "Type": "Wretch",
     "Color": "Yellow",
@@ -1345,7 +1345,7 @@
     "Surface": "No.2",
     "Atmosphere": "Probably"
   },
-  "grifters-88-c1f3": {
+  "grifters-88": {
     "Asset Type": "Edition",
     "Type": "Wretch",
     "Color": "Blue",
@@ -1354,7 +1354,7 @@
     "Surface": "Sideways Pink",
     "Atmosphere": "Probably"
   },
-  "grifters-132-c1f3": {
+  "grifters-132": {
     "Asset Type": "Edition",
     "Type": "Flimflam",
     "Color": "Green",
@@ -1363,7 +1363,7 @@
     "Surface": "No.2",
     "Atmosphere": "Bubbles"
   },
-  "grifters-51-c1f3": {
+  "grifters-51": {
     "Asset Type": "Edition",
     "Type": "Wretch",
     "Color": "Blue",
@@ -1372,7 +1372,7 @@
     "Surface": "No.2",
     "Atmosphere": "Probably"
   },
-  "grifters-165-c1f3": {
+  "grifters-165": {
     "Asset Type": "Edition",
     "Type": "Flimflam",
     "Color": "Yellow",
@@ -1381,7 +1381,7 @@
     "Surface": "No.2",
     "Atmosphere": "Bubbles"
   },
-  "grifters-166-c1f3": {
+  "grifters-166": {
     "Asset Type": "Edition",
     "Type": "Flimflam",
     "Color": "Blue",
@@ -1390,10 +1390,10 @@
     "Surface": "No.2",
     "Atmosphere": "Probably"
   },
-  "grifters-170-c1f3": {
+  "grifters-170": {
     "Asset Type": "Legendary Edition"
   },
-  "grifters-197-c1f3": {
+  "grifters-197": {
     "Asset Type": "Edition",
     "Type": "Gouge",
     "Color": "Blue",
@@ -1402,7 +1402,7 @@
     "Surface": "Mo Yel",
     "Atmosphere": "AirDrop"
   },
-  "grifters-222-c1f3": {
+  "grifters-222": {
     "Asset Type": "Edition",
     "Type": "Flimflam",
     "Color": "Blue",
@@ -1411,7 +1411,7 @@
     "Surface": "Mo Multi",
     "Atmosphere": "Probably"
   },
-  "grifters-254-c1f3": {
+  "grifters-254": {
     "Asset Type": "Edition",
     "Type": "Wretch",
     "Color": "Blue",
@@ -1420,7 +1420,7 @@
     "Surface": "Sideways Pink",
     "Atmosphere": "DMs"
   },
-  "grifters-308-c1f3": {
+  "grifters-308": {
     "Asset Type": "Edition",
     "Type": "Wretch",
     "Color": "Green",
@@ -1429,7 +1429,7 @@
     "Surface": "Flies",
     "Atmosphere": "FlySpy"
   },
-  "grifters-363-c1f3": {
+  "grifters-363": {
     "Asset Type": "Edition",
     "Type": "Flimflam",
     "Color": "Green",
@@ -1438,7 +1438,7 @@
     "Surface": "Sideways Pink",
     "Atmosphere": "Probably"
   },
-  "grifters-368-c1f3": {
+  "grifters-368": {
     "Asset Type": "Edition",
     "Type": "Gouge",
     "Color": "Yellow",
@@ -1447,7 +1447,7 @@
     "Surface": "No.2",
     "Atmosphere": "Universe"
   },
-  "grifters-439-c1f3": {
+  "grifters-439": {
     "Asset Type": "Edition",
     "Type": "Gouge",
     "Color": "Yellow",
@@ -1456,7 +1456,7 @@
     "Surface": "White Worms",
     "Atmosphere": "Bubbles"
   },
-  "grifters-442-c1f3": {
+  "grifters-442": {
     "Asset Type": "Edition",
     "Type": "Gouge",
     "Color": "Blue",
@@ -1465,7 +1465,7 @@
     "Surface": "No.1",
     "Atmosphere": "Universe"
   },
-  "grifters-472-c1f3": {
+  "grifters-472": {
     "Asset Type": "Edition",
     "Type": "Gouge",
     "Color": "Blue",
@@ -1474,7 +1474,7 @@
     "Surface": "White Worms",
     "Atmosphere": "Universe"
   },
-  "grifters-522-c1f3": {
+  "grifters-522": {
     "Asset Type": "Edition",
     "Type": "Flimflam",
     "Color": "Green",
@@ -1483,7 +1483,7 @@
     "Surface": "No.2",
     "Atmosphere": "JPEGs"
   },
-  "grifters-532-c1f3": {
+  "grifters-532": {
     "Asset Type": "Edition",
     "Type": "Gouge",
     "Color": "Green",
@@ -1492,7 +1492,7 @@
     "Surface": "Mo Multi",
     "Atmosphere": "Bubbles"
   },
-  "grifters-542-c1f3": {
+  "grifters-542": {
     "Asset Type": "Edition",
     "Type": "Gouge",
     "Color": "Blue",
@@ -1501,7 +1501,7 @@
     "Surface": "Flies",
     "Atmosphere": "DMs"
   },
-  "grifters-547-c1f3": {
+  "grifters-547": {
     "Asset Type": "Edition",
     "Type": "Gouge",
     "Color": "Blue",
@@ -1510,7 +1510,7 @@
     "Surface": "No.1",
     "Atmosphere": "Save As"
   },
-  "grifters-572-c1f3": {
+  "grifters-572": {
     "Asset Type": "Edition",
     "Type": "Gouge",
     "Color": "Yellow",
@@ -1519,7 +1519,7 @@
     "Surface": "White Worms",
     "Atmosphere": "Universe"
   },
-  "grifters-574-c1f3": {
+  "grifters-574": {
     "Asset Type": "Edition",
     "Type": "Shady",
     "Color": "Blue",
@@ -1528,73 +1528,73 @@
     "Surface": "No.2",
     "Atmosphere": "Bubbles"
   },
-  "grifters-614-c1f3": {
+  "grifters-614": {
     "Asset Type": "Edition",
     "Type": "Shady",
     "Color": "Yellow"
   },
-  "masks-of-luci-86-249a": {
+  "masks-of-luci-86": {
     "Attendee Type": "Masked Player",
     "Category": "Luminate",
     "Material": "Crystal",
     "Region": "Endless Cycle",
     "Adornments": "Sacred Lines"
   },
-  "masks-of-luci-94-249a": {
+  "masks-of-luci-94": {
     "Attendee Type": "Masked Player",
     "Category": "Understory",
     "Material": "Wood",
     "Region": "First Cycle"
   },
-  "masks-of-luci-142-249a": {
+  "masks-of-luci-142": {
     "Attendee Type": "Masked Player",
     "Category": "Network",
     "Material": "Moss",
     "Region": "Kingdom"
   },
-  "masks-of-luci-191-249a": {
+  "masks-of-luci-191": {
     "Attendee Type": "Masked Guest",
     "Category": "Canopic",
     "Material": "Stone",
     "Region": "Nectar Springs"
   },
-  "masks-of-luci-240-249a": {
+  "masks-of-luci-240": {
     "Attendee Type": "Council Mask",
     "Material": "Bone",
     "Region": "Bankless Canopy",
     "Adornments": "Teeth"
   },
-  "masks-of-luci-241-249a": {
+  "masks-of-luci-241": {
     "Attendee Type": "Masked Player",
     "Category": "Foundation",
     "Material": "Wood"
   },
-  "masks-of-luci-303-249a": {
+  "masks-of-luci-303": {
     "Attendee Type": "Masked Player",
     "Category": "Network",
     "Material": "Fungi",
     "Region": "Auctioneers Valley"
   },
-  "masks-of-luci-349-249a": {
+  "masks-of-luci-349": {
     "Attendee Type": "Masked Player",
     "Category": "Foundation",
     "Material": "Quartz",
     "Region": "Bankless Canopy"
   },
-  "masks-of-luci-394-249a": {
+  "masks-of-luci-394": {
     "Attendee Type": "Masked Guest",
     "Category": "Luminate",
     "Material": "Visions",
     "Region": "Monument Garden",
     "Adornments": "Protrusions"
   },
-  "masks-of-luci-435-249a": {
+  "masks-of-luci-435": {
     "Attendee Type": "Masked Guest",
     "Category": "Herd",
     "Material": "Stone",
     "Region": "Endless Cycle"
   },
-  "masks-of-luci-442-249a": {
+  "masks-of-luci-442": {
     "Attendee Type": "Masked Guest",
     "Category": "Root",
     "Material": "Flesh",
@@ -1602,59 +1602,59 @@
     "Adornments": "Ears",
     "Bond": "Wolfpack"
   },
-  "masks-of-luci-476-249a": {
+  "masks-of-luci-476": {
     "Attendee Type": "Masked Guest",
     "Category": "Understory",
     "Material": "Wood",
     "Region": "Endless Cycle",
     "Adornments": "Protrusions"
   },
-  "masks-of-luci-504-249a": {
+  "masks-of-luci-504": {
     "Attendee Type": "Masked Guest",
     "Category": "Foundation",
     "Material": "Vine",
     "Region": "Kingdom",
     "Adornments": "Protrusions"
   },
-  "masks-of-luci-518-249a": {
+  "masks-of-luci-518": {
     "Attendee Type": "Masked Guest",
     "Category": "Canopic",
     "Material": "Stone",
     "Region": "Endless Cycle"
   },
-  "masks-of-luci-540-249a": {
+  "masks-of-luci-540": {
     "Attendee Type": "Masked Guest",
     "Category": "Root",
     "Material": "Stone",
     "Region": "Sprawl"
   },
-  "masks-of-luci-569-249a": {
+  "masks-of-luci-569": {
     "Attendee Type": "Masked Guest",
     "Category": "Order",
     "Material": "Feather",
     "Region": "Sprawl",
     "Adornments": "Horns"
   },
-  "masks-of-luci-591-249a": {
+  "masks-of-luci-591": {
     "Attendee Type": "Council Mask",
     "Material": "Bone",
     "Region": "Endless Cycle",
     "Adornments": "Teeth"
   },
-  "masks-of-luci-597-249a": {
+  "masks-of-luci-597": {
     "Attendee Type": "Masked Guest",
     "Category": "Order",
     "Material": "Metal",
     "Region": "Kingdom",
     "Adornments": "Teeth"
   },
-  "masks-of-luci-609-249a": {
+  "masks-of-luci-609": {
     "Attendee Type": "Masked Guest",
     "Category": "Herd",
     "Material": "Scales",
     "Region": "Nectar Springs"
   },
-  "qql-308-0c88": {
+  "qql-308": {
     "Palette": "Fidenza",
     "Color Mode": "Simple",
     "Structure": "Formation",
@@ -1663,7 +1663,7 @@
     "Spacing": "Dense",
     "Background": "Fidenza Newsprint"
   },
-  "qql-309-0c88": {
+  "qql-309": {
     "Palette": "Fidenza",
     "Color Mode": "Simple",
     "Structure": "Formation",
@@ -1672,32 +1672,32 @@
     "Spacing": "Dense",
     "Background": "Fidenza Newsprint"
   },
-  "pxl-dex-105-ecfb": {
+  "pxl-dex-105": {
     "Pixels": "500000",
     "Allowance": "500000"
   },
-  "pxl-dex-107-ecfb": {
+  "pxl-dex-107": {
     "Pixels": "450000",
     "Allowance": "0"
   },
-  "pxl-dex-130-ecfb": {
+  "pxl-dex-130": {
     "Pixels": "500000",
     "Allowance": "500000"
   },
-  "pxl-dex-139-ecfb": {
+  "pxl-dex-139": {
     "Pixels": "500000",
     "Allowance": "500000"
   },
-  "pxl-dex-141-ecfb": {
+  "pxl-dex-141": {
     "Pixels": "1000000",
     "Allowance": "0"
   },
-  "ack-editions-8-7102": {
+  "ack-editions-8": {
     "Funders Token": "StarryNight Capital",
     "Glitch": "Twilight Blue",
     "Setting": "Nocturne"
   },
-  "cryptopunks-269-3BBB": {
+  "cryptopunks-269": {
     "Type": "Male",
     "Attribute": [
       "Luxurious Beard",
@@ -1706,7 +1706,7 @@
       "Small Shades"
     ]
   },
-  "cryptopunks-1568-3BBB": {
+  "cryptopunks-1568": {
     "Type": "Male",
     "Attribute": [
       "Mustache",
@@ -1714,7 +1714,7 @@
       "Clown Eyes Green"
     ]
   },
-  "cryptopunks-1775-3BBB": {
+  "cryptopunks-1775": {
     "Type": "Female",
     "Attribute": [
       "Earring",
@@ -1722,14 +1722,14 @@
       "Purple Eye Shadow"
     ]
   },
-  "cryptopunks-1887-13f6": {
+  "cryptopunks-1887": {
     "Type": "Male",
     "Attribute": [
       "Police Cap",
       "Nerd Glasses"
     ]
   },
-  "cryptopunks-2412-3BBB": {
+  "cryptopunks-2412": {
     "Type": "Male",
     "Attribute": [
       "Front Beard",
@@ -1737,14 +1737,14 @@
       "Classic Shades"
     ]
   },
-  "cryptopunks-2550-3BBB": {
+  "cryptopunks-2550": {
     "Type": "Male",
     "Attribute": [
       "Goat",
       "Hoodie"
     ]
   },
-  "cryptopunks-2758-3BBB": {
+  "cryptopunks-2758": {
     "Type": "Male",
     "Attribute": [
       "Cap Forward",
@@ -1752,7 +1752,7 @@
       "Clown Eyes Green"
     ]
   },
-  "cryptopunks-3017-3BBB": {
+  "cryptopunks-3017": {
     "Type": "Male",
     "Attribute": [
       "Frown",
@@ -1761,35 +1761,35 @@
       "Eye Mask"
     ]
   },
-  "cryptopunks-3745-3BBB": {
+  "cryptopunks-3745": {
     "Type": "Male",
     "Attribute": [
       "Big Beard",
       "Headband"
     ]
   },
-  "cryptopunks-4063-3BBB": {
+  "cryptopunks-4063": {
     "Type": "Male",
     "Attribute": [
       "Cap Forward",
       "Classic Shades"
     ]
   },
-  "cryptopunks-4081-3BBB": {
+  "cryptopunks-4081": {
     "Type": "Male",
     "Attribute": [
       "Big Beard",
       "Peak Spike"
     ]
   },
-  "cryptopunks-4253-3BBB": {
+  "cryptopunks-4253": {
     "Type": "Male",
     "Attribute": [
       "Earring",
       "Fedora"
     ]
   },
-  "cryptopunks-4558-3BBB": {
+  "cryptopunks-4558": {
     "Type": "Male",
     "Attribute": [
       "Smile",
@@ -1797,14 +1797,14 @@
       "Cap Forward"
     ]
   },
-  "cryptopunks-4633-3BBB": {
+  "cryptopunks-4633": {
     "Type": "Male",
     "Attribute": [
       "Big Beard",
       "Stringy Hair"
     ]
   },
-  "cryptopunks-4776-3BBB": {
+  "cryptopunks-4776": {
     "Type": "Male",
     "Attribute": [
       "Big Beard",
@@ -1813,7 +1813,7 @@
       "Eye Patch"
     ]
   },
-  "cryptopunks-4853-13f6": {
+  "cryptopunks-4853": {
     "Type": "Male",
     "Attribute": [
       "Big Beard",
@@ -1822,14 +1822,14 @@
       "Classic Shades"
     ]
   },
-  "cryptopunks-4926-3BBB": {
+  "cryptopunks-4926": {
     "Type": "Male",
     "Attribute": [
       "Mole",
       "Hoodie"
     ]
   },
-  "cryptopunks-4978-3BBB": {
+  "cryptopunks-4978": {
     "Type": "Male",
     "Attribute": [
       "Chinstrap",
@@ -1837,21 +1837,21 @@
       "Cigarette"
     ]
   },
-  "cryptopunks-5061-3BBB": {
+  "cryptopunks-5061": {
     "Type": "Male",
     "Attribute": [
       "Big Beard",
       "Frumpy Hair"
     ]
   },
-  "cryptopunks-5528-3BBB": {
+  "cryptopunks-5528": {
     "Type": "Male",
     "Attribute": [
       "Spots",
       "Cap Forward"
     ]
   },
-  "cryptopunks-6194-3BBB": {
+  "cryptopunks-6194": {
     "Type": "Male",
     "Attribute": [
       "Big Beard",
@@ -1859,7 +1859,7 @@
       "Eye Patch"
     ]
   },
-  "cryptopunks-6435-3BBB": {
+  "cryptopunks-6435": {
     "Type": "Male",
     "Attribute": [
       "Front Beard",
@@ -1867,7 +1867,7 @@
       "Classic Shades"
     ]
   },
-  "cryptopunks-6479-3BBB": {
+  "cryptopunks-6479": {
     "Type": "Male",
     "Attribute": [
       "Normal Beard",
@@ -1875,14 +1875,14 @@
       "Horned Rim Glasses"
     ]
   },
-  "cryptopunks-6583-3BBB": {
+  "cryptopunks-6583": {
     "Type": "Male",
     "Attribute": [
       "Big Beard",
       "Bandana"
     ]
   },
-  "cryptopunks-6788-3BBB": {
+  "cryptopunks-6788": {
     "Type": "Male",
     "Attribute": [
       "Big Beard",
@@ -1890,7 +1890,7 @@
       "Stringy Hair"
     ]
   },
-  "cryptopunks-6932-3BBB": {
+  "cryptopunks-6932": {
     "Type": "Female",
     "Attribute": [
       "Earring",
@@ -1898,14 +1898,14 @@
       "Clown Eyes Blue"
     ]
   },
-  "cryptopunks-7144-3BBB": {
+  "cryptopunks-7144": {
     "Type": "Male",
     "Attribute": [
       "Hoodie",
       "Vape"
     ]
   },
-  "cryptopunks-7364-3BBB": {
+  "cryptopunks-7364": {
     "Type": "Male",
     "Attribute": [
       "Big Beard",
@@ -1913,7 +1913,7 @@
       "Vape"
     ]
   },
-  "cryptopunks-7728-3BBB": {
+  "cryptopunks-7728": {
     "Type": "Male",
     "Attribute": [
       "Buck Teeth",
@@ -1921,7 +1921,7 @@
       "Small Shades"
     ]
   },
-  "cryptopunks-8259-3BBB": {
+  "cryptopunks-8259": {
     "Type": "Male",
     "Attribute": [
       "Handlebars",
@@ -1929,28 +1929,28 @@
       "Horned Rim Glasses"
     ]
   },
-  "cryptopunks-8561-13f6": {
+  "cryptopunks-8561": {
     "Type": "Male",
     "Attribute": [
       "Cap Forward",
       "Rosy Cheeks"
     ]
   },
-  "cryptopunks-8564-13f6": {
+  "cryptopunks-8564": {
     "Type": "Male",
     "Attribute": [
       "Big Beard",
       "Cap Forward"
     ]
   },
-  "cryptopunks-8779-3BBB": {
+  "cryptopunks-8779": {
     "Type": "Female",
     "Attribute": [
       "Tiara",
       "Clown Eyes Blue"
     ]
   },
-  "cryptopunks-9019-3BBB": {
+  "cryptopunks-9019": {
     "Type": "Male",
     "Attribute": [
       "Big Beard",
@@ -1959,14 +1959,14 @@
       "VR"
     ]
   },
-  "cryptopunks-9363-3BBB": {
+  "cryptopunks-9363": {
     "Type": "Male",
     "Attribute": [
       "Cap Forward",
       "Clown Eyes Green"
     ]
   },
-  "cryptopunks-9405-3BBB": {
+  "cryptopunks-9405": {
     "Type": "Male",
     "Attribute": [
       "Big Beard",
@@ -1974,7 +1974,7 @@
       "Small Shades"
     ]
   },
-  "cryptopunks-9665-3BBB": {
+  "cryptopunks-9665": {
     "Type": "Male",
     "Attribute": [
       "Earring",
@@ -1982,7 +1982,7 @@
       "Horned Rim Glasses"
     ]
   },
-  "cryptopunks-9968-3BBB": {
+  "cryptopunks-9968": {
     "Type": "Male",
     "Attribute": [
       "Big Beard",
@@ -1990,14 +1990,14 @@
       "Big Shades"
     ]
   },
-  "cryptopunks-9985-3BBB": {
+  "cryptopunks-9985": {
     "Type": "Male",
     "Attribute": [
       "Big Beard",
       "Vampire Hair"
     ]
   },
-  "cryptopunks-9133-3BBB": {
+  "cryptopunks-9133": {
     "Type": "Male",
     "Attribute": [
       "Luxurious Beard",
@@ -2005,25 +2005,25 @@
       "Clown Eyes Green"
     ]
   },
-  "lightyears-1-f3f5": {
+  "lightyears-1": {
     "Copyright": "© 2022 DLC Arts LLC. All Rights Reserved."
   },
-  "lightyears-13-f3f5": {
+  "lightyears-13": {
     "Copyright": "© 2022 DLC Arts LLC. All Rights Reserved."
   },
-  "lightyears-30-f3f5": {
+  "lightyears-30": {
     "Copyright": "© 2022 DLC Arts LLC. All Rights Reserved."
   },
-  "lightyears-42-f3f5": {
+  "lightyears-42": {
     "Copyright": "© 2022 DLC Arts LLC. All Rights Reserved."
   },
-  "lightyears-67-f3f5": {
+  "lightyears-67": {
     "Copyright": "© 2022 DLC Arts LLC. All Rights Reserved."
   },
-  "lightyears-72-f3f5": {
+  "lightyears-72": {
     "Copyright": "© 2022 DLC Arts LLC. All Rights Reserved."
   },
-  "meebit-3611-6bc7": {
+  "meebit-3611": {
     "Type": "Human",
     "Hair Style": "Buzzcut",
     "Hair Color": "Dark",
@@ -2038,68 +2038,68 @@
     "Jersey Number": "0",
     "Tattoo": "No"
   },
-  "notable-pepes-354-8e43": {
+  "notable-pepes-354": {
     "Series": "7",
     "Card": "49"
   },
-  "lights-3-2006": {
+  "lights-3": {
     "Code Size (Kb)": "11"
   },
-  "pxl-pod-42-88b3": {
+  "pxl-pod-42": {
     "Pixels": "1000000",
     "Pods": "1"
   },
-  "pxl-pod-55-88b3": {
+  "pxl-pod-55": {
     "Pixels": "1000000",
     "Pods": "1"
   },
-  "pxl-pod-61-88b3": {
+  "pxl-pod-61": {
     "Pixels": "1000000",
     "Pods": "1"
   },
-  "pxl-pod-108-88b3": {
+  "pxl-pod-108": {
     "Pixels": "1000000",
     "Pods": "1"
   },
-  "pxl-pod-122-88b3": {
+  "pxl-pod-122": {
     "Pixels": "1000000",
     "Pods": "1"
   },
-  "pxl-pod-175-88b3": {
+  "pxl-pod-175": {
     "Pixels": "1000000",
     "Pods": "1"
   },
-  "pxl-pod-209-88b3": {
+  "pxl-pod-209": {
     "Pixels": "1000000",
     "Pods": "1"
   },
-  "pxl-pod-215-88b3": {
+  "pxl-pod-215": {
     "Pixels": "1000000",
     "Pods": "1"
   },
-  "pxl-pod-241-88b3": {
+  "pxl-pod-241": {
     "Pixels": "1000000",
     "Pods": "2"
   },
-  "pxl-pod-242-88b3": {
+  "pxl-pod-242": {
     "Pixels": "1000000",
     "Pods": "2"
   },
-  "x0x-576-3753": {
+  "x0x-576": {
     "Image": "Xx",
     "Noise": "Fractional/Simplex",
     "Mode": "Circular",
     "Color": "Saturated Random"
   },
-  "skulls-of-luci-12-d27c": {
+  "skulls-of-luci-12": {
     "The Blueprint Skull Token Id": "33019",
     "The Blueprint Skull Contract Address": "0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0"
   },
-  "skulls-of-luci-20-d27c": {
+  "skulls-of-luci-20": {
     "The Blueprint Skull Token Id": "33019",
     "The Blueprint Skull Contract Address": "0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0"
   },
-  "cryptopunks-4752-3BBB": {
+  "cryptopunks-4752": {
     "Type": "Female",
     "Attribute": [
       "Purple Lipstick",
@@ -2107,14 +2107,14 @@
       "Horned Rim Glasses"
     ]
   },
-  "cryptopunks-5381-3BBB": {
+  "cryptopunks-5381": {
     "Type": "Male",
     "Attribute": [
       "Cowboy Hat",
       "Clown Eyes Green"
     ]
   },
-  "cryptopunks-7036-3BBB": {
+  "cryptopunks-7036": {
     "Type": "Male",
     "Attribute": [
       "Earring",
