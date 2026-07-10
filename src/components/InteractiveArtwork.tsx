@@ -14,14 +14,17 @@ import { useMotion } from "./MotionPreference";
  * `data:` URI: the art spawns a Web Worker from a blob URL, which browsers block in
  * a `data:`/opaque-origin document (→ black square) but run from the https origin.
  *
- * Motion-preference wiring, mirrors PieceVideo:
+ * Motion-preference wiring, mirrors PieceVideo and matches the
+ * collection page (SinglePieceDisplay) so the artwork behaves the
+ * same way in every context:
  *   - "play-all" → run immediately (mounts iframe on load).
- *   - "hover"    → run on pointer-enter; revert to still on pointer-leave.
- *                  Once run for the first time the iframe stays mounted and is
- *                  toggled via opacity, so subsequent hovers don't reload it.
- *   - "off"      → still only; user opts in via the "Run interactive" button.
- * Reduced-motion and small-viewport (≤768px) suppress hover / autoplay
- * regardless of the mode — the button remains available in every case.
+ *   - "hover"    → run on pointer-enter; once run for the first time the
+ *                  iframe stays mounted and is toggled via opacity, so
+ *                  subsequent hovers don't reload it.
+ *   - "off"      → still only.
+ * Reduced-motion and small-viewport (≤768px) suppress hover / autoplay.
+ * No manual play/stop chrome — the reader's global Media preference is
+ * the switch.
  */
 export default function InteractiveArtwork({
   src,
@@ -129,32 +132,6 @@ export default function InteractiveArtwork({
           />
         )}
       </div>
-      {/* Controls sit in a row directly under the artwork so the "Run
-          interactive" affordance reads as part of the work rather than
-          part of the metadata block below. Suppressed when the piece is
-          already always-on (play-all mode) — the button would be dead
-          chrome. Kept in hover mode as a fallback for touch and non-
-          pointer devices where hover doesn't apply. */}
-      {mode !== "play-all" && (
-        <div className="mt-1 flex items-center gap-4 text-[13px] uppercase tracking-[0.08em] text-foreground-secondary">
-          {running ? (
-            <button
-              onClick={() => setRunning(false)}
-              className="transition-colors duration-200 hover:text-foreground"
-            >
-              Show still
-            </button>
-          ) : (
-            <button
-              onClick={activate}
-              aria-label={`Run ${title} interactive`}
-              className="flex items-center gap-2 transition-colors duration-200 hover:text-foreground"
-            >
-              <span aria-hidden>▶</span> Run interactive
-            </button>
-          )}
-        </div>
-      )}
     </div>
   );
 }
