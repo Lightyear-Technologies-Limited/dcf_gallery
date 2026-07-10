@@ -447,8 +447,8 @@ export default async function CollectionPage({
     <details
       className="group max-w-[520px] [&_summary::-webkit-details-marker]:hidden"
     >
-      <summary className="cursor-pointer list-none text-muted hover:text-foreground transition-colors duration-200 inline-flex items-center gap-2 select-none">
-        <span className="text-[10px] tracking-[0.1em] uppercase font-medium">Browse by trait</span>
+      <summary className="cursor-pointer list-none text-[10px] tracking-[0.1em] uppercase text-muted font-medium hover:text-foreground transition-colors duration-200 inline-flex items-center gap-2 select-none">
+        <span>Browse by trait</span>
         <span
           aria-hidden
           className="inline-block transition-transform duration-200 group-open:rotate-90"
