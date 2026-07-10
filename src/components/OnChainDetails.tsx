@@ -51,7 +51,7 @@ export default function OnChainDetails({
 
   return (
     <details className="group/details text-[13px] [&_summary::-webkit-details-marker]:hidden">
-      <summary className="cursor-pointer list-none text-muted hover:text-foreground transition-colors duration-200 inline-flex items-center gap-2 select-none">
+      <summary className="cursor-pointer list-none text-[10px] tracking-[0.1em] uppercase font-medium text-muted hover:text-foreground transition-colors duration-200 inline-flex items-center gap-2 select-none">
         <span>Blockchain details</span>
         <span
           aria-hidden

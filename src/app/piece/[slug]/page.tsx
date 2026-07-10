@@ -347,11 +347,14 @@ export default async function PiecePage({
   const videoPinPending =
     provenance?.animation?.type === "video" && !provenance.animation.pinned;
   const preservedBlock = provenance?.cid && !videoPinPending ? (
-    <p className="text-[13px] text-muted">
-      <span className="text-foreground-secondary">Preserved by Hivemind:</span>
-      <br />
-      Pinned to IPFS{provenance.verifiedAt ? ", integrity verified" : ""}
-    </p>
+    <div>
+      <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-2">
+        Preserved by Hivemind
+      </p>
+      <p className="text-[13px] text-muted">
+        Pinned to IPFS{provenance.verifiedAt ? ", integrity verified" : ""}
+      </p>
+    </div>
   ) : null;
 
   const artistDisplay = artist ? getArtistDisplayName(artist.slug, artist.name) : undefined;

@@ -24,7 +24,7 @@ export default function ShareButton({ title }: { title: string }) {
     <button
       type="button"
       onClick={onShare}
-      className="text-left hover:text-foreground transition-colors duration-200"
+      className="text-left text-[10px] tracking-[0.1em] uppercase font-medium text-muted hover:text-foreground transition-colors duration-200"
     >
       Share
     </button>

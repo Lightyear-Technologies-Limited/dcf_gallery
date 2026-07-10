@@ -77,7 +77,7 @@ export default function Features({ traits, collectionSlug, defaultOpen = false, 
       className="group text-[13px] [&_summary::-webkit-details-marker]:hidden"
       open={defaultOpen}
     >
-      <summary className="cursor-pointer list-none text-muted hover:text-foreground transition-colors duration-200 inline-flex items-center gap-2 select-none">
+      <summary className="cursor-pointer list-none text-[10px] tracking-[0.1em] uppercase font-medium text-muted hover:text-foreground transition-colors duration-200 inline-flex items-center gap-2 select-none">
         <span>{label}</span>
         <span
           aria-hidden
