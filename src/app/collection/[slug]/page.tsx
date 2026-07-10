@@ -550,12 +550,14 @@ export default async function CollectionPage({
                 (i.e. when totalSupply is set) - reading "30 works" twice in
                 the first three lines of the page is redundant. Falls back to
                 inline when the holdings line is absent (collections without
-                totalSupply). Always suppressed on filtered views. */}
+                totalSupply). Applies regardless of filter state — the
+                collection-level header describes the collection, not
+                the subset currently visible. */}
             <div className="flex items-baseline gap-2.5">
               <h1 className="font-serif display-sm">
                 {collectionName}
               </h1>
-              {!traitFilter && !col.totalSupply && (
+              {!col.totalSupply && (
                 <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium tabular-nums">{sorted.length} {sorted.length === 1 ? "work" : "works"}</span>
               )}
             </div>
@@ -584,11 +586,12 @@ export default async function CollectionPage({
                       artist contract (Lights, Piano Blossoms): each piece
                       is unique, not a series output.
                     Surfaces when totalSupply > 1; suppressed for true
-                    singletons where the 1/1 is implicit. */}
-                {!traitFilter &&
-                  col.totalSupply !== undefined &&
+                    singletons where the 1/1 is implicit. Renders in all
+                    filter states — collection-level facts don't change
+                    when the reader narrows to a subset. */}
+                {col.totalSupply !== undefined &&
                   col.totalSupply > 1 && <p>{editionType}</p>}
-                {!traitFilter && col.contractAddress && (
+                {col.contractAddress && (
                   <p className="inline-flex items-baseline gap-x-2">
                     <span>Contract:</span>
                     <CopyableHash value={col.contractAddress} />
@@ -604,7 +607,7 @@ export default async function CollectionPage({
                   </p>
                 )}
                 {col.mintDate && <p>Minted {col.mintDate}</p>}
-                {!traitFilter && col.platform && <p>{col.platform}</p>}
+                {col.platform && <p>{col.platform}</p>}
                 {col.codeSizeKb !== undefined && (
                   <p>Code size {col.codeSizeKb} Kb</p>
                 )}
