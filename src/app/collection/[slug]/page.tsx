@@ -775,30 +775,11 @@ export default async function CollectionPage({
             </div>
         </div>
 
-      {/* Filter reminder above the gallery: the chipBlock at the top of
-          the editorial column carries the full status row, but a reader
-          who has scrolled past the editorial header should still see at
-          a glance that they're filtered and have a one-click escape. */}
-      {traitFilter && pieces.length > 0 && (
-        <div className="pt-6 flex items-baseline gap-3">
-          <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium">
-            Filter
-          </span>
-          <span className="text-[13px] text-foreground-secondary">
-            {traitFilter.key}: <span className="text-foreground font-medium">{traitFilter.value}</span>
-          </span>
-          <Link
-            href={`/collection/${slug}`}
-            aria-label="Clear filter"
-            className="ml-auto text-[10px] tracking-[0.1em] uppercase text-muted font-medium hover:text-foreground transition-colors duration-200"
-          >
-            Clear
-          </Link>
-        </div>
-      )}
-
-      {/* Gallery. */}
-      <div className={`${traitFilter ? "pt-4" : "pt-6"} pb-24`}>
+      {/* Gallery. The sidebar chipBlock carries the filter status and
+          clear affordance; a second filter reminder above the gallery
+          duplicated it (right under EXHIBITIONS on the sidebar spread)
+          without adding anything. Removed. */}
+      <div className="pt-6 pb-24">
         {(() => {
           const heroLayout = getHeroLayout(slug);
           // Filtered view: bypass hero / fixed-row / single-piece layouts
