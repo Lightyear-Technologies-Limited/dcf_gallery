@@ -576,7 +576,7 @@ export default async function CollectionPage({
                 nothing to say are omitted. */}
             <div className="mt-8">
               <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
-                Collection Details
+                Collection details
               </p>
               <div className="space-y-1 text-[13px] text-muted tabular-nums">
                 {/* Type — canonical web3 edition shorthand.
@@ -696,7 +696,7 @@ export default async function CollectionPage({
               {col.curatorNote && (
                 <div className="border-l border-border pl-5">
                   <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
-                    Hivemind Commentary
+                    Hivemind commentary
                   </p>
                   <p className="font-serif text-[16px] leading-[1.65] text-foreground-secondary whitespace-pre-line">
                     {col.curatorNote}

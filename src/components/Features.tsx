@@ -118,7 +118,7 @@ export default function Features({ traits, collectionSlug, defaultOpen = false, 
                 key={`count-${row.key}-${i}`}
                 className="flex justify-between items-center gap-4 py-2.5 border-b border-border"
               >
-                <span className="text-muted shrink-0">Trait Count</span>
+                <span className="text-muted shrink-0">Trait count</span>
                 <span className="text-foreground text-right tabular-nums">{row.count}</span>
               </div>
             );

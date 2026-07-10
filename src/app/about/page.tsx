@@ -63,7 +63,7 @@ export default function AboutPage() {
           updated to reflect the portfolio's actual ten-artist shape rather
           than the thesis's aspirational 6-10 core collections target. */}
       <div className="max-w-[680px] space-y-6">
-        <h2 className="font-serif text-[32px] sm:text-[40px] tracking-tight leading-tight">Working Backwards</h2>
+        <h2 className="font-serif text-[32px] sm:text-[40px] tracking-tight leading-tight">Working backwards</h2>
         <p className="text-[16px] text-foreground-secondary leading-[1.65]">
           For an illiquid asset class, the most desirable end state has to be
           defined first, then the plan to reach it works backward from there.
@@ -86,9 +86,9 @@ export default function AboutPage() {
           matter for a public reader; examples are verified DCF holdings
           (White Mono Fidenza, Return Zero, A Slight Lack of Symmetry). */}
       <div className="max-w-[680px] pt-12 space-y-6">
-        <h2 className="font-serif text-[32px] sm:text-[40px] tracking-tight leading-tight">The Curation</h2>
+        <h2 className="font-serif text-[32px] sm:text-[40px] tracking-tight leading-tight">The curation</h2>
         <div>
-          <p className="text-[16px] font-medium text-foreground">Artist and Collection</p>
+          <p className="text-[16px] font-medium text-foreground">Artist and collection</p>
           <p className="text-[16px] text-foreground-secondary leading-[1.65] mt-1">
             Digital art sits within Contemporary Art, where the actions of a
             living artist still shape an artwork&rsquo;s enduring value. An
@@ -99,7 +99,7 @@ export default function AboutPage() {
           </p>
         </div>
         <div>
-          <p className="text-[16px] font-medium text-foreground">Trait Concentration</p>
+          <p className="text-[16px] font-medium text-foreground">Trait concentration</p>
           <p className="text-[16px] text-foreground-secondary leading-[1.65] mt-1">
             Within a collection, Hivemind leans into desirable traits when
             pricing is opportunistic. For example, Tyler Hobbs&rsquo;s Fidenza
@@ -110,7 +110,7 @@ export default function AboutPage() {
           </p>
         </div>
         <div>
-          <p className="text-[16px] font-medium text-foreground">1/1 Keystones</p>
+          <p className="text-[16px] font-medium text-foreground">1/1 keystones</p>
           <p className="text-[16px] text-foreground-secondary leading-[1.65] mt-1">
             1/1s are acquired as keystones, not standalone trophies. Tyler
             Hobbs&rsquo;s <em>Return Zero</em>, the precursor algorithm to
@@ -124,7 +124,7 @@ export default function AboutPage() {
 
       {/* Five Chapters */}
       <div className="pt-12 pb-8">
-        <h2 className="font-serif text-[32px] sm:text-[40px] tracking-tight leading-tight max-w-[680px]">Five Chapters</h2>
+        <h2 className="font-serif text-[32px] sm:text-[40px] tracking-tight leading-tight max-w-[680px]">Five chapters</h2>
         <p className="text-[16px] text-foreground-secondary leading-[1.65] mt-4 max-w-[680px]">
           The ten artists are grouped into five chapters of digital
           art&rsquo;s first decades.
@@ -190,7 +190,7 @@ export default function AboutPage() {
 
         <div className="mt-8 border-t border-border pt-6">
           <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium">
-            Investor Relations
+            Investor relations
           </p>
           <a
             href="mailto:investor.relations@hivemind.capital"

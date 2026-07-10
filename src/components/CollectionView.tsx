@@ -361,7 +361,7 @@ export default function CollectionView({ sections, artists }: Props) {
           reader sees the collection scale even when nothing is filtered.
           "All N works..." reads as institutional scope; "X of N works..."
           reads as filter subset. */}
-      <p className="text-[11px] text-muted tabular-nums pt-2">
+      <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium tabular-nums pt-2">
         {hasFilters
           ? `${visiblePieces} of ${totalPieces} works in the Hivemind collection`
           : `All ${totalPieces} works in the Hivemind collection`}
