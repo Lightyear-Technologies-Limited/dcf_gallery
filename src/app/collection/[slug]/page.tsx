@@ -397,31 +397,38 @@ export default async function CollectionPage({
   // affordance renders alongside the summary when filtered so the
   // reader can drop the filter without hunting for a chip.
   const traitDisclosure = traitIndexRows.length > 0 ? (
-    <details
-      className="group max-w-[520px] [&_summary::-webkit-details-marker]:hidden"
-      open={!!traitFilter}
-    >
-      <summary className="cursor-pointer list-none text-[10px] tracking-[0.1em] uppercase text-muted font-medium hover:text-foreground transition-colors duration-200 inline-flex items-center gap-2 select-none">
-        <span>Browse by trait</span>
-        <span
-          aria-hidden
-          className="inline-block transition-transform duration-200 group-open:rotate-90"
+    <div className="max-w-[520px]">
+      {/* Clear sits as a sibling to <details> (not inside the summary),
+          so clicking it doesn't also toggle the disclosure. A server
+          component can't use onClick to stopPropagation, so structure
+          rather than JS handles the disambiguation. */}
+      <div className="flex items-baseline gap-3">
+        <details
+          className="group [&_summary::-webkit-details-marker]:hidden"
+          open={!!traitFilter}
         >
-          &rsaquo;
-        </span>
+          <summary className="cursor-pointer list-none text-[10px] tracking-[0.1em] uppercase text-muted font-medium hover:text-foreground transition-colors duration-200 inline-flex items-center gap-2 select-none">
+            <span>Browse by trait</span>
+            <span
+              aria-hidden
+              className="inline-block transition-transform duration-200 group-open:rotate-90"
+            >
+              &rsaquo;
+            </span>
+          </summary>
+          {traitIndexInline}
+        </details>
         {traitFilter && (
           <Link
             href={`/collection/${slug}`}
             aria-label="Clear filter"
-            onClick={(e) => e.stopPropagation()}
-            className="ml-3 text-[10px] tracking-[0.1em] uppercase text-muted font-medium hover:text-foreground transition-colors duration-200"
+            className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium hover:text-foreground transition-colors duration-200 self-start"
           >
             Clear
           </Link>
         )}
-      </summary>
-      {traitIndexInline}
-    </details>
+      </div>
+    </div>
   ) : null;
 
   const collectionLd = {
