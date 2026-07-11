@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { MotionProvider } from "@/components/MotionPreference";
+import Header from "@/components/Header";
 import "./globals.css";
 
 /**
@@ -65,8 +67,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
       </head>
-      <body className="antialiased">
-        {children}
+      <body className="antialiased md:pl-32 xl:pl-36">
+        <MotionProvider>
+          <Header />
+          {children}
+        </MotionProvider>
       </body>
     </html>
   );
