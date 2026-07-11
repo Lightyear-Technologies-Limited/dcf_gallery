@@ -1,0 +1,23 @@
+node_modules
+.next
+out
+build
+dist
+
+# Env
+.env
+.env.local
+.env*.local
+
+# Editor
+.vscode
+.idea
+.DS_Store
+
+# Scripts intermediates (regenerable; don't commit)
+scripts/*.json
+!scripts/content-schema.mjs
+
+# Local Playwright artefacts
+test-results
+playwright-report

@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+/* ============================================================
+   OKLCH warm-eggshell palette. Light-mode first (default).
+   Dark mode is a .dark class toggled by ThemeToggle, persisted
+   to localStorage['gallery-theme']. See layout.tsx for the
+   pre-hydration script that applies the class before paint.
+
+   Do NOT swap these to HSL / hex / RGB — the warm hue tint
+   (~60-80 across every token) is what makes the palette read
+   as institutional rather than generic cold grey.
+   ============================================================ */
+
+:root {
+  --background: oklch(0.985 0.005 80);
+  --foreground: oklch(0.20 0.010 60);
+  --foreground-secondary: oklch(0.35 0.008 60);
+  --muted: oklch(0.55 0.006 60);
+  --border: oklch(0.90 0.006 80);
+  --surface: oklch(0.97 0.005 80);
+  --punk-bg: oklch(0.85 0.15 15);
+}
+
+.dark {
+  --background: oklch(0.18 0.005 60);
+  --foreground: oklch(0.95 0.008 80);
+  --foreground-secondary: oklch(0.75 0.006 80);
+  --muted: oklch(0.55 0.006 60);
+  --border: oklch(0.28 0.006 60);
+  --surface: oklch(0.22 0.005 60);
+}
+
+/* ============================================================
+   Local fonts. Argent for display, Instrument Sans for body.
+   Loaded via next/font/local in layout.tsx; the class names
+   here reference the CSS variables exposed by next/font.
+   ============================================================ */
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-foreground-secondary: var(--foreground-secondary);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-surface: var(--surface);
+  --color-punk: var(--punk-bg);
+
+  --font-serif: var(--font-argent);
+  --font-sans: var(--font-instrument);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-feature-settings: "tnum" on, "lnum" on;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================================
+   Display type — masthead H1 on every index page.
+   Argent Thin at a fluid clamp so mobile and desktop both look
+   intentional without dropping to placeholder small size.
+   ============================================================ */
+
+.display-sm {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.display {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(40px, 6vw, 80px);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+}
+
+/* Selection highlight — warm, subtle, matches palette */
+::selection {
+  background: var(--surface);
+  color: var(--foreground);
+}
