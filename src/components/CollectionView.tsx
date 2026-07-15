@@ -249,13 +249,24 @@ export default function CollectionView({ sections, artists }: Props) {
   // clicking a button in either updates everything.
   const filterContent = (
     <>
-      {/* Row 1: Artists. Mask gives a fade on the trailing edge when overflowing.
-          "All" moved to its own middle row so artist items and chapter items
-          align in the same left column. */}
+      {/* Row 1: Artists. All leads the row (clears both artist + chapter
+          state). Mask gives a fade on the trailing edge when overflowing. */}
       <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide [mask-image:linear-gradient(to_right,black_calc(100%-24px),transparent)]">
         <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium shrink-0 w-20">
           Artist
         </span>
+        <button
+          type="button"
+          onClick={clearAll}
+          aria-label="Clear all filters"
+          className={`text-[13px] whitespace-nowrap shrink-0 transition-colors duration-200 ${
+            !hasFilters
+              ? "text-foreground"
+              : "text-muted hover:text-foreground"
+          }`}
+        >
+          All
+        </button>
         {artists.map((a) => {
           const inChapter = activeChapter ? activeChapter.artists.includes(a.slug) : true;
           const excluded = excludedArtists.includes(a.slug);
@@ -295,27 +306,8 @@ export default function CollectionView({ sections, artists }: Props) {
         })}
       </div>
 
-      {/* Middle row: shared All. Sits between the Artist and Chapter rows
-          so items in both rows column-align. Blank label slot keeps the
-          button's left edge at the same column as the artist/chapter
-          content beside it. */}
-      <div className="flex items-center gap-4">
-        <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium shrink-0 w-20" aria-hidden />
-        <button
-          type="button"
-          onClick={clearAll}
-          aria-label="Clear all filters"
-          className={`text-[13px] whitespace-nowrap shrink-0 transition-colors duration-200 ${
-            !hasFilters
-              ? "text-foreground"
-              : "text-muted hover:text-foreground"
-          }`}
-        >
-          All
-        </button>
-      </div>
-
-      {/* Row 3: Chapters */}
+      {/* Row 2: Chapters. No All here; the Artist row's All clears
+          everything. */}
       <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide [mask-image:linear-gradient(to_right,black_calc(100%-24px),transparent)]">
         <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium shrink-0 w-20">Chapter</span>
         {CHAPTERS.map((ch) => {
@@ -384,12 +376,6 @@ export default function CollectionView({ sections, artists }: Props) {
           <h1 className="font-serif display-sm">
             Hivemind Digital Culture Fund
           </h1>
-          {/* Lede + Thesis link. Tight vertical rhythm so the filter row
-              sits close under the CTA rather than floating in white space. */}
-          <p className="mt-4 text-[17px] sm:text-[18px] leading-[1.6] text-foreground-secondary max-w-2xl">
-            Digital art&rsquo;s emergent canon, held by Hivemind Capital
-            Partners. Acquired after the first market cycle.
-          </p>
           <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-[13px]">
             <Link
               href="/thesis"
