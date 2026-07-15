@@ -89,7 +89,6 @@ ${collectionList}
 
 - **Fund**: Hivemind Digital Culture Fund
 - **Parent firm**: Hivemind Capital Partners (https://www.hivemind.capital)
-- **Investor relations**: investor.relations@hivemind.capital
 - **Press**: press@hivemind.capital
 - **X**: https://x.com/HivemindCap
 

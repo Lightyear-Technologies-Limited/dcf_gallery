@@ -194,17 +194,6 @@ export default function AboutPage() {
           </a>
         </div>
 
-        <div className="mt-12">
-          <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium">
-            Investor relations
-          </p>
-          <a
-            href="mailto:investor.relations@hivemind.capital?subject=Hivemind%20DCF%20-%20LP%20inquiry"
-            className="text-[15px] text-foreground-secondary hover:text-foreground transition-colors duration-200 inline-block underline underline-offset-4 decoration-border hover:decoration-foreground mt-2 font-mono"
-          >
-            investor.relations@hivemind.capital
-          </a>
-        </div>
       </div>
     </div>
   );

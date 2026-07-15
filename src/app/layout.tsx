@@ -106,12 +106,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               <Link href="/thesis" className="hover:text-foreground transition-colors duration-200">Thesis</Link>
               <Link href="/press" className="hover:text-foreground transition-colors duration-200">Press</Link>
               <a
-                href="mailto:investor.relations@hivemind.capital?subject=Hivemind%20DCF%20-%20LP%20inquiry"
-                className="hover:text-foreground transition-colors duration-200"
-              >
-                Investor relations
-              </a>
-              <a
                 href="https://x.com/HivemindCap"
                 target="_blank"
                 rel="noopener noreferrer"

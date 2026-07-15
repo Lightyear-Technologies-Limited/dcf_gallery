@@ -311,11 +311,21 @@ export default function CollectionView({ sections, artists }: Props) {
         })}
       </div>
 
-      {/* Row 2: Chapters. No "All" affordance on this row — a single
-          "All" leads the Artist row and clears everything. Two "All"
-          buttons doing the same thing read as duplicated chrome. */}
+      {/* Row 2: Chapters */}
       <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide [mask-image:linear-gradient(to_right,black_calc(100%-24px),transparent)]">
         <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium shrink-0 w-20">Chapter</span>
+        <button
+          type="button"
+          onClick={selectChapterAll}
+          aria-label="Show all chapters"
+          className={`text-[13px] whitespace-nowrap shrink-0 transition-colors duration-200 ${
+            !hasFilters
+              ? "text-foreground"
+              : "text-muted hover:text-foreground"
+          }`}
+        >
+          All
+        </button>
         {CHAPTERS.map((ch) => {
           const isExplicit = chapterFilter === ch.slug;
           const isImplied = impliedChapter?.slug === ch.slug;
@@ -398,12 +408,6 @@ export default function CollectionView({ sections, artists }: Props) {
             >
               Read the thesis
             </Link>
-            <a
-              href="mailto:investor.relations@hivemind.capital?subject=Hivemind%20DCF%20-%20LP%20inquiry"
-              className="text-foreground-secondary hover:text-foreground transition-colors duration-200 underline underline-offset-4 decoration-border hover:decoration-foreground"
-            >
-              Investor relations
-            </a>
           </div>
         </div>
         {/* Sentinel: IntersectionObserver tracks this element to know when

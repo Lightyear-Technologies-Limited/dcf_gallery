@@ -65,43 +65,12 @@ export default function Header() {
               {n.label}
             </Link>
           ))}
-          <a
-            href="mailto:investor.relations@hivemind.capital?subject=Hivemind%20DCF%20-%20LP%20inquiry"
-            className="text-[13px] tracking-[0.02em] transition-colors duration-200 py-2 text-muted hover:text-foreground"
-          >
-            Investor relations
-          </a>
         </nav>
 
-        {/* Preferences disclosure — MotionToggle + ThemeToggle behind a
-            gear affordance so the sidebar rail reads as navigation, not
-            settings. Attribution is on the footer only (not duplicated
-            here) so a reader who scrolls doesn't see it twice. */}
-        <div className="mt-auto pb-8 px-6">
-          <details className="group">
-            <summary className="cursor-pointer list-none text-[10px] tracking-[0.1em] uppercase text-muted font-medium hover:text-foreground transition-colors duration-200 inline-flex items-center gap-2 select-none">
-              <svg
-                aria-hidden
-                width="12"
-                height="12"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="inline-block"
-              >
-                <circle cx="12" cy="12" r="3" />
-                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
-              </svg>
-              <span>Preferences</span>
-            </summary>
-            <div className="mt-3 space-y-3">
-              <MotionToggle />
-              <ThemeToggle />
-            </div>
-          </details>
+        {/* Motion + theme toggles pinned to the bottom of the rail. */}
+        <div className="mt-auto pb-8 px-6 space-y-5">
+          <MotionToggle />
+          <ThemeToggle />
         </div>
       </aside>
 
@@ -159,13 +128,6 @@ export default function Header() {
                 {n.label}
               </Link>
             ))}
-            <a
-              href="mailto:investor.relations@hivemind.capital?subject=Hivemind%20DCF%20-%20LP%20inquiry"
-              onClick={() => setOpen(false)}
-              className="font-serif text-3xl tracking-[-0.01em] text-foreground-secondary hover:text-foreground transition-colors duration-200"
-            >
-              Investor relations
-            </a>
           </nav>
           <div className="px-8 pb-8 space-y-5">
             <MotionToggle />
