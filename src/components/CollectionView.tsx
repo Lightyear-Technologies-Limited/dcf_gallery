@@ -307,9 +307,11 @@ export default function CollectionView({ sections, artists }: Props) {
       </div>
 
       {/* Row 2: Chapters. No All here; the Artist row's All clears
-          everything. */}
+          everything. Invisible "All" spacer so the first chapter column-
+          aligns with the first artist (a.c.k.), not with the All button. */}
       <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide [mask-image:linear-gradient(to_right,black_calc(100%-24px),transparent)]">
         <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium shrink-0 w-20">Chapter</span>
+        <span aria-hidden className="text-[13px] whitespace-nowrap shrink-0 invisible">All</span>
         {CHAPTERS.map((ch) => {
           const isExplicit = chapterFilter === ch.slug;
           const isImplied = impliedChapter?.slug === ch.slug;
