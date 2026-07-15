@@ -376,8 +376,8 @@ export default function CollectionView({ sections, artists }: Props) {
             across the gutter; eye reads "Hivemind" on the rail and
             "Hivemind Digital Culture Fund" on the page at the same line. */}
         <div className="pt-6">
-          <h1 className="font-serif display-sm inline-flex items-center gap-3 sm:gap-4 flex-wrap">
-            <Wordmark className="h-7 sm:h-9" />
+          <h1 className="font-serif display-sm inline-flex items-center gap-2 sm:gap-3 flex-wrap">
+            <Wordmark className="h-5 sm:h-7" />
             <span>Digital Culture Fund</span>
           </h1>
           <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-[13px]">
