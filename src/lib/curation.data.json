@@ -141,11 +141,11 @@
   },
   "pieceRows": {
     "piano-blossoms": {
-      "piano-blossoms-5": 1,
+      "piano-blossoms-1": 1,
       "piano-blossoms-2": 1,
-      "piano-blossoms-4": 1,
-      "piano-blossoms-3": 2,
-      "piano-blossoms-1": 2
+      "piano-blossoms-3": 1,
+      "piano-blossoms-4": 2,
+      "piano-blossoms-5": 2
     },
     "her-favorite-flowers": {
       "her-favorite-flowers-2": 1
@@ -462,11 +462,11 @@
   },
   "pieceOrder": {
     "piano-blossoms": [
-      "piano-blossoms-5",
+      "piano-blossoms-1",
       "piano-blossoms-2",
-      "piano-blossoms-4",
       "piano-blossoms-3",
-      "piano-blossoms-1"
+      "piano-blossoms-4",
+      "piano-blossoms-5"
     ],
     "her-favorite-flowers": [
       "her-favorite-flowers-2"
