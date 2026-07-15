@@ -11,7 +11,6 @@ import { getArtworkImage } from "@/lib/images";
 import { getHeroLayout } from "@/lib/curation";
 import { CHAPTERS, CHAPTER_COLORS } from "@/lib/chapters";
 import ScrollRestore from "./ScrollRestore";
-import Wordmark from "./Wordmark";
 
 interface PieceData {
   id: string;
@@ -376,9 +375,8 @@ export default function CollectionView({ sections, artists }: Props) {
             across the gutter; eye reads "Hivemind" on the rail and
             "Hivemind Digital Culture Fund" on the page at the same line. */}
         <div className="pt-6">
-          <h1 className="font-serif display-sm inline-flex items-center gap-2 sm:gap-3 flex-wrap">
-            <Wordmark className="h-5 sm:h-7" />
-            <span>Digital Culture Fund</span>
+          <h1 className="font-serif display-sm">
+            Hivemind Digital Culture Fund
           </h1>
           <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-[13px]">
             <Link
