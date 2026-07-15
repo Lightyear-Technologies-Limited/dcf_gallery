@@ -43,7 +43,7 @@ export const CHAPTERS: Chapter[] = [
     color: "var(--foreground)",
     artists: ["larva-labs"],
     description:
-      "Art that doubles as identity - profile pictures (PFPs), social signal, membership.",
+      "Art that doubles as identity: profile pictures (PFPs), social signal, membership.",
   },
   {
     name: "Generative Art",

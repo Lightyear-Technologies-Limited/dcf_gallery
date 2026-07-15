@@ -38,15 +38,15 @@ export default function AboutPage() {
           Every technological advance creates new wealth, and with it a new
           generation of collectors looking for art that speaks to their
           cultural moment. The Ethereum blockchain has redefined how digital
-          art is created, owned, traded, and seen, and online communities now
-          drive its value.
+          art is created, owned, traded, and seen; online communities now set
+          its value.
         </p>
         <p>
           In 2024, with the first major market cycle for digital art behind
-          it, Hivemind began acquiring the artists who survived the cycle at
-          prices well below their peaks. Today, the collection is
-          comprehensive and targeted, with grail works by many of the
-          medium&rsquo;s defining names.
+          it, Hivemind began acquiring the artists who had survived at prices
+          set by the reset. Today, the collection is comprehensive and
+          targeted, with defining works across many of the medium&rsquo;s
+          canonical names.
         </p>
       </div>
 
@@ -65,8 +65,8 @@ export default function AboutPage() {
           first; the plan works backward from it. Hivemind is built around ten
           artists, each anchoring a chapter of digital art&rsquo;s first
           decades. Within each chapter, collections are acquired deep rather
-          than wide, and 1/1 pieces are added to elevate the curation of
-          specific movements.
+          than wide, and 1/1 pieces sharpen the reading of specific
+          movements.
         </p>
         <p className="text-[16px] text-foreground-secondary leading-[1.65]">
           Value in this medium is expected to follow a power-law rather than a
@@ -103,8 +103,15 @@ export default function AboutPage() {
           <p className="text-[16px] font-medium text-foreground">1/1 keystones</p>
           <p className="text-[16px] text-foreground-secondary leading-[1.65] mt-1">
             1/1s are acquired as keystones, not standalone trophies. Tyler
-            Hobbs&rsquo;s <em>Return Zero</em>, the precursor algorithm to
-            Fidenza, sits alongside the Fidenza set.{" "}
+            Hobbs&rsquo;s{" "}
+            <Link
+              href="/piece/tyler-hobbs-1"
+              className="underline underline-offset-4 decoration-border hover:decoration-foreground transition-colors duration-200"
+            >
+              <em>Return Zero</em>
+            </Link>
+            , the precursor algorithm to Fidenza, sits alongside the Fidenza
+            set. Dmitri Cherniak&rsquo;s{" "}
             <Link
               href="/piece/superrare-dmitri-cherniak-26901"
               className="underline underline-offset-4 decoration-border hover:decoration-foreground transition-colors duration-200"
@@ -155,7 +162,7 @@ export default function AboutPage() {
           href="/chapters"
           className="mt-8 inline-block text-[13px] text-muted hover:text-foreground transition-colors duration-200 underline underline-offset-4 decoration-border hover:decoration-foreground"
         >
-          Explore all five chapters →
+          Explore all five chapters <span aria-hidden>→</span>
         </Link>
       </div>
 
@@ -187,12 +194,12 @@ export default function AboutPage() {
           </a>
         </div>
 
-        <div className="mt-8 border-t border-border pt-6">
+        <div className="mt-12">
           <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium">
             Investor relations
           </p>
           <a
-            href="mailto:investor.relations@hivemind.capital"
+            href="mailto:investor.relations@hivemind.capital?subject=Hivemind%20DCF%20-%20LP%20inquiry"
             className="text-[15px] text-foreground-secondary hover:text-foreground transition-colors duration-200 inline-block underline underline-offset-4 decoration-border hover:decoration-foreground mt-2 font-mono"
           >
             investor.relations@hivemind.capital

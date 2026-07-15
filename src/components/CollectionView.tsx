@@ -399,7 +399,7 @@ export default function CollectionView({ sections, artists }: Props) {
               Read the thesis
             </Link>
             <a
-              href="mailto:investor.relations@hivemind.capital"
+              href="mailto:investor.relations@hivemind.capital?subject=Hivemind%20DCF%20-%20LP%20inquiry"
               className="text-foreground-secondary hover:text-foreground transition-colors duration-200 underline underline-offset-4 decoration-border hover:decoration-foreground"
             >
               Investor relations

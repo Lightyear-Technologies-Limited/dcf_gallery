@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   },
 };
 
-const BOILERPLATE = `The Hivemind Digital Culture Fund is a curated portfolio of digital art's emergent canon, held by Hivemind Capital Partners. Acquired after the first market cycle, the collection is comprehensive and targeted, with grail works by XCOPY, Tyler Hobbs, Dmitri Cherniak, CryptoPunks, Refik Anadol, Sam Spratt, Kim Asendorf, Operator, Beeple, and a.c.k. Holdings are managed to the custody, security, and operational standards LPs apply to any asset on their book.`;
+const BOILERPLATE = `The Hivemind Digital Culture Fund is a curated portfolio of digital art's emergent canon, held by Hivemind Capital Partners. Acquired after the first market cycle, the collection is comprehensive and targeted, with defining works by XCOPY, Tyler Hobbs, Dmitri Cherniak, Larva Labs (CryptoPunks), Refik Anadol, Sam Spratt, Kim Asendorf, Operator, Beeple, and a.c.k. Holdings are managed to the custody, security, and operational standards LPs apply to any asset on their book.`;
 
 export default function PressPage() {
   const essays = collections
@@ -26,11 +26,14 @@ export default function PressPage() {
 
   return (
     <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12 pt-6 pb-24">
-      <h1 className="font-serif display-sm">Hivemind Digital Culture Fund</h1>
+      {/* Eyebrow + subject H1 pattern, matching /thesis /artists /chapters. */}
+      <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium">
+        Hivemind Digital Culture Fund
+      </p>
+      <h1 className="font-serif display-sm mt-3">Press</h1>
       <div className="mt-6 mb-8 max-w-2xl">
-        <h2 className="font-serif display-sm mb-5">Press</h2>
         <p className="text-[17px] sm:text-[18px] leading-[1.6] text-foreground-secondary">
-          Resources for journalists, editors, and researchers writing about the fund.
+          Resources for journalists, editors, and researchers covering the fund.
         </p>
       </div>
 
@@ -99,7 +102,7 @@ export default function PressPage() {
             press@hivemind.capital
           </a>
           <p className="text-[13px] text-muted mt-4">
-            For high-resolution imagery of specific works, please contact press directly with the piece title and intended publication.
+            For high-resolution imagery of specific works, please email the press address with the piece title and intended publication.
           </p>
         </section>
 

@@ -268,7 +268,7 @@ export const collections: Collection[] = [
     slug: 'ack-editions',
     name: 'ACK Editions',
     artistSlug: 'a-c-k',
-    description: 'A collection of Tyler Hobbs\' 1/1 artworks showcasing his mastery of blending precise digital processes with the chaos that comes from human input and computational surprises. Includes Elektroanima, One One Overflow, and Return Zero.',
+    description: 'Two works by a.c.k. on his 1/1 contract, drawing on the botanical vocabulary that runs through his practice.',
     curatorNote: '',
     medium: 'image',
     contractAddress: '0x232a68a51d6e07357ae025d2a459c16077327102',
@@ -329,7 +329,7 @@ export const collections: Collection[] = [
   },
   {
     slug: 'dataland-biome-lumina',
-    name: 'Dataland - Biome Lumina',
+    name: 'Dataland: Biome Lumina',
     artistSlug: 'refik-anadol',
     description: 'Biome Lumina is the first series of unique living paintings for Dataland, Refik Anadol\'s ambitious Museum of AI Arts. Each artwork is fully dynamic, shaped by incoming environmental data.',
     curatorNote: 'Biome Lumina opens a new chapter for AI-driven art: works that breathe and respond rather than resolve as static outputs. As a founding piece in Anadol\'s Dataland, it anchors a new institutional framework for the medium.',

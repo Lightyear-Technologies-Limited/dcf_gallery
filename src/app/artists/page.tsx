@@ -72,7 +72,7 @@ export default function ArtistsPage() {
       <h1 className="font-serif display-sm mt-3">Artists</h1>
       <div className="mt-6 mb-8 max-w-3xl">
         <p className="text-[17px] sm:text-[18px] leading-[1.6] text-foreground-secondary">
-          Hivemind holds work by ten of the artists who shaped digital art&rsquo;s first decades.
+          Ten artists who shaped digital art&rsquo;s first decades.
         </p>
       </div>
       {sorted.map((artist, idx) => {

@@ -94,14 +94,13 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
             <div>
               <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium">
-                Hivemind Digital Culture Fund. A vehicle of Hivemind Capital Partners
+                Hivemind Digital Culture Fund. A vehicle of Hivemind Capital Partners.
               </p>
               <p className="text-[11px] text-muted mt-1">
                 &copy; 2026 Hivemind Capital Partners. All rights reserved.
               </p>
             </div>
             <div className="flex flex-wrap gap-6 text-[13px] text-muted">
-              <Link href="/" className="hover:text-foreground transition-colors duration-200">Collection</Link>
               <Link href="/artists" className="hover:text-foreground transition-colors duration-200">Artists</Link>
               <Link href="/chapters" className="hover:text-foreground transition-colors duration-200">Chapters</Link>
               <Link href="/thesis" className="hover:text-foreground transition-colors duration-200">Thesis</Link>

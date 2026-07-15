@@ -31,7 +31,7 @@ export default function CopyableHash({ value, prefix = 6 }: Props) {
     <button
       type="button"
       onClick={copy}
-      title={`Click to copy - ${value}`}
+      title={`Click to copy: ${value}`}
       aria-label={`Copy ${value}`}
       className="font-mono text-foreground cursor-pointer hover:opacity-60 transition-opacity duration-200 inline-flex items-baseline gap-1.5"
     >
