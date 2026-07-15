@@ -13,7 +13,7 @@ export default function CuratorNote({ text, attribution, variant = "inline" }: {
         </p>
         {attribution && (
           <cite className="block mt-4 text-[13px] text-muted not-italic">
-            - {attribution}
+            &ndash; {attribution}
           </cite>
         )}
       </blockquote>

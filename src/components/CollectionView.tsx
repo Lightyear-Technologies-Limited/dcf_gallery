@@ -37,7 +37,7 @@ interface Section {
 
 interface Props {
   sections: Section[];
-  artists: { name: string; slug: string; tags: string[] }[];
+  artists: { name: string; slug: string }[];
 }
 
 export default function CollectionView({ sections, artists }: Props) {
@@ -251,10 +251,7 @@ export default function CollectionView({ sections, artists }: Props) {
     <>
       {/* Row 1: Artists. Mask gives a fade on the trailing edge when overflowing. */}
       <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide [mask-image:linear-gradient(to_right,black_calc(100%-24px),transparent)]">
-        <span
-          className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium shrink-0 w-20"
-          title="Tap an artist to filter"
-        >
+        <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium shrink-0 w-20">
           Artist
         </span>
         {/* "All" reset button - leads the artist row. Foreground only
@@ -270,7 +267,7 @@ export default function CollectionView({ sections, artists }: Props) {
           className={`text-[13px] whitespace-nowrap shrink-0 transition-colors duration-200 ${
             !hasFilters
               ? "text-foreground"
-              : "text-muted/40 hover:text-foreground"
+              : "text-muted hover:text-foreground"
           }`}
         >
           All
@@ -291,11 +288,11 @@ export default function CollectionView({ sections, artists }: Props) {
               aria-pressed={isActive}
               className={`text-[13px] whitespace-nowrap shrink-0 transition-colors duration-200 ${
                 outOfChapter
-                  ? "text-muted/40 hover:text-foreground"
+                  ? "text-muted hover:text-foreground"
                   : isActive
                   ? "text-foreground"
                   : hasFilters
-                  ? "text-muted/40 hover:text-foreground"
+                  ? "text-muted hover:text-foreground"
                   : "text-muted hover:text-foreground"
               }`}
               aria-label={
@@ -314,25 +311,11 @@ export default function CollectionView({ sections, artists }: Props) {
         })}
       </div>
 
-      {/* Row 2: Chapters */}
+      {/* Row 2: Chapters. No "All" affordance on this row — a single
+          "All" leads the Artist row and clears everything. Two "All"
+          buttons doing the same thing read as duplicated chrome. */}
       <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide [mask-image:linear-gradient(to_right,black_calc(100%-24px),transparent)]">
         <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium shrink-0 w-20">Chapter</span>
-        {/* "All" reset button - leads the chapter row. Foreground only
-            when nothing is filtered anywhere; dims whenever any filter
-            is active (matches the Artist row's All). Clicking still
-            clears just the chapter filter and keeps the artist as-is. */}
-        <button
-          type="button"
-          onClick={selectChapterAll}
-          aria-label="Show all chapters"
-          className={`text-[13px] whitespace-nowrap shrink-0 transition-colors duration-200 ${
-            !hasFilters
-              ? "text-foreground"
-              : "text-muted/40 hover:text-foreground"
-          }`}
-        >
-          All
-        </button>
         {CHAPTERS.map((ch) => {
           const isExplicit = chapterFilter === ch.slug;
           const isImplied = impliedChapter?.slug === ch.slug;
@@ -346,7 +329,7 @@ export default function CollectionView({ sections, artists }: Props) {
                 isHighlighted
                   ? "text-foreground"
                   : hasFilters
-                  ? "text-muted/40 hover:text-foreground"
+                  ? "text-muted hover:text-foreground"
                   : "text-muted hover:text-foreground"
               }`}
               style={isHighlighted ? { color: ch.color } : undefined}
@@ -399,11 +382,33 @@ export default function CollectionView({ sections, artists }: Props) {
           <h1 className="font-serif display-sm">
             Hivemind Digital Culture Fund
           </h1>
+          {/* Lede + LP path — first-time visitors self-qualify (this is
+              a fund catalogue, not a personal collection) and reach the
+              Thesis / IR one click from the front door. */}
+          <p className="mt-6 text-[17px] sm:text-[18px] leading-[1.6] text-foreground-secondary max-w-2xl">
+            Digital art&rsquo;s emergent canon, held by Hivemind Capital
+            Partners. Acquired after the first market cycle, when the
+            medium&rsquo;s defining artists, collections, and works could
+            be identified with the clarity of historical context.
+          </p>
+          <div className="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-[13px]">
+            <Link
+              href="/thesis"
+              className="text-foreground-secondary hover:text-foreground transition-colors duration-200 underline underline-offset-4 decoration-border hover:decoration-foreground"
+            >
+              Read the thesis
+            </Link>
+            <a
+              href="mailto:investor.relations@hivemind.capital"
+              className="text-foreground-secondary hover:text-foreground transition-colors duration-200 underline underline-offset-4 decoration-border hover:decoration-foreground"
+            >
+              Investor relations
+            </a>
+          </div>
         </div>
         {/* Sentinel: IntersectionObserver tracks this element to know when
-            the reader has moved past the masthead. Sits immediately after
-            the masthead so its viewport intersection mirrors the masthead's. */}
-        <div ref={sentinelRef} aria-hidden className="h-2 w-full" />
+            the reader has moved past the masthead. */}
+        <div ref={sentinelRef} aria-hidden className="h-2 w-full mt-6" />
         {/* Main filter - in flow at its natural position. The page scrolls
             past it naturally on the way down (no sticky, no slide-out);
             the overlay above handles the sticky-on-scroll-up behaviour. */}

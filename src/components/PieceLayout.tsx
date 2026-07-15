@@ -430,9 +430,9 @@ function PieceDescription({
       {isLong && (
         <button
           onClick={() => setExpanded((v) => !v)}
-          className="mt-3 text-[11px] tracking-[0.1em] uppercase text-muted hover:text-foreground transition-colors duration-200 font-medium"
+          className="mt-3 text-[13px] text-muted hover:text-foreground transition-colors duration-200 underline underline-offset-4 decoration-border hover:decoration-foreground"
         >
-          {expanded ? "Show less" : "Read more"}
+          {expanded ? "Read less" : "Read more"}
         </button>
       )}
     </div>

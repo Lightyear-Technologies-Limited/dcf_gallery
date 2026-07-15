@@ -297,8 +297,7 @@ export default async function PiecePage({
       <ul className="space-y-1 text-[13px] leading-snug">
         {piece.exhibitions.map((ex, i) => (
           <li key={i}>
-            <span className="text-muted tabular-nums">{ex.date}</span>
-            <span className="text-muted"> - </span>
+            <span className="text-muted tabular-nums">{ex.date}.</span>{" "}
             {ex.url ? (
               <a
                 href={ex.url}
@@ -416,12 +415,14 @@ export default async function PiecePage({
         {prevPiece ? (
           <Link
             href={pieceHref(prevPiece.slug)}
+            title={prevPiece.title}
             className="group inline-flex flex-col gap-1 max-w-full sm:max-w-[45%]"
           >
-            <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium group-hover:text-foreground transition-colors duration-200">
-              ← Previous work
+            <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium group-hover:text-foreground transition-colors duration-200 inline-flex items-center gap-1.5">
+              <span aria-hidden className="tracking-normal">←</span>
+              Previous work
             </span>
-            <span className="font-serif text-[15px] text-foreground-secondary group-hover:text-foreground transition-colors duration-200 truncate">
+            <span className="font-serif text-[15px] text-foreground-secondary group-hover:text-foreground transition-colors duration-200 line-clamp-2">
               {prevPiece.title}
             </span>
           </Link>
@@ -431,12 +432,14 @@ export default async function PiecePage({
         {nextPiece ? (
           <Link
             href={pieceHref(nextPiece.slug)}
+            title={nextPiece.title}
             className="group inline-flex flex-col gap-1 max-w-full sm:max-w-[45%] sm:items-end sm:text-right"
           >
-            <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium group-hover:text-foreground transition-colors duration-200">
-              Next work →
+            <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium group-hover:text-foreground transition-colors duration-200 inline-flex items-center gap-1.5">
+              Next work
+              <span aria-hidden className="tracking-normal">→</span>
             </span>
-            <span className="font-serif text-[15px] text-foreground-secondary group-hover:text-foreground transition-colors duration-200 truncate">
+            <span className="font-serif text-[15px] text-foreground-secondary group-hover:text-foreground transition-colors duration-200 line-clamp-2">
               {nextPiece.title}
             </span>
           </Link>

@@ -7,11 +7,10 @@ export default function NotFound() {
         404
       </p>
       <h1 className="font-serif display">
-        Not in the collection.
+        Not in the collection
       </h1>
       <p className="text-[20px] text-foreground-secondary leading-[1.6] mt-8 max-w-[52ch]">
-        The page you&rsquo;re looking for isn&rsquo;t here. It may have moved, or the link may be
-        incorrect.
+        The page you&rsquo;re looking for isn&rsquo;t here. It may have been renamed, or the link may be broken.
       </p>
       <Link
         href="/"

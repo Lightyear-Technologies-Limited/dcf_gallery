@@ -55,7 +55,7 @@ export default function ChaptersView({ chapters }: { chapters: ChapterData[] }) 
               <p className="max-w-2xl text-[17px] sm:text-[18px] leading-[1.6] text-foreground-secondary mb-3">
                 {c.description}
               </p>
-              <p className="text-[12px] text-muted mb-9 tabular-nums">
+              <p className="text-[12px] text-muted tabular-nums">
                 {c.artists.map((a, j) => (
                   <span key={a.slug}>
                     {j > 0 && " · "}
@@ -67,20 +67,19 @@ export default function ChaptersView({ chapters }: { chapters: ChapterData[] }) 
                     </Link>
                   </span>
                 ))}
-                {" - "}
-                <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium tabular-nums">
-                  {c.total} {c.total === 1 ? "work" : "works"}
-                </span>
+              </p>
+              <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium tabular-nums mt-2 mb-9">
+                {c.total} {c.total === 1 ? "work" : "works"}
               </p>
 
               <ChapterFilmstrip name={c.name} works={c.works} />
 
               <Link
                 href={`/?chapter=${c.slug}`}
-                className="mt-7 inline-flex items-center gap-2 text-[10px] tracking-[0.1em] uppercase text-muted font-medium hover:text-foreground transition-colors duration-200 tabular-nums"
+                className="mt-7 inline-flex items-center gap-2 text-[13px] text-foreground-secondary hover:text-foreground transition-colors duration-200 underline underline-offset-4 decoration-border hover:decoration-foreground"
               >
                 View all in {c.name}
-                <span aria-hidden>→</span>
+                <span aria-hidden className="no-underline">→</span>
               </Link>
             </div>
           </section>

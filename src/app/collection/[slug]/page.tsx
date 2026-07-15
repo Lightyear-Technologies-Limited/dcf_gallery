@@ -447,12 +447,20 @@ export default async function CollectionPage({
         >
           <summary className="cursor-pointer list-none text-[10px] tracking-[0.1em] uppercase text-muted font-medium hover:text-foreground transition-colors duration-200 inline-flex items-center gap-2 select-none">
             <span>Browse by trait</span>
-            <span
+            <svg
               aria-hidden
+              width="10"
+              height="10"
+              viewBox="0 0 12 12"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               className="inline-block transition-transform duration-200 group-open:rotate-90"
             >
-              &rsaquo;
-            </span>
+              <path d="M4 2l4 4-4 4" />
+            </svg>
           </summary>
           {traitIndexInline}
         </details>
@@ -638,8 +646,7 @@ export default async function CollectionPage({
                 <ul className="space-y-1 text-[13px] leading-snug">
                   {col.exhibitions.map((ex, i) => (
                     <li key={i}>
-                      <span className="text-muted tabular-nums">{ex.date}</span>
-                      <span className="text-muted"> - </span>
+                      <span className="text-muted tabular-nums">{ex.date}.</span>{" "}
                       {ex.url ? (
                         <a
                           href={ex.url}

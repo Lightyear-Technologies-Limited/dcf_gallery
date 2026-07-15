@@ -1,6 +1,18 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { artists, getPiecesByArtist, getCollectionsByArtist } from "@/lib/data";
+
+export const metadata: Metadata = {
+  title: "Artists",
+  description:
+    "Ten artists shaping digital art's first decades. XCOPY, Tyler Hobbs, Dmitri Cherniak, Kim Asendorf, Sam Spratt, Refik Anadol, Operator, Beeple, Larva Labs, a.c.k.",
+  openGraph: {
+    title: "Artists",
+    description:
+      "Ten artists shaping digital art's first decades. XCOPY, Tyler Hobbs, Dmitri Cherniak, Kim Asendorf, Sam Spratt, Refik Anadol, Operator, Beeple, Larva Labs, a.c.k.",
+  },
+};
 import { getArtistEditorial } from "@/lib/editorial";
 import { getArtworkImage } from "@/lib/images";
 import {
@@ -51,17 +63,16 @@ const HERO_ASPECT_OVERRIDES: Record<string, number> = {
 export default function ArtistsPage() {
   return (
     <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12 pt-6 pb-24">
-      {/* Masthead — mirrors the Chapters / Salon masthead (same component +
-          display-sm scale) so the "Hivemind Digital Culture Fund" wordmark
-          holds position across the index pages. */}
-      <h1 className="font-serif display-sm">Hivemind Digital Culture Fund</h1>
-      {/* Section title + framing copy, structured to match a Chapters chapter
-          entry: the section title sits at the chapter-title scale, with a
-          framing paragraph below (replacing the old "N artists" count line). */}
+      {/* Fund name as eyebrow; subject as H1 so index pages each carry
+          their own subject and the reader isn't reading the same H1 on
+          every navigation. */}
+      <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium">
+        Hivemind Digital Culture Fund
+      </p>
+      <h1 className="font-serif display-sm mt-3">Artists</h1>
       <div className="mt-6 mb-8 max-w-3xl">
-        <h2 className="font-serif display-sm mb-5">Artists</h2>
         <p className="text-[17px] sm:text-[18px] leading-[1.6] text-foreground-secondary">
-          Hivemind collects work by ten of digital art&rsquo;s most influential artists.
+          Hivemind holds work by ten of the artists who shaped digital art&rsquo;s first decades.
         </p>
       </div>
       {sorted.map((artist, idx) => {

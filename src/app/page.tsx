@@ -69,7 +69,7 @@ export default function HomePage() {
   return (
     <CollectionView
       sections={sections}
-      artists={sorted.map((a) => ({ name: getArtistDisplayName(a.slug, a.name), slug: a.slug, tags: a.tags }))}
+      artists={sorted.map((a) => ({ name: getArtistDisplayName(a.slug, a.name), slug: a.slug }))}
     />
   );
 }

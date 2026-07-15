@@ -212,7 +212,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
               )}
               {artist.twitter && (
                 <a href={artist.twitter} target="_blank" rel="noopener noreferrer" className="text-muted underline underline-offset-4 decoration-border hover:text-foreground transition-colors duration-200">
-                  Twitter
+                  X
                 </a>
               )}
               {artist.instagram && (
@@ -263,7 +263,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
           <p className="font-serif italic text-[22px] leading-[1.5] text-foreground-secondary">
             {artist.artistQuote}
           </p>
-          <p className="text-[13px] text-muted mt-4">- {artistName}</p>
+          <p className="text-[13px] text-muted mt-4">&ndash; {artistName}</p>
         </div>
       )}
 

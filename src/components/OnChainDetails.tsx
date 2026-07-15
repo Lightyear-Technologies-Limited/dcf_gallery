@@ -53,12 +53,20 @@ export default function OnChainDetails({
     <details className="group/details text-[13px] [&_summary::-webkit-details-marker]:hidden">
       <summary className="cursor-pointer list-none text-[10px] tracking-[0.1em] uppercase font-medium text-muted hover:text-foreground transition-colors duration-200 inline-flex items-center gap-2 select-none">
         <span>Blockchain details</span>
-        <span
+        <svg
           aria-hidden
+          width="10"
+          height="10"
+          viewBox="0 0 12 12"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
           className="inline-block transition-transform duration-200 group-open/details:rotate-90"
         >
-          &rsaquo;
-        </span>
+          <path d="M4 2l4 4-4 4" />
+        </svg>
       </summary>
 
       <div className="mt-4 space-y-0">
@@ -120,7 +128,7 @@ export default function OnChainDetails({
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-mono tabular-nums text-foreground-secondary hover:text-foreground transition-colors duration-200"
-                title={`${provenance.cid} — open the preserved copy`}
+                title={`${provenance.cid}: open the preserved copy`}
               >
                 {provenance.cid.slice(0, 8)}…{provenance.cid.slice(-6)}
               </a>
@@ -147,11 +155,11 @@ export default function OnChainDetails({
 /** Hover tooltip for the Storage label - explains what the label means for
     permanence (the actual fund-relevant property). */
 function storageTooltip(storage: string): string {
-  if (storage === "On-chain") return "Rendered from contract bytecode - survives as long as Ethereum.";
-  if (storage === "IPFS") return "Image pinned to IPFS - distributed storage, persistence depends on continued pinning.";
+  if (storage === "On-chain") return "Rendered from contract bytecode. Survives as long as Ethereum.";
+  if (storage === "IPFS") return "Image pinned to IPFS. Distributed storage; persistence depends on continued pinning.";
   if (storage === "IPFS (Art Blocks proxy)") return "Image on IPFS, served via Art Blocks' media proxy.";
-  if (storage === "Arweave") return "Image on Arweave - paid-once permanent storage.";
-  if (storage === "Centralized") return "Image hosted on a centralized server - depends on that host remaining online.";
+  if (storage === "Arweave") return "Image on Arweave. Paid-once permanent storage.";
+  if (storage === "Centralized") return "Image hosted on a centralized server. Depends on that host remaining online.";
   return storage;
 }
 

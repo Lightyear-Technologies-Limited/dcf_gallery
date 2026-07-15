@@ -29,15 +29,17 @@ const instrumentSans = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Hivemind - Digital Culture Fund Gallery",
-    template: "%s - Hivemind",
+    default: "Hivemind Digital Culture Fund",
+    template: "%s. Hivemind Digital Culture Fund",
   },
-  description: "A curated showcase of the Hivemind Digital Culture Fund collection.",
+  description:
+    "Digital art's emergent canon held by Hivemind Capital Partners. Grail works by XCOPY, Tyler Hobbs, Dmitri Cherniak, CryptoPunks, Refik Anadol, Sam Spratt, Kim Asendorf and more.",
   openGraph: {
     siteName: "Hivemind Digital Culture Fund",
     type: "website",
-    title: "Hivemind - Digital Culture Fund Gallery",
-    description: "A curated showcase of the Hivemind Digital Culture Fund collection.",
+    title: "Hivemind Digital Culture Fund",
+    description:
+      "Digital art's emergent canon held by Hivemind Capital Partners. Grail works by XCOPY, Tyler Hobbs, Dmitri Cherniak, CryptoPunks, Refik Anadol, Sam Spratt, Kim Asendorf and more.",
   },
   twitter: { card: "summary_large_image" },
 };
@@ -67,7 +69,19 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@graph": [
-                { "@type": "Organization", "@id": `${SITE_URL}/#org`, name: "Hivemind Digital Culture Fund", url: SITE_URL, logo: `${SITE_URL}/icon-512.png` },
+                {
+                  "@type": "Organization",
+                  "@id": `${SITE_URL}/#org`,
+                  name: "Hivemind Digital Culture Fund",
+                  parentOrganization: { "@type": "Organization", name: "Hivemind Capital Partners", url: "https://www.hivemind.capital" },
+                  url: SITE_URL,
+                  logo: `${SITE_URL}/icon-512.png`,
+                  sameAs: [
+                    "https://www.hivemind.capital",
+                    "https://x.com/HivemindCap",
+                    "https://www.linkedin.com/company/hivemind-capital",
+                  ],
+                },
                 { "@type": "WebSite", "@id": `${SITE_URL}/#site`, name: "Hivemind Digital Culture Fund", url: SITE_URL, publisher: { "@id": `${SITE_URL}/#org` } },
               ],
             }),
@@ -79,20 +93,32 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <footer className="border-t border-border py-8 md:pl-32 xl:pl-36">
           <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
             <div>
-              <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium">Hivemind Digital Culture Fund</p>
+              <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium">
+                Hivemind Digital Culture Fund. A vehicle of Hivemind Capital Partners
+              </p>
+              <p className="text-[11px] text-muted mt-1">
+                &copy; 2026 Hivemind Capital Partners. All rights reserved.
+              </p>
             </div>
-            <div className="flex flex-wrap gap-8 text-[13px] text-muted">
+            <div className="flex flex-wrap gap-6 text-[13px] text-muted">
               <Link href="/" className="hover:text-foreground transition-colors duration-200">Collection</Link>
               <Link href="/artists" className="hover:text-foreground transition-colors duration-200">Artists</Link>
               <Link href="/chapters" className="hover:text-foreground transition-colors duration-200">Chapters</Link>
-              <Link href="/about" className="hover:text-foreground transition-colors duration-200">Thesis</Link>
+              <Link href="/thesis" className="hover:text-foreground transition-colors duration-200">Thesis</Link>
+              <Link href="/press" className="hover:text-foreground transition-colors duration-200">Press</Link>
               <a
-                href="mailto:dcf@hivemind.capital?subject=Hivemind%20Inquiry"
+                href="mailto:investor.relations@hivemind.capital?subject=Hivemind%20DCF%20-%20LP%20inquiry"
                 className="hover:text-foreground transition-colors duration-200"
-                title="For acquisitions, partnerships, or press"
-                aria-label="Inquire about acquisitions, partnerships, or press"
               >
-                Inquire
+                Investor relations
+              </a>
+              <a
+                href="https://x.com/HivemindCap"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-foreground transition-colors duration-200"
+              >
+                X
               </a>
             </div>
           </div>

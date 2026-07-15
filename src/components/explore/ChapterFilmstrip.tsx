@@ -65,7 +65,7 @@ export default function ChapterFilmstrip({ name, works }: Props) {
       <div
         ref={scrollRef}
         role="group"
-        aria-label={`${name} — works (scroll horizontally)`}
+        aria-label={`${name}: works (scroll horizontally)`}
         tabIndex={0}
         className="overflow-x-auto scrollbar-hide pr-6 snap-x snap-mandatory"
       >
