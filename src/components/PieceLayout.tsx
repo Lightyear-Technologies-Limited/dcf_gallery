@@ -353,7 +353,7 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
 
       {preservedBlock && <div className="mt-6">{preservedBlock}</div>}
 
-      <div className="mt-6">
+      <div className="mt-3">
         <ShareButton title={artistName ? `${title} by ${artistName}` : title} />
       </div>
     </div>
