@@ -447,7 +447,7 @@ export default async function PiecePage({
           <span />
         )}
       </div>
-      <div className="pt-6 pb-48">
+      <div className="pt-6 pb-24">
         <PieceLayout
           image={realImage}
           detailSrc={getDetailVariants(piece.slug)?.src}
