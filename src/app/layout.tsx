@@ -56,7 +56,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <meta name="theme-color" content="#171614" media="(prefers-color-scheme: dark)" />
         <script dangerouslySetInnerHTML={{ __html: `(function(){var t=localStorage.getItem('dcf-theme');if(t==='dark'){document.documentElement.classList.add('dark');document.querySelector('meta[name=theme-color]').content='#171614'}})()` }} />
       </head>
-      <body className="bg-background text-foreground min-h-screen flex flex-col">
+      <body className="bg-background text-foreground min-h-screen grid grid-rows-[1fr_auto]">
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-background focus:text-foreground focus:px-4 focus:py-2 focus:border focus:border-border focus:text-[13px]"
@@ -89,7 +89,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         />
         <MotionProvider>
         <Header />
-        <main id="main" className="flex-1 min-h-screen pt-14 md:pt-0 md:pl-32 xl:pl-36">{children}</main>
+        <main id="main" className="min-h-screen pt-14 md:pt-0 md:pl-32 xl:pl-36">{children}</main>
         <footer className="border-t border-border py-8 md:pl-32 xl:pl-36">
           <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
             <div>
