@@ -51,7 +51,7 @@ export default async function OG() {
             }}
           >
             <div>Digital art&rsquo;s emergent canon,</div>
-            <div>held by Hivemind Capital Partners.</div>
+            <div>held by Hivemind Digital Culture Fund.</div>
           </div>
           <div
             style={{

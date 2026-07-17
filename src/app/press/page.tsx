@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   },
 };
 
-const BOILERPLATE = `The Hivemind Digital Culture Fund is a curated portfolio of digital art's emergent canon, held by Hivemind Capital Partners. Acquired after the first market cycle, the collection is comprehensive and targeted, with defining works by XCOPY, Tyler Hobbs, Dmitri Cherniak, Larva Labs (CryptoPunks), Refik Anadol, Sam Spratt, Kim Asendorf, Operator, Beeple, and a.c.k. Holdings are managed to the custody, security, and operational standards LPs apply to any asset on their book.`;
+const BOILERPLATE = `The Hivemind Digital Culture Fund is a curated portfolio of digital art's emergent canon. Acquired after the first market cycle, the collection is comprehensive and targeted, with defining works by a.c.k., Beeple, Dmitri Cherniak, Kim Asendorf, Larva Labs (CryptoPunks), Operator, Refik Anadol, Sam Spratt, Tyler Hobbs, and XCOPY. Holdings are managed to the custody, security, and operational standards LPs apply to any asset on their book.`;
 
 export default function PressPage() {
   const essays = collections

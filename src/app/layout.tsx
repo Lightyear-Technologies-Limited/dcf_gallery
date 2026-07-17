@@ -33,13 +33,13 @@ export const metadata: Metadata = {
     template: "%s. Hivemind Digital Culture Fund",
   },
   description:
-    "Digital art's emergent canon held by Hivemind Capital Partners. Grail works by XCOPY, Tyler Hobbs, Dmitri Cherniak, CryptoPunks, Refik Anadol, Sam Spratt, Kim Asendorf and more.",
+    "Digital art's emergent canon held by Hivemind Digital Culture Fund. Defining works by XCOPY, Tyler Hobbs, Dmitri Cherniak, CryptoPunks, Refik Anadol, Sam Spratt, Kim Asendorf and more.",
   openGraph: {
     siteName: "Hivemind Digital Culture Fund",
     type: "website",
     title: "Hivemind Digital Culture Fund",
     description:
-      "Digital art's emergent canon held by Hivemind Capital Partners. Grail works by XCOPY, Tyler Hobbs, Dmitri Cherniak, CryptoPunks, Refik Anadol, Sam Spratt, Kim Asendorf and more.",
+      "Digital art's emergent canon held by Hivemind Digital Culture Fund. Defining works by XCOPY, Tyler Hobbs, Dmitri Cherniak, CryptoPunks, Refik Anadol, Sam Spratt, Kim Asendorf and more.",
   },
   twitter: { card: "summary_large_image" },
 };
