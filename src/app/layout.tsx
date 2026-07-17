@@ -89,7 +89,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         />
         <MotionProvider>
         <Header />
-        <main id="main" className="flex-1 pt-14 md:pt-0 md:pl-32 xl:pl-36">{children}</main>
+        <main id="main" className="flex-1 min-h-dvh pt-14 md:pt-0 md:pl-32 xl:pl-36">{children}</main>
         <footer className="border-t border-border py-8 md:pl-32 xl:pl-36">
           <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
             <div>
