@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12 pt-6 pb-24">
+    <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12 pt-6 pb-24 min-h-screen">
       {/* Fund name as small-caps eyebrow, subject as H1. Each index page
           leads with its own subject so the reader doesn't see the same H1
           on every page. */}

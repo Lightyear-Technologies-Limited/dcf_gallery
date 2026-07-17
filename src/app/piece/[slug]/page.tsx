@@ -391,7 +391,7 @@ export default async function PiecePage({
   };
 
   return (
-    <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12">
+    <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12 min-h-screen">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {/* Back link. With an explicit origin (?from=) it returns there (Collection
           or Chapters). Otherwise it goes UP one level: multi-piece collections —

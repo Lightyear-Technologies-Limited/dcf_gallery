@@ -62,7 +62,7 @@ const HERO_ASPECT_OVERRIDES: Record<string, number> = {
 
 export default function ArtistsPage() {
   return (
-    <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12 pt-6 pb-24">
+    <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12 pt-6 pb-24 min-h-screen">
       {/* Fund name as eyebrow; subject as H1 so index pages each carry
           their own subject and the reader isn't reading the same H1 on
           every navigation. */}

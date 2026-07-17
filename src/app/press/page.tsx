@@ -25,7 +25,7 @@ export default function PressPage() {
     .filter((e): e is { title: string; url: string; collection: string } => e !== null);
 
   return (
-    <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12 pt-6 pb-24">
+    <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12 pt-6 pb-24 min-h-screen">
       {/* Eyebrow + subject H1 pattern, matching /thesis /artists /chapters. */}
       <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium">
         Hivemind Digital Culture Fund

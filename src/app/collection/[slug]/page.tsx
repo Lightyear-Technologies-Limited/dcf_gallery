@@ -486,7 +486,7 @@ export default async function CollectionPage({
   };
 
   return (
-    <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12">
+    <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12 min-h-screen">
       <ScrollRestore />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionLd) }} />
       {/* Breadcrumb + sibling nav. Prev (artist's other works) and next
