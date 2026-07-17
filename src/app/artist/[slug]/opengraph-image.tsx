@@ -77,7 +77,7 @@ export default async function OG({ params }: { params: Promise<{ slug: string }>
             fontWeight: 500,
           }}
         >
-          A vehicle of Hivemind Capital Partners
+          Hivemind Digital Culture Fund
         </div>
       </div>
     ),

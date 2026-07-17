@@ -350,7 +350,7 @@ export default async function PiecePage({
       <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-2">
         Preserved by Hivemind
       </p>
-      <p className="text-[13px] text-muted">
+      <p className="text-[13px] text-foreground-secondary">
         Pinned to IPFS{provenance.verifiedAt ? ", integrity verified" : ""}
       </p>
     </div>

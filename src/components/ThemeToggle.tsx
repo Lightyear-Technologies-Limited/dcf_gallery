@@ -19,7 +19,7 @@ export default function ThemeToggle() {
     // Keep the mobile browser chrome color in sync - otherwise iOS Safari /
     // Android Chrome retain the previous status-bar tint after a toggle.
     const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute("content", next ? "#111111" : "#F8F8F7");
+    if (meta) meta.setAttribute("content", next ? "#171614" : "#F8F8F7");
   }
 
   return (

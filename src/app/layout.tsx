@@ -53,8 +53,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     >
       <head>
         <meta name="theme-color" content="#F8F8F7" media="(prefers-color-scheme: light)" />
-        <meta name="theme-color" content="#111111" media="(prefers-color-scheme: dark)" />
-        <script dangerouslySetInnerHTML={{ __html: `(function(){var t=localStorage.getItem('dcf-theme');if(t==='dark'){document.documentElement.classList.add('dark');document.querySelector('meta[name=theme-color]').content='#111111'}})()` }} />
+        <meta name="theme-color" content="#171614" media="(prefers-color-scheme: dark)" />
+        <script dangerouslySetInnerHTML={{ __html: `(function(){var t=localStorage.getItem('dcf-theme');if(t==='dark'){document.documentElement.classList.add('dark');document.querySelector('meta[name=theme-color]').content='#171614'}})()` }} />
       </head>
       <body className="bg-background text-foreground min-h-screen flex flex-col">
         <a
@@ -94,7 +94,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
             <div>
               <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium">
-                Hivemind Digital Culture Fund. A vehicle of Hivemind Capital Partners.
+                Hivemind Digital Culture Fund
               </p>
               <p className="text-[11px] text-muted mt-1">
                 &copy; 2026 Hivemind Capital Partners. All rights reserved.

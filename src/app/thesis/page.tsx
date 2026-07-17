@@ -141,7 +141,8 @@ export default function AboutPage() {
               <div className="flex items-center gap-3">
                 <span
                   aria-hidden
-                  className="inline-block w-2 h-2 rounded-full shrink-0 bg-foreground"
+                  className="inline-block w-2 h-2 rounded-full shrink-0"
+                  style={{ backgroundColor: ch.color }}
                 />
                 <h3 className="font-serif text-[22px] tracking-[-0.01em] leading-tight">
                   <Link

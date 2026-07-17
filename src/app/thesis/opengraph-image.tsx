@@ -63,7 +63,7 @@ export default async function OG() {
             fontWeight: 500,
           }}
         >
-          A vehicle of Hivemind Capital Partners
+          Hivemind Digital Culture Fund
         </div>
       </div>
     ),

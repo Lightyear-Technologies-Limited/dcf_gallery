@@ -378,14 +378,6 @@ export default function CollectionView({ sections, artists }: Props) {
           <h1 className="font-serif display-sm">
             Hivemind Digital Culture Fund
           </h1>
-          <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-[13px]">
-            <Link
-              href="/thesis"
-              className="text-foreground-secondary hover:text-foreground transition-colors duration-200 underline underline-offset-4 decoration-border hover:decoration-foreground"
-            >
-              Read the thesis
-            </Link>
-          </div>
         </div>
         {/* Sentinel: IntersectionObserver tracks this element to know when
             the reader has moved past the masthead. */}

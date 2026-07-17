@@ -81,7 +81,7 @@ export default async function OG() {
             fontWeight: 500,
           }}
         >
-          <div>A vehicle of Hivemind Capital Partners</div>
+          <div>Hivemind Digital Culture Fund</div>
           <div>Salon</div>
         </div>
       </div>

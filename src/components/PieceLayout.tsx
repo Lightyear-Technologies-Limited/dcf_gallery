@@ -353,7 +353,7 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
 
       {preservedBlock && <div className="mt-6">{preservedBlock}</div>}
 
-      <div className="mt-3 text-[12px] text-muted">
+      <div className="mt-6">
         <ShareButton title={artistName ? `${title} by ${artistName}` : title} />
       </div>
     </div>
@@ -430,7 +430,7 @@ function PieceDescription({
       {isLong && (
         <button
           onClick={() => setExpanded((v) => !v)}
-          className="mt-3 text-[13px] text-muted hover:text-foreground transition-colors duration-200 underline underline-offset-4 decoration-border hover:decoration-foreground"
+          className="mt-3 text-[13px] text-foreground-secondary hover:text-foreground transition-colors duration-200 underline underline-offset-4 decoration-border hover:decoration-foreground"
         >
           {expanded ? "Read less" : "Read more"}
         </button>

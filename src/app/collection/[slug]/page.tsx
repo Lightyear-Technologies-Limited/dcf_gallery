@@ -297,13 +297,13 @@ export default async function CollectionPage({
                 ? "text-foreground"
                 : count > 1
                 ? "text-muted"
-                : "text-muted/40"
+                : "text-muted/70"
             }
           >
             {count}
           </span>
           {globalCount !== null && (
-            <span className="text-muted/40">/{globalCount.toLocaleString()}</span>
+            <span className="text-muted/70">/{globalCount.toLocaleString()}</span>
           )}
         </span>
       </Link>
@@ -395,7 +395,7 @@ export default async function CollectionPage({
                         ? "text-foreground"
                         : entry.count > 1
                         ? "text-muted"
-                        : "text-muted/40"
+                        : "text-muted/70"
                     }
                   >
                     {entry.count}
