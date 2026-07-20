@@ -6,11 +6,11 @@ import { artists, getPiecesByArtist, getCollectionsByArtist } from "@/lib/data";
 export const metadata: Metadata = {
   title: "Artists",
   description:
-    "Ten artists shaping digital art's first decades. XCOPY, Tyler Hobbs, Dmitri Cherniak, Kim Asendorf, Sam Spratt, Refik Anadol, Operator, Beeple, Larva Labs, a.c.k.",
+    "Ten artists shaping digital art's first decades. a.c.k., Beeple, Dmitri Cherniak, Kim Asendorf, Larva Labs, Operator, Refik Anadol, Sam Spratt, Tyler Hobbs, XCOPY.",
   openGraph: {
     title: "Artists",
     description:
-      "Ten artists shaping digital art's first decades. XCOPY, Tyler Hobbs, Dmitri Cherniak, Kim Asendorf, Sam Spratt, Refik Anadol, Operator, Beeple, Larva Labs, a.c.k.",
+      "Ten artists shaping digital art's first decades. a.c.k., Beeple, Dmitri Cherniak, Kim Asendorf, Larva Labs, Operator, Refik Anadol, Sam Spratt, Tyler Hobbs, XCOPY.",
   },
 };
 import { getArtistEditorial } from "@/lib/editorial";
@@ -72,7 +72,7 @@ export default function ArtistsPage() {
       <h1 className="font-serif display-sm mt-3">Artists</h1>
       <div className="mt-6 mb-8 max-w-3xl">
         <p className="text-[17px] sm:text-[18px] leading-[1.6] text-foreground-secondary">
-          Hivemind holds work by ten of the artists who shaped digital art&rsquo;s first decades.
+          Hivemind holds work by ten of the artists shaping digital art&rsquo;s first decades.
         </p>
       </div>
       {sorted.map((artist, idx) => {
