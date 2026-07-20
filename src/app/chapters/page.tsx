@@ -92,7 +92,7 @@ export default function ChaptersPage() {
           same position when moving between Collection and Chapters. The
           "Chapters" subject heading + one-line framing match the Artists /
           About index-page pattern so the three reads as a consistent set. */}
-      <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12 pt-6 min-h-screen">
+      <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12 pt-6">
         <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium">
           Hivemind Digital Culture Fund
         </p>

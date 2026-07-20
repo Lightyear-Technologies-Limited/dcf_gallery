@@ -324,11 +324,8 @@ export default function CollectionView({ sections, artists }: Props) {
               className={`text-[13px] whitespace-nowrap shrink-0 transition-colors duration-200 ${
                 isHighlighted
                   ? "text-foreground"
-                  : hasFilters
-                  ? "text-muted hover:text-foreground"
                   : "text-muted hover:text-foreground"
               }`}
-              style={isHighlighted ? { color: ch.color } : undefined}
             >
               {ch.name}
             </button>
