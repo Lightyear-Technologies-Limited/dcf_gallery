@@ -372,9 +372,10 @@ export default function CollectionView({ sections, artists }: Props) {
             across the gutter; eye reads "Hivemind" on the rail and
             "Hivemind Digital Culture Fund" on the page at the same line. */}
         <div className="pt-6">
-          <h1 className="font-serif display-sm">
+          <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium">
             Hivemind Digital Culture Fund
-          </h1>
+          </p>
+          <h1 className="font-serif display-sm mt-3">Collection</h1>
         </div>
         {/* Sentinel: IntersectionObserver tracks this element to know when
             the reader has moved past the masthead. */}

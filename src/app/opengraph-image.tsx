@@ -82,7 +82,7 @@ export default async function OG() {
           }}
         >
           <div>Hivemind Digital Culture Fund</div>
-          <div>Salon</div>
+          <div>Collection</div>
         </div>
       </div>
     ),
