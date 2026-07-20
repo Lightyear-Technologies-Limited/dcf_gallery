@@ -9,7 +9,7 @@ import HeroSidebarGallery from "./HeroSidebarGallery";
 import SinglePieceDisplay from "./SinglePieceDisplay";
 import { getArtworkImage } from "@/lib/images";
 import { getHeroLayout } from "@/lib/curation";
-import { CHAPTERS, CHAPTER_COLORS } from "@/lib/chapters";
+import { CHAPTERS } from "@/lib/chapters";
 import ScrollRestore from "./ScrollRestore";
 
 interface PieceData {
@@ -413,7 +413,6 @@ export default function CollectionView({ sections, artists }: Props) {
               <Link href={`/artist/${artist.slug}`} className="inline-block">
                 <h2
                   className="font-serif text-[32px] sm:text-[40px] tracking-tight leading-tight hover:opacity-60 transition-opacity duration-200"
-                  style={CHAPTER_COLORS[artist.slug] ? { color: CHAPTER_COLORS[artist.slug] } : undefined}
                 >
                   {artist.name}
                 </h2>
