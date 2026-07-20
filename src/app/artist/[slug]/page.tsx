@@ -134,7 +134,6 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
             <Link
               href={`/?chapter=${chapter.slug}`}
               className="text-muted hover:text-foreground transition-colors duration-200"
-              style={{ color: chapter.color }}
             >
               {chapter.name}
             </Link>
