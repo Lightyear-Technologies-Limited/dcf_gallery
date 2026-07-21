@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getArtworkImage, getArtworkAspect } from "@/lib/images";
 import PlaceholderArt from "../PlaceholderArt";
 import GridArtwork from "../GridArtwork";
@@ -34,6 +34,36 @@ interface Props {
  */
 export default function ChapterFilmstrip({ name, works }: Props) {
   const scrollRef = useRef<HTMLDivElement>(null);
+  // Initialise canRight true / canLeft false so SSR ships the right chevron
+  // visible (nearly every chapter has overflow) and the left one hidden (page
+  // starts at scroll 0). The effect below corrects both once the client has
+  // actual scroll geometry.
+  const [canLeft, setCanLeft] = useState(false);
+  const [canRight, setCanRight] = useState(true);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const update = () => {
+      setCanLeft(el.scrollLeft > 8);
+      setCanRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 8);
+    };
+    update();
+    el.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    // Tile widths depend on async layout (aspect ratios + image loading);
+    // scrollWidth may not settle on the first mount tick. ResizeObserver
+    // fires when tiles finish laying out so the chevron state is accurate
+    // regardless of viewport width.
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    for (const child of Array.from(el.children)) ro.observe(child);
+    return () => {
+      el.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+      ro.disconnect();
+    };
+  }, []);
 
   const nudge = (dir: 1 | -1) => {
     const el = scrollRef.current;
@@ -82,7 +112,10 @@ export default function ChapterFilmstrip({ name, works }: Props) {
         type="button"
         onClick={() => nudge(-1)}
         aria-label={`Previous works in ${name}`}
-        className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full border border-foreground/25 bg-background shadow-sm flex items-center justify-center text-foreground opacity-90 hover:opacity-100 hover:bg-background transition-opacity duration-200"
+        tabIndex={canLeft ? 0 : -1}
+        className={`absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full border border-foreground/25 bg-background shadow-sm flex items-center justify-center text-foreground hover:bg-background transition-opacity duration-200 ${
+          canLeft ? "opacity-90 hover:opacity-100" : "opacity-0 pointer-events-none"
+        }`}
       >
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
           <polyline points="15 18 9 12 15 6" />
@@ -92,7 +125,10 @@ export default function ChapterFilmstrip({ name, works }: Props) {
         type="button"
         onClick={() => nudge(1)}
         aria-label={`Next works in ${name}`}
-        className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full border border-foreground/25 bg-background shadow-sm flex items-center justify-center text-foreground opacity-90 hover:opacity-100 hover:bg-background transition-opacity duration-200"
+        tabIndex={canRight ? 0 : -1}
+        className={`absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full border border-foreground/25 bg-background shadow-sm flex items-center justify-center text-foreground hover:bg-background transition-opacity duration-200 ${
+          canRight ? "opacity-90 hover:opacity-100" : "opacity-0 pointer-events-none"
+        }`}
       >
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
           <polyline points="9 18 15 12 9 6" />
