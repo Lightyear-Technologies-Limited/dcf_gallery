@@ -113,7 +113,7 @@ export default function ChapterFilmstrip({ name, works }: Props) {
         onClick={() => nudge(-1)}
         aria-label={`Previous works in ${name}`}
         tabIndex={canLeft ? 0 : -1}
-        className={`absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full border border-foreground/25 bg-background shadow-sm flex items-center justify-center text-foreground hover:bg-background transition-opacity duration-200 ${
+        className={`absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full border border-muted bg-background shadow-md flex items-center justify-center text-foreground hover:bg-background transition-opacity duration-200 ${
           canLeft ? "opacity-90 hover:opacity-100" : "opacity-0 pointer-events-none"
         }`}
       >
@@ -126,7 +126,7 @@ export default function ChapterFilmstrip({ name, works }: Props) {
         onClick={() => nudge(1)}
         aria-label={`Next works in ${name}`}
         tabIndex={canRight ? 0 : -1}
-        className={`absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full border border-foreground/25 bg-background shadow-sm flex items-center justify-center text-foreground hover:bg-background transition-opacity duration-200 ${
+        className={`absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full border border-muted bg-background shadow-md flex items-center justify-center text-foreground hover:bg-background transition-opacity duration-200 ${
           canRight ? "opacity-90 hover:opacity-100" : "opacity-0 pointer-events-none"
         }`}
       >
