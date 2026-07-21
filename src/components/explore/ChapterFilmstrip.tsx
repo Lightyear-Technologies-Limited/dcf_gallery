@@ -47,9 +47,17 @@ export default function ChapterFilmstrip({ name, works }: Props) {
     update();
     el.addEventListener("scroll", update, { passive: true });
     window.addEventListener("resize", update);
+    // Tiles' widths depend on async layout (aspect ratios + image loading);
+    // scrollWidth may equal clientWidth on the first mount tick, leaving
+    // canRight false and the chevron invisible even though there IS overflow.
+    // ResizeObserver picks up the subsequent resize as tiles settle.
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    for (const child of Array.from(el.children)) ro.observe(child);
     return () => {
       el.removeEventListener("scroll", update);
       window.removeEventListener("resize", update);
+      ro.disconnect();
     };
   }, []);
 
