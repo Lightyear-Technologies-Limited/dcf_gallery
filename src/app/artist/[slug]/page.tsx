@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const artist = withArtistEditorial(artists.find((a) => a.slug === slug));
   if (!artist) return {};
   const name = getArtistDisplayName(artist.slug, artist.name);
-  const description = (artist.bio || `${name} in the Hivemind Digital Culture Fund collection.`).slice(0, 200);
+  const description = (artist.bio || `${name} in the Hivemind Digital Culture Fund collection.`).slice(0, 320);
   return {
     title: name,
     description,
@@ -130,10 +130,13 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
           {artistName}
         </p>
         {chapter && (
-          <div className="mt-6 text-[13px]">
+          <div className="mt-6">
+            <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-2">
+              Chapter
+            </p>
             <Link
               href={`/?chapter=${chapter.slug}`}
-              className="text-muted hover:text-foreground transition-colors duration-200"
+              className="text-[13px] text-muted hover:text-foreground transition-colors duration-200"
             >
               {chapter.name}
             </Link>
@@ -262,7 +265,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
           <p className="font-serif italic text-[22px] leading-[1.5] text-foreground-secondary">
             {artist.artistQuote}
           </p>
-          <p className="text-[13px] text-muted mt-4">&ndash; {artistName}</p>
+          <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mt-4">{artistName}</p>
         </div>
       )}
 
@@ -278,7 +281,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
           without leaving a yawning gap when the 2-col header above is
           uneven (right column commentary often ends before the left
           column's holdings + socials stack does). */}
-      <div className="pt-8 pb-24 space-y-3">
+      <div className="pt-8 pb-24 space-y-8">
         {artistCollections.map((col) => {
           const n = col.pieces.length;
           const piece = col.pieces[0];
