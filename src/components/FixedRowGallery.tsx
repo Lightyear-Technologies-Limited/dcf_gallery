@@ -116,7 +116,7 @@ export default function FixedRowGallery({ pieces, rowMap, fallbackPerRow, gap = 
                   className={`block shrink-0 overflow-hidden ${isPunk ? "bg-punk" : ""}`}
                 >
                   {src ? (
-                    <GridArtwork slug={piece.slug} title={piece.title} imgSrc={src} isPunk={isPunk} sizes="500px" />
+                    <GridArtwork slug={piece.slug} title={piece.title} imgSrc={src} isPunk={isPunk} sizes="(min-width: 1024px) 1000px, 500px" />
                   ) : (
                     <PlaceholderArt
                       collectionSlug={piece.collectionSlug}
