@@ -99,7 +99,7 @@ export default function ChaptersPage() {
         <h1 className="font-serif display-sm mt-3">Chapters</h1>
         <div className="mt-6 mb-8 max-w-2xl">
           <p className="text-[17px] sm:text-[18px] leading-[1.6] text-foreground-secondary">
-            Hivemind collects across five chapters of the digital-art canon.
+            Hivemind collects across five chapters of the digital art canon.
           </p>
         </div>
       </div>

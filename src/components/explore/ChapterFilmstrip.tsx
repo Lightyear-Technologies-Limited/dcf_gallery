@@ -67,7 +67,7 @@ export default function ChapterFilmstrip({ name, works }: Props) {
         role="group"
         aria-label={`${name}: works (scroll horizontally)`}
         tabIndex={0}
-        className="overflow-x-auto scrollbar-hide pr-6 snap-x snap-mandatory"
+        className="overflow-x-auto scrollbar-hide pr-6 snap-x snap-mandatory [mask-image:linear-gradient(to_right,black_calc(100%-40px),transparent)]"
       >
         <div className="flex gap-3 pb-1">
           {works.map((w) => {
