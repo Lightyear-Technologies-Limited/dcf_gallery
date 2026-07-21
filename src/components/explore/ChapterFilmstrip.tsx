@@ -91,7 +91,7 @@ export default function ChapterFilmstrip({ name, works }: Props) {
       onPointerUp={onPointerUp}
       onPointerCancel={onPointerUp}
       onDragStart={(e) => e.preventDefault()}
-      className="overflow-x-auto scrollbar-hide pr-6 snap-x snap-mandatory cursor-grab select-none [mask-image:linear-gradient(to_right,black_calc(100%-40px),transparent)]"
+      className="overflow-x-auto scrollbar-hide snap-x snap-mandatory cursor-grab select-none"
     >
       <div className="flex gap-3 pb-1">
         {works.map((w) => {
