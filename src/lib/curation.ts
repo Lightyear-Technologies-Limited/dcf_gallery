@@ -387,7 +387,7 @@ export type SyntheticTraitGroup = {
 export const SYNTHETIC_TRAIT_GROUPS: Record<string, SyntheticTraitGroup[]> = {
   grifters: [
     {
-      label: "Sets",
+      label: "Curated sets",
       // Editorial display order: Shady -> Wretch -> G to the M -> Bubbles
       // -> Turbulence. Set here rather than sorted by count so the
       // narrative order (curatorial priority) leads.

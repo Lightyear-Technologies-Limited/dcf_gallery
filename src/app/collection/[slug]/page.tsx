@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const artist = getArtist(col.artistSlug);
   const artistName = artist ? getArtistDisplayName(artist.slug, artist.name) : undefined;
   const title = artistName ? `${name}, ${artistName}` : name;
-  const description = (col.description || `${name} in the Hivemind Digital Culture Fund collection.`).slice(0, 200);
+  const description = (col.description || `${name} in the Hivemind Digital Culture Fund collection.`).slice(0, 320);
   const first = getPiecesByCollection(col.slug)[0];
   const og = first ? getOgImage(first.slug) : undefined;
   return {
