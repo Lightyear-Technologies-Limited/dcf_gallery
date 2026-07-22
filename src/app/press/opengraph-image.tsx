@@ -47,8 +47,8 @@ export default async function OG() {
               maxWidth: 900,
             }}
           >
-            Boilerplate, brand assets, published essays, and press contact for
-            journalists, editors, and researchers covering the fund.
+            Overview, brand assets, published essays, and press contact for
+            journalists, editors, and researchers covering Hivemind Digital Culture Fund.
           </div>
         </div>
 

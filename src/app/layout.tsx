@@ -97,10 +97,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 Hivemind Digital Culture Fund
               </p>
               <p className="text-[11px] text-muted mt-1">
-                &copy; 2026 Hivemind Capital Partners. All rights reserved.
+                &copy; 2026 Hivemind Digital Culture Fund. All rights reserved.
               </p>
             </div>
             <div className="flex flex-wrap gap-6 text-[13px] text-muted">
+              <Link href="/" className="hover:text-foreground transition-colors duration-200">Collection</Link>
               <Link href="/artists" className="hover:text-foreground transition-colors duration-200">Artists</Link>
               <Link href="/chapters" className="hover:text-foreground transition-colors duration-200">Chapters</Link>
               <Link href="/thesis" className="hover:text-foreground transition-colors duration-200">Thesis</Link>

@@ -70,7 +70,7 @@ export default async function OG() {
             fontWeight: 500,
           }}
         >
-          Ten artists who shaped digital art&rsquo;s first decades
+          Ten artists shaping digital art&rsquo;s first decades
         </div>
       </div>
     ),
