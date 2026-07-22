@@ -6,15 +6,15 @@ import { getCollectionEditorial } from "@/lib/editorial";
 export const metadata: Metadata = {
   title: "Press",
   description:
-    "Press resources for the Hivemind Digital Culture Fund: boilerplate, brand assets, published essays, and contact.",
+    "Press resources for Hivemind Digital Culture Fund: overview, brand assets, published essays, and contact.",
   openGraph: {
     title: "Press",
     description:
-      "Press resources for the Hivemind Digital Culture Fund: boilerplate, brand assets, published essays, and contact.",
+      "Press resources for Hivemind Digital Culture Fund: overview, brand assets, published essays, and contact.",
   },
 };
 
-const BOILERPLATE = `The Hivemind Digital Culture Fund is a curated portfolio of digital art's emergent canon. Acquired after the first market cycle, the collection is comprehensive and targeted, with defining works by a.c.k., Beeple, Dmitri Cherniak, Kim Asendorf, Larva Labs (CryptoPunks), Operator, Refik Anadol, Sam Spratt, Tyler Hobbs, and XCOPY. Holdings are managed to the custody, security, and operational standards LPs apply to any asset on their book.`;
+const OVERVIEW = `The Hivemind Digital Culture Fund is a curated portfolio of digital art's emergent canon. Acquired after the first market cycle, the collection is comprehensive and targeted, with defining works by a.c.k., Beeple, Dmitri Cherniak, Kim Asendorf, Larva Labs, Operator, Refik Anadol, Sam Spratt, Tyler Hobbs, and XCOPY.`;
 
 export default function PressPage() {
   const essays = collections
@@ -33,17 +33,17 @@ export default function PressPage() {
       <h1 className="font-serif display-sm mt-3">Press</h1>
       <div className="mt-6 mb-8 max-w-2xl">
         <p className="text-[17px] sm:text-[18px] leading-[1.6] text-foreground-secondary">
-          Resources for journalists, editors, and researchers covering the fund.
+          Resources for journalists, editors, and researchers covering Hivemind Digital Culture Fund.
         </p>
       </div>
 
       <div className="max-w-[680px] space-y-12">
         <section>
           <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
-            Boilerplate
+            Overview
           </p>
           <p className="text-[16px] text-foreground-secondary leading-[1.65]">
-            {BOILERPLATE}
+            {OVERVIEW}
           </p>
         </section>
 
