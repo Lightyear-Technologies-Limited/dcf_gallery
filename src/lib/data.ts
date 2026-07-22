@@ -182,7 +182,7 @@ export const artists: Artist[] = [
     slug: 'refik-anadol',
     name: 'Refik Anadol',
     bio: 'Refik Anadol uses machine learning to render datasets as moving image. His data paintings have shown at MoMA (Unsupervised was the first tokenized work acquired into its permanent collection) and live now at Dataland, his Museum of AI Arts in Los Angeles.',
-    curationComment: 'Winds of Yawanawa pairs Anadol Studio with the Yawanaw\u00e1 community of the Brazilian Amazon, with proceeds directed toward cultural preservation. Biome Lumina extends the practice into fully dynamic living paintings for Dataland, Anadol\u2019s Museum of AI Arts in Los Angeles.',
+    curationComment: 'Winds of Yawanawá pairs Anadol Studio with the Yawanaw\u00e1 community of the Brazilian Amazon, with proceeds directed toward cultural preservation. Biome Lumina extends the practice into fully dynamic living paintings for Dataland, Anadol\u2019s Museum of AI Arts in Los Angeles.',
     portrait: '/artists/refik-anadol.jpg',
     influences: [],
     tags: ['ai-generated', 'machine-learning', 'data-art'],
@@ -647,10 +647,10 @@ export const collections: Collection[] = [
   },
   {
     slug: 'winds-of-yawanawa',
-    name: 'Winds of Yawanawa',
+    name: 'Winds of Yawanawá',
     artistSlug: 'refik-anadol',
     description: 'Winds of Yawanawá is a project by Refik Anadol Studio in collaboration with the Yawanawá community of the Brazilian Amazon.',
-    artistStatement: 'Winds of Yawanawa is a collection of 1000 unique Data Paintings that harness weather data from the tribe’s village in the Amazon rainforest including wind speed, gusts, direction and temperature. This data then merges with the works of young Yawanawa artists, resulting in a mesmerizing play of traditional shapes and colors of data pigmentation.\n\nThe Winds of Yawanawa collection will bring the nuances of Yawanawa art to the digital world with the aim of preserving their rich culture.\n\nNFT Data Paintings\n\nFormat: MP4 | 60 second loop\n\nEach NFT comes with an archival museum quality physical print (44x22 inches) signed by Chief Nixiwaka Yawanawa & Refik Anadol',
+    artistStatement: 'Winds of Yawanawá is a collection of 1000 unique Data Paintings that harness weather data from the tribe’s village in the Amazon rainforest including wind speed, gusts, direction and temperature. This data then merges with the works of young Yawanawá artists, resulting in a mesmerizing play of traditional shapes and colors of data pigmentation.\n\nThe Winds of Yawanawá collection will bring the nuances of Yawanawá art to the digital world with the aim of preserving their rich culture.\n\nNFT Data Paintings\n\nFormat: MP4 | 60 second loop\n\nEach NFT comes with an archival museum quality physical print (44x22 inches) signed by Chief Nixiwaka Yawanawá & Refik Anadol',
     curatorNote: 'Anadol\'s data-painting practice paired with the Yawanawá community of the Brazilian Amazon. The project channels collector capital toward indigenous cultural preservation.',
     essayUrl: 'https://www.hivemind.capital/content/inside-the-collection-refik-anadol-synthetic-dreams---landscapes-2021-winds-of-yawanawa-2023',
     essayTitle: 'Inside the Collection: Winds of Yawanawá',
@@ -5541,7 +5541,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-20',
     slug: 'winds-of-yawanawa-20',
-    title: 'Winds of Yawanawa #20',
+    title: 'Winds of Yawanawá #20',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-20.svg',
@@ -5560,7 +5560,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-62',
     slug: 'winds-of-yawanawa-62',
-    title: 'Winds of Yawanawa #62',
+    title: 'Winds of Yawanawá #62',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-62.svg',
@@ -5579,7 +5579,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-103',
     slug: 'winds-of-yawanawa-103',
-    title: 'Winds of Yawanawa #103',
+    title: 'Winds of Yawanawá #103',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-103.svg',
@@ -5598,7 +5598,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-118',
     slug: 'winds-of-yawanawa-118',
-    title: 'Winds of Yawanawa #118',
+    title: 'Winds of Yawanawá #118',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-118.svg',
@@ -5617,7 +5617,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-154',
     slug: 'winds-of-yawanawa-154',
-    title: 'Winds of Yawanawa #154',
+    title: 'Winds of Yawanawá #154',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-154.svg',
@@ -5636,7 +5636,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-178',
     slug: 'winds-of-yawanawa-178',
-    title: 'Winds of Yawanawa #178',
+    title: 'Winds of Yawanawá #178',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-178.svg',
@@ -5655,7 +5655,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-227',
     slug: 'winds-of-yawanawa-227',
-    title: 'Winds of Yawanawa #227',
+    title: 'Winds of Yawanawá #227',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-227.svg',
@@ -5674,7 +5674,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-265',
     slug: 'winds-of-yawanawa-265',
-    title: 'Winds of Yawanawa #265',
+    title: 'Winds of Yawanawá #265',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-265.svg',
@@ -5693,7 +5693,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-281',
     slug: 'winds-of-yawanawa-281',
-    title: 'Winds of Yawanawa #281',
+    title: 'Winds of Yawanawá #281',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-281.svg',
@@ -5712,7 +5712,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-369',
     slug: 'winds-of-yawanawa-369',
-    title: 'Winds of Yawanawa #369',
+    title: 'Winds of Yawanawá #369',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-369.svg',
@@ -5731,7 +5731,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-371',
     slug: 'winds-of-yawanawa-371',
-    title: 'Winds of Yawanawa #371',
+    title: 'Winds of Yawanawá #371',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-371.svg',
@@ -5750,7 +5750,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-373',
     slug: 'winds-of-yawanawa-373',
-    title: 'Winds of Yawanawa #373',
+    title: 'Winds of Yawanawá #373',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-373.svg',
@@ -5769,7 +5769,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-442',
     slug: 'winds-of-yawanawa-442',
-    title: 'Winds of Yawanawa #442',
+    title: 'Winds of Yawanawá #442',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-442.svg',
@@ -5788,7 +5788,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-451',
     slug: 'winds-of-yawanawa-451',
-    title: 'Winds of Yawanawa #451',
+    title: 'Winds of Yawanawá #451',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-451.svg',
@@ -5807,7 +5807,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-487',
     slug: 'winds-of-yawanawa-487',
-    title: 'Winds of Yawanawa #487',
+    title: 'Winds of Yawanawá #487',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-487.svg',
@@ -5826,7 +5826,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-495',
     slug: 'winds-of-yawanawa-495',
-    title: 'Winds of Yawanawa #495',
+    title: 'Winds of Yawanawá #495',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-495.svg',
@@ -5845,7 +5845,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-524',
     slug: 'winds-of-yawanawa-524',
-    title: 'Winds of Yawanawa #524',
+    title: 'Winds of Yawanawá #524',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-524.svg',
@@ -5864,7 +5864,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-554',
     slug: 'winds-of-yawanawa-554',
-    title: 'Winds of Yawanawa #554',
+    title: 'Winds of Yawanawá #554',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-554.svg',
@@ -5883,7 +5883,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-572',
     slug: 'winds-of-yawanawa-572',
-    title: 'Winds of Yawanawa #572',
+    title: 'Winds of Yawanawá #572',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-572.svg',
@@ -5902,7 +5902,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-600',
     slug: 'winds-of-yawanawa-600',
-    title: 'Winds of Yawanawa #600',
+    title: 'Winds of Yawanawá #600',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-600.svg',
@@ -5921,7 +5921,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-629',
     slug: 'winds-of-yawanawa-629',
-    title: 'Winds of Yawanawa #629',
+    title: 'Winds of Yawanawá #629',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-629.svg',
@@ -5940,7 +5940,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-637',
     slug: 'winds-of-yawanawa-637',
-    title: 'Winds of Yawanawa #637',
+    title: 'Winds of Yawanawá #637',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-637.svg',
@@ -5959,7 +5959,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-638',
     slug: 'winds-of-yawanawa-638',
-    title: 'Winds of Yawanawa #638',
+    title: 'Winds of Yawanawá #638',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-638.svg',
@@ -5978,7 +5978,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-681',
     slug: 'winds-of-yawanawa-681',
-    title: 'Winds of Yawanawa #681',
+    title: 'Winds of Yawanawá #681',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-681.svg',
@@ -5997,7 +5997,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-688',
     slug: 'winds-of-yawanawa-688',
-    title: 'Winds of Yawanawa #688',
+    title: 'Winds of Yawanawá #688',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-688.svg',
@@ -6016,7 +6016,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-692',
     slug: 'winds-of-yawanawa-692',
-    title: 'Winds of Yawanawa #692',
+    title: 'Winds of Yawanawá #692',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-692.svg',
@@ -6035,7 +6035,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-695',
     slug: 'winds-of-yawanawa-695',
-    title: 'Winds of Yawanawa #695',
+    title: 'Winds of Yawanawá #695',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-695.svg',
@@ -6054,7 +6054,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-697',
     slug: 'winds-of-yawanawa-697',
-    title: 'Winds of Yawanawa #697',
+    title: 'Winds of Yawanawá #697',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-697.svg',
@@ -6073,7 +6073,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-700',
     slug: 'winds-of-yawanawa-700',
-    title: 'Winds of Yawanawa #700',
+    title: 'Winds of Yawanawá #700',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-700.svg',
@@ -6092,7 +6092,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-701',
     slug: 'winds-of-yawanawa-701',
-    title: 'Winds of Yawanawa #701',
+    title: 'Winds of Yawanawá #701',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-701.svg',
@@ -6111,7 +6111,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-704',
     slug: 'winds-of-yawanawa-704',
-    title: 'Winds of Yawanawa #704',
+    title: 'Winds of Yawanawá #704',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-704.svg',
@@ -6130,7 +6130,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-712',
     slug: 'winds-of-yawanawa-712',
-    title: 'Winds of Yawanawa #712',
+    title: 'Winds of Yawanawá #712',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-712.svg',
@@ -6149,7 +6149,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-717',
     slug: 'winds-of-yawanawa-717',
-    title: 'Winds of Yawanawa #717',
+    title: 'Winds of Yawanawá #717',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-717.svg',
@@ -6168,7 +6168,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-738',
     slug: 'winds-of-yawanawa-738',
-    title: 'Winds of Yawanawa #738',
+    title: 'Winds of Yawanawá #738',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-738.svg',
@@ -6187,7 +6187,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-741',
     slug: 'winds-of-yawanawa-741',
-    title: 'Winds of Yawanawa #741',
+    title: 'Winds of Yawanawá #741',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-741.svg',
@@ -6206,7 +6206,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-745',
     slug: 'winds-of-yawanawa-745',
-    title: 'Winds of Yawanawa #745',
+    title: 'Winds of Yawanawá #745',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-745.svg',
@@ -6225,7 +6225,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-746',
     slug: 'winds-of-yawanawa-746',
-    title: 'Winds of Yawanawa #746',
+    title: 'Winds of Yawanawá #746',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-746.svg',
@@ -6244,7 +6244,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-754',
     slug: 'winds-of-yawanawa-754',
-    title: 'Winds of Yawanawa #754',
+    title: 'Winds of Yawanawá #754',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-754.svg',
@@ -6263,7 +6263,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-755',
     slug: 'winds-of-yawanawa-755',
-    title: 'Winds of Yawanawa #755',
+    title: 'Winds of Yawanawá #755',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-755.svg',
@@ -6282,7 +6282,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-764',
     slug: 'winds-of-yawanawa-764',
-    title: 'Winds of Yawanawa #764',
+    title: 'Winds of Yawanawá #764',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-764.svg',
@@ -6301,7 +6301,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-856',
     slug: 'winds-of-yawanawa-856',
-    title: 'Winds of Yawanawa #856',
+    title: 'Winds of Yawanawá #856',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-856.svg',
@@ -6320,7 +6320,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-863',
     slug: 'winds-of-yawanawa-863',
-    title: 'Winds of Yawanawa #863',
+    title: 'Winds of Yawanawá #863',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-863.svg',
@@ -6339,7 +6339,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-870',
     slug: 'winds-of-yawanawa-870',
-    title: 'Winds of Yawanawa #870',
+    title: 'Winds of Yawanawá #870',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-870.svg',
@@ -6358,7 +6358,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-878',
     slug: 'winds-of-yawanawa-878',
-    title: 'Winds of Yawanawa #878',
+    title: 'Winds of Yawanawá #878',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-878.svg',
@@ -6377,7 +6377,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-888',
     slug: 'winds-of-yawanawa-888',
-    title: 'Winds of Yawanawa #888',
+    title: 'Winds of Yawanawá #888',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-888.svg',
@@ -6396,7 +6396,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-912',
     slug: 'winds-of-yawanawa-912',
-    title: 'Winds of Yawanawa #912',
+    title: 'Winds of Yawanawá #912',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-912.svg',
@@ -6415,7 +6415,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-917',
     slug: 'winds-of-yawanawa-917',
-    title: 'Winds of Yawanawa #917',
+    title: 'Winds of Yawanawá #917',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-917.svg',
@@ -6434,7 +6434,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-921',
     slug: 'winds-of-yawanawa-921',
-    title: 'Winds of Yawanawa #921',
+    title: 'Winds of Yawanawá #921',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-921.svg',
@@ -6453,7 +6453,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-962',
     slug: 'winds-of-yawanawa-962',
-    title: 'Winds of Yawanawa #962',
+    title: 'Winds of Yawanawá #962',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-962.svg',
@@ -6472,7 +6472,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-989',
     slug: 'winds-of-yawanawa-989',
-    title: 'Winds of Yawanawa #989',
+    title: 'Winds of Yawanawá #989',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-989.svg',
@@ -6686,7 +6686,7 @@ export const pieces: Piece[] = [
   {
     id: 'winds-of-yawanawa-213',
     slug: 'winds-of-yawanawa-213',
-    title: 'Winds of Yawanawa #213',
+    title: 'Winds of Yawanawá #213',
     collectionSlug: 'winds-of-yawanawa',
     artistSlug: 'refik-anadol',
     image: '/samples/winds-of-yawanawa-213.svg',

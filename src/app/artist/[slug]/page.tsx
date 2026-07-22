@@ -21,7 +21,6 @@ import JustifiedGallery from "@/components/JustifiedGallery";
 import FixedRowGallery from "@/components/FixedRowGallery";
 import HeroSidebarGallery from "@/components/HeroSidebarGallery";
 import SinglePieceDisplay from "@/components/SinglePieceDisplay";
-import CuratorNote from "@/components/CuratorNote";
 import ScrollRestore from "@/components/ScrollRestore";
 
 const MERGE_INTO: Record<string, string> = {
@@ -232,12 +231,9 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
               {artist.bio}
             </p>
           )}
-          {/* curationComment is the curator's voice - given its own attributed
-              block (HIVEMIND COMMENTARY) instead of running on as a second bio
-              paragraph, so a reader can clearly tell what is DCF's view. */}
-          {artist.curationComment && (
-            <CuratorNote text={artist.curationComment} variant="inline" />
-          )}
+          {/* Artist-level Hivemind Commentary block is a planned surface;
+              editorial curatorNote per artist has not been authored yet. When
+              it lands, restore the CuratorNote render here. */}
           {artist.essayUrl && (
             <div>
               <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-2">
