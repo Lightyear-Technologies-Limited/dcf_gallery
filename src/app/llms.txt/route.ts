@@ -32,7 +32,7 @@ export function GET() {
 
   const body = `# Hivemind Digital Culture Fund
 
-> The Hivemind Digital Culture Fund is a curated portfolio of digital art's emergent canon, acquired after the first market cycle by Hivemind Capital Partners, a crypto-focused investment firm. Holdings span ${visiblePieces.length} works by ten artists across ${visibleCollections.length} collections, held to the custody, security, and operational standards LPs apply to any asset on their book.
+> The Hivemind Digital Culture Fund is a curated portfolio of digital art's emergent canon, acquired after the first market cycle. Holdings span ${visiblePieces.length} works by ten artists across ${visibleCollections.length} collections.
 
 ## Thesis
 
@@ -42,8 +42,8 @@ Technology drives wealth. Wealth drives culture. The fund is built around ten ar
 
 - **White Mono Fidenza** (Tyler Hobbs, Art Blocks 2021). Hivemind's Fidenza position is built around the White Mono trait: pure white forms on a colored ground, the inverse of the standard palette.
 - **Return Zero** (Tyler Hobbs, 2021). The precursor algorithm to Fidenza. Sits alongside the Fidenza set as a keystone 1/1.
-- **A Slight Lack of Symmetry Can Cause So Much Pain** (Dmitri Cherniak, 2021). Cherniak's four-piece SuperRare 1/1 set, sourced from the collapsed Starry Night Capital collection via Sotheby's. Sits alongside the deep Ringers position.
-- **Ringers** (Dmitri Cherniak, Art Blocks 2021). Substantial position including works previously in Three Arrows Capital's Starry Night collection alongside The Goose.
+- **A Slight Lack of Symmetry Can Cause So Much Pain** (Dmitri Cherniak, 2021). Cherniak's four-piece SuperRare 1/1 set, sourced from 3AC's Starry Night collection via Sotheby's. Sits alongside the deep Ringers position.
+- **Ringers** (Dmitri Cherniak, Art Blocks 2021). Substantial position including works previously in 3AC's Starry Night collection alongside The Goose.
 - **Some Other Asshole** and **THE FUD** (XCOPY, SuperRare). Five XCOPY SuperRare 1/1s, predominantly from his COVID-era work.
 - **Grifters** (XCOPY, 2021). Color sets for Wretch, Shady, and G to the M, anchored by one of three Legendary outputs: ROTTEN.
 - **X-Ray Machine** (Operator). The sole large-scale physical sculpture from the Human Unreadable series, on view at Toledo Museum of Art.
@@ -53,7 +53,7 @@ Technology drives wealth. Wealth drives culture. The fund is built around ten ar
 
 ## Curatorial method
 
-- **Artist and collection**. In Contemporary Art, the living artist still shapes an artwork's value. Hivemind acquires blue-chip collections by blue-chip artists, not artists wholesale.
+- **Artist and collection**. In Contemporary Art, the living artist still shapes an artwork's value. Hivemind acquires blue-chip artworks by blue-chip artists.
 - **Trait concentration**. Within a collection, Hivemind concentrates on desirable traits when pricing allows.
 - **1/1 keystones**. 1/1s are acquired as keystones, not standalone trophies. Each 1/1 completes a thread that runs through the rest of the curation.
 

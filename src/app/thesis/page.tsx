@@ -94,7 +94,7 @@ export default function AboutPage() {
           <p className="text-[16px] font-medium text-foreground">1/1 keystones</p>
           <p className="text-[16px] text-foreground-secondary leading-[1.65] mt-1">
             1/1s are acquired as keystones, not standalone acquisitions. Tyler
-            Hobbs&rsquo;s{" "}
+            Hobbs&rsquo;{" "}
             <Link
               href="/piece/tyler-hobbs-1"
               className="underline underline-offset-4 decoration-border hover:decoration-foreground transition-colors duration-200"

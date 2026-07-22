@@ -63,8 +63,8 @@ export default async function OG() {
               maxWidth: 900,
             }}
           >
-            XCOPY. Tyler Hobbs. Dmitri Cherniak. Larva Labs (CryptoPunks). Refik
-            Anadol. Sam Spratt. Kim Asendorf. Operator. Beeple. a.c.k.
+            XCOPY. Tyler Hobbs. Dmitri Cherniak. Larva Labs. Refik Anadol. Sam
+            Spratt. Kim Asendorf. Operator. Beeple. a.c.k.
           </div>
         </div>
 
