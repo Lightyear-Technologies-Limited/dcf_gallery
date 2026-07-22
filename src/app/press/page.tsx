@@ -102,7 +102,7 @@ export default function PressPage() {
             press@hivemind.capital
           </a>
           <p className="text-[13px] text-muted mt-4">
-            For high-resolution imagery of specific works, please email the press address with the piece title and intended publication.
+            For high-resolution images of specific works, email press@hivemind.capital with the piece title and intended publication.
           </p>
         </section>
 
