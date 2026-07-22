@@ -227,7 +227,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
 
         <div className="space-y-6 md:pt-4">
           {artist.bio && (
-            <p className="text-[20px] text-foreground-secondary leading-[1.6]">
+            <p className="text-[17px] sm:text-[18px] text-foreground-secondary leading-[1.6]">
               {artist.bio}
             </p>
           )}

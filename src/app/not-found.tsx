@@ -6,7 +6,7 @@ export default function NotFound() {
       <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-6">
         404
       </p>
-      <h1 className="font-serif display">
+      <h1 className="font-serif display-sm">
         Not in the collection
       </h1>
       <p className="text-[20px] text-foreground-secondary leading-[1.6] mt-8 max-w-[52ch]">
