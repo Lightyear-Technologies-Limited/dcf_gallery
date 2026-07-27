@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import pieceRedirects from "./src/lib/piece-redirects.json";
 
 // Site-wide security headers (D.1). This is a static, no-auth, no-PII brochure
 // site, so the threat model is reputational (defacement / supply chain) more
@@ -35,6 +36,18 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    // - /collections -> / (home is the collections index)
+    // - /about -> /thesis (renamed for LP-facing clarity)
+    // - /piece/{old-hex-slug} -> /piece/{new-slug} for the 317 pieces
+    //   whose slugs were shortened by dropping the redundant contract
+    //   -hex suffix. Old shared links keep working.
+    return [
+      { source: "/collections", destination: "/", permanent: true },
+      { source: "/about", destination: "/thesis", permanent: true },
+      ...pieceRedirects,
+    ];
+  },
   async headers() {
     return [
       { source: "/:path*", headers: securityHeaders },

@@ -55,9 +55,22 @@ export function getDetailVariants(slug: string): { src: string; srcSet: string }
   return { src, srcSet };
 }
 
-/** Tiny blurred LQIP data URI for blur-up (progressive load), or undefined. */
+/** Tiny blurred LQIP data URI for blur-up (progressive load), or undefined.
+ *
+ *  Skulls of Luci are released as transparent tondos (circular artwork on
+ *  a transparent canvas). Applying a rectangular LQIP as a background on
+ *  the img element makes the LQIP show through the transparent pixels
+ *  around the circular skull — reading as a strange rectangular halo /
+ *  frame around the artwork. For transparent-tondo pieces we return
+ *  undefined so no LQIP background is set; the page background shows
+ *  through the transparency cleanly. Trade-off: no blur-up on initial
+ *  load for these specific pieces, but tondo files are small and load
+ *  fast in practice. */
 export function getArtworkBlur(slug: string): string | undefined {
-  return PROVENANCE[slug]?.lqip;
+  const p = PROVENANCE[slug];
+  if (!p?.lqip) return undefined;
+  if ((p as { display?: string }).display === "transparent-tondo") return undefined;
+  return p.lqip;
 }
 
 /** Social-card (OG) image for a piece: a 1200px JPG via the gateway, for the

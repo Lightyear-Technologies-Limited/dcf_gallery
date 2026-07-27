@@ -1,0 +1,1587 @@
+[
+  {
+    "source": "/piece/ack-editions-8-7102",
+    "destination": "/piece/ack-editions-8",
+    "permanent": true
+  },
+  {
+    "source": "/piece/piano-blossoms-5-40f9",
+    "destination": "/piece/piano-blossoms-5",
+    "permanent": true
+  },
+  {
+    "source": "/piece/piano-blossoms-3-40f9",
+    "destination": "/piece/piano-blossoms-3",
+    "permanent": true
+  },
+  {
+    "source": "/piece/piano-blossoms-2-40f9",
+    "destination": "/piece/piano-blossoms-2",
+    "permanent": true
+  },
+  {
+    "source": "/piece/piano-blossoms-4-40f9",
+    "destination": "/piece/piano-blossoms-4",
+    "permanent": true
+  },
+  {
+    "source": "/piece/piano-blossoms-1-40f9",
+    "destination": "/piece/piano-blossoms-1",
+    "permanent": true
+  },
+  {
+    "source": "/piece/her-favorite-flowers-2-fe63",
+    "destination": "/piece/her-favorite-flowers-2",
+    "permanent": true
+  },
+  {
+    "source": "/piece/superrare-beeple-24644-b9e0",
+    "destination": "/piece/superrare-beeple-24644",
+    "permanent": true
+  },
+  {
+    "source": "/piece/dataland-biome-lumina-115-1c9d",
+    "destination": "/piece/dataland-biome-lumina-115",
+    "permanent": true
+  },
+  {
+    "source": "/piece/dataland-biome-lumina-127-1c9d",
+    "destination": "/piece/dataland-biome-lumina-127",
+    "permanent": true
+  },
+  {
+    "source": "/piece/dataland-biome-lumina-161-1c9d",
+    "destination": "/piece/dataland-biome-lumina-161",
+    "permanent": true
+  },
+  {
+    "source": "/piece/dataland-biome-lumina-179-1c9d",
+    "destination": "/piece/dataland-biome-lumina-179",
+    "permanent": true
+  },
+  {
+    "source": "/piece/dataland-biome-lumina-207-1c9d",
+    "destination": "/piece/dataland-biome-lumina-207",
+    "permanent": true
+  },
+  {
+    "source": "/piece/dataland-biome-lumina-242-1c9d",
+    "destination": "/piece/dataland-biome-lumina-242",
+    "permanent": true
+  },
+  {
+    "source": "/piece/dataland-biome-lumina-458-1c9d",
+    "destination": "/piece/dataland-biome-lumina-458",
+    "permanent": true
+  },
+  {
+    "source": "/piece/dataland-biome-lumina-461-1c9d",
+    "destination": "/piece/dataland-biome-lumina-461",
+    "permanent": true
+  },
+  {
+    "source": "/piece/dataland-biome-lumina-464-1c9d",
+    "destination": "/piece/dataland-biome-lumina-464",
+    "permanent": true
+  },
+  {
+    "source": "/piece/dataland-biome-lumina-524-1c9d",
+    "destination": "/piece/dataland-biome-lumina-524",
+    "permanent": true
+  },
+  {
+    "source": "/piece/dataland-biome-lumina-549-1c9d",
+    "destination": "/piece/dataland-biome-lumina-549",
+    "permanent": true
+  },
+  {
+    "source": "/piece/dataland-biome-lumina-632-1c9d",
+    "destination": "/piece/dataland-biome-lumina-632",
+    "permanent": true
+  },
+  {
+    "source": "/piece/dataland-biome-lumina-665-1c9d",
+    "destination": "/piece/dataland-biome-lumina-665",
+    "permanent": true
+  },
+  {
+    "source": "/piece/dataland-biome-lumina-670-1c9d",
+    "destination": "/piece/dataland-biome-lumina-670",
+    "permanent": true
+  },
+  {
+    "source": "/piece/dataland-biome-lumina-691-1c9d",
+    "destination": "/piece/dataland-biome-lumina-691",
+    "permanent": true
+  },
+  {
+    "source": "/piece/dataland-biome-lumina-789-1c9d",
+    "destination": "/piece/dataland-biome-lumina-789",
+    "permanent": true
+  },
+  {
+    "source": "/piece/dataland-biome-lumina-791-1c9d",
+    "destination": "/piece/dataland-biome-lumina-791",
+    "permanent": true
+  },
+  {
+    "source": "/piece/dataland-biome-lumina-999-1c9d",
+    "destination": "/piece/dataland-biome-lumina-999",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-269-3BBB",
+    "destination": "/piece/cryptopunks-269",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-1568-3BBB",
+    "destination": "/piece/cryptopunks-1568",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-1775-3BBB",
+    "destination": "/piece/cryptopunks-1775",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-1887-13f6",
+    "destination": "/piece/cryptopunks-1887",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-2412-3BBB",
+    "destination": "/piece/cryptopunks-2412",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-2550-3BBB",
+    "destination": "/piece/cryptopunks-2550",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-2758-3BBB",
+    "destination": "/piece/cryptopunks-2758",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-3017-3BBB",
+    "destination": "/piece/cryptopunks-3017",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-3745-3BBB",
+    "destination": "/piece/cryptopunks-3745",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-4063-3BBB",
+    "destination": "/piece/cryptopunks-4063",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-4081-3BBB",
+    "destination": "/piece/cryptopunks-4081",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-4253-3BBB",
+    "destination": "/piece/cryptopunks-4253",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-4558-3BBB",
+    "destination": "/piece/cryptopunks-4558",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-4633-3BBB",
+    "destination": "/piece/cryptopunks-4633",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-4776-3BBB",
+    "destination": "/piece/cryptopunks-4776",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-4853-13f6",
+    "destination": "/piece/cryptopunks-4853",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-4926-3BBB",
+    "destination": "/piece/cryptopunks-4926",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-4978-3BBB",
+    "destination": "/piece/cryptopunks-4978",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-5061-3BBB",
+    "destination": "/piece/cryptopunks-5061",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-5528-3BBB",
+    "destination": "/piece/cryptopunks-5528",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-6194-3BBB",
+    "destination": "/piece/cryptopunks-6194",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-6435-3BBB",
+    "destination": "/piece/cryptopunks-6435",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-6479-3BBB",
+    "destination": "/piece/cryptopunks-6479",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-6583-3BBB",
+    "destination": "/piece/cryptopunks-6583",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-6788-3BBB",
+    "destination": "/piece/cryptopunks-6788",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-6932-3BBB",
+    "destination": "/piece/cryptopunks-6932",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-7144-3BBB",
+    "destination": "/piece/cryptopunks-7144",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-7364-3BBB",
+    "destination": "/piece/cryptopunks-7364",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-7728-3BBB",
+    "destination": "/piece/cryptopunks-7728",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-8259-3BBB",
+    "destination": "/piece/cryptopunks-8259",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-8561-13f6",
+    "destination": "/piece/cryptopunks-8561",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-8564-13f6",
+    "destination": "/piece/cryptopunks-8564",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-8779-3BBB",
+    "destination": "/piece/cryptopunks-8779",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-9019-3BBB",
+    "destination": "/piece/cryptopunks-9019",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-9363-3BBB",
+    "destination": "/piece/cryptopunks-9363",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-9405-3BBB",
+    "destination": "/piece/cryptopunks-9405",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-9665-3BBB",
+    "destination": "/piece/cryptopunks-9665",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-9968-3BBB",
+    "destination": "/piece/cryptopunks-9968",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-9985-3BBB",
+    "destination": "/piece/cryptopunks-9985",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-9133-3BBB",
+    "destination": "/piece/cryptopunks-9133",
+    "permanent": true
+  },
+  {
+    "source": "/piece/day-gardens-27-c0fd",
+    "destination": "/piece/day-gardens-27",
+    "permanent": true
+  },
+  {
+    "source": "/piece/day-gardens-32-c0fd",
+    "destination": "/piece/day-gardens-32",
+    "permanent": true
+  },
+  {
+    "source": "/piece/day-gardens-40-c0fd",
+    "destination": "/piece/day-gardens-40",
+    "permanent": true
+  },
+  {
+    "source": "/piece/superrare-dmitri-cherniak-26901-b9e0",
+    "destination": "/piece/superrare-dmitri-cherniak-26901",
+    "permanent": true
+  },
+  {
+    "source": "/piece/superrare-dmitri-cherniak-26902-b9e0",
+    "destination": "/piece/superrare-dmitri-cherniak-26902",
+    "permanent": true
+  },
+  {
+    "source": "/piece/fidenza-5-d270",
+    "destination": "/piece/fidenza-5",
+    "permanent": true
+  },
+  {
+    "source": "/piece/fidenza-19-d270",
+    "destination": "/piece/fidenza-19",
+    "permanent": true
+  },
+  {
+    "source": "/piece/fidenza-28-d270",
+    "destination": "/piece/fidenza-28",
+    "permanent": true
+  },
+  {
+    "source": "/piece/fidenza-60-d270",
+    "destination": "/piece/fidenza-60",
+    "permanent": true
+  },
+  {
+    "source": "/piece/fidenza-90-d270",
+    "destination": "/piece/fidenza-90",
+    "permanent": true
+  },
+  {
+    "source": "/piece/fidenza-98-d270",
+    "destination": "/piece/fidenza-98",
+    "permanent": true
+  },
+  {
+    "source": "/piece/fidenza-145-d270",
+    "destination": "/piece/fidenza-145",
+    "permanent": true
+  },
+  {
+    "source": "/piece/fidenza-169-d270",
+    "destination": "/piece/fidenza-169",
+    "permanent": true
+  },
+  {
+    "source": "/piece/fidenza-180-d270",
+    "destination": "/piece/fidenza-180",
+    "permanent": true
+  },
+  {
+    "source": "/piece/fidenza-200-d270",
+    "destination": "/piece/fidenza-200",
+    "permanent": true
+  },
+  {
+    "source": "/piece/fidenza-231-d270",
+    "destination": "/piece/fidenza-231",
+    "permanent": true
+  },
+  {
+    "source": "/piece/fidenza-253-d270",
+    "destination": "/piece/fidenza-253",
+    "permanent": true
+  },
+  {
+    "source": "/piece/fidenza-256-d270",
+    "destination": "/piece/fidenza-256",
+    "permanent": true
+  },
+  {
+    "source": "/piece/fidenza-262-d270",
+    "destination": "/piece/fidenza-262",
+    "permanent": true
+  },
+  {
+    "source": "/piece/fidenza-342-d270",
+    "destination": "/piece/fidenza-342",
+    "permanent": true
+  },
+  {
+    "source": "/piece/fidenza-378-d270",
+    "destination": "/piece/fidenza-378",
+    "permanent": true
+  },
+  {
+    "source": "/piece/fidenza-437-d270",
+    "destination": "/piece/fidenza-437",
+    "permanent": true
+  },
+  {
+    "source": "/piece/fidenza-456-d270",
+    "destination": "/piece/fidenza-456",
+    "permanent": true
+  },
+  {
+    "source": "/piece/fidenza-573-d270",
+    "destination": "/piece/fidenza-573",
+    "permanent": true
+  },
+  {
+    "source": "/piece/fidenza-587-d270",
+    "destination": "/piece/fidenza-587",
+    "permanent": true
+  },
+  {
+    "source": "/piece/fidenza-593-d270",
+    "destination": "/piece/fidenza-593",
+    "permanent": true
+  },
+  {
+    "source": "/piece/fidenza-609-d270",
+    "destination": "/piece/fidenza-609",
+    "permanent": true
+  },
+  {
+    "source": "/piece/fidenza-647-d270",
+    "destination": "/piece/fidenza-647",
+    "permanent": true
+  },
+  {
+    "source": "/piece/fidenza-650-d270",
+    "destination": "/piece/fidenza-650",
+    "permanent": true
+  },
+  {
+    "source": "/piece/fidenza-713-d270",
+    "destination": "/piece/fidenza-713",
+    "permanent": true
+  },
+  {
+    "source": "/piece/fidenza-718-d270",
+    "destination": "/piece/fidenza-718",
+    "permanent": true
+  },
+  {
+    "source": "/piece/fidenza-819-d270",
+    "destination": "/piece/fidenza-819",
+    "permanent": true
+  },
+  {
+    "source": "/piece/fidenza-929-d270",
+    "destination": "/piece/fidenza-929",
+    "permanent": true
+  },
+  {
+    "source": "/piece/fidenza-943-d270",
+    "destination": "/piece/fidenza-943",
+    "permanent": true
+  },
+  {
+    "source": "/piece/fidenza-984-d270",
+    "destination": "/piece/fidenza-984",
+    "permanent": true
+  },
+  {
+    "source": "/piece/grifters-8-c1f3",
+    "destination": "/piece/grifters-8",
+    "permanent": true
+  },
+  {
+    "source": "/piece/grifters-37-c1f3",
+    "destination": "/piece/grifters-37",
+    "permanent": true
+  },
+  {
+    "source": "/piece/grifters-66-c1f3",
+    "destination": "/piece/grifters-66",
+    "permanent": true
+  },
+  {
+    "source": "/piece/grifters-88-c1f3",
+    "destination": "/piece/grifters-88",
+    "permanent": true
+  },
+  {
+    "source": "/piece/grifters-132-c1f3",
+    "destination": "/piece/grifters-132",
+    "permanent": true
+  },
+  {
+    "source": "/piece/grifters-51-c1f3",
+    "destination": "/piece/grifters-51",
+    "permanent": true
+  },
+  {
+    "source": "/piece/grifters-165-c1f3",
+    "destination": "/piece/grifters-165",
+    "permanent": true
+  },
+  {
+    "source": "/piece/grifters-166-c1f3",
+    "destination": "/piece/grifters-166",
+    "permanent": true
+  },
+  {
+    "source": "/piece/grifters-170-c1f3",
+    "destination": "/piece/grifters-170",
+    "permanent": true
+  },
+  {
+    "source": "/piece/grifters-197-c1f3",
+    "destination": "/piece/grifters-197",
+    "permanent": true
+  },
+  {
+    "source": "/piece/grifters-222-c1f3",
+    "destination": "/piece/grifters-222",
+    "permanent": true
+  },
+  {
+    "source": "/piece/grifters-254-c1f3",
+    "destination": "/piece/grifters-254",
+    "permanent": true
+  },
+  {
+    "source": "/piece/grifters-308-c1f3",
+    "destination": "/piece/grifters-308",
+    "permanent": true
+  },
+  {
+    "source": "/piece/grifters-363-c1f3",
+    "destination": "/piece/grifters-363",
+    "permanent": true
+  },
+  {
+    "source": "/piece/grifters-368-c1f3",
+    "destination": "/piece/grifters-368",
+    "permanent": true
+  },
+  {
+    "source": "/piece/grifters-439-c1f3",
+    "destination": "/piece/grifters-439",
+    "permanent": true
+  },
+  {
+    "source": "/piece/grifters-442-c1f3",
+    "destination": "/piece/grifters-442",
+    "permanent": true
+  },
+  {
+    "source": "/piece/grifters-472-c1f3",
+    "destination": "/piece/grifters-472",
+    "permanent": true
+  },
+  {
+    "source": "/piece/grifters-522-c1f3",
+    "destination": "/piece/grifters-522",
+    "permanent": true
+  },
+  {
+    "source": "/piece/grifters-532-c1f3",
+    "destination": "/piece/grifters-532",
+    "permanent": true
+  },
+  {
+    "source": "/piece/grifters-542-c1f3",
+    "destination": "/piece/grifters-542",
+    "permanent": true
+  },
+  {
+    "source": "/piece/grifters-547-c1f3",
+    "destination": "/piece/grifters-547",
+    "permanent": true
+  },
+  {
+    "source": "/piece/grifters-572-c1f3",
+    "destination": "/piece/grifters-572",
+    "permanent": true
+  },
+  {
+    "source": "/piece/grifters-574-c1f3",
+    "destination": "/piece/grifters-574",
+    "permanent": true
+  },
+  {
+    "source": "/piece/human-unreadable-455000095-b069",
+    "destination": "/piece/human-unreadable-455000095",
+    "permanent": true
+  },
+  {
+    "source": "/piece/human-unreadable-455000124-b069",
+    "destination": "/piece/human-unreadable-455000124",
+    "permanent": true
+  },
+  {
+    "source": "/piece/human-unreadable-455000140-b069",
+    "destination": "/piece/human-unreadable-455000140",
+    "permanent": true
+  },
+  {
+    "source": "/piece/human-unreadable-455000141-b069",
+    "destination": "/piece/human-unreadable-455000141",
+    "permanent": true
+  },
+  {
+    "source": "/piece/human-unreadable-455000150-b069",
+    "destination": "/piece/human-unreadable-455000150",
+    "permanent": true
+  },
+  {
+    "source": "/piece/human-unreadable-455000155-b069",
+    "destination": "/piece/human-unreadable-455000155",
+    "permanent": true
+  },
+  {
+    "source": "/piece/human-unreadable-455000156-b069",
+    "destination": "/piece/human-unreadable-455000156",
+    "permanent": true
+  },
+  {
+    "source": "/piece/human-unreadable-455000169-b069",
+    "destination": "/piece/human-unreadable-455000169",
+    "permanent": true
+  },
+  {
+    "source": "/piece/human-unreadable-455000180-b069",
+    "destination": "/piece/human-unreadable-455000180",
+    "permanent": true
+  },
+  {
+    "source": "/piece/human-unreadable-455000201-b069",
+    "destination": "/piece/human-unreadable-455000201",
+    "permanent": true
+  },
+  {
+    "source": "/piece/human-unreadable-455000216-b069",
+    "destination": "/piece/human-unreadable-455000216",
+    "permanent": true
+  },
+  {
+    "source": "/piece/human-unreadable-455000237-b069",
+    "destination": "/piece/human-unreadable-455000237",
+    "permanent": true
+  },
+  {
+    "source": "/piece/human-unreadable-455000245-b069",
+    "destination": "/piece/human-unreadable-455000245",
+    "permanent": true
+  },
+  {
+    "source": "/piece/human-unreadable-455000278-b069",
+    "destination": "/piece/human-unreadable-455000278",
+    "permanent": true
+  },
+  {
+    "source": "/piece/human-unreadable-455000328-b069",
+    "destination": "/piece/human-unreadable-455000328",
+    "permanent": true
+  },
+  {
+    "source": "/piece/human-unreadable-455000336-b069",
+    "destination": "/piece/human-unreadable-455000336",
+    "permanent": true
+  },
+  {
+    "source": "/piece/human-unreadable-455000339-b069",
+    "destination": "/piece/human-unreadable-455000339",
+    "permanent": true
+  },
+  {
+    "source": "/piece/lightyears-1-f3f5",
+    "destination": "/piece/lightyears-1",
+    "permanent": true
+  },
+  {
+    "source": "/piece/lightyears-13-f3f5",
+    "destination": "/piece/lightyears-13",
+    "permanent": true
+  },
+  {
+    "source": "/piece/lightyears-30-f3f5",
+    "destination": "/piece/lightyears-30",
+    "permanent": true
+  },
+  {
+    "source": "/piece/lightyears-42-f3f5",
+    "destination": "/piece/lightyears-42",
+    "permanent": true
+  },
+  {
+    "source": "/piece/lightyears-67-f3f5",
+    "destination": "/piece/lightyears-67",
+    "permanent": true
+  },
+  {
+    "source": "/piece/lightyears-72-f3f5",
+    "destination": "/piece/lightyears-72",
+    "permanent": true
+  },
+  {
+    "source": "/piece/masks-of-luci-86-249a",
+    "destination": "/piece/masks-of-luci-86",
+    "permanent": true
+  },
+  {
+    "source": "/piece/masks-of-luci-94-249a",
+    "destination": "/piece/masks-of-luci-94",
+    "permanent": true
+  },
+  {
+    "source": "/piece/masks-of-luci-142-249a",
+    "destination": "/piece/masks-of-luci-142",
+    "permanent": true
+  },
+  {
+    "source": "/piece/masks-of-luci-191-249a",
+    "destination": "/piece/masks-of-luci-191",
+    "permanent": true
+  },
+  {
+    "source": "/piece/masks-of-luci-240-249a",
+    "destination": "/piece/masks-of-luci-240",
+    "permanent": true
+  },
+  {
+    "source": "/piece/masks-of-luci-241-249a",
+    "destination": "/piece/masks-of-luci-241",
+    "permanent": true
+  },
+  {
+    "source": "/piece/masks-of-luci-303-249a",
+    "destination": "/piece/masks-of-luci-303",
+    "permanent": true
+  },
+  {
+    "source": "/piece/masks-of-luci-349-249a",
+    "destination": "/piece/masks-of-luci-349",
+    "permanent": true
+  },
+  {
+    "source": "/piece/masks-of-luci-394-249a",
+    "destination": "/piece/masks-of-luci-394",
+    "permanent": true
+  },
+  {
+    "source": "/piece/masks-of-luci-435-249a",
+    "destination": "/piece/masks-of-luci-435",
+    "permanent": true
+  },
+  {
+    "source": "/piece/masks-of-luci-442-249a",
+    "destination": "/piece/masks-of-luci-442",
+    "permanent": true
+  },
+  {
+    "source": "/piece/masks-of-luci-476-249a",
+    "destination": "/piece/masks-of-luci-476",
+    "permanent": true
+  },
+  {
+    "source": "/piece/masks-of-luci-504-249a",
+    "destination": "/piece/masks-of-luci-504",
+    "permanent": true
+  },
+  {
+    "source": "/piece/masks-of-luci-518-249a",
+    "destination": "/piece/masks-of-luci-518",
+    "permanent": true
+  },
+  {
+    "source": "/piece/masks-of-luci-540-249a",
+    "destination": "/piece/masks-of-luci-540",
+    "permanent": true
+  },
+  {
+    "source": "/piece/masks-of-luci-569-249a",
+    "destination": "/piece/masks-of-luci-569",
+    "permanent": true
+  },
+  {
+    "source": "/piece/masks-of-luci-591-249a",
+    "destination": "/piece/masks-of-luci-591",
+    "permanent": true
+  },
+  {
+    "source": "/piece/masks-of-luci-597-249a",
+    "destination": "/piece/masks-of-luci-597",
+    "permanent": true
+  },
+  {
+    "source": "/piece/masks-of-luci-609-249a",
+    "destination": "/piece/masks-of-luci-609",
+    "permanent": true
+  },
+  {
+    "source": "/piece/meebit-3611-6bc7",
+    "destination": "/piece/meebit-3611",
+    "permanent": true
+  },
+  {
+    "source": "/piece/notable-pepes-354-8e43",
+    "destination": "/piece/notable-pepes-354",
+    "permanent": true
+  },
+  {
+    "source": "/piece/lights-3-2006",
+    "destination": "/piece/lights-3",
+    "permanent": true
+  },
+  {
+    "source": "/piece/pxl-dex-105-ecfb",
+    "destination": "/piece/pxl-dex-105",
+    "permanent": true
+  },
+  {
+    "source": "/piece/pxl-dex-107-ecfb",
+    "destination": "/piece/pxl-dex-107",
+    "permanent": true
+  },
+  {
+    "source": "/piece/pxl-dex-130-ecfb",
+    "destination": "/piece/pxl-dex-130",
+    "permanent": true
+  },
+  {
+    "source": "/piece/pxl-dex-139-ecfb",
+    "destination": "/piece/pxl-dex-139",
+    "permanent": true
+  },
+  {
+    "source": "/piece/pxl-dex-141-ecfb",
+    "destination": "/piece/pxl-dex-141",
+    "permanent": true
+  },
+  {
+    "source": "/piece/pxl-pod-42-88b3",
+    "destination": "/piece/pxl-pod-42",
+    "permanent": true
+  },
+  {
+    "source": "/piece/pxl-pod-55-88b3",
+    "destination": "/piece/pxl-pod-55",
+    "permanent": true
+  },
+  {
+    "source": "/piece/pxl-pod-61-88b3",
+    "destination": "/piece/pxl-pod-61",
+    "permanent": true
+  },
+  {
+    "source": "/piece/pxl-pod-108-88b3",
+    "destination": "/piece/pxl-pod-108",
+    "permanent": true
+  },
+  {
+    "source": "/piece/pxl-pod-122-88b3",
+    "destination": "/piece/pxl-pod-122",
+    "permanent": true
+  },
+  {
+    "source": "/piece/pxl-pod-175-88b3",
+    "destination": "/piece/pxl-pod-175",
+    "permanent": true
+  },
+  {
+    "source": "/piece/pxl-pod-209-88b3",
+    "destination": "/piece/pxl-pod-209",
+    "permanent": true
+  },
+  {
+    "source": "/piece/pxl-pod-215-88b3",
+    "destination": "/piece/pxl-pod-215",
+    "permanent": true
+  },
+  {
+    "source": "/piece/pxl-pod-241-88b3",
+    "destination": "/piece/pxl-pod-241",
+    "permanent": true
+  },
+  {
+    "source": "/piece/pxl-pod-242-88b3",
+    "destination": "/piece/pxl-pod-242",
+    "permanent": true
+  },
+  {
+    "source": "/piece/x0x-576-3753",
+    "destination": "/piece/x0x-576",
+    "permanent": true
+  },
+  {
+    "source": "/piece/qql-308-0c88",
+    "destination": "/piece/qql-308",
+    "permanent": true
+  },
+  {
+    "source": "/piece/qql-309-0c88",
+    "destination": "/piece/qql-309",
+    "permanent": true
+  },
+  {
+    "source": "/piece/qql-160-1088",
+    "destination": "/piece/qql-160",
+    "permanent": true
+  },
+  {
+    "source": "/piece/qql-220-1088",
+    "destination": "/piece/qql-220",
+    "permanent": true
+  },
+  {
+    "source": "/piece/qql-458-1088",
+    "destination": "/piece/qql-458",
+    "permanent": true
+  },
+  {
+    "source": "/piece/qql-496-1088",
+    "destination": "/piece/qql-496",
+    "permanent": true
+  },
+  {
+    "source": "/piece/qql-534-1088",
+    "destination": "/piece/qql-534",
+    "permanent": true
+  },
+  {
+    "source": "/piece/qql-617-1088",
+    "destination": "/piece/qql-617",
+    "permanent": true
+  },
+  {
+    "source": "/piece/qql-714-1088",
+    "destination": "/piece/qql-714",
+    "permanent": true
+  },
+  {
+    "source": "/piece/qql-722-1088",
+    "destination": "/piece/qql-722",
+    "permanent": true
+  },
+  {
+    "source": "/piece/qql-915-1088",
+    "destination": "/piece/qql-915",
+    "permanent": true
+  },
+  {
+    "source": "/piece/qql-978-1088",
+    "destination": "/piece/qql-978",
+    "permanent": true
+  },
+  {
+    "source": "/piece/repeat-as-necessary-1-b069",
+    "destination": "/piece/repeat-as-necessary-1",
+    "permanent": true
+  },
+  {
+    "source": "/piece/repeat-as-necessary-12-b069",
+    "destination": "/piece/repeat-as-necessary-12",
+    "permanent": true
+  },
+  {
+    "source": "/piece/repeat-as-necessary-21-b069",
+    "destination": "/piece/repeat-as-necessary-21",
+    "permanent": true
+  },
+  {
+    "source": "/piece/repeat-as-necessary-40-b069",
+    "destination": "/piece/repeat-as-necessary-40",
+    "permanent": true
+  },
+  {
+    "source": "/piece/ringers-13000014-d270",
+    "destination": "/piece/ringers-13000014",
+    "permanent": true
+  },
+  {
+    "source": "/piece/ringers-13000025-d270",
+    "destination": "/piece/ringers-13000025",
+    "permanent": true
+  },
+  {
+    "source": "/piece/ringers-13000058-d270",
+    "destination": "/piece/ringers-13000058",
+    "permanent": true
+  },
+  {
+    "source": "/piece/ringers-13000064-d270",
+    "destination": "/piece/ringers-13000064",
+    "permanent": true
+  },
+  {
+    "source": "/piece/ringers-13000075-d270",
+    "destination": "/piece/ringers-13000075",
+    "permanent": true
+  },
+  {
+    "source": "/piece/ringers-13000086-d270",
+    "destination": "/piece/ringers-13000086",
+    "permanent": true
+  },
+  {
+    "source": "/piece/ringers-13000089-d270",
+    "destination": "/piece/ringers-13000089",
+    "permanent": true
+  },
+  {
+    "source": "/piece/ringers-13000108-d270",
+    "destination": "/piece/ringers-13000108",
+    "permanent": true
+  },
+  {
+    "source": "/piece/ringers-13000117-d270",
+    "destination": "/piece/ringers-13000117",
+    "permanent": true
+  },
+  {
+    "source": "/piece/ringers-13000174-d270",
+    "destination": "/piece/ringers-13000174",
+    "permanent": true
+  },
+  {
+    "source": "/piece/ringers-13000209-d270",
+    "destination": "/piece/ringers-13000209",
+    "permanent": true
+  },
+  {
+    "source": "/piece/ringers-13000214-d270",
+    "destination": "/piece/ringers-13000214",
+    "permanent": true
+  },
+  {
+    "source": "/piece/ringers-13000241-d270",
+    "destination": "/piece/ringers-13000241",
+    "permanent": true
+  },
+  {
+    "source": "/piece/ringers-13000268-d270",
+    "destination": "/piece/ringers-13000268",
+    "permanent": true
+  },
+  {
+    "source": "/piece/ringers-13000273-d270",
+    "destination": "/piece/ringers-13000273",
+    "permanent": true
+  },
+  {
+    "source": "/piece/ringers-13000287-d270",
+    "destination": "/piece/ringers-13000287",
+    "permanent": true
+  },
+  {
+    "source": "/piece/ringers-13000303-d270",
+    "destination": "/piece/ringers-13000303",
+    "permanent": true
+  },
+  {
+    "source": "/piece/ringers-13000338-d270",
+    "destination": "/piece/ringers-13000338",
+    "permanent": true
+  },
+  {
+    "source": "/piece/ringers-13000342-d270",
+    "destination": "/piece/ringers-13000342",
+    "permanent": true
+  },
+  {
+    "source": "/piece/ringers-13000374-d270",
+    "destination": "/piece/ringers-13000374",
+    "permanent": true
+  },
+  {
+    "source": "/piece/ringers-13000391-d270",
+    "destination": "/piece/ringers-13000391",
+    "permanent": true
+  },
+  {
+    "source": "/piece/ringers-13000392-d270",
+    "destination": "/piece/ringers-13000392",
+    "permanent": true
+  },
+  {
+    "source": "/piece/ringers-13000492-d270",
+    "destination": "/piece/ringers-13000492",
+    "permanent": true
+  },
+  {
+    "source": "/piece/ringers-13000505-d270",
+    "destination": "/piece/ringers-13000505",
+    "permanent": true
+  },
+  {
+    "source": "/piece/ringers-13000520-d270",
+    "destination": "/piece/ringers-13000520",
+    "permanent": true
+  },
+  {
+    "source": "/piece/ringers-13000523-d270",
+    "destination": "/piece/ringers-13000523",
+    "permanent": true
+  },
+  {
+    "source": "/piece/ringers-13000549-d270",
+    "destination": "/piece/ringers-13000549",
+    "permanent": true
+  },
+  {
+    "source": "/piece/ringers-13000654-d270",
+    "destination": "/piece/ringers-13000654",
+    "permanent": true
+  },
+  {
+    "source": "/piece/ringers-13000680-d270",
+    "destination": "/piece/ringers-13000680",
+    "permanent": true
+  },
+  {
+    "source": "/piece/ringers-13000696-d270",
+    "destination": "/piece/ringers-13000696",
+    "permanent": true
+  },
+  {
+    "source": "/piece/ringers-13000698-d270",
+    "destination": "/piece/ringers-13000698",
+    "permanent": true
+  },
+  {
+    "source": "/piece/ringers-13000708-d270",
+    "destination": "/piece/ringers-13000708",
+    "permanent": true
+  },
+  {
+    "source": "/piece/ringers-13000715-d270",
+    "destination": "/piece/ringers-13000715",
+    "permanent": true
+  },
+  {
+    "source": "/piece/ringers-13000792-d270",
+    "destination": "/piece/ringers-13000792",
+    "permanent": true
+  },
+  {
+    "source": "/piece/ringers-13000952-d270",
+    "destination": "/piece/ringers-13000952",
+    "permanent": true
+  },
+  {
+    "source": "/piece/ringers-13000972-d270",
+    "destination": "/piece/ringers-13000972",
+    "permanent": true
+  },
+  {
+    "source": "/piece/synthetic-dreams-51-be3a",
+    "destination": "/piece/synthetic-dreams-51",
+    "permanent": true
+  },
+  {
+    "source": "/piece/synthetic-dreams-362-be3a",
+    "destination": "/piece/synthetic-dreams-362",
+    "permanent": true
+  },
+  {
+    "source": "/piece/synthetic-dreams-379-be3a",
+    "destination": "/piece/synthetic-dreams-379",
+    "permanent": true
+  },
+  {
+    "source": "/piece/synthetic-dreams-625-be3a",
+    "destination": "/piece/synthetic-dreams-625",
+    "permanent": true
+  },
+  {
+    "source": "/piece/synthetic-dreams-630-be3a",
+    "destination": "/piece/synthetic-dreams-630",
+    "permanent": true
+  },
+  {
+    "source": "/piece/synthetic-dreams-648-be3a",
+    "destination": "/piece/synthetic-dreams-648",
+    "permanent": true
+  },
+  {
+    "source": "/piece/synthetic-dreams-754-be3a",
+    "destination": "/piece/synthetic-dreams-754",
+    "permanent": true
+  },
+  {
+    "source": "/piece/synthetic-dreams-774-be3a",
+    "destination": "/piece/synthetic-dreams-774",
+    "permanent": true
+  },
+  {
+    "source": "/piece/synthetic-dreams-854-be3a",
+    "destination": "/piece/synthetic-dreams-854",
+    "permanent": true
+  },
+  {
+    "source": "/piece/synthetic-dreams-858-be3a",
+    "destination": "/piece/synthetic-dreams-858",
+    "permanent": true
+  },
+  {
+    "source": "/piece/synthetic-dreams-951-be3a",
+    "destination": "/piece/synthetic-dreams-951",
+    "permanent": true
+  },
+  {
+    "source": "/piece/synthetic-dreams-957-be3a",
+    "destination": "/piece/synthetic-dreams-957",
+    "permanent": true
+  },
+  {
+    "source": "/piece/skulls-of-luci-12-d27c",
+    "destination": "/piece/skulls-of-luci-12",
+    "permanent": true
+  },
+  {
+    "source": "/piece/skulls-of-luci-20-d27c",
+    "destination": "/piece/skulls-of-luci-20",
+    "permanent": true
+  },
+  {
+    "source": "/piece/tyler-hobbs-1-9345",
+    "destination": "/piece/tyler-hobbs-1",
+    "permanent": true
+  },
+  {
+    "source": "/piece/tyler-hobbs-2-9345",
+    "destination": "/piece/tyler-hobbs-2",
+    "permanent": true
+  },
+  {
+    "source": "/piece/tyler-hobbs-3-9345",
+    "destination": "/piece/tyler-hobbs-3",
+    "permanent": true
+  },
+  {
+    "source": "/piece/tyler-hobbs-2-8e82",
+    "destination": "/piece/harbor-scene-2",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-20-100b",
+    "destination": "/piece/winds-of-yawanawa-20",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-62-100b",
+    "destination": "/piece/winds-of-yawanawa-62",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-103-100b",
+    "destination": "/piece/winds-of-yawanawa-103",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-118-100b",
+    "destination": "/piece/winds-of-yawanawa-118",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-154-100b",
+    "destination": "/piece/winds-of-yawanawa-154",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-178-100b",
+    "destination": "/piece/winds-of-yawanawa-178",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-227-100b",
+    "destination": "/piece/winds-of-yawanawa-227",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-265-100b",
+    "destination": "/piece/winds-of-yawanawa-265",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-281-100b",
+    "destination": "/piece/winds-of-yawanawa-281",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-369-100b",
+    "destination": "/piece/winds-of-yawanawa-369",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-371-100b",
+    "destination": "/piece/winds-of-yawanawa-371",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-373-100b",
+    "destination": "/piece/winds-of-yawanawa-373",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-442-100b",
+    "destination": "/piece/winds-of-yawanawa-442",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-451-100b",
+    "destination": "/piece/winds-of-yawanawa-451",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-487-100b",
+    "destination": "/piece/winds-of-yawanawa-487",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-495-100b",
+    "destination": "/piece/winds-of-yawanawa-495",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-524-100b",
+    "destination": "/piece/winds-of-yawanawa-524",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-554-100b",
+    "destination": "/piece/winds-of-yawanawa-554",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-572-100b",
+    "destination": "/piece/winds-of-yawanawa-572",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-600-100b",
+    "destination": "/piece/winds-of-yawanawa-600",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-629-100b",
+    "destination": "/piece/winds-of-yawanawa-629",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-637-100b",
+    "destination": "/piece/winds-of-yawanawa-637",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-638-100b",
+    "destination": "/piece/winds-of-yawanawa-638",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-681-100b",
+    "destination": "/piece/winds-of-yawanawa-681",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-688-100b",
+    "destination": "/piece/winds-of-yawanawa-688",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-692-100b",
+    "destination": "/piece/winds-of-yawanawa-692",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-695-100b",
+    "destination": "/piece/winds-of-yawanawa-695",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-697-100b",
+    "destination": "/piece/winds-of-yawanawa-697",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-700-100b",
+    "destination": "/piece/winds-of-yawanawa-700",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-701-100b",
+    "destination": "/piece/winds-of-yawanawa-701",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-704-100b",
+    "destination": "/piece/winds-of-yawanawa-704",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-712-100b",
+    "destination": "/piece/winds-of-yawanawa-712",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-717-100b",
+    "destination": "/piece/winds-of-yawanawa-717",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-738-100b",
+    "destination": "/piece/winds-of-yawanawa-738",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-741-100b",
+    "destination": "/piece/winds-of-yawanawa-741",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-745-100b",
+    "destination": "/piece/winds-of-yawanawa-745",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-746-100b",
+    "destination": "/piece/winds-of-yawanawa-746",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-754-100b",
+    "destination": "/piece/winds-of-yawanawa-754",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-755-100b",
+    "destination": "/piece/winds-of-yawanawa-755",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-764-100b",
+    "destination": "/piece/winds-of-yawanawa-764",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-856-100b",
+    "destination": "/piece/winds-of-yawanawa-856",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-863-100b",
+    "destination": "/piece/winds-of-yawanawa-863",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-870-100b",
+    "destination": "/piece/winds-of-yawanawa-870",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-878-100b",
+    "destination": "/piece/winds-of-yawanawa-878",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-888-100b",
+    "destination": "/piece/winds-of-yawanawa-888",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-912-100b",
+    "destination": "/piece/winds-of-yawanawa-912",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-917-100b",
+    "destination": "/piece/winds-of-yawanawa-917",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-921-100b",
+    "destination": "/piece/winds-of-yawanawa-921",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-962-100b",
+    "destination": "/piece/winds-of-yawanawa-962",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-989-100b",
+    "destination": "/piece/winds-of-yawanawa-989",
+    "permanent": true
+  },
+  {
+    "source": "/piece/superrare-xcopy-9129-b9e0",
+    "destination": "/piece/superrare-xcopy-9129",
+    "permanent": true
+  },
+  {
+    "source": "/piece/superrare-xcopy-29757-b9e0",
+    "destination": "/piece/superrare-xcopy-29757",
+    "permanent": true
+  },
+  {
+    "source": "/piece/superrare-xcopy-30801-b9e0",
+    "destination": "/piece/superrare-xcopy-30801",
+    "permanent": true
+  },
+  {
+    "source": "/piece/superrare-xcopy-32171-b9e0",
+    "destination": "/piece/superrare-xcopy-32171",
+    "permanent": true
+  },
+  {
+    "source": "/piece/superrare-xcopy-2123-b9e0",
+    "destination": "/piece/superrare-xcopy-2123",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cope-salada-125-2e9e",
+    "destination": "/piece/cope-salada-125",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-4752-3BBB",
+    "destination": "/piece/cryptopunks-4752",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-5381-3BBB",
+    "destination": "/piece/cryptopunks-5381",
+    "permanent": true
+  },
+  {
+    "source": "/piece/cryptopunks-7036-3BBB",
+    "destination": "/piece/cryptopunks-7036",
+    "permanent": true
+  },
+  {
+    "source": "/piece/grifters-614-c1f3",
+    "destination": "/piece/grifters-614",
+    "permanent": true
+  },
+  {
+    "source": "/piece/winds-of-yawanawa-213-100b",
+    "destination": "/piece/winds-of-yawanawa-213",
+    "permanent": true
+  }
+]

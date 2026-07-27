@@ -262,10 +262,11 @@ export const CLICKABLE_TRAITS: Record<string, Record<string, ClickableRule>> = {
     Pods: "all",
   },
   grifters: {
+    // Non-Sets trait rows sort by count desc (site default) so the reader
+    // sees the fund's concentration in each dimension - Type and Color
+    // both surface their most-held value first.
     Type: "all",
-    // Array order is preserved as display order (Yellow / Blue / Green per
-    // editorial spec, not the default count-desc sort).
-    Color: ["Yellow", "Blue", "Green"],
+    Color: "all",
     // Vision + Noise no longer render as standalone rows; their named-set
     // values surface under the synthetic "Sets" row defined in
     // SYNTHETIC_TRAIT_GROUPS below, alongside Wretch (also in Type).
@@ -340,6 +341,22 @@ export const SYNTHETIC_TRAITS: Record<string, Record<string, string>> = {
 };
 
 /**
+ * Per-piece synthetic traits — for facts about a single piece that don't
+ * belong on every piece in the collection. Used for physical companion
+ * editions, one-off exhibition markers, and other single-piece attributes
+ * that aren't in on-chain metadata. Appended after the on-chain traits
+ * on the piece page (footnote-style) so the reader reads it as a
+ * curator-added note rather than confusing it with the token metadata.
+ *
+ * Empty by default; add entries only when a piece genuinely needs a
+ * trait row that doesn't come from traits.data.json. Punk 269's physical
+ * "Paper Punk" companion, for instance, was surfaced here briefly but
+ * ultimately belonged in the Exhibitions block (the Kate Vass show
+ * carries the same information more clearly), so it lives there instead.
+ */
+export const PIECE_SYNTHETIC_TRAITS: Record<string, Record<string, string>> = {};
+
+/**
  * Synthetic trait groups that render as their own row in the Browse-by-
  * trait disclosure but cut across multiple underlying trait keys. Used
  * for editorial groupings that don't map 1:1 to an on-chain trait
@@ -354,16 +371,48 @@ export const SYNTHETIC_TRAITS: Record<string, Record<string, string>> = {
  */
 export type SyntheticTraitGroup = {
   label: string;
-  values: { label: string; key: string; value: string }[];
+  values: {
+    label: string;
+    key: string;
+    value: string;
+    /** Optional explicit curated 3-piece list in the display order the
+     *  reader should see (Yellow / Blue / Green for Grifters). Overrides
+     *  the automatic "first-per-color" picker used for sets without an
+     *  explicit list — needed when the fund holds >3 pieces matching the
+     *  trait and the natural pieceOrder-first pick doesn't match the
+     *  editorial selection. */
+    pieces?: string[];
+  }[];
 };
 export const SYNTHETIC_TRAIT_GROUPS: Record<string, SyntheticTraitGroup[]> = {
   grifters: [
     {
-      label: "Sets",
+      label: "Curated sets",
+      // Editorial display order: Shady -> Wretch -> G to the M -> Bubbles
+      // -> Turbulence. Set here rather than sorted by count so the
+      // narrative order (curatorial priority) leads.
       values: [
-        { label: "Turbulence", key: "Vision", value: "Turbulence" },
-        { label: "G to the M", key: "Noise", value: "G to the M" },
+        {
+          label: "Shady",
+          key: "Type",
+          value: "Shady",
+          // Yellow -> Blue -> Green order: #614 (Yellow), #574 (Blue),
+          // #37 (Green). Editorial color reading order across every
+          // Set in the group.
+          pieces: ["grifters-614", "grifters-574", "grifters-37"],
+        },
         { label: "Wretch", key: "Type", value: "Wretch" },
+        { label: "G to the M", key: "Noise", value: "G to the M" },
+        {
+          label: "Bubbles",
+          key: "Atmosphere",
+          value: "Bubbles",
+          // Yellow -> Blue -> Green: #165 (Yellow), #574 (Blue), #132
+          // (Green). Yellow slot swapped from #439 to #165; #439 stays
+          // free to represent Yellow under Turbulence if needed.
+          pieces: ["grifters-165", "grifters-574", "grifters-132"],
+        },
+        { label: "Turbulence", key: "Vision", value: "Turbulence" },
       ],
     },
   ],

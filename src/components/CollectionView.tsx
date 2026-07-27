@@ -9,7 +9,7 @@ import HeroSidebarGallery from "./HeroSidebarGallery";
 import SinglePieceDisplay from "./SinglePieceDisplay";
 import { getArtworkImage } from "@/lib/images";
 import { getHeroLayout } from "@/lib/curation";
-import { CHAPTERS, CHAPTER_COLORS } from "@/lib/chapters";
+import { CHAPTERS } from "@/lib/chapters";
 import ScrollRestore from "./ScrollRestore";
 
 interface PieceData {
@@ -37,7 +37,7 @@ interface Section {
 
 interface Props {
   sections: Section[];
-  artists: { name: string; slug: string; tags: string[] }[];
+  artists: { name: string; slug: string }[];
 }
 
 export default function CollectionView({ sections, artists }: Props) {
@@ -249,28 +249,20 @@ export default function CollectionView({ sections, artists }: Props) {
   // clicking a button in either updates everything.
   const filterContent = (
     <>
-      {/* Row 1: Artists. Mask gives a fade on the trailing edge when overflowing. */}
+      {/* Row 1: Artists. All leads the row (clears both artist + chapter
+          state). Mask gives a fade on the trailing edge when overflowing. */}
       <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide [mask-image:linear-gradient(to_right,black_calc(100%-24px),transparent)]">
-        <span
-          className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium shrink-0 w-20"
-          title="Tap an artist to filter"
-        >
+        <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium shrink-0 w-20">
           Artist
         </span>
-        {/* "All" reset button - leads the artist row. Foreground only
-            when nothing is filtered anywhere (no artistFilter, no
-            chapter, no exclusions). Dims whenever ANY filter is active
-            so the row reads as "you're not at All" - matches Chapter
-            row's All treatment for symmetry. Clicking still clears just
-            the artist-side state and keeps the chapter filter. */}
         <button
           type="button"
-          onClick={selectArtistAll}
-          aria-label="Show all artists"
+          onClick={clearAll}
+          aria-label="Clear all filters"
           className={`text-[13px] whitespace-nowrap shrink-0 transition-colors duration-200 ${
             !hasFilters
               ? "text-foreground"
-              : "text-muted/40 hover:text-foreground"
+              : "text-muted hover:text-foreground"
           }`}
         >
           All
@@ -291,11 +283,11 @@ export default function CollectionView({ sections, artists }: Props) {
               aria-pressed={isActive}
               className={`text-[13px] whitespace-nowrap shrink-0 transition-colors duration-200 ${
                 outOfChapter
-                  ? "text-muted/40 hover:text-foreground"
+                  ? "text-muted hover:text-foreground"
                   : isActive
                   ? "text-foreground"
                   : hasFilters
-                  ? "text-muted/40 hover:text-foreground"
+                  ? "text-muted hover:text-foreground"
                   : "text-muted hover:text-foreground"
               }`}
               aria-label={
@@ -314,25 +306,12 @@ export default function CollectionView({ sections, artists }: Props) {
         })}
       </div>
 
-      {/* Row 2: Chapters */}
+      {/* Row 2: Chapters. No All here; the Artist row's All clears
+          everything. Invisible "All" spacer so the first chapter column-
+          aligns with the first artist (a.c.k.), not with the All button. */}
       <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide [mask-image:linear-gradient(to_right,black_calc(100%-24px),transparent)]">
         <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium shrink-0 w-20">Chapter</span>
-        {/* "All" reset button - leads the chapter row. Foreground only
-            when nothing is filtered anywhere; dims whenever any filter
-            is active (matches the Artist row's All). Clicking still
-            clears just the chapter filter and keeps the artist as-is. */}
-        <button
-          type="button"
-          onClick={selectChapterAll}
-          aria-label="Show all chapters"
-          className={`text-[13px] whitespace-nowrap shrink-0 transition-colors duration-200 ${
-            !hasFilters
-              ? "text-foreground"
-              : "text-muted/40 hover:text-foreground"
-          }`}
-        >
-          All
-        </button>
+        <span aria-hidden className="text-[13px] whitespace-nowrap shrink-0 invisible">All</span>
         {CHAPTERS.map((ch) => {
           const isExplicit = chapterFilter === ch.slug;
           const isImplied = impliedChapter?.slug === ch.slug;
@@ -345,11 +324,8 @@ export default function CollectionView({ sections, artists }: Props) {
               className={`text-[13px] whitespace-nowrap shrink-0 transition-colors duration-200 ${
                 isHighlighted
                   ? "text-foreground"
-                  : hasFilters
-                  ? "text-muted/40 hover:text-foreground"
                   : "text-muted hover:text-foreground"
               }`}
-              style={isHighlighted ? { color: ch.color } : undefined}
             >
               {ch.name}
             </button>
@@ -361,7 +337,10 @@ export default function CollectionView({ sections, artists }: Props) {
           reader sees the collection scale even when nothing is filtered.
           "All N works..." reads as institutional scope; "X of N works..."
           reads as filter subset. */}
-      <p className="text-[11px] text-muted tabular-nums pt-2">
+      <p
+        aria-live="polite"
+        className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium tabular-nums pt-2"
+      >
         {hasFilters
           ? `${visiblePieces} of ${totalPieces} works in the Hivemind collection`
           : `All ${totalPieces} works in the Hivemind collection`}
@@ -382,12 +361,12 @@ export default function CollectionView({ sections, artists }: Props) {
           pointerEvents: showsAsSticky ? "auto" : "none",
         }}
       >
-        <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 pt-4 pb-3 space-y-2">
+        <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12 pt-4 pb-3 space-y-2">
           {filterContent}
         </div>
       </div>
 
-      <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
+      <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12">
         <ScrollRestore />
         {/* Masthead - "Hivemind Digital Culture Fund" rendered prominently
             above the filter rows so the catalogue identifies itself before
@@ -396,20 +375,20 @@ export default function CollectionView({ sections, artists }: Props) {
             across the gutter; eye reads "Hivemind" on the rail and
             "Hivemind Digital Culture Fund" on the page at the same line. */}
         <div className="pt-6">
-          <h1 className="font-serif display-sm">
+          <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium">
             Hivemind Digital Culture Fund
-          </h1>
+          </p>
+          <h1 className="font-serif display-sm mt-3">Collection</h1>
         </div>
         {/* Sentinel: IntersectionObserver tracks this element to know when
-            the reader has moved past the masthead. Sits immediately after
-            the masthead so its viewport intersection mirrors the masthead's. */}
-        <div ref={sentinelRef} aria-hidden className="h-2 w-full" />
+            the reader has moved past the masthead. */}
+        <div ref={sentinelRef} aria-hidden className="h-1 w-full mt-3" />
         {/* Main filter - in flow at its natural position. The page scrolls
             past it naturally on the way down (no sticky, no slide-out);
             the overlay above handles the sticky-on-scroll-up behaviour. */}
         <section
           ref={filterRef}
-          className="bg-background pt-6 pb-4 border-b border-border space-y-2"
+          className="bg-background pt-3 pb-4 border-b border-border space-y-2"
         >
           {filterContent}
         </section>
@@ -435,7 +414,6 @@ export default function CollectionView({ sections, artists }: Props) {
               <Link href={`/artist/${artist.slug}`} className="inline-block">
                 <h2
                   className="font-serif text-[32px] sm:text-[40px] tracking-tight leading-tight hover:opacity-60 transition-opacity duration-200"
-                  style={CHAPTER_COLORS[artist.slug] ? { color: CHAPTER_COLORS[artist.slug] } : undefined}
                 >
                   {artist.name}
                 </h2>

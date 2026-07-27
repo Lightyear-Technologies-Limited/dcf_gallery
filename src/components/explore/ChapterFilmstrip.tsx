@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { getArtworkImage, getArtworkAspect } from "@/lib/images";
 import PlaceholderArt from "../PlaceholderArt";
 import GridArtwork from "../GridArtwork";
@@ -23,106 +23,113 @@ interface Props {
 }
 
 /**
- * Horizontal filmstrip with hidden scrollbar plus small left/right chevron
- * buttons that fade in/out based on remaining scroll. The chevrons sit
- * over the edge tiles with a light backdrop blur so they don't compete
- * with the artwork.
- *
- * Tile alignment: the scroll container uses CSS scroll-snap (x mandatory)
- * with each tile snapping to start, so chevron clicks - and any other
- * scroll input - always land on a whole tile rather than mid-artwork.
+ * Horizontal filmstrip with drag-to-scroll for pointer devices. Touch swipe
+ * is native (browser handles scroll + snap); trackpad two-finger horizontal
+ * scroll is native. For mouse/pen users, click-and-drag on the strip pans
+ * it horizontally. A 5px click/drag threshold distinguishes a tile click
+ * (navigate to /piece) from a strip drag; the click that would otherwise
+ * fire on release-after-drag is suppressed so tiles never navigate as a
+ * byproduct of scrolling. Scroll-snap is disabled during drag and restored
+ * after so the strip settles onto tile boundaries.
  */
 export default function ChapterFilmstrip({ name, works }: Props) {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [canLeft, setCanLeft] = useState(false);
-  const [canRight, setCanRight] = useState(false);
+  const drag = useRef({ down: false, startX: 0, startScrollLeft: 0, moved: false });
 
-  useEffect(() => {
+  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    // Touch is native (scroll + snap already work). Only mouse/pen need drag.
+    if (e.pointerType === "touch") return;
     const el = scrollRef.current;
     if (!el) return;
-    const update = () => {
-      setCanLeft(el.scrollLeft > 8);
-      setCanRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 8);
+    drag.current = {
+      down: true,
+      startX: e.clientX,
+      startScrollLeft: el.scrollLeft,
+      moved: false,
     };
-    update();
-    el.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-    return () => {
-      el.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
-    };
-  }, []);
+    // NOTE: pointer capture + style changes are deferred to onPointerMove
+    // once the 5px threshold is crossed. If we captured on pointerdown,
+    // subsequent pointerup would route to the container instead of the
+    // child <Link>, and the browser would refuse to fire click on the
+    // tile — a simple tap on a filmstrip tile would fail to navigate.
+  };
 
-  const nudge = (dir: 1 | -1) => {
+  const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!drag.current.down) return;
     const el = scrollRef.current;
     if (!el) return;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    el.scrollBy({ left: el.clientWidth * 0.8 * dir, behavior: reduce ? "auto" : "smooth" });
+    const dx = e.clientX - drag.current.startX;
+    if (Math.abs(dx) > 5 && !drag.current.moved) {
+      drag.current.moved = true;
+      // Threshold crossed: this is a drag, not a click. NOW capture pointer,
+      // disable snap, change cursor. Clicks that never cross the threshold
+      // flow through untouched to child <Link>s and navigate normally.
+      el.style.scrollSnapType = "none";
+      el.style.cursor = "grabbing";
+      try { el.setPointerCapture(e.pointerId); } catch { /* capture race */ }
+    }
+    if (drag.current.moved) {
+      el.scrollLeft = drag.current.startScrollLeft - dx;
+    }
+  };
+
+  const onPointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!drag.current.down) return;
+    const el = scrollRef.current;
+    const wasDrag = drag.current.moved;
+    drag.current.down = false;
+    if (el && wasDrag) {
+      el.style.scrollSnapType = "";
+      el.style.cursor = "";
+      try { el.releasePointerCapture(e.pointerId); } catch { /* already released */ }
+    }
+    if (wasDrag) {
+      // Suppress the click that would otherwise navigate the tile's Link.
+      const suppress = (ev: MouseEvent) => {
+        ev.stopPropagation();
+        ev.preventDefault();
+      };
+      window.addEventListener("click", suppress, { once: true, capture: true });
+    }
   };
 
   return (
-    <div className="relative">
-      <div
-        ref={scrollRef}
-        role="group"
-        aria-label={`${name} — works (scroll horizontally)`}
-        tabIndex={0}
-        className="overflow-x-auto scrollbar-hide pr-6 snap-x snap-mandatory"
-      >
-        <div className="flex gap-3 pb-1">
-          {works.map((w) => {
-            const aspect = getArtworkAspect(w.slug, w.contractAddress, w.tokenId);
-            const ratio = aspect ? aspect.w / aspect.h : 1;
-            const src = getArtworkImage(w.slug, w.contractAddress, w.tokenId, "thumb");
-            const isPunk = w.collectionSlug === "cryptopunks";
-            return (
-              <Link
-                key={w.id}
-                id={`p-${w.slug}`}
-                href={`/piece/${w.slug}?from=chapters`}
-                title={w.title}
-                style={{ aspectRatio: `${ratio}` }}
-                className={`group relative block h-[180px] sm:h-[220px] lg:h-[260px] shrink-0 overflow-hidden bg-surface snap-start ${
-                  isPunk ? "bg-punk" : ""
-                }`}
-              >
-                {src ? (
-                  <GridArtwork slug={w.slug} title={w.title} imgSrc={src} isPunk={isPunk} sizes="320px" />
-                ) : (
-                  <PlaceholderArt collectionSlug={w.collectionSlug} pieceSlug={w.slug} className="h-full w-full" />
-                )}
-              </Link>
-            );
-          })}
-        </div>
+    <div
+      ref={scrollRef}
+      role="group"
+      aria-label={`${name}: works (swipe or drag horizontally)`}
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={onPointerUp}
+      onPointerCancel={onPointerUp}
+      onDragStart={(e) => e.preventDefault()}
+      className="overflow-x-auto scrollbar-hide snap-x snap-mandatory cursor-grab select-none"
+    >
+      <div className="flex gap-3 pb-1">
+        {works.map((w) => {
+          const aspect = getArtworkAspect(w.slug, w.contractAddress, w.tokenId);
+          const ratio = aspect ? aspect.w / aspect.h : 1;
+          const src = getArtworkImage(w.slug, w.contractAddress, w.tokenId, "thumb");
+          const isPunk = w.collectionSlug === "cryptopunks";
+          return (
+            <Link
+              key={w.id}
+              id={`p-${w.slug}`}
+              href={`/piece/${w.slug}?from=chapters`}
+              style={{ aspectRatio: `${ratio}` }}
+              className={`group relative block h-[180px] sm:h-[220px] lg:h-[260px] shrink-0 overflow-hidden snap-start ${
+                isPunk ? "bg-punk" : "bg-surface"
+              }`}
+            >
+              {src ? (
+                <GridArtwork slug={w.slug} title={w.title} imgSrc={src} isPunk={isPunk} sizes="320px" />
+              ) : (
+                <PlaceholderArt collectionSlug={w.collectionSlug} pieceSlug={w.slug} className="h-full w-full" />
+              )}
+            </Link>
+          );
+        })}
       </div>
-
-      <button
-        type="button"
-        onClick={() => nudge(-1)}
-        aria-label={`Previous works in ${name}`}
-        tabIndex={canLeft ? 0 : -1}
-        className={`absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full border border-border bg-background/85 backdrop-blur-sm flex items-center justify-center text-foreground transition-opacity duration-200 hover:bg-background ${
-          canLeft ? "opacity-90 hover:opacity-100" : "opacity-0 pointer-events-none"
-        }`}
-      >
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-          <polyline points="15 18 9 12 15 6" />
-        </svg>
-      </button>
-      <button
-        type="button"
-        onClick={() => nudge(1)}
-        aria-label={`Next works in ${name}`}
-        tabIndex={canRight ? 0 : -1}
-        className={`absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full border border-border bg-background/85 backdrop-blur-sm flex items-center justify-center text-foreground transition-opacity duration-200 hover:bg-background ${
-          canRight ? "opacity-90 hover:opacity-100" : "opacity-0 pointer-events-none"
-        }`}
-      >
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-          <polyline points="9 18 15 12 9 6" />
-        </svg>
-      </button>
     </div>
   );
 }

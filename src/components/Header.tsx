@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ThemeToggle from "./ThemeToggle";
 import MotionToggle from "./MotionToggle";
 
@@ -10,51 +10,81 @@ const NAV = [
   { label: "Collection", href: "/" },
   { label: "Artists", href: "/artists" },
   { label: "Chapters", href: "/chapters" },
-  // Labelled "Thesis" to match the page's display-lg h2; URL stays /about
-  // so backlinks aren't broken.
-  { label: "Thesis", href: "/about" },
+  { label: "Thesis", href: "/thesis" },
 ];
 
 export default function Header() {
   const [open, setOpen] = useState(false);
   const path = usePathname();
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const openerRef = useRef<HTMLButtonElement>(null);
 
   function isActive(href: string) {
     if (href === "/") {
-      // Collection nav is active on home, collection pages, and piece pages.
       return path === "/" || path.startsWith("/collection/") || path.startsWith("/piece/");
     }
     if (href === "/artists") {
-      // Artists nav is active on the index AND on each artist detail page
-      // (path is /artist/[slug], not /artists/[slug] — startsWith would miss it).
       return path === "/artists" || path.startsWith("/artist/");
     }
     return path.startsWith(href);
   }
 
+  // Open state wiring:
+  //  - focus the close button when the overlay opens
+  //  - ESC closes
+  //  - Tab / Shift+Tab trap focus inside the dialog (SR + keyboard users
+  //    couldn't otherwise stay inside the modal — Tab would drop into the
+  //    inert page beneath)
+  //  - main + footer get `inert` while the overlay is open so background
+  //    content is not reachable via keyboard or announced by SR
+  //  - on close, focus restores to the hamburger button that opened it
+  useEffect(() => {
+    if (!open) return;
+    closeRef.current?.focus();
+    const main = document.getElementById("main");
+    const foot = document.querySelector("footer");
+    main?.setAttribute("inert", "");
+    foot?.setAttribute("inert", "");
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") { setOpen(false); return; }
+      if (e.key !== "Tab" || !dialogRef.current) return;
+      const focusables = dialogRef.current.querySelectorAll<HTMLElement>(
+        'button, [href], input, [tabindex]:not([tabindex="-1"])'
+      );
+      if (!focusables.length) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      const active = document.activeElement as HTMLElement | null;
+      if (e.shiftKey && active === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && active === last) { e.preventDefault(); first.focus(); }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      main?.removeAttribute("inert");
+      foot?.removeAttribute("inert");
+      openerRef.current?.focus();
+    };
+  }, [open]);
+
   return (
     <>
-      {/* Desktop sidebar - tightens to w-32 below xl so content doesn't right-shift
-          on 1280px laptops, expands to w-36 on xl+ where the extra breathing room
-          is affordable. */}
+      {/* Desktop sidebar */}
       <aside className="hidden md:flex fixed left-0 top-0 bottom-0 w-32 xl:w-36 z-50 flex-col border-r border-border bg-background">
-        {/* Masthead: logo at top */}
         <Link href="/" className="text-foreground pt-6 px-6" aria-label="Home">
           <span className="logo-wrap block h-4 w-24">
             <img src="/brand/hivemind-black.png" alt="Hivemind" className="h-4 w-auto logo-light" />
-            <img src="/brand/hivemind-white.png" alt="Hivemind" className="h-4 w-auto logo-dark" />
+            <img src="/brand/hivemind-white.png" alt="" aria-hidden className="h-4 w-auto logo-dark" />
           </span>
         </Link>
 
-        {/* Nav - Collection leads (the curatorial surface), then Artists, then About.
-            Active state uses font-medium + foreground so it survives hover (hover
-            also raises non-active items to foreground, so color alone wasn't enough). */}
         <nav aria-label="Primary" className="flex flex-col items-start w-full px-6 pt-4">
           {NAV.map((n) => (
             <Link
               key={n.href}
               href={n.href}
-              className={`text-[13px] tracking-[0.02em] transition-colors duration-200 py-1.5 ${
+              className={`text-[13px] tracking-[0.02em] transition-colors duration-200 py-2 ${
                 isActive(n.href)
                   ? "text-foreground font-medium"
                   : "text-muted hover:text-foreground"
@@ -65,7 +95,7 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* Reel + theme toggles pinned bottom */}
+        {/* Motion + theme toggles pinned to the bottom of the rail. */}
         <div className="mt-auto pb-8 px-6 space-y-5">
           <MotionToggle />
           <ThemeToggle />
@@ -75,14 +105,20 @@ export default function Header() {
       {/* Mobile header */}
       <header className="md:hidden fixed top-0 left-0 right-0 z-50 bg-background border-b border-border h-14 flex items-center justify-between px-6">
         <Link href="/" aria-label="Home">
-          <span className="logo-wrap block h-[12px] w-20">
-            <img src="/brand/hivemind-black.png" alt="Hivemind" className="h-[12px] w-auto logo-light" />
-            <img src="/brand/hivemind-white.png" alt="Hivemind" className="h-[12px] w-auto logo-dark" />
+          <span className="logo-wrap block h-[14px] w-24">
+            <img src="/brand/hivemind-black.png" alt="Hivemind" className="h-[14px] w-auto logo-light" />
+            <img src="/brand/hivemind-white.png" alt="" aria-hidden className="h-[14px] w-auto logo-dark" />
           </span>
         </Link>
-        <div className="flex items-center gap-4">
-          <button className="text-muted" onClick={() => setOpen(true)} aria-label="Menu">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <div className="flex items-center">
+          <button
+            ref={openerRef}
+            className="w-11 h-11 flex items-center justify-center text-muted hover:text-foreground transition-colors duration-200 -mr-2"
+            onClick={() => setOpen(true)}
+            aria-label="Open menu"
+            aria-expanded={open}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
               <path strokeLinecap="round" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
@@ -91,18 +127,26 @@ export default function Header() {
 
       {/* Mobile overlay */}
       {open && (
-        <div className="fixed inset-0 z-[100] bg-background flex flex-col md:hidden">
+        <div
+          ref={dialogRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menu"
+          className="fixed inset-0 z-[100] bg-background flex flex-col md:hidden"
+        >
           <div className="h-14 flex items-center justify-end px-6">
-            <button className="p-2 text-muted" onClick={() => setOpen(false)} aria-label="Close">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <button
+              ref={closeRef}
+              className="w-11 h-11 flex items-center justify-center text-muted hover:text-foreground transition-colors duration-200 -mr-2"
+              onClick={() => setOpen(false)}
+              aria-label="Close menu"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path strokeLinecap="round" d="M18 6L6 18M6 6l12 12" />
               </svg>
             </button>
           </div>
           <nav className="flex-1 flex flex-col justify-center px-8 gap-8">
-            <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-2">
-              Menu
-            </p>
             {NAV.map((n) => (
               <Link
                 key={n.href}
@@ -113,15 +157,11 @@ export default function Header() {
                 {n.label}
               </Link>
             ))}
-            <a
-              href="mailto:dcf@hivemind.capital?subject=Hivemind%20Inquiry"
-              onClick={() => setOpen(false)}
-              className="font-serif text-3xl tracking-[-0.01em] text-foreground-secondary hover:text-foreground transition-colors duration-200"
-            >
-              Inquire
-            </a>
           </nav>
-          <div className="px-8 pb-8 space-y-5"><MotionToggle /><ThemeToggle /></div>
+          <div className="px-8 pb-8 space-y-5">
+            <MotionToggle />
+            <ThemeToggle />
+          </div>
         </div>
       )}
     </>

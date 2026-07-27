@@ -21,7 +21,6 @@ import JustifiedGallery from "@/components/JustifiedGallery";
 import FixedRowGallery from "@/components/FixedRowGallery";
 import HeroSidebarGallery from "@/components/HeroSidebarGallery";
 import SinglePieceDisplay from "@/components/SinglePieceDisplay";
-import CuratorNote from "@/components/CuratorNote";
 import ScrollRestore from "@/components/ScrollRestore";
 
 const MERGE_INTO: Record<string, string> = {
@@ -39,7 +38,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const artist = withArtistEditorial(artists.find((a) => a.slug === slug));
   if (!artist) return {};
   const name = getArtistDisplayName(artist.slug, artist.name);
-  const description = (artist.bio || `${name} in the Hivemind Digital Culture Fund collection.`).slice(0, 200);
+  const description = (artist.bio || `${name} in the Hivemind Digital Culture Fund collection.`).slice(0, 320);
   return {
     title: name,
     description,
@@ -109,7 +108,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
   };
 
   return (
-    <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
+    <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12 min-h-screen">
       <ScrollRestore />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personLd) }} />
       {/* Top row mirrors the collection page's breadcrumb + sibling-nav
@@ -130,11 +129,13 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
           {artistName}
         </p>
         {chapter && (
-          <div className="mt-6 text-[13px]">
+          <div className="mt-6">
+            <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-2">
+              Chapter
+            </p>
             <Link
               href={`/?chapter=${chapter.slug}`}
-              className="text-muted hover:text-foreground transition-colors duration-200"
-              style={{ color: chapter.color }}
+              className="text-[13px] text-muted hover:text-foreground transition-colors duration-200"
             >
               {chapter.name}
             </Link>
@@ -212,7 +213,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
               )}
               {artist.twitter && (
                 <a href={artist.twitter} target="_blank" rel="noopener noreferrer" className="text-muted underline underline-offset-4 decoration-border hover:text-foreground transition-colors duration-200">
-                  Twitter
+                  X
                 </a>
               )}
               {artist.instagram && (
@@ -226,16 +227,13 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
 
         <div className="space-y-6 md:pt-4">
           {artist.bio && (
-            <p className="text-[20px] text-foreground-secondary leading-[1.6]">
+            <p className="text-[17px] sm:text-[18px] text-foreground-secondary leading-[1.6]">
               {artist.bio}
             </p>
           )}
-          {/* curationComment is the curator's voice - given its own attributed
-              block (HIVEMIND COMMENTARY) instead of running on as a second bio
-              paragraph, so a reader can clearly tell what is DCF's view. */}
-          {artist.curationComment && (
-            <CuratorNote text={artist.curationComment} variant="inline" />
-          )}
+          {/* Artist-level Hivemind Commentary block is a planned surface;
+              editorial curatorNote per artist has not been authored yet. When
+              it lands, restore the CuratorNote render here. */}
           {artist.essayUrl && (
             <div>
               <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-2">
@@ -263,7 +261,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
           <p className="font-serif italic text-[22px] leading-[1.5] text-foreground-secondary">
             {artist.artistQuote}
           </p>
-          <p className="text-[13px] text-muted mt-4">- {artistName}</p>
+          <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mt-4">{artistName}</p>
         </div>
       )}
 
@@ -279,7 +277,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
           without leaving a yawning gap when the 2-col header above is
           uneven (right column commentary often ends before the left
           column's holdings + socials stack does). */}
-      <div className="pt-8 pb-24 space-y-3">
+      <div className="pt-8 pb-24 space-y-8">
         {artistCollections.map((col) => {
           const n = col.pieces.length;
           const piece = col.pieces[0];
@@ -295,9 +293,12 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
           else if (n <= 12) ideal = 4;
           else ideal = 5;
 
-          /* Single-piece collections skip the collection layer entirely;
-             the title links straight to the piece. */
-          const sectionHref = n === 1 && piece ? `/piece/${piece.slug}` : `/collection/${col.slug}`;
+          /* Every collection title routes to its collection page, even
+             single-piece sets. Lights is a 1/1 that still deserves a
+             collection surface (edition, contract, holdings, essay link,
+             announcement) — jumping straight to the piece skipped the
+             editorial layer that reads as the collection's identity. */
+          const sectionHref = `/collection/${col.slug}`;
           return (
             <section key={col.slug} id={col.slug}>
               <div className="flex items-baseline gap-2.5 mb-2">
@@ -321,6 +322,13 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
                       title={piece.title}
                       isPunk={piece.collectionSlug === "cryptopunks"}
                       hrefSearch={artistFrom}
+                      // Artist page: single-piece collections route the
+                      // artwork click to the collection page too, matching
+                      // the title link above. Reader lands on the
+                      // collection surface (edition, contract, Hivemind
+                      // holds, essay, announcement) instead of skipping
+                      // it, then can click through to the piece from there.
+                      href={`/collection/${col.slug}`}
                     />
                   );
                 }

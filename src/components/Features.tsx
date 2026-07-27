@@ -77,14 +77,22 @@ export default function Features({ traits, collectionSlug, defaultOpen = false, 
       className="group text-[13px] [&_summary::-webkit-details-marker]:hidden"
       open={defaultOpen}
     >
-      <summary className="cursor-pointer list-none text-muted hover:text-foreground transition-colors duration-200 inline-flex items-center gap-2 select-none">
+      <summary className="cursor-pointer list-none text-[10px] tracking-[0.1em] uppercase font-medium text-muted hover:text-foreground transition-colors duration-200 inline-flex items-center gap-2 select-none">
         <span>{label}</span>
-        <span
+        <svg
           aria-hidden
+          width="10"
+          height="10"
+          viewBox="0 0 12 12"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
           className="inline-block transition-transform duration-200 group-open:rotate-90"
         >
-          &rsaquo;
-        </span>
+          <path d="M4 2l4 4-4 4" />
+        </svg>
       </summary>
 
       <div className="mt-4 space-y-0">
@@ -118,7 +126,7 @@ export default function Features({ traits, collectionSlug, defaultOpen = false, 
                 key={`count-${row.key}-${i}`}
                 className="flex justify-between items-center gap-4 py-2.5 border-b border-border"
               >
-                <span className="text-muted shrink-0">Trait Count</span>
+                <span className="text-muted shrink-0">Trait count</span>
                 <span className="text-foreground text-right tabular-nums">{row.count}</span>
               </div>
             );

@@ -16,6 +16,44 @@ const xLink = {
   xLabel: z.string().min(1, "xLabel must not be empty").optional(),
 };
 
+// Optional generic external links (artist site profile, catalogue page,
+// press coverage, credited collaborator link, etc.). Rendered as a
+// small list under the piece/collection links block. Kept flexible so
+// non-X / non-essay references have a home without adding a new field
+// per link type.
+const linkArray = {
+  links: z
+    .array(
+      z
+        .object({
+          label: z.string().min(1, "link.label must not be empty"),
+          url: z.url("link.url must be a valid URL"),
+        })
+        .strict(),
+    )
+    .optional(),
+};
+
+// Context section — a small ledger of externally-referenced signals about
+// the piece / collection, rendered as a "Context" block right below the
+// Exhibitions block on the piece page. Announcement posts, artist / critic
+// responses (Ethnograph by Tynett on the Masks of Luci), press write-ups.
+// Extensible: append new entries here as the piece accumulates external
+// commentary. Distinct from `links[]` which is the miscellaneous
+// external-links block at the bottom of the info column.
+const contextArray = {
+  context: z
+    .array(
+      z
+        .object({
+          label: z.string().min(1, "context.label must not be empty"),
+          url: z.url("context.url must be a valid URL"),
+        })
+        .strict(),
+    )
+    .optional(),
+};
+
 export const ArtistEditorial = z
   .object({
     bio: z.string().min(1, "bio is required"),
@@ -32,16 +70,21 @@ export const CollectionEditorial = z
     curatorNote: z.string(),
     ...essay,
     ...xLink,
+    ...linkArray,
+    ...contextArray,
   })
   .strict();
 
-// Per-piece editorial overlay. Currently only carries an optional X
-// thread / announcement link, rendered on the piece page. Populate
-// `content/editorial/pieces/<slug>.json` only when a piece has a
-// specific thread (TIME, ROTTEN, Fidenza #456, Tyler Hobbs 1/1s, etc).
+// Per-piece editorial overlay. Carries the optional X thread / announcement
+// link (legacy), the generic `links[]` for external references
+// (samspratt.com profile, catalogue page), and the newer `context[]` for
+// announcement + response items rendered as their own "Context" section
+// below the Exhibitions block on the piece page.
 export const PieceEditorial = z
   .object({
     ...xLink,
+    ...linkArray,
+    ...contextArray,
   })
   .strict();
 

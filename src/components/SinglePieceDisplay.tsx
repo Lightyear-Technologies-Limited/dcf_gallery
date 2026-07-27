@@ -12,12 +12,22 @@ interface Props {
   title: string;
   isPunk?: boolean;
   hrefSearch?: string;
+  /** Override the click target. Default is /piece/<slug>. The artist
+   *  page passes /collection/<colSlug> for single-piece collections so
+   *  the reader lands on the collection surface (edition, contract,
+   *  Hivemind holds, essay) instead of skipping straight past it. */
+  href?: string;
 }
 
 /**
- * Single-piece collection display:
- * - Wide pieces (aspect > 1): full container width
- * - Tall/square pieces (aspect <= 1): cap at 70vh so they don't dominate vertically
+ * Single-piece collection display. Single height cap
+ * (calc(100dvh - 14rem)) applied regardless of aspect — matches the piece
+ * page rule. An earlier version branched on aspect ratio (70vh for tall,
+ * calc(100dvh-14rem) for wide), but the branch depended on a client-side
+ * onLoad callback, so a wide piece like Raster und Spektrum rendered at
+ * the smaller 70vh cap during image download on first open, then grew
+ * once the state flipped. On refresh with the image cached the growth
+ * was invisible, hence "small on first open, bigger on refresh".
  *
  * Motion-aware (E.1), mirroring GridArtwork: for pieces with playable motion the
  * live work overlays the still per the global Reels preference — autoplaying in
@@ -26,15 +36,13 @@ interface Props {
  * (pointer-events-none): a tap still opens the piece page, where the interactive is
  * fully operable. prefers-reduced-motion and small/mobile viewports suppress play.
  */
-export default function SinglePieceDisplay({ slug, src, title, isPunk = false, hrefSearch }: Props) {
+export default function SinglePieceDisplay({ slug, src, title, isPunk = false, hrefSearch, href }: Props) {
   const motion = getMotion(slug);
   const { mode, reduced } = useMotion();
   const ref = useRef<HTMLAnchorElement>(null);
-  const [aspect, setAspect] = useState<number | null>(null);
   const [inView, setInView] = useState(false);
   const [hovering, setHovering] = useState(false);
   const [small, setSmall] = useState(false);
-  const isWide = aspect !== null && aspect > 1;
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 768px)");
@@ -63,27 +71,28 @@ export default function SinglePieceDisplay({ slug, src, title, isPunk = false, h
     <Link
       ref={ref}
       id={`p-${slug}`}
-      href={`/piece/${slug}${hrefSearch ? `?${hrefSearch}` : ""}`}
+      href={`${href ?? `/piece/${slug}`}${hrefSearch ? `?${hrefSearch}` : ""}`}
       onPointerEnter={() => setHovering(true)}
       onPointerLeave={() => setHovering(false)}
-      className={`relative block ${isPunk ? "bg-punk inline-block" : ""}`}
-      style={!isWide && aspect !== null ? { width: "fit-content", maxWidth: "100%" } : undefined}
+      // Wrapper hugs the image and centres it in the row, so that when
+      // max-h clamps a wide piece (Raster und Spektrum on a tall viewport)
+      // the browser-reduced effective width doesn't strand the image
+      // against the left edge.
+      className={`relative block mx-auto w-fit max-w-full ${isPunk ? "bg-punk" : ""}`}
     >
       <Image
         src={src}
         alt={title}
         width={1600}
         height={1200}
-        className={`block ${
-          isWide
-            ? "w-full h-auto"
-            : "w-auto h-auto max-h-[70vh] max-w-full"
-        } ${isPunk ? "[image-rendering:pixelated] w-[400px]" : ""}`}
+        className={`block w-auto h-auto max-w-full object-contain max-h-[calc(100dvh-14rem)] ${
+          isPunk ? "[image-rendering:pixelated] w-[400px]" : ""
+        }`}
+        // Inline style guarantees the max-height applies even if the
+        // Tailwind arbitrary value doesn't make it into the built CSS
+        // (JIT quirks with calc() have bitten us before on hero pieces).
+        style={isPunk ? undefined : { maxHeight: "calc(100dvh - 14rem)" }}
         sizes="(max-width: 1024px) 90vw, 1200px"
-        onLoad={(e) => {
-          const img = e.currentTarget;
-          setAspect(img.naturalWidth / img.naturalHeight);
-        }}
       />
 
       {/* Reel overlays are pointer-events-none: the still is a Link to the piece,

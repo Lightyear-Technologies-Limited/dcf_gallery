@@ -7,7 +7,7 @@ import { getArtworkImage, getArtworkAspect, resolveTokenId } from "@/lib/images"
 import { getDetailVariants, getArtworkBlur, getProvenance, getOgImage } from "@/lib/provenance";
 import { getMotion } from "@/lib/motion";
 import { SITE_URL as SITE } from "@/lib/site";
-import { getEditionType, getArtistSiteUrl, getPieceTraits, getPieceDescription, getCollectionDisplayName, getArtistDisplayName, sortPieces, SYNTHETIC_TRAITS } from "@/lib/curation";
+import { getEditionType, getArtistSiteUrl, getPieceTraits, getPieceDescription, getCollectionDisplayName, getArtistDisplayName, sortPieces, SYNTHETIC_TRAITS, PIECE_SYNTHETIC_TRAITS } from "@/lib/curation";
 import type { TraitValue } from "@/lib/curation";
 import PlaceholderArt from "@/components/PlaceholderArt";
 import BackButton from "@/components/BackButton";
@@ -51,12 +51,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const artist = getArtist(piece.artistSlug);
   const collection = getCollection(piece.collectionSlug);
   const artistName = artist ? getArtistDisplayName(artist.slug, artist.name) : undefined;
-  const title = artistName ? `${piece.title} - ${artistName}` : piece.title;
+  const title = artistName ? `${piece.title}, ${artistName}` : piece.title;
   const collName = collection ? getCollectionDisplayName(collection.slug, collection.name) : undefined;
   const description = (
     getPieceDescription(piece.slug) ||
     piece.description ||
-    (collName ? `${piece.title}, from ${collName} - in the Hivemind Digital Culture Fund collection.` : "Held by the Hivemind Digital Culture Fund.")
+    (collName ? `${piece.title}, from ${collName}. Held by the Hivemind Digital Culture Fund.` : "Held by the Hivemind Digital Culture Fund.")
   ).slice(0, 200);
   const og = getOgImage(piece.slug);
   return {
@@ -215,13 +215,22 @@ export default async function PiecePage({
     undefined;
 
   const rawTraits = getPieceTraits(piece.slug);
-  // Editorial / curator-added "synthetic" traits prepended to the on-chain
-  // attributes - used for facts not in metadata (QQL "Minted by: Tyler
-  // Hobbs"). When the collection has none, the piece's traits pass through.
-  const syntheticEntries = SYNTHETIC_TRAITS[piece.collectionSlug];
-  const traits: Array<[string, TraitValue]> | null = syntheticEntries
-    ? [...Object.entries(syntheticEntries), ...(rawTraits || [])]
-    : rawTraits;
+  // Editorial / curator-added "synthetic" traits sit either side of the
+  // on-chain attributes depending on layer:
+  //  - Collection-level (SYNTHETIC_TRAITS) prepends — every piece in the
+  //    collection carries the credit (QQL "Minted by: Tyler Hobbs" leads
+  //    the panel above the algorithmic features).
+  //  - Piece-level (PIECE_SYNTHETIC_TRAITS) appends — the fact is unique
+  //    to this piece (Punk 269 "Paper Punk: Yes" for the physical
+  //    companion) and reads as a footnote below the on-chain traits.
+  const collectionSynthetic = SYNTHETIC_TRAITS[piece.collectionSlug];
+  const pieceSynthetic = PIECE_SYNTHETIC_TRAITS[piece.slug];
+  const merged: Array<[string, TraitValue]> = [
+    ...(collectionSynthetic ? (Object.entries(collectionSynthetic) as Array<[string, TraitValue]>) : []),
+    ...(rawTraits || []),
+    ...(pieceSynthetic ? (Object.entries(pieceSynthetic) as Array<[string, TraitValue]>) : []),
+  ];
+  const traits: Array<[string, TraitValue]> | null = merged.length ? merged : null;
   // Collections where traits carry curatorial weight (palette, scale, mood,
   // origin) - open the Features panel by default. Others stay collapsed.
   // Traits / Attributes panel opens by default - the on-chain attributes
@@ -265,67 +274,87 @@ export default async function PiecePage({
   const storageLabel =
     (provenance?.storage && STORAGE_LABEL[provenance.storage]) ||
     deriveStorage(piece.originalUri, piece.contractAddress);
+  // The piece page's right-column stack is composed by PieceLayout from
+  // three separate slots so the order matches the editorial brief:
+  //   metadata          -> Traits, Exhibitions (subject-of-the-work data)
+  //   blockchainDetails -> the on-chain expander (data about the token)
+  //   preservedBlock    -> the Hivemind preservation note (data about
+  //                        our custody), rendered after the external
+  //                        links so it sits with Share as a coda.
   const metadata = (
-    <div className="space-y-6">
-      <Features
-        traits={traits}
-        collectionSlug={isMultiPieceSeries ? piece.collectionSlug : undefined}
-        defaultOpen={featuresDefaultOpen}
-        label={isPunk ? "Attributes" : "Traits"}
-      />
-      {piece.exhibitions && piece.exhibitions.length > 0 && (
-        <div>
-          <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
-            Exhibitions
-          </p>
-          <ul className="space-y-1 text-[13px] leading-snug">
-            {piece.exhibitions.map((ex, i) => (
-              <li key={i}>
-                <span className="text-muted tabular-nums">{ex.date}</span>
-                <span className="text-muted"> - </span>
-                {ex.url ? (
-                  <a
-                    href={ex.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-foreground-secondary hover:text-foreground transition-colors duration-200 underline decoration-border hover:decoration-foreground underline-offset-4"
-                  >
-                    <span className="font-serif italic">{ex.title}</span>
-                    {ex.location && `, ${ex.location}`}
-                  </a>
-                ) : (
-                  <>
-                    <span className="font-serif italic text-foreground-secondary">{ex.title}</span>
-                    {ex.location && (
-                      <span className="text-foreground-secondary">, {ex.location}</span>
-                    )}
-                  </>
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-      {provenance?.cid && (
-        <p className="text-[13px] text-muted">
-          <span className="text-foreground-secondary">Preserved by Hivemind:</span>
-          <br />
-          Pinned to IPFS{provenance.verifiedAt ? ", integrity verified" : ""}
-        </p>
-      )}
-      <OnChainDetails
-        contractAddress={piece.contractAddress}
-        tokenId={piece.tokenId}
-        editionType={collectionEditionType}
-        storage={storageLabel}
-        provenance={
-          provenance?.cid
-            ? { cid: provenance.cid, sha256: provenance.sha256, pinnedAt: provenance.pinnedAt, verifiedAt: provenance.verifiedAt }
-            : undefined
-        }
-      />
-    </div>
+    <Features
+      traits={traits}
+      collectionSlug={isMultiPieceSeries ? piece.collectionSlug : undefined}
+      defaultOpen={featuresDefaultOpen}
+      label={isPunk ? "Attributes" : "Traits"}
+    />
   );
+  const exhibitionsBlock = piece.exhibitions && piece.exhibitions.length > 0 ? (
+    <div>
+      <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
+        Exhibitions
+      </p>
+      <ul className="space-y-1 text-[13px] leading-snug">
+        {piece.exhibitions.map((ex, i) => (
+          <li key={i}>
+            <span className="text-muted tabular-nums">{ex.date}.</span>{" "}
+            {ex.url ? (
+              <a
+                href={ex.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground-secondary hover:text-foreground transition-colors duration-200 underline decoration-border hover:decoration-foreground underline-offset-4"
+              >
+                <span className="font-serif italic">{ex.title}</span>
+                {ex.location && `, ${ex.location}`}
+              </a>
+            ) : (
+              <>
+                <span className="font-serif italic text-foreground-secondary">{ex.title}</span>
+                {ex.location && (
+                  <span className="text-foreground-secondary">, {ex.location}</span>
+                )}
+              </>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+  ) : null;
+  const blockchainDetails = (
+    <OnChainDetails
+      contractAddress={piece.contractAddress}
+      tokenId={piece.tokenId}
+      editionType={collectionEditionType}
+      storage={storageLabel}
+      mintDate={piece.mintDate}
+      mintPlatform={piece.mintPlatform}
+      provenance={
+        provenance?.cid
+          ? { cid: provenance.cid, sha256: provenance.sha256, pinnedAt: provenance.pinnedAt, verifiedAt: provenance.verifiedAt }
+          : undefined
+      }
+    />
+  );
+  // Guard: for video pieces, the artwork the reader is looking at IS the
+  // motion piece — a still poster being pinned to IPFS doesn't preserve
+  // the work, only its opening frame. When the animation isn't pinned yet
+  // (winds-of-yawanawa-213 as of this branch), suppress the Preserved
+  // claim so the reader isn't told the artwork is preserved when the
+  // video pin is still pending. The block auto-restores the moment
+  // animation.pinned flips true after a pin-videos run.
+  const videoPinPending =
+    provenance?.animation?.type === "video" && !provenance.animation.pinned;
+  const preservedBlock = provenance?.cid && !videoPinPending ? (
+    <div>
+      <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-2">
+        Preserved by Hivemind
+      </p>
+      <p className="text-[13px] text-foreground-secondary">
+        Pinned to IPFS{provenance.verifiedAt ? ", integrity verified" : ""}
+      </p>
+    </div>
+  ) : null;
 
   const artistDisplay = artist ? getArtistDisplayName(artist.slug, artist.name) : undefined;
 
@@ -362,7 +391,7 @@ export default async function PiecePage({
   };
 
   return (
-    <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
+    <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12 min-h-screen">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {/* Back link. With an explicit origin (?from=) it returns there (Collection
           or Chapters). Otherwise it goes UP one level: multi-piece collections —
@@ -374,38 +403,50 @@ export default async function PiecePage({
         href={originHref || upHref}
         label={originHref ? originLabel : upLabel}
       />
-      {(prevPiece || nextPiece) && (
-        <div className="mt-6 flex flex-col sm:flex-row sm:justify-between gap-4 sm:gap-2">
-          {prevPiece ? (
-            <Link
-              href={pieceHref(prevPiece.slug)}
-              className="group inline-flex flex-col gap-1 max-w-full sm:max-w-[45%]"
-            >
-              <span className="text-[10px] tracking-[0.12em] uppercase text-muted font-medium group-hover:text-foreground transition-colors duration-200">
-                ← Previous work
-              </span>
-              <span className="font-serif italic text-[15px] text-foreground-secondary group-hover:text-foreground transition-colors duration-200 truncate">
-                {prevPiece.title}
-              </span>
-            </Link>
-          ) : (
-            <span />
-          )}
-          {nextPiece && (
-            <Link
-              href={pieceHref(nextPiece.slug)}
-              className="group inline-flex flex-col gap-1 max-w-full sm:max-w-[45%] sm:items-end sm:text-right"
-            >
-              <span className="text-[10px] tracking-[0.12em] uppercase text-muted font-medium group-hover:text-foreground transition-colors duration-200">
-                Next work →
-              </span>
-              <span className="font-serif italic text-[15px] text-foreground-secondary group-hover:text-foreground transition-colors duration-200 truncate">
-                {nextPiece.title}
-              </span>
-            </Link>
-          )}
-        </div>
-      )}
+      {/* Prev/Next work nav. Always rendered — even when the piece is in
+       *  a single-piece collection with no siblings — so that the artwork
+       *  below sits at the same Y position on every piece page. Without
+       *  this reservation, single-piece pages (kissed by the Moonlight,
+       *  meebit, cope-salada, etc.) rendered the artwork ~52px higher
+       *  than multi-piece pages, breaking the reader's sense of place
+       *  when clicking between pieces. Empty spans preserve the layout
+       *  without any visible chrome. */}
+      <div className="mt-6 flex flex-col sm:flex-row sm:justify-between gap-4 sm:gap-2 min-h-[40px]">
+        {prevPiece ? (
+          <Link
+            href={pieceHref(prevPiece.slug)}
+            title={prevPiece.title}
+            className="group inline-flex flex-col gap-1 max-w-full sm:max-w-[45%]"
+          >
+            <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium group-hover:text-foreground transition-colors duration-200 inline-flex items-center gap-1.5">
+              <span aria-hidden className="tracking-normal">←</span>
+              Previous work
+            </span>
+            <span className="font-serif text-[15px] text-foreground-secondary group-hover:text-foreground transition-colors duration-200 line-clamp-2">
+              {prevPiece.title}
+            </span>
+          </Link>
+        ) : (
+          <span />
+        )}
+        {nextPiece ? (
+          <Link
+            href={pieceHref(nextPiece.slug)}
+            title={nextPiece.title}
+            className="group inline-flex flex-col gap-1 max-w-full sm:max-w-[45%] sm:items-end sm:text-right"
+          >
+            <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium group-hover:text-foreground transition-colors duration-200 inline-flex items-center gap-1.5">
+              Next work
+              <span aria-hidden className="tracking-normal">→</span>
+            </span>
+            <span className="font-serif text-[15px] text-foreground-secondary group-hover:text-foreground transition-colors duration-200 line-clamp-2">
+              {nextPiece.title}
+            </span>
+          </Link>
+        ) : (
+          <span />
+        )}
+      </div>
       <div className="pt-6 pb-24">
         <PieceLayout
           image={realImage}
@@ -434,12 +475,20 @@ export default async function PiecePage({
             return { slug: c.slug, title: c.title };
           })()}
           metadata={metadata}
+          blockchainDetails={blockchainDetails}
+          exhibitionsBlock={exhibitionsBlock}
+          preservedBlock={preservedBlock}
           rasterUrl={rasterUrl}
           cryptopunksUrl={cryptopunksUrl}
           artistSiteUrl={artistSiteUrl}
           originalUri={piece.originalUri}
-          xUrl={getPieceEditorial(piece.slug)?.xUrl}
-          xLabel={getPieceEditorial(piece.slug)?.xLabel}
+          editorialLinks={getPieceEditorial(piece.slug)?.links}
+          // Piece-level context only. Collection-level announcements
+          // (Hivemind acquisition posts, etc.) live on the collection
+          // page and don't repeat across every piece in the set — the
+          // focus of a piece page is the piece itself.
+          contextLinks={getPieceEditorial(piece.slug)?.context}
+          year={piece.year}
           placeholder={<PlaceholderArt collectionSlug={piece.collectionSlug} pieceSlug={piece.slug} className="w-full h-full" />}
         />
       </div>

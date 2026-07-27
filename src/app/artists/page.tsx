@@ -1,6 +1,18 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { artists, getPiecesByArtist, getCollectionsByArtist } from "@/lib/data";
+
+export const metadata: Metadata = {
+  title: "Artists",
+  description:
+    "Ten artists shaping digital art's first decades. a.c.k., Beeple, Dmitri Cherniak, Kim Asendorf, Larva Labs, Operator, Refik Anadol, Sam Spratt, Tyler Hobbs, XCOPY.",
+  openGraph: {
+    title: "Artists",
+    description:
+      "Ten artists shaping digital art's first decades. a.c.k., Beeple, Dmitri Cherniak, Kim Asendorf, Larva Labs, Operator, Refik Anadol, Sam Spratt, Tyler Hobbs, XCOPY.",
+  },
+};
 import { getArtistEditorial } from "@/lib/editorial";
 import { getArtworkImage } from "@/lib/images";
 import {
@@ -27,15 +39,15 @@ const sorted = [...artists]
 // in curation order) because the spec was the collection, not a
 // specific token; the rest pin to a single slug.
 const HERO_PIECE_SLUGS: Record<string, string> = {
-  "a-c-k": "piano-blossoms-4-40f9", // Muse Blossoms
-  "beeple": "superrare-beeple-24644-b9e0", // TIME: The Future of Business
-  "dmitri-cherniak": "superrare-dmitri-cherniak-26901-b9e0", // A slight lack of symmetry 1/4
-  "larva-labs": "cryptopunks-269-3BBB",
-  "operator": "human-unreadable-455000124-b069",
-  "refik-anadol": "synthetic-dreams-648-be3a",
-  "sam-spratt": "skulls-of-luci-20-d27c", // Saturnalia Pigmentation (Skull)
-  "tyler-hobbs": "tyler-hobbs-1-9345", // Return Zero [Blue] 0.7
-  "xcopy": "superrare-xcopy-2123-b9e0", // Some Other Asshole
+  "a-c-k": "piano-blossoms-4", // Muse Blossoms
+  "beeple": "superrare-beeple-24644", // TIME: The Future of Business
+  "dmitri-cherniak": "superrare-dmitri-cherniak-26901", // A slight lack of symmetry 1/4
+  "larva-labs": "cryptopunks-269",
+  "operator": "human-unreadable-455000124",
+  "refik-anadol": "synthetic-dreams-648",
+  "sam-spratt": "skulls-of-luci-20", // Saturnalia Pigmentation (Skull)
+  "tyler-hobbs": "tyler-hobbs-1", // Return Zero [Blue] 0.7
+  "xcopy": "superrare-xcopy-2123", // Some Other Asshole
 };
 const HERO_COLLECTION_OVERRIDES: Record<string, string[]> = {
   "kim-asendorf": ["lights"],
@@ -50,18 +62,17 @@ const HERO_ASPECT_OVERRIDES: Record<string, number> = {
 
 export default function ArtistsPage() {
   return (
-    <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 pt-6 pb-24">
-      {/* Masthead — mirrors the Chapters / Salon masthead (same component +
-          display-sm scale) so the "Hivemind Digital Culture Fund" wordmark
-          holds position across the index pages. */}
-      <h1 className="font-serif display-sm">Hivemind Digital Culture Fund</h1>
-      {/* Section title + framing copy, structured to match a Chapters chapter
-          entry: the section title sits at the chapter-title scale, with a
-          framing paragraph below (replacing the old "N artists" count line). */}
+    <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12 pt-6 pb-24 min-h-screen">
+      {/* Fund name as eyebrow; subject as H1 so index pages each carry
+          their own subject and the reader isn't reading the same H1 on
+          every navigation. */}
+      <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium">
+        Hivemind Digital Culture Fund
+      </p>
+      <h1 className="font-serif display-sm mt-3">Artists</h1>
       <div className="mt-6 mb-8 max-w-3xl">
-        <h2 className="font-serif display-sm mb-5">Artists</h2>
         <p className="text-[17px] sm:text-[18px] leading-[1.6] text-foreground-secondary">
-          Hivemind collects work by ten of digital art&rsquo;s most influential artists.
+          Hivemind holds work by ten of the artists shaping digital art&rsquo;s first decades.
         </p>
       </div>
       {sorted.map((artist, idx) => {
@@ -145,7 +156,7 @@ export default function ArtistsPage() {
                   </h3>
                 </Link>
                 <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mt-4 tabular-nums">
-                  {visibleCols.length} collection{visibleCols.length !== 1 ? "s" : ""} &middot; {allWorks.length} works
+                  {visibleCols.length} collection{visibleCols.length !== 1 ? "s" : ""} &middot; {allWorks.length} work{allWorks.length !== 1 ? "s" : ""}
                 </p>
                 {(getArtistEditorial(artist.slug)?.bio ?? artist.bio) && (
                   <p className="text-[15px] text-foreground-secondary leading-[1.65] mt-6 max-w-[440px]">

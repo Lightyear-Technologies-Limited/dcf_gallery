@@ -40,8 +40,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const name = getCollectionDisplayName(col.slug, col.name);
   const artist = getArtist(col.artistSlug);
   const artistName = artist ? getArtistDisplayName(artist.slug, artist.name) : undefined;
-  const title = artistName ? `${name} - ${artistName}` : name;
-  const description = (col.description || `${name} in the Hivemind Digital Culture Fund collection.`).slice(0, 200);
+  const title = artistName ? `${name}, ${artistName}` : name;
+  const description = (col.description || `${name} in the Hivemind Digital Culture Fund collection.`).slice(0, 320);
   const first = getPiecesByCollection(col.slug)[0];
   const og = first ? getOgImage(first.slug) : undefined;
   return {
@@ -58,7 +58,7 @@ export default async function CollectionPage({
   searchParams,
 }: {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ trait?: string; value?: string }>;
+  searchParams: Promise<{ trait?: string; value?: string; set?: string }>;
 }) {
   const { slug } = await params;
   const sp = await searchParams;
@@ -86,6 +86,15 @@ export default async function CollectionPage({
   // page Features link. Filter pieces whose stored traits contain a matching
   // (key, value) pair. The canonical /collection/{slug} (no params) remains
   // statically generated; filtered views are SSR.
+  // `set=1` flag signals the filter came from a Sets row click (as
+  // opposed to a standalone Type/Color row click on the same value).
+  // Same underlying filter, but the origin drives two divergent
+  // behaviours:
+  //   - Set-mode: reduce the pieces to the curated activeSetValue.pieces
+  //     list, highlight the Sets row only.
+  //   - Trait-mode: show every held piece matching (key, value),
+  //     highlight the standalone Type/Color row only.
+  const isSetFilter = sp.set === "1";
   const traitFilter = sp.trait && sp.value ? { key: sp.trait, value: sp.value } : null;
 
   // Build the (key -> value -> count) facet aggregation over the unfiltered
@@ -131,31 +140,50 @@ export default async function CollectionPage({
     : sorted;
 
   // If the active filter is a synthetic Sets value (Grifters Turbulence,
-  // G to the M, Wretch), reduce the filtered pieces to one representative
-  // per color in Yellow / Blue / Green order. With 5 Wretches across mixed
-  // colors, the gallery surfaces the first Yellow Wretch, first Blue
-  // Wretch, and first Green Wretch (by tokenId) - "1 of each colour".
-  const isSyntheticSetFilter = traitFilter
-    ? !!SYNTHETIC_TRAIT_GROUPS[slug]?.some((g) =>
-        g.values.some(
+  // G to the M, Wretch, Shady, Bubbles), reduce the filtered pieces to
+  // the curated 3-piece display. Two paths:
+  //
+  //   1. The set defines an explicit `pieces` list (editorial curation):
+  //      use those exact slugs in that exact order. Needed when the fund
+  //      holds >3 pieces matching the trait and the natural pieceOrder
+  //      picker wouldn't select the editorial choice.
+  //
+  //   2. No explicit list: auto-pick one representative per color in
+  //      Yellow / Blue / Green reading order (the "1 of each colour"
+  //      curator rule). First-per-color wins, using the current
+  //      pieceOrder as the tiebreaker.
+  // Set reduction only fires when the filter arrived via a Sets row
+  // click. Clicking Type: Shady in the Type row leaves the pieces
+  // list unreduced (all held Shadys), which is the difference between
+  // a "curated set" affordance and a "standalone trait" affordance.
+  const activeSetValue = traitFilter && isSetFilter
+    ? SYNTHETIC_TRAIT_GROUPS[slug]
+        ?.flatMap((g) => g.values)
+        .find(
           (v) => v.key === traitFilter.key && v.value === traitFilter.value,
-        ),
-      )
-    : false;
-  if (isSyntheticSetFilter) {
-    const colorOrder = ["Yellow", "Blue", "Green"];
-    const byColor = new Map<string, (typeof pieces)[number]>();
-    for (const p of pieces) {
-      const traits = getPieceTraits(p.slug);
-      const colorEntry = traits?.find(([k]) => k === "Color");
-      const color = colorEntry?.[1];
-      if (typeof color === "string" && !byColor.has(color)) {
-        byColor.set(color, p);
+        )
+    : undefined;
+  if (activeSetValue) {
+    if (activeSetValue.pieces && activeSetValue.pieces.length > 0) {
+      const bySlug = new Map(pieces.map((p) => [p.slug, p]));
+      pieces = activeSetValue.pieces
+        .map((s) => bySlug.get(s))
+        .filter((p): p is (typeof pieces)[number] => p !== undefined);
+    } else {
+      const colorOrder = ["Yellow", "Blue", "Green"];
+      const byColor = new Map<string, (typeof pieces)[number]>();
+      for (const p of pieces) {
+        const traits = getPieceTraits(p.slug);
+        const colorEntry = traits?.find(([k]) => k === "Color");
+        const color = colorEntry?.[1];
+        if (typeof color === "string" && !byColor.has(color)) {
+          byColor.set(color, p);
+        }
       }
+      pieces = colorOrder
+        .map((c) => byColor.get(c))
+        .filter((p): p is (typeof pieces)[number] => p !== undefined);
     }
-    pieces = colorOrder
-      .map((c) => byColor.get(c))
-      .filter((p): p is (typeof pieces)[number] => p !== undefined);
   }
 
   const piecesPerRow = getPiecesPerRow(slug);
@@ -240,7 +268,15 @@ export default async function CollectionPage({
       .sort((a, b) => (orderIndex.get(a[0])! - orderIndex.get(b[0])!));
   };
   const renderTraitLink = (key: string, val: string, count: number) => {
-    const isActive = traitFilter?.key === key && traitFilter?.value === val;
+    // Standalone Type/Color rows only highlight when the current URL
+    // carries the plain trait filter (no set=1 flag). If the same
+    // value is active but arrived via a Sets row click, the highlight
+    // stays on the Sets row alone — clicking Type != clicking a Set,
+    // even when the underlying (key, value) is identical.
+    const isActive =
+      !isSetFilter &&
+      traitFilter?.key === key &&
+      traitFilter?.value === val;
     const globalCount = getTraitGlobalCount(slug, key, val);
     return (
       <Link
@@ -261,69 +297,18 @@ export default async function CollectionPage({
                 ? "text-foreground"
                 : count > 1
                 ? "text-muted"
-                : "text-muted/40"
+                : "text-muted"
             }
           >
             {count}
           </span>
           {globalCount !== null && (
-            <span className="text-muted/40">/{globalCount.toLocaleString()}</span>
+            <span className="text-muted">/{globalCount.toLocaleString()}</span>
           )}
         </span>
       </Link>
     );
   };
-
-  // Filter status line - rendered in the LEFT column under the holdings line
-  // on filtered views. Earlier iterations used a rounded-pill chip with a
-  // surface background; that chrome read as a marketplace facet button
-  // (OpenSea / Blur / Magic Eden all use the same pill grammar), which
-  // undercut the page's institutional register. The current treatment is a
-  // flush status row with a single hairline bottom rule - same content
-  // (filter axis + held figure + clear), same data, same affordance, but
-  // sitting in the rhythm of the page rather than floating as a control.
-  // The held figure stays font-medium so the answer to "how many" remains
-  // the eye's anchor; everything else is muted.
-  const chipBlock = traitFilter ? (() => {
-    const globalCount = getTraitGlobalCount(slug, traitFilter.key, traitFilter.value);
-    // If the active filter targets a (key, value) that's covered by a
-    // synthetic group (Grifters Vision/Noise -> "Sets"), the chip names
-    // the synthetic group instead of the underlying real trait. Reader
-    // sees "Sets: G to the M" rather than the unhelpful "Noise: G to the
-    // M" - matches the affordance they clicked from.
-    const syntheticGroup = SYNTHETIC_TRAIT_GROUPS[slug]?.find((g) =>
-      g.values.some(
-        (v) => v.key === traitFilter.key && v.value === traitFilter.value,
-      ),
-    );
-    const chipKey = syntheticGroup?.label ?? traitFilter.key;
-    return (
-      <div className="mt-6 max-w-[520px] flex flex-wrap items-baseline gap-x-3 gap-y-1 border-b border-border pb-3 text-[13px]">
-        <span className="text-[10px] uppercase text-muted">
-          Filter
-        </span>
-        <span className="text-foreground">
-          {chipKey}: <span className="font-medium">{traitFilter.value}</span>
-        </span>
-        <span className="text-muted">·</span>
-        <span className="text-foreground tabular-nums font-medium">{pieces.length}</span>
-        {globalCount !== null ? (
-          <span className="text-muted tabular-nums">
-            of {globalCount.toLocaleString()} held
-          </span>
-        ) : (
-          <span className="text-muted">held</span>
-        )}
-        <Link
-          href={`/collection/${slug}`}
-          aria-label="Clear filter"
-          className="ml-auto text-foreground-secondary hover:text-foreground transition-colors duration-200"
-        >
-          Clear
-        </Link>
-      </div>
-    );
-  })() : null;
 
   // Compact inline trait index - single layout used on BOTH filtered and
   // unfiltered views so the disclosure mechanic doesn't change the page
@@ -339,8 +324,16 @@ export default async function CollectionPage({
     const visible = buildVisibleValues(key, values);
     if (!visible.length) continue;
     traitIndexRows.push(
-      <div key={`r-${key}`} className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-        <span className="text-[10px] uppercase text-muted shrink-0 min-w-[80px]">
+      <div
+        key={`r-${key}`}
+        // Two-column grid: label pinned in its own column, values wrap
+        // within the second column only. Flex-wrap on the parent row
+        // used to let the values collapse under the label on narrow
+        // screens (leaving the label on its own line one row, values
+        // on their own line the next), which read as messy.
+        className="grid grid-cols-[80px_1fr] items-baseline gap-x-4 gap-y-1"
+      >
+        <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium">
           {key}
         </span>
         <div className="flex flex-wrap gap-x-4 gap-y-1">
@@ -353,27 +346,40 @@ export default async function CollectionPage({
     // Set counts cap at 3 - one per color (Yellow / Blue / Green). When
     // Hivemind holds 4+ of a set in the same color, the surplus drops
     // from the displayed count so the figure reads "1 of each colour"
-    // rather than total holdings.
+    // rather than total holdings. Sets that supply an explicit `pieces`
+    // list count the length of that list — the editorial curation IS
+    // the truth for those.
     const entries = group.values
       .map((v) => ({
         ...v,
-        count: Math.min(facets.get(v.key)?.get(v.value) ?? 0, 3),
+        count: v.pieces
+          ? v.pieces.length
+          : Math.min(facets.get(v.key)?.get(v.value) ?? 0, 3),
       }))
       .filter((v) => v.count > 0);
     if (!entries.length) continue;
     traitIndexRows.push(
-      <div key={`s-${group.label}`} className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-        <span className="text-[10px] uppercase text-muted shrink-0 min-w-[80px]">
+      <div
+        key={`s-${group.label}`}
+        className="grid grid-cols-[80px_1fr] items-baseline gap-x-4 gap-y-1"
+      >
+        <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium">
           {group.label}
         </span>
         <div className="flex flex-wrap gap-x-4 gap-y-1">
           {entries.map((entry) => {
+            // Sets rows only highlight when the current URL carries
+            // set=1. If the reader clicked the same value from the
+            // Type row instead, the Type row lights up (below); this
+            // stays quiet.
             const isActive =
-              traitFilter?.key === entry.key && traitFilter?.value === entry.value;
+              isSetFilter &&
+              traitFilter?.key === entry.key &&
+              traitFilter?.value === entry.value;
             return (
               <Link
                 key={`${entry.key}:${entry.value}`}
-                href={`/collection/${slug}?trait=${encodeURIComponent(entry.key)}&value=${encodeURIComponent(entry.value)}`}
+                href={`/collection/${slug}?trait=${encodeURIComponent(entry.key)}&value=${encodeURIComponent(entry.value)}&set=1`}
                 className={`inline-flex items-baseline gap-1.5 transition-colors duration-200 underline underline-offset-4 ${
                   isActive
                     ? "text-foreground font-medium decoration-foreground"
@@ -389,7 +395,7 @@ export default async function CollectionPage({
                         ? "text-foreground"
                         : entry.count > 1
                         ? "text-muted"
-                        : "text-muted/40"
+                        : "text-muted"
                     }
                   >
                     {entry.count}
@@ -402,7 +408,7 @@ export default async function CollectionPage({
       </div>
     );
   }
-  // Tight rhythm: mt-3 below the summary chip / chipBlock above. The wider
+  // Tight rhythm: mt-3 below the summary. The wider
   // mt-6 read as a void between "Browse by trait >" and the first trait row
   // when the disclosure was opened, and broke the editorial column's
   // space-y-6 rhythm. mt-3 inside the disclosure pairs with space-y-2
@@ -422,23 +428,53 @@ export default async function CollectionPage({
   // an earlier checkbox+peer reserved-height hack: the dead empty space
   // it created read as a hole in the column, and the consistency win
   // with Features.tsx is worth a small gallery push-down on open.
-  // Closed by default - the unfiltered page subject is the artwork, not
-  // the pivot affordance; readers who want to filter open it.
+  // Closed by default; opens by default when a filter is active so
+  // the reader sees the highlighted trait in the same position the
+  // disclosure lives in unfiltered — the row of trait pivots doesn't
+  // move between states, just its open/closed status. A Clear
+  // affordance renders alongside the summary when filtered so the
+  // reader can drop the filter without hunting for a chip.
   const traitDisclosure = traitIndexRows.length > 0 ? (
-    <details
-      className="group max-w-[520px] [&_summary::-webkit-details-marker]:hidden"
-    >
-      <summary className="cursor-pointer list-none text-muted hover:text-foreground transition-colors duration-200 inline-flex items-center gap-2 select-none">
-        <span className="text-[10px] uppercase">Browse by trait</span>
-        <span
-          aria-hidden
-          className="inline-block transition-transform duration-200 group-open:rotate-90"
+    <div className="max-w-[520px]">
+      {/* Clear sits as a sibling to <details> (not inside the summary),
+          so clicking it doesn't also toggle the disclosure. A server
+          component can't use onClick to stopPropagation, so structure
+          rather than JS handles the disambiguation. */}
+      <div className="flex items-baseline gap-3">
+        <details
+          className="group [&_summary::-webkit-details-marker]:hidden"
+          open={!!traitFilter}
         >
-          &rsaquo;
-        </span>
-      </summary>
-      {traitIndexInline}
-    </details>
+          <summary className="cursor-pointer list-none text-[10px] tracking-[0.1em] uppercase text-muted font-medium hover:text-foreground transition-colors duration-200 inline-flex items-center gap-2 select-none">
+            <span>Browse by trait</span>
+            <svg
+              aria-hidden
+              width="10"
+              height="10"
+              viewBox="0 0 12 12"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="inline-block transition-transform duration-200 group-open:rotate-90"
+            >
+              <path d="M4 2l4 4-4 4" />
+            </svg>
+          </summary>
+          {traitIndexInline}
+        </details>
+        {traitFilter && (
+          <Link
+            href={`/collection/${slug}`}
+            aria-label="Clear filter"
+            className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium hover:text-foreground transition-colors duration-200 self-start"
+          >
+            Clear
+          </Link>
+        )}
+      </div>
+    </div>
   ) : null;
 
   const collectionLd = {
@@ -450,7 +486,7 @@ export default async function CollectionPage({
   };
 
   return (
-    <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
+    <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12 min-h-screen">
       <ScrollRestore />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionLd) }} />
       {/* Breadcrumb + sibling nav. Prev (artist's other works) and next
@@ -522,12 +558,14 @@ export default async function CollectionPage({
                 (i.e. when totalSupply is set) - reading "30 works" twice in
                 the first three lines of the page is redundant. Falls back to
                 inline when the holdings line is absent (collections without
-                totalSupply). Always suppressed on filtered views. */}
+                totalSupply). Applies regardless of filter state — the
+                collection-level header describes the collection, not
+                the subset currently visible. */}
             <div className="flex items-baseline gap-2.5">
               <h1 className="font-serif display-sm">
                 {collectionName}
               </h1>
-              {!traitFilter && !col.totalSupply && (
+              {!col.totalSupply && (
                 <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium tabular-nums">{sorted.length} {sorted.length === 1 ? "work" : "works"}</span>
               )}
             </div>
@@ -539,71 +577,59 @@ export default async function CollectionPage({
                 {artistName}
               </Link>
             )}
-            {/* Catalogue-style data stack - reads top-down from work-
-                level facts (mint date, code size, edition) to provenance
-                (contract) to the fund's position last. Each row is one
-                muted 13px tabular-nums line; rows with nothing to say
-                are omitted. Replaces the earlier 3-row MetadataTable.
-                Hivemind holdings line ("Hivemind holds N of M") omitted
-                when:
-                  - n === 1: singleton; the count is inventory tally on
-                    what is fundamentally a single artwork.
-                  - n === totalSupply <= 2: tiny series we hold entire.
-                  - !totalSupply: no series context.
-                Contract + edition rows suppressed on filtered views
-                (collection-level context, not subset-relevant). */}
-            <div className="mt-6 space-y-1 text-[13px] text-muted tabular-nums">
-              {col.mintDate && <p>Minted {col.mintDate}</p>}
-              {col.codeSizeKb !== undefined && (
-                <p>Code size {col.codeSizeKb} Kb</p>
-              )}
-              {/* Edition row shows the canonical web3 shorthand:
-                  - "1/1/N" for curated programmatic series (Fidenza 999,
-                    Punks 10000): each piece is 1 of 1 in a series of N.
-                  - "1/1" alone for collections of independent 1/1s on a
-                    shared artist contract (Her favorite flowers, Piano
-                    Blossoms): each piece is unique, not a series output.
-                    Surfaces when totalSupply > 1 so the reader knows
-                    each piece is 1/1 (not an edition of N), paired with
-                    the holdings line below.
-                  - Suppressed entirely for true singletons (no totalSupply)
-                    where the 1/1 is implicit. */}
-              {!traitFilter &&
-                col.totalSupply !== undefined &&
-                col.totalSupply > 1 && <p>{editionType}</p>}
-              {/* Hivemind holdings line sits directly under the edition
-                  row so the reader's eye reads "1/1/999 -> Hivemind
-                  holds N works" as a paired figure. "of M" dropped
-                  because the edition row above already states the
-                  total - "Hivemind holds N of 999 works" right under
-                  "1/1/999" doubled the number. Clarifier "1/1s" stays
-                  for shared-contract independent 1/1s (Piano Blossoms,
-                  Her favorite flowers) where the unit isn't implied by
-                  the edition row. */}
-              {col.totalSupply && (
-                <p>
-                  Hivemind holds {sorted.length}{" "}
-                  {editionType === "1/1" && col.totalSupply > 1 ? "1/1s" : "works"}
-                </p>
-              )}
-              {!traitFilter && col.platform && <p>{col.platform}</p>}
-              {!traitFilter && col.contractAddress && (
-                <p className="inline-flex items-baseline gap-x-2">
-                  <span>Contract:</span>
-                  <CopyableHash value={col.contractAddress} />
-                </p>
-              )}
+            {/* Collection details block: catalogue-style data stack under
+                a COLLECTION DETAILS eyebrow. Reads top-down as identity
+                (type, contract) → position (Hivemind holds) → secondary
+                tombstone (mint date, platform, code size). Rows with
+                nothing to say are omitted. */}
+            <div className="mt-8">
+              <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
+                Collection details
+              </p>
+              <div className="space-y-1 text-[13px] text-muted tabular-nums">
+                {/* Type — canonical web3 edition shorthand.
+                    - "1/1/N" for curated programmatic series (Fidenza 999,
+                      Punks 10000): each piece is 1 of 1 in a series of N.
+                    - "1/1" for collections of independent 1/1s on a shared
+                      artist contract (Lights, Piano Blossoms): each piece
+                      is unique, not a series output.
+                    Surfaces when totalSupply > 1; suppressed for true
+                    singletons where the 1/1 is implicit. Renders in all
+                    filter states — collection-level facts don't change
+                    when the reader narrows to a subset. */}
+                {col.totalSupply !== undefined &&
+                  col.totalSupply > 1 && <p>{editionType}</p>}
+                {col.contractAddress && (
+                  <p className="inline-flex items-baseline gap-x-2">
+                    <span>Contract:</span>
+                    <CopyableHash value={col.contractAddress} />
+                  </p>
+                )}
+                {/* Hivemind holdings — singular "work" when sorted.length
+                    === 1 (previously always "works", which read as
+                    "Hivemind holds 1 works" on Lights). */}
+                {col.totalSupply && (
+                  <p>
+                    Hivemind holds {sorted.length}{" "}
+                    {sorted.length === 1 ? "work" : "works"}
+                  </p>
+                )}
+                {col.mintDate && <p>Minted {col.mintDate}</p>}
+                {col.platform && <p>{col.platform}</p>}
+                {col.codeSizeKb !== undefined && (
+                  <p>Code size {col.codeSizeKb} Kb</p>
+                )}
+              </div>
             </div>
 
-            {/* Filter chip + compact trait index. On FILTERED views the
-                inline trait rows sit directly under the holdings line so
-                the filter context pairs visually with the fund's position
-                figure (holdings -> chip -> available pivots). On unfiltered
-                views the inline is suppressed: the Browse-by-trait
-                disclosure below handles the same rows, and rendering both
-                would double the pivots above the gallery. */}
-            {chipBlock}
-            {traitFilter && traitIndexInline}
+            {/* Browse-by-trait + Exhibitions render in the SAME positions
+                whether a filter is active or not — the disclosure lives
+                below Exhibitions in both states; when filtered it just
+                opens by default with the selected trait highlighted and
+                a Clear button beside the summary. Previous behaviour
+                flipped the two blocks (chip + inline rows above
+                Exhibitions when filtered, disclosure below when not),
+                which read as a layout jolt on filter click. */}
 
             {/* Exhibitions - tombstone provenance under the holdings stack.
                 Catalogue convention: EXHIBITED sits in the lot tombstone
@@ -620,8 +646,7 @@ export default async function CollectionPage({
                 <ul className="space-y-1 text-[13px] leading-snug">
                   {col.exhibitions.map((ex, i) => (
                     <li key={i}>
-                      <span className="text-muted tabular-nums">{ex.date}</span>
-                      <span className="text-muted"> - </span>
+                      <span className="text-muted tabular-nums">{ex.date}.</span>{" "}
                       {ex.url ? (
                         <a
                           href={ex.url}
@@ -653,7 +678,7 @@ export default async function CollectionPage({
                 block when present, otherwise directly under the holdings
                 stack. Editorial prose (About + Hivemind Commentary +
                 Artist Statement) lives in the RIGHT column. */}
-            {!traitFilter && traitDisclosure && (
+            {traitDisclosure && (
               <div className="mt-6">{traitDisclosure}</div>
             )}
           </div>
@@ -678,17 +703,20 @@ export default async function CollectionPage({
               {col.curatorNote && (
                 <div className="border-l border-border pl-5">
                   <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
-                    Hivemind Commentary
+                    Hivemind commentary
                   </p>
                   <p className="font-serif text-[16px] leading-[1.65] text-foreground-secondary whitespace-pre-line">
                     {col.curatorNote}
                   </p>
+                  {/* Each link renders on its own line via block display,
+                   *  so essay + context + editorial links stack vertically
+                   *  rather than wrapping mid-line. */}
                   {col.essayUrl && (
                     <a
                       href={col.essayUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-3 text-[13px] text-muted hover:text-foreground transition-colors duration-200 inline-block"
+                      className="mt-3 text-[13px] text-muted hover:text-foreground transition-colors duration-200 block"
                     >
                       Read the essay
                       {col.essayTitle && (
@@ -699,16 +727,28 @@ export default async function CollectionPage({
                       →
                     </a>
                   )}
-                  {col.xUrl && (
+                  {col.context?.map((l) => (
                     <a
-                      href={col.xUrl}
+                      key={l.url}
+                      href={l.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-3 text-[13px] text-muted hover:text-foreground transition-colors duration-200 inline-block"
+                      className="mt-3 text-[13px] text-muted hover:text-foreground transition-colors duration-200 block"
                     >
-                      {col.xLabel ?? "Read the thread on X"} →
+                      {l.label} →
                     </a>
-                  )}
+                  ))}
+                  {col.links?.map((l) => (
+                    <a
+                      key={l.url}
+                      href={l.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-3 text-[13px] text-muted hover:text-foreground transition-colors duration-200 block"
+                    >
+                      {l.label} →
+                    </a>
+                  ))}
                 </div>
               )}
               {!col.curatorNote && col.essayUrl && (
@@ -729,12 +769,13 @@ export default async function CollectionPage({
               )}
               {col.artistStatement && (
                 <div className="border-l border-border pl-5">
-                  {/* Eyebrow "Artist metadata description" carries the
-                      provenance on its own - signals at a glance that
-                      the block is inherited content from the work's
-                      original metadata, not text written for Hivemind. */}
+                  {/* Eyebrow "Artist statement" mirrors museum convention —
+                      the reader immediately knows the prose is the artist's
+                      own words (from the token metadata), not editorial
+                      commentary written for the fund. Same label on the
+                      piece page so the register carries across pages. */}
                   <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
-                    Artist metadata description
+                    Artist statement
                   </p>
                   {/* Threshold at 300 chars - medium-length statements
                       (Ringers ~500, Lightyears ~430) collapse to a 3-line
@@ -752,28 +793,9 @@ export default async function CollectionPage({
             </div>
         </div>
 
-      {/* Filter reminder above the gallery: the chipBlock at the top of
-          the editorial column carries the full status row, but a reader
-          who has scrolled past the editorial header should still see at
-          a glance that they're filtered and have a one-click escape. */}
-      {traitFilter && pieces.length > 0 && (
-        <div className="pt-6 flex items-baseline gap-2 text-[11px] text-muted">
-          <span className="uppercase tracking-[0.08em]">Filter</span>
-          <span className="text-foreground-secondary">
-            {traitFilter.key}: <span className="font-medium">{traitFilter.value}</span>
-          </span>
-          <Link
-            href={`/collection/${slug}`}
-            aria-label="Clear filter"
-            className="ml-auto text-foreground-secondary hover:text-foreground transition-colors duration-200"
-          >
-            Clear
-          </Link>
-        </div>
-      )}
-
-      {/* Gallery. */}
-      <div className={`${traitFilter ? "pt-4" : "pt-6"} pb-24`}>
+      {/* Gallery. Filter status + Clear live inside the Browse-by-trait
+          disclosure in the sidebar; no chrome needed above the images. */}
+      <div className="pt-6 pb-24">
         {(() => {
           const heroLayout = getHeroLayout(slug);
           // Filtered view: bypass hero / fixed-row / single-piece layouts
@@ -835,6 +857,7 @@ export default async function CollectionPage({
                 sidebarRows={heroLayout.sidebarRows}
                 sidebarSlugs={heroLayout.sidebarPieces}
                 fallbackPerRow={ideal}
+                rowMap={pieceRows ?? undefined}
               />
             );
           }

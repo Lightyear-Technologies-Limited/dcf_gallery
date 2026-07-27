@@ -32,15 +32,17 @@ const roman = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"];
 export default function ChaptersView({ chapters }: { chapters: ChapterData[] }) {
   return (
     <div className="relative">
-      <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
+      <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12">
         {chapters.map((c, i) => (
           <section
             key={c.slug}
-            // First chapter starts just below the page-level "Chapters"
-            // heading + framing (pt-2). Chapters 2+ keep the cinematic
-            // full-height vertical centering as you scroll the procession.
-            className={`min-h-[78vh] flex flex-col border-b border-border last:border-b-0 ${
-              i === 0 ? "justify-start pt-2 pb-16" : "justify-center py-16"
+            // Consistent top/bottom padding between chapters, no min-height
+            // — the earlier "full-height title card" treatment (min-h-[78vh]
+            // + vertical centering) left large dead bands above and below
+            // each chapter that didn't match the density of the rest of
+            // the site.
+            className={`border-b border-border last:border-b-0 ${
+              i === 0 ? "pt-2 pb-14" : "py-14"
             }`}
           >
             <div>
@@ -53,7 +55,7 @@ export default function ChaptersView({ chapters }: { chapters: ChapterData[] }) 
               <p className="max-w-2xl text-[17px] sm:text-[18px] leading-[1.6] text-foreground-secondary mb-3">
                 {c.description}
               </p>
-              <p className="text-[12px] text-muted mb-9 tabular-nums">
+              <p className="text-[12px] text-muted tabular-nums">
                 {c.artists.map((a, j) => (
                   <span key={a.slug}>
                     {j > 0 && " · "}
@@ -65,7 +67,8 @@ export default function ChaptersView({ chapters }: { chapters: ChapterData[] }) 
                     </Link>
                   </span>
                 ))}
-                {" - "}
+              </p>
+              <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium tabular-nums mt-2 mb-9">
                 {c.total} {c.total === 1 ? "work" : "works"}
               </p>
 
@@ -73,10 +76,10 @@ export default function ChaptersView({ chapters }: { chapters: ChapterData[] }) 
 
               <Link
                 href={`/?chapter=${c.slug}`}
-                className="mt-7 inline-flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase text-muted hover:text-foreground transition-colors duration-200 tabular-nums"
+                className="mt-7 inline-flex items-center gap-2 text-[13px] text-foreground-secondary hover:text-foreground transition-colors duration-200 underline underline-offset-4 decoration-border hover:decoration-foreground"
               >
-                View all {c.total} in {c.name}
-                <span aria-hidden>→</span>
+                View all in {c.name}
+                <span aria-hidden className="no-underline">→</span>
               </Link>
             </div>
           </section>
