@@ -12,9 +12,11 @@ test.describe("smoke", () => {
   test("homepage: masthead + sidebar nav render", async ({ page }) => {
     const errors = guardPageErrors(page);
     await page.goto("/");
-    await expect(page.getByRole("heading", { name: /Hivemind Digital Culture Fund/i })).toBeVisible();
-    // Primary sidebar nav now carries the Chapters destination (the old in-page
-    // view-switcher is gone).
+    // Home H1 is "Collection" (the fund's collection). "Hivemind Digital Culture
+    // Fund" sits above it as the small-caps eyebrow, matching the pattern used
+    // by every other index page (Thesis, Artists, Chapters, Press).
+    await expect(page.getByRole("heading", { name: "Collection" })).toBeVisible();
+    // Primary sidebar nav carries the Chapters destination.
     await expect(page.getByRole("navigation", { name: /Primary/i }).getByRole("link", { name: "Chapters" })).toBeVisible();
     expect(errors, errors.join("\n")).toHaveLength(0);
   });
@@ -57,12 +59,17 @@ test.describe("smoke", () => {
     await expect(page.locator("video").first()).toBeAttached({ timeout: 15000 });
   });
 
-  test("interactive: on-chain HTML runs in a sandboxed iframe on demand", async ({ page }) => {
-    await page.goto("/piece/pxl-dex-105-ecfb");
-    const run = page.getByRole("button", { name: /Run .* interactive/i });
-    await expect(run).toBeVisible();
-    await run.click();
-    await expect(page.locator('iframe[sandbox="allow-scripts"]')).toBeVisible();
+  test("interactive: on-chain HTML mounts in a sandboxed iframe", async ({ page }) => {
+    // The explicit "Run interactive" / "Show still" toggle buttons were
+    // removed; interactive on-chain HTML now mounts automatically per the
+    // global Reels preference (Auto = in-view, Hover = on pointer, Off).
+    // Auto is used here so the assertion doesn't depend on hover timing.
+    await page.addInitScript(() => {
+      try { localStorage.setItem("dcf-motion", "play-all"); } catch { /* ignore */ }
+    });
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/piece/pxl-dex-105");
+    await expect(page.locator('iframe[sandbox="allow-scripts"]')).toBeAttached({ timeout: 15000 });
   });
 
   test("interactive: Auto runs on-chain HTML in galleries (sandboxed iframe)", async ({ page }) => {

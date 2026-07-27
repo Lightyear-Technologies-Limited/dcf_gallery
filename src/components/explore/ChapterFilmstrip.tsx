@@ -47,9 +47,11 @@ export default function ChapterFilmstrip({ name, works }: Props) {
       startScrollLeft: el.scrollLeft,
       moved: false,
     };
-    el.style.scrollSnapType = "none";
-    el.style.cursor = "grabbing";
-    el.setPointerCapture(e.pointerId);
+    // NOTE: pointer capture + style changes are deferred to onPointerMove
+    // once the 5px threshold is crossed. If we captured on pointerdown,
+    // subsequent pointerup would route to the container instead of the
+    // child <Link>, and the browser would refuse to fire click on the
+    // tile — a simple tap on a filmstrip tile would fail to navigate.
   };
 
   const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -57,20 +59,31 @@ export default function ChapterFilmstrip({ name, works }: Props) {
     const el = scrollRef.current;
     if (!el) return;
     const dx = e.clientX - drag.current.startX;
-    if (Math.abs(dx) > 5) drag.current.moved = true;
-    el.scrollLeft = drag.current.startScrollLeft - dx;
+    if (Math.abs(dx) > 5 && !drag.current.moved) {
+      drag.current.moved = true;
+      // Threshold crossed: this is a drag, not a click. NOW capture pointer,
+      // disable snap, change cursor. Clicks that never cross the threshold
+      // flow through untouched to child <Link>s and navigate normally.
+      el.style.scrollSnapType = "none";
+      el.style.cursor = "grabbing";
+      try { el.setPointerCapture(e.pointerId); } catch { /* capture race */ }
+    }
+    if (drag.current.moved) {
+      el.scrollLeft = drag.current.startScrollLeft - dx;
+    }
   };
 
   const onPointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
     if (!drag.current.down) return;
     const el = scrollRef.current;
+    const wasDrag = drag.current.moved;
     drag.current.down = false;
-    if (el) {
+    if (el && wasDrag) {
       el.style.scrollSnapType = "";
       el.style.cursor = "";
       try { el.releasePointerCapture(e.pointerId); } catch { /* already released */ }
     }
-    if (drag.current.moved) {
+    if (wasDrag) {
       // Suppress the click that would otherwise navigate the tile's Link.
       const suppress = (ev: MouseEvent) => {
         ev.stopPropagation();
