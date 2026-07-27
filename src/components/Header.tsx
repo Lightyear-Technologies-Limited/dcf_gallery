@@ -18,6 +18,7 @@ export default function Header() {
   const path = usePathname();
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
+  const openerRef = useRef<HTMLButtonElement>(null);
 
   function isActive(href: string) {
     if (href === "/") {
@@ -29,15 +30,42 @@ export default function Header() {
     return path.startsWith(href);
   }
 
-  // ESC to close + focus the close button when the overlay opens.
+  // Open state wiring:
+  //  - focus the close button when the overlay opens
+  //  - ESC closes
+  //  - Tab / Shift+Tab trap focus inside the dialog (SR + keyboard users
+  //    couldn't otherwise stay inside the modal — Tab would drop into the
+  //    inert page beneath)
+  //  - main + footer get `inert` while the overlay is open so background
+  //    content is not reachable via keyboard or announced by SR
+  //  - on close, focus restores to the hamburger button that opened it
   useEffect(() => {
     if (!open) return;
     closeRef.current?.focus();
+    const main = document.getElementById("main");
+    const foot = document.querySelector("footer");
+    main?.setAttribute("inert", "");
+    foot?.setAttribute("inert", "");
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") { setOpen(false); return; }
+      if (e.key !== "Tab" || !dialogRef.current) return;
+      const focusables = dialogRef.current.querySelectorAll<HTMLElement>(
+        'button, [href], input, [tabindex]:not([tabindex="-1"])'
+      );
+      if (!focusables.length) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      const active = document.activeElement as HTMLElement | null;
+      if (e.shiftKey && active === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && active === last) { e.preventDefault(); first.focus(); }
     };
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      main?.removeAttribute("inert");
+      foot?.removeAttribute("inert");
+      openerRef.current?.focus();
+    };
   }, [open]);
 
   return (
@@ -47,7 +75,7 @@ export default function Header() {
         <Link href="/" className="text-foreground pt-6 px-6" aria-label="Home">
           <span className="logo-wrap block h-4 w-24">
             <img src="/brand/hivemind-black.png" alt="Hivemind" className="h-4 w-auto logo-light" />
-            <img src="/brand/hivemind-white.png" alt="Hivemind" className="h-4 w-auto logo-dark" />
+            <img src="/brand/hivemind-white.png" alt="" aria-hidden className="h-4 w-auto logo-dark" />
           </span>
         </Link>
 
@@ -79,11 +107,12 @@ export default function Header() {
         <Link href="/" aria-label="Home">
           <span className="logo-wrap block h-[14px] w-24">
             <img src="/brand/hivemind-black.png" alt="Hivemind" className="h-[14px] w-auto logo-light" />
-            <img src="/brand/hivemind-white.png" alt="Hivemind" className="h-[14px] w-auto logo-dark" />
+            <img src="/brand/hivemind-white.png" alt="" aria-hidden className="h-[14px] w-auto logo-dark" />
           </span>
         </Link>
         <div className="flex items-center">
           <button
+            ref={openerRef}
             className="w-11 h-11 flex items-center justify-center text-muted hover:text-foreground transition-colors duration-200 -mr-2"
             onClick={() => setOpen(true)}
             aria-label="Open menu"

@@ -85,7 +85,6 @@ export default function ChapterFilmstrip({ name, works }: Props) {
       ref={scrollRef}
       role="group"
       aria-label={`${name}: works (swipe or drag horizontally)`}
-      tabIndex={0}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}

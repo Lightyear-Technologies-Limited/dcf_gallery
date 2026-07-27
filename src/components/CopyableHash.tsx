@@ -8,22 +8,35 @@ interface Props {
   prefix?: number;
 }
 
+type State = "idle" | "copied" | "failed";
+
 /**
- * Truncated hex string with click-to-copy. Width-locked so the "Copied"
- * confirmation doesn't shift surrounding layout.
+ * Truncated hex string with click-to-copy. Width-locked so the confirmation
+ * glyph doesn't shift surrounding layout. On clipboard permission denial
+ * (some private-mode browsers, some restricted permissions) shows a ×
+ * failure marker so an LP verifying provenance doesn't get silently
+ * empty-handed.
  */
 export default function CopyableHash({ value, prefix = 6 }: Props) {
-  const [copied, setCopied] = useState(false);
+  const [state, setState] = useState<State>("idle");
   const truncated =
     value.length > prefix + 5 ? `${value.slice(0, prefix)}…${value.slice(-4)}` : value;
 
   function copy() {
-    navigator.clipboard?.writeText(value).then(
+    if (!navigator.clipboard) {
+      setState("failed");
+      setTimeout(() => setState("idle"), 1600);
+      return;
+    }
+    navigator.clipboard.writeText(value).then(
       () => {
-        setCopied(true);
-        setTimeout(() => setCopied(false), 1200);
+        setState("copied");
+        setTimeout(() => setState("idle"), 1200);
       },
-      () => {}
+      () => {
+        setState("failed");
+        setTimeout(() => setState("idle"), 1600);
+      }
     );
   }
 
@@ -38,11 +51,11 @@ export default function CopyableHash({ value, prefix = 6 }: Props) {
       <span>{truncated}</span>
       <span
         aria-hidden
-        className={`text-[10px] text-muted transition-opacity duration-300 ${
-          copied ? "opacity-100" : "opacity-0"
-        }`}
+        className={`text-[10px] transition-opacity duration-300 ${
+          state === "idle" ? "opacity-0 text-muted" : "opacity-100"
+        } ${state === "failed" ? "text-foreground" : "text-muted"}`}
       >
-        ✓
+        {state === "failed" ? "×" : "✓"}
       </span>
     </button>
   );
