@@ -48,7 +48,19 @@ interface Props {
 export default function JustifiedGallery({ pieces, piecesPerRow, gap = 4, maxRowHeight, hrefSearch, showCaptions }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0);
-  const [aspects, setAspects] = useState<Record<string, number>>({});
+  // Initialise aspects synchronously from the build-time aspects.data.json so
+  // the first client render already has correct tile geometry — the earlier
+  // pattern populated aspects via useEffect after mount, which meant the first
+  // paint had aspects={} and every tile rendered with width=0 (perceived slow
+  // load even when actual image bytes were cached).
+  const [aspects, setAspects] = useState<Record<string, number>>(() => {
+    const init: Record<string, number> = {};
+    for (const piece of pieces) {
+      const known = getArtworkAspect(piece.slug, piece.contractAddress, piece.tokenId);
+      if (known) init[piece.id] = known.w / known.h;
+    }
+    return init;
+  });
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -58,14 +70,13 @@ export default function JustifiedGallery({ pieces, piecesPerRow, gap = 4, maxRow
   }, []);
 
   useEffect(() => {
+    // Only probe pieces whose aspect isn't already known from the build-time
+    // manifest. In practice this branch is rarely entered — nearly every held
+    // piece has an entry in aspects.data.json.
     pieces.forEach((piece) => {
       if (aspects[piece.id]) return;
-      // Prefer the build-time intrinsic aspect (aspects.data.json) — no network. (plan A.2)
-      const known = getArtworkAspect(piece.slug, piece.contractAddress, piece.tokenId);
-      if (known) { setAspects((a) => ({ ...a, [piece.id]: known.w / known.h })); return; }
       const src = getArtworkImage(piece.slug, piece.contractAddress, piece.tokenId, "thumb");
       if (!src) { setAspects((a) => ({ ...a, [piece.id]: 1 })); return; }
-      // Fallback probe measures a TINY gateway render, never the full original.
       const probe = src.includes("lightyear.myfilebase.com/ipfs/") ? `${src}?img-width=32&img-format=webp` : src;
       const img = new window.Image();
       img.onload = () => setAspects((a) => ({ ...a, [piece.id]: img.naturalWidth / img.naturalHeight }));
