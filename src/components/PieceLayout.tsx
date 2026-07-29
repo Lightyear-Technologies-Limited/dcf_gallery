@@ -158,7 +158,7 @@ function resolveOriginal(uri: string): { href: string; label: string } | null {
 /**
  * Piece layout: image on the left, details on the right.
  */
-export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, video, interactive, animatedGif, aspect, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, holdingNote, description, collectionDescription, physical, companion, metadata, blockchainDetails, exhibitionsBlock, preservedBlock, rasterUrl, cryptopunksUrl, artistSiteUrl, originalUri, editorialLinks, contextLinks, year, placeholder }: Props) {
+export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, video, interactive, animatedGif, aspect, title, isPunk, artistName, artistSlug, collectionName, collectionSlug, description, collectionDescription, physical, companion, metadata, blockchainDetails, exhibitionsBlock, preservedBlock, rasterUrl, cryptopunksUrl, artistSiteUrl, originalUri, editorialLinks, contextLinks, year, placeholder }: Props) {
   const artistHost = artistSiteUrl ? hostLabel(artistSiteUrl) : null;
   const original = originalUri ? resolveOriginal(originalUri) : null;
   // When natural aspect is known, pass it as width/height props so next/image

@@ -10,11 +10,12 @@ import { useMotion } from "./MotionPreference";
  * prefers-reduced-motion or on a small/mobile viewport (data). The genuine
  * original remains one click away via the "View original" link.
  */
+// `original` is intentionally accepted but not destructured — see the note at the
+// end of the render for why the second "full-resolution original" link was dropped.
 export default function PieceVideo({
   src,
   poster,
   title,
-  original,
 }: {
   src: string;
   poster?: string;
