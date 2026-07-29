@@ -1,16 +1,18 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import Link from "next/link";
+import { Suspense } from "react";
 import { pieces, getArtist, getCollection, getPiecesByCollection } from "@/lib/data";
 import { getPieceEditorial } from "@/lib/editorial";
 import { getArtworkImage, getArtworkAspect, resolveTokenId } from "@/lib/images";
 import { getDetailVariants, getArtworkBlur, getProvenance, getOgImage } from "@/lib/provenance";
 import { getMotion } from "@/lib/motion";
-import { SITE_URL as SITE } from "@/lib/site";
+import { SITE_URL as SITE, ldJson } from "@/lib/site";
 import { getEditionType, getArtistSiteUrl, getPieceTraits, getPieceDescription, getCollectionDisplayName, getArtistDisplayName, sortPieces, SYNTHETIC_TRAITS, PIECE_SYNTHETIC_TRAITS } from "@/lib/curation";
 import type { TraitValue } from "@/lib/curation";
+import { resolveNav, NO_PARAMS, type PieceNavData } from "@/lib/piece-nav";
 import PlaceholderArt from "@/components/PlaceholderArt";
-import BackButton from "@/components/BackButton";
+import PieceNav from "@/components/PieceNav";
+import PieceNavView from "@/components/PieceNavView";
 import PieceLayout from "@/components/PieceLayout";
 import OnChainDetails from "@/components/OnChainDetails";
 import Features from "@/components/Features";
@@ -39,6 +41,13 @@ function deriveStorage(originalUri?: string, contractAddress?: string): string |
   if (originalUri.startsWith("https://") || originalUri.startsWith("http://")) return "Centralized";
   return undefined;
 }
+
+// The catalogue is fully enumerated from data.ts at build time and there is no
+// runtime backend, so a slug outside generateStaticParams can never be valid.
+// Without this, Next renders unknown slugs on demand and the resulting
+// notFound() is served with HTTP **200** — a soft 404 that tells crawlers a
+// broken link is a real page. `false` makes them a genuine 404.
+export const dynamicParams = false;
 
 export function generateStaticParams() {
   return pieces.map((p) => ({ slug: p.slug }));
@@ -69,13 +78,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function PiecePage({
   params,
-  searchParams,
 }: {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const { slug } = await params;
-  const sp = await searchParams;
   const piece = pieces.find((p) => p.slug === slug);
   if (!piece) notFound();
 
@@ -83,91 +89,32 @@ export default async function PiecePage({
   const collection = getCollection(piece.collectionSlug);
   const realImage = getArtworkImage(piece.slug, piece.contractAddress, piece.tokenId, "detail");
 
-  // If the reader arrived via a filtered collection view, the URL carries
-  // the filter as ?trait=Key&value=Value (mirroring the filter route).
-  // Preserve it on Back + Prev/Next so the filtered browsing mode survives
-  // navigation.
-  const incomingFilter: { key: string; value: string } | null =
-    typeof sp.trait === "string" && typeof sp.value === "string" && sp.trait && sp.value
-      ? { key: sp.trait, value: sp.value }
-      : null;
-  const filterQs = incomingFilter
-    ? `trait=${encodeURIComponent(incomingFilter.key)}&value=${encodeURIComponent(incomingFilter.value)}`
-    : "";
-  // Origin view (?from=…) so Back returns to where the reader came from — the
-  // Collection (the Salon homepage, with any active chapter/artist filter) or the
-  // Chapters page — not just up to the parent collection. Absent → fall back up
-  // the hierarchy (collection page, or the artist for single-piece collections).
-  const from = typeof sp.from === "string" ? sp.from : "";
-  const viewParams = new URLSearchParams();
-  for (const k of ["chapter", "artist", "collection", "medium", "q"] as const) {
-    const v = typeof sp[k] === "string" ? (sp[k] as string) : "";
-    if (v) viewParams.set(k, v);
-  }
-  // Anchor the Back link to the exact tile the reader opened (`#p-<slug>`), so
-  // returning to the origin restores their scroll position instead of jumping to
-  // the top. ScrollRestore on each surface re-scrolls to this id once the async
-  // gallery has laid out.
-  const anchor = `#p-${piece.slug}`;
-  let originHref: string | null = null;
-  let originLabel = "";
-  if (from === "salon") { originHref = `/${viewParams.toString() ? `?${viewParams}` : ""}${anchor}`; originLabel = "Collection"; }
-  else if (from === "chapters") { originHref = `/chapters${anchor}`; originLabel = "Chapters"; }
-  else if (from === "artist") {
-    const a = viewParams.get("artist") || piece.artistSlug;
-    const fa = getArtist(a);
-    originHref = `/artist/${a}${anchor}`;
-    originLabel = fa ? getArtistDisplayName(fa.slug, fa.name) : "Artist";
-  }
-
-  // Carry the origin (and any active filters) onto Prev/Next so sibling browsing
-  // keeps the same Back destination.
-  const carry = new URLSearchParams(filterQs);
-  if (from) { carry.set("from", from); for (const [k, v] of viewParams) carry.set(k, v); }
-  const carryQs = carry.toString();
-
-  const pieceHref = (s: string) => `/piece/${s}${carryQs ? `?${carryQs}` : ""}`;
-  const collectionHref = collection
-    ? `/collection/${collection.slug}${filterQs ? `?${filterQs}` : ""}`
-    : "/";
-
-  // Sibling navigation - previous + next piece in the collection.
-  //
-  // Unfiltered walk: follow the curated display order from sortPieces (same
-  // function the collection page uses) so prev/next matches the order the
-  // reader saw the works in. Pre-fix this was sorted by raw tokenId, which
-  // diverged from curation for sets like Piano Blossoms (Flower Demons is
-  // displayed first but has tokenId 5 - "Next" from there walked to tokenId
-  // 4, third in display order).
-  //
-  // Filtered walk: when a trait filter is active, walk only the filtered
-  // subset (so prev/next doesn't drop the reader out of their browsing
-  // mode), sorted by numeric tokenId for a predictable scan through the
-  // filtered set - this matches the order the filtered collection view
-  // renders subsets in (see /collection/[slug] sort comment).
-  let siblingPieces = [...getPiecesByCollection(piece.collectionSlug)];
-  if (incomingFilter) {
-    siblingPieces = siblingPieces.filter((p) => {
-      const t = getPieceTraits(p.slug);
-      if (!t) return false;
-      return t.some(([k, v]) => {
-        if (k !== incomingFilter.key) return false;
-        if (Array.isArray(v)) return v.some((item) => String(item) === incomingFilter.value);
-        return String(v) === incomingFilter.value;
-      });
-    });
-    siblingPieces.sort((a, b) => {
-      const an = parseInt(a.tokenId || "", 10);
-      const bn = parseInt(b.tokenId || "", 10);
-      if (Number.isFinite(an) && Number.isFinite(bn)) return an - bn;
-      return a.slug.localeCompare(b.slug);
-    });
-  } else {
-    siblingPieces = sortPieces(piece.collectionSlug, siblingPieces);
-  }
-  const sibIdx = siblingPieces.findIndex((p) => p.slug === piece.slug);
-  const prevPiece = sibIdx > 0 ? siblingPieces[sibIdx - 1] : null;
-  const nextPiece = sibIdx >= 0 && sibIdx < siblingPieces.length - 1 ? siblingPieces[sibIdx + 1] : null;
+  // Back + Prev/Next chrome is the ONLY thing on this page that ever depended on
+  // the query string (the trait filter, the ?from= origin breadcrumb, and the
+  // query carried onto sibling links). Reading searchParams here opted all 318
+  // piece pages out of static generation — they were served
+  // `Cache-Control: private, no-store`, i.e. a function invocation on every
+  // visit, crawl and OG unfurl, on exactly the URLs people share. So the nav is
+  // now resolved from the URL on the client (src/lib/piece-nav.ts) and everything
+  // it needs that is query-independent is assembled statically here.
+  const collectionSiblings = getPiecesByCollection(piece.collectionSlug);
+  const navData: PieceNavData = {
+    pieceSlug: piece.slug,
+    collectionSlug: collection?.slug ?? null,
+    collectionName: collection ? getCollectionDisplayName(collection.slug, collection.name) : null,
+    artistSlug: artist?.slug ?? null,
+    artistName: artist ? getArtistDisplayName(artist.slug, artist.name) : null,
+    collectionPieceCount: collectionSiblings.length,
+    // Curated display order — the same sortPieces order the collection page
+    // renders in, so an unfiltered Prev/Next matches the order the reader saw
+    // the works in. A filtered walk re-sorts this subset by tokenId client-side.
+    siblings: sortPieces(piece.collectionSlug, [...collectionSiblings]).map((p) => ({
+      slug: p.slug,
+      title: p.title,
+      tokenId: p.tokenId ?? null,
+      traits: getPieceTraits(p.slug) ?? [],
+    })),
+  };
   const isPunk = piece.collectionSlug === "cryptopunks";
 
   // Marketplace links. Punks get both CryptoPunks.app (canonical) and
@@ -291,9 +238,9 @@ export default async function PiecePage({
   );
   const exhibitionsBlock = piece.exhibitions && piece.exhibitions.length > 0 ? (
     <div>
-      <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
+      <h2 className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
         Exhibitions
-      </p>
+      </h2>
       <ul className="space-y-1 text-[13px] leading-snug">
         {piece.exhibitions.map((ex, i) => (
           <li key={i}>
@@ -347,9 +294,9 @@ export default async function PiecePage({
     provenance?.animation?.type === "video" && !provenance.animation.pinned;
   const preservedBlock = provenance?.cid && !videoPinPending ? (
     <div>
-      <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-2">
+      <h2 className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-2">
         Preserved by Hivemind
-      </p>
+      </h2>
       <p className="text-[13px] text-foreground-secondary">
         Pinned to IPFS{provenance.verifiedAt ? ", integrity verified" : ""}
       </p>
@@ -357,22 +304,6 @@ export default async function PiecePage({
   ) : null;
 
   const artistDisplay = artist ? getArtistDisplayName(artist.slug, artist.name) : undefined;
-
-  // Up-the-hierarchy fallback for Back when there's no explicit ?from origin.
-  // A single-piece collection is redundant chrome (the title links straight to
-  // the piece everywhere), so its natural parent is the artist, not a one-item
-  // collection page. Multi-piece collections — and any active filter — go to the
-  // collection page, carrying the filter so the reader lands in the same subset.
-  const collectionPieceCount = getPiecesByCollection(piece.collectionSlug).length;
-  const upToArtist = !incomingFilter && collectionPieceCount === 1 && !!artist;
-  const upHref = (upToArtist ? `/artist/${artist!.slug}` : collectionHref) + anchor;
-  const upLabel = upToArtist
-    ? artistDisplay ?? "Artist"
-    : collection
-      ? `${getCollectionDisplayName(collection.slug, collection.name)}${
-          incomingFilter ? ` · ${incomingFilter.key}: ${incomingFilter.value}` : ""
-        }`
-      : "Back";
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -392,61 +323,16 @@ export default async function PiecePage({
 
   return (
     <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12 min-h-screen">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      {/* Back link. With an explicit origin (?from=) it returns there (Collection
-          or Chapters). Otherwise it goes UP one level: multi-piece collections —
-          and any active trait filter — return to the collection page; single-piece
-          collections, whose collection page is redundant chrome, return to the
-          artist page instead. Label uses the curated display name, extended with
-          "· {trait: value}" when filtered so the destination is unambiguous. */}
-      <BackButton
-        href={originHref || upHref}
-        label={originHref ? originLabel : upLabel}
-      />
-      {/* Prev/Next work nav. Always rendered — even when the piece is in
-       *  a single-piece collection with no siblings — so that the artwork
-       *  below sits at the same Y position on every piece page. Without
-       *  this reservation, single-piece pages (kissed by the Moonlight,
-       *  meebit, cope-salada, etc.) rendered the artwork ~52px higher
-       *  than multi-piece pages, breaking the reader's sense of place
-       *  when clicking between pieces. Empty spans preserve the layout
-       *  without any visible chrome. */}
-      <div className="mt-6 flex flex-col sm:flex-row sm:justify-between gap-4 sm:gap-2 min-h-[40px]">
-        {prevPiece ? (
-          <Link
-            href={pieceHref(prevPiece.slug)}
-            title={prevPiece.title}
-            className="group inline-flex flex-col gap-1 max-w-full sm:max-w-[45%]"
-          >
-            <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium group-hover:text-foreground transition-colors duration-200 inline-flex items-center gap-1.5">
-              <span aria-hidden className="tracking-normal">←</span>
-              Previous work
-            </span>
-            <span className="font-serif text-[15px] text-foreground-secondary group-hover:text-foreground transition-colors duration-200 line-clamp-2">
-              {prevPiece.title}
-            </span>
-          </Link>
-        ) : (
-          <span />
-        )}
-        {nextPiece ? (
-          <Link
-            href={pieceHref(nextPiece.slug)}
-            title={nextPiece.title}
-            className="group inline-flex flex-col gap-1 max-w-full sm:max-w-[45%] sm:items-end sm:text-right"
-          >
-            <span className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium group-hover:text-foreground transition-colors duration-200 inline-flex items-center gap-1.5">
-              Next work
-              <span aria-hidden className="tracking-normal">→</span>
-            </span>
-            <span className="font-serif text-[15px] text-foreground-secondary group-hover:text-foreground transition-colors duration-200 line-clamp-2">
-              {nextPiece.title}
-            </span>
-          </Link>
-        ) : (
-          <span />
-        )}
-      </div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ldJson(jsonLd) }} />
+      {/* Back + Prev/Next. The <Suspense> fallback renders the query-independent
+          nav (curated Prev/Next, up-the-hierarchy Back) which IS the correct answer
+          for a bare /piece/{slug} URL, so the static HTML is meaningful. PieceNav
+          then re-resolves it from the URL on the client when a trait filter or
+          ?from= origin is present. Suspense is mandatory here: a prerendered page
+          calling useSearchParams fails the production build without it. */}
+      <Suspense fallback={<PieceNavView {...resolveNav(navData, NO_PARAMS)} />}>
+        <PieceNav {...navData} />
+      </Suspense>
       <div className="pt-6 pb-24">
         <PieceLayout
           image={realImage}

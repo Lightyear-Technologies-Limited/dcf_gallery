@@ -15,3 +15,19 @@ function resolveSiteUrl(): string {
 }
 
 export const SITE_URL = resolveSiteUrl();
+
+/**
+ * Serialize a JSON-LD graph for injection into a <script type="application/ld+json">.
+ *
+ * Plain JSON.stringify is not safe inside a <script> element: HTML parsing wins over
+ * JSON, so a literal `</script>` anywhere in the payload closes the block early and
+ * everything after it is parsed as markup. Curator-authored editorial copy is the
+ * realistic source here (a note quoting an HTML tag), not an attacker — but the copy
+ * is CMS-editable, so the escape belongs at the sink rather than in a review checklist.
+ *
+ * Escaping `<` to its < JSON escape is inert to JSON.parse and to consumers
+ * (Google's parser unescapes it), so structured data is unaffected.
+ */
+export function ldJson(graph: unknown): string {
+  return JSON.stringify(graph).replace(/</g, "\\u003c");
+}

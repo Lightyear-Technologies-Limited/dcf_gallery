@@ -39,18 +39,18 @@ export default function PressPage() {
 
       <div className="max-w-[680px] space-y-12">
         <section>
-          <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
+          <h2 className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
             Overview
-          </p>
+          </h2>
           <p className="text-[16px] text-foreground-secondary leading-[1.65]">
             {OVERVIEW}
           </p>
         </section>
 
         <section>
-          <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
+          <h2 className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
             Brand assets
-          </p>
+          </h2>
           <div className="space-y-1.5 text-[13px]">
             <a
               href="/brand/hivemind-black.png"
@@ -71,9 +71,9 @@ export default function PressPage() {
 
         {essays.length > 0 && (
           <section>
-            <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
+            <h2 className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
               Published essays
-            </p>
+            </h2>
             <ul className="space-y-1.5 text-[13px]">
               {essays.map((e) => (
                 <li key={e.url}>
@@ -92,9 +92,9 @@ export default function PressPage() {
         )}
 
         <section>
-          <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
+          <h2 className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
             Press contact
-          </p>
+          </h2>
           <a
             href="mailto:press@hivemind.capital"
             className="text-[15px] text-foreground-secondary hover:text-foreground transition-colors duration-200 inline-block underline underline-offset-4 decoration-border hover:decoration-foreground font-mono"
