@@ -126,7 +126,7 @@ export default function JustifiedGallery({ pieces, piecesPerRow, gap = 4, maxRow
                     className={`block overflow-hidden ${isPunk ? "bg-punk" : ""}`}
                   >
                     {src ? (
-                      <GridArtwork slug={piece.slug} title={piece.title} imgSrc={src} isPunk={isPunk} sizes="500px" />
+                      <GridArtwork slug={piece.slug} title={piece.title} imgSrc={src} isPunk={isPunk} sizes={w > 0 ? `${Math.ceil(w)}px` : "500px"} />
                     ) : (
                       <PlaceholderArt
                         collectionSlug={piece.collectionSlug}
