@@ -18,6 +18,7 @@
     "pin-videos": "node scripts/pin-videos.mjs",
     "verify-pins": "node scripts/verify-pins.mjs",
     "audit": "node scripts/audit-assets.mjs",
+    "audit:slugs": "node scripts/audit-slugs.mjs",
     "test:e2e": "playwright test",
     "onboard": "node scripts/onboard.mjs",
     "curate": "node scripts/fix-curation.mjs"

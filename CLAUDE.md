@@ -50,9 +50,18 @@ The invariants spec is the one to extend when something breaks invisibly. It
 currently locks: the root OG card stays the static wordmark PNG and every
 generated card carries the `Wordmark` lockup; every route emits an `og:image`;
 `/piece/*` stays cacheable (i.e. still prerendered — see Routing); unknown slugs
-return a real 404; old piece slugs still redirect; the security headers are
-present; gallery tiles don't request images far larger than they render; and
-content pages expose a real heading structure.
+return a real 404; **every URL in the sitemap resolves** (a full sweep of all ~350,
+which takes under a second — no need to sample); old piece slugs still redirect;
+the security headers are present; gallery tiles don't request images far larger
+than they render; and content pages expose a real heading structure.
+
+`npm run audit:slugs` (`scripts/audit-slugs.mjs`) is the companion static check:
+`data.ts` is the canonical entity list, but a dozen files are keyed by the slugs it
+defines — the generated `*.data.json`, the curation layer, the editorial files, the
+redirect map — and nothing else enforces that they agree. A re-import, a hand-edit
+or a slug rename can leave any of them pointing at an entity that no longer exists,
+and the app just renders nothing for it. Pure static analysis, ~0.2s, runs in CI
+before the build so a broken reference fails fast.
 
 No pixel snapshots anywhere — `playwright.config.ts` rejects them as brittle
 across OSes. Where a property is structural, assert it against the source or the
@@ -61,8 +70,8 @@ response headers instead of a rendered image.
 Data-pipeline scripts are plain ESM. Most have an npm alias — `npm run onboard`
 (add pieces), `npm run curate` (apply `curation.json`), `npm run content`
 (validate + build editorial copy; also runs as `prebuild`), plus `sources`,
-`pin`, `pin-videos`, `verify-pins`, `audit` — or run any directly:
-`node scripts/<name>.mjs`.
+`pin`, `pin-videos`, `verify-pins`, `audit` (assets), `audit:slugs`
+(cross-references) — or run any directly: `node scripts/<name>.mjs`.
 
 ## Architecture
 

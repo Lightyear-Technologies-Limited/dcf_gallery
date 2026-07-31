@@ -112,6 +112,36 @@ test.describe("invariants: rendering + routing", () => {
     });
   }
 
+  // The sitemap is what we ask crawlers to index, so a 404 in it is a promise we
+  // are visibly breaking. This became sharper with dynamicParams = false: a URL
+  // advertised here but missing from generateStaticParams is now a hard 404 rather
+  // than being quietly rendered on demand, so the two lists must not drift.
+  //
+  // Full sweep, not a sample: every URL is prerendered, so this is a few seconds
+  // of localhost requests and a sample would only catch the drift probabilistically.
+  test("every URL in the sitemap resolves", async ({ request }) => {
+    const xml = await (await request.get("/sitemap.xml")).text();
+    const paths = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)]
+      .map((m) => m[1].replace(/^https?:\/\/[^/]+/, ""))
+      .map((p) => p || "/");
+    expect(paths.length, "sitemap looks empty").toBeGreaterThan(100);
+
+    const bad: string[] = [];
+    const queue = [...paths];
+    // Bounded concurrency — 350 simultaneous requests would measure the dev
+    // machine's socket limit rather than the site.
+    await Promise.all(
+      Array.from({ length: 12 }, async () => {
+        for (let p = queue.pop(); p; p = queue.pop()) {
+          const status = (await request.get(p, { maxRedirects: 0 })).status();
+          if (status !== 200) bad.push(`${p} → ${status}`);
+        }
+      }),
+    );
+
+    expect(bad, `sitemap URLs not returning 200:\n${bad.slice(0, 15).join("\n")}`).toHaveLength(0);
+  });
+
   // Piece URLs are the shared unit; 317 old slugs redirect to their new form.
   test("old piece slugs still redirect", async ({ request }) => {
     const res = await request.get("/piece/pxl-dex-105-ecfb", { maxRedirects: 0 });
