@@ -18,12 +18,13 @@
     "pin-videos": "node scripts/pin-videos.mjs",
     "verify-pins": "node scripts/verify-pins.mjs",
     "audit": "node scripts/audit-assets.mjs",
+    "audit:slugs": "node scripts/audit-slugs.mjs",
     "test:e2e": "playwright test",
     "onboard": "node scripts/onboard.mjs",
     "curate": "node scripts/fix-curation.mjs"
   },
   "dependencies": {
-    "next": "^16.2.6",
+    "next": "^16.2.12",
     "react": "19.2.7",
     "react-dom": "19.2.7",
     "sharp": "^0.34.5"
@@ -45,6 +46,6 @@
     "zod": "^4.4.3"
   },
   "overrides": {
-    "postcss": "^8.5.10"
+    "postcss": "^8.5.18"
   }
 }

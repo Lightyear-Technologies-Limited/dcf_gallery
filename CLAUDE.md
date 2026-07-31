@@ -14,8 +14,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 A statically-generated gallery site for the **Hivemind Digital Culture Fund
 (DCF)** — a curated showcase of the fund's NFT art holdings (XCOPY, Tyler Hobbs,
 Dmitri Cherniak, CryptoPunks, Beeple, etc.). Next.js 16 (App Router) + React 19 +
-Tailwind v4 + TypeScript. Every page is pre-rendered via `generateStaticParams`;
-there is no runtime backend.
+Tailwind v4 + TypeScript. There is no runtime backend — all content comes from
+the generated dataset at build time.
+
+Almost every route is pre-rendered. The **one exception is `/collection/[slug]`**,
+which `await`s `searchParams` for trait filtering; reading `searchParams` on the
+server opts a route out of static generation, so those 29 pages are
+server-rendered per request (`ƒ` in the build output) and served
+`Cache-Control: private, no-store`. Everything else — including all 318
+`/piece/[slug]` pages — prerenders and serves `s-maxage=31536000`. Check the
+`○`/`●`/`ƒ` markers in `npm run build` output if you change how a page reads the
+URL; silently turning a `●` into a `ƒ` is an easy and costly regression.
 
 ## Commands
 
@@ -26,16 +35,43 @@ npm run start    # serve the production build
 npm run lint     # eslint (flat config, eslint-config-next)
 ```
 
-Testing is minimal — a single Playwright smoke test (`tests/smoke.spec.ts`, run
-with `npm run test:e2e`); there is no unit-test suite. **`npm run build` is the
-primary check** (catches type + static-generation errors); `npm run typecheck`
-and the dev server cover the rest.
+Testing is deliberately light — there is no unit-test suite, and **`npm run build`
+is still the primary check** (it catches type + static-generation errors). Two
+Playwright specs run against the production build via `npm run test:e2e`, and CI
+(`.github/workflows/ci.yml`) runs lint → typecheck → `audit` → `content` → build →
+e2e on every push:
+
+| Spec | Covers |
+|------|--------|
+| `tests/smoke.spec.ts` | User journeys — nav renders, reels/motion preference, sandboxed interactive art, back-to-origin navigation. |
+| `tests/invariants.spec.ts` | Properties that break *silently*. Every one of these regressed at least once in the 2026-07 pass and shipped, because nothing in the build or the typechecker notices. |
+
+The invariants spec is the one to extend when something breaks invisibly. It
+currently locks: the root OG card stays the static wordmark PNG and every
+generated card carries the `Wordmark` lockup; every route emits an `og:image`;
+`/piece/*` stays cacheable (i.e. still prerendered — see Routing); unknown slugs
+return a real 404; **every URL in the sitemap resolves** (a full sweep of all ~350,
+which takes under a second — no need to sample); old piece slugs still redirect;
+the security headers are present; gallery tiles don't request images far larger
+than they render; and content pages expose a real heading structure.
+
+`npm run audit:slugs` (`scripts/audit-slugs.mjs`) is the companion static check:
+`data.ts` is the canonical entity list, but a dozen files are keyed by the slugs it
+defines — the generated `*.data.json`, the curation layer, the editorial files, the
+redirect map — and nothing else enforces that they agree. A re-import, a hand-edit
+or a slug rename can leave any of them pointing at an entity that no longer exists,
+and the app just renders nothing for it. Pure static analysis, ~0.2s, runs in CI
+before the build so a broken reference fails fast.
+
+No pixel snapshots anywhere — `playwright.config.ts` rejects them as brittle
+across OSes. Where a property is structural, assert it against the source or the
+response headers instead of a rendered image.
 
 Data-pipeline scripts are plain ESM. Most have an npm alias — `npm run onboard`
 (add pieces), `npm run curate` (apply `curation.json`), `npm run content`
 (validate + build editorial copy; also runs as `prebuild`), plus `sources`,
-`pin`, `pin-videos`, `verify-pins`, `audit` — or run any directly:
-`node scripts/<name>.mjs`.
+`pin`, `pin-videos`, `verify-pins`, `audit` (assets), `audit:slugs`
+(cross-references) — or run any directly: `node scripts/<name>.mjs`.
 
 ## Architecture
 
@@ -125,13 +161,53 @@ Blocks** IDs (`project*1_000_000 + serial`; Fidenza = project 78, Ringers =
 project 13) so raw serials and full token IDs both resolve. See
 `docs/ADDING-PIECES.md` for the end-to-end pipeline.
 
+**`sizes` must reflect the tile's real rendered width.** The loader passes the
+chosen srcset candidate straight to the gateway as `img-width`, so `sizes` decides
+bytes on the wire. The justified/fixed-row galleries already compute each tile's
+exact CSS width (`aspect * rowHeight`) and pass it as `` `${Math.ceil(w)}px` `` —
+do not substitute a flat value. A hardcoded `sizes` makes the browser pick a
+candidate sized for the *widest* tile in the layout and download it for every
+tile; that bug cost the homepage 71 MB vs 31 MB (mean 2.9× oversampling). No DPR
+maths is needed — `sizes` is CSS px and the browser applies DPR itself. Grid tiles
+default to `quality={85}` via `GridArtwork`; hero/detail paths pass higher values.
+
+Both galleries also **withhold the tile image until the container is measured**
+(`w > 0`). Row width is only known after a client measurement pass; rendering an
+image before then means declaring a guessed `sizes`, and a guess gets *fetched* —
+the browser will not downgrade once the real, usually much smaller, width
+resolves. Nothing is visible during that frame (the row has no height yet), so
+the guard costs nothing and saved a further 31 MB → 12 MB. Hero and single-piece
+displays are the deliberate exception: they declare a larger `sizes` than their CSS
+width so retina screens still get a sharp master, which is why
+`tests/invariants.spec.ts` scopes its oversampling check to grid tiles.
+
 ### Routing — `src/app/`
 
 `page.tsx` (home: all artists/collections), `/artists`, `/artist/[slug]`,
 `/collection/[slug]`, `/piece/[slug]`, `/chapters` (the five curatorial chapters),
-`/about`. All static. Trait filtering uses
-the URL convention `?trait=Key&value=Value`, preserved across Back / Prev / Next
-navigation so filtered browsing survives page transitions.
+`/thesis`, `/press`. `/about` and `/collections` are permanent redirects (to
+`/thesis` and `/` respectively), alongside the 317 old-slug piece redirects in
+`src/lib/piece-redirects.json` — all declared in `next.config.ts`.
+
+Trait filtering uses the URL convention `?trait=Key&value=Value`, preserved across
+Back / Prev / Next navigation so filtered browsing survives page transitions.
+**On the piece page this is resolved client-side**, in `src/lib/piece-nav.ts` —
+that module is what keeps `/piece/[slug]` static. Do not re-introduce a
+`searchParams` prop there: it would silently make all 318 pages
+server-rendered-per-request again. `piece-nav.ts` is deliberately a plain shared
+module (no `"use client"`) so the server's `<Suspense>` fallback and the client
+`PieceNav` resolve links through one implementation.
+
+All three parameterized routes set **`dynamicParams = false`**, so a slug outside
+`generateStaticParams` returns a genuine 404 rather than rendering on demand and
+returning `notFound()` with HTTP 200. Consequence worth knowing: a newly added
+piece 404s until the site is rebuilt, and a renamed slug needs an entry in
+`piece-redirects.json` or the old URL hard-404s.
+
+Known gap: `/collection/[slug]` still soft-404s (HTTP 200 + not-found body) for
+unknown or hidden slugs, because it renders dynamically and therefore streams —
+the status is flushed before `notFound()` runs. It resolves if that route is ever
+made static.
 
 ### Theming & type
 
@@ -152,7 +228,18 @@ its chapter; chapters intentionally use the foreground token, no color accent.
 
 - Import alias `@/*` → `./src/*`.
 - Server Components by default; only `ThemeToggle`, `CopyableHash`,
-  `ExpandableProse` and similar interactive bits are client components.
+  `ExpandableProse`, `PieceNav` and similar interactive bits are client components.
+- **JSON-LD goes through `ldJson()`** (`src/lib/site.ts`), never bare
+  `JSON.stringify`. HTML parsing beats JSON inside `<script>`, so a literal
+  `</script>` in CMS-editable editorial copy would close the block early; `ldJson`
+  escapes `<` and is inert to `JSON.parse`.
+- **Section labels are headings.** The small-caps eyebrow style
+  (`text-[10px] tracking-[0.1em] uppercase text-muted`) is used for two different
+  things: the page-level eyebrow above an `<h1>` (keep as `<p>`) and section
+  labels introducing a block ("Exhibitions", "Hivemind commentary", "Collection
+  details") — those must be `<h2>` or screen-reader users get no navigable
+  structure. Tailwind preflight resets heading size/weight/margin to inherit, so
+  the tag carries no visual cost.
 - On-chain contract addresses recur as inline constants — CryptoPunks canonical
   V2 `0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb`, wrapped V1
   `0xb7f7f6c52f2e2fdb1963eab30438024864c313f6`, Art Blocks

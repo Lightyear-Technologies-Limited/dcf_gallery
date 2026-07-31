@@ -41,9 +41,28 @@ npm run onboard -- --only new-slug-1,new-slug-2
 # 4. If you changed ordering / names / added a collection:
 npm run curate            # or the /curate skill (fix-curation + annotate)
 
-# 5. Verify + deploy:
+# 5. Optional: per-piece editorial (external links / "Context" block) —
+#    content/editorial/pieces/<slug>.json. Only if the piece has external
+#    references; see content/editorial/README.md.
+
+# 6. Verify + deploy:
 npm run build
 ```
+
+> **A new piece is a hard 404 until the site is rebuilt.** All three
+> parameterized routes set `dynamicParams = false`, so `/piece/<slug>` only
+> exists if the slug was in `generateStaticParams` (i.e. in `data.ts`) at build
+> time. There is no render-on-demand fallback. This is deliberate — it is what
+> makes broken links return a real 404 instead of HTTP 200 with a not-found
+> page — but it means **adding a piece to `data.ts` is not enough on its own;
+> the deploy has to run.**
+>
+> **Renaming a slug requires a redirect.** Old URLs hard-404 otherwise, and
+> piece URLs are the ones that get shared. Add an entry to
+> `src/lib/piece-redirects.json` (`{ "source": "/piece/<old>", "destination":
+> "/piece/<new>", "permanent": true }`) in the same change — that file is the
+> 317 redirects from the 2026-07 slug shortening and is wired into
+> `next.config.ts`.
 
 `npm run onboard` chains the two pipeline scripts and prints a gap report:
 1. **`npm run sources`** (`resolve-sources.mjs`) — reads each piece's on-chain

@@ -11,7 +11,17 @@ interface Props {
   /** The still/poster src (gateway transform of the variant). */
   imgSrc: string;
   isPunk?: boolean;
+  /**
+   * Rendered CSS width of the tile, e.g. "285px". The justified/fixed-row
+   * galleries know each tile's exact width (aspect × rowHeight), so they pass
+   * it verbatim — a flat declaration makes the browser pick a srcset candidate
+   * sized for the *widest* tile in the layout and download it for every tile.
+   */
   sizes?: string;
+  /**
+   * Gateway img-quality. Grid tiles default to 85 (indistinguishable from 90 at
+   * tile scale, meaningfully fewer bytes); hero/detail views pass a higher value.
+   */
   quality?: number;
 }
 
@@ -23,7 +33,7 @@ interface Props {
  * sandboxed <iframe> (on-chain HTML). prefers-reduced-motion and small/mobile
  * viewports suppress playback. The tile stays a link, so a tap opens the piece.
  */
-export default function GridArtwork({ slug, title, imgSrc, isPunk = false, sizes = "500px", quality }: Props) {
+export default function GridArtwork({ slug, title, imgSrc, isPunk = false, sizes = "500px", quality = 85 }: Props) {
   const motion = getMotion(slug);
   const { mode, reduced } = useMotion();
   const wrapRef = useRef<HTMLDivElement>(null);

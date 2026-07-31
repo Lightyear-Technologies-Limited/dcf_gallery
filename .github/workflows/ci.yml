@@ -24,11 +24,18 @@ jobs:
         run: npm run typecheck
       - name: Asset audit (every piece resolves to a servable image)
         run: npm run audit
+      # Static cross-reference of every slug-keyed file against data.ts. ~0.2s,
+      # no network — placed before the build so a broken reference fails fast.
+      - name: Slug audit (every slug-keyed reference resolves)
+        run: npm run audit:slugs
       - name: Validate editorial content (Zod)
         run: npm run content
       - name: Build (static generation of all pages)
         run: npm run build
-      - name: E2E smoke (Playwright)
+      # Both specs: smoke.spec.ts (journeys) + invariants.spec.ts (properties that
+      # break silently — OG cards, cacheability, real 404s, sitemap, oversampling,
+      # heading structure).
+      - name: E2E (Playwright — smoke + invariants)
         run: |
           npx playwright install --with-deps chromium
           npm run test:e2e

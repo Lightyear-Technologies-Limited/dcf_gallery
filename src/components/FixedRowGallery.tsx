@@ -121,15 +121,21 @@ export default function FixedRowGallery({ pieces, rowMap, fallbackPerRow, gap = 
                   style={{ width: w > 0 ? `${w}px` : undefined, height: "100%" }}
                   className={`block shrink-0 overflow-hidden ${isPunk ? "bg-punk" : ""}`}
                 >
-                  {src ? (
-                    <GridArtwork slug={piece.slug} title={piece.title} imgSrc={src} isPunk={isPunk} sizes="(min-width: 1024px) 1000px, 500px" />
-                  ) : (
+                  {/* Hold the image back until the container has been measured.
+                      Before that w is 0, so any sizes we could declare is a guess —
+                      and a guess gets FETCHED, at which point the browser will not
+                      downgrade once the real (often much smaller) width resolves.
+                      The row has no height yet either, so nothing is visible to
+                      delay; this only avoids a wasted full-size request per tile. */}
+                  {!src ? (
                     <PlaceholderArt
                       collectionSlug={piece.collectionSlug}
                       pieceSlug={piece.slug}
                       className="w-full h-full"
                     />
-                  )}
+                  ) : w > 0 ? (
+                    <GridArtwork slug={piece.slug} title={piece.title} imgSrc={src} isPunk={isPunk} sizes={`${Math.ceil(w)}px`} />
+                  ) : null}
                 </Link>
               );
             })}

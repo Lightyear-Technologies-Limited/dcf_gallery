@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import Header from "@/components/Header";
 import Link from "next/link";
 import { MotionProvider } from "@/components/MotionPreference";
-import { SITE_URL } from "@/lib/site";
+import { SITE_URL, ldJson } from "@/lib/site";
 import "./globals.css";
 
 const argent = localFont({
@@ -66,7 +66,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
+            __html: ldJson({
               "@context": "https://schema.org",
               "@graph": [
                 {
@@ -106,6 +106,17 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               <Link href="/chapters" className="hover:text-foreground transition-colors duration-200">Chapters</Link>
               <Link href="/thesis" className="hover:text-foreground transition-colors duration-200">Thesis</Link>
               <Link href="/press" className="hover:text-foreground transition-colors duration-200">Press</Link>
+              {/* Press + Inquire are deliberately footer-only: the primary rail stays
+                  the four curatorial destinations. Inquire is the sole general contact
+                  route on the site (the /press mailto is press-specific). */}
+              <a
+                href="mailto:dcf@hivemind.capital?subject=Hivemind%20Inquiry"
+                className="hover:text-foreground transition-colors duration-200"
+                title="For acquisitions, partnerships, or press"
+                aria-label="Inquire about acquisitions, partnerships, or press"
+              >
+                Inquire
+              </a>
               <a
                 href="https://x.com/HivemindCap"
                 target="_blank"

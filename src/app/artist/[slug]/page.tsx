@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { artists, collections, getPiecesByCollection } from "@/lib/data";
 import { withArtistEditorial } from "@/lib/editorial";
-import { SITE_URL } from "@/lib/site";
+import { SITE_URL, ldJson } from "@/lib/site";
 import { getArtworkImage } from "@/lib/images";
 import {
   getArtistDisplayName,
@@ -26,6 +26,14 @@ import ScrollRestore from "@/components/ScrollRestore";
 const MERGE_INTO: Record<string, string> = {
   "tyler-hobbs-and-dandelion-wist": "tyler-hobbs",
 };
+
+// See the note in piece/[slug]: unknown slugs would otherwise render on demand
+// and return notFound() with HTTP 200. This additionally closes a real leak —
+// artists folded into another (MERGE_INTO) are excluded below and excluded from
+// the sitemap precisely because they have no standalone page, yet
+// /artist/tyler-hobbs-and-dandelion-wist was still serving a full duplicate
+// page. It is now a 404, matching the stated intent.
+export const dynamicParams = false;
 
 export function generateStaticParams() {
   return artists
@@ -110,7 +118,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
   return (
     <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12 min-h-screen">
       <ScrollRestore />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ldJson(personLd) }} />
       {/* Top row mirrors the collection page's breadcrumb + sibling-nav
           structure so the h1 below sits at the same vertical position
           on both routes (no jump when navigating Artist <-> Collection).
@@ -130,9 +138,9 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
         </p>
         {chapter && (
           <div className="mt-6">
-            <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-2">
+            <h2 className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-2">
               Chapter
-            </p>
+            </h2>
             <Link
               href={`/?chapter=${chapter.slug}`}
               className="text-[13px] text-muted hover:text-foreground transition-colors duration-200"
@@ -236,9 +244,9 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
               it lands, restore the CuratorNote render here. */}
           {artist.essayUrl && (
             <div>
-              <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-2">
+              <h2 className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-2">
                 Essay
-              </p>
+              </h2>
               <a
                 href={artist.essayUrl}
                 target="_blank"

@@ -73,8 +73,14 @@ export default function Header() {
       {/* Desktop sidebar */}
       <aside className="hidden md:flex fixed left-0 top-0 bottom-0 w-32 xl:w-36 z-50 flex-col border-r border-border bg-background">
         <Link href="/" className="text-foreground pt-6 px-6" aria-label="Home">
+          {/* Plain <img>, not next/image, deliberately: this is a fixed-size
+              wordmark pair swapped by CSS (.logo-light/.logo-dark) so the correct
+              mark is painted before hydration. Both are tiny PNGs already at their
+              display size, so there is nothing for the optimizer to do. */}
           <span className="logo-wrap block h-4 w-24">
+            {/* eslint-disable-next-line @next/next/no-img-element -- see above */}
             <img src="/brand/hivemind-black.png" alt="Hivemind" className="h-4 w-auto logo-light" />
+            {/* eslint-disable-next-line @next/next/no-img-element -- see above */}
             <img src="/brand/hivemind-white.png" alt="" aria-hidden className="h-4 w-auto logo-dark" />
           </span>
         </Link>
@@ -106,7 +112,9 @@ export default function Header() {
       <header className="md:hidden fixed top-0 left-0 right-0 z-50 bg-background border-b border-border h-14 flex items-center justify-between px-6">
         <Link href="/" aria-label="Home">
           <span className="logo-wrap block h-[14px] w-24">
+            {/* eslint-disable-next-line @next/next/no-img-element -- CSS-swapped wordmark pair, see desktop rail above */}
             <img src="/brand/hivemind-black.png" alt="Hivemind" className="h-[14px] w-auto logo-light" />
+            {/* eslint-disable-next-line @next/next/no-img-element -- CSS-swapped wordmark pair, see desktop rail above */}
             <img src="/brand/hivemind-white.png" alt="" aria-hidden className="h-[14px] w-auto logo-dark" />
           </span>
         </Link>

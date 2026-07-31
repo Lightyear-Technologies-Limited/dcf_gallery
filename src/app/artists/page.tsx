@@ -17,7 +17,6 @@ import { getArtistEditorial } from "@/lib/editorial";
 import { getArtworkImage } from "@/lib/images";
 import {
   getArtistDisplayName,
-  getCollectionDisplayName,
   isCollectionHidden,
   sortCollections,
   sortPieces,

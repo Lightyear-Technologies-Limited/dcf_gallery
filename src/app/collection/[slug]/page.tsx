@@ -4,7 +4,7 @@ import Link from "next/link";
 import { getOgImage } from "@/lib/provenance";
 import { collections, getArtist, getCollectionsByArtist, getPiecesByCollection } from "@/lib/data";
 import { withCollectionEditorial } from "@/lib/editorial";
-import { SITE_URL } from "@/lib/site";
+import { SITE_URL, ldJson, DEFAULT_OG_IMAGE } from "@/lib/site";
 import { getArtworkImage } from "@/lib/images";
 import {
   getArtistDisplayName,
@@ -29,6 +29,13 @@ import ExpandableProse from "@/components/ExpandableProse";
 import CopyableHash from "@/components/CopyableHash";
 import ScrollRestore from "@/components/ScrollRestore";
 
+// See the note in piece/[slug]: unknown slugs would otherwise render on demand
+// and return notFound() with HTTP 200. Hidden collections are excluded below, so
+// they become a genuine 404 too (they were already notFound(), just with the
+// wrong status). Their individual pieces stay reachable by design — only the
+// collection index is withheld.
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return collections.filter((c) => !isCollectionHidden(c.slug)).map((c) => ({ slug: c.slug }));
 }
@@ -42,13 +49,17 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const artistName = artist ? getArtistDisplayName(artist.slug, artist.name) : undefined;
   const title = artistName ? `${name}, ${artistName}` : name;
   const description = (col.description || `${name} in the Hivemind Digital Culture Fund collection.`).slice(0, 320);
-  const first = getPiecesByCollection(col.slug)[0];
-  const og = first ? getOgImage(first.slug) : undefined;
+  // First piece that actually HAS an OG image, not merely the first piece: a
+  // collection whose lead work is an SVG (getOgImage skips those — the gateway
+  // can't transform them) would otherwise lose its card even when later pieces
+  // have perfectly good art. All-SVG collections (CryptoPunks) fall through to
+  // the wordmark card rather than emitting no image at all.
+  const og = getPiecesByCollection(col.slug).map((p) => getOgImage(p.slug)).find(Boolean) ?? DEFAULT_OG_IMAGE;
   return {
     title,
     description,
-    openGraph: { title, description, type: "website", images: og ? [{ url: og, width: 1200 }] : undefined },
-    twitter: { card: "summary_large_image", title, description, images: og ? [og] : undefined },
+    openGraph: { title, description, type: "website", images: [{ url: og, width: 1200 }] },
+    twitter: { card: "summary_large_image", title, description, images: [og] },
   };
 }
 
@@ -228,7 +239,6 @@ export default async function CollectionPage({
   const nextSibling = idx >= 0 && idx < siblings.length - 1 ? siblings[idx + 1] : null;
 
   const editionType = getEditionType(slug);
-  const isSingle = n === 1 && heroImage && first;
 
   // Shared helpers used by both the inline left-column trait index and the
   // below-grid "Browse by trait" disclosure - keep them in one place so the
@@ -488,7 +498,7 @@ export default async function CollectionPage({
   return (
     <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12 min-h-screen">
       <ScrollRestore />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ldJson(collectionLd) }} />
       {/* Breadcrumb + sibling nav. Prev (artist's other works) and next
           collection sit at the top alongside the trail so a returning
           reader can jump laterally without first scrolling to the bottom
@@ -583,9 +593,9 @@ export default async function CollectionPage({
                 tombstone (mint date, platform, code size). Rows with
                 nothing to say are omitted. */}
             <div className="mt-8">
-              <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
+              <h2 className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
                 Collection details
-              </p>
+              </h2>
               <div className="space-y-1 text-[13px] text-muted tabular-nums">
                 {/* Type — canonical web3 edition shorthand.
                     - "1/1/N" for curated programmatic series (Fidenza 999,
@@ -640,9 +650,9 @@ export default async function CollectionPage({
                 collection-level truth, not subset-relative. */}
             {col.exhibitions && col.exhibitions.length > 0 && (
               <div className="mt-6 max-w-[420px]">
-                <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
+                <h2 className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
                   Exhibitions
-                </p>
+                </h2>
                 <ul className="space-y-1 text-[13px] leading-snug">
                   {col.exhibitions.map((ex, i) => (
                     <li key={i}>
@@ -702,9 +712,9 @@ export default async function CollectionPage({
                   essay link renders on its own without the rule. */}
               {col.curatorNote && (
                 <div className="border-l border-border pl-5">
-                  <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
+                  <h2 className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
                     Hivemind commentary
-                  </p>
+                  </h2>
                   <p className="font-serif text-[16px] leading-[1.65] text-foreground-secondary whitespace-pre-line">
                     {col.curatorNote}
                   </p>
@@ -774,9 +784,9 @@ export default async function CollectionPage({
                       own words (from the token metadata), not editorial
                       commentary written for the fund. Same label on the
                       piece page so the register carries across pages. */}
-                  <p className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
+                  <h2 className="text-[10px] tracking-[0.1em] uppercase text-muted font-medium mb-3">
                     Artist statement
-                  </p>
+                  </h2>
                   {/* Threshold at 300 chars - medium-length statements
                       (Ringers ~500, Lightyears ~430) collapse to a 3-line
                       preview behind Read more so the right column stays

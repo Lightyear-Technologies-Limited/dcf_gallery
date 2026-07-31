@@ -23,6 +23,15 @@ const eslintConfig = defineConfig([
       "react-hooks/set-state-in-effect": "warn",
     },
   },
+  {
+    // One-off data-pipeline scripts (fetch-*/build-*/import-*/pull-*). These
+    // destructure spreadsheet columns and API response fields they don't all
+    // consume — the unused names document the upstream shape and are load-bearing
+    // as documentation. 21 warnings here were drowning out the handful that
+    // actually mattered in src/, so scope the rule off rather than rename them.
+    files: ["scripts/**/*.mjs"],
+    rules: { "@typescript-eslint/no-unused-vars": "off" },
+  },
 ]);
 
 export default eslintConfig;

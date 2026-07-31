@@ -184,13 +184,11 @@ export default function CollectionView({ sections, artists }: Props) {
     scrollToFilterIfPast();
   }
 
-  // Both "All" buttons now clear EVERYTHING (artist + chapter + exclusions)
-  // - they're the "back to full view" affordance regardless of which row
-  // they sit in. Previously each was row-scoped (Artist All kept chapter,
-  // Chapter All kept artist) but that meant Chapter All did nothing when
-  // only an artist was selected, which read as broken. Aliased to clearAll.
-  const selectArtistAll = clearAll;
-  const selectChapterAll = clearAll;
+  // Both "All" buttons call clearAll directly: they clear EVERYTHING (artist +
+  // chapter + exclusions) and are the "back to full view" affordance regardless
+  // of which row they sit in. Previously each was row-scoped (Artist All kept
+  // chapter, Chapter All kept artist) but that meant Chapter All did nothing
+  // when only an artist was selected, which read as broken.
 
   useEffect(() => {
     const a = searchParams.get("artist");

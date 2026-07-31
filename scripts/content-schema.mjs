@@ -8,9 +8,10 @@ const essay = {
   essayTitle: z.string().min(1, "essayTitle must not be empty").optional(),
 };
 
-// Optional X (Twitter) thread / announcement-post link. Renders alongside
-// the essay link on the collection page. Authoritative source is the
-// same per-collection JSON; populate when a thread exists.
+// Optional X (Twitter) thread / announcement-post link.
+// NOTE: accepted and validated but currently rendered NOWHERE — no component
+// reads xUrl/xLabel. Kept so authored data isn't lost, but if a thread needs to
+// be visible today it must go in `links`/`context` with an explicit label.
 const xLink = {
   xUrl: z.url("xUrl must be a valid URL").optional(),
   xLabel: z.string().min(1, "xLabel must not be empty").optional(),
@@ -34,13 +35,14 @@ const linkArray = {
     .optional(),
 };
 
-// Context section — a small ledger of externally-referenced signals about
-// the piece / collection, rendered as a "Context" block right below the
-// Exhibitions block on the piece page. Announcement posts, artist / critic
-// responses (Ethnograph by Tynett on the Masks of Luci), press write-ups.
-// Extensible: append new entries here as the piece accumulates external
-// commentary. Distinct from `links[]` which is the miscellaneous
-// external-links block at the bottom of the info column.
+// Context section — a small ledger of externally-referenced signals about the
+// piece / collection: announcement posts, artist / critic responses (Ethnograph
+// by Tynett on the Masks of Luci), press write-ups. Extensible: append entries
+// as a piece accumulates external commentary.
+// NOTE: the intended separate "Context" block does not exist yet. On the piece
+// page PieceLayout merges `links` then `context` into the single "Other
+// resources" list; on the collection page both render as plain links under the
+// commentary. Semantically distinct in the data, visually identical to a reader.
 const contextArray = {
   context: z
     .array(
