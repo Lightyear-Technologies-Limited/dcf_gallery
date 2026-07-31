@@ -26,7 +26,7 @@ ongoing deploy flow.
 
    | Variable | Value | Scope | Notes |
    |---|---|---|---|
-   | `NEXT_PUBLIC_SITE_URL` | `https://gallery.hivemind.capital` (final domain) | Production (+ Preview) | Only used to build absolute OG/canonical URLs. If unset, it falls back to that same default, so the site still builds. |
+   | `NEXT_PUBLIC_SITE_URL` | `https://dcf.hivemind.capital` (final domain) | Production (+ Preview) | Only used to build absolute OG/canonical URLs. If unset, it falls back to that same default, so the site still builds. |
 
    **That's the only variable Vercel needs.** The Alchemy / Filebase keys in
    `.env.example` are for the **local** data-pipeline scripts (`npm run pin`,
@@ -39,10 +39,17 @@ ongoing deploy flow.
 
 ## 2. Custom domain
 
-1. Project Settings → *Domains* → add `gallery.hivemind.capital`.
+1. Project Settings → *Domains* → add `dcf.hivemind.capital`.
 2. At the DNS provider, add the CNAME / A record Vercel shows.
 3. Set `NEXT_PUBLIC_SITE_URL` to the final `https://…` origin and redeploy so OG
    tags and the sitemap use it.
+
+> Until the DNS record exists, production self-references the project's
+> `*.vercel.app` origin (step 2 of the resolution order in `src/lib/site.ts`), so
+> shares and the sitemap stay valid throughout — there is no window where they
+> point at a hostname that does not resolve. Setting `NEXT_PUBLIC_SITE_URL` ahead
+> of the DNS change is the one thing that *would* create that window, because it
+> takes precedence over the working fallback.
 
 ---
 

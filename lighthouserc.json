@@ -6,7 +6,7 @@
         "http://localhost:3000/",
         "http://localhost:3000/chapters",
         "http://localhost:3000/artists",
-        "http://localhost:3000/piece/grifters-8-c1f3"
+        "http://localhost:3000/piece/grifters-8"
       ],
       "numberOfRuns": 1,
       "settings": { "preset": "desktop" }
