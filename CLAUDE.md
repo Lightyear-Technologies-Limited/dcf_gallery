@@ -35,10 +35,28 @@ npm run start    # serve the production build
 npm run lint     # eslint (flat config, eslint-config-next)
 ```
 
-Testing is minimal — a single Playwright smoke test (`tests/smoke.spec.ts`, run
-with `npm run test:e2e`); there is no unit-test suite. **`npm run build` is the
-primary check** (catches type + static-generation errors); `npm run typecheck`
-and the dev server cover the rest.
+Testing is deliberately light — there is no unit-test suite, and **`npm run build`
+is still the primary check** (it catches type + static-generation errors). Two
+Playwright specs run against the production build via `npm run test:e2e`, and CI
+(`.github/workflows/ci.yml`) runs lint → typecheck → `audit` → `content` → build →
+e2e on every push:
+
+| Spec | Covers |
+|------|--------|
+| `tests/smoke.spec.ts` | User journeys — nav renders, reels/motion preference, sandboxed interactive art, back-to-origin navigation. |
+| `tests/invariants.spec.ts` | Properties that break *silently*. Every one of these regressed at least once in the 2026-07 pass and shipped, because nothing in the build or the typechecker notices. |
+
+The invariants spec is the one to extend when something breaks invisibly. It
+currently locks: the root OG card stays the static wordmark PNG and every
+generated card carries the `Wordmark` lockup; every route emits an `og:image`;
+`/piece/*` stays cacheable (i.e. still prerendered — see Routing); unknown slugs
+return a real 404; old piece slugs still redirect; the security headers are
+present; gallery tiles don't request images far larger than they render; and
+content pages expose a real heading structure.
+
+No pixel snapshots anywhere — `playwright.config.ts` rejects them as brittle
+across OSes. Where a property is structural, assert it against the source or the
+response headers instead of a rendered image.
 
 Data-pipeline scripts are plain ESM. Most have an npm alias — `npm run onboard`
 (add pieces), `npm run curate` (apply `curation.json`), `npm run content`
@@ -143,6 +161,16 @@ candidate sized for the *widest* tile in the layout and download it for every
 tile; that bug cost the homepage 71 MB vs 31 MB (mean 2.9× oversampling). No DPR
 maths is needed — `sizes` is CSS px and the browser applies DPR itself. Grid tiles
 default to `quality={85}` via `GridArtwork`; hero/detail paths pass higher values.
+
+Both galleries also **withhold the tile image until the container is measured**
+(`w > 0`). Row width is only known after a client measurement pass; rendering an
+image before then means declaring a guessed `sizes`, and a guess gets *fetched* —
+the browser will not downgrade once the real, usually much smaller, width
+resolves. Nothing is visible during that frame (the row has no height yet), so
+the guard costs nothing and saved a further 31 MB → 12 MB. Hero and single-piece
+displays are the deliberate exception: they declare a larger `sizes` than their CSS
+width so retina screens still get a sharp master, which is why
+`tests/invariants.spec.ts` scopes its oversampling check to grid tiles.
 
 ### Routing — `src/app/`
 

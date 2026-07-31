@@ -125,15 +125,19 @@ export default function JustifiedGallery({ pieces, piecesPerRow, gap = 4, maxRow
                     style={{ height: rowHeight > 0 ? `${rowHeight}px` : undefined }}
                     className={`block overflow-hidden ${isPunk ? "bg-punk" : ""}`}
                   >
-                    {src ? (
-                      <GridArtwork slug={piece.slug} title={piece.title} imgSrc={src} isPunk={isPunk} sizes={w > 0 ? `${Math.ceil(w)}px` : "500px"} />
-                    ) : (
+                    {/* Held back until the row is measured — see FixedRowGallery:
+                        before that w is 0, and a guessed `sizes` gets fetched at
+                        that guess, which the browser will not downgrade once the
+                        real width resolves. */}
+                    {!src ? (
                       <PlaceholderArt
                         collectionSlug={piece.collectionSlug}
                         pieceSlug={piece.slug}
                         className="w-full h-full"
                       />
-                    )}
+                    ) : w > 0 ? (
+                      <GridArtwork slug={piece.slug} title={piece.title} imgSrc={src} isPunk={isPunk} sizes={`${Math.ceil(w)}px`} />
+                    ) : null}
                   </Link>
                   {showCaptions && (
                     // Visual caption only — the tile above already links to the
