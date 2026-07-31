@@ -6,7 +6,7 @@ import { getPieceEditorial } from "@/lib/editorial";
 import { getArtworkImage, getArtworkAspect, resolveTokenId } from "@/lib/images";
 import { getDetailVariants, getArtworkBlur, getProvenance, getOgImage } from "@/lib/provenance";
 import { getMotion } from "@/lib/motion";
-import { SITE_URL as SITE, ldJson } from "@/lib/site";
+import { SITE_URL as SITE, ldJson, DEFAULT_OG_IMAGE } from "@/lib/site";
 import { getEditionType, getArtistSiteUrl, getPieceTraits, getPieceDescription, getCollectionDisplayName, getArtistDisplayName, sortPieces, SYNTHETIC_TRAITS, PIECE_SYNTHETIC_TRAITS } from "@/lib/curation";
 import type { TraitValue } from "@/lib/curation";
 import { resolveNav, NO_PARAMS, type PieceNavData } from "@/lib/piece-nav";
@@ -67,12 +67,15 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     piece.description ||
     (collName ? `${piece.title}, from ${collName}. Held by the Hivemind Digital Culture Fund.` : "Held by the Hivemind Digital Culture Fund.")
   ).slice(0, 200);
-  const og = getOgImage(piece.slug);
+  // Falls back to the wordmark card rather than emitting no image: getOgImage
+  // returns undefined for SVG sources (the gateway can't transform them), which
+  // is every CryptoPunk, so those 43 pieces were unfurling bare.
+  const og = getOgImage(piece.slug) ?? DEFAULT_OG_IMAGE;
   return {
     title,
     description,
-    openGraph: { title, description, type: "article", images: og ? [{ url: og, width: 1200, alt: piece.title }] : undefined },
-    twitter: { card: "summary_large_image", title, description, images: og ? [og] : undefined },
+    openGraph: { title, description, type: "article", images: [{ url: og, width: 1200, alt: piece.title }] },
+    twitter: { card: "summary_large_image", title, description, images: [og] },
   };
 }
 

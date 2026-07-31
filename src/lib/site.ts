@@ -17,6 +17,19 @@ function resolveSiteUrl(): string {
 export const SITE_URL = resolveSiteUrl();
 
 /**
+ * Absolute URL of the site's default OG card (`src/app/opengraph-image.png` — the
+ * Hivemind wordmark).
+ *
+ * Needed as an explicit fallback because the file-convention image is NOT
+ * inherited once a route's generateMetadata returns its own `openGraph` object.
+ * Routes that did so while having no artwork to show — every /collection/* page
+ * whose lead piece is an SVG, and all 43 CryptoPunk pieces — were emitting no
+ * og:image at all, so shares unfurled bare. On-chain Punk art is SVG and the
+ * Filebase gateway cannot transform SVG, so there is no artwork raster to use.
+ */
+export const DEFAULT_OG_IMAGE = `${SITE_URL}/opengraph-image.png`;
+
+/**
  * Serialize a JSON-LD graph for injection into a <script type="application/ld+json">.
  *
  * Plain JSON.stringify is not safe inside a <script> element: HTML parsing wins over

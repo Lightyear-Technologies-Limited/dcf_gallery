@@ -4,7 +4,7 @@ import Link from "next/link";
 import { getOgImage } from "@/lib/provenance";
 import { collections, getArtist, getCollectionsByArtist, getPiecesByCollection } from "@/lib/data";
 import { withCollectionEditorial } from "@/lib/editorial";
-import { SITE_URL, ldJson } from "@/lib/site";
+import { SITE_URL, ldJson, DEFAULT_OG_IMAGE } from "@/lib/site";
 import { getArtworkImage } from "@/lib/images";
 import {
   getArtistDisplayName,
@@ -49,13 +49,17 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const artistName = artist ? getArtistDisplayName(artist.slug, artist.name) : undefined;
   const title = artistName ? `${name}, ${artistName}` : name;
   const description = (col.description || `${name} in the Hivemind Digital Culture Fund collection.`).slice(0, 320);
-  const first = getPiecesByCollection(col.slug)[0];
-  const og = first ? getOgImage(first.slug) : undefined;
+  // First piece that actually HAS an OG image, not merely the first piece: a
+  // collection whose lead work is an SVG (getOgImage skips those — the gateway
+  // can't transform them) would otherwise lose its card even when later pieces
+  // have perfectly good art. All-SVG collections (CryptoPunks) fall through to
+  // the wordmark card rather than emitting no image at all.
+  const og = getPiecesByCollection(col.slug).map((p) => getOgImage(p.slug)).find(Boolean) ?? DEFAULT_OG_IMAGE;
   return {
     title,
     description,
-    openGraph: { title, description, type: "website", images: og ? [{ url: og, width: 1200 }] : undefined },
-    twitter: { card: "summary_large_image", title, description, images: og ? [og] : undefined },
+    openGraph: { title, description, type: "website", images: [{ url: og, width: 1200 }] },
+    twitter: { card: "summary_large_image", title, description, images: [og] },
   };
 }
 
