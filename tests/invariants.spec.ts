@@ -175,10 +175,31 @@ test.describe("invariants: images", () => {
   // 640, 750, 1080 …) so a 285px tile legitimately requests 384. The failure being
   // guarded against was an order of magnitude off -- 1080 for a 285px tile.
   const MAX_OVERSAMPLE = 2;
+  // Enough tiles to be meaningful without encoding an assumption about how many
+  // happen to have finished loading. Tile images come from the Filebase gateway
+  // over the real network, so the count varies with the runner's bandwidth — an
+  // absolute threshold tuned on a dev machine fails on CI for no good reason
+  // (it did: 19 measured against a guessed floor of 20). A systemic regression
+  // shows up in any handful of tiles, since the original bug hit 185 of 313.
+  const MIN_SAMPLE = 6;
 
   test("no gallery tile requests an image far larger than it renders", async ({ page }) => {
     await page.goto("/");
     await page.waitForLoadState("networkidle");
+
+    // Wait for the sample to exist rather than assuming it does by now.
+    const countLoaded = () =>
+      page.evaluate(() =>
+        Array.from(document.querySelectorAll("img.h-full.w-full")).filter(
+          (i) => /img-width=\d+/.test((i as HTMLImageElement).currentSrc ?? ""),
+        ).length,
+      );
+    await expect
+      .poll(countLoaded, {
+        message: `fewer than ${MIN_SAMPLE} gateway-served tiles ever loaded — the gallery or the gateway is broken`,
+        timeout: 30_000,
+      })
+      .toBeGreaterThanOrEqual(MIN_SAMPLE);
 
     const { measured, bad } = await page.evaluate(() => {
       const bad: { requested: number; rendered: number; ratio: number }[] = [];
@@ -201,8 +222,10 @@ test.describe("invariants: images", () => {
       return { measured, bad };
     });
 
-    // Guard against the test silently passing because nothing was measured.
-    expect(measured, "no gateway-served tiles were measured").toBeGreaterThan(20);
+    // Guard against a vacuous pass. The poll above should already have satisfied
+    // this; it is repeated because the assertion below is only meaningful if the
+    // sample it ran against was real.
+    expect(measured, "no gateway-served tiles were measured").toBeGreaterThanOrEqual(MIN_SAMPLE);
     expect(
       bad,
       `tiles requesting >${MAX_OVERSAMPLE}x their rendered width: ${JSON.stringify(bad.slice(0, 8))}`,
