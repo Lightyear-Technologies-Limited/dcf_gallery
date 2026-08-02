@@ -257,6 +257,7 @@ export const CLICKABLE_TRAITS: Record<string, Record<string, ClickableRule>> = {
   "masks-of-luci": {
     Category: "all",
     "Attendee Type": "all",
+    Finalist: ["Yes"],
   },
   "pxl-pod": {
     Pods: "all",
