@@ -1544,7 +1544,8 @@
     "Attendee Type": "Masked Player",
     "Category": "Understory",
     "Material": "Wood",
-    "Region": "First Cycle"
+    "Region": "First Cycle",
+    "Finalist": "Yes"
   },
   "masks-of-luci-142": {
     "Attendee Type": "Masked Player",
@@ -1556,7 +1557,8 @@
     "Attendee Type": "Masked Guest",
     "Category": "Canopic",
     "Material": "Stone",
-    "Region": "Nectar Springs"
+    "Region": "Nectar Springs",
+    "Finalist": "Yes"
   },
   "masks-of-luci-240": {
     "Attendee Type": "Council Mask",
@@ -1600,7 +1602,8 @@
     "Material": "Flesh",
     "Region": "Frogland",
     "Adornments": "Ears",
-    "Bond": "Wolfpack"
+    "Bond": "Wolfpack",
+    "Finalist": "Yes"
   },
   "masks-of-luci-476": {
     "Attendee Type": "Masked Guest",
@@ -1626,7 +1629,8 @@
     "Attendee Type": "Masked Guest",
     "Category": "Root",
     "Material": "Stone",
-    "Region": "Sprawl"
+    "Region": "Sprawl",
+    "Finalist": "Yes"
   },
   "masks-of-luci-569": {
     "Attendee Type": "Masked Guest",
