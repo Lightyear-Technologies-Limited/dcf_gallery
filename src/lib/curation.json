@@ -391,7 +391,7 @@
       "masks-of-luci-303": 5,
       "masks-of-luci-349": 5,
       "masks-of-luci-504": 5,
-      "masks-of-luci-241": 6
+      "masks-of-luci-241": 5
     },
     "fidenza": {
       "fidenza-718": 1,
@@ -705,8 +705,8 @@
       "synthetic-dreams-858" (4)
     ],
     "skulls-of-luci": [
-      "skulls-of-luci-12", ()
-      "skulls-of-luci-20" ()
+      "skulls-of-luci-20", ()
+      "skulls-of-luci-12" ()
     ],
     "masks-of-luci": [
       "masks-of-luci-240", (1)
@@ -727,7 +727,7 @@
       "masks-of-luci-303", (5)
       "masks-of-luci-349", (5)
       "masks-of-luci-504", (5)
-      "masks-of-luci-241" (6)
+      "masks-of-luci-241" (5)
     ],
     "tyler-hobbs": [
       "tyler-hobbs-1", ()
