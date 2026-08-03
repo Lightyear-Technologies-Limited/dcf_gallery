@@ -154,12 +154,34 @@ custom loader `src/lib/image-loader.js`; (4) a local fallback
 to on-chain SVG from `/art/all/` (vector — the gateway can't transform it).
 
 **Detail / hero** pages don't use that path — they render locally-generated
-`sharp` variants (768/1280/1920w WebP) through `<img srcset>` with an **LQIP
-blur-up**, sourced from the heavy provenance manifest in `src/lib/provenance.ts`
-(server-only, kept out of the client bundle). `resolveTokenId` normalizes **Art
-Blocks** IDs (`project*1_000_000 + serial`; Fidenza = project 78, Ringers =
-project 13) so raw serials and full token IDs both resolve. See
-`docs/ADDING-PIECES.md` for the end-to-end pipeline.
+`sharp` variants (768/1280/1920w WebP, +2560w for opted-in collections) through
+`<img srcset>` with an **LQIP blur-up**, sourced from the heavy provenance manifest
+in `src/lib/provenance.ts` (server-only, kept out of the client bundle).
+`resolveTokenId` normalizes **Art Blocks** IDs (`project*1_000_000 + serial`;
+Fidenza = project 78, Ringers = project 13) so raw serials and full token IDs both
+resolve. See `docs/ADDING-PIECES.md` for the end-to-end pipeline.
+
+**Detail variants are encoded with `smartSubsample: true`** (`pin-assets.mjs`).
+Without it sharp writes WebP at 4:2:0, halving colour resolution in both axes —
+which on work built from individually coloured marks smears them into muddy
+streaks. It costs ~6% more bytes and is the largest quality win available on this
+pipeline. Don't remove it to save weight; a.c.k. spotted the 4:2:0 artefacts on
+Piano Blossoms unprompted.
+
+**The 2560w tier is opt-in per collection** (`EXTRA_WIDE_COLLECTIONS`), and the
+bar for adding one is specific: the masters must be *substantially wider than
+2560* **and** the detail high-frequency. Piano Blossoms qualifies — 8500px masters
+downscaled to 1920w (4.4×) merge adjacent dots before the encoder sees them, and
+no quality setting recovers that. Fidenza does **not**: its masters are 2000×2400,
+so 1920w is already a 1.04× downscale and there is nothing to recover — the tier
+would cap at 2000w via `withoutEnlargement` and, encoded at the wide tier's q90,
+would land as a candidate marginally *worse* than the existing 1920w q95 one. The
+pin script now refuses to emit a tier the master can't fill, and records each
+variant's **actual** encoded width so the srcset never overstates a candidate.
+
+Measured effect: the hero caps at 978 CSS px, so DPR-2 viewports ask for 1956px.
+DPR 1 and DPR 2 up to ~1440px are unaffected by the new tier; only DPR-2 viewports
+at ≥1920px switch from 1920w to 2560w — precisely the case that was short.
 
 **`sizes` must reflect the tile's real rendered width.** The loader passes the
 chosen srcset candidate straight to the gateway as `img-width`, so `sizes` decides

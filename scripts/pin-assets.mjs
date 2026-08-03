@@ -8,7 +8,12 @@
  *
  * Output: src/lib/provenance.data.json (shipped — consumed by B.3 / C.1 / C.2).
  * Idempotent: skips pieces already pinned (cid present) unless --refresh.
- * Usage: node scripts/pin-assets.mjs [--refresh] [--only slug,slug] [--limit N] [--dry]
+ * Usage: node scripts/pin-assets.mjs [--refresh] [--upgrade] [--only slug,slug] [--limit N] [--dry]
+ *
+ *   --upgrade  re-derive variants ONLY where the encoder stamp is stale (see
+ *              VARIANT_ENCODER). Idempotent and resumable — the intended way to
+ *              roll an encode change across the catalogue. Re-run until it
+ *              reports "Pinned 0"; --refresh would restart the whole 4.2GB sweep.
  */
 import { readFileSync, writeFileSync, existsSync } from "fs";
 import { resolve, dirname } from "path";
@@ -18,8 +23,52 @@ import { S3Client, PutObjectCommand, HeadObjectCommand } from "@aws-sdk/client-s
 import sharp from "sharp";
 
 // Sharp variant widths for the DETAIL view (Path B hybrid). Covers phone →
-// desktop-retina; the detail column caps ~780px so 1920 gives 2x headroom.
+// desktop-retina. Measured: the hero caps at 978 CSS px, so at DPR 2 it asks for
+// 1956px and 1920 is a hair short (1.96x rather than 2x) — imperceptible on most
+// work, which is why this stayed at 1920.
 const DETAIL_WIDTHS = [768, 1280, 1920];
+
+// Collections that additionally get a 2560w tier.
+//
+// For work whose subject IS micro-texture, the 4.4x downscale from an 8500px
+// master merges adjacent marks before the encoder sees them, and no amount of
+// quality tuning recovers them. a.c.k.'s Piano Blossoms are pointillist — built
+// from thousands of individually coloured dots — and at 1920w the stipple reads
+// as ropey directional smears rather than discrete touches of paint. The artist
+// noticed and was right. 2560w restores it (verified against the master).
+//
+// Deliberately opt-in per collection rather than global: this tier costs ~1.2MB
+// over 1920w on dense work, and srcset means only DPR>=2 viewports ever fetch it.
+// Grids and thumbs are untouched, so it never affects the homepage.
+//
+// ONLY add a collection here when its masters are meaningfully WIDER than 2560
+// AND its detail is high-frequency. Measured counter-example: Fidenza masters are
+// 2000x2400, so 1920w is already a 1.04x downscale (essentially native) and there
+// is no resampling loss to recover — the tier would cap at 2000w via
+// withoutEnlargement and, being encoded at the wide tier's q90, would land as a
+// 2000w candidate slightly WORSE than the existing 1920w q95 one. Flat-colour
+// generative work (Fidenza, Ringers, QQL) gains nothing here.
+const EXTRA_WIDE_COLLECTIONS = new Set(["piano-blossoms"]);
+const EXTRA_WIDE_WIDTH = 2560;
+
+// Stamp recording which variant-encoder settings produced a piece's variants.
+// Bump this whenever the encode changes (widths, quality, subsampling) so
+// `--upgrade` can find the stragglers.
+//
+// This exists because a full re-encode means re-downloading ~4.2GB of masters, and
+// `--refresh` is not resumable: it ignores the already-pinned check, so an
+// interrupted overnight run would start from zero. `--upgrade` re-pins only pieces
+// whose stamp is missing or stale, making the sweep idempotent and safe to run
+// repeatedly until it reports 0 remaining.
+const VARIANT_ENCODER = "webp-q95-sharpyuv-v2";
+
+/** Widths for a given piece — the base tiers plus 2560 for opted-in collections. */
+function detailWidthsFor(slug) {
+  for (const c of EXTRA_WIDE_COLLECTIONS) {
+    if (slug.startsWith(`${c}-`)) return [...DETAIL_WIDTHS, EXTRA_WIDE_WIDTH];
+  }
+  return DETAIL_WIDTHS;
+}
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
@@ -36,6 +85,7 @@ const BUCKET = env.FILEBASE_BUCKET;
 const GATEWAY = env.FILEBASE_GATEWAY || "lightyear.myfilebase.com";
 
 const REFRESH = process.argv.includes("--refresh");
+const UPGRADE = process.argv.includes("--upgrade");
 const DRY = process.argv.includes("--dry");
 const limitArg = process.argv.indexOf("--limit");
 const LIMIT = limitArg !== -1 ? parseInt(process.argv[limitArg + 1], 10) : Infinity;
@@ -119,7 +169,13 @@ if (ONLY) slugs = slugs.filter((s) => ONLY.has(s));
 let pinned = 0, skipped = 0, failed = 0, processed = 0;
 for (const slug of slugs) {
   if (processed >= LIMIT) break;
-  if (!REFRESH && manifest[slug]?.cid) { skipped++; continue; }
+  // --upgrade: re-derive variants only where the encoder stamp is missing or stale.
+  // Idempotent, so an interrupted sweep can simply be re-run until it reports 0.
+  if (UPGRADE) {
+    const m = manifest[slug];
+    const stale = m?.cid && m.variants?.length && m.variantEncoder !== VARIANT_ENCODER;
+    if (!stale) { skipped++; continue; }
+  } else if (!REFRESH && manifest[slug]?.cid) { skipped++; continue; }
   const src = sources[slug];
   if (src.storage === "physical") { manifest[slug] = { storage: "physical" }; continue; }
 
@@ -147,16 +203,45 @@ for (const slug of slugs) {
     if (!isSvg && !DRY) {
       try {
         const variants = [];
-        for (const w of DETAIL_WIDTHS) {
+        const masterW = (await sharp(buf, { limitInputPixels: false }).metadata()).width || 0;
+        for (const w of detailWidthsFor(slug)) {
+          // Don't emit a tier the master can't actually fill. withoutEnlargement
+          // would silently produce a narrower image, and because the wide tier
+          // encodes at a lower quality it could land as a candidate that is barely
+          // wider than the 1920 one but visibly worse — so the browser would pick
+          // it and get a softer image. Skipping keeps the srcset honest.
+          if (w > masterW && w > DETAIL_WIDTHS[DETAIL_WIDTHS.length - 1]) {
+            console.warn(`  ${slug}: skipping ${w}w tier (master is only ${masterW}w)`);
+            continue;
+          }
+          // smartSubsample (libwebp's -sharp_yuv) is the important flag here.
+          // Without it sharp encodes WebP at 4:2:0, halving colour resolution in
+          // both axes — which on work made of individually coloured marks smears
+          // them into muddy streaks. It costs ~6% more bytes and is the single
+          // biggest quality win available on this pipeline.
+          //
+          // The wider tier drops to q90: at 2560w each mark covers more pixels,
+          // so per-pixel quality matters less, and q90/2560 both looks better than
+          // q95/1920 and costs less than q95/2560 would.
           const vbuf = await sharp(buf, { limitInputPixels: false })
             .resize({ width: w, kernel: "lanczos3", withoutEnlargement: true })
             .sharpen({ sigma: 1, m1: 0.6, m2: 2 })
-            .webp({ quality: 95, effort: 5 })
+            .webp({ quality: w >= EXTRA_WIDE_WIDTH ? 90 : 95, effort: w >= EXTRA_WIDE_WIDTH ? 6 : 5, smartSubsample: true })
             .toBuffer();
           const v = await pin(`variants/${slug}-${w}.webp`, vbuf, "image/webp");
-          variants.push({ w, cid: v.cid, bytes: vbuf.length });
+          // Record the ACTUAL encoded width, not the requested one. With
+          // withoutEnlargement a master narrower than the tier yields a smaller
+          // image, and recording the request would put a wrong descriptor in the
+          // srcset — the browser would pick that candidate believing it is wider
+          // than it is, and get a soft image for its trouble. Dedupe on the way
+          // out so a small master doesn't emit two candidates at the same width.
+          const actualW = (await sharp(vbuf).metadata()).width || w;
+          if (!variants.some((x) => x.w === actualW)) {
+            variants.push({ w: actualW, cid: v.cid, bytes: vbuf.length });
+          }
         }
         entry.variants = variants;
+        entry.variantEncoder = VARIANT_ENCODER;
         // Tiny blurred LQIP, inlined as a data URI for blur-up (progressive load).
         const lqipBuf = await sharp(buf, { limitInputPixels: false }).resize({ width: 24 }).blur(1).webp({ quality: 40 }).toBuffer();
         entry.lqip = `data:image/webp;base64,${lqipBuf.toString("base64")}`;
