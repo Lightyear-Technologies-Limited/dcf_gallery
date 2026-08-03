@@ -168,9 +168,16 @@ streaks. It costs ~6% more bytes and is the largest quality win available on thi
 pipeline. Don't remove it to save weight; a.c.k. spotted the 4:2:0 artefacts on
 Piano Blossoms unprompted.
 
-**The 2560w tier is opt-in per collection** (`EXTRA_WIDE_COLLECTIONS`), and the
-bar for adding one is specific: the masters must be *substantially wider than
-2560* **and** the detail high-frequency. Piano Blossoms qualifies — 8500px masters
+**The 2560w tier is opt-in per collection** (`EXTRA_WIDE_COLLECTIONS`). Before
+adding one, run `npm run check:wide-tier -- --collection <slug>` — it samples the
+masters and measures whether capping at 1920 actually discards detail, which is the
+half of the question the pin script cannot check. Measured: Piano Blossoms 14.8–22.3
+(shipped), Masks of Luci ~4.3 and a synthetic flat-but-wide master ~5.5 (rejected).
+It is advisory rather than a gate, deliberately: a hard threshold could quietly deny
+an artist's work the resolution it needs.
+
+The bar for adding a collection is specific: the masters must be *substantially
+wider than 2560* **and** the detail high-frequency. Piano Blossoms qualifies — 8500px masters
 downscaled to 1920w (4.4×) merge adjacent dots before the encoder sees them, and
 no quality setting recovers that. Fidenza does **not**: its masters are 2000×2400,
 so 1920w is already a 1.04× downscale and there is nothing to recover — the tier

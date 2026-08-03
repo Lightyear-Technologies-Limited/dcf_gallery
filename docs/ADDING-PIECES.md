@@ -76,6 +76,22 @@ npm run build
 
 Both skip pieces already done, so re-running is cheap and safe.
 
+### Should a collection get the 2560w tier?
+
+```bash
+npm run check:wide-tier -- --collection <slug> [--limit N]
+```
+
+Answers it with a measurement instead of a guess, and does so *before* you commit
+to re-pinning. It samples masters across the collection and scores how much detail
+capping at 1920w throws away. Reference points: Piano Blossoms 14.8–22.3 (tier
+shipped, the artist could see the difference), Masks of Luci ~4.3 and a synthetic
+flat-but-wide master ~5.5 (rejected). Advisory only — in the 8–12 band, look at 1:1
+crops yourself.
+
+Note the spread *within* Piano Blossoms: one piece is not representative of a
+collection, which is why it samples several and reports a mean.
+
 ### Rolling out an encode change (`--upgrade`)
 
 Variant encode settings are stamped on each manifest entry as `variantEncoder`.
