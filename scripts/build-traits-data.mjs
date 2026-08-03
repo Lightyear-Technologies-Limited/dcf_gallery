@@ -198,9 +198,32 @@ function titleCase(str) {
   return String(str).toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
+// Refuse to emit a slug that isn't in data.ts.
+//
+// The 2026-07 rename shortened 317 piece slugs, and every intermediate above kept
+// the old hex-suffixed form. Because the merge below only ever ADDS, running this
+// script wrote 276 dead-slug entries alongside the live ones — inflating the file
+// from 281 to 557 — while a from-scratch regen produced almost nothing usable. The
+// site never broke (the live keys survived the merge), so it was invisible for a
+// month. Failing here is what makes the next such drift immediate and obvious.
+// `npm run audit:slugs` is the same check for every other slug-keyed file.
+const liveSlugs = new Set(
+  [...readFileSync(resolve(__dirname, "../src/lib/data.ts"), "utf-8")
+    .matchAll(/^\s{4}slug: '([^']+)'/gm)].map((m) => m[1]),
+);
+const strays = Object.keys(out).filter((s) => !liveSlugs.has(s));
+if (strays.length) {
+  console.error(`✗ ${strays.length} generated key(s) are not a slug in data.ts — refusing to write:`);
+  console.error(`  ${strays.slice(0, 10).join(", ")}${strays.length > 10 ? " …" : ""}`);
+  console.error("  The scripts/*.json intermediates are keyed by piece slug; if a slug was");
+  console.error("  renamed, re-key them (src/lib/piece-redirects.json is the old→new map).");
+  process.exit(1);
+}
+
 // Shallow-merge over whatever is already on disk. With the manual overlay above
-// the script now reproduces the whole file, so this is a safety net (preserves
-// any not-yet-captured hand edit) rather than load-bearing.
+// the script reproduces the whole file exactly (verified: a from-scratch regen
+// yields the same 281 entries with identical values), so this is a safety net
+// preserving any not-yet-captured hand edit rather than load-bearing.
 let existing = {};
 try { existing = JSON.parse(readFileSync(OUT, "utf-8")); } catch (e) { console.warn("No existing traits.data.json:", e.message); }
 const merged = { ...existing };

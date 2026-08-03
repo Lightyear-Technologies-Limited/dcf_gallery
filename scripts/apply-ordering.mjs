@@ -1,4 +1,16 @@
 #!/usr/bin/env node
+//
+// ⚠️ SPENT ONE-OFF — DO NOT RUN. Kept for provenance only.
+//
+// This applied a specific historical ordering to curation.json from a hardcoded
+// list of ~59 piece slugs. Every one of those slugs is in the pre-2026-07 form
+// (hex-suffixed, e.g. ringers-13000273-d270), so running it now would write dead
+// references into curation.json and silently drop the ordering it claims to set.
+// It is not wired to an npm alias and nothing calls it.
+//
+// To change ordering, edit src/lib/curation.json and run `npm run curate`
+// (fix-curation + annotate-curation) — see docs/CURATION.md.
+//
 import { readFileSync, writeFileSync } from "fs";
 import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";

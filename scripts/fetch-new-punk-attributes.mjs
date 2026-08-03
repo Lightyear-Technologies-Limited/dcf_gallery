@@ -31,7 +31,7 @@ if (!key) {
 const meta = JSON.parse(readFileSync(META, "utf8"));
 
 for (const tokenId of NEW_TOKENS) {
-  const slug = `cryptopunks-${tokenId}-3BBB`;
+  const slug = `cryptopunks-${tokenId}`;
   console.log(`Fetching ${slug}...`);
   const url = `https://eth-mainnet.g.alchemy.com/nft/v3/${key}/getNFTMetadata?contractAddress=${PUNK_CONTRACT}&tokenId=${tokenId}&refreshCache=false`;
   const res = await fetch(url);

@@ -7,9 +7,9 @@ import { fileURLToPath } from "url";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const data = readFileSync(resolve(__dirname, "..", "src/lib/data.ts"), "utf-8");
 
-// Find all ringers-*-d270 pieces and their tokenIds
+// Find all ringers-* pieces and their tokenIds
 const slugs = [];
-const re = /slug: '(ringers-\d+-d270)'/g;
+const re = /slug: '(ringers-\d+)'/g;
 let m;
 while ((m = re.exec(data)) !== null) slugs.push(m[1]);
 

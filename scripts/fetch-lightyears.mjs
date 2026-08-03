@@ -7,7 +7,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const data = readFileSync(resolve(__dirname, "..", "src/lib/data.ts"), "utf-8");
 
 const slugs = [];
-const re = /slug: '(lightyears-\d+-f3f5)'/g;
+const re = /slug: '(lightyears-\d+)'/g;
 let m;
 while ((m = re.exec(data)) !== null) slugs.push(m[1]);
 console.log(`Found ${slugs.length} Lightyears`);

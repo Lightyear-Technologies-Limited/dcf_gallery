@@ -35,26 +35,26 @@ function guessExt(url, contentType) {
 
 const PIECES = [
   // Lights
-  { slug: "lights-3-2006",    contract: "0x6d38705ad8af087d86ef505618b77b066ead2006", token: "3" },
+  { slug: "lights-3",    contract: "0x6d38705ad8af087d86ef505618b77b066ead2006", token: "3" },
   // PXL DEX
-  { slug: "pxl-dex-105-ecfb", contract: "0x81345761670fc8b90665466a94c196e26b92ecfb", token: "105" },
-  { slug: "pxl-dex-107-ecfb", contract: "0x81345761670fc8b90665466a94c196e26b92ecfb", token: "107" },
-  { slug: "pxl-dex-130-ecfb", contract: "0x81345761670fc8b90665466a94c196e26b92ecfb", token: "130" },
-  { slug: "pxl-dex-139-ecfb", contract: "0x81345761670fc8b90665466a94c196e26b92ecfb", token: "139" },
-  { slug: "pxl-dex-141-ecfb", contract: "0x81345761670fc8b90665466a94c196e26b92ecfb", token: "141" },
+  { slug: "pxl-dex-105", contract: "0x81345761670fc8b90665466a94c196e26b92ecfb", token: "105" },
+  { slug: "pxl-dex-107", contract: "0x81345761670fc8b90665466a94c196e26b92ecfb", token: "107" },
+  { slug: "pxl-dex-130", contract: "0x81345761670fc8b90665466a94c196e26b92ecfb", token: "130" },
+  { slug: "pxl-dex-139", contract: "0x81345761670fc8b90665466a94c196e26b92ecfb", token: "139" },
+  { slug: "pxl-dex-141", contract: "0x81345761670fc8b90665466a94c196e26b92ecfb", token: "141" },
   // PXL POD
-  { slug: "pxl-pod-42-88b3",  contract: "0xaee022552b539db18297d7481b6d547c622488b3", token: "42" },
-  { slug: "pxl-pod-55-88b3",  contract: "0xaee022552b539db18297d7481b6d547c622488b3", token: "55" },
-  { slug: "pxl-pod-61-88b3",  contract: "0xaee022552b539db18297d7481b6d547c622488b3", token: "61" },
-  { slug: "pxl-pod-108-88b3", contract: "0xaee022552b539db18297d7481b6d547c622488b3", token: "108" },
-  { slug: "pxl-pod-122-88b3", contract: "0xaee022552b539db18297d7481b6d547c622488b3", token: "122" },
-  { slug: "pxl-pod-175-88b3", contract: "0xaee022552b539db18297d7481b6d547c622488b3", token: "175" },
-  { slug: "pxl-pod-209-88b3", contract: "0xaee022552b539db18297d7481b6d547c622488b3", token: "209" },
-  { slug: "pxl-pod-215-88b3", contract: "0xaee022552b539db18297d7481b6d547c622488b3", token: "215" },
-  { slug: "pxl-pod-241-88b3", contract: "0xaee022552b539db18297d7481b6d547c622488b3", token: "241" },
-  { slug: "pxl-pod-242-88b3", contract: "0xaee022552b539db18297d7481b6d547c622488b3", token: "242" },
+  { slug: "pxl-pod-42",  contract: "0xaee022552b539db18297d7481b6d547c622488b3", token: "42" },
+  { slug: "pxl-pod-55",  contract: "0xaee022552b539db18297d7481b6d547c622488b3", token: "55" },
+  { slug: "pxl-pod-61",  contract: "0xaee022552b539db18297d7481b6d547c622488b3", token: "61" },
+  { slug: "pxl-pod-108", contract: "0xaee022552b539db18297d7481b6d547c622488b3", token: "108" },
+  { slug: "pxl-pod-122", contract: "0xaee022552b539db18297d7481b6d547c622488b3", token: "122" },
+  { slug: "pxl-pod-175", contract: "0xaee022552b539db18297d7481b6d547c622488b3", token: "175" },
+  { slug: "pxl-pod-209", contract: "0xaee022552b539db18297d7481b6d547c622488b3", token: "209" },
+  { slug: "pxl-pod-215", contract: "0xaee022552b539db18297d7481b6d547c622488b3", token: "215" },
+  { slug: "pxl-pod-241", contract: "0xaee022552b539db18297d7481b6d547c622488b3", token: "241" },
+  { slug: "pxl-pod-242", contract: "0xaee022552b539db18297d7481b6d547c622488b3", token: "242" },
   // X0X
-  { slug: "x0x-576-3753",     contract: "0x03699f24c1a96d91c261f3f6574e8aeba6bc3753", token: "576" },
+  { slug: "x0x-576",     contract: "0x03699f24c1a96d91c261f3f6574e8aeba6bc3753", token: "576" },
 ];
 
 const results = [];

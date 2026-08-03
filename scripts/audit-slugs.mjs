@@ -138,6 +138,49 @@ for (const [dir, set, kind] of [
   checkKeys(dir, files.map((f) => f.replace(/\.json$/, "")), set, kind);
 }
 
+// ------------------------------------------- scripts/*.json intermediates ----
+// The trait pipeline's inputs are keyed by piece slug too, and they drifted for a
+// month after the 2026-07 rename without anything noticing: build-traits-data.mjs
+// only ever ADDED on merge, so it wrote 276 dead-slug entries beside the live ones
+// while the site carried on working. Two shapes in use — `{ "<slug>": {...} }` and
+// `[ { slug: "<slug>", … } ]` — so both are checked. Named explicitly rather than
+// globbed: scripts/ also holds outputs and one-off scratch files that are not
+// slug-keyed, and a glob would produce noise on those.
+const INTERMEDIATES_BY_KEY = [
+  "asset-sources.json",
+  "manual-traits.json",
+  "piece-metadata.json",
+  "pxl-traits.json",
+  "trait-map.json",
+];
+const INTERMEDIATES_BY_RECORD = [
+  "fidenza-traits.json",
+  "ringer-bg.json",
+  "winds-traits.json",
+  "human-unreadable-traits.json",
+  "biome-lumina-traits.json",
+  "synthetic-dreams-traits.json",
+  "grifters-traits.json",
+  "masks-traits.json",
+  "qql-traits.json",
+];
+for (const f of INTERMEDIATES_BY_KEY) {
+  const p = join(ROOT, "scripts", f);
+  if (!existsSync(p)) continue;
+  const keys = real(JSON.parse(readFileSync(p, "utf8")));
+  counts[`scripts/${f}`] = keys.length;
+  checkKeys(`scripts/${f}`, keys, P, "piece");
+}
+for (const f of INTERMEDIATES_BY_RECORD) {
+  const p = join(ROOT, "scripts", f);
+  if (!existsSync(p)) continue;
+  const arr = JSON.parse(readFileSync(p, "utf8"));
+  if (!Array.isArray(arr)) { fail(`scripts/${f}: expected an array of records`); continue; }
+  const slugs = arr.map((r) => r?.slug).filter((s) => typeof s === "string");
+  counts[`scripts/${f}`] = slugs.length;
+  checkKeys(`scripts/${f}`, slugs, P, "piece");
+}
+
 // ------------------------------------------------------------- redirects ----
 // A redirect whose source is ALSO a live slug would shadow a real page; one whose
 // destination doesn't exist sends a shared link to a 404 (hard, since

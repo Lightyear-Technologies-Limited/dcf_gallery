@@ -14,7 +14,7 @@ const BASE = `https://admin.xcopy.art/media/original_images/${CONTRACT}-`;
 let src = readFileSync(filePath, "utf-8");
 
 // Find each Grifter piece (block ending with closing })
-const blockRe = /\{\s*id: '(grifters-\d+-c1f3)',[\s\S]*?\n\s\s\}/g;
+const blockRe = /\{\s*id: '(grifters-\d+)',[\s\S]*?\n\s\s\}/g;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const updates = [];
 

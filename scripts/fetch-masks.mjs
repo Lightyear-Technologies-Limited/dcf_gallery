@@ -8,7 +8,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const data = readFileSync(resolve(__dirname, "..", "src/lib/data.ts"), "utf-8");
 
 const slugs = [];
-const re = /slug: '(masks-of-luci-\d+-249a)'/g;
+const re = /slug: '(masks-of-luci-\d+)'/g;
 let m;
 while ((m = re.exec(data)) !== null) slugs.push(m[1]);
 console.log(`Found ${slugs.length} Masks`);

@@ -5,11 +5,11 @@
  * Supports inline row tags after piece slugs to group pieces into rows:
  *
  *   "ringers": [
- *     "ringers-13000273-d270", (1)
- *     "ringers-13000708-d270", (1)
- *     "ringers-13000117-d270", (2)
- *     "ringers-13000014-d270",
- *     "ringers-13000025-d270"
+ *     "ringers-13000273", (1)
+ *     "ringers-13000708", (1)
+ *     "ringers-13000117", (2)
+ *     "ringers-13000014",
+ *     "ringers-13000025"
  *   ]
  *
  * Idempotent - running repeatedly gives the same result.

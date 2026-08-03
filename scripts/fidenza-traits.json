@@ -1,6 +1,6 @@
 [
   {
-    "slug": "fidenza-5-d270",
+    "slug": "fidenza-5",
     "tokenId": "78000005",
     "serial": 5,
     "Turbulence": "Med",
@@ -16,7 +16,7 @@
     "Density": "High"
   },
   {
-    "slug": "fidenza-19-d270",
+    "slug": "fidenza-19",
     "tokenId": "78000019",
     "serial": 19,
     "Turbulence": "None",
@@ -32,7 +32,7 @@
     "Density": "High"
   },
   {
-    "slug": "fidenza-28-d270",
+    "slug": "fidenza-28",
     "tokenId": "78000028",
     "serial": 28,
     "Turbulence": "Med",
@@ -48,7 +48,7 @@
     "Density": "High"
   },
   {
-    "slug": "fidenza-60-d270",
+    "slug": "fidenza-60",
     "tokenId": "78000060",
     "serial": 60,
     "Turbulence": "Med",
@@ -64,7 +64,7 @@
     "Density": "Medium"
   },
   {
-    "slug": "fidenza-90-d270",
+    "slug": "fidenza-90",
     "tokenId": "78000090",
     "serial": 90,
     "Turbulence": "None",
@@ -80,7 +80,7 @@
     "Density": "Medium"
   },
   {
-    "slug": "fidenza-98-d270",
+    "slug": "fidenza-98",
     "tokenId": "78000098",
     "serial": 98,
     "Turbulence": "None",
@@ -96,7 +96,7 @@
     "Density": "Medium"
   },
   {
-    "slug": "fidenza-145-d270",
+    "slug": "fidenza-145",
     "tokenId": "78000145",
     "serial": 145,
     "Turbulence": "Low",
@@ -112,7 +112,7 @@
     "Density": "Medium"
   },
   {
-    "slug": "fidenza-169-d270",
+    "slug": "fidenza-169",
     "tokenId": "78000169",
     "serial": 169,
     "Turbulence": "None",
@@ -128,7 +128,7 @@
     "Density": "High"
   },
   {
-    "slug": "fidenza-180-d270",
+    "slug": "fidenza-180",
     "tokenId": "78000180",
     "serial": 180,
     "Turbulence": "High",
@@ -144,7 +144,7 @@
     "Density": "High"
   },
   {
-    "slug": "fidenza-200-d270",
+    "slug": "fidenza-200",
     "tokenId": "78000200",
     "serial": 200,
     "Turbulence": "Low",
@@ -160,7 +160,7 @@
     "Density": "High"
   },
   {
-    "slug": "fidenza-231-d270",
+    "slug": "fidenza-231",
     "tokenId": "78000231",
     "serial": 231,
     "Turbulence": "Low",
@@ -176,7 +176,7 @@
     "Density": "High"
   },
   {
-    "slug": "fidenza-253-d270",
+    "slug": "fidenza-253",
     "tokenId": "78000253",
     "serial": 253,
     "Turbulence": "None",
@@ -192,7 +192,7 @@
     "Density": "High"
   },
   {
-    "slug": "fidenza-256-d270",
+    "slug": "fidenza-256",
     "tokenId": "78000256",
     "serial": 256,
     "Turbulence": "High",
@@ -208,7 +208,7 @@
     "Density": "High"
   },
   {
-    "slug": "fidenza-262-d270",
+    "slug": "fidenza-262",
     "tokenId": "78000262",
     "serial": 262,
     "Turbulence": "Med",
@@ -224,7 +224,7 @@
     "Density": "High"
   },
   {
-    "slug": "fidenza-342-d270",
+    "slug": "fidenza-342",
     "tokenId": "78000342",
     "serial": 342,
     "Turbulence": "Med",
@@ -240,7 +240,7 @@
     "Density": "Medium"
   },
   {
-    "slug": "fidenza-378-d270",
+    "slug": "fidenza-378",
     "tokenId": "78000378",
     "serial": 378,
     "Turbulence": "Low",
@@ -256,7 +256,7 @@
     "Density": "High"
   },
   {
-    "slug": "fidenza-437-d270",
+    "slug": "fidenza-437",
     "tokenId": "78000437",
     "serial": 437,
     "Turbulence": "Med",
@@ -272,7 +272,7 @@
     "Density": "High"
   },
   {
-    "slug": "fidenza-456-d270",
+    "slug": "fidenza-456",
     "tokenId": "78000456",
     "serial": 456,
     "Turbulence": "Med",
@@ -288,7 +288,7 @@
     "Density": "High AF"
   },
   {
-    "slug": "fidenza-573-d270",
+    "slug": "fidenza-573",
     "tokenId": "78000573",
     "serial": 573,
     "Turbulence": "Low",
@@ -304,7 +304,7 @@
     "Density": "Medium"
   },
   {
-    "slug": "fidenza-587-d270",
+    "slug": "fidenza-587",
     "tokenId": "78000587",
     "serial": 587,
     "Turbulence": "High",
@@ -320,7 +320,7 @@
     "Density": "High"
   },
   {
-    "slug": "fidenza-593-d270",
+    "slug": "fidenza-593",
     "tokenId": "78000593",
     "serial": 593,
     "Turbulence": "Low",
@@ -336,7 +336,7 @@
     "Density": "High"
   },
   {
-    "slug": "fidenza-609-d270",
+    "slug": "fidenza-609",
     "tokenId": "78000609",
     "serial": 609,
     "Turbulence": "High",
@@ -352,7 +352,7 @@
     "Density": "High"
   },
   {
-    "slug": "fidenza-647-d270",
+    "slug": "fidenza-647",
     "tokenId": "78000647",
     "serial": 647,
     "Turbulence": "Med",
@@ -368,7 +368,7 @@
     "Density": "Medium"
   },
   {
-    "slug": "fidenza-650-d270",
+    "slug": "fidenza-650",
     "tokenId": "78000650",
     "serial": 650,
     "Turbulence": "Med",
@@ -384,7 +384,7 @@
     "Density": "High"
   },
   {
-    "slug": "fidenza-713-d270",
+    "slug": "fidenza-713",
     "tokenId": "78000713",
     "serial": 713,
     "Turbulence": "Low",
@@ -400,7 +400,7 @@
     "Density": "High"
   },
   {
-    "slug": "fidenza-718-d270",
+    "slug": "fidenza-718",
     "tokenId": "78000718",
     "serial": 718,
     "Turbulence": "Med",
@@ -416,7 +416,7 @@
     "Density": "High AF"
   },
   {
-    "slug": "fidenza-819-d270",
+    "slug": "fidenza-819",
     "tokenId": "78000819",
     "serial": 819,
     "Turbulence": "Med",
@@ -432,7 +432,7 @@
     "Density": "High"
   },
   {
-    "slug": "fidenza-929-d270",
+    "slug": "fidenza-929",
     "tokenId": "78000929",
     "serial": 929,
     "Turbulence": "None",
@@ -448,7 +448,7 @@
     "Density": "High"
   },
   {
-    "slug": "fidenza-943-d270",
+    "slug": "fidenza-943",
     "tokenId": "78000943",
     "serial": 943,
     "Turbulence": "Med",
@@ -464,7 +464,7 @@
     "Density": "High"
   },
   {
-    "slug": "fidenza-984-d270",
+    "slug": "fidenza-984",
     "tokenId": "78000984",
     "serial": 984,
     "Turbulence": "Low",

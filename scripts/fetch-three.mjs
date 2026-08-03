@@ -11,7 +11,7 @@ const data = readFileSync(resolve(__dirname, "..", "src/lib/data.ts"), "utf-8");
 const COLLECTIONS = [
   { name: "biome-lumina", pattern: /slug: '(dataland-biome-lumina-\d+-1c9d)'/g, contract: "0xb097fba49a679a61b18b7079b99a953ca2691c9d", extract: (s) => s.match(/dataland-biome-lumina-(\d+)-/)[1] },
   { name: "synthetic-dreams", pattern: /slug: '(synthetic-dreams-\d+-be3a)'/g, contract: "0x183368d767b299681fdf660233e39f9f8cf8be3a", extract: (s) => s.match(/synthetic-dreams-(\d+)-/)[1] },
-  { name: "grifters", pattern: /slug: '(grifters-\d+-c1f3)'/g, contract: "0xc143bbfcdbdbed6d454803804752a064a622c1f3", extract: (s) => s.match(/grifters-(\d+)-/)[1] },
+  { name: "grifters", pattern: /slug: '(grifters-\d+)'/g, contract: "0xc143bbfcdbdbed6d454803804752a064a622c1f3", extract: (s) => s.match(/grifters-(\d+)-/)[1] },
 ];
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));

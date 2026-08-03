@@ -63,8 +63,8 @@ async function tondo(buf) {
 }
 
 const SKULLS = {
-  "skulls-of-luci-12-d27c": "https://arweave.net/mnnvYqIxCkPj7Hx5B_YBaOAkVwspaNnb4D3b39RIc1g",
-  "skulls-of-luci-20-d27c": "https://arweave.net/lyjTnF_faOuiMUNUSvCeiZ9fhaI4kuOh8elK0icZBtE",
+  "skulls-of-luci-12": "https://arweave.net/mnnvYqIxCkPj7Hx5B_YBaOAkVwspaNnb4D3b39RIc1g",
+  "skulls-of-luci-20": "https://arweave.net/lyjTnF_faOuiMUNUSvCeiZ9fhaI4kuOh8elK0icZBtE",
 };
 
 const manifestPath = resolve(ROOT, "src/lib/provenance.data.json");

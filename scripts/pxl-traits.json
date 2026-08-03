@@ -1,61 +1,61 @@
 {
-  "pxl-dex-105-ecfb": {
+  "pxl-dex-105": {
     "Pixels": "500000",
     "Allowance": "500000"
   },
-  "pxl-dex-107-ecfb": {
+  "pxl-dex-107": {
     "Pixels": "450000",
     "Allowance": "0"
   },
-  "pxl-dex-130-ecfb": {
+  "pxl-dex-130": {
     "Pixels": "500000",
     "Allowance": "500000"
   },
-  "pxl-dex-139-ecfb": {
+  "pxl-dex-139": {
     "Pixels": "500000",
     "Allowance": "500000"
   },
-  "pxl-dex-141-ecfb": {
+  "pxl-dex-141": {
     "Pixels": "1000000",
     "Allowance": "0"
   },
-  "pxl-pod-42-88b3": {
+  "pxl-pod-42": {
     "Pixels": "1000000",
     "Pods": "1"
   },
-  "pxl-pod-55-88b3": {
+  "pxl-pod-55": {
     "Pixels": "1000000",
     "Pods": "1"
   },
-  "pxl-pod-61-88b3": {
+  "pxl-pod-61": {
     "Pixels": "1000000",
     "Pods": "1"
   },
-  "pxl-pod-108-88b3": {
+  "pxl-pod-108": {
     "Pixels": "1000000",
     "Pods": "1"
   },
-  "pxl-pod-122-88b3": {
+  "pxl-pod-122": {
     "Pixels": "1000000",
     "Pods": "1"
   },
-  "pxl-pod-175-88b3": {
+  "pxl-pod-175": {
     "Pixels": "1000000",
     "Pods": "1"
   },
-  "pxl-pod-209-88b3": {
+  "pxl-pod-209": {
     "Pixels": "1000000",
     "Pods": "1"
   },
-  "pxl-pod-215-88b3": {
+  "pxl-pod-215": {
     "Pixels": "1000000",
     "Pods": "1"
   },
-  "pxl-pod-241-88b3": {
+  "pxl-pod-241": {
     "Pixels": "1000000",
     "Pods": "2"
   },
-  "pxl-pod-242-88b3": {
+  "pxl-pod-242": {
     "Pixels": "1000000",
     "Pods": "2"
   }

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Adds inline trait + position annotations to curation.json pieceOrder entries.
- *   "fidenza-145-d270", ()  →  "fidenza-145-d270", () // [7/30] Baked, Uniform
+ *   "fidenza-145", ()  →  "fidenza-145", () // [7/30] Baked, Uniform
  *
  * Format: [position/total] trait summary
  *   - position = 1-based index within the collection's current order
