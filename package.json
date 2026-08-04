@@ -19,6 +19,7 @@
     "verify-pins": "node scripts/verify-pins.mjs",
     "audit": "node scripts/audit-assets.mjs",
     "audit:slugs": "node scripts/audit-slugs.mjs",
+    "check:wide-tier": "node scripts/check-wide-tier.mjs",
     "test:e2e": "playwright test",
     "onboard": "node scripts/onboard.mjs",
     "curate": "node scripts/fix-curation.mjs"

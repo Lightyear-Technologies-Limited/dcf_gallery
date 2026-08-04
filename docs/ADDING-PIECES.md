@@ -70,10 +70,57 @@ npm run build
    classifies storage. Writes `scripts/asset-sources.json`. *Needs `ALCHEMY_API_KEY`.*
 2. **`npm run pin`** (`pin-assets.mjs`) — downloads each canonical original, pins
    it to the Filebase IPFS bucket (→ CID + sha256), generates **sharp** detail
-   variants (768/1280/1920, webp q95) + a base64 **LQIP**, and writes
-   `src/lib/provenance.data.json`. *Needs Filebase creds.*
+   variants (768/1280/1920 — plus 2560 for collections listed in
+   `EXTRA_WIDE_COLLECTIONS` — webp q95 with `smartSubsample`) + a base64 **LQIP**,
+   and writes `src/lib/provenance.data.json`. *Needs Filebase creds.*
 
 Both skip pieces already done, so re-running is cheap and safe.
+
+### Should a collection get the 2560w tier?
+
+```bash
+npm run check:wide-tier -- --collection <slug> [--limit N]
+```
+
+Answers it with a measurement instead of a guess, and does so *before* you commit
+to re-pinning. It samples masters across the collection and scores how much detail
+capping at 1920w throws away. Reference points: Piano Blossoms 14.8–22.3 (tier
+shipped, the artist could see the difference), Masks of Luci ~4.3 and a synthetic
+flat-but-wide master ~5.5 (rejected). Advisory only — in the 8–12 band, look at 1:1
+crops yourself.
+
+Note the spread *within* Piano Blossoms: one piece is not representative of a
+collection, which is why it samples several and reports a mean.
+
+### Rolling out an encode change (`--upgrade`)
+
+Variant encode settings are stamped on each manifest entry as `variantEncoder`.
+When the encode changes — widths, quality, subsampling — bump `VARIANT_ENCODER` in
+`pin-assets.mjs` and sweep:
+
+```bash
+node scripts/pin-assets.mjs --upgrade      # only pieces whose stamp is stale
+```
+
+Re-run until it reports `Pinned 0`. Use this rather than `--refresh` for a
+catalogue-wide re-encode: a full sweep re-downloads **~4.2 GB** of masters (15 are
+over 50 MB) and takes a while, and `--refresh` is *not* resumable — it ignores the
+already-done check, so an interrupted run restarts from zero. `--upgrade` is
+idempotent, and the manifest is checkpointed every 5 pieces, so an interruption
+costs at most a few pieces of work.
+
+Two things worth knowing before running it:
+
+- **A partially-complete sweep is valid**, not broken — the manifest just holds a
+  mix of old and new encodes, and every piece still renders. There is no need to
+  finish in one sitting.
+- **`--dry` still downloads the masters** (it skips only the encode and the
+  upload), so it is not a cheap preview. To see how many pieces remain, read the
+  manifest instead: count entries with `variants` whose `variantEncoder` differs
+  from the current constant.
+
+The preservation master is never re-uploaded by an upgrade — its CID and sha256 are
+untouched, and only the derived variants change. Verify that after any sweep.
 
 ---
 
