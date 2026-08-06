@@ -167,16 +167,16 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
   // letterbox slightly but the gallery 320-of-321 has real dimensions.
   const imgW = aspect?.w ?? 1600;
   const imgH = aspect?.h ?? 1200;
-  // Tall (portrait) pieces get a fill-column-width treatment rather than the
-  // viewport-height cap the rest of the pieces use. The height cap made
-  // portrait art render smaller than it should — a 5:7 SVG in a 45% column,
-  // capped to `100dvh - 14rem`, ended up ~78% of its column width with visible
-  // gutters. Removing the cap for portrait lets the image fill its column
-  // (SVG scales losslessly; the extra vertical scroll is a fair trade for the
-  // artwork actually reading as prominent).
+  // Tall (portrait) pieces get a viewport-bounded box that fills the column
+  // width AND stays within one screen height. Wanting both is a real
+  // constraint: the previous `max-h-[calc(100dvh-14rem)]` cap left portrait
+  // pieces at ~78% of their column with visible gutters (chrome above the
+  // artwork is only ~4rem, so a 14rem allowance was over-conservative). The
+  // tighter 6rem allowance lets a portrait image reach ~90-94% of its column
+  // width while still fitting one screen without scroll.
   const isTallSource = aspect ? aspect.w < aspect.h : false;
   const stillImgClass = isTallSource
-    ? "block w-full h-auto object-contain mx-auto"
+    ? "block w-full h-auto max-h-[calc(100dvh-6rem)] object-contain mx-auto"
     : "block w-auto h-auto max-w-full max-h-[calc(100dvh-14rem)] object-contain mx-auto";
   // Artwork rendering — pick one of four paths (video / interactive HTML /
   // animated GIF / still image). Zoom was previously wired here for stills
