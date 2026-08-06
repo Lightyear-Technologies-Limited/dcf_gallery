@@ -167,6 +167,17 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
   // letterbox slightly but the gallery 320-of-321 has real dimensions.
   const imgW = aspect?.w ?? 1600;
   const imgH = aspect?.h ?? 1200;
+  // Tall (portrait) pieces get a fill-column-width treatment rather than the
+  // viewport-height cap the rest of the pieces use. The height cap made
+  // portrait art render smaller than it should — a 5:7 SVG in a 45% column,
+  // capped to `100dvh - 14rem`, ended up ~78% of its column width with visible
+  // gutters. Removing the cap for portrait lets the image fill its column
+  // (SVG scales losslessly; the extra vertical scroll is a fair trade for the
+  // artwork actually reading as prominent).
+  const isTallSource = aspect ? aspect.w < aspect.h : false;
+  const stillImgClass = isTallSource
+    ? "block w-full h-auto object-contain mx-auto"
+    : "block w-auto h-auto max-w-full max-h-[calc(100dvh-14rem)] object-contain mx-auto";
   // Artwork rendering — pick one of four paths (video / interactive HTML /
   // animated GIF / still image). Zoom was previously wired here for stills
   // and GIFs, then removed: at our 1920w variant cap the zoom quality
@@ -210,7 +221,7 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
         width={imgW}
         height={imgH}
         decoding="async"
-        className="block w-auto h-auto max-w-full max-h-[calc(100dvh-14rem)] object-contain mx-auto"
+        className={stillImgClass}
         style={lqip ? { backgroundImage: `url(${lqip})`, backgroundSize: "cover", backgroundPosition: "center" } : undefined}
       />
     ) : (
@@ -219,7 +230,7 @@ export default function PieceLayout({ image, detailSrc, detailSrcSet, lqip, vide
         alt={title}
         width={imgW}
         height={imgH}
-        className="block w-auto h-auto max-w-full max-h-[calc(100dvh-14rem)] object-contain mx-auto"
+        className={stillImgClass}
         priority
         quality={95}
         sizes="(max-width: 768px) 90vw, 60vw"
