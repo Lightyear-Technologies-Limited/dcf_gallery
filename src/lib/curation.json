@@ -257,8 +257,9 @@
       "cryptopunks-6435": 10,
       "cryptopunks-8259": 10,
       "cryptopunks-4253": 10,
-      "cryptopunks-1887": 10,
-      "cryptopunks-9665": 10
+      "cryptopunks-2303": 10,
+      "cryptopunks-1887": 11,
+      "cryptopunks-9665": 11
     },
     "human-unreadable": {
       "x-ray-machine-1": 1,
@@ -590,8 +591,9 @@
       "cryptopunks-6435", (10)
       "cryptopunks-8259", (10)
       "cryptopunks-4253", (10)
-      "cryptopunks-1887", (10)
-      "cryptopunks-9665" (10)
+      "cryptopunks-2303", (10)
+      "cryptopunks-1887", (11)
+      "cryptopunks-9665" (11)
     ],
     "human-unreadable": [
       "x-ray-machine-1", (1)
