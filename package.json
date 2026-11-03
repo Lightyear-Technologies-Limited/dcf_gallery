@@ -22,7 +22,7 @@
     "check:wide-tier": "node scripts/check-wide-tier.mjs",
     "test:e2e": "playwright test",
     "onboard": "node scripts/onboard.mjs",
-    "curate": "node scripts/fix-curation.mjs"
+    "curate": "node scripts/fix-curation.mjs && node scripts/annotate-curation.mjs"
   },
   "dependencies": {
     "next": "^16.2.12",

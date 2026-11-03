@@ -464,376 +464,376 @@
   },
   "pieceOrder": {
     "piano-blossoms": [
-      "piano-blossoms-1", (1)
-      "piano-blossoms-2", (1)
-      "piano-blossoms-3", (1)
-      "piano-blossoms-4", (2)
-      "piano-blossoms-5" (2)
+      "piano-blossoms-1", (1) // [1/5] Wonderland
+      "piano-blossoms-2", (1) // [2/5] interblossom
+      "piano-blossoms-3", (1) // [3/5] Golden Afternoon
+      "piano-blossoms-4", (2) // [4/5] Muse Blossoms
+      "piano-blossoms-5" (2) // [5/5] Flower Demons
     ],
     "her-favorite-flowers": [
-      "her-favorite-flowers-2" (1)
+      "her-favorite-flowers-2" (1) // [1/1] kissed by the Moonlight
     ],
     "superrare-beeple": [
-      "superrare-beeple-24644" (1)
+      "superrare-beeple-24644" (1) // [1/1] TIME The Future of Business (Beeple Edition)
     ],
     "superrare-dmitri-cherniak": [
-      "superrare-dmitri-cherniak-26901", (1)
-      "superrare-dmitri-cherniak-26902" (1)
+      "superrare-dmitri-cherniak-26901", (1) // [1/2] A slight lack of symmetry can cause so much pain
+      "superrare-dmitri-cherniak-26902" (1) // [2/2] A slight lack of symmetry can cause so much pain
     ],
     "ringers": [
-      "ringers-13000273", (1)
-      "ringers-13000708", (1)
-      "ringers-13000972", (4)
-      "ringers-13000117", (4)
-      "ringers-13000654", (4)
-      "ringers-13000064", (4)
-      "ringers-13000549", (2)
-      "ringers-13000338", (2)
-      "ringers-13000303", (2)
-      "ringers-13000342", (3)
-      "ringers-13000715", (3)
-      "ringers-13000952", (3)
-      "ringers-13000058", (5)
-      "ringers-13000523", (5)
-      "ringers-13000214", (5)
-      "ringers-13000174", (5)
-      "ringers-13000089", (6)
-      "ringers-13000268", (6)
-      "ringers-13000374", (6)
-      "ringers-13000287", (6)
-      "ringers-13000241", (6)
-      "ringers-13000505", (7)
-      "ringers-13000086", (7)
-      "ringers-13000698", (7)
-      "ringers-13000520", (7)
-      "ringers-13000108", (7)
-      "ringers-13000680", (8)
-      "ringers-13000025", (8)
-      "ringers-13000492", (8)
-      "ringers-13000075", (8)
-      "ringers-13000209", (8)
-      "ringers-13000391", (9)
-      "ringers-13000392", (9)
-      "ringers-13000014", (9)
-      "ringers-13000696", (9)
-      "ringers-13000792" (9)
+      "ringers-13000273", (1) // [1/36] White, 5 pegs
+      "ringers-13000708", (1) // [2/36] Black, 5 pegs
+      "ringers-13000972", (4) // [3/36] Black, 6 pegs
+      "ringers-13000117", (4) // [4/36] Black, 14 pegs
+      "ringers-13000654", (4) // [5/36] Black, 17 pegs
+      "ringers-13000064", (4) // [6/36] Black, 7 pegs
+      "ringers-13000549", (2) // [7/36] Black, smol boi, 10 pegs
+      "ringers-13000338", (2) // [8/36] White, 25 pegs
+      "ringers-13000303", (2) // [9/36] Black, 6 pegs
+      "ringers-13000342", (3) // [10/36] Yellow, 10 pegs
+      "ringers-13000715", (3) // [11/36] Yellow, 14 pegs
+      "ringers-13000952", (3) // [12/36] Yellow, 13 pegs
+      "ringers-13000058", (5) // [13/36] Black, 11 pegs
+      "ringers-13000523", (5) // [14/36] Black, 9 pegs
+      "ringers-13000214", (5) // [15/36] Black, 8 pegs
+      "ringers-13000174", (5) // [16/36] Black, 9 pegs
+      "ringers-13000089", (6) // [17/36] White, 16 pegs
+      "ringers-13000268", (6) // [18/36] White, smol boi, 8 pegs
+      "ringers-13000374", (6) // [19/36] White, 4 pegs
+      "ringers-13000287", (6) // [20/36] White, smol boi, 12 pegs
+      "ringers-13000241", (6) // [21/36] White, 8 pegs
+      "ringers-13000505", (7) // [22/36] White, 9 pegs
+      "ringers-13000086", (7) // [23/36] White, 18 pegs
+      "ringers-13000698", (7) // [24/36] White, 22 pegs
+      "ringers-13000520", (7) // [25/36] White, 5 pegs
+      "ringers-13000108", (7) // [26/36] White, 10 pegs
+      "ringers-13000680", (8) // [27/36] Black, 6 pegs
+      "ringers-13000025", (8) // [28/36] Black, 10 pegs
+      "ringers-13000492", (8) // [29/36] Black, smol boi, 12 pegs
+      "ringers-13000075", (8) // [30/36] Black, 5 pegs
+      "ringers-13000209", (8) // [31/36] Black, 4 pegs
+      "ringers-13000391", (9) // [32/36] Black, 12 pegs
+      "ringers-13000392", (9) // [33/36] Black, 10 pegs
+      "ringers-13000014", (9) // [34/36] Black, 29 pegs
+      "ringers-13000696", (9) // [35/36] Black, 13 pegs
+      "ringers-13000792" (9) // [36/36] Black, 6 pegs
     ],
     "lightyears": [
-      "lightyears-1", ()
-      "lightyears-13", ()
-      "lightyears-30", ()
-      "lightyears-42", ()
-      "lightyears-67", ()
-      "lightyears-72" ()
+      "lightyears-1", () // [1/6]
+      "lightyears-13", () // [2/6]
+      "lightyears-30", () // [3/6]
+      "lightyears-42", () // [4/6]
+      "lightyears-67", () // [5/6]
+      "lightyears-72" () // [6/6]
     ],
     "lights": [
-      "lights-3" ()
+      "lights-3" () // [1/1] Raster und Spektrum
     ],
     "pxl-dex": [
-      "pxl-dex-105", (1)
-      "pxl-dex-130", (1)
-      "pxl-dex-139", (1)
-      "pxl-dex-107", (1)
-      "pxl-dex-141" (1)
+      "pxl-dex-105", (1) // [1/5]
+      "pxl-dex-130", (1) // [2/5]
+      "pxl-dex-139", (1) // [3/5]
+      "pxl-dex-107", (1) // [4/5]
+      "pxl-dex-141" (1) // [5/5]
     ],
     "pxl-pod": [
-      "pxl-pod-241", (1)
-      "pxl-pod-242", (1)
-      "pxl-pod-42", (2)
-      "pxl-pod-55", (2)
-      "pxl-pod-61", (2)
-      "pxl-pod-108", (2)
-      "pxl-pod-122", (3)
-      "pxl-pod-175", (3)
-      "pxl-pod-209", (3)
-      "pxl-pod-215" (3)
+      "pxl-pod-241", (1) // [1/10]
+      "pxl-pod-242", (1) // [2/10]
+      "pxl-pod-42", (2) // [3/10]
+      "pxl-pod-55", (2) // [4/10]
+      "pxl-pod-61", (2) // [5/10]
+      "pxl-pod-108", (2) // [6/10]
+      "pxl-pod-122", (3) // [7/10]
+      "pxl-pod-175", (3) // [8/10]
+      "pxl-pod-209", (3) // [9/10]
+      "pxl-pod-215" (3) // [10/10]
     ],
     "cryptopunks": [
-      "cryptopunks-269", (1)
-      "cryptopunks-7144", (1)
-      "cryptopunks-1568", (2)
-      "cryptopunks-4926", (2)
-      "cryptopunks-2550", (2)
-      "cryptopunks-4752", (3)
-      "cryptopunks-8779", (3)
-      "cryptopunks-6932", (3)
-      "cryptopunks-1775", (3)
-      "cryptopunks-5381", (4)
-      "cryptopunks-9133", (4)
-      "cryptopunks-6648", (4)
-      "cryptopunks-7728", (4)
-      "cryptopunks-8564", (5)
-      "cryptopunks-4558", (5)
-      "cryptopunks-4978", (5)
-      "cryptopunks-2412", (5)
-      "cryptopunks-6479", (5)
-      "cryptopunks-5528", (6)
-      "cryptopunks-2758", (6)
-      "cryptopunks-8561", (6)
-      "cryptopunks-4063", (6)
-      "cryptopunks-9363", (6)
-      "cryptopunks-4776", (7)
-      "cryptopunks-4081", (7)
-      "cryptopunks-7364", (7)
-      "cryptopunks-6194", (7)
-      "cryptopunks-4853", (7)
-      "cryptopunks-9985", (8)
-      "cryptopunks-9968", (8)
-      "cryptopunks-4633", (8)
-      "cryptopunks-6788", (8)
-      "cryptopunks-5061", (8)
-      "cryptopunks-9019", (9)
-      "cryptopunks-6583", (9)
-      "cryptopunks-3745", (9)
-      "cryptopunks-3017", (9)
-      "cryptopunks-9405", (9)
-      "cryptopunks-7036", (10)
-      "cryptopunks-6435", (10)
-      "cryptopunks-8259", (10)
-      "cryptopunks-4253", (10)
-      "cryptopunks-2303", (10)
-      "cryptopunks-1887", (11)
-      "cryptopunks-9665" (11)
+      "cryptopunks-269", (1) // [1/45] Male 1, Luxurious Beard, Earring, Hoodie, Small Shades
+      "cryptopunks-7144", (1) // [2/45] Male 2, Hoodie, Vape
+      "cryptopunks-1568", (2) // [3/45] Male 1, Mustache, Hoodie, Clown Eyes Green
+      "cryptopunks-4926", (2) // [4/45] Male 1, Mole, Hoodie
+      "cryptopunks-2550", (2) // [5/45] Male 2, Goat, Hoodie
+      "cryptopunks-4752", (3) // [6/45]
+      "cryptopunks-8779", (3) // [7/45] Female 4, Tiara, Clown Eyes Blue
+      "cryptopunks-6932", (3) // [8/45] Female 1, Earring, Tiara, Clown Eyes Blue
+      "cryptopunks-1775", (3) // [9/45] Female 2, Earring, Tiara, Purple Eye Shadow
+      "cryptopunks-5381", (4) // [10/45]
+      "cryptopunks-9133", (4) // [11/45] Male 1, Luxurious Beard, Top Hat, Clown Eyes Green
+      "cryptopunks-6648", (4) // [12/45]
+      "cryptopunks-7728", (4) // [13/45] Male 2, Buck Teeth, Headband, Small Shades
+      "cryptopunks-8564", (5) // [14/45] Male 1, Big Beard, Cap Forward
+      "cryptopunks-4558", (5) // [15/45] Male 1, Smile, Normal Beard, Cap Forward
+      "cryptopunks-4978", (5) // [16/45] Male 1, Chinstrap, Cap Forward, Cigarette
+      "cryptopunks-2412", (5) // [17/45] Male 2, Front Beard, Cap Forward, Classic Shades
+      "cryptopunks-6479", (5) // [18/45] Male 2, Normal Beard, Cap Forward, Horned Rim Glasses
+      "cryptopunks-5528", (6) // [19/45] Male 2, Spots, Cap Forward
+      "cryptopunks-2758", (6) // [20/45] Male 1, Cap Forward, Cigarette, Clown Eyes Green
+      "cryptopunks-8561", (6) // [21/45] Male 2, Rosy Cheeks, Cap Forward
+      "cryptopunks-4063", (6) // [22/45] Male 3, Cap Forward, Classic Shades
+      "cryptopunks-9363", (6) // [23/45] Male 3, Cap Forward, Clown Eyes Green
+      "cryptopunks-4776", (7) // [24/45] Male 3, Big Beard, Frumpy Hair, Cigarette, Eye Patch
+      "cryptopunks-4081", (7) // [25/45] Male 1, Big Beard, Peak Spike
+      "cryptopunks-7364", (7) // [26/45] Male 2, Big Beard, Shaved Head, Vape
+      "cryptopunks-6194", (7) // [27/45] Male 3, Big Beard, Mohawk Thin, Eye Patch
+      "cryptopunks-4853", (7) // [28/45] Male, Big Beard, Peak Spike, Vape, Classic Shades
+      "cryptopunks-9985", (8) // [29/45] Male 3, Big Beard, Vampire Hair
+      "cryptopunks-9968", (8) // [30/45] Male 3, Big Beard, Vampire Hair, Big Shades
+      "cryptopunks-4633", (8) // [31/45] Male 1, Big Beard, Stringy Hair
+      "cryptopunks-6788", (8) // [32/45] Male 1, Big Beard, Earring, Stringy Hair
+      "cryptopunks-5061", (8) // [33/45] Male 1, Big Beard, Frumpy Hair
+      "cryptopunks-9019", (9) // [34/45] Male 3, Big Beard, Bandana, Medical Mask, VR
+      "cryptopunks-6583", (9) // [35/45] Male 2, Big Beard, Bandana
+      "cryptopunks-3745", (9) // [36/45] Male 2, Big Beard, Headband
+      "cryptopunks-3017", (9) // [37/45] Male 1, Frown, Big Beard, Knitted Cap, Eye Mask
+      "cryptopunks-9405", (9) // [38/45] Male 2, Big Beard, Knitted Cap, Small Shades
+      "cryptopunks-7036", (10) // [39/45]
+      "cryptopunks-6435", (10) // [40/45] Male 1, Front Beard, Fedora, Classic Shades
+      "cryptopunks-8259", (10) // [41/45] Male 2, Handlebars, Fedora, Horned Rim Glasses
+      "cryptopunks-4253", (10) // [42/45] Male 4, Earring, Fedora
+      "cryptopunks-2303", (10) // [43/45]
+      "cryptopunks-1887", (11) // [44/45] Male, Police Cap, Nerd Glasses
+      "cryptopunks-9665" (11) // [45/45] Male 4, Earring, Police Cap, Horned Rim Glasses
     ],
     "human-unreadable": [
-      "x-ray-machine-1", (1)
-      "human-unreadable-455000124", (1)
-      "human-unreadable-455000141", (2)
-      "human-unreadable-455000150", (2)
-      "human-unreadable-455000328", (2)
-      "human-unreadable-455000156", (2)
-      "human-unreadable-455000245", (3)
-      "human-unreadable-455000336", (3)
-      "human-unreadable-455000278", (3)
-      "human-unreadable-455000339", (3)
-      "human-unreadable-455000095", (4)
-      "human-unreadable-455000155", (4)
-      "human-unreadable-455000169", (4)
-      "human-unreadable-455000180", (4)
-      "human-unreadable-455000140", (5)
-      "human-unreadable-455000216", (5)
-      "human-unreadable-455000237", (5)
-      "human-unreadable-455000201" (5)
+      "x-ray-machine-1", (1) // [1/18]
+      "human-unreadable-455000124", (1) // [2/18] #124 Current, Vulnerable, R_Wrist
+      "human-unreadable-455000141", (2) // [3/18] #141 Relaxed, L_Elbow
+      "human-unreadable-455000150", (2) // [4/18] #150 Relaxed, L_Knee, Improv
+      "human-unreadable-455000328", (2) // [5/18] #328 Relaxed, L_Wrist
+      "human-unreadable-455000156", (2) // [6/18] #156 Current, L_Wrist, precise
+      "human-unreadable-455000245", (3) // [7/18] #245 Some clouds, R_Shoulder, Improv
+      "human-unreadable-455000336", (3) // [8/18] #336 Some clouds, R_Wrist
+      "human-unreadable-455000278", (3) // [9/18] #278 Some clouds, L_Wrist, short
+      "human-unreadable-455000339", (3) // [10/18] #339 Current, L_Elbow, erratic
+      "human-unreadable-455000095", (4) // [11/18] #95 Your crush responded, R_Ankle
+      "human-unreadable-455000155", (4) // [12/18] #155 Your crush responded, R_Shoulder, Less slow
+      "human-unreadable-455000169", (4) // [13/18] #169 Your crush responded, R_Wrist
+      "human-unreadable-455000180", (4) // [14/18] #180 Current, L_Elbow, precise
+      "human-unreadable-455000140", (5) // [15/18] #140 Bad news, Guarded, Head
+      "human-unreadable-455000216", (5) // [16/18] #216 Bad news, L_Knee, Pause
+      "human-unreadable-455000237", (5) // [17/18] #237 Bad news, R_Ankle, max travel
+      "human-unreadable-455000201" (5) // [18/18] #201 On edge, L_Wrist
     ],
     "repeat-as-necessary": [
-      "repeat-as-necessary-1", (1)
-      "repeat-as-necessary-12", (1)
-      "repeat-as-necessary-21", (1)
-      "repeat-as-necessary-40" (1)
+      "repeat-as-necessary-1", (1) // [1/4] Find the slowest breather, join them
+      "repeat-as-necessary-12", (1) // [2/4] Breath: soul steam
+      "repeat-as-necessary-21", (1) // [3/4] Disappear into breath
+      "repeat-as-necessary-40" (1) // [4/4] What is left, is
     ],
     "winds-of-yawanawa": [
-      "winds-of-yawanawa-989", (1)
-      "winds-of-yawanawa-103", (1)
-      "winds-of-yawanawa-638", (1)
-      "winds-of-yawanawa-764", (1)
-      "winds-of-yawanawa-917", (1)
-      "winds-of-yawanawa-487", (1)
-      "winds-of-yawanawa-701", (1)
-      "winds-of-yawanawa-227", (2)
-      "winds-of-yawanawa-856", (2)
-      "winds-of-yawanawa-281", (2)
-      "winds-of-yawanawa-712", (2)
-      "winds-of-yawanawa-755", (2)
-      "winds-of-yawanawa-888", (2)
-      "winds-of-yawanawa-912", (2)
-      "winds-of-yawanawa-62", (3)
-      "winds-of-yawanawa-371", (3)
-      "winds-of-yawanawa-442", (3)
-      "winds-of-yawanawa-681", (3)
-      "winds-of-yawanawa-921", (3)
-      "winds-of-yawanawa-373", (3)
-      "winds-of-yawanawa-695", (3)
-      "winds-of-yawanawa-697", (4)
-      "winds-of-yawanawa-746", (4)
-      "winds-of-yawanawa-700", (4)
-      "winds-of-yawanawa-213", (4)
-      "winds-of-yawanawa-863", (4)
-      "winds-of-yawanawa-962", (4)
-      "winds-of-yawanawa-20", (4)
-      "winds-of-yawanawa-118", (5)
-      "winds-of-yawanawa-265", (5)
-      "winds-of-yawanawa-572", (5)
-      "winds-of-yawanawa-629", (5)
-      "winds-of-yawanawa-637", (5)
-      "winds-of-yawanawa-870", (5)
-      "winds-of-yawanawa-154", (5)
-      "winds-of-yawanawa-524", (6)
-      "winds-of-yawanawa-600", (6)
-      "winds-of-yawanawa-688", (6)
-      "winds-of-yawanawa-745", (6)
-      "winds-of-yawanawa-495", (6)
-      "winds-of-yawanawa-692", (6)
-      "winds-of-yawanawa-754", (6)
-      "winds-of-yawanawa-369", (7)
-      "winds-of-yawanawa-741", (7)
-      "winds-of-yawanawa-878", (7)
-      "winds-of-yawanawa-178", (7)
-      "winds-of-yawanawa-554", (7)
-      "winds-of-yawanawa-704", (8)
-      "winds-of-yawanawa-717", (8)
-      "winds-of-yawanawa-738", (8)
-      "winds-of-yawanawa-451" (8)
+      "winds-of-yawanawa-989", (1) // [1/51] Cold, Flower
+      "winds-of-yawanawa-103", (1) // [2/51] Mild, Flower
+      "winds-of-yawanawa-638", (1) // [3/51] Mild, Flower
+      "winds-of-yawanawa-764", (1) // [4/51] Mild, Flower, Intense
+      "winds-of-yawanawa-917", (1) // [5/51] Mild, Flower
+      "winds-of-yawanawa-487", (1) // [6/51] Hot, Flower
+      "winds-of-yawanawa-701", (1) // [7/51] Hot, Flower
+      "winds-of-yawanawa-227", (2) // [8/51] Scorching, Fire, Intense
+      "winds-of-yawanawa-856", (2) // [9/51] Scorching, Fire, Tranquil
+      "winds-of-yawanawa-281", (2) // [10/51] Scorching, Sky
+      "winds-of-yawanawa-712", (2) // [11/51] Scorching, Sun, Spherical
+      "winds-of-yawanawa-755", (2) // [12/51] Scorching, Sun, Tranquil
+      "winds-of-yawanawa-888", (2) // [13/51] Scorching, Sun
+      "winds-of-yawanawa-912", (2) // [14/51] Scorching, Sun, Intense, Spherical
+      "winds-of-yawanawa-62", (3) // [15/51] Freezing, Wind
+      "winds-of-yawanawa-371", (3) // [16/51] Freezing, Moon
+      "winds-of-yawanawa-442", (3) // [17/51] Freezing, Moon
+      "winds-of-yawanawa-681", (3) // [18/51] Freezing, Moon
+      "winds-of-yawanawa-921", (3) // [19/51] Freezing, Moon, Spherical
+      "winds-of-yawanawa-373", (3) // [20/51] Freezing, Forest, Intense, Spherical
+      "winds-of-yawanawa-695", (3) // [21/51] Freezing, Earth
+      "winds-of-yawanawa-697", (4) // [22/51] Hot, Fire, Intense, Spherical
+      "winds-of-yawanawa-746", (4) // [23/51] Hot, Fire
+      "winds-of-yawanawa-700", (4) // [24/51] Hot, Sun
+      "winds-of-yawanawa-213", (4) // [25/51]
+      "winds-of-yawanawa-863", (4) // [26/51] Hot, Wind
+      "winds-of-yawanawa-962", (4) // [27/51] Hot, Wind, Spherical
+      "winds-of-yawanawa-20", (4) // [28/51] Hot, Earth, Tranquil
+      "winds-of-yawanawa-118", (5) // [29/51] Mild, Sky, Intense
+      "winds-of-yawanawa-265", (5) // [30/51] Mild, Sky
+      "winds-of-yawanawa-572", (5) // [31/51] Mild, Sky
+      "winds-of-yawanawa-629", (5) // [32/51] Mild, Sky
+      "winds-of-yawanawa-637", (5) // [33/51] Mild, Sky
+      "winds-of-yawanawa-870", (5) // [34/51] Mild, Sky
+      "winds-of-yawanawa-154", (5) // [35/51] Mild, Forest, Still
+      "winds-of-yawanawa-524", (6) // [36/51] Mild, Fire
+      "winds-of-yawanawa-600", (6) // [37/51] Mild, Sun
+      "winds-of-yawanawa-688", (6) // [38/51] Mild, Wind
+      "winds-of-yawanawa-745", (6) // [39/51] Mild, Earth
+      "winds-of-yawanawa-495", (6) // [40/51] Cold, Sky
+      "winds-of-yawanawa-692", (6) // [41/51] Cold, Sky
+      "winds-of-yawanawa-754", (6) // [42/51] Cold, Sky
+      "winds-of-yawanawa-369", (7) // [43/51] Cold, Moon
+      "winds-of-yawanawa-741", (7) // [44/51] Cold, Moon
+      "winds-of-yawanawa-878", (7) // [45/51] Cold, Moon
+      "winds-of-yawanawa-178", (7) // [46/51] Cold, Water, Tranquil
+      "winds-of-yawanawa-554", (7) // [47/51] Cold, Water, Intense, Spherical
+      "winds-of-yawanawa-704", (8) // [48/51] Cold, Star
+      "winds-of-yawanawa-717", (8) // [49/51] Cold, Wind
+      "winds-of-yawanawa-738", (8) // [50/51] Cold, Forest, Spherical
+      "winds-of-yawanawa-451" (8) // [51/51] Hot, Forest
     ],
     "dataland-biome-lumina": [
-      "dataland-biome-lumina-242", (1)
-      "dataland-biome-lumina-549", (1)
-      "dataland-biome-lumina-632", (1)
-      "dataland-biome-lumina-665", (1)
-      "dataland-biome-lumina-999", (1)
-      "dataland-biome-lumina-115", (2)
-      "dataland-biome-lumina-179", (2)
-      "dataland-biome-lumina-207", (2)
-      "dataland-biome-lumina-461", (2)
-      "dataland-biome-lumina-464", (2)
-      "dataland-biome-lumina-524", (3)
-      "dataland-biome-lumina-789", (3)
-      "dataland-biome-lumina-791", (3)
-      "dataland-biome-lumina-127", (3)
-      "dataland-biome-lumina-670", (4)
-      "dataland-biome-lumina-691", (4)
-      "dataland-biome-lumina-161", (4)
-      "dataland-biome-lumina-458" (4)
+      "dataland-biome-lumina-242", (1) // [1/18] Luminosa Florinus, Petalum Glimmera
+      "dataland-biome-lumina-549", (1) // [2/18] Luminiflora Spectraglow, Nocturnalis Flora
+      "dataland-biome-lumina-632", (1) // [3/18] Luminosa Floragloria, Galacticae Petalia
+      "dataland-biome-lumina-665", (1) // [4/18] Phosphoriflora Scintillans, Aurelia Petalina
+      "dataland-biome-lumina-999", (1) // [5/18] Luminellus Auroraglow, Luminorialis Aurorae
+      "dataland-biome-lumina-115", (2) // [6/18] Luminflora Aureolea, Abyssal Petalon
+      "dataland-biome-lumina-179", (2) // [7/18] Phosphorblossom Lucens, Phantasmae Notani
+      "dataland-biome-lumina-207", (2) // [8/18] Phosphoriflora Crepuscularis, Helios Petalate
+      "dataland-biome-lumina-461", (2) // [9/18] Floraglow Luminaflora, Galacticae Petalia
+      "dataland-biome-lumina-464", (2) // [10/18] Phosphora Petalumis, Luminous Glacies
+      "dataland-biome-lumina-524", (3) // [11/18] Luminora Aurea, Aurelia Petalina
+      "dataland-biome-lumina-789", (3) // [12/18] Floralis Luminara, Aqua Luminaceae
+      "dataland-biome-lumina-791", (3) // [13/18] Luminiflora Scintillans, Helios Petalate
+      "dataland-biome-lumina-127", (3) // [14/18] Luminara Aurelius, Aetherium Arborescens
+      "dataland-biome-lumina-670", (4) // [15/18] Lumina Frondosa, Aetherium Arborescens
+      "dataland-biome-lumina-691", (4) // [16/18] Phosphoralis Etherealis, Illuminaetherea Petalens
+      "dataland-biome-lumina-161", (4) // [17/18] Luminosa Florae Scintillans, Luminous Glacies
+      "dataland-biome-lumina-458" (4) // [18/18] Luminiflora Aureliensis, Illuminaetherea Petalens
     ],
     "synthetic-dreams": [
-      "synthetic-dreams-51", (1)
-      "synthetic-dreams-379", (1)
-      "synthetic-dreams-648", (1)
-      "synthetic-dreams-854", (1)
-      "synthetic-dreams-625", (2)
-      "synthetic-dreams-754", (2)
-      "synthetic-dreams-957", (2)
-      "synthetic-dreams-630", (3)
-      "synthetic-dreams-774", (3)
-      "synthetic-dreams-951", (3)
-      "synthetic-dreams-362", (4)
-      "synthetic-dreams-858" (4)
+      "synthetic-dreams-51", (1) // [1/12] Closed Water, Rarity 2
+      "synthetic-dreams-379", (1) // [2/12] Closed Water, Rarity 2
+      "synthetic-dreams-648", (1) // [3/12] Closed Water, Rarity 2
+      "synthetic-dreams-854", (1) // [4/12] Closed Water, Rarity 2
+      "synthetic-dreams-625", (2) // [5/12] Green Landscapes, Rarity 1
+      "synthetic-dreams-754", (2) // [6/12] Green Landscapes, Rarity 1
+      "synthetic-dreams-957", (2) // [7/12] Green Landscapes, Rarity 1
+      "synthetic-dreams-630", (3) // [8/12] Desert Landscapes, Rarity 1
+      "synthetic-dreams-774", (3) // [9/12] Desert Landscapes, Rarity 1
+      "synthetic-dreams-951", (3) // [10/12] Desert Landscapes, Rarity 1
+      "synthetic-dreams-362", (4) // [11/12] Rocky Landscapes, Rarity 1
+      "synthetic-dreams-858" (4) // [12/12] Rocky Landscapes, Rarity 1
     ],
     "skulls-of-luci": [
-      "skulls-of-luci-20", ()
-      "skulls-of-luci-12" ()
+      "skulls-of-luci-20", () // [1/2] Saturnalia Pigmentation
+      "skulls-of-luci-12" () // [2/2] Unum
     ],
     "masks-of-luci": [
-      "masks-of-luci-240", (1)
-      "masks-of-luci-591", (1)
-      "masks-of-luci-86", (2)
-      "masks-of-luci-394", (2)
-      "masks-of-luci-191", (2)
-      "masks-of-luci-518", (2)
-      "masks-of-luci-569", (3)
-      "masks-of-luci-597", (3)
-      "masks-of-luci-435", (3)
-      "masks-of-luci-609", (3)
-      "masks-of-luci-94", (4)
-      "masks-of-luci-476", (4)
-      "masks-of-luci-442", (4)
-      "masks-of-luci-540", (4)
-      "masks-of-luci-142", (5)
-      "masks-of-luci-303", (5)
-      "masks-of-luci-349", (5)
-      "masks-of-luci-504", (5)
-      "masks-of-luci-241" (5)
+      "masks-of-luci-240", (1) // [1/19] Saturnalia Pigmentation, Bone
+      "masks-of-luci-591", (1) // [2/19] Unum, Bone
+      "masks-of-luci-86", (2) // [3/19] Prism Shield, Luminate, Crystal
+      "masks-of-luci-394", (2) // [4/19] The Wheel Weaver's Stroboscope, Luminate, Visions
+      "masks-of-luci-191", (2) // [5/19] Trusted Process, Canopic, Stone
+      "masks-of-luci-518", (2) // [6/19] Violence of Old Growth, Canopic, Stone
+      "masks-of-luci-569", (3) // [7/19] Stealth Revolution, Order, Feather
+      "masks-of-luci-597", (3) // [8/19] Curse of The Fumble, Order, Metal
+      "masks-of-luci-435", (3) // [9/19] Lush of Anaximander, Herd, Stone
+      "masks-of-luci-609", (3) // [10/19] Liquidity Pool, Herd, Scales
+      "masks-of-luci-94", (4) // [11/19] Indus Wanders, Understory, Wood
+      "masks-of-luci-476", (4) // [12/19] Mimetic Desire, Understory, Wood
+      "masks-of-luci-442", (4) // [13/19] Amor Fati, Root, Flesh
+      "masks-of-luci-540", (4) // [14/19] Avowed Petals, Root, Stone
+      "masks-of-luci-142", (5) // [15/19] Flush the Dull, Network, Moss
+      "masks-of-luci-303", (5) // [16/19] Starseeker, Network, Fungi
+      "masks-of-luci-349", (5) // [17/19] Untainted Glint, Foundation, Quartz
+      "masks-of-luci-504", (5) // [18/19] Riddle of the Clutch, Foundation, Vine
+      "masks-of-luci-241" (5) // [19/19] Chunked, Foundation, Wood
     ],
     "tyler-hobbs": [
-      "tyler-hobbs-1", ()
-      "tyler-hobbs-2", ()
-      "tyler-hobbs-3" ()
+      "tyler-hobbs-1", () // [1/3] Return Zero [Blue] 0.7
+      "tyler-hobbs-2", () // [2/3] Elektroanima 0.9
+      "tyler-hobbs-3" () // [3/3] One One Overflow
     ],
     "harbor-scene": [
-      "harbor-scene-2" ()
+      "harbor-scene-2" () // [1/1] Harbor Scene #2 (after John Henry Twachtman)
     ],
     "fidenza": [
-      "fidenza-718", (1)
-      "fidenza-456", (1)
-      "fidenza-593", (2)
-      "fidenza-984", (2)
-      "fidenza-98", (3)
-      "fidenza-169", (3)
-      "fidenza-200", (3)
-      "fidenza-943", (3)
-      "fidenza-90", (4)
-      "fidenza-437", (4)
-      "fidenza-19", (4)
-      "fidenza-929", (4)
-      "fidenza-60", (5)
-      "fidenza-145", (5)
-      "fidenza-713", (5)
-      "fidenza-5", (6)
-      "fidenza-28", (6)
-      "fidenza-253", (6)
-      "fidenza-256", (7)
-      "fidenza-609", (7)
-      "fidenza-647", (7)
-      "fidenza-231", (8)
-      "fidenza-262", (8)
-      "fidenza-587", (8)
-      "fidenza-650", (8)
-      "fidenza-180", (9)
-      "fidenza-342", (9)
-      "fidenza-378", (9)
-      "fidenza-573", (9)
-      "fidenza-819" (9)
+      "fidenza-718", (1) // [1/30] Rad, Micro-Uniform
+      "fidenza-456", (1) // [2/30] Black, Jumbo XL
+      "fidenza-593", (2) // [3/30] Politique, Jumbo
+      "fidenza-984", (2) // [4/30] White Mono, Jumbo
+      "fidenza-98", (3) // [5/30] White Mono, Medium
+      "fidenza-169", (3) // [6/30] White Mono, Jumbo
+      "fidenza-200", (3) // [7/30] White Mono, Jumbo
+      "fidenza-943", (3) // [8/30] White Mono, Jumbo
+      "fidenza-90", (4) // [9/30] Luxe, Large
+      "fidenza-437", (4) // [10/30] Luxe, Jumbo
+      "fidenza-19", (4) // [11/30] Cool, Jumbo
+      "fidenza-929", (4) // [12/30] Luxe, Jumbo
+      "fidenza-60", (5) // [13/30] AM, Uniform
+      "fidenza-145", (5) // [14/30] Baked, Uniform
+      "fidenza-713", (5) // [15/30] Black, Uniform
+      "fidenza-5", (6) // [16/30] Politique, Jumbo
+      "fidenza-28", (6) // [17/30] Politique, Jumbo
+      "fidenza-253", (6) // [18/30] Politique, Jumbo
+      "fidenza-256", (7) // [19/30] Rad, Jumbo
+      "fidenza-609", (7) // [20/30] Rad, Jumbo
+      "fidenza-647", (7) // [21/30] Rad, Large
+      "fidenza-231", (8) // [22/30] AM, Jumbo
+      "fidenza-262", (8) // [23/30] Baked, Jumbo
+      "fidenza-587", (8) // [24/30] Luxe, Jumbo
+      "fidenza-650", (8) // [25/30] Rose, Jumbo
+      "fidenza-180", (9) // [26/30] Golf Socks, Jumbo
+      "fidenza-342", (9) // [27/30] Golf Socks, Large
+      "fidenza-378", (9) // [28/30] Golf Socks, Jumbo
+      "fidenza-573", (9) // [29/30] Golf Socks, Large
+      "fidenza-819" (9) // [30/30] Golf Socks, Jumbo
     ],
     "day-gardens": [
-      "day-gardens-27", ()
-      "day-gardens-32", ()
-      "day-gardens-40" ()
+      "day-gardens-27", () // [1/3] Day Garden #27
+      "day-gardens-32", () // [2/3] Day Garden #32
+      "day-gardens-40" () // [3/3] Day Garden #40
     ],
     "qql": [
-      "qql-308", (1)
-      "qql-309", (1)
-      "qql-160", (2)
-      "qql-220", (2)
-      "qql-458", (2)
-      "qql-496", (2)
-      "qql-534", (2)
-      "qql-617", (3)
-      "qql-714", (3)
-      "qql-722", (3)
-      "qql-915", (3)
-      "qql-978" (3)
+      "qql-308", (1) // [1/12] Minted, Fidenza, Formation
+      "qql-309", (1) // [2/12] Minted, Fidenza, Formation
+      "qql-160", (2) // [3/12] Mint Pass
+      "qql-220", (2) // [4/12] Mint Pass
+      "qql-458", (2) // [5/12] Mint Pass
+      "qql-496", (2) // [6/12] Mint Pass
+      "qql-534", (2) // [7/12] Mint Pass
+      "qql-617", (3) // [8/12] Mint Pass
+      "qql-714", (3) // [9/12] Mint Pass
+      "qql-722", (3) // [10/12] Mint Pass
+      "qql-915", (3) // [11/12] Mint Pass
+      "qql-978" (3) // [12/12] Mint Pass
     ],
     "superrare-xcopy": [
-      "superrare-xcopy-9129", ()
-      "superrare-xcopy-29757", ()
-      "superrare-xcopy-30801", ()
-      "superrare-xcopy-32171", ()
-      "superrare-xcopy-2123" ()
+      "superrare-xcopy-9129", () // [1/5] CITIZENS!
+      "superrare-xcopy-29757", () // [2/5] DANKRUPT
+      "superrare-xcopy-30801", () // [3/5] XCOPYDECAY
+      "superrare-xcopy-32171", () // [4/5] THE FUD
+      "superrare-xcopy-2123" () // [5/5] Some Other Asshole
     ],
     "grifters": [
-      "grifters-170", ()
-      "grifters-66", ()
-      "grifters-614", ()
-      "grifters-88", ()
-      "grifters-574", ()
-      "grifters-308", ()
-      "grifters-37", ()
-      "grifters-368", (4)
-      "grifters-166", (4)
-      "grifters-522", (4)
-      "grifters-439", (4)
-      "grifters-8", (4)
-      "grifters-572", (5)
-      "grifters-542", (5)
-      "grifters-532", (5)
-      "grifters-547", (5)
-      "grifters-442", (5)
-      "grifters-165", (6)
-      "grifters-222", (6)
-      "grifters-132", (6)
-      "grifters-363", (6)
-      "grifters-197", (6)
-      "grifters-254", (7)
-      "grifters-472", (7)
-      "grifters-51" (7)
+      "grifters-170", () // [1/25] Legendary Edition
+      "grifters-66", () // [2/25] Wretch, Yellow, ProtoVisor, Rager, No.2, Probably
+      "grifters-614", () // [3/25]
+      "grifters-88", () // [4/25] Wretch, Blue, Bandit Obvious, Blue Pill
+      "grifters-574", () // [5/25] Shady, Blue, ProtoVisor, Deviant, No.2, Bubbles
+      "grifters-308", () // [6/25] Wretch, Green, Faceport, Sweaty, Flies, FlySpy
+      "grifters-37", () // [7/25] Shady, Green, Turbulence, Deviant, Sideways Pink
+      "grifters-368", (4) // [8/25] Gouge, Yellow, Bandit Classic, G to the M, No.2
+      "grifters-166", (4) // [9/25] Flimflam, Blue, Turbulence, G to the M, No.2
+      "grifters-522", (4) // [10/25] Flimflam, Green, Art Innit, G to the M, No.2, JPEGs
+      "grifters-439", (4) // [11/25] Gouge, Yellow, Turbulence, Rager, White Worms
+      "grifters-8", (4) // [12/25] Shady, Green, Suss, Guzz, No.2, Probably
+      "grifters-572", (5) // [13/25] Gouge, Yellow, Hyper, Deviant, White Worms
+      "grifters-542", (5) // [14/25] Gouge, Blue, Hyper, Sweaty, Flies, DMs
+      "grifters-532", (5) // [15/25] Gouge, Green, Art Innit, Candy Cig, Mo Multi
+      "grifters-547", (5) // [16/25] Gouge, Blue, Suss, Deviant, No.1, Save As
+      "grifters-442", (5) // [17/25] Gouge, Blue, Burnout, Deviant, No.1, Universe
+      "grifters-165", (6) // [18/25] Flimflam, Yellow, Bandit Drowsy, Sweaty, No.2
+      "grifters-222", (6) // [19/25] Flimflam, Blue, Bandit Obvious, Guzz, Mo Multi
+      "grifters-132", (6) // [20/25] Flimflam, Green, Art Innit, LOUD, No.2, Bubbles
+      "grifters-363", (6) // [21/25] Flimflam, Green, FacePort, Sweaty, Sideways Pink
+      "grifters-197", (6) // [22/25] Gouge, Blue, Eth Hed, Deviant, Mo Yel, AirDrop
+      "grifters-254", (7) // [23/25] Wretch, Blue, Hyper, Gappy, Sideways Pink, DMs
+      "grifters-472", (7) // [24/25] Gouge, Blue, Ded, Sweaty, White Worms, Universe
+      "grifters-51" (7) // [25/25] Wretch, Blue Pill, Art Innit, Blue, No.2, Edition, Probably
     ],
     "cope-salada": [
-      "cope-salada-125" ()
+      "cope-salada-125" () // [1/1]
     ],
     "x0x": [
-      "x0x-576" ()
+      "x0x-576" () // [1/1]
     ],
     "meebit": [
-      "meebit-3611" ()
+      "meebit-3611" () // [1/1]
     ]
   }
 }
