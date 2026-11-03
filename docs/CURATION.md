@@ -21,19 +21,15 @@ layer) — only how the existing works are arranged and labelled.
 1. Edit `src/lib/curation.json`.
 2. Apply your changes:
    ```bash
-   npm run curate        # validates + regenerates what the site reads
+   npm run curate        # validates, regenerates what the site reads, refreshes the [3/30] hints
    ```
-3. *(optional)* bring back the helpful `[3/30] …` hints in the file:
-   ```bash
-   node scripts/annotate-curation.mjs
-   ```
-4. Check it:
+3. Check it:
    ```bash
    npm run build
    ```
-5. Open a pull request → read the **preview link** → merge to `master` to deploy.
+4. Open a pull request → read the **preview link** → merge to `master` to deploy.
 
-The `/curate` skill runs steps 2 + 3 together.
+The `/curate` skill runs step 2 and reports the totals.
 
 > **`curation.json` is not plain JSON.** It carries little `(1)` row tags and
 > `// notes` that a strict JSON checker would reject — that's intentional, and the
@@ -120,9 +116,6 @@ You only ever change **the order of the lines** and **the numbers in `( )`**.
 > they're rebuilt every time you run `curate`:
 > - the `// [7/30] Palette, Scale` hints after each line, and
 > - the separate `pieceRows` block higher up in the file.
->
-> After `npm run curate` strips the `// […]` hints, run
-> `node scripts/annotate-curation.mjs` to bring them back.
 
 ---
 
