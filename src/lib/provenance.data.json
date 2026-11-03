@@ -9491,5 +9491,25 @@
     },
     "verifiedAt": "2026-07-09T14:59:18.707Z",
     "verified": true
+  },
+  "cryptopunks-6648": {
+    "storage": "onchain",
+    "source": "/art/all/0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb-6648.svg",
+    "cid": "QmZ1okjt7tGgjkyYZBs8hN4wMXF1e8yeM6XduGAy1eSdfj",
+    "sha256": "5a4cacf05408069bb5a0da0e01259cc02847e7eb70046549df216d9b631576ff",
+    "bytes": 21792,
+    "mime": "image/svg+xml",
+    "gateway": "https://lightyear.myfilebase.com/ipfs/QmZ1okjt7tGgjkyYZBs8hN4wMXF1e8yeM6XduGAy1eSdfj",
+    "pinnedAt": "2026-11-03T10:24:18.658Z"
+  },
+  "cryptopunks-2303": {
+    "storage": "onchain",
+    "source": "/art/all/0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb-2303.svg",
+    "cid": "QmUr6jWU32zjgTvtHzur81eCz8YqVrUAbRiVbaRuKpAQmt",
+    "sha256": "16035ce6841f677ba8af8d88edd990720162fc24379b4088e775ab6fe94c4f9d",
+    "bytes": 18933,
+    "mime": "image/svg+xml",
+    "gateway": "https://lightyear.myfilebase.com/ipfs/QmUr6jWU32zjgTvtHzur81eCz8YqVrUAbRiVbaRuKpAQmt",
+    "pinnedAt": "2026-11-03T10:24:19.236Z"
   }
 }
