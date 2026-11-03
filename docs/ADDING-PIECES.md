@@ -76,6 +76,47 @@ npm run build
 
 Both skip pieces already done, so re-running is cheap and safe.
 
+### Adding a CryptoPunk
+
+Punks have no raster `tokenURI`; image and traits both come from the on-chain
+CryptoPunksData contract. Slug is `cryptopunks-<tokenId>` (no contract suffix).
+
+```bash
+# 1. Append the piece to data.ts: copy an existing cryptopunks-* entry and
+#    change id / slug / title / image / tokenId / openseaUrl.
+# 2. Image and traits, straight from the chain:
+node scripts/fetch-punk-svgs.mjs <tokenId>     # → public/art/all/<contract>-<tokenId>.svg
+node scripts/fetch-punk-traits.mjs <tokenId>   # → src/lib/traits.data.json
+# 3. Preservation pin (CID + sha256 of the SVG; no variants, it's vector):
+npm run onboard -- --only cryptopunks-<tokenId>
+# 4. Place it: add the slug to the "cryptopunks" list in curation.json with a
+#    row tag, e.g.  "cryptopunks-2303", (10)  then:
+npm run curate
+```
+
+The Punks grid is curated in trait-grouped rows (e.g. row 10 Fedoras, row 11
+Police Caps), so ask which row a new Punk belongs on. A new row is just the next
+number. Step 3 is not needed for the site to render, since Punks serve the SVG
+from `/art/all/`; it only adds the provenance record. If it fails, ship anyway and
+backfill (see "Filebase Access Denied" below).
+
+### Review and go live
+
+Additions go on a branch and through a PR; nothing is live until it's merged.
+
+1. Branch `data/<yyyy-mm>-portfolio-additions`, commit, push, `gh pr create --base master`.
+2. CI runs lint, typecheck, `audit:slugs`, build, e2e. Vercel comments a
+   **preview URL** on the PR: review `/collection/<slug>` and `/piece/<new-slug>`
+   there (or locally with `npm run dev`).
+3. When happy and CI is green, squash-merge. Vercel deploys `master` to production
+   in a few minutes.
+
+Commit `data.ts`, `traits.data.json`, `curation.json`, `curation.data.json`, any
+`provenance.*.json` the pin step changed, and (Punks) the new SVG. Leave out
+`scripts/asset-sources.json`, `.claude/settings.local.json`, and any
+`*.data.json` whose diff is line endings only (Windows `prebuild` rewrites
+`editorial.data.json` this way).
+
 ### Should a collection get the 2560w tier?
 
 ```bash
@@ -156,6 +197,11 @@ three `768w/1280w/1920w` variant CIDs on its detail page.
   served variants are small. Variant generation just takes a few extra seconds.
 - **Never hand-edit** `provenance.data.json` or `asset-sources.json` — they're
   generated. Fix inputs (`data.ts`, the source URL) and re-run.
+- **Filebase "Access Denied"** on pin: the `FILEBASE_*` keys in `.env` can't write
+  to the bucket (expired, rotated, or read-only). The run still writes
+  `"error": "Access Denied"` placeholder entries into `provenance.data.json`;
+  discard them (`git checkout -- src/lib/provenance.data.json src/lib/provenance.cids.json`),
+  get fresh keys from the bucket owner, and re-run `npm run pin -- --only <slug>`.
 
 ---
 
@@ -177,6 +223,8 @@ Do this:
    id, slug, title, collectionSlug, artistSlug, medium, contractAddress, tokenId.
    Add editorial fields (description, curator notes) if provided.
    NEVER run scripts/import-portfolio.mjs — append by hand; it's destructive.
+   CryptoPunks: also run `node scripts/fetch-punk-svgs.mjs <ids>` and
+   `node scripts/fetch-punk-traits.mjs <ids>` (see "Adding a CryptoPunk").
 2. Run: npm run onboard -- --only <comma-separated new slugs>
 3. Read the gap report. For any "no source" or pin error:
    - try to find the canonical image (marketplace / IPFS / Arweave / artist site),
